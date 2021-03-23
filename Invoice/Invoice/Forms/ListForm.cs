@@ -11,9 +11,9 @@ using Invoice.Forms;
 
 namespace Invoice
 {
-    public partial class LisForm : Form
+    public partial class ListForm : Form
     {
-        public LisForm()
+        public ListForm()
         {
             InitializeComponent();
         }

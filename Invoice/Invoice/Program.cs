@@ -17,7 +17,7 @@ namespace Invoice
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LisForm());
+            Application.Run(new ListForm());
         }
     }
 }
