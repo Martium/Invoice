@@ -7,3 +7,10 @@ C:\Development\Github\Invoice\Invoice\Invoice\obj\Debug\Invoice.csproj.GenerateR
 C:\Development\Github\Invoice\Invoice\Invoice\obj\Debug\Invoice.csproj.CoreCompileInputs.cache
 C:\Development\Github\Invoice\Invoice\Invoice\obj\Debug\Invoice.exe
 C:\Development\Github\Invoice\Invoice\Invoice\obj\Debug\Invoice.pdb
+C:\Development\Github\Invoice\Invoice\Invoice\bin\Debug\Dapper.dll
+C:\Development\Github\Invoice\Invoice\Invoice\bin\Debug\System.Data.SQLite.dll
+C:\Development\Github\Invoice\Invoice\Invoice\bin\Debug\Dapper.xml
+C:\Development\Github\Invoice\Invoice\Invoice\bin\Debug\System.Data.SQLite.xml
+C:\Development\Github\Invoice\Invoice\Invoice\obj\Debug\Invoice.csproj.CopyComplete
+C:\Development\Github\Invoice\Invoice\Invoice\obj\Debug\Invoice.Forms.InvoiceForm.resources
+C:\Development\Github\Invoice\Invoice\Invoice\obj\Debug\Invoice.LisForm.resources
