@@ -8,13 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Invoice
+namespace Invoice.Forms
 {
-    public partial class Form1 : Form
+    public partial class InvoiceForm : Form
     {
-        public Form1()
+        public InvoiceForm()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+           
         }
     }
 }
