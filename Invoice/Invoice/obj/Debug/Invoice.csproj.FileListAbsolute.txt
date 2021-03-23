@@ -13,3 +13,4 @@ C:\Development\Github\Invoice\Invoice\Invoice\bin\Debug\Dapper.xml
 C:\Development\Github\Invoice\Invoice\Invoice\bin\Debug\System.Data.SQLite.xml
 C:\Development\Github\Invoice\Invoice\Invoice\obj\Debug\Invoice.csproj.CopyComplete
 C:\Development\Github\Invoice\Invoice\Invoice\obj\Debug\Invoice.Forms.InvoiceForm.resources
+C:\Development\Github\Invoice\Invoice\Invoice\obj\Debug\Invoice.LisForm.resources
