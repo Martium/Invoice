@@ -1,0 +1,9 @@
+C:\Development\Github\Invoice\Invoice\Invoice\bin\Debug\Invoice.exe.config
+C:\Development\Github\Invoice\Invoice\Invoice\bin\Debug\Invoice.exe
+C:\Development\Github\Invoice\Invoice\Invoice\bin\Debug\Invoice.pdb
+C:\Development\Github\Invoice\Invoice\Invoice\obj\Debug\Invoice.csprojAssemblyReference.cache
+C:\Development\Github\Invoice\Invoice\Invoice\obj\Debug\Invoice.Properties.Resources.resources
+C:\Development\Github\Invoice\Invoice\Invoice\obj\Debug\Invoice.csproj.GenerateResource.cache
+C:\Development\Github\Invoice\Invoice\Invoice\obj\Debug\Invoice.csproj.CoreCompileInputs.cache
+C:\Development\Github\Invoice\Invoice\Invoice\obj\Debug\Invoice.exe
+C:\Development\Github\Invoice\Invoice\Invoice\obj\Debug\Invoice.pdb
