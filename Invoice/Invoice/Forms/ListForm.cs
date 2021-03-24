@@ -38,5 +38,10 @@ namespace Invoice
 
             invoiceForm.Show(this);
         }
+
+        private void ListOfInvoiceDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
