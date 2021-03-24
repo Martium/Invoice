@@ -1,6 +1,7 @@
 bin
 obj
 suo
+diff
 .vs
 packages
 Database/
