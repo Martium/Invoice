@@ -38,7 +38,6 @@ namespace Invoice
             this.InvoiceNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OrderDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NameOfCustumer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CustumerPhoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ListOfInvoiceDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,8 +85,7 @@ namespace Invoice
             this.ListOfInvoiceDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.InvoiceNumber,
             this.OrderDate,
-            this.NameOfCustumer,
-            this.CustumerPhoneNumber});
+            this.NameOfCustumer});
             this.ListOfInvoiceDataGridView.Location = new System.Drawing.Point(12, 82);
             this.ListOfInvoiceDataGridView.Name = "ListOfInvoiceDataGridView";
             this.ListOfInvoiceDataGridView.Size = new System.Drawing.Size(1040, 825);
@@ -121,14 +119,7 @@ namespace Invoice
             this.NameOfCustumer.HeaderText = "Užsakovas";
             this.NameOfCustumer.Name = "NameOfCustumer";
             this.NameOfCustumer.ReadOnly = true;
-            this.NameOfCustumer.Width = 590;
-            // 
-            // CustumerPhoneNumber
-            // 
-            this.CustumerPhoneNumber.HeaderText = "Telefonas";
-            this.CustumerPhoneNumber.Name = "CustumerPhoneNumber";
-            this.CustumerPhoneNumber.ReadOnly = true;
-            this.CustumerPhoneNumber.Width = 200;
+            this.NameOfCustumer.Width = 780;
             // 
             // ListForm
             // 
@@ -163,7 +154,6 @@ namespace Invoice
         private System.Windows.Forms.DataGridViewTextBoxColumn InvoiceNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrderDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn NameOfCustumer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CustumerPhoneNumber;
     }
 }
 
