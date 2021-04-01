@@ -119,11 +119,23 @@ namespace Invoice.Forms
             this.TenProductPriceRichTextBox = new System.Windows.Forms.RichTextBox();
             this.EleventhProductPriceRichTextBox = new System.Windows.Forms.RichTextBox();
             this.TwelfthProductPriceRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.ProductTotalPriceLabel = new System.Windows.Forms.Label();
+            this.ProductTotalPriceRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.PvmPriceLabel = new System.Windows.Forms.Label();
+            this.PvmPriceRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.TotalPriceWithPvmLabel = new System.Windows.Forms.Label();
+            this.TotalPriceWithPvmRichTextBox = new System.Windows.Forms.RichTextBox();
             this.PrintInvoicePanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // PrintInvoicePanel
             // 
+            this.PrintInvoicePanel.Controls.Add(this.TotalPriceWithPvmRichTextBox);
+            this.PrintInvoicePanel.Controls.Add(this.TotalPriceWithPvmLabel);
+            this.PrintInvoicePanel.Controls.Add(this.PvmPriceRichTextBox);
+            this.PrintInvoicePanel.Controls.Add(this.PvmPriceLabel);
+            this.PrintInvoicePanel.Controls.Add(this.ProductTotalPriceRichTextBox);
+            this.PrintInvoicePanel.Controls.Add(this.ProductTotalPriceLabel);
             this.PrintInvoicePanel.Controls.Add(this.TwelfthProductPriceRichTextBox);
             this.PrintInvoicePanel.Controls.Add(this.EleventhProductPriceRichTextBox);
             this.PrintInvoicePanel.Controls.Add(this.TenProductPriceRichTextBox);
@@ -958,6 +970,57 @@ namespace Invoice.Forms
             this.TwelfthProductPriceRichTextBox.TabIndex = 90;
             this.TwelfthProductPriceRichTextBox.Text = "";
             // 
+            // ProductTotalPriceLabel
+            // 
+            this.ProductTotalPriceLabel.AutoSize = true;
+            this.ProductTotalPriceLabel.Location = new System.Drawing.Point(604, 462);
+            this.ProductTotalPriceLabel.Name = "ProductTotalPriceLabel";
+            this.ProductTotalPriceLabel.Size = new System.Drawing.Size(70, 13);
+            this.ProductTotalPriceLabel.TabIndex = 91;
+            this.ProductTotalPriceLabel.Text = "Bendra kaina";
+            // 
+            // ProductTotalPriceRichTextBox
+            // 
+            this.ProductTotalPriceRichTextBox.Location = new System.Drawing.Point(680, 459);
+            this.ProductTotalPriceRichTextBox.Name = "ProductTotalPriceRichTextBox";
+            this.ProductTotalPriceRichTextBox.Size = new System.Drawing.Size(96, 19);
+            this.ProductTotalPriceRichTextBox.TabIndex = 92;
+            this.ProductTotalPriceRichTextBox.Text = "";
+            // 
+            // PvmPriceLabel
+            // 
+            this.PvmPriceLabel.AutoSize = true;
+            this.PvmPriceLabel.Location = new System.Drawing.Point(604, 497);
+            this.PvmPriceLabel.Name = "PvmPriceLabel";
+            this.PvmPriceLabel.Size = new System.Drawing.Size(53, 13);
+            this.PvmPriceLabel.TabIndex = 93;
+            this.PvmPriceLabel.Text = "PVM 21%";
+            // 
+            // PvmPriceRichTextBox
+            // 
+            this.PvmPriceRichTextBox.Location = new System.Drawing.Point(680, 494);
+            this.PvmPriceRichTextBox.Name = "PvmPriceRichTextBox";
+            this.PvmPriceRichTextBox.Size = new System.Drawing.Size(96, 19);
+            this.PvmPriceRichTextBox.TabIndex = 94;
+            this.PvmPriceRichTextBox.Text = "";
+            // 
+            // TotalPriceWithPvmLabel
+            // 
+            this.TotalPriceWithPvmLabel.AutoSize = true;
+            this.TotalPriceWithPvmLabel.Location = new System.Drawing.Point(604, 531);
+            this.TotalPriceWithPvmLabel.Name = "TotalPriceWithPvmLabel";
+            this.TotalPriceWithPvmLabel.Size = new System.Drawing.Size(37, 13);
+            this.TotalPriceWithPvmLabel.TabIndex = 95;
+            this.TotalPriceWithPvmLabel.Text = "Iš viso";
+            // 
+            // TotalPriceWithPvmRichTextBox
+            // 
+            this.TotalPriceWithPvmRichTextBox.Location = new System.Drawing.Point(680, 528);
+            this.TotalPriceWithPvmRichTextBox.Name = "TotalPriceWithPvmRichTextBox";
+            this.TotalPriceWithPvmRichTextBox.Size = new System.Drawing.Size(96, 19);
+            this.TotalPriceWithPvmRichTextBox.TabIndex = 96;
+            this.TotalPriceWithPvmRichTextBox.Text = "";
+            // 
             // InvoiceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1066,5 +1129,11 @@ namespace Invoice.Forms
         private System.Windows.Forms.RichTextBox FourthProductPriceRichTextBox;
         private System.Windows.Forms.RichTextBox ThirdProductPriceRichTextBox;
         private System.Windows.Forms.RichTextBox SecondProductPriceRichTextBox;
+        private System.Windows.Forms.RichTextBox TotalPriceWithPvmRichTextBox;
+        private System.Windows.Forms.Label TotalPriceWithPvmLabel;
+        private System.Windows.Forms.RichTextBox PvmPriceRichTextBox;
+        private System.Windows.Forms.Label PvmPriceLabel;
+        private System.Windows.Forms.RichTextBox ProductTotalPriceRichTextBox;
+        private System.Windows.Forms.Label ProductTotalPriceLabel;
     }
 }
