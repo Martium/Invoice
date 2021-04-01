@@ -101,6 +101,7 @@ namespace Invoice
             this.CopyButton.TabIndex = 5;
             this.CopyButton.Text = "Kopijuoti sąskaitą ( kurti naują )";
             this.CopyButton.UseVisualStyleBackColor = false;
+            this.CopyButton.Click += new System.EventHandler(this.CopyButton_Click);
             // 
             // InvoiceNumber
             // 
