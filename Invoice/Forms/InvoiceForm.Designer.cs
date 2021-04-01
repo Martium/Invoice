@@ -432,9 +432,9 @@ namespace Invoice.Forms
             this.BuyerPhoneNumberLabel.AutoSize = true;
             this.BuyerPhoneNumberLabel.Location = new System.Drawing.Point(43, 277);
             this.BuyerPhoneNumberLabel.Name = "BuyerPhoneNumberLabel";
-            this.BuyerPhoneNumberLabel.Size = new System.Drawing.Size(54, 13);
+            this.BuyerPhoneNumberLabel.Size = new System.Drawing.Size(88, 13);
             this.BuyerPhoneNumberLabel.TabIndex = 25;
-            this.BuyerPhoneNumberLabel.Text = "Telefonas";
+            this.BuyerPhoneNumberLabel.Text = "Telefono numeris";
             // 
             // SellerPhoneNumberRichTextBox
             // 
@@ -483,9 +483,9 @@ namespace Invoice.Forms
             this.SellerEmailAddressLabel.AutoSize = true;
             this.SellerEmailAddressLabel.Location = new System.Drawing.Point(43, 381);
             this.SellerEmailAddressLabel.Name = "SellerEmailAddressLabel";
-            this.SellerEmailAddressLabel.Size = new System.Drawing.Size(48, 13);
+            this.SellerEmailAddressLabel.Size = new System.Drawing.Size(53, 13);
             this.SellerEmailAddressLabel.TabIndex = 31;
-            this.SellerEmailAddressLabel.Text = "Sąskaita";
+            this.SellerEmailAddressLabel.Text = "El. paštas";
             // 
             // SellerEmailAddressRichTextBox
             // 
