@@ -105,7 +105,7 @@ namespace Invoice
             // 
             // InvoiceNumber
             // 
-            this.InvoiceNumber.HeaderText = "Sąskaitos numeris";
+            this.InvoiceNumber.HeaderText = "Sąskaitos faktūros numeris";
             this.InvoiceNumber.Name = "InvoiceNumber";
             this.InvoiceNumber.ReadOnly = true;
             // 
