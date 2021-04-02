@@ -35,10 +35,9 @@ namespace Invoice
             this.NewInvoiceButton = new System.Windows.Forms.Button();
             this.ListOfInvoiceDataGridView = new System.Windows.Forms.DataGridView();
             this.CopyButton = new System.Windows.Forms.Button();
-            this.OrderNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.InvoiceNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OrderDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NameOfCustumer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CustumerPhoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ListOfInvoiceDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -84,10 +83,9 @@ namespace Invoice
             this.ListOfInvoiceDataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonShadow;
             this.ListOfInvoiceDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ListOfInvoiceDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.OrderNumber,
+            this.InvoiceNumber,
             this.OrderDate,
-            this.NameOfCustumer,
-            this.CustumerPhoneNumber});
+            this.NameOfCustumer});
             this.ListOfInvoiceDataGridView.Location = new System.Drawing.Point(12, 82);
             this.ListOfInvoiceDataGridView.Name = "ListOfInvoiceDataGridView";
             this.ListOfInvoiceDataGridView.Size = new System.Drawing.Size(1040, 825);
@@ -103,12 +101,13 @@ namespace Invoice
             this.CopyButton.TabIndex = 5;
             this.CopyButton.Text = "Kopijuoti sąskaitą ( kurti naują )";
             this.CopyButton.UseVisualStyleBackColor = false;
+            this.CopyButton.Click += new System.EventHandler(this.CopyButton_Click);
             // 
-            // OrderNumber
+            // InvoiceNumber
             // 
-            this.OrderNumber.HeaderText = "Užsakymo numeris";
-            this.OrderNumber.Name = "OrderNumber";
-            this.OrderNumber.ReadOnly = true;
+            this.InvoiceNumber.HeaderText = "Sąskaitos faktūros numeris";
+            this.InvoiceNumber.Name = "InvoiceNumber";
+            this.InvoiceNumber.ReadOnly = true;
             // 
             // OrderDate
             // 
@@ -121,14 +120,7 @@ namespace Invoice
             this.NameOfCustumer.HeaderText = "Užsakovas";
             this.NameOfCustumer.Name = "NameOfCustumer";
             this.NameOfCustumer.ReadOnly = true;
-            this.NameOfCustumer.Width = 590;
-            // 
-            // CustumerPhoneNumber
-            // 
-            this.CustumerPhoneNumber.HeaderText = "Telefonas";
-            this.CustumerPhoneNumber.Name = "CustumerPhoneNumber";
-            this.CustumerPhoneNumber.ReadOnly = true;
-            this.CustumerPhoneNumber.Width = 200;
+            this.NameOfCustumer.Width = 780;
             // 
             // ListForm
             // 
@@ -160,10 +152,9 @@ namespace Invoice
         private System.Windows.Forms.Button NewInvoiceButton;
         private System.Windows.Forms.DataGridView ListOfInvoiceDataGridView;
         private System.Windows.Forms.Button CopyButton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OrderNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn InvoiceNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrderDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn NameOfCustumer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CustumerPhoneNumber;
     }
 }
 

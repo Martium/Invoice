@@ -32,16 +32,25 @@ namespace Invoice
             this.Show();
         }
 
+        private void ListOfInvoiceDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void CopyButton_Click(object sender, EventArgs e)
+        {
+            var createNewInvoice = new MoneyRecepitForm();
+
+            createNewInvoice.Closed += ShowAndRefreshListForm;
+
+            HideListAndOpenInvoiceForm(createNewInvoice);
+        }
+
         private void HideListAndOpenInvoiceForm(Form invoiceForm)
         {
             this.Hide();
 
             invoiceForm.Show(this);
-        }
-
-        private void ListOfInvoiceDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }
