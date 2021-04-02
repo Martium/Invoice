@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppConfiguration.cs" />
+    <Compile Include="Constants\FormSettings.cs" />
     <Compile Include="Forms\InvoiceForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +76,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\DataBaseInitializerRepository.cs" />
     <EmbeddedResource Include="Forms\InvoiceForm.resx">
       <DependentUpon>InvoiceForm.cs</DependentUpon>
     </EmbeddedResource>
