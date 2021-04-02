@@ -64,7 +64,7 @@ namespace Invoice.Forms
             this.NinthProductSeesRichTextBox = new System.Windows.Forms.RichTextBox();
             this.EighthProductSeesRichTextBox = new System.Windows.Forms.RichTextBox();
             this.SeventhProductSeesRichTextBox = new System.Windows.Forms.RichTextBox();
-            this.SixsthProductSeesRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.SixthProductSeesRichTextBox = new System.Windows.Forms.RichTextBox();
             this.FifthProductSeesRichTextBox = new System.Windows.Forms.RichTextBox();
             this.FourthProductSeesRichTextBox = new System.Windows.Forms.RichTextBox();
             this.ThirdProductSeesRichTextBox = new System.Windows.Forms.RichTextBox();
@@ -164,7 +164,7 @@ namespace Invoice.Forms
             this.PrintInvoicePanel.Controls.Add(this.NinthProductSeesRichTextBox);
             this.PrintInvoicePanel.Controls.Add(this.EighthProductSeesRichTextBox);
             this.PrintInvoicePanel.Controls.Add(this.SeventhProductSeesRichTextBox);
-            this.PrintInvoicePanel.Controls.Add(this.SixsthProductSeesRichTextBox);
+            this.PrintInvoicePanel.Controls.Add(this.SixthProductSeesRichTextBox);
             this.PrintInvoicePanel.Controls.Add(this.FifthProductSeesRichTextBox);
             this.PrintInvoicePanel.Controls.Add(this.FourthProductSeesRichTextBox);
             this.PrintInvoicePanel.Controls.Add(this.ThirdProductSeesRichTextBox);
@@ -505,13 +505,13 @@ namespace Invoice.Forms
             this.SeventhProductSeesRichTextBox.TabIndex = 63;
             this.SeventhProductSeesRichTextBox.Text = "";
             // 
-            // SixsthProductSeesRichTextBox
+            // SixthProductSeesRichTextBox
             // 
-            this.SixsthProductSeesRichTextBox.Location = new System.Drawing.Point(348, 581);
-            this.SixsthProductSeesRichTextBox.Name = "SixsthProductSeesRichTextBox";
-            this.SixsthProductSeesRichTextBox.Size = new System.Drawing.Size(72, 19);
-            this.SixsthProductSeesRichTextBox.TabIndex = 62;
-            this.SixsthProductSeesRichTextBox.Text = "";
+            this.SixthProductSeesRichTextBox.Location = new System.Drawing.Point(348, 581);
+            this.SixthProductSeesRichTextBox.Name = "SixthProductSeesRichTextBox";
+            this.SixthProductSeesRichTextBox.Size = new System.Drawing.Size(72, 19);
+            this.SixthProductSeesRichTextBox.TabIndex = 62;
+            this.SixthProductSeesRichTextBox.Text = "";
             // 
             // FifthProductSeesRichTextBox
             // 
@@ -1102,7 +1102,7 @@ namespace Invoice.Forms
         private System.Windows.Forms.RichTextBox NinthProductSeesRichTextBox;
         private System.Windows.Forms.RichTextBox EighthProductSeesRichTextBox;
         private System.Windows.Forms.RichTextBox SeventhProductSeesRichTextBox;
-        private System.Windows.Forms.RichTextBox SixsthProductSeesRichTextBox;
+        private System.Windows.Forms.RichTextBox SixthProductSeesRichTextBox;
         private System.Windows.Forms.RichTextBox FifthProductSeesRichTextBox;
         private System.Windows.Forms.RichTextBox FourthProductSeesRichTextBox;
         private System.Windows.Forms.RichTextBox ThirdProductSeesRichTextBox;
