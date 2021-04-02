@@ -117,8 +117,21 @@ namespace Invoice.Repositories
                         [TenProductQuantity] [NUMERIC] NULL,
                         [EleventhProductQuantity] [NUMERIC] NULL,
                         [TwelfthProductQuantity] [NUMERIC] NULL,
-
-                        
+                        [FirstProductPrice] [NUMERIC] NULL,
+                        [SecondProductPrice] [NUMERIC] NULL,
+                        [ThirdProductPrice] [NUMERIC] NULL,
+                        [FourthProductPrice] [NUMERIC] NULL,
+                        [FifthProductPrice] [NUMERIC] NULL,
+                        [SixthProductPrice] [NUMERIC] NULL,
+                        [SeventhProductPrice] [NUMERIC] NULL,
+                        [EighthProductPrice] [NUMERIC] NULL,
+                        [NinthProductPrice] [NUMERIC] NULL,
+                        [TenProductPrice] [NUMERIC] NULL,
+                        [EleventhProductPrice] [NUMERIC] NULL,
+                        [TwelfthProductPrice] [NUMERIC] NULL,
+                        [PriceInWords] [nvarchar]({FormSettings.TextBoxLengths.PriceInWords}) NULL,
+                        [InvoiceMaker] [nvarchar]({FormSettings.TextBoxLengths.InvoiceMaker}) NULL,
+                        [InvoiceAccepted] [nvarchar]({FormSettings.TextBoxLengths.InvoiceAccepted}) NULL,
                     );
                  ";
         }
