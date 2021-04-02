@@ -11,11 +11,11 @@ namespace Invoice.Repositories
         {
             if (File.Exists(AppConfiguration.DatabaseFile))
             {
-#if DEBUG
+//#if DEBUG
 
-#else
+//#else
                 return;
-#endif
+//#endif
             }
 
             if (!Directory.Exists(AppConfiguration.DatabaseFolder))

@@ -1,5 +1,5 @@
 ﻿
-namespace Invoice
+namespace Invoice.Forms
 {
     partial class ListForm
     {

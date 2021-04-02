@@ -1,20 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Invoice.Forms;
+using Invoice.Models;
+using Invoice.Repositories;
 
-namespace Invoice
+namespace Invoice.Forms
 {
     public partial class ListForm : Form
     {
+        private readonly InvoiceRepository _invoiceRepository;
+
+        private static readonly string SearchTextBoxPlaceholderText = "Įveskite paieškos frazę...";
+
+        private bool _searchActive;
+
         public ListForm()
         {
+            _invoiceRepository = new InvoiceRepository();
+
             InitializeComponent();
         }
 
@@ -51,6 +55,34 @@ namespace Invoice
             this.Hide();
 
             invoiceForm.Show(this);
+        }
+
+        private void LoadFuneralServiceList(string searchPhrase = null)
+        {
+            if (_searchActive)
+            {
+                SearchButton.Enabled = true;
+            }
+
+            IEnumerable<InvoiceListModel> invoiceListModels = _invoiceRepository.GetInvoiceList(searchPhrase);
+
+            ToggleExistingListManaging(enabled: invoiceListModels.Any(), searchPhrase);
+
+            ListOfInvoiceDataGridView.DataSource = invoiceListModels;
+
+           // ServiceHistoryDataGridView.DataSource = FuneralServiceBindingSource;
+        }
+
+        private void ToggleExistingListManaging(bool enabled, string searchPhrase)
+        {
+            if (string.IsNullOrWhiteSpace(searchPhrase))
+            {
+                SearchTextBox.Enabled = enabled;
+                SearchButton.Enabled = false;
+            }
+
+            EditButton.Enabled = enabled;
+            CopyButton.Enabled = enabled;
         }
     }
 }
