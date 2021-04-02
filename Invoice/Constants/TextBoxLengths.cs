@@ -17,10 +17,27 @@ namespace Invoice.Constants
         public static int SellerBank => 800;
         public static int SellerBankAccountNumber => 800;
         public static int SellerEmailAddress => 800;
+
         public static int BuyerName => 800;
         public static int BuyerFirmCode => 800;
         public static int BuyerPvmCode => 800;
         public static int BuyerAddress => 800;
+
+        public static int FirstProductName => 800;
+        public static int SecondProductName => 800;
+        public static int ThirdProductName => 800;
+        public static int FourthProductName => 800;
+        public static int FifthProductName => 800;
+        public static int SixthProductName => 800;
+        public static int SeventhProductName => 800;
+        public static int EighthProductName => 800;
+        public static int NinthProductName => 800;
+        public static int TenProductName => 800;
+        public static int EleventhProductName => 800;
+        public static int TwelfthProductName => 800;
+
+
+
 
 
     }
