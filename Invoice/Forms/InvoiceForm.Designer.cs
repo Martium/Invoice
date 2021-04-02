@@ -120,7 +120,7 @@ namespace Invoice.Forms
             this.SellerNameLabel = new System.Windows.Forms.Label();
             this.SerialNumberRichTextBox = new System.Windows.Forms.RichTextBox();
             this.InvoiceNumberRichTextBox = new System.Windows.Forms.RichTextBox();
-            this.DateRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.InvoiceDateRichTextBox = new System.Windows.Forms.RichTextBox();
             this.DateLabel = new System.Windows.Forms.Label();
             this.InvoiceNumberLabel = new System.Windows.Forms.Label();
             this.SerialNumberLabel = new System.Windows.Forms.Label();
@@ -220,7 +220,7 @@ namespace Invoice.Forms
             this.PrintInvoicePanel.Controls.Add(this.SellerNameLabel);
             this.PrintInvoicePanel.Controls.Add(this.SerialNumberRichTextBox);
             this.PrintInvoicePanel.Controls.Add(this.InvoiceNumberRichTextBox);
-            this.PrintInvoicePanel.Controls.Add(this.DateRichTextBox);
+            this.PrintInvoicePanel.Controls.Add(this.InvoiceDateRichTextBox);
             this.PrintInvoicePanel.Controls.Add(this.DateLabel);
             this.PrintInvoicePanel.Controls.Add(this.InvoiceNumberLabel);
             this.PrintInvoicePanel.Controls.Add(this.SerialNumberLabel);
@@ -976,13 +976,13 @@ namespace Invoice.Forms
             this.InvoiceNumberRichTextBox.TabIndex = 7;
             this.InvoiceNumberRichTextBox.Text = "";
             // 
-            // DateRichTextBox
+            // InvoiceDateRichTextBox
             // 
-            this.DateRichTextBox.Location = new System.Drawing.Point(693, 87);
-            this.DateRichTextBox.Name = "DateRichTextBox";
-            this.DateRichTextBox.Size = new System.Drawing.Size(83, 19);
-            this.DateRichTextBox.TabIndex = 6;
-            this.DateRichTextBox.Text = "";
+            this.InvoiceDateRichTextBox.Location = new System.Drawing.Point(693, 87);
+            this.InvoiceDateRichTextBox.Name = "InvoiceDateRichTextBox";
+            this.InvoiceDateRichTextBox.Size = new System.Drawing.Size(83, 19);
+            this.InvoiceDateRichTextBox.TabIndex = 6;
+            this.InvoiceDateRichTextBox.Text = "";
             // 
             // DateLabel
             // 
@@ -1041,7 +1041,7 @@ namespace Invoice.Forms
 
         private System.Windows.Forms.Panel PrintInvoicePanel;
         private System.Windows.Forms.Label InvoiceNameLabel;
-        private System.Windows.Forms.RichTextBox DateRichTextBox;
+        private System.Windows.Forms.RichTextBox InvoiceDateRichTextBox;
         private System.Windows.Forms.Label DateLabel;
         private System.Windows.Forms.Label InvoiceNumberLabel;
         private System.Windows.Forms.Label SerialNumberLabel;
