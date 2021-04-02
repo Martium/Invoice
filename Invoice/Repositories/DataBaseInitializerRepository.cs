@@ -4,7 +4,7 @@ using Invoice.Constants;
 
 namespace Invoice.Repositories
 {
-    class DataBaseInitializerRepository
+    public class DataBaseInitializerRepository
     {
         public void InitializeDatabaseIfNotExist()
         {
@@ -35,7 +35,7 @@ namespace Invoice.Repositories
                 //CreateInvoiceTable(dbConnection);
 
 #if DEBUG
-               // FillInvoiceDefaultInfo(dbConnection);
+                // FillInvoiceDefaultInfo(dbConnection);
 #endif
 
             }
@@ -105,6 +105,20 @@ namespace Invoice.Repositories
                         [TenProductSees] [nvarchar]({FormSettings.TextBoxLengths.TenProductSees}) NULL,
                         [EleventhProductSees] [nvarchar]({FormSettings.TextBoxLengths.EleventhProductSees}) NULL,
                         [TwelfthProductSees] [nvarchar]({FormSettings.TextBoxLengths.TwelfthProductSees}) NULL,
+                        [FirstProductQuantity] [NUMERIC] NULL,
+                        [SecondProductQuantity] [NUMERIC] NULL,
+                        [ThirdProductQuantity] [NUMERIC] NULL,
+                        [FourthProductQuantity] [NUMERIC] NULL,
+                        [FifthProductQuantity] [NUMERIC] NULL,
+                        [SixthProductQuantity] [NUMERIC] NULL,
+                        [SeventhProductQuantity] [NUMERIC] NULL,
+                        [EighthProductQuantity] [NUMERIC] NULL,
+                        [NinthProductQuantity] [NUMERIC] NULL,
+                        [TenProductQuantity] [NUMERIC] NULL,
+                        [EleventhProductQuantity] [NUMERIC] NULL,
+                        [TwelfthProductQuantity] [NUMERIC] NULL,
+
+                        
                     );
                  ";
         }
