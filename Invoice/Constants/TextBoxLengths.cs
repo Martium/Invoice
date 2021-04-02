@@ -49,6 +49,11 @@ namespace Invoice.Constants
         public static int EleventhProductSees => 800;
         public static int TwelfthProductSees => 800;
 
+        public static int PriceInWords => 800;
+        public static int InvoiceMaker => 800;
+        public static int InvoiceAccepted => 800;
+
+
 
 
 
