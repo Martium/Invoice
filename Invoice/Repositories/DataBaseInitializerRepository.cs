@@ -1,5 +1,6 @@
 ﻿using System.Data.SQLite;
 using System.IO;
+using Invoice.Constants;
 
 namespace Invoice.Repositories
 {
@@ -62,9 +63,48 @@ namespace Invoice.Repositories
             dropAInvoiceTableCommand.ExecuteNonQuery();
 
             string createInvoiceTableQuery =
-                @"
+                $@"
                     CREATE TABLE [Invoice] (
-                        
+                        [InvoiceNumber] [INTEGER] NOT NULL,
+                        [InvoiceNumberYearCreation] [INTEGER] NOT NULL,
+                        [InvoiceDate] [Date] NOT NULL,
+                        [SerialNumber] [nvarchar]({FormSettings.TextBoxLengths.SerialNumber}) NULL,
+                        [SellerName] [nvarchar]({FormSettings.TextBoxLengths.SellerName}) NULL,
+                        [SellerFirmCode] [nvarchar]({FormSettings.TextBoxLengths.SellerFirmCode}) NULL,
+                        [SellerPvmCode] [nvarchar]({FormSettings.TextBoxLengths.SellerPvmCode}) NULL,
+                        [SellerAddress] [nvarchar]({FormSettings.TextBoxLengths.SellerAddress}) NULL,
+                        [SellerPhoneNumber] [nvarchar]({FormSettings.TextBoxLengths.SellerPhoneNumber}) NULL,
+                        [SellerBank] [nvarchar]({FormSettings.TextBoxLengths.SellerBank}) NULL,
+                        [SellerBankAccountNumber] [nvarchar]({FormSettings.TextBoxLengths.SellerBankAccountNumber}) NULL,
+                        [SellerEmailAddress] [nvarchar]({FormSettings.TextBoxLengths.SellerEmailAddress}) NULL,
+                        [BuyerName] [nvarchar]({FormSettings.TextBoxLengths.BuyerName}) NULL,
+                        [BuyerFirmCode] [nvarchar]({FormSettings.TextBoxLengths.BuyerFirmCode}) NULL,
+                        [BuyerPvmCode] [nvarchar]({FormSettings.TextBoxLengths.BuyerPvmCode}) NULL,
+                        [BuyerAddress] [nvarchar]({FormSettings.TextBoxLengths.BuyerAddress}) NULL,
+                        [FirstProductName] [nvarchar]({FormSettings.TextBoxLengths.FirstProductName}) NULL,
+                        [SecondProductName] [nvarchar]({FormSettings.TextBoxLengths.SecondProductName}) NULL,
+                        [ThirdProductName] [nvarchar]({FormSettings.TextBoxLengths.ThirdProductName}) NULL,
+                        [FourthProductName] [nvarchar]({FormSettings.TextBoxLengths.FourthProductName}) NULL,
+                        [FifthProductName] [nvarchar]({FormSettings.TextBoxLengths.FifthProductName}) NULL,
+                        [SixthProductName] [nvarchar]({FormSettings.TextBoxLengths.SixthProductName}) NULL,
+                        [SeventhProductName] [nvarchar]({FormSettings.TextBoxLengths.SeventhProductName}) NULL,
+                        [EighthProductName] [nvarchar]({FormSettings.TextBoxLengths.EighthProductName}) NULL,
+                        [NinthProductName] [nvarchar]({FormSettings.TextBoxLengths.NinthProductName}) NULL,
+                        [TenProductName] [nvarchar]({FormSettings.TextBoxLengths.TenProductName}) NULL,
+                        [EleventhProductName] [nvarchar]({FormSettings.TextBoxLengths.EleventhProductName}) NULL,
+                        [TwelfthProductName] [nvarchar]({FormSettings.TextBoxLengths.TwelfthProductName}) NULL,
+                        [FirstProductSees] [nvarchar]({FormSettings.TextBoxLengths.FirstProductSees}) NULL,
+                        [SecondProductSees] [nvarchar]({FormSettings.TextBoxLengths.SecondProductSees}) NULL,
+                        [ThirdProductSees] [nvarchar]({FormSettings.TextBoxLengths.ThirdProductSees}) NULL,
+                        [ForthProductSees] [nvarchar]({FormSettings.TextBoxLengths.FourthProductSees}) NULL,
+                        [FifthProductSees] [nvarchar]({FormSettings.TextBoxLengths.FifthProductSees}) NULL,
+                        [SixthProductSees] [nvarchar]({FormSettings.TextBoxLengths.SixthProductSees}) NULL,
+                        [SeventhProductSees] [nvarchar]({FormSettings.TextBoxLengths.SeventhProductSees}) NULL,
+                        [EighthProductSees] [nvarchar]({FormSettings.TextBoxLengths.EighthProductSees}) NULL,
+                        [NinthProductSees] [nvarchar]({FormSettings.TextBoxLengths.NinthProductSees}) NULL,
+                        [TenProductSees] [nvarchar]({FormSettings.TextBoxLengths.TenProductSees}) NULL,
+                        [EleventhProductSees] [nvarchar]({FormSettings.TextBoxLengths.EleventhProductSees}) NULL,
+                        [TwelfthProductSees] [nvarchar]({FormSettings.TextBoxLengths.TwelfthProductSees}) NULL,
                     );
                  ";
         }
