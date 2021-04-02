@@ -36,6 +36,19 @@ namespace Invoice.Constants
         public static int EleventhProductName => 800;
         public static int TwelfthProductName => 800;
 
+        public static int FirstProductSees => 800;
+        public static int SecondProductSees => 800;
+        public static int ThirdProductSees => 800;
+        public static int FourthProductSees => 800;
+        public static int FifthProductSees => 800;
+        public static int SixthProductSees => 800;
+        public static int SeventhProductSees => 800;
+        public static int EighthProductSees => 800;
+        public static int NinthProductSees => 800;
+        public static int TenProductSees => 800;
+        public static int EleventhProductSees => 800;
+        public static int TwelfthProductSees => 800;
+
 
 
 
