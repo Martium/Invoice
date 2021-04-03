@@ -20,6 +20,8 @@ namespace Invoice.Forms
             _invoiceRepository = new InvoiceRepository();
 
             InitializeComponent();
+
+            SetControlsInitialState();
         }
 
         private void ListForm_Load(object sender, EventArgs e)
@@ -39,6 +41,15 @@ namespace Invoice.Forms
             createNewInvoice.Closed += ShowAndRefreshListForm;
 
             HideListAndOpenInvoiceForm(createNewInvoice);
+        }
+
+        private void SearchCancelButton_Click(object sender, EventArgs e)
+        {
+            _searchActive = false;
+
+            SetControlsInitialState();
+
+            LoadInvoiceList();
         }
 
         private void SearchButton_Click(object sender, EventArgs e)
@@ -102,7 +113,7 @@ namespace Invoice.Forms
         {
             if (_searchActive)
             {
-                SearchButton.Enabled = true;
+                SearchCancelButton.Enabled = true;
             }
 
             IEnumerable<InvoiceListModel> invoiceListModels = _invoiceRepository.GetInvoiceList(searchPhrase);
@@ -124,6 +135,17 @@ namespace Invoice.Forms
 
             EditButton.Enabled = enabled;
             CopyButton.Enabled = enabled;
+        }
+
+        private void SetControlsInitialState()
+        {
+            this.StartPosition = FormStartPosition.CenterScreen;
+
+            ActiveControl = NewInvoiceButton;
+
+            SearchTextBox.Text = SearchTextBoxPlaceholderText;
+            SearchButton.Enabled = false;
+            SearchCancelButton.Enabled = false;
         }
     }
 }

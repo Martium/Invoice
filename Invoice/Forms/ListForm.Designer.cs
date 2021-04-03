@@ -42,6 +42,7 @@ namespace Invoice.Forms
             this.invoiceDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buyerNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoiceListModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.SearchCancelButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ListOfInvoiceDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceListModelBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -148,12 +149,23 @@ namespace Invoice.Forms
             // 
             this.invoiceListModelBindingSource.DataSource = typeof(Invoice.Models.InvoiceListModel);
             // 
+            // SearchCancelButton
+            // 
+            this.SearchCancelButton.Location = new System.Drawing.Point(257, 37);
+            this.SearchCancelButton.Name = "SearchCancelButton";
+            this.SearchCancelButton.Size = new System.Drawing.Size(75, 20);
+            this.SearchCancelButton.TabIndex = 6;
+            this.SearchCancelButton.Text = "Atšaukti";
+            this.SearchCancelButton.UseVisualStyleBackColor = true;
+            this.SearchCancelButton.Click += new System.EventHandler(this.SearchCancelButton_Click);
+            // 
             // ListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1064, 1001);
+            this.Controls.Add(this.SearchCancelButton);
             this.Controls.Add(this.CopyButton);
             this.Controls.Add(this.ListOfInvoiceDataGridView);
             this.Controls.Add(this.NewInvoiceButton);
@@ -184,6 +196,7 @@ namespace Invoice.Forms
         private System.Windows.Forms.DataGridViewTextBoxColumn invoiceNumberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoiceDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn buyerNameDataGridViewTextBoxColumn;
+        private Button SearchCancelButton;
     }
 }
 
