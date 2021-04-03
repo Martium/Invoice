@@ -29,6 +29,11 @@ namespace Invoice.Forms
             LoadInvoiceList();
         }
 
+        private void SearchTextBox_TextChanged(object sender, EventArgs e)
+        {
+            SearchButton.Enabled = !string.IsNullOrWhiteSpace(SearchTextBox.Text);
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             var createNewInvoice = new InvoiceForm();
@@ -36,6 +41,12 @@ namespace Invoice.Forms
             createNewInvoice.Closed += ShowAndRefreshListForm;
 
             HideListAndOpenInvoiceForm(createNewInvoice);
+        }
+
+        private void SearchButton_Click(object sender, EventArgs e)
+        {
+            _searchActive = true;
+            LoadInvoiceList(SearchTextBox.Text);
         }
 
         private void ShowAndRefreshListForm(object sender, EventArgs e)
