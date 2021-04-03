@@ -29,16 +29,19 @@ namespace Invoice.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.EditButton = new System.Windows.Forms.Button();
             this.SearchTextBox = new System.Windows.Forms.TextBox();
             this.SearchButton = new System.Windows.Forms.Button();
             this.NewInvoiceButton = new System.Windows.Forms.Button();
             this.ListOfInvoiceDataGridView = new System.Windows.Forms.DataGridView();
             this.CopyButton = new System.Windows.Forms.Button();
-            this.InvoiceNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OrderDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NameOfCustumer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.invoiceListModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.invoiceNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.invoiceDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buyerNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ListOfInvoiceDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.invoiceListModelBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // EditButton
@@ -80,12 +83,14 @@ namespace Invoice.Forms
             // 
             // ListOfInvoiceDataGridView
             // 
+            this.ListOfInvoiceDataGridView.AutoGenerateColumns = false;
             this.ListOfInvoiceDataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonShadow;
             this.ListOfInvoiceDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ListOfInvoiceDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.InvoiceNumber,
-            this.OrderDate,
-            this.NameOfCustumer});
+            this.invoiceNumberDataGridViewTextBoxColumn,
+            this.invoiceDateDataGridViewTextBoxColumn,
+            this.buyerNameDataGridViewTextBoxColumn});
+            this.ListOfInvoiceDataGridView.DataSource = this.invoiceListModelBindingSource;
             this.ListOfInvoiceDataGridView.Location = new System.Drawing.Point(12, 82);
             this.ListOfInvoiceDataGridView.Name = "ListOfInvoiceDataGridView";
             this.ListOfInvoiceDataGridView.Size = new System.Drawing.Size(1040, 825);
@@ -103,24 +108,30 @@ namespace Invoice.Forms
             this.CopyButton.UseVisualStyleBackColor = false;
             this.CopyButton.Click += new System.EventHandler(this.CopyButton_Click);
             // 
-            // InvoiceNumber
+            // invoiceListModelBindingSource
             // 
-            this.InvoiceNumber.HeaderText = "Sąskaitos faktūros numeris";
-            this.InvoiceNumber.Name = "InvoiceNumber";
-            this.InvoiceNumber.ReadOnly = true;
+            this.invoiceListModelBindingSource.DataSource = typeof(Invoice.Models.InvoiceListModel);
             // 
-            // OrderDate
+            // invoiceNumberDataGridViewTextBoxColumn
             // 
-            this.OrderDate.HeaderText = "Data";
-            this.OrderDate.Name = "OrderDate";
-            this.OrderDate.ReadOnly = true;
+            this.invoiceNumberDataGridViewTextBoxColumn.DataPropertyName = "InvoiceNumber";
+            this.invoiceNumberDataGridViewTextBoxColumn.HeaderText = "Sąskaitos numeris";
+            this.invoiceNumberDataGridViewTextBoxColumn.Name = "invoiceNumberDataGridViewTextBoxColumn";
+            this.invoiceNumberDataGridViewTextBoxColumn.Width = 120;
             // 
-            // NameOfCustumer
+            // invoiceDateDataGridViewTextBoxColumn
             // 
-            this.NameOfCustumer.HeaderText = "Užsakovas";
-            this.NameOfCustumer.Name = "NameOfCustumer";
-            this.NameOfCustumer.ReadOnly = true;
-            this.NameOfCustumer.Width = 780;
+            this.invoiceDateDataGridViewTextBoxColumn.DataPropertyName = "InvoiceDate";
+            this.invoiceDateDataGridViewTextBoxColumn.HeaderText = "Data";
+            this.invoiceDateDataGridViewTextBoxColumn.Name = "invoiceDateDataGridViewTextBoxColumn";
+            this.invoiceDateDataGridViewTextBoxColumn.Width = 120;
+            // 
+            // buyerNameDataGridViewTextBoxColumn
+            // 
+            this.buyerNameDataGridViewTextBoxColumn.DataPropertyName = "BuyerName";
+            this.buyerNameDataGridViewTextBoxColumn.HeaderText = "Pirkėjas";
+            this.buyerNameDataGridViewTextBoxColumn.Name = "buyerNameDataGridViewTextBoxColumn";
+            this.buyerNameDataGridViewTextBoxColumn.Width = 740;
             // 
             // ListForm
             // 
@@ -138,7 +149,9 @@ namespace Invoice.Forms
             this.Name = "ListForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Vitalijaus Pranskūno sąskaitos";
+            this.Load += new System.EventHandler(this.ListForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ListOfInvoiceDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.invoiceListModelBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -152,9 +165,10 @@ namespace Invoice.Forms
         private System.Windows.Forms.Button NewInvoiceButton;
         private System.Windows.Forms.DataGridView ListOfInvoiceDataGridView;
         private System.Windows.Forms.Button CopyButton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn InvoiceNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OrderDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NameOfCustumer;
+        private System.Windows.Forms.BindingSource invoiceListModelBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn invoiceNumberDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn invoiceDateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn buyerNameDataGridViewTextBoxColumn;
     }
 }
 

@@ -15,11 +15,18 @@ namespace Invoice.Forms
 
         private bool _searchActive;
 
+        private BindingSource _invoiceDataGridViewBindingSource = new BindingSource();
+
         public ListForm()
         {
             _invoiceRepository = new InvoiceRepository();
 
             InitializeComponent();
+        }
+
+        private void ListForm_Load(object sender, EventArgs e)
+        {
+            LoadInvoiceList();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -57,7 +64,7 @@ namespace Invoice.Forms
             invoiceForm.Show(this);
         }
 
-        private void LoadFuneralServiceList(string searchPhrase = null)
+        private void LoadInvoiceList(string searchPhrase = null)
         {
             if (_searchActive)
             {
@@ -68,9 +75,9 @@ namespace Invoice.Forms
 
             ToggleExistingListManaging(enabled: invoiceListModels.Any(), searchPhrase);
 
-            ListOfInvoiceDataGridView.DataSource = invoiceListModels;
+            invoiceListModelBindingSource.DataSource = invoiceListModels;
 
-           // ServiceHistoryDataGridView.DataSource = FuneralServiceBindingSource;
+            ListOfInvoiceDataGridView.DataSource = invoiceListModelBindingSource;
         }
 
         private void ToggleExistingListManaging(bool enabled, string searchPhrase)
