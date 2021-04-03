@@ -5,6 +5,7 @@ using Invoice.Constants;
 using Invoice.Enums;
 using Invoice.Models;
 using Invoice.Repositories;
+using Invoice.Service;
 
 namespace Invoice.Forms
 {
@@ -13,6 +14,8 @@ namespace Invoice.Forms
         private readonly InvoiceRepository _invoiceRepository;
 
         private readonly FillDefaultSellerInfo _fillDefaultSellerInfo = new FillDefaultSellerInfo();
+
+        private readonly MessageDialogService _messageDialogService = new MessageDialogService();
 
         private readonly InvoiceOperations _invoiceOperations;
         private readonly int? _invoiceNumber;
@@ -138,6 +141,16 @@ namespace Invoice.Forms
             {
                 isSuccess = _invoiceRepository.CreateNewInvoice(invoiceModel);
                 successMessage = "Nauja Sąskaita faktūra sukurta";
+            }
+
+            if (isSuccess)
+            {
+                _messageDialogService.ShowInfoMessage(successMessage);
+                this.Close();
+            }
+            else
+            {
+                _messageDialogService.ShowErrorMassage("nepavyko išsaugot bandykit dar kartą");
             }
         }
 
