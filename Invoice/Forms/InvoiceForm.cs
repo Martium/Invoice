@@ -130,7 +130,9 @@ namespace Invoice.Forms
 
             if (_invoiceOperations == InvoiceOperations.Edit)
             {
-                
+                isSuccess = _invoiceRepository.UpdateExistingInvoice(_invoiceNumber.Value,
+                    _invoiceNumberYearCreation.Value, invoiceModel);
+                successMessage = "Sąskaita faktūra atnaujinta sekmingai";
             }
             else
             {
