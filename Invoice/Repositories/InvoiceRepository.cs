@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using Dapper;
@@ -40,6 +41,30 @@ namespace Invoice.Repositories
                 IEnumerable<InvoiceListModel> InvoiceList = dbConnection.Query<InvoiceListModel>(getExistingInvoiceQuery, queryParameters);
 
                 return InvoiceList;
+            }
+        }
+
+        public int GetNextInvoiceNumber()
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string getBiggestInvoiceNumberQuery =
+                    @"SELECT  
+                        MAX(I.InvoiceNumber)
+                      FROM Invoice I
+                      WHERE I.InvoiceNumberYearCreation = @InvoiceNumberYearCreation
+                    ";
+
+                object queryParameters = new
+                {
+                    InvoiceNumberYearCreation = DateTime.Now.Year
+                };
+
+                int? biggestOrderNumber = dbConnection.QuerySingleOrDefault<int?>(getBiggestInvoiceNumberQuery, queryParameters) ?? 0;
+
+                return biggestOrderNumber.Value + 1;
             }
         }
     }
