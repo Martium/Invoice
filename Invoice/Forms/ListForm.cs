@@ -34,7 +34,7 @@ namespace Invoice.Forms
             SearchButton.Enabled = !string.IsNullOrWhiteSpace(SearchTextBox.Text);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void EditButton_Click(object sender, EventArgs e)
         {
             var createNewInvoice = new InvoiceForm();
 
@@ -63,6 +63,14 @@ namespace Invoice.Forms
             {
                 SearchTextBox.Text = SearchTextBoxPlaceholderText;
                 SearchButton.Enabled = false;
+            }
+        }
+
+        private void SearchTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                SearchButton_Click(this, new EventArgs());
             }
         }
 

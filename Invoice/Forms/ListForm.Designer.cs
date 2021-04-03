@@ -1,4 +1,6 @@
 ﻿
+using System.Windows.Forms;
+
 namespace Invoice.Forms
 {
     partial class ListForm
@@ -53,7 +55,7 @@ namespace Invoice.Forms
             this.EditButton.TabIndex = 0;
             this.EditButton.Text = "Keisti esamą sąskaitą";
             this.EditButton.UseVisualStyleBackColor = false;
-            this.EditButton.Click += new System.EventHandler(this.button1_Click);
+            this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
             // SearchTextBox
             // 
@@ -64,6 +66,7 @@ namespace Invoice.Forms
             this.SearchTextBox.TextChanged += new System.EventHandler(this.SearchTextBox_TextChanged);
             this.SearchTextBox.GotFocus += new System.EventHandler(this.SearchTextBox_GotFocus);
             this.SearchTextBox.LostFocus += new System.EventHandler(this.SearchTextBox_LostFocus);
+            this.SearchTextBox.KeyDown += new KeyEventHandler(this.SearchTextBox_KeyDown);
             // 
             // SearchButton
             // 
