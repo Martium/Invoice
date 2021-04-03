@@ -16,6 +16,8 @@ namespace Invoice.Forms
         private readonly int? _invoiceNumber;
         private readonly int? _invoiceNumberYearCreation;
 
+        private const string DateFormat = "yyyy-MM-dd";
+
         public InvoiceForm(InvoiceOperations invoiceOperations, int? invoiceNumber = null, int? invoiceNumberYearCreation = null)
         {
             _invoiceRepository = new InvoiceRepository();
@@ -59,8 +61,7 @@ namespace Invoice.Forms
             if (_invoiceOperations == InvoiceOperations.Create)
             {
                 SerialNumberRichTextBox.Text = _fillDefaultSellerInfo.SerialNumber;
-                InvoiceDateRichTextBox.Text = DateTime.Now.ToString("yyyy-MM-dd");
-                
+                InvoiceDateRichTextBox.Text = DateTime.Now.ToString(DateFormat);
 
                 SellerNameRichTextBox.Text = _fillDefaultSellerInfo.SellerName;
                 SellerFirmCodeRichTextBox.Text = _fillDefaultSellerInfo.SellerFirmCode;
