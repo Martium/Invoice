@@ -76,11 +76,6 @@ namespace Invoice.Forms
             }
         }
 
-        private void ShowAndRefreshListForm(object sender, EventArgs e)
-        {
-            this.Show();
-        }
-
         private void NewInvoiceButton_Click(object sender, EventArgs e)
         {
             var createNewInvoice = new InvoiceForm(InvoiceOperations.Create);
@@ -101,11 +96,11 @@ namespace Invoice.Forms
 
         private void CopyButton_Click(object sender, EventArgs e)
         {
-            var CopySelectedInvoice = new InvoiceForm(InvoiceOperations.Copy);
+            var copySelectedInvoice = new InvoiceForm(InvoiceOperations.Copy);
 
-            CopySelectedInvoice.Closed += ShowAndRefreshListForm;
+            copySelectedInvoice.Closed += ShowAndRefreshListForm;
 
-            HideListAndOpenInvoiceForm(CopySelectedInvoice);
+            HideListAndOpenInvoiceForm(copySelectedInvoice);
         }
 
         private void ListOfInvoiceDataGridView_Paint(object sender, PaintEventArgs e)
@@ -120,6 +115,17 @@ namespace Invoice.Forms
 
                 DisplayEmptyListReason(emptyListReason, e, dataGridView);
             }
+        }
+
+        private void ShowAndRefreshListForm(object sender, EventArgs e)
+        {
+            _searchActive = false;
+
+            SetControlsInitialState();
+
+            LoadInvoiceList();
+
+            this.Show();
         }
 
         private void HideListAndOpenInvoiceForm(Form invoiceForm)
