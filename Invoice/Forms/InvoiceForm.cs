@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Invoice.Constants;
 using Invoice.Enums;
 using Invoice.Repositories;
 
@@ -56,7 +50,51 @@ namespace Invoice.Forms
 
         private void SetTextBoxLengths()
         {
+            SerialNumberRichTextBox.MaxLength = FormSettings.TextBoxLengths.SerialNumber;
 
+            SellerNameRichTextBox.MaxLength = FormSettings.TextBoxLengths.SellerName;
+            SellerFirmCodeRichTextBox.MaxLength = FormSettings.TextBoxLengths.SellerFirmCode;
+            SellerPvmCodeRichTextBox.MaxLength = FormSettings.TextBoxLengths.SellerPvmCode;
+            SellerAddressRichTextBox.MaxLength = FormSettings.TextBoxLengths.SellerAddress;
+            SellerPhoneNumberRichTextBox.MaxLength = FormSettings.TextBoxLengths.SellerPhoneNumber;
+            SellerBankRichTextBox.MaxLength = FormSettings.TextBoxLengths.SellerBank;
+            SellerBankAccountNumberRichTextBox.MaxLength = FormSettings.TextBoxLengths.SellerBankAccountNumber;
+            SellerEmailAddressRichTextBox.MaxLength = FormSettings.TextBoxLengths.SellerEmailAddress;
+
+            BuyerNameRichTextBox.MaxLength = FormSettings.TextBoxLengths.BuyerName;
+            BuyerFirmCodeRichTextBox.MaxLength = FormSettings.TextBoxLengths.BuyerFirmCode;
+            BuyerPvmCodeRichTextBox.MaxLength = FormSettings.TextBoxLengths.BuyerPvmCode;
+            BuyerAddressRichTextBox.MaxLength = FormSettings.TextBoxLengths.BuyerAddress;
+
+            FirstProductNameRichTextBox.MaxLength = FormSettings.TextBoxLengths.FirstProductName;
+            SecondProductNameRichTextBox.MaxLength = FormSettings.TextBoxLengths.SecondProductName;
+            ThirdProductNameRichTextBox.MaxLength = FormSettings.TextBoxLengths.ThirdProductName;
+            FourthProductNameRichTextBox.MaxLength = FormSettings.TextBoxLengths.FourthProductName;
+            FifthProductNameRichTextBox.MaxLength = FormSettings.TextBoxLengths.FifthProductName;
+            SixthProductNameRichTextBox.MaxLength = FormSettings.TextBoxLengths.SixthProductName;
+            SeventhProductNameRichTextBox.MaxLength = FormSettings.TextBoxLengths.SeventhProductName;
+            EighthProductNameRichTextBox.MaxLength = FormSettings.TextBoxLengths.EighthProductName;
+            NinthProductNameRichTextBox.MaxLength = FormSettings.TextBoxLengths.NinthProductName;
+            TenProductNameRichTextBox.MaxLength = FormSettings.TextBoxLengths.TenProductName;
+            EleventhProductNameRichTextBox.MaxLength = FormSettings.TextBoxLengths.EleventhProductName;
+            TwelfthProductNameRichTextBox.MaxLength = FormSettings.TextBoxLengths.TwelfthProductName;
+
+            FirstProductSeesRichTextBox.MaxLength = FormSettings.TextBoxLengths.FirstProductSees;
+            SecondProductSeesRichTextBox.MaxLength = FormSettings.TextBoxLengths.SecondProductSees;
+            ThirdProductSeesRichTextBox.MaxLength = FormSettings.TextBoxLengths.ThirdProductSees;
+            FourthProductSeesRichTextBox.MaxLength = FormSettings.TextBoxLengths.FourthProductSees;
+            FifthProductSeesRichTextBox.MaxLength = FormSettings.TextBoxLengths.FifthProductSees;
+            SixthProductSeesRichTextBox.MaxLength = FormSettings.TextBoxLengths.SixthProductSees;
+            SeventhProductSeesRichTextBox.MaxLength = FormSettings.TextBoxLengths.SeventhProductSees;
+            EighthProductSeesRichTextBox.MaxLength = FormSettings.TextBoxLengths.EighthProductSees;
+            NinthProductSeesRichTextBox.MaxLength = FormSettings.TextBoxLengths.NinthProductSees;
+            TenProductSeesRichTextBox.MaxLength = FormSettings.TextBoxLengths.TenProductSees;
+            EleventhProductSeesRichTextBox.MaxLength = FormSettings.TextBoxLengths.EleventhProductSees;
+            TwelfthProductSeesRichTextBox.MaxLength = FormSettings.TextBoxLengths.TwelfthProductSees;
+
+            PriceInWordsRichTextBox.MaxLength = FormSettings.TextBoxLengths.PriceInWords;
+            InvoiceMakerRichTextBox.MaxLength = FormSettings.TextBoxLengths.InvoiceMaker;
+            InvoiceAcceptedRichTextBox.MaxLength = FormSettings.TextBoxLengths.InvoiceAccepted;
         }
     }
 }
