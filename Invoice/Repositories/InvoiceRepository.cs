@@ -176,6 +176,111 @@ namespace Invoice.Repositories
             }
         }
 
+        public bool UpdateExistingInvoice(int invoiceNumber, int invoiceNumberYearCreation, InvoiceModel updatedInvoice)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string updateExistingInvoiceCommand =
+                    @"Update 'Invoice'
+                        SET InvoiceDate = @InvoiceDate, SerialNumber = @SerialNumber, SellerName = @SellerName, SellerFirmCode = @SellerFirmCode, SellerPvmCode = @SellerPvmCode, SellerAddress = @SellerAddress, 
+                           SellerPhoneNumber = @SellerPhoneNumber, SellerBank = @SellerBank, SellerBankAccountNumber = @SellerBankAccountNumber, SellerEmailAddress = @SellerEmailAddress, BuyerName = @BuyerName, 
+                           BuyerFirmCode = @BuyerFirmCode, BuyerPvmCode = @BuyerPvmCode, BuyerAddress = @BuyerAddress, FirstProductName = @FirstProductName, SecondProductName = @SecondProductName, 
+                           ThirdProductName = @ThirdProductName, FourthProductName = @FourthProductName, FifthProductName = @FifthProductName, SixthProductName = @SixthProductName, 
+                           SeventhProductName = @SeventhProductName, EighthProductName = @EighthProductName, NinthProductName = @NinthProductName, TenProductName = @TenProductName, EleventhProductName = @EleventhProductName, TwelfthProductName = @TwelfthProductName, FirstProductSees = @FirstProductSees, SecondProductSees = @SecondProductSees, ThirdProductSees = @ThirdProductSees, ForthProductSees = @ForthProductSees, 
+                          FifthProductSees = @FifthProductSees, SixthProductSees = @SixthProductSees, SeventhProductSees = @SeventhProductSees, EighthProductSees = @EighthProductSees, NinthProductSees = @NinthProductSees,  TenProductSees = @TenProductSees, EleventhProductSees = @EleventhProductSees, TwelfthProductSees = @TwelfthProductSees, FirstProductQuantity = @FirstProductQuantity, 
+                          SecondProductQuantity = @SecondProductQuantity, ThirdProductQuantity = @ThirdProductQuantity, FourthProductQuantity = @FourthProductQuantity, FifthProductQuantity = @FifthProductQuantity,  SixthProductQuantity = @SixthProductQuantity, SeventhProductQuantity = @SeventhProductQuantity, EighthProductQuantity = @EighthProductQuantity, NinthProductQuantity = @NinthProductQuantity, TenProductQuantity = @TenProductQuantity, EleventhProductQuantity = @EleventhProductQuantity, TwelfthProductQuantity = @TwelfthProductQuantity, FirstProductPrice = @FirstProductPrice, 
+                          SecondProductPrice = @SecondProductPrice, ThirdProductPrice = @ThirdProductPrice, FourthProductPrice = @FourthProductPrice, FifthProductPrice = @FifthProductPrice, SixthProductPrice = @SixthProductPrice, SeventhProductPrice = @SeventhProductPrice, EighthProductPrice = @EighthProductPrice, NinthProductPrice = @NinthProductPrice,TenProductPrice = @TenProductPrice,                           EleventhProductPrice = @EleventhProductPrice,  TwelfthProductPrice = @TwelfthProductPrice, PriceInWords = @PriceInWords, InvoiceMaker = @InvoiceMaker, InvoiceAccepted = @InvoiceAccepted
+                      WHERE InvoiceNumber = @InvoiceNumber AND InvoiceNumberYearCreation = @InvoiceNumberYearCreation
+
+                     ";
+
+                object queryParameters = new
+                {
+                    updatedInvoice.InvoiceDate,
+                    updatedInvoice.SerialNumber,
+
+                    updatedInvoice.SellerName,
+                    updatedInvoice.SellerFirmCode,
+                    updatedInvoice.SellerPvmCode,
+                    updatedInvoice.SellerAddress,
+                    updatedInvoice.SellerPhoneNumber,
+                    updatedInvoice.SellerBank,
+                    updatedInvoice.SellerBankAccountNumber,
+                    updatedInvoice.SellerEmailAddress,
+
+                    updatedInvoice.BuyerName,
+                    updatedInvoice.BuyerFirmCode,
+                    updatedInvoice.BuyerPvmCode,
+                    updatedInvoice.BuyerAddress,
+
+                    updatedInvoice.FirstProductName,
+                    updatedInvoice.SecondProductName,
+                    updatedInvoice.ThirdProductName,
+                    updatedInvoice.FourthProductName,
+                    updatedInvoice.FifthProductName,
+                    updatedInvoice.SixthProductName,
+                    updatedInvoice.SeventhProductName,
+                    updatedInvoice.EighthProductName,
+                    updatedInvoice.NinthProductName,
+                    updatedInvoice.TenProductName,
+                    updatedInvoice.EleventhProductName,
+                    updatedInvoice.TwelfthProductName,
+
+                    updatedInvoice.FirstProductSees,
+                    updatedInvoice.SecondProductSees,
+                    updatedInvoice.ThirdProductSees,
+                    updatedInvoice.ForthProductSees,
+                    updatedInvoice.FifthProductSees,
+                    updatedInvoice.SixthProductSees,
+                    updatedInvoice.SeventhProductSees,
+                    updatedInvoice.EighthProductSees,
+                    updatedInvoice.NinthProductSees,
+                    updatedInvoice.TenProductSees,
+                    updatedInvoice.EleventhProductSees,
+                    updatedInvoice.TwelfthProductSees,
+
+                    updatedInvoice.FirstProductQuantity,
+                    updatedInvoice.SecondProductQuantity,
+                    updatedInvoice.ThirdProductQuantity,
+                    updatedInvoice.FourthProductQuantity,
+                    updatedInvoice.FifthProductQuantity,
+                    updatedInvoice.SixthProductQuantity,
+                    updatedInvoice.SeventhProductQuantity,
+                    updatedInvoice.EighthProductQuantity,
+                    updatedInvoice.NinthProductQuantity,
+                    updatedInvoice.TenProductQuantity,
+                    updatedInvoice.EleventhProductQuantity,
+                    updatedInvoice.TwelfthProductQuantity,
+
+                    updatedInvoice.FirstProductPrice,
+                    updatedInvoice.SecondProductPrice,
+                    updatedInvoice.ThirdProductPrice,
+                    updatedInvoice.FourthProductPrice,
+                    updatedInvoice.FifthProductPrice,
+                    updatedInvoice.SixthProductPrice,
+                    updatedInvoice.SeventhProductPrice,
+                    updatedInvoice.EighthProductPrice,
+                    updatedInvoice.NinthProductPrice,
+                    updatedInvoice.TenProductPrice,
+                    updatedInvoice.EleventhProductPrice,
+                    updatedInvoice.TwelfthProductPrice,
+
+                    updatedInvoice.PriceInWords,
+                    updatedInvoice.InvoiceMaker,
+                    updatedInvoice.InvoiceAccepted,
+
+                    InvoiceNumber = invoiceNumber, 
+                    InvoiceNumberYearCreation = invoiceNumberYearCreation
+                };
+
+                int affectedRows = dbConnection.Execute(updateExistingInvoiceCommand, queryParameters);
+
+                return affectedRows == 1;
+            }
+        }
+
         public int GetNextInvoiceNumber()
         {
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
