@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Invoice.Enums;
 using Invoice.Models;
 using Invoice.Repositories;
 
@@ -33,15 +34,6 @@ namespace Invoice.Forms
         private void SearchTextBox_TextChanged(object sender, EventArgs e)
         {
             SearchButton.Enabled = !string.IsNullOrWhiteSpace(SearchTextBox.Text);
-        }
-
-        private void EditButton_Click(object sender, EventArgs e)
-        {
-            var createNewInvoice = new InvoiceForm();
-
-            createNewInvoice.Closed += ShowAndRefreshListForm;
-
-            HideListAndOpenInvoiceForm(createNewInvoice);
         }
 
         private void SearchCancelButton_Click(object sender, EventArgs e)
@@ -89,13 +81,31 @@ namespace Invoice.Forms
             this.Show();
         }
 
-        private void CopyButton_Click(object sender, EventArgs e)
+        private void NewInvoiceButton_Click(object sender, EventArgs e)
         {
-            var createNewInvoice = new MoneyRecepitForm();
+            var createNewInvoice = new InvoiceForm(InvoiceOperations.Create);
 
             createNewInvoice.Closed += ShowAndRefreshListForm;
 
             HideListAndOpenInvoiceForm(createNewInvoice);
+        }
+
+        private void EditButton_Click(object sender, EventArgs e)
+        {
+            var EditSelectedInvoice = new InvoiceForm(InvoiceOperations.Edit);
+
+            EditSelectedInvoice.Closed += ShowAndRefreshListForm;
+
+            HideListAndOpenInvoiceForm(EditSelectedInvoice);
+        }
+
+        private void CopyButton_Click(object sender, EventArgs e)
+        {
+            var CopySelectedInvoice = new InvoiceForm(InvoiceOperations.Copy);
+
+            CopySelectedInvoice.Closed += ShowAndRefreshListForm;
+
+            HideListAndOpenInvoiceForm(CopySelectedInvoice);
         }
 
         private void ListOfInvoiceDataGridView_Paint(object sender, PaintEventArgs e)

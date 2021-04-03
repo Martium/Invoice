@@ -37,11 +37,11 @@ namespace Invoice.Forms
             this.SearchButton = new System.Windows.Forms.Button();
             this.NewInvoiceButton = new System.Windows.Forms.Button();
             this.ListOfInvoiceDataGridView = new System.Windows.Forms.DataGridView();
-            this.CopyButton = new System.Windows.Forms.Button();
             this.invoiceNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoiceDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buyerNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoiceListModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.CopyButton = new System.Windows.Forms.Button();
             this.SearchCancelButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ListOfInvoiceDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceListModelBindingSource)).BeginInit();
@@ -88,6 +88,7 @@ namespace Invoice.Forms
             this.NewInvoiceButton.TabIndex = 3;
             this.NewInvoiceButton.Text = "Nauja sąskaita";
             this.NewInvoiceButton.UseVisualStyleBackColor = false;
+            this.NewInvoiceButton.Click += new System.EventHandler(this.NewInvoiceButton_Click);
             // 
             // ListOfInvoiceDataGridView
             // 
@@ -109,17 +110,6 @@ namespace Invoice.Forms
             this.ListOfInvoiceDataGridView.Size = new System.Drawing.Size(1040, 825);
             this.ListOfInvoiceDataGridView.TabIndex = 4;
             this.ListOfInvoiceDataGridView.Paint += new System.Windows.Forms.PaintEventHandler(this.ListOfInvoiceDataGridView_Paint);
-            // 
-            // CopyButton
-            // 
-            this.CopyButton.BackColor = System.Drawing.SystemColors.Control;
-            this.CopyButton.Location = new System.Drawing.Point(12, 938);
-            this.CopyButton.Name = "CopyButton";
-            this.CopyButton.Size = new System.Drawing.Size(187, 37);
-            this.CopyButton.TabIndex = 5;
-            this.CopyButton.Text = "Kopijuoti sąskaitą ( kurti naują )";
-            this.CopyButton.UseVisualStyleBackColor = false;
-            this.CopyButton.Click += new System.EventHandler(this.CopyButton_Click);
             // 
             // invoiceNumberDataGridViewTextBoxColumn
             // 
@@ -148,6 +138,17 @@ namespace Invoice.Forms
             // invoiceListModelBindingSource
             // 
             this.invoiceListModelBindingSource.DataSource = typeof(Invoice.Models.InvoiceListModel);
+            // 
+            // CopyButton
+            // 
+            this.CopyButton.BackColor = System.Drawing.SystemColors.Control;
+            this.CopyButton.Location = new System.Drawing.Point(12, 938);
+            this.CopyButton.Name = "CopyButton";
+            this.CopyButton.Size = new System.Drawing.Size(187, 37);
+            this.CopyButton.TabIndex = 5;
+            this.CopyButton.Text = "Kopijuoti sąskaitą ( kurti naują )";
+            this.CopyButton.UseVisualStyleBackColor = false;
+            this.CopyButton.Click += new System.EventHandler(this.CopyButton_Click);
             // 
             // SearchCancelButton
             // 
