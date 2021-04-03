@@ -1030,7 +1030,6 @@ namespace Invoice.Forms
             this.MaximizeBox = false;
             this.Name = "InvoiceForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "InvoiceForm";
             this.PrintInvoicePanel.ResumeLayout(false);
             this.PrintInvoicePanel.PerformLayout();
             this.ResumeLayout(false);
