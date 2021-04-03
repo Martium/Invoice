@@ -15,8 +15,6 @@ namespace Invoice.Forms
 
         private bool _searchActive;
 
-        private BindingSource _invoiceDataGridViewBindingSource = new BindingSource();
-
         public ListForm()
         {
             _invoiceRepository = new InvoiceRepository();

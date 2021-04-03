@@ -65,8 +65,8 @@ namespace Invoice.Forms
             this.SearchTextBox.TabIndex = 1;
             this.SearchTextBox.TextChanged += new System.EventHandler(this.SearchTextBox_TextChanged);
             this.SearchTextBox.GotFocus += new System.EventHandler(this.SearchTextBox_GotFocus);
+            this.SearchTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SearchTextBox_KeyDown);
             this.SearchTextBox.LostFocus += new System.EventHandler(this.SearchTextBox_LostFocus);
-            this.SearchTextBox.KeyDown += new KeyEventHandler(this.SearchTextBox_KeyDown);
             // 
             // SearchButton
             // 
@@ -90,6 +90,8 @@ namespace Invoice.Forms
             // 
             // ListOfInvoiceDataGridView
             // 
+            this.ListOfInvoiceDataGridView.AllowUserToAddRows = false;
+            this.ListOfInvoiceDataGridView.AllowUserToDeleteRows = false;
             this.ListOfInvoiceDataGridView.AutoGenerateColumns = false;
             this.ListOfInvoiceDataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonShadow;
             this.ListOfInvoiceDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -99,7 +101,10 @@ namespace Invoice.Forms
             this.buyerNameDataGridViewTextBoxColumn});
             this.ListOfInvoiceDataGridView.DataSource = this.invoiceListModelBindingSource;
             this.ListOfInvoiceDataGridView.Location = new System.Drawing.Point(12, 82);
+            this.ListOfInvoiceDataGridView.MultiSelect = false;
             this.ListOfInvoiceDataGridView.Name = "ListOfInvoiceDataGridView";
+            this.ListOfInvoiceDataGridView.ReadOnly = true;
+            this.ListOfInvoiceDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ListOfInvoiceDataGridView.Size = new System.Drawing.Size(1040, 825);
             this.ListOfInvoiceDataGridView.TabIndex = 4;
             this.ListOfInvoiceDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ListOfInvoiceDataGridView_CellContentClick);
@@ -120,6 +125,7 @@ namespace Invoice.Forms
             this.invoiceNumberDataGridViewTextBoxColumn.DataPropertyName = "InvoiceNumber";
             this.invoiceNumberDataGridViewTextBoxColumn.HeaderText = "Sąskaitos numeris";
             this.invoiceNumberDataGridViewTextBoxColumn.Name = "invoiceNumberDataGridViewTextBoxColumn";
+            this.invoiceNumberDataGridViewTextBoxColumn.ReadOnly = true;
             this.invoiceNumberDataGridViewTextBoxColumn.Width = 120;
             // 
             // invoiceDateDataGridViewTextBoxColumn
@@ -127,6 +133,7 @@ namespace Invoice.Forms
             this.invoiceDateDataGridViewTextBoxColumn.DataPropertyName = "InvoiceDate";
             this.invoiceDateDataGridViewTextBoxColumn.HeaderText = "Data";
             this.invoiceDateDataGridViewTextBoxColumn.Name = "invoiceDateDataGridViewTextBoxColumn";
+            this.invoiceDateDataGridViewTextBoxColumn.ReadOnly = true;
             this.invoiceDateDataGridViewTextBoxColumn.Width = 120;
             // 
             // buyerNameDataGridViewTextBoxColumn
@@ -134,6 +141,7 @@ namespace Invoice.Forms
             this.buyerNameDataGridViewTextBoxColumn.DataPropertyName = "BuyerName";
             this.buyerNameDataGridViewTextBoxColumn.HeaderText = "Pirkėjas";
             this.buyerNameDataGridViewTextBoxColumn.Name = "buyerNameDataGridViewTextBoxColumn";
+            this.buyerNameDataGridViewTextBoxColumn.ReadOnly = true;
             this.buyerNameDataGridViewTextBoxColumn.Width = 740;
             // 
             // invoiceListModelBindingSource
