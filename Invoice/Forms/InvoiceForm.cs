@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows.Forms;
 using Invoice.Constants;
 using Invoice.Enums;
+using Invoice.Models;
 using Invoice.Repositories;
 
 namespace Invoice.Forms
@@ -40,6 +42,7 @@ namespace Invoice.Forms
         private void InvoiceForm_Load(object sender, EventArgs e)
         {
             ResolveInvoiceNumberText();
+            LoadFormDataForEditOrCopy();
         }
 
         private void ResolveFormOperationDesign()
@@ -97,6 +100,88 @@ namespace Invoice.Forms
                 InvoiceNumberRichTextBox.Text = _invoiceRepository.GetNextInvoiceNumber().ToString();
 
                 InvoiceDateRichTextBox.Text = DateTime.Now.ToString(DateFormat);
+            }
+        }
+
+        private void LoadFormDataForEditOrCopy()
+        {
+            if (_invoiceOperations == InvoiceOperations.Edit || _invoiceOperations == InvoiceOperations.Copy)
+            {
+                InvoiceModel invoiceModel =
+                    _invoiceRepository.GetExistingInvoice(_invoiceNumber.Value, _invoiceNumberYearCreation.Value);
+
+                SerialNumberRichTextBox.Text = invoiceModel.SerialNumber;
+                InvoiceDateRichTextBox.Text = invoiceModel.InvoiceDate.ToString(DateFormat);
+
+                SellerNameRichTextBox.Text = invoiceModel.SellerName;
+                SellerFirmCodeRichTextBox.Text = invoiceModel.SellerFirmCode;
+                SellerPvmCodeRichTextBox.Text = invoiceModel.SellerPvmCode;
+                SellerAddressRichTextBox.Text = invoiceModel.SellerAddress;
+                SellerPhoneNumberRichTextBox.Text = invoiceModel.SellerPhoneNumber;
+                SellerBankRichTextBox.Text = invoiceModel.SellerBank;
+                SellerBankAccountNumberRichTextBox.Text = invoiceModel.SellerBankAccountNumber;
+                SellerEmailAddressRichTextBox.Text = invoiceModel.SellerEmailAddress;
+
+                BuyerNameRichTextBox.Text = invoiceModel.BuyerName;
+                BuyerFirmCodeRichTextBox.Text = invoiceModel.BuyerFirmCode;
+                BuyerPvmCodeRichTextBox.Text = invoiceModel.BuyerPvmCode;
+                BuyerAddressRichTextBox.Text = invoiceModel.BuyerAddress;
+
+                FirstProductNameRichTextBox.Text = invoiceModel.FirstProductName;
+                SecondProductNameRichTextBox.Text = invoiceModel.SecondProductName;
+                ThirdProductNameRichTextBox.Text = invoiceModel.ThirdProductName;
+                FourthProductNameRichTextBox.Text = invoiceModel.FourthProductName;
+                FifthProductNameRichTextBox.Text = invoiceModel.FifthProductName;
+                SixthProductNameRichTextBox.Text = invoiceModel.SixthProductName;
+                SeventhProductNameRichTextBox.Text = invoiceModel.SeventhProductName;
+                EighthProductNameRichTextBox.Text = invoiceModel.EighthProductName;
+                NinthProductNameRichTextBox.Text = invoiceModel.NinthProductName;
+                TenProductNameRichTextBox.Text = invoiceModel.TenProductName;
+                EleventhProductNameRichTextBox.Text = invoiceModel.EleventhProductName;
+                TwelfthProductNameRichTextBox.Text = invoiceModel.TwelfthProductName;
+
+                FirstProductSeesRichTextBox.Text = invoiceModel.FirstProductSees;
+                SecondProductSeesRichTextBox.Text = invoiceModel.SecondProductSees;
+                ThirdProductSeesRichTextBox.Text = invoiceModel.ThirdProductSees;
+                FourthProductSeesRichTextBox.Text = invoiceModel.ForthProductSees;
+                FifthProductSeesRichTextBox.Text = invoiceModel.FifthProductSees;
+                SixthProductSeesRichTextBox.Text = invoiceModel.SixthProductSees;
+                SeventhProductSeesRichTextBox.Text = invoiceModel.SeventhProductSees;
+                EighthProductSeesRichTextBox.Text = invoiceModel.EighthProductSees;
+                NinthProductSeesRichTextBox.Text = invoiceModel.NinthProductSees;
+                TenProductSeesRichTextBox.Text = invoiceModel.TenProductSees;
+                EleventhProductSeesRichTextBox.Text = invoiceModel.EleventhProductSees;
+                TwelfthProductSeesRichTextBox.Text = invoiceModel.TwelfthProductSees;
+
+                FirstProductQuantityRichTextBox.Text = invoiceModel.FirstProductQuantity.ToString(CultureInfo.InvariantCulture);
+                SecondProductQuantityRichTextBox.Text = invoiceModel.SecondProductQuantity.ToString(CultureInfo.InvariantCulture);
+                ThirdProductQuantityRichTextBox.Text = invoiceModel.ThirdProductQuantity.ToString(CultureInfo.InvariantCulture);
+                FourthProductQuantityRichTextBox.Text = invoiceModel.FourthProductQuantity.ToString(CultureInfo.InvariantCulture);
+                FifthProductQuantityRichTextBox.Text = invoiceModel.FifthProductQuantity.ToString(CultureInfo.InvariantCulture);
+                SixthProductQuantityRichTextBox.Text = invoiceModel.SixthProductQuantity.ToString(CultureInfo.InvariantCulture);
+                SeventhProductQuantityRichTextBox.Text = invoiceModel.SeventhProductQuantity.ToString(CultureInfo.InvariantCulture);
+                EighthProductQuantityRichTextBox.Text = invoiceModel.EighthProductQuantity.ToString(CultureInfo.InvariantCulture);
+                NinthProductQuantityRichTextBox.Text = invoiceModel.NinthProductQuantity.ToString(CultureInfo.InvariantCulture);
+                TenProductQuantityRichTextBox.Text = invoiceModel.TenProductQuantity.ToString(CultureInfo.InvariantCulture);
+                EleventhProductQuantityRichTextBox.Text = invoiceModel.EleventhProductQuantity.ToString(CultureInfo.InvariantCulture);
+                TwelfthProductQuantityRichTextBox.Text = invoiceModel.TwelfthProductQuantity.ToString(CultureInfo.InvariantCulture);
+
+                FirstProductPriceRichTextBox.Text = invoiceModel.FirstProductPrice.ToString(CultureInfo.InvariantCulture);
+                SecondProductPriceRichTextBox.Text = invoiceModel.SecondProductPrice.ToString(CultureInfo.InvariantCulture);
+                ThirdProductPriceRichTextBox.Text = invoiceModel.ThirdProductPrice.ToString(CultureInfo.InvariantCulture);
+                FourthProductPriceRichTextBox.Text = invoiceModel.FourthProductPrice.ToString(CultureInfo.InvariantCulture);
+                FifthProductPriceRichTextBox.Text = invoiceModel.FifthProductPrice.ToString(CultureInfo.InvariantCulture);
+                SixthProductPriceRichTextBox.Text = invoiceModel.SixthProductPrice.ToString(CultureInfo.InvariantCulture);
+                SeventhProductPriceRichTextBox.Text = invoiceModel.SeventhProductPrice.ToString(CultureInfo.InvariantCulture);
+                EighthProductPriceRichTextBox.Text = invoiceModel.EighthProductPrice.ToString(CultureInfo.InvariantCulture);
+                NinthProductPriceRichTextBox.Text = invoiceModel.NinthProductPrice.ToString(CultureInfo.InvariantCulture);
+                TenProductPriceRichTextBox.Text = invoiceModel.TenProductPrice.ToString(CultureInfo.InvariantCulture);
+                EleventhProductPriceRichTextBox.Text = invoiceModel.EleventhProductPrice.ToString(CultureInfo.InvariantCulture);
+                TwelfthProductPriceRichTextBox.Text = invoiceModel.TwelfthProductPrice.ToString(CultureInfo.InvariantCulture);
+
+                PriceInWordsRichTextBox.Text = invoiceModel.PriceInWords;
+                InvoiceMakerRichTextBox.Text = invoiceModel.InvoiceMaker;
+                InvoiceAcceptedRichTextBox.Text = invoiceModel.InvoiceAccepted;
             }
         }
 
