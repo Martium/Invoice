@@ -13,7 +13,7 @@ namespace Invoice.Forms
 {
     public partial class InvoiceForm : Form
     {
-        public InvoiceForm(InvoiceOperations invoiceOperations)
+        public InvoiceForm(InvoiceOperations invoiceOperations, int? invoiceNumber = null, int? invoiceNumberYearCreation = null)
         {
             InitializeComponent();
         }

@@ -87,16 +87,22 @@ namespace Invoice.Forms
 
         private void EditButton_Click(object sender, EventArgs e)
         {
-            var EditSelectedInvoice = new InvoiceForm(InvoiceOperations.Edit);
+            int invoiceNumber = GetSelectedInvoiceNumber();
+            int invoiceNumberYearCreation = GetSelectedOrderCreationYear();
 
-            EditSelectedInvoice.Closed += ShowAndRefreshListForm;
+            var editSelectedInvoice = new InvoiceForm(InvoiceOperations.Edit, invoiceNumber, invoiceNumberYearCreation);
 
-            HideListAndOpenInvoiceForm(EditSelectedInvoice);
+            editSelectedInvoice.Closed += ShowAndRefreshListForm;
+
+            HideListAndOpenInvoiceForm(editSelectedInvoice);
         }
 
         private void CopyButton_Click(object sender, EventArgs e)
         {
-            var copySelectedInvoice = new InvoiceForm(InvoiceOperations.Copy);
+            int invoiceNumber = GetSelectedInvoiceNumber();
+            int invoiceNumberYearCreation = GetSelectedOrderCreationYear();
+
+            var copySelectedInvoice = new InvoiceForm(InvoiceOperations.Copy, invoiceNumber, invoiceNumberYearCreation);
 
             copySelectedInvoice.Closed += ShowAndRefreshListForm;
 
@@ -197,6 +203,20 @@ namespace Invoice.Forms
                     Brushes.DarkGray,
                     new PointF(leftPadding, topPadding));
             }
+        }
+
+        private int GetSelectedInvoiceNumber()
+        {
+            int invoiceNumberColumnIndex = 0;
+
+            return (int)ListOfInvoiceDataGridView.SelectedRows[0].Cells[invoiceNumberColumnIndex].Value;
+        }
+
+        private int GetSelectedOrderCreationYear()
+        {
+            int invoiceNumberYearCreationColumnIndex = 1;
+
+            return (int)ListOfInvoiceDataGridView.SelectedRows[0].Cells[invoiceNumberYearCreationColumnIndex].Value;
         }
     }
 }
