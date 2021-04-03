@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="AppConfiguration.cs" />
     <Compile Include="Constants\FormSettings.cs" />
+    <Compile Include="Enums\InvoiceOperations.cs" />
     <Compile Include="Forms\InvoiceForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,9 +75,11 @@
     <Compile Include="Forms\MoneyRecepitForm.Designer.cs">
       <DependentUpon>MoneyRecepitForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\InvoiceListModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\DataBaseInitializerRepository.cs" />
+    <Compile Include="Repositories\InvoiceRepository.cs" />
     <EmbeddedResource Include="Forms\InvoiceForm.resx">
       <DependentUpon>InvoiceForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -108,6 +111,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
