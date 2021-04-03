@@ -59,6 +59,8 @@ namespace Invoice.Forms
             if (_invoiceOperations == InvoiceOperations.Create)
             {
                 SerialNumberRichTextBox.Text = _fillDefaultSellerInfo.SerialNumber;
+                InvoiceDateRichTextBox.Text = DateTime.Now.ToString("yyyy-MM-dd");
+                
 
                 SellerNameRichTextBox.Text = _fillDefaultSellerInfo.SellerName;
                 SellerFirmCodeRichTextBox.Text = _fillDefaultSellerInfo.SellerFirmCode;
