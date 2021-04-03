@@ -35,24 +35,22 @@ namespace Invoice.Forms
 
         private void ResolveFormOperationDesign()
         {
-            if (_invoiceOperations == InvoiceOperations.Create)
+            switch (_invoiceOperations)
             {
-                this.Text = "Naujos Sąskaita faktūra";
-                //this.Icon = Properties.Resources.CreateIcon;
-            }
-            else if (_invoiceOperations == InvoiceOperations.Edit)
-            {
-                this.Text = "Esamos Sąskaitos faktūros keitimas";
-                //this.Icon = Properties.Resources.EditIcon;
-            }
-            else if (_invoiceOperations == InvoiceOperations.Copy)
-            {
-                this.Text = "Esamos Sąskaitos faktūros kopijavimas (sukurti naują)";
-                //this.Icon = Properties.Resources.CopyIcon;
-            }
-            else
-            {
-                throw new Exception($"Paslaugų valdymo formoje gauta nežinoma opercija: '{_invoiceOperations}'");
+                case InvoiceOperations.Create:
+                    this.Text = "Naujos Sąskaita faktūra";
+                    //this.Icon = Properties.Resources.CreateIcon;
+                    break;
+                case InvoiceOperations.Edit:
+                    this.Text = "Esamos Sąskaitos faktūros keitimas";
+                    //this.Icon = Properties.Resources.EditIcon;
+                    break;
+                case InvoiceOperations.Copy:
+                    this.Text = "Esamos Sąskaitos faktūros kopijavimas (sukurti naują)";
+                    //this.Icon = Properties.Resources.CopyIcon;
+                    break;
+                default:
+                    throw new Exception($"Paslaugų valdymo formoje gauta nežinoma opercija: '{_invoiceOperations}'");
             }
         }
 
