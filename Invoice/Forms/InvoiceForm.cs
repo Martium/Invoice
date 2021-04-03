@@ -33,6 +33,13 @@ namespace Invoice.Forms
             SetTextBoxLengths();
 
             FillDefaultSellerInfoForNewInvoice();
+
+            SetControlInitialState();
+        }
+
+        private void InvoiceForm_Load(object sender, EventArgs e)
+        {
+            ResolveInvoiceNumberText();
         }
 
         private void ResolveFormOperationDesign()
@@ -56,12 +63,17 @@ namespace Invoice.Forms
             }
         }
 
+        private void SetControlInitialState()
+        {
+            this.StartPosition = FormStartPosition.CenterScreen;
+            InvoiceNumberRichTextBox.ReadOnly = true;
+        }
+
         private void FillDefaultSellerInfoForNewInvoice()
         {
             if (_invoiceOperations == InvoiceOperations.Create)
             {
                 SerialNumberRichTextBox.Text = _fillDefaultSellerInfo.SerialNumber;
-                InvoiceDateRichTextBox.Text = DateTime.Now.ToString(DateFormat);
 
                 SellerNameRichTextBox.Text = _fillDefaultSellerInfo.SellerName;
                 SellerFirmCodeRichTextBox.Text = _fillDefaultSellerInfo.SellerFirmCode;
@@ -71,6 +83,20 @@ namespace Invoice.Forms
                 SellerBankRichTextBox.Text = _fillDefaultSellerInfo.SellerBank;
                 SellerBankAccountNumberRichTextBox.Text = _fillDefaultSellerInfo.SellerBankAccount;
                 SellerEmailAddressRichTextBox.Text = _fillDefaultSellerInfo.SellerEmailAddress;
+            }
+        }
+
+        private void ResolveInvoiceNumberText()
+        {
+            if (_invoiceOperations == InvoiceOperations.Edit)
+            {
+               InvoiceNumberRichTextBox.Text = _invoiceNumber.Value.ToString();
+            }
+            else
+            { 
+                InvoiceNumberRichTextBox.Text = _invoiceRepository.GetNextInvoiceNumber().ToString();
+
+                InvoiceDateRichTextBox.Text = DateTime.Now.ToString(DateFormat);
             }
         }
 
