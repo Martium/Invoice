@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Invoice.Models;
@@ -88,11 +89,6 @@ namespace Invoice.Forms
             this.Show();
         }
 
-        private void ListOfInvoiceDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void CopyButton_Click(object sender, EventArgs e)
         {
             var createNewInvoice = new MoneyRecepitForm();
@@ -100,6 +96,20 @@ namespace Invoice.Forms
             createNewInvoice.Closed += ShowAndRefreshListForm;
 
             HideListAndOpenInvoiceForm(createNewInvoice);
+        }
+
+        private void ListOfInvoiceDataGridView_Paint(object sender, PaintEventArgs e)
+        {
+            DataGridView dataGridView = (DataGridView)sender;
+
+            if (dataGridView.Rows.Count == 0)
+            {
+                string emptyListReason = _searchActive
+                    ? $"Paieškos frazė '{SearchTextBox.Text}' neatitiko jokių rezultatų. Ieškokite kitos frazės arba atšaukite paiešką."
+                    : "Paslaugų istorija tuščia. Galite pradėti kurti naujas paslaugas pasinaudojęs mygtuku 'Įvesti naują paslaugą' dešiniame viršutiniame kampe.";
+
+                DisplayEmptyListReason(emptyListReason, e, dataGridView);
+            }
         }
 
         private void HideListAndOpenInvoiceForm(Form invoiceForm)
@@ -146,6 +156,31 @@ namespace Invoice.Forms
             SearchTextBox.Text = SearchTextBoxPlaceholderText;
             SearchButton.Enabled = false;
             SearchCancelButton.Enabled = false;
+        }
+
+        private static void DisplayEmptyListReason(string reason, PaintEventArgs e, DataGridView dataGridView)
+        {
+            using (Graphics graphics = e.Graphics)
+            {
+                int leftPadding = 2;
+                int topPadding = 41;
+                int rowSelectionColumnWidth = 40;
+                int messageBackgroundWidth = dataGridView.Columns.GetColumnsWidth(DataGridViewElementStates.Displayed) + rowSelectionColumnWidth;
+                int messageBackgroundHeight = 25;
+
+                graphics.FillRectangle(
+                    Brushes.White,
+                    new Rectangle(
+                        new Point(leftPadding, topPadding),
+                        new Size(messageBackgroundWidth, messageBackgroundHeight)
+                    )
+                );
+                graphics.DrawString(
+                    reason,
+                    new Font("Times New Roman", 12),
+                    Brushes.DarkGray,
+                    new PointF(leftPadding, topPadding));
+            }
         }
     }
 }
