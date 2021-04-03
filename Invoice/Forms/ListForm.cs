@@ -49,6 +49,23 @@ namespace Invoice.Forms
             LoadInvoiceList(SearchTextBox.Text);
         }
 
+        private void SearchTextBox_GotFocus(object sender, EventArgs e)
+        {
+            if (SearchTextBox.Text == SearchTextBoxPlaceholderText)
+            {
+                SearchTextBox.Text = string.Empty;
+            }
+        }
+
+        private void SearchTextBox_LostFocus(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(SearchTextBox.Text))
+            {
+                SearchTextBox.Text = SearchTextBoxPlaceholderText;
+                SearchButton.Enabled = false;
+            }
+        }
+
         private void ShowAndRefreshListForm(object sender, EventArgs e)
         {
             this.Show();

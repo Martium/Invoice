@@ -62,6 +62,8 @@ namespace Invoice.Forms
             this.SearchTextBox.Size = new System.Drawing.Size(158, 20);
             this.SearchTextBox.TabIndex = 1;
             this.SearchTextBox.TextChanged += new System.EventHandler(this.SearchTextBox_TextChanged);
+            this.SearchTextBox.GotFocus += new System.EventHandler(this.SearchTextBox_GotFocus);
+            this.SearchTextBox.LostFocus += new System.EventHandler(this.SearchTextBox_LostFocus);
             // 
             // SearchButton
             // 
