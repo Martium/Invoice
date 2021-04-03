@@ -25,6 +25,8 @@ namespace Invoice.Forms
             ResolveFormOperationDesign();
 
             InitializeComponent();
+
+            SetTextBoxLengths();
         }
 
         private void ResolveFormOperationDesign()

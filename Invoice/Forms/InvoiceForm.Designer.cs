@@ -970,8 +970,10 @@ namespace Invoice.Forms
             // 
             // InvoiceNumberRichTextBox
             // 
+            this.InvoiceNumberRichTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.InvoiceNumberRichTextBox.Location = new System.Drawing.Point(377, 87);
             this.InvoiceNumberRichTextBox.Name = "InvoiceNumberRichTextBox";
+            this.InvoiceNumberRichTextBox.ReadOnly = true;
             this.InvoiceNumberRichTextBox.Size = new System.Drawing.Size(83, 19);
             this.InvoiceNumberRichTextBox.TabIndex = 7;
             this.InvoiceNumberRichTextBox.Text = "";
