@@ -125,6 +125,7 @@ namespace Invoice.Forms
             this.InvoiceNumberLabel = new System.Windows.Forms.Label();
             this.SerialNumberLabel = new System.Windows.Forms.Label();
             this.InvoiceNameLabel = new System.Windows.Forms.Label();
+            this.SaveButton = new System.Windows.Forms.Button();
             this.PrintInvoicePanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -1023,11 +1024,22 @@ namespace Invoice.Forms
             this.InvoiceNameLabel.TabIndex = 0;
             this.InvoiceNameLabel.Text = "PVM SĄSKAITA - FAKTŪRA";
             // 
+            // SaveButton
+            // 
+            this.SaveButton.Location = new System.Drawing.Point(125, 960);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(92, 29);
+            this.SaveButton.TabIndex = 1;
+            this.SaveButton.Text = "Išsaugoti";
+            this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
+            // 
             // InvoiceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1064, 1001);
+            this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.PrintInvoicePanel);
             this.MaximizeBox = false;
             this.Name = "InvoiceForm";
@@ -1137,5 +1149,6 @@ namespace Invoice.Forms
         private System.Windows.Forms.Label PvmPriceLabel;
         private System.Windows.Forms.RichTextBox ProductTotalPriceRichTextBox;
         private System.Windows.Forms.Label ProductTotalPriceLabel;
+        private System.Windows.Forms.Button SaveButton;
     }
 }

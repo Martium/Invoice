@@ -45,12 +45,20 @@ namespace Invoice.Forms
             LoadFormDataForEditOrCopy();
         }
 
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            var invoiceModel = new InvoiceModel
+            {
+
+            };
+        }
+
         private void ResolveFormOperationDesign()
         {
             switch (_invoiceOperations)
             {
                 case InvoiceOperations.Create:
-                    this.Text = "Naujos Sąskaita faktūra";
+                    this.Text = "Nauja Sąskaita faktūra";
                     //this.Icon = Properties.Resources.CreateIcon;
                     break;
                 case InvoiceOperations.Edit:

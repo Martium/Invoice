@@ -74,6 +74,108 @@ namespace Invoice.Repositories
             }
         }
 
+        public bool CreateNewInvoice(InvoiceModel invoiceModel)
+        {
+            int createNextInvoiceNumber = GetNextInvoiceNumber();
+
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string createNewInvoiceCommand =
+                    @"INSERT INTO 'Invoice' 
+	                    VALUES ( @InvoiceNumber, @InvoiceNumberYearCreation, @InvoiceDate, @SerialNumber, @SellerName, @SellerFirmCode, @SellerPvmCode, @SellerAddress, @SellerPhoneNumber, @SellerBank, @SellerBankAccountNumber, @SellerEmailAddress, @BuyerName, @BuyerFirmCode, @BuyerPvmCode, @BuyerAddress, @FirstProductName, @SecondProductName, @ThirdProductName, @FourthProductName, @FifthProductName, @SixthProductName, 
+                          @SeventhProductName, @EighthProductName, @NinthProductName, @TenProductName, @EleventhProductName, @TwelfthProductName, @FirstProductSees, @SecondProductSees, @ThirdProductSees, @ForthProductSees,
+                          @FifthProductSees, @SixthProductSees, @SeventhProductSees, @EighthProductSees, @NinthProductSees, @TenProductSees, @EleventhProductSees, @TwelfthProductSees, @FirstProductQuantity, @SecondProductQuantity, 
+                          @ThirdProductQuantity, @FourthProductQuantity, @FifthProductQuantity, @SixthProductQuantity, @SeventhProductQuantity, @EighthProductQuantity, @NinthProductQuantity, @TenProductQuantity, 
+                          @EleventhProductQuantity, @TwelfthProductQuantity, @FirstProductPrice, @SecondProductPrice, @ThirdProductPrice, @FourthProductPrice, @FifthProductPrice, @SixthProductPrice, @SeventhProductPrice,
+                          @EighthProductPrice, @NinthProductPrice, @TenProductPrice, @EleventhProductPrice, @TwelfthProductPrice, @PriceInWords, @InvoiceMaker, @InvoiceAccepted
+                     )";
+
+                object queryParameters = new
+                {
+                    InvoiceNumber = createNextInvoiceNumber,
+                    InvoiceNumberYearCreation = DateTime.Now.Year, 
+                    invoiceModel.InvoiceDate,
+                    invoiceModel.SerialNumber,
+
+                    invoiceModel.SellerName,
+                    invoiceModel.SellerFirmCode,
+                    invoiceModel.SellerPvmCode,
+                    invoiceModel.SellerAddress,
+                    invoiceModel.SellerPhoneNumber,
+                    invoiceModel.SellerBank,
+                    invoiceModel.SellerBankAccountNumber,
+                    invoiceModel.SellerEmailAddress,
+
+                    invoiceModel.BuyerName,
+                    invoiceModel.BuyerFirmCode,
+                    invoiceModel.BuyerPvmCode,
+                    invoiceModel.BuyerAddress,
+
+                    invoiceModel.FirstProductName,
+                    invoiceModel.SecondProductName,
+                    invoiceModel.ThirdProductName,
+                    invoiceModel.FourthProductName,
+                    invoiceModel.FifthProductName,
+                    invoiceModel.SixthProductName,
+                    invoiceModel.SeventhProductName,
+                    invoiceModel.EighthProductName,
+                    invoiceModel.NinthProductName,
+                    invoiceModel.TenProductName,
+                    invoiceModel.EleventhProductName,
+                    invoiceModel.TwelfthProductName,
+
+                    invoiceModel.FirstProductSees,
+                    invoiceModel.SecondProductSees,
+                    invoiceModel.ThirdProductSees,
+                    invoiceModel.ForthProductSees,
+                    invoiceModel.FifthProductSees,
+                    invoiceModel.SixthProductSees,
+                    invoiceModel.SeventhProductSees,
+                    invoiceModel.EighthProductSees,
+                    invoiceModel.NinthProductSees,
+                    invoiceModel.TenProductSees,
+                    invoiceModel.EleventhProductSees,
+                    invoiceModel.TwelfthProductSees,
+
+                    invoiceModel.FirstProductQuantity,
+                    invoiceModel.SecondProductQuantity,
+                    invoiceModel.ThirdProductQuantity,
+                    invoiceModel.FourthProductQuantity,
+                    invoiceModel.FifthProductQuantity,
+                    invoiceModel.SixthProductQuantity,
+                    invoiceModel.SeventhProductQuantity,
+                    invoiceModel.EighthProductQuantity,
+                    invoiceModel.NinthProductQuantity,
+                    invoiceModel.TenProductQuantity,
+                    invoiceModel.EleventhProductQuantity,
+                    invoiceModel.TwelfthProductQuantity,
+
+                    invoiceModel.FirstProductPrice,
+                    invoiceModel.SecondProductPrice,
+                    invoiceModel.ThirdProductPrice,
+                    invoiceModel.FourthProductPrice,
+                    invoiceModel.FifthProductPrice,
+                    invoiceModel.SixthProductPrice,
+                    invoiceModel.SeventhProductPrice,
+                    invoiceModel.EighthProductPrice,
+                    invoiceModel.NinthProductPrice,
+                    invoiceModel.TenProductPrice,
+                    invoiceModel.EleventhProductPrice,
+                    invoiceModel.TwelfthProductPrice,
+
+                    invoiceModel.PriceInWords,
+                    invoiceModel.InvoiceMaker,
+                    invoiceModel.InvoiceAccepted
+                };
+
+                int affectedRows = dbConnection.Execute(createNewInvoiceCommand, queryParameters);
+
+                return affectedRows == 1;
+            }
+        }
+
         public int GetNextInvoiceNumber()
         {
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
