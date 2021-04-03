@@ -10,6 +10,8 @@ namespace Invoice.Forms
     {
         private readonly InvoiceRepository _invoiceRepository;
 
+        private readonly FillDefaultSellerInfo _fillDefaultSellerInfo = new FillDefaultSellerInfo();
+
         private readonly InvoiceOperations _invoiceOperations;
         private readonly int? _invoiceNumber;
         private readonly int? _invoiceNumberYearCreation;
@@ -27,6 +29,8 @@ namespace Invoice.Forms
             InitializeComponent();
 
             SetTextBoxLengths();
+
+            FillDefaultSellerInfoForNewInvoice();
         }
 
         private void ResolveFormOperationDesign()
@@ -47,6 +51,23 @@ namespace Invoice.Forms
                     break;
                 default:
                     throw new Exception($"Paslaugų valdymo formoje gauta nežinoma opercija: '{_invoiceOperations}'");
+            }
+        }
+
+        private void FillDefaultSellerInfoForNewInvoice()
+        {
+            if (_invoiceOperations == InvoiceOperations.Create)
+            {
+                SerialNumberRichTextBox.Text = _fillDefaultSellerInfo.SerialNumber;
+
+                SellerNameRichTextBox.Text = _fillDefaultSellerInfo.SellerName;
+                SellerFirmCodeRichTextBox.Text = _fillDefaultSellerInfo.SellerFirmCode;
+                SellerPvmCodeRichTextBox.Text = _fillDefaultSellerInfo.SellerPvmCode;
+                SellerAddressRichTextBox.Text = _fillDefaultSellerInfo.SellerAddress;
+                SellerPhoneNumberRichTextBox.Text = _fillDefaultSellerInfo.SellerPhoneNumber;
+                SellerBankRichTextBox.Text = _fillDefaultSellerInfo.SellerBank;
+                SellerBankAccountNumberRichTextBox.Text = _fillDefaultSellerInfo.SellerBankAccount;
+                SellerEmailAddressRichTextBox.Text = _fillDefaultSellerInfo.SellerEmailAddress;
             }
         }
 
