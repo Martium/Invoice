@@ -83,6 +83,7 @@
     <Compile Include="Repositories\FillDefaultSellerInfo.cs" />
     <Compile Include="Repositories\InvoiceRepository.cs" />
     <Compile Include="Service\MessageDialogService.cs" />
+    <Compile Include="Service\NumberService.cs" />
     <EmbeddedResource Include="Forms\InvoiceForm.resx">
       <DependentUpon>InvoiceForm.cs</DependentUpon>
     </EmbeddedResource>
