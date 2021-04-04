@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Forms;
 using Invoice.Constants;
@@ -16,6 +17,8 @@ namespace Invoice.Forms
         private readonly FillDefaultSellerInfo _fillDefaultSellerInfo = new FillDefaultSellerInfo();
 
         private readonly MessageDialogService _messageDialogService = new MessageDialogService();
+
+        private readonly NumberService _numberService = new NumberService();
 
         private readonly InvoiceOperations _invoiceOperations;
         private readonly int? _invoiceNumber;
@@ -47,6 +50,41 @@ namespace Invoice.Forms
         {
             ResolveInvoiceNumberText();
             LoadFormDataForEditOrCopy();
+        }
+
+        private void InvoiceDateRichTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+            if (string.IsNullOrWhiteSpace(InvoiceDateRichTextBox.Text))
+            {
+                SaveButton.Enabled = false;
+            }
+            else
+            {
+                SaveButton.Enabled = true;
+            }
+        }
+
+        private void InvoiceDateRichTextBox_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(InvoiceDateRichTextBox.Text))
+            {
+                SaveButton.Enabled = false;
+                e.Cancel = true;
+                _messageDialogService.DisplayLabelAndTextBoxError($"Negali būti tuščias! pvz.: {DateTime.Now.ToString(DateFormat)}", InvoiceDateRichTextBox, ErrorMassageLabel);
+            }
+            else if (!DateTime.TryParseExact(InvoiceDateRichTextBox.Text, DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
+            {
+                SaveButton.Enabled = false;
+                e.Cancel = true;
+                _messageDialogService.DisplayLabelAndTextBoxError($"Įveskite teisingą datą! pvz.: {DateTime.Now.ToString(DateFormat)}", InvoiceDateRichTextBox, ErrorMassageLabel);
+            }
+            else
+            {
+                SaveButton.Enabled = true;
+                e.Cancel = false;
+                _messageDialogService.HideLabelAndTextBoxError(ErrorMassageLabel, InvoiceDateRichTextBox);
+            }
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
@@ -97,31 +135,31 @@ namespace Invoice.Forms
                 EleventhProductSees = EleventhProductSeesRichTextBox.Text,
                 TwelfthProductSees = TwelfthProductSeesRichTextBox.Text,
 
-                FirstProductQuantity = double.Parse(FirstProductQuantityRichTextBox.Text, CultureInfo.InvariantCulture),
-                SecondProductQuantity = double.Parse(SecondProductQuantityRichTextBox.Text, CultureInfo.InvariantCulture),
-                ThirdProductQuantity = double.Parse(ThirdProductQuantityRichTextBox.Text, CultureInfo.InvariantCulture),
-                FourthProductQuantity = double.Parse(FourthProductQuantityRichTextBox.Text, CultureInfo.InvariantCulture),
-                FifthProductQuantity = double.Parse(FifthProductQuantityRichTextBox.Text, CultureInfo.InvariantCulture),
-                SixthProductQuantity = double.Parse(SixthProductQuantityRichTextBox.Text, CultureInfo.InvariantCulture),
-                SeventhProductQuantity = double.Parse(SeventhProductQuantityRichTextBox.Text, CultureInfo.InvariantCulture),
-                EighthProductQuantity = double.Parse(EighthProductQuantityRichTextBox.Text, CultureInfo.InvariantCulture),
-                NinthProductQuantity = double.Parse(NinthProductQuantityRichTextBox.Text, CultureInfo.InvariantCulture),
-                TenProductQuantity = double.Parse(TenProductQuantityRichTextBox.Text, CultureInfo.InvariantCulture),
-                EleventhProductQuantity = double.Parse(EleventhProductQuantityRichTextBox.Text, CultureInfo.InvariantCulture),
-                TwelfthProductQuantity = double.Parse(TwelfthProductQuantityRichTextBox.Text, CultureInfo.InvariantCulture),
+                FirstProductQuantity = _numberService.ParseToDoubleOrNull(FirstProductQuantityRichTextBox),
+                SecondProductQuantity = _numberService.ParseToDoubleOrNull(SecondProductQuantityRichTextBox),
+                ThirdProductQuantity = _numberService.ParseToDoubleOrNull(ThirdProductQuantityRichTextBox),
+                FourthProductQuantity = _numberService.ParseToDoubleOrNull(FourthProductQuantityRichTextBox),
+                FifthProductQuantity = _numberService.ParseToDoubleOrNull(FifthProductQuantityRichTextBox),
+                SixthProductQuantity = _numberService.ParseToDoubleOrNull(SixthProductQuantityRichTextBox),
+                SeventhProductQuantity = _numberService.ParseToDoubleOrNull(SeventhProductQuantityRichTextBox),
+                EighthProductQuantity = _numberService.ParseToDoubleOrNull(EighthProductQuantityRichTextBox),
+                NinthProductQuantity = _numberService.ParseToDoubleOrNull(NinthProductQuantityRichTextBox),
+                TenProductQuantity = _numberService.ParseToDoubleOrNull(TenProductQuantityRichTextBox),
+                EleventhProductQuantity = _numberService.ParseToDoubleOrNull(EleventhProductQuantityRichTextBox),
+                TwelfthProductQuantity = _numberService.ParseToDoubleOrNull(TwelfthProductQuantityRichTextBox),
 
-                FirstProductPrice = double.Parse(FirstProductPriceRichTextBox.Text, CultureInfo.InvariantCulture),
-                SecondProductPrice = double.Parse(SecondProductPriceRichTextBox.Text, CultureInfo.InvariantCulture),
-                ThirdProductPrice = double.Parse(ThirdProductPriceRichTextBox.Text, CultureInfo.InvariantCulture),
-                FourthProductPrice = double.Parse(FourthProductPriceRichTextBox.Text, CultureInfo.InvariantCulture),
-                FifthProductPrice = double.Parse(FifthProductPriceRichTextBox.Text, CultureInfo.InvariantCulture),
-                SixthProductPrice = double.Parse(SixthProductPriceRichTextBox.Text, CultureInfo.InvariantCulture),
-                SeventhProductPrice = double.Parse(SeventhProductPriceRichTextBox.Text, CultureInfo.InvariantCulture),
-                EighthProductPrice = double.Parse(EighthProductPriceRichTextBox.Text, CultureInfo.InvariantCulture),
-                NinthProductPrice = double.Parse(NinthProductPriceRichTextBox.Text, CultureInfo.InvariantCulture),
-                TenProductPrice = double.Parse(TenProductPriceRichTextBox.Text, CultureInfo.InvariantCulture),
-                EleventhProductPrice = double.Parse(EleventhProductPriceRichTextBox.Text, CultureInfo.InvariantCulture),
-                TwelfthProductPrice = double.Parse(TwelfthProductPriceRichTextBox.Text, CultureInfo.InvariantCulture),
+                FirstProductPrice = _numberService.ParseToDoubleOrNull(FirstProductPriceRichTextBox),
+                SecondProductPrice = _numberService.ParseToDoubleOrNull(SecondProductPriceRichTextBox),
+                ThirdProductPrice = _numberService.ParseToDoubleOrNull(ThirdProductPriceRichTextBox),
+                FourthProductPrice = _numberService.ParseToDoubleOrNull(FourthProductPriceRichTextBox),
+                FifthProductPrice = _numberService.ParseToDoubleOrNull(FifthProductPriceRichTextBox),
+                SixthProductPrice = _numberService.ParseToDoubleOrNull(SixthProductPriceRichTextBox),
+                SeventhProductPrice = _numberService.ParseToDoubleOrNull(SeventhProductPriceRichTextBox),
+                EighthProductPrice = _numberService.ParseToDoubleOrNull(EighthProductPriceRichTextBox),
+                NinthProductPrice = _numberService.ParseToDoubleOrNull(NinthProductPriceRichTextBox),
+                TenProductPrice = _numberService.ParseToDoubleOrNull(TenProductPriceRichTextBox),
+                EleventhProductPrice = _numberService.ParseToDoubleOrNull(EleventhProductPriceRichTextBox),
+                TwelfthProductPrice = _numberService.ParseToDoubleOrNull(TwelfthProductPriceRichTextBox),
 
                 PriceInWords = PriceInWordsRichTextBox.Text,
                 InvoiceMaker = InvoiceMakerRichTextBox.Text,
@@ -263,53 +301,42 @@ namespace Invoice.Forms
                 TwelfthProductSeesRichTextBox.Text = invoiceModel.TwelfthProductSees;
 
                 FirstProductQuantityRichTextBox.Text =
-                    invoiceModel.FirstProductQuantity.ToString(CultureInfo.InvariantCulture);
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "FirstProductQuantity");
                 SecondProductQuantityRichTextBox.Text =
-                    invoiceModel.SecondProductQuantity.ToString(CultureInfo.InvariantCulture);
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "SecondProductQuantity");
                 ThirdProductQuantityRichTextBox.Text =
-                    invoiceModel.ThirdProductQuantity.ToString(CultureInfo.InvariantCulture);
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "ThirdProductQuantity");
                 FourthProductQuantityRichTextBox.Text =
-                    invoiceModel.FourthProductQuantity.ToString(CultureInfo.InvariantCulture);
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "FourthProductQuantity");
                 FifthProductQuantityRichTextBox.Text =
-                    invoiceModel.FifthProductQuantity.ToString(CultureInfo.InvariantCulture);
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "FifthProductQuantity");
                 SixthProductQuantityRichTextBox.Text =
-                    invoiceModel.SixthProductQuantity.ToString(CultureInfo.InvariantCulture);
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "SixthProductQuantity");
                 SeventhProductQuantityRichTextBox.Text =
-                    invoiceModel.SeventhProductQuantity.ToString(CultureInfo.InvariantCulture);
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "SeventhProductQuantity");
                 EighthProductQuantityRichTextBox.Text =
-                    invoiceModel.EighthProductQuantity.ToString(CultureInfo.InvariantCulture);
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "EighthProductQuantity");
                 NinthProductQuantityRichTextBox.Text =
-                    invoiceModel.NinthProductQuantity.ToString(CultureInfo.InvariantCulture);
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "NinthProductQuantity");
                 TenProductQuantityRichTextBox.Text =
-                    invoiceModel.TenProductQuantity.ToString(CultureInfo.InvariantCulture);
-                EleventhProductQuantityRichTextBox.Text =
-                    invoiceModel.EleventhProductQuantity.ToString(CultureInfo.InvariantCulture);
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "TenProductQuantity");
+                EleventhProductQuantityRichTextBox.Text = 
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "EleventhProductQuantity");
                 TwelfthProductQuantityRichTextBox.Text =
-                    invoiceModel.TwelfthProductQuantity.ToString(CultureInfo.InvariantCulture);
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "TwelfthProductQuantity");
 
-                FirstProductPriceRichTextBox.Text =
-                    invoiceModel.FirstProductPrice.ToString(CultureInfo.InvariantCulture);
-                SecondProductPriceRichTextBox.Text =
-                    invoiceModel.SecondProductPrice.ToString(CultureInfo.InvariantCulture);
-                ThirdProductPriceRichTextBox.Text =
-                    invoiceModel.ThirdProductPrice.ToString(CultureInfo.InvariantCulture);
-                FourthProductPriceRichTextBox.Text =
-                    invoiceModel.FourthProductPrice.ToString(CultureInfo.InvariantCulture);
-                FifthProductPriceRichTextBox.Text =
-                    invoiceModel.FifthProductPrice.ToString(CultureInfo.InvariantCulture);
-                SixthProductPriceRichTextBox.Text =
-                    invoiceModel.SixthProductPrice.ToString(CultureInfo.InvariantCulture);
-                SeventhProductPriceRichTextBox.Text =
-                    invoiceModel.SeventhProductPrice.ToString(CultureInfo.InvariantCulture);
-                EighthProductPriceRichTextBox.Text =
-                    invoiceModel.EighthProductPrice.ToString(CultureInfo.InvariantCulture);
-                NinthProductPriceRichTextBox.Text =
-                    invoiceModel.NinthProductPrice.ToString(CultureInfo.InvariantCulture);
-                TenProductPriceRichTextBox.Text = invoiceModel.TenProductPrice.ToString(CultureInfo.InvariantCulture);
-                EleventhProductPriceRichTextBox.Text =
-                    invoiceModel.EleventhProductPrice.ToString(CultureInfo.InvariantCulture);
-                TwelfthProductPriceRichTextBox.Text =
-                    invoiceModel.TwelfthProductPrice.ToString(CultureInfo.InvariantCulture);
+                FirstProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "FirstProductPrice");
+                SecondProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "SecondProductPrice");
+                ThirdProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "ThirdProductPrice");
+                FourthProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "FourthProductPrice");
+                FifthProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "FifthProductPrice");
+                SixthProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "SixthProductPrice");
+                SeventhProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "SeventhProductPrice");
+                EighthProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "EighthProductPrice");
+                NinthProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "NinthProductPrice");
+                TenProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "TenProductPrice");
+                EleventhProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "EleventhProductPrice");
+                TwelfthProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "TwelfthProductPrice");
 
                 PriceInWordsRichTextBox.Text = invoiceModel.PriceInWords;
                 InvoiceMakerRichTextBox.Text = invoiceModel.InvoiceMaker;
