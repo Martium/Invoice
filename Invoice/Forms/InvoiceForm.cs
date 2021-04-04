@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Forms;
 using Invoice.Constants;
@@ -49,6 +50,41 @@ namespace Invoice.Forms
         {
             ResolveInvoiceNumberText();
             LoadFormDataForEditOrCopy();
+        }
+
+        private void InvoiceDateRichTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+            if (string.IsNullOrWhiteSpace(InvoiceDateRichTextBox.Text))
+            {
+                SaveButton.Enabled = false;
+            }
+            else
+            {
+                SaveButton.Enabled = true;
+            }
+        }
+
+        private void InvoiceDateRichTextBox_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(InvoiceDateRichTextBox.Text))
+            {
+                SaveButton.Enabled = false;
+                e.Cancel = true;
+                _messageDialogService.DisplayLabelAndTextBoxError($"Negali būti tuščias! pvz.: {DateTime.Now.ToString(DateFormat)}", InvoiceDateRichTextBox, ErrorMassageLabel);
+            }
+            else if (!DateTime.TryParseExact(InvoiceDateRichTextBox.Text, DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
+            {
+                SaveButton.Enabled = false;
+                e.Cancel = true;
+                _messageDialogService.DisplayLabelAndTextBoxError($"Įveskite teisingą datą! pvz.: {DateTime.Now.ToString(DateFormat)}", InvoiceDateRichTextBox, ErrorMassageLabel);
+            }
+            else
+            {
+                SaveButton.Enabled = true;
+                e.Cancel = false;
+                _messageDialogService.HideLabelAndTextBoxError(ErrorMassageLabel, InvoiceDateRichTextBox);
+            }
         }
 
         private void SaveButton_Click(object sender, EventArgs e)

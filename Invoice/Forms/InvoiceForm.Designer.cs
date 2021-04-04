@@ -1,4 +1,6 @@
 ﻿
+using System.ComponentModel;
+
 namespace Invoice.Forms
 {
     partial class InvoiceForm
@@ -30,6 +32,7 @@ namespace Invoice.Forms
         private void InitializeComponent()
         {
             this.PrintInvoicePanel = new System.Windows.Forms.Panel();
+            this.ErrorMassageLabel = new System.Windows.Forms.Label();
             this.TotalPriceWithPvmRichTextBox = new System.Windows.Forms.RichTextBox();
             this.TotalPriceWithPvmLabel = new System.Windows.Forms.Label();
             this.PvmPriceRichTextBox = new System.Windows.Forms.RichTextBox();
@@ -131,6 +134,7 @@ namespace Invoice.Forms
             // 
             // PrintInvoicePanel
             // 
+            this.PrintInvoicePanel.Controls.Add(this.ErrorMassageLabel);
             this.PrintInvoicePanel.Controls.Add(this.TotalPriceWithPvmRichTextBox);
             this.PrintInvoicePanel.Controls.Add(this.TotalPriceWithPvmLabel);
             this.PrintInvoicePanel.Controls.Add(this.PvmPriceRichTextBox);
@@ -230,6 +234,17 @@ namespace Invoice.Forms
             this.PrintInvoicePanel.Name = "PrintInvoicePanel";
             this.PrintInvoicePanel.Size = new System.Drawing.Size(820, 926);
             this.PrintInvoicePanel.TabIndex = 0;
+            // 
+            // ErrorMassageLabel
+            // 
+            this.ErrorMassageLabel.AutoSize = true;
+            this.ErrorMassageLabel.ForeColor = System.Drawing.Color.Red;
+            this.ErrorMassageLabel.Location = new System.Drawing.Point(552, 109);
+            this.ErrorMassageLabel.Name = "ErrorMassageLabel";
+            this.ErrorMassageLabel.Size = new System.Drawing.Size(57, 13);
+            this.ErrorMassageLabel.TabIndex = 97;
+            this.ErrorMassageLabel.Text = "error Label";
+            this.ErrorMassageLabel.Visible = false;
             // 
             // TotalPriceWithPvmRichTextBox
             // 
@@ -986,6 +1001,8 @@ namespace Invoice.Forms
             this.InvoiceDateRichTextBox.Size = new System.Drawing.Size(83, 19);
             this.InvoiceDateRichTextBox.TabIndex = 6;
             this.InvoiceDateRichTextBox.Text = "";
+            this.InvoiceDateRichTextBox.TextChanged += new System.EventHandler(this.InvoiceDateRichTextBox_TextChanged);
+            this.InvoiceDateRichTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.InvoiceDateRichTextBox_Validating);
             // 
             // DateLabel
             // 
@@ -1150,5 +1167,6 @@ namespace Invoice.Forms
         private System.Windows.Forms.RichTextBox ProductTotalPriceRichTextBox;
         private System.Windows.Forms.Label ProductTotalPriceLabel;
         private System.Windows.Forms.Button SaveButton;
+        private System.Windows.Forms.Label ErrorMassageLabel;
     }
 }
