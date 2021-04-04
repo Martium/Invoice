@@ -21,7 +21,7 @@ namespace Invoice.Service
             return doubleOrNull;
         }
 
-        public string DoubleToStringOrEmpty(InvoiceModel invoiceModel, string invoiceModelProp)
+        public string ToStringDoubleOrEmpty(InvoiceModel invoiceModel, string invoiceModelProp)
         {
             string newString;
 
@@ -62,6 +62,43 @@ namespace Invoice.Service
                     break;
                 case "TwelfthProductQuantity":
                     newString = invoiceModel.TwelfthProductQuantity.HasValue ? invoiceModel.TwelfthProductQuantity.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
+                    break;
+
+                case "FirstProductPrice":
+                    newString = invoiceModel.FirstProductPrice.HasValue ? invoiceModel.FirstProductPrice.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
+                    break;
+                case "SecondProductPrice":
+                    newString = invoiceModel.SecondProductPrice.HasValue ? invoiceModel.SecondProductPrice.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
+                    break;
+                case "ThirdProductPrice":
+                    newString = invoiceModel.ThirdProductPrice.HasValue ? invoiceModel.ThirdProductPrice.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
+                    break;
+                case "FourthProductPrice":
+                    newString = invoiceModel.FourthProductPrice.HasValue ? invoiceModel.FourthProductPrice.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
+                    break;
+                case "FifthProductPrice":
+                    newString = invoiceModel.FifthProductPrice.HasValue ? invoiceModel.FifthProductPrice.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
+                    break;
+                case "SixthProductPrice":
+                    newString = invoiceModel.SixthProductPrice.HasValue ? invoiceModel.SixthProductPrice.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
+                    break;
+                case "SeventhProductPrice":
+                    newString = invoiceModel.SeventhProductPrice.HasValue ? invoiceModel.SeventhProductPrice.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
+                    break;
+                case "EighthProductPrice":
+                    newString = invoiceModel.EighthProductPrice.HasValue ? invoiceModel.EighthProductPrice.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
+                    break;
+                case "NinthProductPrice":
+                    newString = invoiceModel.NinthProductPrice.HasValue ? invoiceModel.NinthProductPrice.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
+                    break;
+                case "TenProductPrice":
+                    newString = invoiceModel.TenProductPrice.HasValue ? invoiceModel.TenProductPrice.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
+                    break;
+                case "EleventhProductPrice":
+                    newString = invoiceModel.EleventhProductPrice.HasValue ? invoiceModel.EleventhProductPrice.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
+                    break;
+                case "TwelfthProductPrice":
+                    newString = invoiceModel.TwelfthProductPrice.HasValue ? invoiceModel.TwelfthProductPrice.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
                     break;
                  default:
                      newString = "coding map error";
