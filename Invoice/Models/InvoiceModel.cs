@@ -64,18 +64,18 @@ namespace Invoice.Models
         public double? EleventhProductQuantity { get; set; }
         public double? TwelfthProductQuantity { get; set; }
 
-        public double FirstProductPrice { get; set; }
-        public double SecondProductPrice { get; set; }
-        public double ThirdProductPrice { get; set; }
-        public double FourthProductPrice { get; set; }
-        public double FifthProductPrice { get; set; }
-        public double SixthProductPrice { get; set; }
-        public double SeventhProductPrice { get; set; }
-        public double EighthProductPrice { get; set; }
-        public double NinthProductPrice { get; set; }
-        public double TenProductPrice { get; set; }
-        public double EleventhProductPrice { get; set; }
-        public double TwelfthProductPrice { get; set; }
+        public double? FirstProductPrice { get; set; }
+        public double? SecondProductPrice { get; set; }
+        public double? ThirdProductPrice { get; set; }
+        public double? FourthProductPrice { get; set; }
+        public double? FifthProductPrice { get; set; }
+        public double? SixthProductPrice { get; set; }
+        public double? SeventhProductPrice { get; set; }
+        public double? EighthProductPrice { get; set; }
+        public double? NinthProductPrice { get; set; }
+        public double? TenProductPrice { get; set; }
+        public double? EleventhProductPrice { get; set; }
+        public double? TwelfthProductPrice { get; set; }
 
         public string PriceInWords { get; set; }
         public string InvoiceMaker { get; set; }
