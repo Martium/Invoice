@@ -708,6 +708,7 @@ namespace Invoice.Forms
             // InvoiceAcceptedRichTextBox
             // 
             this.InvoiceAcceptedRichTextBox.Location = new System.Drawing.Point(175, 861);
+            this.InvoiceAcceptedRichTextBox.Multiline = false;
             this.InvoiceAcceptedRichTextBox.Name = "InvoiceAcceptedRichTextBox";
             this.InvoiceAcceptedRichTextBox.Size = new System.Drawing.Size(374, 19);
             this.InvoiceAcceptedRichTextBox.TabIndex = 46;
@@ -725,6 +726,7 @@ namespace Invoice.Forms
             // InvoiceMakerRichTextBox
             // 
             this.InvoiceMakerRichTextBox.Location = new System.Drawing.Point(175, 820);
+            this.InvoiceMakerRichTextBox.Multiline = false;
             this.InvoiceMakerRichTextBox.Name = "InvoiceMakerRichTextBox";
             this.InvoiceMakerRichTextBox.Size = new System.Drawing.Size(374, 19);
             this.InvoiceMakerRichTextBox.TabIndex = 44;
@@ -742,6 +744,7 @@ namespace Invoice.Forms
             // PriceInWordsRichTextBox
             // 
             this.PriceInWordsRichTextBox.Location = new System.Drawing.Point(175, 773);
+            this.PriceInWordsRichTextBox.Multiline = false;
             this.PriceInWordsRichTextBox.Name = "PriceInWordsRichTextBox";
             this.PriceInWordsRichTextBox.Size = new System.Drawing.Size(374, 19);
             this.PriceInWordsRichTextBox.TabIndex = 42;
