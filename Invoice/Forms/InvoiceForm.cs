@@ -12,7 +12,6 @@ using iText.IO.Image;
 using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Properties;
-using Image = System.Drawing.Image;
 
 namespace Invoice.Forms
 {
@@ -31,8 +30,6 @@ namespace Invoice.Forms
         private readonly int? _invoiceNumberYearCreation;
 
         private Bitmap _InvoiceMemoryImage;
-
-        private Image _image;
 
         private const string DateFormat = "yyyy-MM-dd";
 
@@ -147,6 +144,9 @@ namespace Invoice.Forms
 
             newInvoiceDocument.Add(newInvoiceImage);
             newInvoiceDocument.Close();
+
+            _messageDialogService.ShowInfoMessage("Sąskaitos faktūros anketa išsaugota į pdf failą");
+            this.Close();
         }
 
         private void CalculateButton_Click(object sender, EventArgs e)
