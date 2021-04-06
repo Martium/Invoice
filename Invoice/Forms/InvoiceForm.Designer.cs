@@ -251,6 +251,7 @@ namespace Invoice.Forms
             // 
             // TotalPriceWithPvmRichTextBox
             // 
+            this.TotalPriceWithPvmRichTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.TotalPriceWithPvmRichTextBox.Location = new System.Drawing.Point(680, 528);
             this.TotalPriceWithPvmRichTextBox.Multiline = false;
             this.TotalPriceWithPvmRichTextBox.Name = "TotalPriceWithPvmRichTextBox";
@@ -270,6 +271,7 @@ namespace Invoice.Forms
             // 
             // PvmPriceRichTextBox
             // 
+            this.PvmPriceRichTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.PvmPriceRichTextBox.Location = new System.Drawing.Point(680, 494);
             this.PvmPriceRichTextBox.Multiline = false;
             this.PvmPriceRichTextBox.Name = "PvmPriceRichTextBox";
@@ -289,6 +291,7 @@ namespace Invoice.Forms
             // 
             // ProductTotalPriceRichTextBox
             // 
+            this.ProductTotalPriceRichTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.ProductTotalPriceRichTextBox.Location = new System.Drawing.Point(680, 459);
             this.ProductTotalPriceRichTextBox.Multiline = false;
             this.ProductTotalPriceRichTextBox.Name = "ProductTotalPriceRichTextBox";
@@ -1047,6 +1050,7 @@ namespace Invoice.Forms
             // 
             // SerialNumberRichTextBox
             // 
+            this.SerialNumberRichTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.SerialNumberRichTextBox.Location = new System.Drawing.Point(93, 90);
             this.SerialNumberRichTextBox.Multiline = false;
             this.SerialNumberRichTextBox.Name = "SerialNumberRichTextBox";
@@ -1067,6 +1071,7 @@ namespace Invoice.Forms
             // 
             // InvoiceDateRichTextBox
             // 
+            this.InvoiceDateRichTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.InvoiceDateRichTextBox.Location = new System.Drawing.Point(693, 87);
             this.InvoiceDateRichTextBox.Multiline = false;
             this.InvoiceDateRichTextBox.Name = "InvoiceDateRichTextBox";
