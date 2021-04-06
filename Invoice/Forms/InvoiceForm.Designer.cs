@@ -135,6 +135,7 @@ namespace Invoice.Forms
             // 
             // PrintInvoicePanel
             // 
+            this.PrintInvoicePanel.BackColor = System.Drawing.SystemColors.Window;
             this.PrintInvoicePanel.Controls.Add(this.ErrorMassageLabel);
             this.PrintInvoicePanel.Controls.Add(this.TotalPriceWithPvmRichTextBox);
             this.PrintInvoicePanel.Controls.Add(this.TotalPriceWithPvmLabel);
