@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
 using Invoice.Constants;
@@ -7,6 +8,11 @@ using Invoice.Enums;
 using Invoice.Models;
 using Invoice.Repositories;
 using Invoice.Service;
+using iText.IO.Image;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Properties;
+using Image = System.Drawing.Image;
 
 namespace Invoice.Forms
 {
@@ -23,6 +29,10 @@ namespace Invoice.Forms
         private readonly InvoiceOperations _invoiceOperations;
         private readonly int? _invoiceNumber;
         private readonly int? _invoiceNumberYearCreation;
+
+        private Bitmap _InvoiceMemoryImage;
+
+        private Image _image;
 
         private const string DateFormat = "yyyy-MM-dd";
 
@@ -71,13 +81,18 @@ namespace Invoice.Forms
             {
                 SaveButton.Enabled = false;
                 e.Cancel = true;
-                _messageDialogService.DisplayLabelAndTextBoxError($"Negali būti tuščias! pvz.: {DateTime.Now.ToString(DateFormat)}", InvoiceDateRichTextBox, ErrorMassageLabel);
+                _messageDialogService.DisplayLabelAndTextBoxError(
+                    $"Negali būti tuščias! pvz.: {DateTime.Now.ToString(DateFormat)}", InvoiceDateRichTextBox,
+                    ErrorMassageLabel);
             }
-            else if (!DateTime.TryParseExact(InvoiceDateRichTextBox.Text, DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
+            else if (!DateTime.TryParseExact(InvoiceDateRichTextBox.Text, DateFormat, CultureInfo.InvariantCulture,
+                DateTimeStyles.None, out _))
             {
                 SaveButton.Enabled = false;
                 e.Cancel = true;
-                _messageDialogService.DisplayLabelAndTextBoxError($"Įveskite teisingą datą! pvz.: {DateTime.Now.ToString(DateFormat)}", InvoiceDateRichTextBox, ErrorMassageLabel);
+                _messageDialogService.DisplayLabelAndTextBoxError(
+                    $"Įveskite teisingą datą! pvz.: {DateTime.Now.ToString(DateFormat)}", InvoiceDateRichTextBox,
+                    ErrorMassageLabel);
             }
             else
             {
@@ -192,6 +207,21 @@ namespace Invoice.Forms
             {
                 _messageDialogService.ShowErrorMassage("nepavyko išsaugot bandykit dar kartą");
             }
+        }
+
+        private void SaveToPdf_Click(object sender, EventArgs e)
+        {
+            CaptureInvoiceFormScreen();
+
+            PdfWriter newInvoicePdfWriter = new PdfWriter($"{AppConfiguration.PdfFolder}\\Saskaitos nr.{InvoiceNumberRichTextBox.Text} {BuyerNameRichTextBox.Text}.pdf");
+            PdfDocument newInvoicePdfDocument = new PdfDocument(newInvoicePdfWriter);
+            Document newInvoiceDocument = new Document(newInvoicePdfDocument);
+
+            var convertImageToByteArray = ConvertImageToByteArray(_InvoiceMemoryImage);
+            var newInvoiceImage = new iText.Layout.Element.Image(ImageDataFactory.Create(convertImageToByteArray)).SetTextAlignment(TextAlignment.CENTER);
+
+            newInvoiceDocument.Add(newInvoiceImage);
+            newInvoiceDocument.Close();
         }
 
         private void ResolveFormOperationDesign()
@@ -322,23 +352,34 @@ namespace Invoice.Forms
                     _numberService.ToStringDoubleOrEmpty(invoiceModel, "NinthProductQuantity");
                 TenProductQuantityRichTextBox.Text =
                     _numberService.ToStringDoubleOrEmpty(invoiceModel, "TenProductQuantity");
-                EleventhProductQuantityRichTextBox.Text = 
+                EleventhProductQuantityRichTextBox.Text =
                     _numberService.ToStringDoubleOrEmpty(invoiceModel, "EleventhProductQuantity");
                 TwelfthProductQuantityRichTextBox.Text =
                     _numberService.ToStringDoubleOrEmpty(invoiceModel, "TwelfthProductQuantity");
 
-                FirstProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "FirstProductPrice");
-                SecondProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "SecondProductPrice");
-                ThirdProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "ThirdProductPrice");
-                FourthProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "FourthProductPrice");
-                FifthProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "FifthProductPrice");
-                SixthProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "SixthProductPrice");
-                SeventhProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "SeventhProductPrice");
-                EighthProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "EighthProductPrice");
-                NinthProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "NinthProductPrice");
+                FirstProductPriceRichTextBox.Text =
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "FirstProductPrice");
+                SecondProductPriceRichTextBox.Text =
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "SecondProductPrice");
+                ThirdProductPriceRichTextBox.Text =
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "ThirdProductPrice");
+                FourthProductPriceRichTextBox.Text =
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "FourthProductPrice");
+                FifthProductPriceRichTextBox.Text =
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "FifthProductPrice");
+                SixthProductPriceRichTextBox.Text =
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "SixthProductPrice");
+                SeventhProductPriceRichTextBox.Text =
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "SeventhProductPrice");
+                EighthProductPriceRichTextBox.Text =
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "EighthProductPrice");
+                NinthProductPriceRichTextBox.Text =
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "NinthProductPrice");
                 TenProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "TenProductPrice");
-                EleventhProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "EleventhProductPrice");
-                TwelfthProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "TwelfthProductPrice");
+                EleventhProductPriceRichTextBox.Text =
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "EleventhProductPrice");
+                TwelfthProductPriceRichTextBox.Text =
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "TwelfthProductPrice");
 
                 PriceInWordsRichTextBox.Text = invoiceModel.PriceInWords;
                 InvoiceMakerRichTextBox.Text = invoiceModel.InvoiceMaker;
@@ -358,7 +399,8 @@ namespace Invoice.Forms
             EighthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(EighthProductQuantityRichTextBox);
             NinthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(NinthProductQuantityRichTextBox);
             TenProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(TenProductQuantityRichTextBox);
-            EleventhProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(EleventhProductQuantityRichTextBox);
+            EleventhProductQuantityRichTextBox.Text =
+                _numberService.ChangeCommaToDot(EleventhProductQuantityRichTextBox);
             TwelfthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(TwelfthProductQuantityRichTextBox);
 
             FirstProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(FirstProductPriceRichTextBox);
@@ -424,5 +466,22 @@ namespace Invoice.Forms
             InvoiceMakerRichTextBox.MaxLength = FormSettings.TextBoxLengths.InvoiceMaker;
             InvoiceAcceptedRichTextBox.MaxLength = FormSettings.TextBoxLengths.InvoiceAccepted;
         }
+
+        private void CaptureInvoiceFormScreen()
+        {
+            _InvoiceMemoryImage = new Bitmap(PrintInvoicePanel.Width, PrintInvoicePanel.Height);
+
+            PrintInvoicePanel.DrawToBitmap(
+                _InvoiceMemoryImage,
+                new Rectangle(0, 0,PrintInvoicePanel.Width, PrintInvoicePanel.Height));
+        }
+
+        public static byte[] ConvertImageToByteArray(System.Drawing.Image img)
+        {
+            ImageConverter converter = new ImageConverter();
+            return (byte[])converter.ConvertTo(img, typeof(byte[]));
+        }
+
+
     }
 }
