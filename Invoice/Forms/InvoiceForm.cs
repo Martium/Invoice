@@ -12,7 +12,6 @@ using iText.IO.Image;
 using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Properties;
-using Image = System.Drawing.Image;
 
 namespace Invoice.Forms
 {
@@ -31,8 +30,6 @@ namespace Invoice.Forms
         private readonly int? _invoiceNumberYearCreation;
 
         private Bitmap _InvoiceMemoryImage;
-
-        private Image _image;
 
         private const string DateFormat = "yyyy-MM-dd";
 
@@ -106,6 +103,71 @@ namespace Invoice.Forms
         {
             ChangeDoubleCommaToDot();
 
+            var invoiceModel = GetAllInfoFromRichTextBox();
+
+            bool isSuccess;
+            string successMessage;
+
+            if (_invoiceOperations == InvoiceOperations.Edit)
+            {
+                isSuccess = _invoiceRepository.UpdateExistingInvoice(_invoiceNumber.Value,
+                    _invoiceNumberYearCreation.Value, invoiceModel);
+                successMessage = "Sąskaita faktūra atnaujinta sekmingai";
+            }
+            else
+            {
+                isSuccess = _invoiceRepository.CreateNewInvoice(invoiceModel);
+                successMessage = "Nauja Sąskaita faktūra sukurta";
+            }
+
+            if (isSuccess)
+            {
+                _messageDialogService.ShowInfoMessage(successMessage);
+                this.Close();
+            }
+            else
+            {
+                _messageDialogService.ShowErrorMassage("nepavyko išsaugot bandykit dar kartą");
+            }
+        }
+
+        private void SaveToPdf_Click(object sender, EventArgs e)
+        {
+            CaptureInvoiceFormScreen();
+
+            PdfWriter newInvoicePdfWriter = new PdfWriter($"{AppConfiguration.PdfFolder}\\Saskaitos fakturos nr.{InvoiceNumberRichTextBox.Text} {BuyerNameRichTextBox.Text}.pdf");
+            PdfDocument newInvoicePdfDocument = new PdfDocument(newInvoicePdfWriter);
+            Document newInvoiceDocument = new Document(newInvoicePdfDocument);
+
+            var convertImageToByteArray = ConvertImageToByteArray(_InvoiceMemoryImage);
+            var newInvoiceImage = new iText.Layout.Element.Image(ImageDataFactory.Create(convertImageToByteArray)).SetTextAlignment(TextAlignment.CENTER);
+
+            newInvoiceDocument.Add(newInvoiceImage);
+            newInvoiceDocument.Close();
+
+            _messageDialogService.ShowInfoMessage("Sąskaitos faktūros anketa išsaugota į pdf failą");
+            this.Close();
+        }
+
+        private void CalculateButton_Click(object sender, EventArgs e)
+        {
+            ChangeDoubleCommaToDot();
+
+            var invoiceQuantityAndPriceModel = GetAllProductsQuantityAndPriceNumbersFromRichTextBox();
+
+            ProductTotalPriceRichTextBox.Text =
+                _numberService.CalculateFullPrice(invoiceQuantityAndPriceModel).ToString();
+
+            PvmPriceRichTextBox.Text =
+                _numberService.CalculatePvm(ProductTotalPriceRichTextBox).ToString();
+
+            TotalPriceWithPvmRichTextBox.Text = _numberService
+                .CalculateTotalPriceWithPvm(ProductTotalPriceRichTextBox, PvmPriceRichTextBox).ToString();
+
+        }
+
+        private InvoiceModel GetAllInfoFromRichTextBox()
+        {
             var invoiceModel = new InvoiceModel
             {
                 InvoiceDate =
@@ -182,46 +244,40 @@ namespace Invoice.Forms
                 InvoiceMaker = InvoiceMakerRichTextBox.Text,
                 InvoiceAccepted = InvoiceAcceptedRichTextBox.Text
             };
-
-            bool isSuccess;
-            string successMessage;
-
-            if (_invoiceOperations == InvoiceOperations.Edit)
-            {
-                isSuccess = _invoiceRepository.UpdateExistingInvoice(_invoiceNumber.Value,
-                    _invoiceNumberYearCreation.Value, invoiceModel);
-                successMessage = "Sąskaita faktūra atnaujinta sekmingai";
-            }
-            else
-            {
-                isSuccess = _invoiceRepository.CreateNewInvoice(invoiceModel);
-                successMessage = "Nauja Sąskaita faktūra sukurta";
-            }
-
-            if (isSuccess)
-            {
-                _messageDialogService.ShowInfoMessage(successMessage);
-                this.Close();
-            }
-            else
-            {
-                _messageDialogService.ShowErrorMassage("nepavyko išsaugot bandykit dar kartą");
-            }
+            return invoiceModel;
         }
 
-        private void SaveToPdf_Click(object sender, EventArgs e)
+        private InvoiceQuantityAndPriceModel GetAllProductsQuantityAndPriceNumbersFromRichTextBox()
         {
-            CaptureInvoiceFormScreen();
+            var invoiceQuantityAndPriceModel = new InvoiceQuantityAndPriceModel()
+            {
+                FirstProductQuantity = _numberService.ParseToDoubleOrZero(FirstProductQuantityRichTextBox),
+                SecondProductQuantity = _numberService.ParseToDoubleOrZero(SecondProductQuantityRichTextBox),
+                ThirdProductQuantity = _numberService.ParseToDoubleOrZero(ThirdProductQuantityRichTextBox),
+                FourthProductQuantity = _numberService.ParseToDoubleOrZero(FourthProductQuantityRichTextBox),
+                FifthProductQuantity = _numberService.ParseToDoubleOrZero(FifthProductQuantityRichTextBox),
+                SixthProductQuantity = _numberService.ParseToDoubleOrZero(SixthProductQuantityRichTextBox),
+                SeventhProductQuantity = _numberService.ParseToDoubleOrZero(SeventhProductQuantityRichTextBox),
+                EighthProductQuantity = _numberService.ParseToDoubleOrZero(EighthProductQuantityRichTextBox),
+                NinthProductQuantity = _numberService.ParseToDoubleOrZero(NinthProductQuantityRichTextBox),
+                TenProductQuantity = _numberService.ParseToDoubleOrZero(TenProductQuantityRichTextBox),
+                EleventhProductQuantity = _numberService.ParseToDoubleOrZero(EleventhProductQuantityRichTextBox),
+                TwelfthProductQuantity = _numberService.ParseToDoubleOrZero(TwelfthProductQuantityRichTextBox),
 
-            PdfWriter newInvoicePdfWriter = new PdfWriter($"{AppConfiguration.PdfFolder}\\Saskaitos nr.{InvoiceNumberRichTextBox.Text} {BuyerNameRichTextBox.Text}.pdf");
-            PdfDocument newInvoicePdfDocument = new PdfDocument(newInvoicePdfWriter);
-            Document newInvoiceDocument = new Document(newInvoicePdfDocument);
-
-            var convertImageToByteArray = ConvertImageToByteArray(_InvoiceMemoryImage);
-            var newInvoiceImage = new iText.Layout.Element.Image(ImageDataFactory.Create(convertImageToByteArray)).SetTextAlignment(TextAlignment.CENTER);
-
-            newInvoiceDocument.Add(newInvoiceImage);
-            newInvoiceDocument.Close();
+                FirstProductPrice = _numberService.ParseToDoubleOrZero(FirstProductPriceRichTextBox),
+                SecondProductPrice = _numberService.ParseToDoubleOrZero(SecondProductPriceRichTextBox),
+                ThirdProductPrice = _numberService.ParseToDoubleOrZero(ThirdProductPriceRichTextBox),
+                FourthProductPrice = _numberService.ParseToDoubleOrZero(FourthProductPriceRichTextBox),
+                FifthProductPrice = _numberService.ParseToDoubleOrZero(FifthProductPriceRichTextBox),
+                SixthProductPrice = _numberService.ParseToDoubleOrZero(SixthProductPriceRichTextBox),
+                SeventhProductPrice = _numberService.ParseToDoubleOrZero(SeventhProductPriceRichTextBox),
+                EighthProductPrice = _numberService.ParseToDoubleOrZero(EighthProductPriceRichTextBox),
+                NinthProductPrice = _numberService.ParseToDoubleOrZero(NinthProductPriceRichTextBox),
+                TenProductPrice = _numberService.ParseToDoubleOrZero(TenProductPriceRichTextBox),
+                EleventhProductPrice = _numberService.ParseToDoubleOrZero(EleventhProductPriceRichTextBox),
+                TwelfthProductPrice = _numberService.ParseToDoubleOrZero(TwelfthProductPriceRichTextBox)
+            };
+            return invoiceQuantityAndPriceModel;
         }
 
         private void ResolveFormOperationDesign()
@@ -481,7 +537,5 @@ namespace Invoice.Forms
             ImageConverter converter = new ImageConverter();
             return (byte[])converter.ConvertTo(img, typeof(byte[]));
         }
-
-
     }
 }
