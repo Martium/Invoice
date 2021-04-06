@@ -224,6 +224,44 @@ namespace Invoice.Forms
             newInvoiceDocument.Close();
         }
 
+        private void CalculateButton_Click(object sender, EventArgs e)
+        {
+            ChangeDoubleCommaToDot();
+
+            var invoiceQuantityAndPriceModel = new InvoiceQuantityAndPriceModel()
+            {
+                FirstProductQuantity = _numberService.ParseToDoubleOrDefault(FirstProductQuantityRichTextBox),
+                SecondProductQuantity = _numberService.ParseToDoubleOrDefault(SecondProductQuantityRichTextBox),
+                ThirdProductQuantity = _numberService.ParseToDoubleOrDefault(ThirdProductQuantityRichTextBox),
+                FourthProductQuantity = _numberService.ParseToDoubleOrDefault(FourthProductQuantityRichTextBox),
+                FifthProductQuantity = _numberService.ParseToDoubleOrDefault(FifthProductQuantityRichTextBox),
+                SixthProductQuantity = _numberService.ParseToDoubleOrDefault(SixthProductQuantityRichTextBox),
+                SeventhProductQuantity = _numberService.ParseToDoubleOrDefault(SeventhProductQuantityRichTextBox),
+                EighthProductQuantity = _numberService.ParseToDoubleOrDefault(EighthProductQuantityRichTextBox),
+                NinthProductQuantity = _numberService.ParseToDoubleOrDefault(NinthProductQuantityRichTextBox),
+                TenProductQuantity = _numberService.ParseToDoubleOrDefault(TenProductQuantityRichTextBox),
+                EleventhProductQuantity = _numberService.ParseToDoubleOrDefault(EleventhProductQuantityRichTextBox),
+                TwelfthProductQuantity = _numberService.ParseToDoubleOrDefault(TwelfthProductQuantityRichTextBox),
+
+                FirstProductPrice = _numberService.ParseToDoubleOrDefault(FirstProductPriceRichTextBox),
+                SecondProductPrice = _numberService.ParseToDoubleOrDefault(SecondProductPriceRichTextBox),
+                ThirdProductPrice = _numberService.ParseToDoubleOrDefault(ThirdProductPriceRichTextBox),
+                FourthProductPrice = _numberService.ParseToDoubleOrDefault(FourthProductPriceRichTextBox),
+                FifthProductPrice = _numberService.ParseToDoubleOrDefault(FifthProductPriceRichTextBox),
+                SixthProductPrice = _numberService.ParseToDoubleOrDefault(SixthProductPriceRichTextBox),
+                SeventhProductPrice = _numberService.ParseToDoubleOrDefault(SeventhProductPriceRichTextBox),
+                EighthProductPrice = _numberService.ParseToDoubleOrDefault(EighthProductPriceRichTextBox),
+                NinthProductPrice = _numberService.ParseToDoubleOrDefault(NinthProductPriceRichTextBox),
+                TenProductPrice = _numberService.ParseToDoubleOrDefault(TenProductPriceRichTextBox),
+                EleventhProductPrice = _numberService.ParseToDoubleOrDefault(EleventhProductPriceRichTextBox),
+                TwelfthProductPrice = _numberService.ParseToDoubleOrDefault(TwelfthProductPriceRichTextBox)
+            };
+
+            ProductTotalPriceRichTextBox.Text =
+                _numberService.CalculateFullPrice(invoiceQuantityAndPriceModel).ToString();
+
+        }
+
         private void ResolveFormOperationDesign()
         {
             switch (_invoiceOperations)
@@ -481,7 +519,5 @@ namespace Invoice.Forms
             ImageConverter converter = new ImageConverter();
             return (byte[])converter.ConvertTo(img, typeof(byte[]));
         }
-
-
     }
 }

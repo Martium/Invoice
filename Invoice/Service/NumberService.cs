@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Windows.Forms;
 using Invoice.Models;
 
@@ -33,6 +34,21 @@ namespace Invoice.Service
             }
 
             return doubleOrNull;
+        }
+
+        public double? ParseToDoubleOrZero(RichTextBox richTextBox)
+        {
+            double? doubleOrDefault;
+            try
+            {
+                doubleOrDefault = double.Parse(richTextBox.Text, CultureInfo.InvariantCulture);
+            }
+            catch
+            {
+                doubleOrDefault = 0;
+            }
+
+            return doubleOrDefault;
         }
 
         public string ToStringDoubleOrEmpty(InvoiceModel invoiceModel, string invoiceModelProp)
@@ -120,8 +136,25 @@ namespace Invoice.Service
             }
 
             return newString;
-
         }
-        
+
+        public double? CalculateFullPrice(InvoiceQuantityAndPriceModel invoiceQuantityAndPriceModel)
+        {
+            double? calculateFullPrice =
+                (invoiceQuantityAndPriceModel.FirstProductQuantity * invoiceQuantityAndPriceModel.FirstProductPrice) +
+                (invoiceQuantityAndPriceModel.SecondProductQuantity * invoiceQuantityAndPriceModel.SecondProductPrice) +
+                (invoiceQuantityAndPriceModel.ThirdProductQuantity * invoiceQuantityAndPriceModel.ThirdProductPrice) +
+                (invoiceQuantityAndPriceModel.FourthProductQuantity * invoiceQuantityAndPriceModel.FourthProductPrice) +
+                (invoiceQuantityAndPriceModel.FifthProductQuantity * invoiceQuantityAndPriceModel.FifthProductPrice) +
+                (invoiceQuantityAndPriceModel.SixthProductQuantity * invoiceQuantityAndPriceModel.SixthProductPrice) +
+                (invoiceQuantityAndPriceModel.SeventhProductQuantity * invoiceQuantityAndPriceModel.SeventhProductPrice) +
+                (invoiceQuantityAndPriceModel.EighthProductQuantity * invoiceQuantityAndPriceModel.EighthProductPrice) +
+                (invoiceQuantityAndPriceModel.NinthProductQuantity * invoiceQuantityAndPriceModel.NinthProductPrice) +
+                (invoiceQuantityAndPriceModel.TenProductQuantity * invoiceQuantityAndPriceModel.TenProductPrice) +
+                (invoiceQuantityAndPriceModel.EleventhProductQuantity * invoiceQuantityAndPriceModel.EleventhProductPrice) +
+                (invoiceQuantityAndPriceModel.TwelfthProductQuantity * invoiceQuantityAndPriceModel.TwelfthProductPrice);
+
+            return calculateFullPrice;
+        }
     }
 }

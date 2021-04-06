@@ -130,6 +130,7 @@ namespace Invoice.Forms
             this.InvoiceNameLabel = new System.Windows.Forms.Label();
             this.SaveButton = new System.Windows.Forms.Button();
             this.SaveToPdf = new System.Windows.Forms.Button();
+            this.CalculateButton = new System.Windows.Forms.Button();
             this.PrintInvoicePanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -1063,11 +1064,22 @@ namespace Invoice.Forms
             this.SaveToPdf.UseVisualStyleBackColor = true;
             this.SaveToPdf.Click += new System.EventHandler(this.SaveToPdf_Click);
             // 
+            // CalculateButton
+            // 
+            this.CalculateButton.Location = new System.Drawing.Point(853, 960);
+            this.CalculateButton.Name = "CalculateButton";
+            this.CalculateButton.Size = new System.Drawing.Size(92, 29);
+            this.CalculateButton.TabIndex = 3;
+            this.CalculateButton.Text = "Skaičiuoti";
+            this.CalculateButton.UseVisualStyleBackColor = true;
+            this.CalculateButton.Click += new System.EventHandler(this.CalculateButton_Click);
+            // 
             // InvoiceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1064, 1001);
+            this.Controls.Add(this.CalculateButton);
             this.Controls.Add(this.SaveToPdf);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.PrintInvoicePanel);
@@ -1182,5 +1194,6 @@ namespace Invoice.Forms
         private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.Label ErrorMassageLabel;
         private System.Windows.Forms.Button SaveToPdf;
+        private System.Windows.Forms.Button CalculateButton;
     }
 }
