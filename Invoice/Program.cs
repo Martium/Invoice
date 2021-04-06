@@ -14,6 +14,8 @@ namespace Invoice
         private const string AppUuid = "caa556c2 - 952b-11eb-a8b3-0242ac130003";
 
         private static readonly DataBaseInitializerRepository DataBaseInitializerRepository = new DataBaseInitializerRepository();
+        private static readonly PdfFolderInitializer PdfFolderInitializer = new PdfFolderInitializer();
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -32,8 +34,9 @@ namespace Invoice
                 Application.SetCompatibleTextRenderingDefault(false);
 
                 bool isDataBaseInitialize = InitializeDatabase();
+                bool isPdfFolderInitialize = InitializePdfFolder();
 
-                if (isDataBaseInitialize)
+                if (isDataBaseInitialize && isPdfFolderInitialize)
                 {
                     Application.Run(new ListForm());
                 }
@@ -47,6 +50,24 @@ namespace Invoice
             try
             {
                 DataBaseInitializerRepository.InitializeDatabaseIfNotExist();
+            }
+            catch (Exception exception)
+            {
+                success = false;
+
+                MessageBox.Show(exception.Message, "Klaidos pranešimas", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return success;
+        }
+
+        private static bool InitializePdfFolder()
+        {
+            bool success = true;
+
+            try
+            {
+                PdfFolderInitializer.InitializePdfFolderIfNotExist();
             }
             catch (Exception exception)
             {
