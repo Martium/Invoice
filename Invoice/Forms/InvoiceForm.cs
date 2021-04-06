@@ -11,7 +11,6 @@ using Invoice.Service;
 using iText.IO.Image;
 using iText.Kernel.Pdf;
 using iText.Layout;
-using iText.Layout.Element;
 using iText.Layout.Properties;
 using Image = System.Drawing.Image;
 
@@ -470,14 +469,11 @@ namespace Invoice.Forms
 
         private void CaptureInvoiceFormScreen()
         {
-           
-
             _InvoiceMemoryImage = new Bitmap(PrintInvoicePanel.Width, PrintInvoicePanel.Height);
 
             PrintInvoicePanel.DrawToBitmap(
                 _InvoiceMemoryImage,
-                new Rectangle(1, 1,PrintInvoicePanel.Width, PrintInvoicePanel.Height));
-
+                new Rectangle(0, 0,PrintInvoicePanel.Width, PrintInvoicePanel.Height));
         }
 
         public static byte[] ConvertImageToByteArray(System.Drawing.Image img)
