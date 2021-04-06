@@ -260,6 +260,12 @@ namespace Invoice.Forms
             ProductTotalPriceRichTextBox.Text =
                 _numberService.CalculateFullPrice(invoiceQuantityAndPriceModel).ToString();
 
+            PvmPriceRichTextBox.Text =
+                _numberService.CalculatePvm(ProductTotalPriceRichTextBox).ToString();
+
+            TotalPriceWithPvmRichTextBox.Text = _numberService
+                .CalculateTotalPriceWithPvm(ProductTotalPriceRichTextBox, PvmPriceRichTextBox).ToString();
+
         }
 
         private void ResolveFormOperationDesign()

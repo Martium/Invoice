@@ -156,5 +156,19 @@ namespace Invoice.Service
 
             return calculateFullPrice;
         }
+
+        public double? CalculatePvm(RichTextBox richTextBox)
+        {
+            double? calculatePvm = double.Parse(richTextBox.Text, CultureInfo.InvariantCulture) * 21 / 100;
+            return calculatePvm;
+        }
+
+        public double? CalculateTotalPriceWithPvm(RichTextBox productTotalPriceRichTextBox, RichTextBox pvmPriceRichTextBox)
+        {
+            double? calculateTotalPriceWithPvm = double.Parse(productTotalPriceRichTextBox.Text, CultureInfo.InvariantCulture) +
+                                                 double.Parse(pvmPriceRichTextBox.Text, CultureInfo.InvariantCulture);
+
+            return calculateTotalPriceWithPvm;
+        }
     }
 }
