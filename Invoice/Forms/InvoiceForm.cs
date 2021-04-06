@@ -106,6 +106,68 @@ namespace Invoice.Forms
         {
             ChangeDoubleCommaToDot();
 
+            var invoiceModel = GetAllInfoFromRichTextBox();
+
+            bool isSuccess;
+            string successMessage;
+
+            if (_invoiceOperations == InvoiceOperations.Edit)
+            {
+                isSuccess = _invoiceRepository.UpdateExistingInvoice(_invoiceNumber.Value,
+                    _invoiceNumberYearCreation.Value, invoiceModel);
+                successMessage = "Sąskaita faktūra atnaujinta sekmingai";
+            }
+            else
+            {
+                isSuccess = _invoiceRepository.CreateNewInvoice(invoiceModel);
+                successMessage = "Nauja Sąskaita faktūra sukurta";
+            }
+
+            if (isSuccess)
+            {
+                _messageDialogService.ShowInfoMessage(successMessage);
+                this.Close();
+            }
+            else
+            {
+                _messageDialogService.ShowErrorMassage("nepavyko išsaugot bandykit dar kartą");
+            }
+        }
+
+        private void SaveToPdf_Click(object sender, EventArgs e)
+        {
+            CaptureInvoiceFormScreen();
+
+            PdfWriter newInvoicePdfWriter = new PdfWriter($"{AppConfiguration.PdfFolder}\\Saskaitos fakturos nr.{InvoiceNumberRichTextBox.Text} {BuyerNameRichTextBox.Text}.pdf");
+            PdfDocument newInvoicePdfDocument = new PdfDocument(newInvoicePdfWriter);
+            Document newInvoiceDocument = new Document(newInvoicePdfDocument);
+
+            var convertImageToByteArray = ConvertImageToByteArray(_InvoiceMemoryImage);
+            var newInvoiceImage = new iText.Layout.Element.Image(ImageDataFactory.Create(convertImageToByteArray)).SetTextAlignment(TextAlignment.CENTER);
+
+            newInvoiceDocument.Add(newInvoiceImage);
+            newInvoiceDocument.Close();
+        }
+
+        private void CalculateButton_Click(object sender, EventArgs e)
+        {
+            ChangeDoubleCommaToDot();
+
+            var invoiceQuantityAndPriceModel = GetAllProductsQuantityAndPriceNumbersFromRichTextBox();
+
+            ProductTotalPriceRichTextBox.Text =
+                _numberService.CalculateFullPrice(invoiceQuantityAndPriceModel).ToString();
+
+            PvmPriceRichTextBox.Text =
+                _numberService.CalculatePvm(ProductTotalPriceRichTextBox).ToString();
+
+            TotalPriceWithPvmRichTextBox.Text = _numberService
+                .CalculateTotalPriceWithPvm(ProductTotalPriceRichTextBox, PvmPriceRichTextBox).ToString();
+
+        }
+
+        private InvoiceModel GetAllInfoFromRichTextBox()
+        {
             var invoiceModel = new InvoiceModel
             {
                 InvoiceDate =
@@ -182,52 +244,11 @@ namespace Invoice.Forms
                 InvoiceMaker = InvoiceMakerRichTextBox.Text,
                 InvoiceAccepted = InvoiceAcceptedRichTextBox.Text
             };
-
-            bool isSuccess;
-            string successMessage;
-
-            if (_invoiceOperations == InvoiceOperations.Edit)
-            {
-                isSuccess = _invoiceRepository.UpdateExistingInvoice(_invoiceNumber.Value,
-                    _invoiceNumberYearCreation.Value, invoiceModel);
-                successMessage = "Sąskaita faktūra atnaujinta sekmingai";
-            }
-            else
-            {
-                isSuccess = _invoiceRepository.CreateNewInvoice(invoiceModel);
-                successMessage = "Nauja Sąskaita faktūra sukurta";
-            }
-
-            if (isSuccess)
-            {
-                _messageDialogService.ShowInfoMessage(successMessage);
-                this.Close();
-            }
-            else
-            {
-                _messageDialogService.ShowErrorMassage("nepavyko išsaugot bandykit dar kartą");
-            }
+            return invoiceModel;
         }
 
-        private void SaveToPdf_Click(object sender, EventArgs e)
+        private InvoiceQuantityAndPriceModel GetAllProductsQuantityAndPriceNumbersFromRichTextBox()
         {
-            CaptureInvoiceFormScreen();
-
-            PdfWriter newInvoicePdfWriter = new PdfWriter($"{AppConfiguration.PdfFolder}\\Saskaitos fakturos nr.{InvoiceNumberRichTextBox.Text} {BuyerNameRichTextBox.Text}.pdf");
-            PdfDocument newInvoicePdfDocument = new PdfDocument(newInvoicePdfWriter);
-            Document newInvoiceDocument = new Document(newInvoicePdfDocument);
-
-            var convertImageToByteArray = ConvertImageToByteArray(_InvoiceMemoryImage);
-            var newInvoiceImage = new iText.Layout.Element.Image(ImageDataFactory.Create(convertImageToByteArray)).SetTextAlignment(TextAlignment.CENTER);
-
-            newInvoiceDocument.Add(newInvoiceImage);
-            newInvoiceDocument.Close();
-        }
-
-        private void CalculateButton_Click(object sender, EventArgs e)
-        {
-            ChangeDoubleCommaToDot();
-
             var invoiceQuantityAndPriceModel = new InvoiceQuantityAndPriceModel()
             {
                 FirstProductQuantity = _numberService.ParseToDoubleOrZero(FirstProductQuantityRichTextBox),
@@ -256,16 +277,7 @@ namespace Invoice.Forms
                 EleventhProductPrice = _numberService.ParseToDoubleOrZero(EleventhProductPriceRichTextBox),
                 TwelfthProductPrice = _numberService.ParseToDoubleOrZero(TwelfthProductPriceRichTextBox)
             };
-
-            ProductTotalPriceRichTextBox.Text =
-                _numberService.CalculateFullPrice(invoiceQuantityAndPriceModel).ToString();
-
-            PvmPriceRichTextBox.Text =
-                _numberService.CalculatePvm(ProductTotalPriceRichTextBox).ToString();
-
-            TotalPriceWithPvmRichTextBox.Text = _numberService
-                .CalculateTotalPriceWithPvm(ProductTotalPriceRichTextBox, PvmPriceRichTextBox).ToString();
-
+            return invoiceQuantityAndPriceModel;
         }
 
         private void ResolveFormOperationDesign()
