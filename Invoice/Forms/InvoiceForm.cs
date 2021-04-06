@@ -71,13 +71,18 @@ namespace Invoice.Forms
             {
                 SaveButton.Enabled = false;
                 e.Cancel = true;
-                _messageDialogService.DisplayLabelAndTextBoxError($"Negali būti tuščias! pvz.: {DateTime.Now.ToString(DateFormat)}", InvoiceDateRichTextBox, ErrorMassageLabel);
+                _messageDialogService.DisplayLabelAndTextBoxError(
+                    $"Negali būti tuščias! pvz.: {DateTime.Now.ToString(DateFormat)}", InvoiceDateRichTextBox,
+                    ErrorMassageLabel);
             }
-            else if (!DateTime.TryParseExact(InvoiceDateRichTextBox.Text, DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
+            else if (!DateTime.TryParseExact(InvoiceDateRichTextBox.Text, DateFormat, CultureInfo.InvariantCulture,
+                DateTimeStyles.None, out _))
             {
                 SaveButton.Enabled = false;
                 e.Cancel = true;
-                _messageDialogService.DisplayLabelAndTextBoxError($"Įveskite teisingą datą! pvz.: {DateTime.Now.ToString(DateFormat)}", InvoiceDateRichTextBox, ErrorMassageLabel);
+                _messageDialogService.DisplayLabelAndTextBoxError(
+                    $"Įveskite teisingą datą! pvz.: {DateTime.Now.ToString(DateFormat)}", InvoiceDateRichTextBox,
+                    ErrorMassageLabel);
             }
             else
             {
@@ -192,6 +197,11 @@ namespace Invoice.Forms
             {
                 _messageDialogService.ShowErrorMassage("nepavyko išsaugot bandykit dar kartą");
             }
+        }
+
+        private void SaveToPdf_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void ResolveFormOperationDesign()
@@ -322,23 +332,34 @@ namespace Invoice.Forms
                     _numberService.ToStringDoubleOrEmpty(invoiceModel, "NinthProductQuantity");
                 TenProductQuantityRichTextBox.Text =
                     _numberService.ToStringDoubleOrEmpty(invoiceModel, "TenProductQuantity");
-                EleventhProductQuantityRichTextBox.Text = 
+                EleventhProductQuantityRichTextBox.Text =
                     _numberService.ToStringDoubleOrEmpty(invoiceModel, "EleventhProductQuantity");
                 TwelfthProductQuantityRichTextBox.Text =
                     _numberService.ToStringDoubleOrEmpty(invoiceModel, "TwelfthProductQuantity");
 
-                FirstProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "FirstProductPrice");
-                SecondProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "SecondProductPrice");
-                ThirdProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "ThirdProductPrice");
-                FourthProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "FourthProductPrice");
-                FifthProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "FifthProductPrice");
-                SixthProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "SixthProductPrice");
-                SeventhProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "SeventhProductPrice");
-                EighthProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "EighthProductPrice");
-                NinthProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "NinthProductPrice");
+                FirstProductPriceRichTextBox.Text =
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "FirstProductPrice");
+                SecondProductPriceRichTextBox.Text =
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "SecondProductPrice");
+                ThirdProductPriceRichTextBox.Text =
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "ThirdProductPrice");
+                FourthProductPriceRichTextBox.Text =
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "FourthProductPrice");
+                FifthProductPriceRichTextBox.Text =
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "FifthProductPrice");
+                SixthProductPriceRichTextBox.Text =
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "SixthProductPrice");
+                SeventhProductPriceRichTextBox.Text =
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "SeventhProductPrice");
+                EighthProductPriceRichTextBox.Text =
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "EighthProductPrice");
+                NinthProductPriceRichTextBox.Text =
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "NinthProductPrice");
                 TenProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "TenProductPrice");
-                EleventhProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "EleventhProductPrice");
-                TwelfthProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "TwelfthProductPrice");
+                EleventhProductPriceRichTextBox.Text =
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "EleventhProductPrice");
+                TwelfthProductPriceRichTextBox.Text =
+                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "TwelfthProductPrice");
 
                 PriceInWordsRichTextBox.Text = invoiceModel.PriceInWords;
                 InvoiceMakerRichTextBox.Text = invoiceModel.InvoiceMaker;
@@ -358,7 +379,8 @@ namespace Invoice.Forms
             EighthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(EighthProductQuantityRichTextBox);
             NinthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(NinthProductQuantityRichTextBox);
             TenProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(TenProductQuantityRichTextBox);
-            EleventhProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(EleventhProductQuantityRichTextBox);
+            EleventhProductQuantityRichTextBox.Text =
+                _numberService.ChangeCommaToDot(EleventhProductQuantityRichTextBox);
             TwelfthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(TwelfthProductQuantityRichTextBox);
 
             FirstProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(FirstProductPriceRichTextBox);
@@ -424,5 +446,7 @@ namespace Invoice.Forms
             InvoiceMakerRichTextBox.MaxLength = FormSettings.TextBoxLengths.InvoiceMaker;
             InvoiceAcceptedRichTextBox.MaxLength = FormSettings.TextBoxLengths.InvoiceAccepted;
         }
+
+
     }
 }

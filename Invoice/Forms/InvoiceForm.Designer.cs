@@ -129,6 +129,7 @@ namespace Invoice.Forms
             this.SerialNumberLabel = new System.Windows.Forms.Label();
             this.InvoiceNameLabel = new System.Windows.Forms.Label();
             this.SaveButton = new System.Windows.Forms.Button();
+            this.SaveToPdf = new System.Windows.Forms.Button();
             this.PrintInvoicePanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -1051,11 +1052,22 @@ namespace Invoice.Forms
             this.SaveButton.UseVisualStyleBackColor = true;
             this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
+            // SaveToPdf
+            // 
+            this.SaveToPdf.Location = new System.Drawing.Point(223, 960);
+            this.SaveToPdf.Name = "SaveToPdf";
+            this.SaveToPdf.Size = new System.Drawing.Size(92, 29);
+            this.SaveToPdf.TabIndex = 2;
+            this.SaveToPdf.Text = "Išsaugoti į PDF";
+            this.SaveToPdf.UseVisualStyleBackColor = true;
+            this.SaveToPdf.Click += new System.EventHandler(this.SaveToPdf_Click);
+            // 
             // InvoiceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1064, 1001);
+            this.Controls.Add(this.SaveToPdf);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.PrintInvoicePanel);
             this.MaximizeBox = false;
@@ -1168,5 +1180,6 @@ namespace Invoice.Forms
         private System.Windows.Forms.Label ProductTotalPriceLabel;
         private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.Label ErrorMassageLabel;
+        private System.Windows.Forms.Button SaveToPdf;
     }
 }
