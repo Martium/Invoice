@@ -213,7 +213,7 @@ namespace Invoice.Forms
         {
             CaptureInvoiceFormScreen();
 
-            PdfWriter newInvoicePdfWriter = new PdfWriter($"{AppConfiguration.PdfFolder}\\Saskaitos nr.{InvoiceNumberRichTextBox.Text} {BuyerNameRichTextBox.Text}.pdf");
+            PdfWriter newInvoicePdfWriter = new PdfWriter($"{AppConfiguration.PdfFolder}\\Saskaitos fakturos nr.{InvoiceNumberRichTextBox.Text} {BuyerNameRichTextBox.Text}.pdf");
             PdfDocument newInvoicePdfDocument = new PdfDocument(newInvoicePdfWriter);
             Document newInvoiceDocument = new Document(newInvoicePdfDocument);
 
