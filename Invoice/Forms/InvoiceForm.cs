@@ -470,21 +470,14 @@ namespace Invoice.Forms
 
         private void CaptureInvoiceFormScreen()
         {
+           
+
             _InvoiceMemoryImage = new Bitmap(PrintInvoicePanel.Width, PrintInvoicePanel.Height);
 
-            float tgtWidthMM = 210;  //A4 paper size widthMM 25.4f, heightMM 25.4f
-            float tgtHeightMM = 297;
-            float tgtWidthInches = tgtWidthMM / 35.4f;
-            float tgtHeightInches = tgtHeightMM / 35.4f;
-            float srcWidthPx = _InvoiceMemoryImage.Width;
-            float srcHeightPx = _InvoiceMemoryImage.Height;
-            float dpiX = srcWidthPx / tgtWidthInches;
-            float dpiY = srcHeightPx / tgtHeightInches;
+            PrintInvoicePanel.DrawToBitmap(
+                _InvoiceMemoryImage,
+                new Rectangle(1, 1,PrintInvoicePanel.Width, PrintInvoicePanel.Height));
 
-            _InvoiceMemoryImage.SetResolution(dpiX, dpiY);
-
-            PrintInvoicePanel.DrawToBitmap(_InvoiceMemoryImage, PrintInvoicePanel.ClientRectangle);
-          
         }
 
         public static byte[] ConvertImageToByteArray(System.Drawing.Image img)
