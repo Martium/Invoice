@@ -6,6 +6,20 @@ namespace Invoice.Service
 {
     public class NumberService
     {
+        public string ChangeCommaToDot(RichTextBox richTextBox)
+        {
+            string changeComma = richTextBox.Text;
+
+            bool isComma = richTextBox.Text.Contains(",");
+
+            if (isComma)
+            {
+                changeComma = richTextBox.Text.Replace(",", ".");
+            }
+
+            return changeComma;
+        }
+
         public double? ParseToDoubleOrNull(RichTextBox richTexBox)
         {
             double? doubleOrNull;

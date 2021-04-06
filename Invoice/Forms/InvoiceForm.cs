@@ -89,6 +89,8 @@ namespace Invoice.Forms
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
+            ChangeDoubleCommaToDot();
+
             var invoiceModel = new InvoiceModel
             {
                 InvoiceDate =
@@ -342,6 +344,36 @@ namespace Invoice.Forms
                 InvoiceMakerRichTextBox.Text = invoiceModel.InvoiceMaker;
                 InvoiceAcceptedRichTextBox.Text = invoiceModel.InvoiceAccepted;
             }
+        }
+
+        private void ChangeDoubleCommaToDot()
+        {
+            FirstProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(FirstProductQuantityRichTextBox);
+            SecondProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(SecondProductQuantityRichTextBox);
+            ThirdProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(ThirdProductQuantityRichTextBox);
+            FourthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(FourthProductQuantityRichTextBox);
+            FifthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(FifthProductQuantityRichTextBox);
+            SixthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(SixthProductQuantityRichTextBox);
+            SeventhProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(SeventhProductQuantityRichTextBox);
+            EighthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(EighthProductQuantityRichTextBox);
+            NinthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(NinthProductQuantityRichTextBox);
+            TenProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(TenProductQuantityRichTextBox);
+            EleventhProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(EleventhProductQuantityRichTextBox);
+            TwelfthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(TwelfthProductQuantityRichTextBox);
+
+            FirstProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(FirstProductPriceRichTextBox);
+            SecondProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(SecondProductPriceRichTextBox);
+            ThirdProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(ThirdProductPriceRichTextBox);
+            FourthProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(FourthProductPriceRichTextBox);
+            FifthProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(FifthProductPriceRichTextBox);
+            SixthProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(SixthProductPriceRichTextBox);
+            SeventhProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(SeventhProductPriceRichTextBox);
+            EighthProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(EighthProductPriceRichTextBox);
+            NinthProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(NinthProductPriceRichTextBox);
+            TenProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(TenProductPriceRichTextBox);
+            EleventhProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(EleventhProductPriceRichTextBox);
+            TwelfthProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(TwelfthProductPriceRichTextBox);
+
         }
 
         private void SetTextBoxLengths()
