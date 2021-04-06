@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
 using Invoice.Constants;
@@ -7,6 +8,12 @@ using Invoice.Enums;
 using Invoice.Models;
 using Invoice.Repositories;
 using Invoice.Service;
+using iText.IO.Image;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Element;
+using iText.Layout.Properties;
+using Image = System.Drawing.Image;
 
 namespace Invoice.Forms
 {
@@ -23,6 +30,10 @@ namespace Invoice.Forms
         private readonly InvoiceOperations _invoiceOperations;
         private readonly int? _invoiceNumber;
         private readonly int? _invoiceNumberYearCreation;
+
+        private Bitmap _InvoiceMemoryImage;
+
+        private Image _image;
 
         private const string DateFormat = "yyyy-MM-dd";
 
@@ -201,7 +212,17 @@ namespace Invoice.Forms
 
         private void SaveToPdf_Click(object sender, EventArgs e)
         {
+            CaptureInvoiceFormScreen();
 
+            PdfWriter newInvoicePdfWriter = new PdfWriter($"{AppConfiguration.PdfFolder}\\{InvoiceNumberRichTextBox.Text} {BuyerNameRichTextBox.Text}.pdf");
+            PdfDocument newInvoicePdfDocument = new PdfDocument(newInvoicePdfWriter);
+            Document newInvoiceDocument = new Document(newInvoicePdfDocument);
+
+            var convertImageToByteArray = ConvertImageToByteArray(_InvoiceMemoryImage);
+            var newInvoiceImage = new iText.Layout.Element.Image(ImageDataFactory.Create(convertImageToByteArray)).SetTextAlignment(TextAlignment.CENTER);
+
+            newInvoiceDocument.Add(newInvoiceImage);
+            newInvoiceDocument.Close();
         }
 
         private void ResolveFormOperationDesign()
@@ -445,6 +466,31 @@ namespace Invoice.Forms
             PriceInWordsRichTextBox.MaxLength = FormSettings.TextBoxLengths.PriceInWords;
             InvoiceMakerRichTextBox.MaxLength = FormSettings.TextBoxLengths.InvoiceMaker;
             InvoiceAcceptedRichTextBox.MaxLength = FormSettings.TextBoxLengths.InvoiceAccepted;
+        }
+
+        private void CaptureInvoiceFormScreen()
+        {
+            _InvoiceMemoryImage = new Bitmap(PrintInvoicePanel.Width, PrintInvoicePanel.Height);
+
+            float tgtWidthMM = 210;  //A4 paper size widthMM 25.4f, heightMM 25.4f
+            float tgtHeightMM = 297;
+            float tgtWidthInches = tgtWidthMM / 35.4f;
+            float tgtHeightInches = tgtHeightMM / 35.4f;
+            float srcWidthPx = _InvoiceMemoryImage.Width;
+            float srcHeightPx = _InvoiceMemoryImage.Height;
+            float dpiX = srcWidthPx / tgtWidthInches;
+            float dpiY = srcHeightPx / tgtHeightInches;
+
+            _InvoiceMemoryImage.SetResolution(dpiX, dpiY);
+
+            PrintInvoicePanel.DrawToBitmap(_InvoiceMemoryImage, PrintInvoicePanel.ClientRectangle);
+          
+        }
+
+        public static byte[] ConvertImageToByteArray(System.Drawing.Image img)
+        {
+            ImageConverter converter = new ImageConverter();
+            return (byte[])converter.ConvertTo(img, typeof(byte[]));
         }
 
 
