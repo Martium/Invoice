@@ -18,14 +18,14 @@ namespace Invoice.Repositories
 
                 string getExistingInvoiceQuery =
                     @"SELECT  
-                        I.InvoiceNumber,I.InvoiceNumberYearCreation, I.InvoiceDate, I.BuyerName
+                        I.InvoiceNumber,I.InvoiceNumberYearCreation, I.InvoiceDate, I.BuyerName, I.InvoiceIsPaid
                       FROM Invoice I
                     ";
 
                 if (!string.IsNullOrWhiteSpace(searchPhrase))
                 {
                     getExistingInvoiceQuery += @" WHERE 
-                                                I.InvoiceNumber LIKE @SearchPhrase OR I.InvoiceNumberYearCreation LIKE @SearchPhrase OR I.InvoiceDate LIKE @SearchPhrase OR I.BuyerName LIKE @SearchPhrase
+                                                I.InvoiceNumber LIKE @SearchPhrase OR I.InvoiceNumberYearCreation LIKE @SearchPhrase OR I.InvoiceDate LIKE @SearchPhrase OR I.BuyerName LIKE @SearchPhrase OR I.InvoiceIsPaid LIKE @SearchPhrase
                                                 ";
 
                     queryParameters = new
