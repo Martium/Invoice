@@ -242,7 +242,8 @@ namespace Invoice.Forms
 
                 PriceInWords = PriceInWordsRichTextBox.Text,
                 InvoiceMaker = InvoiceMakerRichTextBox.Text,
-                InvoiceAccepted = InvoiceAcceptedRichTextBox.Text
+                InvoiceAccepted = InvoiceAcceptedRichTextBox.Text,
+                InvoiceIsPaid = "Nesumokėta"
             };
             return invoiceModel;
         }
