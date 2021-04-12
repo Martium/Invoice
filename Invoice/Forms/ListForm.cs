@@ -155,6 +155,7 @@ namespace Invoice.Forms
             invoiceListModelBindingSource.DataSource = invoiceListModels;
 
             ListOfInvoiceDataGridView.DataSource = invoiceListModelBindingSource;
+
         }
 
         private void ToggleExistingListManaging(bool enabled, string searchPhrase)
@@ -217,6 +218,14 @@ namespace Invoice.Forms
             int invoiceNumberYearCreationColumnIndex = 1;
 
             return (int)ListOfInvoiceDataGridView.SelectedRows[0].Cells[invoiceNumberYearCreationColumnIndex].Value;
+        }
+
+        private void ListOfInvoiceDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            foreach (DataGridViewRow row in ListOfInvoiceDataGridView.Rows)
+            {
+                row.DefaultCellStyle.BackColor = row.Cells[4].Value.ToString() == "Sumokėta" ? Color.Chartreuse : Color.Red;
+            }
         }
     }
 }

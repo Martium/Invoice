@@ -12,6 +12,6 @@ namespace Invoice.Models
         public int InvoiceNumberYearCreation { get; set; }
         public DateTime InvoiceDate { get; set; }
         public string BuyerName { get; set; }
-        public int InvoiceIsPaid { get; set; }
+        public string InvoiceIsPaid { get; set; }
     }
 }

@@ -39,12 +39,12 @@ namespace Invoice.Forms
             this.ListOfInvoiceDataGridView = new System.Windows.Forms.DataGridView();
             this.CopyButton = new System.Windows.Forms.Button();
             this.SearchCancelButton = new System.Windows.Forms.Button();
-            this.invoiceListModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.invoiceNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoiceNumberYearCreationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoiceDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buyerNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoiceIsPaidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.invoiceListModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.ListOfInvoiceDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceListModelBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -113,6 +113,7 @@ namespace Invoice.Forms
             this.ListOfInvoiceDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ListOfInvoiceDataGridView.Size = new System.Drawing.Size(1040, 825);
             this.ListOfInvoiceDataGridView.TabIndex = 4;
+            this.ListOfInvoiceDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.ListOfInvoiceDataGridView_CellFormatting);
             this.ListOfInvoiceDataGridView.Paint += new System.Windows.Forms.PaintEventHandler(this.ListOfInvoiceDataGridView_Paint);
             // 
             // CopyButton
@@ -135,10 +136,6 @@ namespace Invoice.Forms
             this.SearchCancelButton.Text = "Atšaukti";
             this.SearchCancelButton.UseVisualStyleBackColor = true;
             this.SearchCancelButton.Click += new System.EventHandler(this.SearchCancelButton_Click);
-            // 
-            // invoiceListModelBindingSource
-            // 
-            this.invoiceListModelBindingSource.DataSource = typeof(Invoice.Models.InvoiceListModel);
             // 
             // invoiceNumberDataGridViewTextBoxColumn
             // 
@@ -178,6 +175,10 @@ namespace Invoice.Forms
             this.invoiceIsPaidDataGridViewTextBoxColumn.Name = "invoiceIsPaidDataGridViewTextBoxColumn";
             this.invoiceIsPaidDataGridViewTextBoxColumn.ReadOnly = true;
             this.invoiceIsPaidDataGridViewTextBoxColumn.Width = 200;
+            // 
+            // invoiceListModelBindingSource
+            // 
+            this.invoiceListModelBindingSource.DataSource = typeof(Invoice.Models.InvoiceListModel);
             // 
             // ListForm
             // 
