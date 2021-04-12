@@ -111,6 +111,11 @@ namespace Invoice.Forms
             HideListAndOpenInvoiceForm(copySelectedInvoice);
         }
 
+        private void ChangePaymentButton_Click(object sender, EventArgs e)
+        {
+            ChangePaymentStatus();
+        }
+
         private void ListOfInvoiceDataGridView_Paint(object sender, PaintEventArgs e)
         {
             DataGridView dataGridView = (DataGridView)sender;
@@ -173,6 +178,7 @@ namespace Invoice.Forms
 
             ListOfInvoiceDataGridView.DataSource = invoiceListModelBindingSource;
 
+            ChangeFormBackRoundColorByPaymentStatus();
         }
 
         private void ToggleExistingListManaging(bool enabled, string searchPhrase)
@@ -235,6 +241,36 @@ namespace Invoice.Forms
             int invoiceNumberYearCreationColumnIndex = 1;
 
             return (int)ListOfInvoiceDataGridView.SelectedRows[0].Cells[invoiceNumberYearCreationColumnIndex].Value;
+        }
+
+        private void ChangePaymentStatus()
+        {
+            string paymentStatus = ListOfInvoiceDataGridView.SelectedRows[0].Cells[InvoiceIsPaidIndex].Value.ToString();
+
+            if (paymentStatus == "Atsiskaityta")
+            {
+                ListOfInvoiceDataGridView.SelectedRows[0].Cells[InvoiceIsPaidIndex].Value = "Nesumokėta";
+                this.BackColor = Color.Red;
+            }
+            else
+            {
+                ListOfInvoiceDataGridView.SelectedRows[0].Cells[InvoiceIsPaidIndex].Value = "Atsiskaityta";
+                this.BackColor = Color.Chartreuse;
+            }
+        }
+
+        private void ChangeFormBackRoundColorByPaymentStatus()
+        {
+            string paymentStatus = ListOfInvoiceDataGridView.SelectedRows[0].Cells[InvoiceIsPaidIndex].Value.ToString();
+
+            if (paymentStatus == "Atsiskaityta")
+            {
+                this.BackColor = Color.Chartreuse;
+            }
+            else
+            {
+                this.BackColor = Color.Red;
+            }
         }
     }
 }

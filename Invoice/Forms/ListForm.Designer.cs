@@ -39,6 +39,7 @@ namespace Invoice.Forms
             this.ListOfInvoiceDataGridView = new System.Windows.Forms.DataGridView();
             this.CopyButton = new System.Windows.Forms.Button();
             this.SearchCancelButton = new System.Windows.Forms.Button();
+            this.ChangePaymentButton = new System.Windows.Forms.Button();
             this.invoiceNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoiceNumberYearCreationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoiceDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,9 +55,9 @@ namespace Invoice.Forms
             this.EditButton.BackColor = System.Drawing.SystemColors.Control;
             this.EditButton.Location = new System.Drawing.Point(205, 938);
             this.EditButton.Name = "EditButton";
-            this.EditButton.Size = new System.Drawing.Size(149, 37);
+            this.EditButton.Size = new System.Drawing.Size(180, 37);
             this.EditButton.TabIndex = 0;
-            this.EditButton.Text = "Keisti esamą sąskaitą";
+            this.EditButton.Text = "Keisti esamą sąskaitą (Peržiūrėti)";
             this.EditButton.UseVisualStyleBackColor = false;
             this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
@@ -138,6 +139,17 @@ namespace Invoice.Forms
             this.SearchCancelButton.UseVisualStyleBackColor = true;
             this.SearchCancelButton.Click += new System.EventHandler(this.SearchCancelButton_Click);
             // 
+            // ChangePaymentButton
+            // 
+            this.ChangePaymentButton.BackColor = System.Drawing.SystemColors.Control;
+            this.ChangePaymentButton.Location = new System.Drawing.Point(903, 938);
+            this.ChangePaymentButton.Name = "ChangePaymentButton";
+            this.ChangePaymentButton.Size = new System.Drawing.Size(149, 37);
+            this.ChangePaymentButton.TabIndex = 7;
+            this.ChangePaymentButton.Text = "Keisti sąskaitos būseną";
+            this.ChangePaymentButton.UseVisualStyleBackColor = false;
+            this.ChangePaymentButton.Click += new System.EventHandler(this.ChangePaymentButton_Click);
+            // 
             // invoiceNumberDataGridViewTextBoxColumn
             // 
             this.invoiceNumberDataGridViewTextBoxColumn.DataPropertyName = "InvoiceNumber";
@@ -187,6 +199,7 @@ namespace Invoice.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1064, 1001);
+            this.Controls.Add(this.ChangePaymentButton);
             this.Controls.Add(this.SearchCancelButton);
             this.Controls.Add(this.CopyButton);
             this.Controls.Add(this.ListOfInvoiceDataGridView);
@@ -221,6 +234,7 @@ namespace Invoice.Forms
         private DataGridViewTextBoxColumn invoiceDateDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn buyerNameDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn invoiceIsPaidDataGridViewTextBoxColumn;
+        private Button ChangePaymentButton;
     }
 }
 
