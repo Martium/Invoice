@@ -140,7 +140,7 @@ namespace Invoice.Repositories
                         [PriceInWords] [nvarchar]({FormSettings.TextBoxLengths.PriceInWords}) NULL,
                         [InvoiceMaker] [nvarchar]({FormSettings.TextBoxLengths.InvoiceMaker}) NULL,
                         [InvoiceAccepted] [nvarchar]({FormSettings.TextBoxLengths.InvoiceAccepted}) NULL,
-                        [InvoiceIsPaid] [nvarchar]({FormSettings.TextBoxLengths.InvoiceIsPaid}) NOT NULL,
+                        [PaymentStatus] [nvarchar]({FormSettings.TextBoxLengths.InvoiceIsPaid}) NOT NULL,
                         UNIQUE(InvoiceNumber, InvoiceNumberYearCreation)
                     );
                  ";

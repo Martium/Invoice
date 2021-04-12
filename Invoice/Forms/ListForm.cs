@@ -6,12 +6,15 @@ using System.Windows.Forms;
 using Invoice.Enums;
 using Invoice.Models;
 using Invoice.Repositories;
+using Invoice.Service;
 
 namespace Invoice.Forms
 {
     public partial class ListForm : Form
     {
         private readonly InvoiceRepository _invoiceRepository;
+
+        private readonly MessageDialogService _messageDialogService = new MessageDialogService();
 
         private static readonly string SearchTextBoxPlaceholderText = "Įveskite paieškos frazę...";
 
@@ -245,25 +248,43 @@ namespace Invoice.Forms
 
         private void ChangePaymentStatus()
         {
+            int invoiceNumber = GetSelectedInvoiceNumber();
+            int invoiceNumberYearCreation = GetSelectedOrderCreationYear();
             string paymentStatus = ListOfInvoiceDataGridView.SelectedRows[0].Cells[InvoiceIsPaidIndex].Value.ToString();
 
-            if (paymentStatus == "Atsiskaityta")
+            DialogResult dialogResult = _messageDialogService.ShowPaymentStatusSaveChoiceMessage("Ar tikrai norite pakeisti statusą");
+
+            if (dialogResult == DialogResult.OK)
             {
-                ListOfInvoiceDataGridView.SelectedRows[0].Cells[InvoiceIsPaidIndex].Value = "Nesumokėta";
-                this.BackColor = Color.Red;
-            }
-            else
-            {
-                ListOfInvoiceDataGridView.SelectedRows[0].Cells[InvoiceIsPaidIndex].Value = "Atsiskaityta";
-                this.BackColor = Color.Chartreuse;
+                if (paymentStatus == "Atsiskaityta")
+                {
+                    ListOfInvoiceDataGridView.SelectedRows[0].Cells[InvoiceIsPaidIndex].Value = "Nesumokėta";
+                    this.BackColor = Color.Red;
+                    _invoiceRepository.UpdateExistingInvoicePaymentStatus(invoiceNumber, invoiceNumberYearCreation,
+                        "Nesumokėta");
+                }
+                else
+                {
+                    ListOfInvoiceDataGridView.SelectedRows[0].Cells[InvoiceIsPaidIndex].Value = "Atsiskaityta";
+                    this.BackColor = Color.Chartreuse;
+                    _invoiceRepository.UpdateExistingInvoicePaymentStatus(invoiceNumber, invoiceNumberYearCreation,
+                        "Atsiskaityta");
+                }
             }
         }
 
         private void ChangeFormBackRoundColorByPaymentStatus()
         {
-            string paymentStatus = ListOfInvoiceDataGridView.SelectedRows[0].Cells[InvoiceIsPaidIndex].Value.ToString();
+            try
+            {
+                string paymentStatus = ListOfInvoiceDataGridView.SelectedRows[0].Cells[InvoiceIsPaidIndex].Value.ToString();
 
-            this.BackColor = paymentStatus == "Atsiskaityta" ? Color.Chartreuse : Color.Red;
+                this.BackColor = paymentStatus == "Atsiskaityta" ? Color.Chartreuse : Color.Red;
+            }
+            catch
+            {
+                this.BackColor = Color.Wheat;
+            }
         }
     }
 }

@@ -28,6 +28,7 @@ namespace Invoice.Forms
         private readonly InvoiceOperations _invoiceOperations;
         private readonly int? _invoiceNumber;
         private readonly int? _invoiceNumberYearCreation;
+        private string _paymentStatus = "Nesumokėta";
 
         private Bitmap _InvoiceMemoryImage;
 
@@ -168,6 +169,7 @@ namespace Invoice.Forms
 
         private InvoiceModel GetAllInfoFromRichTextBox()
         {
+
             var invoiceModel = new InvoiceModel
             {
                 InvoiceDate =
@@ -243,7 +245,8 @@ namespace Invoice.Forms
                 PriceInWords = PriceInWordsRichTextBox.Text,
                 InvoiceMaker = InvoiceMakerRichTextBox.Text,
                 InvoiceAccepted = InvoiceAcceptedRichTextBox.Text,
-                InvoiceIsPaid = "Nesumokėta"
+                
+                PaymentStatus = _paymentStatus
             };
             return invoiceModel;
         }
@@ -442,9 +445,11 @@ namespace Invoice.Forms
                 InvoiceMakerRichTextBox.Text = invoiceModel.InvoiceMaker;
                 InvoiceAcceptedRichTextBox.Text = invoiceModel.InvoiceAccepted;
 
-                if (invoiceModel.InvoiceIsPaid == "Atsiskaityta" && _invoiceOperations == InvoiceOperations.Edit)
+                if (invoiceModel.PaymentStatus == "Atsiskaityta" && _invoiceOperations == InvoiceOperations.Edit)
                 {
                     this.BackColor = Color.Chartreuse;
+                    _paymentStatus = "Atsiskaityta";
+
                 }
                 else if(_invoiceOperations == InvoiceOperations.Edit)
                 {

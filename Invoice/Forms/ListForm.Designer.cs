@@ -183,7 +183,7 @@ namespace Invoice.Forms
             // 
             // invoiceIsPaidDataGridViewTextBoxColumn
             // 
-            this.invoiceIsPaidDataGridViewTextBoxColumn.DataPropertyName = "InvoiceIsPaid";
+            this.invoiceIsPaidDataGridViewTextBoxColumn.DataPropertyName = "PaymentStatus";
             this.invoiceIsPaidDataGridViewTextBoxColumn.HeaderText = "Būsena";
             this.invoiceIsPaidDataGridViewTextBoxColumn.Name = "invoiceIsPaidDataGridViewTextBoxColumn";
             this.invoiceIsPaidDataGridViewTextBoxColumn.ReadOnly = true;
