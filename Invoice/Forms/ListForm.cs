@@ -15,6 +15,8 @@ namespace Invoice.Forms
 
         private static readonly string SearchTextBoxPlaceholderText = "Įveskite paieškos frazę...";
 
+        private const int _invoiceIsPaidIndex = 4;
+
         private bool _searchActive;
 
         public ListForm()
@@ -134,6 +136,21 @@ namespace Invoice.Forms
             this.Show();
         }
 
+        private void ListOfInvoiceDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            foreach (DataGridViewRow row in ListOfInvoiceDataGridView.Rows)
+            {
+                row.DefaultCellStyle.BackColor = row.Cells[_invoiceIsPaidIndex].Value.ToString() == "Sumokėta" ? Color.Chartreuse : Color.Red;
+            }
+        }
+
+        private void ListOfInvoiceDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string paymentStatus = ListOfInvoiceDataGridView.SelectedRows[0].Cells[_invoiceIsPaidIndex].Value.ToString();
+
+            this.BackColor = paymentStatus == "Sumokėta" ? Color.Chartreuse : Color.Red;
+        }
+
         private void HideListAndOpenInvoiceForm(Form invoiceForm)
         {
             this.Hide();
@@ -218,14 +235,6 @@ namespace Invoice.Forms
             int invoiceNumberYearCreationColumnIndex = 1;
 
             return (int)ListOfInvoiceDataGridView.SelectedRows[0].Cells[invoiceNumberYearCreationColumnIndex].Value;
-        }
-
-        private void ListOfInvoiceDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            foreach (DataGridViewRow row in ListOfInvoiceDataGridView.Rows)
-            {
-                row.DefaultCellStyle.BackColor = row.Cells[4].Value.ToString() == "Sumokėta" ? Color.Chartreuse : Color.Red;
-            }
         }
     }
 }
