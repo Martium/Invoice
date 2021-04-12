@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Invoice.Enums;
 using Invoice.Models;
 using Invoice.Repositories;
+using Invoice.Service;
 
 namespace Invoice.Forms
 {
@@ -13,7 +14,11 @@ namespace Invoice.Forms
     {
         private readonly InvoiceRepository _invoiceRepository;
 
+        private readonly MessageDialogService _messageDialogService = new MessageDialogService();
+
         private static readonly string SearchTextBoxPlaceholderText = "Įveskite paieškos frazę...";
+
+        private const int InvoiceIsPaidIndex = 4;
 
         private bool _searchActive;
 
@@ -109,6 +114,11 @@ namespace Invoice.Forms
             HideListAndOpenInvoiceForm(copySelectedInvoice);
         }
 
+        private void ChangePaymentButton_Click(object sender, EventArgs e)
+        {
+            ChangePaymentStatus();
+        }
+
         private void ListOfInvoiceDataGridView_Paint(object sender, PaintEventArgs e)
         {
             DataGridView dataGridView = (DataGridView)sender;
@@ -134,6 +144,21 @@ namespace Invoice.Forms
             this.Show();
         }
 
+        private void ListOfInvoiceDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            foreach (DataGridViewRow row in ListOfInvoiceDataGridView.Rows)
+            {
+                row.DefaultCellStyle.BackColor = row.Cells[InvoiceIsPaidIndex].Value.ToString() == "Atsiskaityta" ? Color.Chartreuse : Color.Red;
+            }
+        }
+
+        private void ListOfInvoiceDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string paymentStatus = ListOfInvoiceDataGridView.SelectedRows[0].Cells[InvoiceIsPaidIndex].Value.ToString();
+
+            this.BackColor = paymentStatus == "Atsiskaityta" ? Color.Chartreuse : Color.Red;
+        }
+
         private void HideListAndOpenInvoiceForm(Form invoiceForm)
         {
             this.Hide();
@@ -155,6 +180,8 @@ namespace Invoice.Forms
             invoiceListModelBindingSource.DataSource = invoiceListModels;
 
             ListOfInvoiceDataGridView.DataSource = invoiceListModelBindingSource;
+
+            ChangeFormBackRoundColorByPaymentStatus();
         }
 
         private void ToggleExistingListManaging(bool enabled, string searchPhrase)
@@ -217,6 +244,47 @@ namespace Invoice.Forms
             int invoiceNumberYearCreationColumnIndex = 1;
 
             return (int)ListOfInvoiceDataGridView.SelectedRows[0].Cells[invoiceNumberYearCreationColumnIndex].Value;
+        }
+
+        private void ChangePaymentStatus()
+        {
+            int invoiceNumber = GetSelectedInvoiceNumber();
+            int invoiceNumberYearCreation = GetSelectedOrderCreationYear();
+            string paymentStatus = ListOfInvoiceDataGridView.SelectedRows[0].Cells[InvoiceIsPaidIndex].Value.ToString();
+
+            DialogResult dialogResult = _messageDialogService.ShowPaymentStatusSaveChoiceMessage("Ar tikrai norite pakeisti statusą");
+
+            if (dialogResult == DialogResult.OK)
+            {
+                if (paymentStatus == "Atsiskaityta")
+                {
+                    ListOfInvoiceDataGridView.SelectedRows[0].Cells[InvoiceIsPaidIndex].Value = "Nesumokėta";
+                    this.BackColor = Color.Red;
+                    _invoiceRepository.UpdateExistingInvoicePaymentStatus(invoiceNumber, invoiceNumberYearCreation,
+                        "Nesumokėta");
+                }
+                else
+                {
+                    ListOfInvoiceDataGridView.SelectedRows[0].Cells[InvoiceIsPaidIndex].Value = "Atsiskaityta";
+                    this.BackColor = Color.Chartreuse;
+                    _invoiceRepository.UpdateExistingInvoicePaymentStatus(invoiceNumber, invoiceNumberYearCreation,
+                        "Atsiskaityta");
+                }
+            }
+        }
+
+        private void ChangeFormBackRoundColorByPaymentStatus()
+        {
+            try
+            {
+                string paymentStatus = ListOfInvoiceDataGridView.SelectedRows[0].Cells[InvoiceIsPaidIndex].Value.ToString();
+
+                this.BackColor = paymentStatus == "Atsiskaityta" ? Color.Chartreuse : Color.Red;
+            }
+            catch
+            {
+                this.BackColor = Color.Wheat;
+            }
         }
     }
 }

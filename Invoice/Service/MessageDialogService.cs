@@ -15,6 +15,13 @@ namespace Invoice.Service
             MessageBox.Show(message, "Klaidos pranešimas", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        public DialogResult ShowPaymentStatusSaveChoiceMessage(string message)
+        {
+            DialogResult dialogResult = MessageBox.Show(message, "Saugojimo Pranešimas", MessageBoxButtons.OKCancel);
+
+            return dialogResult;
+        }
+
         public void DisplayLabelAndTextBoxError(string errorText, RichTextBox richTextBox, Label label)
         {
             richTextBox.BackColor = Color.Red;

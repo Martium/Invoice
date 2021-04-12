@@ -80,5 +80,6 @@ namespace Invoice.Models
         public string PriceInWords { get; set; }
         public string InvoiceMaker { get; set; }
         public string InvoiceAccepted { get; set; }
+        public string PaymentStatus { get; set; }
     }
 }

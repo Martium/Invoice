@@ -18,14 +18,14 @@ namespace Invoice.Repositories
 
                 string getExistingInvoiceQuery =
                     @"SELECT  
-                        I.InvoiceNumber,I.InvoiceNumberYearCreation, I.InvoiceDate, I.BuyerName
+                        I.InvoiceNumber,I.InvoiceNumberYearCreation, I.InvoiceDate, I.BuyerName, I.PaymentStatus
                       FROM Invoice I
                     ";
 
                 if (!string.IsNullOrWhiteSpace(searchPhrase))
                 {
                     getExistingInvoiceQuery += @" WHERE 
-                                                I.InvoiceNumber LIKE @SearchPhrase OR I.InvoiceNumberYearCreation LIKE @SearchPhrase OR I.InvoiceDate LIKE @SearchPhrase OR I.BuyerName LIKE @SearchPhrase
+                                                I.InvoiceNumber LIKE @SearchPhrase OR I.InvoiceNumberYearCreation LIKE @SearchPhrase OR I.InvoiceDate LIKE @SearchPhrase OR I.BuyerName LIKE @SearchPhrase OR I.PaymentStatus LIKE @SearchPhrase
                                                 ";
 
                     queryParameters = new
@@ -37,7 +37,8 @@ namespace Invoice.Repositories
                 getExistingInvoiceQuery += @" ORDER BY 
                                                I.InvoiceNumberYearCreation DESC, I.InvoiceNumber DESC";
 
-                IEnumerable<InvoiceListModel> InvoiceList = dbConnection.Query<InvoiceListModel>(getExistingInvoiceQuery, queryParameters);
+                IEnumerable<InvoiceListModel> InvoiceList =
+                    dbConnection.Query<InvoiceListModel>(getExistingInvoiceQuery, queryParameters);
 
                 return InvoiceList;
             }
@@ -58,7 +59,7 @@ namespace Invoice.Repositories
                         I.FirstProductQuantity , I.SecondProductQuantity , I.ThirdProductQuantity , I.FourthProductQuantity , I.FifthProductQuantity , I.SixthProductQuantity , I.SeventhProductQuantity , 
                         I.EighthProductQuantity , I.NinthProductQuantity , i.TenProductQuantity , I.EleventhProductQuantity , I.TwelfthProductQuantity , I.FirstProductPrice , I.SecondProductPrice , I.ThirdProductPrice , 
                         I.FourthProductPrice , I.FifthProductPrice , I.SixthProductPrice , I.SeventhProductPrice , I.EighthProductPrice , I.NinthProductPrice , I.TenProductPrice , I.EleventhProductPrice , 
-                        I.TwelfthProductPrice , I.PriceInWords , I.InvoiceMaker , I.InvoiceAccepted
+                        I.TwelfthProductPrice , I.PriceInWords , I.InvoiceMaker , I.InvoiceAccepted , I.PaymentStatus
                       FROM Invoice I
                       WHERE I.InvoiceNumber = @InvoiceNumber AND InvoiceNumberYearCreation = @InvoiceNumberYearCreation";
 
@@ -68,7 +69,8 @@ namespace Invoice.Repositories
                     InvoiceNumberYearCreation = invoiceNumberYearCreation
                 };
 
-                InvoiceModel invoiceService = dbConnection.QuerySingle<InvoiceModel>(getExistingServiceQuery, queryParameters);
+                InvoiceModel invoiceService =
+                    dbConnection.QuerySingle<InvoiceModel>(getExistingServiceQuery, queryParameters);
 
                 return invoiceService;
             }
@@ -89,13 +91,13 @@ namespace Invoice.Repositories
                           @FifthProductSees, @SixthProductSees, @SeventhProductSees, @EighthProductSees, @NinthProductSees, @TenProductSees, @EleventhProductSees, @TwelfthProductSees, @FirstProductQuantity, @SecondProductQuantity, 
                           @ThirdProductQuantity, @FourthProductQuantity, @FifthProductQuantity, @SixthProductQuantity, @SeventhProductQuantity, @EighthProductQuantity, @NinthProductQuantity, @TenProductQuantity, 
                           @EleventhProductQuantity, @TwelfthProductQuantity, @FirstProductPrice, @SecondProductPrice, @ThirdProductPrice, @FourthProductPrice, @FifthProductPrice, @SixthProductPrice, @SeventhProductPrice,
-                          @EighthProductPrice, @NinthProductPrice, @TenProductPrice, @EleventhProductPrice, @TwelfthProductPrice, @PriceInWords, @InvoiceMaker, @InvoiceAccepted
+                          @EighthProductPrice, @NinthProductPrice, @TenProductPrice, @EleventhProductPrice, @TwelfthProductPrice, @PriceInWords, @InvoiceMaker, @InvoiceAccepted, @PaymentStatus
                      )";
 
                 object queryParameters = new
                 {
                     InvoiceNumber = createNextInvoiceNumber,
-                    InvoiceNumberYearCreation = DateTime.Now.Year, 
+                    InvoiceNumberYearCreation = DateTime.Now.Year,
                     invoiceModel.InvoiceDate,
                     invoiceModel.SerialNumber,
 
@@ -167,7 +169,8 @@ namespace Invoice.Repositories
 
                     invoiceModel.PriceInWords,
                     invoiceModel.InvoiceMaker,
-                    invoiceModel.InvoiceAccepted
+                    invoiceModel.InvoiceAccepted,
+                    invoiceModel.PaymentStatus
                 };
 
                 int affectedRows = dbConnection.Execute(createNewInvoiceCommand, queryParameters);
@@ -191,7 +194,7 @@ namespace Invoice.Repositories
                            SeventhProductName = @SeventhProductName, EighthProductName = @EighthProductName, NinthProductName = @NinthProductName, TenProductName = @TenProductName, EleventhProductName = @EleventhProductName, TwelfthProductName = @TwelfthProductName, FirstProductSees = @FirstProductSees, SecondProductSees = @SecondProductSees, ThirdProductSees = @ThirdProductSees, ForthProductSees = @ForthProductSees, 
                           FifthProductSees = @FifthProductSees, SixthProductSees = @SixthProductSees, SeventhProductSees = @SeventhProductSees, EighthProductSees = @EighthProductSees, NinthProductSees = @NinthProductSees,  TenProductSees = @TenProductSees, EleventhProductSees = @EleventhProductSees, TwelfthProductSees = @TwelfthProductSees, FirstProductQuantity = @FirstProductQuantity, 
                           SecondProductQuantity = @SecondProductQuantity, ThirdProductQuantity = @ThirdProductQuantity, FourthProductQuantity = @FourthProductQuantity, FifthProductQuantity = @FifthProductQuantity,  SixthProductQuantity = @SixthProductQuantity, SeventhProductQuantity = @SeventhProductQuantity, EighthProductQuantity = @EighthProductQuantity, NinthProductQuantity = @NinthProductQuantity, TenProductQuantity = @TenProductQuantity, EleventhProductQuantity = @EleventhProductQuantity, TwelfthProductQuantity = @TwelfthProductQuantity, FirstProductPrice = @FirstProductPrice, 
-                          SecondProductPrice = @SecondProductPrice, ThirdProductPrice = @ThirdProductPrice, FourthProductPrice = @FourthProductPrice, FifthProductPrice = @FifthProductPrice, SixthProductPrice = @SixthProductPrice, SeventhProductPrice = @SeventhProductPrice, EighthProductPrice = @EighthProductPrice, NinthProductPrice = @NinthProductPrice,TenProductPrice = @TenProductPrice,                           EleventhProductPrice = @EleventhProductPrice,  TwelfthProductPrice = @TwelfthProductPrice, PriceInWords = @PriceInWords, InvoiceMaker = @InvoiceMaker, InvoiceAccepted = @InvoiceAccepted
+                          SecondProductPrice = @SecondProductPrice, ThirdProductPrice = @ThirdProductPrice, FourthProductPrice = @FourthProductPrice, FifthProductPrice = @FifthProductPrice, SixthProductPrice = @SixthProductPrice, SeventhProductPrice = @SeventhProductPrice, EighthProductPrice = @EighthProductPrice, NinthProductPrice = @NinthProductPrice,TenProductPrice = @TenProductPrice, EleventhProductPrice = @EleventhProductPrice,  TwelfthProductPrice = @TwelfthProductPrice, PriceInWords = @PriceInWords, InvoiceMaker = @InvoiceMaker, InvoiceAccepted = @InvoiceAccepted, PaymentStatus = @PaymentStatus
                       WHERE InvoiceNumber = @InvoiceNumber AND InvoiceNumberYearCreation = @InvoiceNumberYearCreation
 
                      ";
@@ -270,8 +273,35 @@ namespace Invoice.Repositories
                     updatedInvoice.PriceInWords,
                     updatedInvoice.InvoiceMaker,
                     updatedInvoice.InvoiceAccepted,
+                    updatedInvoice.PaymentStatus,
 
-                    InvoiceNumber = invoiceNumber, 
+                    InvoiceNumber = invoiceNumber,
+                    InvoiceNumberYearCreation = invoiceNumberYearCreation
+                };
+
+                int affectedRows = dbConnection.Execute(updateExistingInvoiceCommand, queryParameters);
+
+                return affectedRows == 1;
+            }
+        }
+
+        public bool UpdateExistingInvoicePaymentStatus(int invoiceNumber, int invoiceNumberYearCreation, string updatePaymentStatus)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string updateExistingInvoiceCommand =
+                    @"Update 'Invoice'
+                        SET PaymentStatus = @PaymentStatus
+                      WHERE InvoiceNumber = @InvoiceNumber AND InvoiceNumberYearCreation = @InvoiceNumberYearCreation
+                     ";
+
+                object queryParameters = new
+                {
+                    PaymentStatus = updatePaymentStatus,
+
+                    InvoiceNumber = invoiceNumber,
                     InvoiceNumberYearCreation = invoiceNumberYearCreation
                 };
 
@@ -299,7 +329,8 @@ namespace Invoice.Repositories
                     InvoiceNumberYearCreation = DateTime.Now.Year
                 };
 
-                int? biggestOrderNumber = dbConnection.QuerySingleOrDefault<int?>(getBiggestInvoiceNumberQuery, queryParameters) ?? 0;
+                int? biggestOrderNumber =
+                    dbConnection.QuerySingleOrDefault<int?>(getBiggestInvoiceNumberQuery, queryParameters) ?? 0;
 
                 return biggestOrderNumber.Value + 1;
             }

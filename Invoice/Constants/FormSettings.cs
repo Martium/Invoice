@@ -49,7 +49,7 @@
             public static int PriceInWords => 75;
             public static int InvoiceMaker => 75;
             public static int InvoiceAccepted => 75;
+            public static int InvoiceIsPaid => 12;
         }
-
     }
 }

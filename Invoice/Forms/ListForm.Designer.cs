@@ -39,11 +39,13 @@ namespace Invoice.Forms
             this.ListOfInvoiceDataGridView = new System.Windows.Forms.DataGridView();
             this.CopyButton = new System.Windows.Forms.Button();
             this.SearchCancelButton = new System.Windows.Forms.Button();
-            this.invoiceListModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.ChangePaymentButton = new System.Windows.Forms.Button();
             this.invoiceNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoiceNumberYearCreationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoiceDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buyerNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.invoiceIsPaidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.invoiceListModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.ListOfInvoiceDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceListModelBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -53,9 +55,9 @@ namespace Invoice.Forms
             this.EditButton.BackColor = System.Drawing.SystemColors.Control;
             this.EditButton.Location = new System.Drawing.Point(205, 938);
             this.EditButton.Name = "EditButton";
-            this.EditButton.Size = new System.Drawing.Size(149, 37);
+            this.EditButton.Size = new System.Drawing.Size(180, 37);
             this.EditButton.TabIndex = 0;
-            this.EditButton.Text = "Keisti esamą sąskaitą";
+            this.EditButton.Text = "Keisti esamą sąskaitą (Peržiūrėti)";
             this.EditButton.UseVisualStyleBackColor = false;
             this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
@@ -102,7 +104,8 @@ namespace Invoice.Forms
             this.invoiceNumberDataGridViewTextBoxColumn,
             this.invoiceNumberYearCreationDataGridViewTextBoxColumn,
             this.invoiceDateDataGridViewTextBoxColumn,
-            this.buyerNameDataGridViewTextBoxColumn});
+            this.buyerNameDataGridViewTextBoxColumn,
+            this.invoiceIsPaidDataGridViewTextBoxColumn});
             this.ListOfInvoiceDataGridView.DataSource = this.invoiceListModelBindingSource;
             this.ListOfInvoiceDataGridView.Location = new System.Drawing.Point(12, 82);
             this.ListOfInvoiceDataGridView.MultiSelect = false;
@@ -111,6 +114,8 @@ namespace Invoice.Forms
             this.ListOfInvoiceDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ListOfInvoiceDataGridView.Size = new System.Drawing.Size(1040, 825);
             this.ListOfInvoiceDataGridView.TabIndex = 4;
+            this.ListOfInvoiceDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ListOfInvoiceDataGridView_CellClick);
+            this.ListOfInvoiceDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.ListOfInvoiceDataGridView_CellFormatting);
             this.ListOfInvoiceDataGridView.Paint += new System.Windows.Forms.PaintEventHandler(this.ListOfInvoiceDataGridView_Paint);
             // 
             // CopyButton
@@ -134,9 +139,16 @@ namespace Invoice.Forms
             this.SearchCancelButton.UseVisualStyleBackColor = true;
             this.SearchCancelButton.Click += new System.EventHandler(this.SearchCancelButton_Click);
             // 
-            // invoiceListModelBindingSource
+            // ChangePaymentButton
             // 
-            this.invoiceListModelBindingSource.DataSource = typeof(Invoice.Models.InvoiceListModel);
+            this.ChangePaymentButton.BackColor = System.Drawing.SystemColors.Control;
+            this.ChangePaymentButton.Location = new System.Drawing.Point(903, 938);
+            this.ChangePaymentButton.Name = "ChangePaymentButton";
+            this.ChangePaymentButton.Size = new System.Drawing.Size(149, 37);
+            this.ChangePaymentButton.TabIndex = 7;
+            this.ChangePaymentButton.Text = "Keisti sąskaitos būseną";
+            this.ChangePaymentButton.UseVisualStyleBackColor = false;
+            this.ChangePaymentButton.Click += new System.EventHandler(this.ChangePaymentButton_Click);
             // 
             // invoiceNumberDataGridViewTextBoxColumn
             // 
@@ -144,22 +156,22 @@ namespace Invoice.Forms
             this.invoiceNumberDataGridViewTextBoxColumn.HeaderText = "Sąskaitos numeris";
             this.invoiceNumberDataGridViewTextBoxColumn.Name = "invoiceNumberDataGridViewTextBoxColumn";
             this.invoiceNumberDataGridViewTextBoxColumn.ReadOnly = true;
-            this.invoiceNumberDataGridViewTextBoxColumn.Width = 120;
             // 
             // invoiceNumberYearCreationDataGridViewTextBoxColumn
             // 
             this.invoiceNumberYearCreationDataGridViewTextBoxColumn.DataPropertyName = "InvoiceNumberYearCreation";
-            this.invoiceNumberYearCreationDataGridViewTextBoxColumn.HeaderText = "Sąskaitos sukurti metai";
+            this.invoiceNumberYearCreationDataGridViewTextBoxColumn.HeaderText = "Sąskaitos sukūrimo metai";
             this.invoiceNumberYearCreationDataGridViewTextBoxColumn.Name = "invoiceNumberYearCreationDataGridViewTextBoxColumn";
             this.invoiceNumberYearCreationDataGridViewTextBoxColumn.ReadOnly = true;
-            this.invoiceNumberYearCreationDataGridViewTextBoxColumn.Width = 150;
+            this.invoiceNumberYearCreationDataGridViewTextBoxColumn.Width = 120;
             // 
             // invoiceDateDataGridViewTextBoxColumn
             // 
             this.invoiceDateDataGridViewTextBoxColumn.DataPropertyName = "InvoiceDate";
-            this.invoiceDateDataGridViewTextBoxColumn.HeaderText = "Pilna Data";
+            this.invoiceDateDataGridViewTextBoxColumn.HeaderText = "Sąskaitos Data";
             this.invoiceDateDataGridViewTextBoxColumn.Name = "invoiceDateDataGridViewTextBoxColumn";
             this.invoiceDateDataGridViewTextBoxColumn.ReadOnly = true;
+            this.invoiceDateDataGridViewTextBoxColumn.Width = 120;
             // 
             // buyerNameDataGridViewTextBoxColumn
             // 
@@ -167,7 +179,19 @@ namespace Invoice.Forms
             this.buyerNameDataGridViewTextBoxColumn.HeaderText = "Pirkėjas";
             this.buyerNameDataGridViewTextBoxColumn.Name = "buyerNameDataGridViewTextBoxColumn";
             this.buyerNameDataGridViewTextBoxColumn.ReadOnly = true;
-            this.buyerNameDataGridViewTextBoxColumn.Width = 620;
+            this.buyerNameDataGridViewTextBoxColumn.Width = 450;
+            // 
+            // invoiceIsPaidDataGridViewTextBoxColumn
+            // 
+            this.invoiceIsPaidDataGridViewTextBoxColumn.DataPropertyName = "PaymentStatus";
+            this.invoiceIsPaidDataGridViewTextBoxColumn.HeaderText = "Būsena";
+            this.invoiceIsPaidDataGridViewTextBoxColumn.Name = "invoiceIsPaidDataGridViewTextBoxColumn";
+            this.invoiceIsPaidDataGridViewTextBoxColumn.ReadOnly = true;
+            this.invoiceIsPaidDataGridViewTextBoxColumn.Width = 200;
+            // 
+            // invoiceListModelBindingSource
+            // 
+            this.invoiceListModelBindingSource.DataSource = typeof(Invoice.Models.InvoiceListModel);
             // 
             // ListForm
             // 
@@ -175,6 +199,7 @@ namespace Invoice.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1064, 1001);
+            this.Controls.Add(this.ChangePaymentButton);
             this.Controls.Add(this.SearchCancelButton);
             this.Controls.Add(this.CopyButton);
             this.Controls.Add(this.ListOfInvoiceDataGridView);
@@ -208,6 +233,8 @@ namespace Invoice.Forms
         private DataGridViewTextBoxColumn invoiceNumberYearCreationDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn invoiceDateDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn buyerNameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn invoiceIsPaidDataGridViewTextBoxColumn;
+        private Button ChangePaymentButton;
     }
 }
 
