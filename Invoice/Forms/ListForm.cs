@@ -15,7 +15,7 @@ namespace Invoice.Forms
 
         private static readonly string SearchTextBoxPlaceholderText = "Įveskite paieškos frazę...";
 
-        private const int _invoiceIsPaidIndex = 4;
+        private const int InvoiceIsPaidIndex = 4;
 
         private bool _searchActive;
 
@@ -140,15 +140,15 @@ namespace Invoice.Forms
         {
             foreach (DataGridViewRow row in ListOfInvoiceDataGridView.Rows)
             {
-                row.DefaultCellStyle.BackColor = row.Cells[_invoiceIsPaidIndex].Value.ToString() == "Sumokėta" ? Color.Chartreuse : Color.Red;
+                row.DefaultCellStyle.BackColor = row.Cells[InvoiceIsPaidIndex].Value.ToString() == "Atsiskaityta" ? Color.Chartreuse : Color.Red;
             }
         }
 
         private void ListOfInvoiceDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            string paymentStatus = ListOfInvoiceDataGridView.SelectedRows[0].Cells[_invoiceIsPaidIndex].Value.ToString();
+            string paymentStatus = ListOfInvoiceDataGridView.SelectedRows[0].Cells[InvoiceIsPaidIndex].Value.ToString();
 
-            this.BackColor = paymentStatus == "Sumokėta" ? Color.Chartreuse : Color.Red;
+            this.BackColor = paymentStatus == "Atsiskaityta" ? Color.Chartreuse : Color.Red;
         }
 
         private void HideListAndOpenInvoiceForm(Form invoiceForm)
