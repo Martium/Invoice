@@ -263,14 +263,7 @@ namespace Invoice.Forms
         {
             string paymentStatus = ListOfInvoiceDataGridView.SelectedRows[0].Cells[InvoiceIsPaidIndex].Value.ToString();
 
-            if (paymentStatus == "Atsiskaityta")
-            {
-                this.BackColor = Color.Chartreuse;
-            }
-            else
-            {
-                this.BackColor = Color.Red;
-            }
+            this.BackColor = paymentStatus == "Atsiskaityta" ? Color.Chartreuse : Color.Red;
         }
     }
 }

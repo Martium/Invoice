@@ -290,7 +290,7 @@ namespace Invoice.Forms
                     //this.Icon = Properties.Resources.CreateIcon;
                     break;
                 case InvoiceOperations.Edit:
-                    this.Text = "Esamos Sąskaitos faktūros keitimas";
+                    this.Text = "Esamos Sąskaitos faktūros keitimas (Peržiūrėti)";
                     //this.Icon = Properties.Resources.EditIcon;
                     break;
                 case InvoiceOperations.Copy:
@@ -441,6 +441,15 @@ namespace Invoice.Forms
                 PriceInWordsRichTextBox.Text = invoiceModel.PriceInWords;
                 InvoiceMakerRichTextBox.Text = invoiceModel.InvoiceMaker;
                 InvoiceAcceptedRichTextBox.Text = invoiceModel.InvoiceAccepted;
+
+                if (invoiceModel.InvoiceIsPaid == "Atsiskaityta" && _invoiceOperations == InvoiceOperations.Edit)
+                {
+                    this.BackColor = Color.Chartreuse;
+                }
+                else if(_invoiceOperations == InvoiceOperations.Edit)
+                {
+                    this.BackColor = Color.Red;
+                }
             }
         }
 
