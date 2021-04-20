@@ -167,7 +167,7 @@ namespace Invoice.Forms
 
         }
 
-        private void FillMoneyRecepitForm()
+        private void FillMoneyReceiptForm()
         {
 
         }

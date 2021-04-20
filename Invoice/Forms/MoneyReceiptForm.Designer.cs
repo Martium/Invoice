@@ -1,7 +1,7 @@
 ﻿
 namespace Invoice.Forms
 {
-    partial class MoneyReceipitForm
+    partial class MoneyReceiptForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@ namespace Invoice.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoneyReceipitForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoneyReceiptForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.SellerInfoGuideLabel = new System.Windows.Forms.Label();
             this.BuyerInfoGuideLabel = new System.Windows.Forms.Label();
