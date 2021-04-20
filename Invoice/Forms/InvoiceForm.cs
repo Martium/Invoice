@@ -502,6 +502,8 @@ namespace Invoice.Forms
                 {
                     this.BackColor = Color.Red;
                 }
+
+                CalculateButton_Click(this, new EventArgs());
             }
         }
 
