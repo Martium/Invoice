@@ -134,19 +134,35 @@ namespace Invoice.Forms
 
         private void SaveToPdf_Click(object sender, EventArgs e)
         {
+            CalculateButton_Click(this, new EventArgs());
+
             CaptureInvoiceFormScreen();
 
-            PdfWriter newInvoicePdfWriter = new PdfWriter($"{AppConfiguration.PdfFolder}\\Saskaitos fakturos nr.{InvoiceNumberRichTextBox.Text} {BuyerNameRichTextBox.Text}.pdf");
+            PdfWriter newInvoicePdfWriter =
+                new PdfWriter(
+                    $"{AppConfiguration.PdfFolder}\\Saskaitos fakturos nr.{InvoiceNumberRichTextBox.Text} {BuyerNameRichTextBox.Text}.pdf");
             PdfDocument newInvoicePdfDocument = new PdfDocument(newInvoicePdfWriter);
             Document newInvoiceDocument = new Document(newInvoicePdfDocument);
 
             var convertImageToByteArray = ConvertImageToByteArray(_InvoiceMemoryImage);
-            var newInvoiceImage = new iText.Layout.Element.Image(ImageDataFactory.Create(convertImageToByteArray)).SetTextAlignment(TextAlignment.CENTER);
+            var newInvoiceImage =
+                new iText.Layout.Element.Image(ImageDataFactory.Create(convertImageToByteArray)).SetTextAlignment(
+                    TextAlignment.CENTER);
 
             newInvoiceDocument.Add(newInvoiceImage);
+
+            DialogResult dialogResult = _messageDialogService.ShowChoiceMessage("Ar norite suformuoti Sąskaitos kvitą");
+
+            if (dialogResult == DialogResult.OK)
+            {
+                SaveMoneyReceiptFormToPdf(newInvoiceDocument);
+            }
+
             newInvoiceDocument.Close();
 
             _messageDialogService.ShowInfoMessage("Sąskaitos faktūros anketa išsaugota į pdf failą");
+
+            SaveButton_Click(this, new EventArgs());
             this.Close();
         }
 
@@ -164,7 +180,38 @@ namespace Invoice.Forms
 
             TotalPriceWithPvmRichTextBox.Text = _numberService
                 .CalculateTotalPriceWithPvm(ProductTotalPriceRichTextBox, PvmPriceRichTextBox).ToString();
+        }
 
+        private void SaveMoneyReceiptFormToPdf(Document newInvoiceDocument)
+        {
+            var moneyReceiptForm = new MoneyReceiptForm();
+
+            MoneyReceiptModel moneyReceiptInfo = new MoneyReceiptModel()
+            {
+                SellerInfo = SellerNameRichTextBox.Text,
+                SellerFirmCode = SellerFirmCodeRichTextBox.Text,
+                SerialNumber = SerialNumberRichTextBox.Text,
+                InvoiceNumber = InvoiceNumberRichTextBox.Text,
+                InvoiceDate = InvoiceDateRichTextBox.Text,
+                AllProducts =
+                    $@"{FirstProductNameRichTextBox.Text}, {FirstProductQuantityRichTextBox.Text} {FirstProductSeesRichTextBox.Text}, {FirstProductPriceRichTextBox.Text} EUR, {SecondProductNameRichTextBox.Text}, {SecondProductQuantityRichTextBox.Text} {SecondProductSeesRichTextBox.Text}, {SecondProductPriceRichTextBox.Text} EUR, {ThirdProductNameRichTextBox.Text}, {ThirdProductQuantityRichTextBox.Text} {ThirdProductSeesRichTextBox.Text}, {ThirdProductPriceRichTextBox.Text} EUR, {FourthProductNameRichTextBox.Text}, {FourthProductQuantityRichTextBox.Text} {FourthProductSeesRichTextBox.Text}, {FourthProductPriceRichTextBox.Text} EUR,
+{FifthProductNameRichTextBox.Text}, {FifthProductQuantityRichTextBox.Text} {FifthProductSeesRichTextBox.Text}, {FifthProductPriceRichTextBox.Text} EUR, {SixthProductNameRichTextBox.Text}, {SixthProductQuantityRichTextBox.Text} {SixthProductSeesRichTextBox.Text}, {SixthProductPriceRichTextBox.Text} EUR, {SeventhProductNameRichTextBox.Text}, {SeventhProductQuantityRichTextBox.Text} {SeventhProductSeesRichTextBox.Text}, {SeventhProductPriceRichTextBox.Text} EUR, {EighthProductNameRichTextBox.Text}, {EighthProductQuantityRichTextBox.Text} {EighthProductSeesRichTextBox.Text}, {EighthProductPriceRichTextBox.Text} EuR, 
+{NinthProductNameRichTextBox.Text}, {NinthProductQuantityRichTextBox.Text} {NinthProductSeesRichTextBox.Text} {NinthProductPriceRichTextBox.Text} EUR, {TenProductNameRichTextBox.Text}, {TenProductQuantityRichTextBox.Text} {TenProductSeesRichTextBox.Text}, {TenProductPriceRichTextBox.Text} EUR, {EleventhProductNameRichTextBox.Text}, {EleventhProductQuantityRichTextBox.Text} {EleventhProductSeesRichTextBox.Text}, {EleventhProductPriceRichTextBox.Text} EUR, {TwelfthProductNameRichTextBox.Text}, {TwelfthProductQuantityRichTextBox.Text} {TwelfthProductSeesRichTextBox.Text}, {TwelfthProductPriceRichTextBox.Text} EUR",
+                PriceInWords = PriceInWordsRichTextBox.Text,
+                InvoiceMaker = InvoiceMakerRichTextBox.Text
+            };
+
+            moneyReceiptForm.Show();
+
+            var convertMoneyReceiptImageToByteArray =
+                ConvertImageToByteArray(moneyReceiptForm.SaveMoneyReceiptForm(moneyReceiptInfo));
+
+            var newMoneyReceiptImage =
+                new iText.Layout.Element.Image(ImageDataFactory.Create(convertMoneyReceiptImageToByteArray)).SetTextAlignment(
+                    TextAlignment.CENTER);
+
+            newInvoiceDocument.Add(newMoneyReceiptImage);
+            moneyReceiptForm.Close();
         }
 
         private InvoiceModel GetAllInfoFromRichTextBox()
@@ -245,7 +292,7 @@ namespace Invoice.Forms
                 PriceInWords = PriceInWordsRichTextBox.Text,
                 InvoiceMaker = InvoiceMakerRichTextBox.Text,
                 InvoiceAccepted = InvoiceAcceptedRichTextBox.Text,
-                
+
                 PaymentStatus = _paymentStatus
             };
             return invoiceModel;
@@ -451,10 +498,12 @@ namespace Invoice.Forms
                     _paymentStatus = "Atsiskaityta";
 
                 }
-                else if(_invoiceOperations == InvoiceOperations.Edit)
+                else if (_invoiceOperations == InvoiceOperations.Edit)
                 {
                     this.BackColor = Color.Red;
                 }
+
+                CalculateButton_Click(this, new EventArgs());
             }
         }
 
@@ -544,13 +593,13 @@ namespace Invoice.Forms
 
             PrintInvoicePanel.DrawToBitmap(
                 _InvoiceMemoryImage,
-                new Rectangle(0, 0,PrintInvoicePanel.Width, PrintInvoicePanel.Height));
+                new Rectangle(0, 0, PrintInvoicePanel.Width, PrintInvoicePanel.Height));
         }
 
-        public static byte[] ConvertImageToByteArray(System.Drawing.Image img)
+        private static byte[] ConvertImageToByteArray(System.Drawing.Image img)
         {
             ImageConverter converter = new ImageConverter();
-            return (byte[])converter.ConvertTo(img, typeof(byte[]));
+            return (byte[]) converter.ConvertTo(img, typeof(byte[]));
         }
     }
 }

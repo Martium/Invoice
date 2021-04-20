@@ -171,7 +171,6 @@ namespace Invoice.Repositories
 
             SQLiteCommand fillInvoiceTestingInfoTableCommand = new SQLiteCommand(fillInvoiceTestingInfo, dbConnection);
             fillInvoiceTestingInfoTableCommand.ExecuteNonQuery();
-            
         }
 
         private string GetDropTableQuery(string tableName)

@@ -172,7 +172,7 @@ namespace Invoice.Forms
             {
                 SearchCancelButton.Enabled = true;
             }
-
+           
             IEnumerable<InvoiceListModel> invoiceListModels = _invoiceRepository.GetInvoiceList(searchPhrase);
 
             ToggleExistingListManaging(enabled: invoiceListModels.Any(), searchPhrase);
@@ -180,6 +180,8 @@ namespace Invoice.Forms
             invoiceListModelBindingSource.DataSource = invoiceListModels;
 
             ListOfInvoiceDataGridView.DataSource = invoiceListModelBindingSource;
+
+            ChangePaymentButton.Enabled = ListOfInvoiceDataGridView.Rows.Count != 0;
 
             ChangeFormBackRoundColorByPaymentStatus();
         }
@@ -252,7 +254,7 @@ namespace Invoice.Forms
             int invoiceNumberYearCreation = GetSelectedOrderCreationYear();
             string paymentStatus = ListOfInvoiceDataGridView.SelectedRows[0].Cells[InvoiceIsPaidIndex].Value.ToString();
 
-            DialogResult dialogResult = _messageDialogService.ShowPaymentStatusSaveChoiceMessage("Ar tikrai norite pakeisti statusą");
+            DialogResult dialogResult = _messageDialogService.ShowChoiceMessage("Ar tikrai norite pakeisti statusą");
 
             if (dialogResult == DialogResult.OK)
             {

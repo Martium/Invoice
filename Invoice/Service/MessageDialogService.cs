@@ -15,7 +15,7 @@ namespace Invoice.Service
             MessageBox.Show(message, "Klaidos pranešimas", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        public DialogResult ShowPaymentStatusSaveChoiceMessage(string message)
+        public DialogResult ShowChoiceMessage(string message)
         {
             DialogResult dialogResult = MessageBox.Show(message, "Saugojimo Pranešimas", MessageBoxButtons.OKCancel);
 
