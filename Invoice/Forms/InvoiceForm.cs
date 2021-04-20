@@ -134,6 +134,8 @@ namespace Invoice.Forms
 
         private void SaveToPdf_Click(object sender, EventArgs e)
         {
+            CalculateButton_Click(this, new EventArgs());
+
             CaptureInvoiceFormScreen();
 
             PdfWriter newInvoicePdfWriter =
@@ -159,6 +161,8 @@ namespace Invoice.Forms
             newInvoiceDocument.Close();
 
             _messageDialogService.ShowInfoMessage("Sąskaitos faktūros anketa išsaugota į pdf failą");
+
+            SaveButton_Click(this, new EventArgs());
             this.Close();
         }
 
