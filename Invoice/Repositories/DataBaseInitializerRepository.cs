@@ -34,6 +34,7 @@ namespace Invoice.Repositories
                 dbConnection.Open();
 
                 CreateInvoiceTable(dbConnection);
+                CreateSellerInfoTable(dbConnection);
 
 #if DEBUG
                 FillInvoiceTestingInfo(dbConnection);
@@ -147,6 +148,31 @@ namespace Invoice.Repositories
 
             SQLiteCommand createInvoiceTableCommand = new SQLiteCommand(createInvoiceTableQuery, dbConnection);
             createInvoiceTableCommand.ExecuteNonQuery();
+        }
+
+        private void CreateSellerInfoTable(SQLiteConnection dbConnection)
+        {
+            string dropSellerInfoTableQuery = GetDropTableQuery("SellerInfo");
+            SQLiteCommand dropASellerInfoTableCommand = new SQLiteCommand(dropSellerInfoTableQuery, dbConnection);
+            dropASellerInfoTableCommand.ExecuteNonQuery();
+
+            string createSellerInfoTableQuery =
+                $@"
+                   CREATE TABLE [SellerInfo] (
+                      [SerialNumber] [nvarchar]({FormSettings.TextBoxLengths.SerialNumber}) NULL,
+                      [SellerName] [nvarchar]({FormSettings.TextBoxLengths.SellerName}) NULL,
+                      [SellerFirmCode] [nvarchar]({FormSettings.TextBoxLengths.SellerFirmCode}) NULL,
+                      [SellerPvmCode] [nvarchar]({FormSettings.TextBoxLengths.SellerPvmCode}) NULL,
+                      [SellerAddress] [nvarchar]({FormSettings.TextBoxLengths.SellerAddress}) NULL,
+                      [SellerPhoneNumber] [nvarchar]({FormSettings.TextBoxLengths.SellerPhoneNumber}) NULL,
+                      [SellerBank] [nvarchar]({FormSettings.TextBoxLengths.SellerBank}) NULL,
+                      [SellerBankAccountNumber] [nvarchar]({FormSettings.TextBoxLengths.SellerBankAccountNumber}) NULL,
+                      [SellerEmailAddress] [nvarchar]({FormSettings.TextBoxLengths.SellerEmailAddress}) NULL
+                   );
+                ";
+
+            SQLiteCommand createSellerInfoTableCommand = new SQLiteCommand(createSellerInfoTableQuery, dbConnection);
+            createSellerInfoTableCommand.ExecuteNonQuery();
         }
 
         private void FillInvoiceTestingInfo(SQLiteConnection dbConnection)

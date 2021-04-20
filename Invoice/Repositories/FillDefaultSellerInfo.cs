@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Invoice.Repositories
+﻿namespace Invoice.Repositories
 {
    public class FillDefaultSellerInfo
    {
