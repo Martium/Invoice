@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
+using Invoice.Models;
 
 namespace Invoice.Forms
 {
@@ -15,6 +8,18 @@ namespace Invoice.Forms
         public MoneyReceiptForm()
         {
             InitializeComponent();
+        }
+
+        public void FillMoneyReceiptForm(MoneyReceiptModel moneyReceiptInfo)
+        {
+            SellerInfoLabel.Text = moneyReceiptInfo.SellerInfo;
+            SellerFirmCodeLabel.Text = moneyReceiptInfo.SellerFirmCode;
+            SerialNumberLabel.Text = moneyReceiptInfo.SerialNumber;
+            InvoiceNumberLabel.Text = moneyReceiptInfo.InvoiceNumber;
+            InvoiceDateLabel.Text = moneyReceiptInfo.InvoiceDate;
+            AllProductsLabel.Text = moneyReceiptInfo.AllProducts;
+            PriceInWordsLabel.Text = moneyReceiptInfo.PriceInWords;
+            InvoiceMakerLabel.Text = moneyReceiptInfo.InvoiceMaker;
         }
     }
 }

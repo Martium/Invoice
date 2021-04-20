@@ -30,54 +30,67 @@ namespace Invoice.Forms
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoneyReceiptForm));
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.PrintMoneyReceiptPanel = new System.Windows.Forms.Panel();
+            this.SellerFirmCodeLabel = new System.Windows.Forms.Label();
             this.SellerInfoGuideLabel = new System.Windows.Forms.Label();
             this.BuyerInfoGuideLabel = new System.Windows.Forms.Label();
-            this.SellerAcceptedMoneyLabel = new System.Windows.Forms.Label();
+            this.InvoiceMakerLabel = new System.Windows.Forms.Label();
             this.SellerAcceptedMoneyInfoLabel = new System.Windows.Forms.Label();
             this.BuyerPaidLabel = new System.Windows.Forms.Label();
             this.BuyerPaidInfoLabel = new System.Windows.Forms.Label();
             this.AdditionalLinksAboutProductLabel = new System.Windows.Forms.Label();
             this.additionalInfoPriceInWordsLabel = new System.Windows.Forms.Label();
-            this.PaidPriceInWordsLabel = new System.Windows.Forms.Label();
+            this.PriceInWordsLabel = new System.Windows.Forms.Label();
             this.PaidPriceInfoLabel = new System.Windows.Forms.Label();
-            this.ProductLabel = new System.Windows.Forms.Label();
+            this.AllProductsLabel = new System.Windows.Forms.Label();
             this.BuyerProductInfoLabel = new System.Windows.Forms.Label();
-            this.DateLabel = new System.Windows.Forms.Label();
+            this.InvoiceDateLabel = new System.Windows.Forms.Label();
             this.InvoiceNumberInfoLabel = new System.Windows.Forms.Label();
             this.SerialNameInfoLabel = new System.Windows.Forms.Label();
             this.MoneyAcceptedRecepitInfoLabel = new System.Windows.Forms.Label();
             this.SellerLabel = new System.Windows.Forms.Label();
             this.SellerInfoLabel = new System.Windows.Forms.Label();
-            this.SellerFirmCodeLabel = new System.Windows.Forms.Label();
-            this.panel1.SuspendLayout();
+            this.SerialNumberLabel = new System.Windows.Forms.Label();
+            this.InvoiceNumberLabel = new System.Windows.Forms.Label();
+            this.PrintMoneyReceiptPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // PrintMoneyReceiptPanel
             // 
-            this.panel1.Controls.Add(this.SellerFirmCodeLabel);
-            this.panel1.Controls.Add(this.SellerInfoGuideLabel);
-            this.panel1.Controls.Add(this.BuyerInfoGuideLabel);
-            this.panel1.Controls.Add(this.SellerAcceptedMoneyLabel);
-            this.panel1.Controls.Add(this.SellerAcceptedMoneyInfoLabel);
-            this.panel1.Controls.Add(this.BuyerPaidLabel);
-            this.panel1.Controls.Add(this.BuyerPaidInfoLabel);
-            this.panel1.Controls.Add(this.AdditionalLinksAboutProductLabel);
-            this.panel1.Controls.Add(this.additionalInfoPriceInWordsLabel);
-            this.panel1.Controls.Add(this.PaidPriceInWordsLabel);
-            this.panel1.Controls.Add(this.PaidPriceInfoLabel);
-            this.panel1.Controls.Add(this.ProductLabel);
-            this.panel1.Controls.Add(this.BuyerProductInfoLabel);
-            this.panel1.Controls.Add(this.DateLabel);
-            this.panel1.Controls.Add(this.InvoiceNumberInfoLabel);
-            this.panel1.Controls.Add(this.SerialNameInfoLabel);
-            this.panel1.Controls.Add(this.MoneyAcceptedRecepitInfoLabel);
-            this.panel1.Controls.Add(this.SellerLabel);
-            this.panel1.Controls.Add(this.SellerInfoLabel);
-            this.panel1.Location = new System.Drawing.Point(133, 86);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(820, 440);
-            this.panel1.TabIndex = 0;
+            this.PrintMoneyReceiptPanel.Controls.Add(this.InvoiceNumberLabel);
+            this.PrintMoneyReceiptPanel.Controls.Add(this.SerialNumberLabel);
+            this.PrintMoneyReceiptPanel.Controls.Add(this.SellerFirmCodeLabel);
+            this.PrintMoneyReceiptPanel.Controls.Add(this.SellerInfoGuideLabel);
+            this.PrintMoneyReceiptPanel.Controls.Add(this.BuyerInfoGuideLabel);
+            this.PrintMoneyReceiptPanel.Controls.Add(this.InvoiceMakerLabel);
+            this.PrintMoneyReceiptPanel.Controls.Add(this.SellerAcceptedMoneyInfoLabel);
+            this.PrintMoneyReceiptPanel.Controls.Add(this.BuyerPaidLabel);
+            this.PrintMoneyReceiptPanel.Controls.Add(this.BuyerPaidInfoLabel);
+            this.PrintMoneyReceiptPanel.Controls.Add(this.AdditionalLinksAboutProductLabel);
+            this.PrintMoneyReceiptPanel.Controls.Add(this.additionalInfoPriceInWordsLabel);
+            this.PrintMoneyReceiptPanel.Controls.Add(this.PriceInWordsLabel);
+            this.PrintMoneyReceiptPanel.Controls.Add(this.PaidPriceInfoLabel);
+            this.PrintMoneyReceiptPanel.Controls.Add(this.AllProductsLabel);
+            this.PrintMoneyReceiptPanel.Controls.Add(this.BuyerProductInfoLabel);
+            this.PrintMoneyReceiptPanel.Controls.Add(this.InvoiceDateLabel);
+            this.PrintMoneyReceiptPanel.Controls.Add(this.InvoiceNumberInfoLabel);
+            this.PrintMoneyReceiptPanel.Controls.Add(this.SerialNameInfoLabel);
+            this.PrintMoneyReceiptPanel.Controls.Add(this.MoneyAcceptedRecepitInfoLabel);
+            this.PrintMoneyReceiptPanel.Controls.Add(this.SellerLabel);
+            this.PrintMoneyReceiptPanel.Controls.Add(this.SellerInfoLabel);
+            this.PrintMoneyReceiptPanel.Location = new System.Drawing.Point(133, 86);
+            this.PrintMoneyReceiptPanel.Name = "PrintMoneyReceiptPanel";
+            this.PrintMoneyReceiptPanel.Size = new System.Drawing.Size(820, 440);
+            this.PrintMoneyReceiptPanel.TabIndex = 0;
+            // 
+            // SellerFirmCodeLabel
+            // 
+            this.SellerFirmCodeLabel.AutoSize = true;
+            this.SellerFirmCodeLabel.Location = new System.Drawing.Point(50, 99);
+            this.SellerFirmCodeLabel.Name = "SellerFirmCodeLabel";
+            this.SellerFirmCodeLabel.Size = new System.Drawing.Size(103, 13);
+            this.SellerFirmCodeLabel.TabIndex = 31;
+            this.SellerFirmCodeLabel.Text = "SellerFirmCodeLabel";
             // 
             // SellerInfoGuideLabel
             // 
@@ -97,29 +110,30 @@ namespace Invoice.Forms
             this.BuyerInfoGuideLabel.TabIndex = 29;
             this.BuyerInfoGuideLabel.Text = "( pirkėjo parašas vardas ir pavardė )";
             // 
-            // SellerAcceptedMoneyLabel
+            // InvoiceMakerLabel
             // 
-            this.SellerAcceptedMoneyLabel.AutoSize = true;
-            this.SellerAcceptedMoneyLabel.Location = new System.Drawing.Point(132, 380);
-            this.SellerAcceptedMoneyLabel.Name = "SellerAcceptedMoneyLabel";
-            this.SellerAcceptedMoneyLabel.Size = new System.Drawing.Size(679, 13);
-            this.SellerAcceptedMoneyLabel.TabIndex = 28;
-            this.SellerAcceptedMoneyLabel.Text = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _" +
-    " _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\r\n";
+            this.InvoiceMakerLabel.AutoSize = true;
+            this.InvoiceMakerLabel.Location = new System.Drawing.Point(136, 380);
+            this.InvoiceMakerLabel.Name = "InvoiceMakerLabel";
+            this.InvoiceMakerLabel.Size = new System.Drawing.Size(574, 13);
+            this.InvoiceMakerLabel.TabIndex = 28;
+            this.InvoiceMakerLabel.Text = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _" +
+    " _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \r\n";
             // 
             // SellerAcceptedMoneyInfoLabel
             // 
             this.SellerAcceptedMoneyInfoLabel.AutoSize = true;
+            this.SellerAcceptedMoneyInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SellerAcceptedMoneyInfoLabel.Location = new System.Drawing.Point(43, 380);
             this.SellerAcceptedMoneyInfoLabel.Name = "SellerAcceptedMoneyInfoLabel";
-            this.SellerAcceptedMoneyInfoLabel.Size = new System.Drawing.Size(74, 13);
+            this.SellerAcceptedMoneyInfoLabel.Size = new System.Drawing.Size(87, 13);
             this.SellerAcceptedMoneyInfoLabel.TabIndex = 27;
             this.SellerAcceptedMoneyInfoLabel.Text = "Pinigus gavau";
             // 
             // BuyerPaidLabel
             // 
             this.BuyerPaidLabel.AutoSize = true;
-            this.BuyerPaidLabel.Location = new System.Drawing.Point(132, 330);
+            this.BuyerPaidLabel.Location = new System.Drawing.Point(118, 330);
             this.BuyerPaidLabel.Name = "BuyerPaidLabel";
             this.BuyerPaidLabel.Size = new System.Drawing.Size(679, 13);
             this.BuyerPaidLabel.TabIndex = 26;
@@ -129,9 +143,10 @@ namespace Invoice.Forms
             // BuyerPaidInfoLabel
             // 
             this.BuyerPaidInfoLabel.AutoSize = true;
+            this.BuyerPaidInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BuyerPaidInfoLabel.Location = new System.Drawing.Point(43, 330);
             this.BuyerPaidInfoLabel.Name = "BuyerPaidInfoLabel";
-            this.BuyerPaidInfoLabel.Size = new System.Drawing.Size(60, 13);
+            this.BuyerPaidInfoLabel.Size = new System.Drawing.Size(69, 13);
             this.BuyerPaidInfoLabel.TabIndex = 25;
             this.BuyerPaidInfoLabel.Text = "Sumokėjau";
             // 
@@ -153,51 +168,52 @@ namespace Invoice.Forms
             this.additionalInfoPriceInWordsLabel.TabIndex = 23;
             this.additionalInfoPriceInWordsLabel.Text = "( už prekes ar paslaugas sumokėta suma žodžiu )";
             // 
-            // PaidPriceInWordsLabel
+            // PriceInWordsLabel
             // 
-            this.PaidPriceInWordsLabel.AutoSize = true;
-            this.PaidPriceInWordsLabel.Location = new System.Drawing.Point(132, 277);
-            this.PaidPriceInWordsLabel.Name = "PaidPriceInWordsLabel";
-            this.PaidPriceInWordsLabel.Size = new System.Drawing.Size(679, 13);
-            this.PaidPriceInWordsLabel.TabIndex = 22;
-            this.PaidPriceInWordsLabel.Text = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _" +
-    " _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\r\n";
+            this.PriceInWordsLabel.AutoSize = true;
+            this.PriceInWordsLabel.Location = new System.Drawing.Point(145, 277);
+            this.PriceInWordsLabel.Name = "PriceInWordsLabel";
+            this.PriceInWordsLabel.Size = new System.Drawing.Size(364, 13);
+            this.PriceInWordsLabel.TabIndex = 22;
+            this.PriceInWordsLabel.Text = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _";
             // 
             // PaidPriceInfoLabel
             // 
             this.PaidPriceInfoLabel.AutoSize = true;
+            this.PaidPriceInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PaidPriceInfoLabel.Location = new System.Drawing.Point(43, 277);
             this.PaidPriceInfoLabel.Name = "PaidPriceInfoLabel";
-            this.PaidPriceInfoLabel.Size = new System.Drawing.Size(83, 13);
+            this.PaidPriceInfoLabel.Size = new System.Drawing.Size(96, 13);
             this.PaidPriceInfoLabel.TabIndex = 21;
             this.PaidPriceInfoLabel.Text = "Sumokėta suma";
             // 
-            // ProductLabel
+            // AllProductsLabel
             // 
-            this.ProductLabel.AutoSize = true;
-            this.ProductLabel.Location = new System.Drawing.Point(50, 205);
-            this.ProductLabel.Name = "ProductLabel";
-            this.ProductLabel.Size = new System.Drawing.Size(763, 39);
-            this.ProductLabel.TabIndex = 20;
-            this.ProductLabel.Text = resources.GetString("ProductLabel.Text");
+            this.AllProductsLabel.AutoSize = true;
+            this.AllProductsLabel.Location = new System.Drawing.Point(50, 205);
+            this.AllProductsLabel.Name = "AllProductsLabel";
+            this.AllProductsLabel.Size = new System.Drawing.Size(763, 39);
+            this.AllProductsLabel.TabIndex = 20;
+            this.AllProductsLabel.Text = resources.GetString("AllProductsLabel.Text");
             // 
             // BuyerProductInfoLabel
             // 
             this.BuyerProductInfoLabel.AutoSize = true;
+            this.BuyerProductInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BuyerProductInfoLabel.Location = new System.Drawing.Point(48, 192);
             this.BuyerProductInfoLabel.Name = "BuyerProductInfoLabel";
-            this.BuyerProductInfoLabel.Size = new System.Drawing.Size(68, 13);
+            this.BuyerProductInfoLabel.Size = new System.Drawing.Size(80, 13);
             this.BuyerProductInfoLabel.TabIndex = 19;
             this.BuyerProductInfoLabel.Text = "Sumokėti už ";
             // 
-            // DateLabel
+            // InvoiceDateLabel
             // 
-            this.DateLabel.AutoSize = true;
-            this.DateLabel.Location = new System.Drawing.Point(215, 162);
-            this.DateLabel.Name = "DateLabel";
-            this.DateLabel.Size = new System.Drawing.Size(355, 13);
-            this.DateLabel.TabIndex = 18;
-            this.DateLabel.Text = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _";
+            this.InvoiceDateLabel.AutoSize = true;
+            this.InvoiceDateLabel.Location = new System.Drawing.Point(342, 157);
+            this.InvoiceDateLabel.Name = "InvoiceDateLabel";
+            this.InvoiceDateLabel.Size = new System.Drawing.Size(30, 13);
+            this.InvoiceDateLabel.TabIndex = 18;
+            this.InvoiceDateLabel.Text = "Date";
             // 
             // InvoiceNumberInfoLabel
             // 
@@ -241,56 +257,67 @@ namespace Invoice.Forms
             // SellerInfoLabel
             // 
             this.SellerInfoLabel.AutoSize = true;
-            this.SellerInfoLabel.Location = new System.Drawing.Point(323, 33);
+            this.SellerInfoLabel.Location = new System.Drawing.Point(342, 30);
             this.SellerInfoLabel.Name = "SellerInfoLabel";
-            this.SellerInfoLabel.Size = new System.Drawing.Size(121, 13);
+            this.SellerInfoLabel.Size = new System.Drawing.Size(51, 13);
             this.SellerInfoLabel.TabIndex = 0;
-            this.SellerInfoLabel.Text = "_ _ _ _ _ _ _ _ _ _ _ _ _\r\n";
+            this.SellerInfoLabel.Text = "SellerInfo\r\n";
             // 
-            // SellerFirmCodeLabel
+            // SerialNumberLabel
             // 
-            this.SellerFirmCodeLabel.AutoSize = true;
-            this.SellerFirmCodeLabel.Location = new System.Drawing.Point(50, 99);
-            this.SellerFirmCodeLabel.Name = "SellerFirmCodeLabel";
-            this.SellerFirmCodeLabel.Size = new System.Drawing.Size(103, 13);
-            this.SellerFirmCodeLabel.TabIndex = 31;
-            this.SellerFirmCodeLabel.Text = "SellerFirmCodeLabel";
+            this.SerialNumberLabel.AutoSize = true;
+            this.SerialNumberLabel.Location = new System.Drawing.Point(323, 126);
+            this.SerialNumberLabel.Name = "SerialNumberLabel";
+            this.SerialNumberLabel.Size = new System.Drawing.Size(70, 13);
+            this.SerialNumberLabel.TabIndex = 32;
+            this.SerialNumberLabel.Text = "SerialNumber";
             // 
-            // MoneyRecepitForm
+            // InvoiceNumberLabel
+            // 
+            this.InvoiceNumberLabel.AutoSize = true;
+            this.InvoiceNumberLabel.Location = new System.Drawing.Point(427, 126);
+            this.InvoiceNumberLabel.Name = "InvoiceNumberLabel";
+            this.InvoiceNumberLabel.Size = new System.Drawing.Size(79, 13);
+            this.InvoiceNumberLabel.TabIndex = 33;
+            this.InvoiceNumberLabel.Text = "InvoiceNumber";
+            // 
+            // MoneyReceiptForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1040, 579);
-            this.Controls.Add(this.panel1);
-            this.Name = "MoneyRecepitForm";
+            this.Controls.Add(this.PrintMoneyReceiptPanel);
+            this.Name = "MoneyReceiptForm";
             this.Text = "MoneyRecepitForm";
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.PrintMoneyReceiptPanel.ResumeLayout(false);
+            this.PrintMoneyReceiptPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel PrintMoneyReceiptPanel;
         private System.Windows.Forms.Label SellerLabel;
         private System.Windows.Forms.Label SellerInfoLabel;
         private System.Windows.Forms.Label SerialNameInfoLabel;
         private System.Windows.Forms.Label MoneyAcceptedRecepitInfoLabel;
         private System.Windows.Forms.Label InvoiceNumberInfoLabel;
-        private System.Windows.Forms.Label DateLabel;
+        private System.Windows.Forms.Label InvoiceDateLabel;
         private System.Windows.Forms.Label additionalInfoPriceInWordsLabel;
-        private System.Windows.Forms.Label PaidPriceInWordsLabel;
+        private System.Windows.Forms.Label PriceInWordsLabel;
         private System.Windows.Forms.Label PaidPriceInfoLabel;
-        private System.Windows.Forms.Label ProductLabel;
+        private System.Windows.Forms.Label AllProductsLabel;
         private System.Windows.Forms.Label BuyerProductInfoLabel;
         private System.Windows.Forms.Label AdditionalLinksAboutProductLabel;
         private System.Windows.Forms.Label BuyerPaidInfoLabel;
-        private System.Windows.Forms.Label SellerAcceptedMoneyLabel;
+        private System.Windows.Forms.Label InvoiceMakerLabel;
         private System.Windows.Forms.Label SellerAcceptedMoneyInfoLabel;
         private System.Windows.Forms.Label BuyerPaidLabel;
         private System.Windows.Forms.Label SellerInfoGuideLabel;
         private System.Windows.Forms.Label BuyerInfoGuideLabel;
         private System.Windows.Forms.Label SellerFirmCodeLabel;
+        private System.Windows.Forms.Label SerialNumberLabel;
+        private System.Windows.Forms.Label InvoiceNumberLabel;
     }
 }
