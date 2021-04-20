@@ -57,6 +57,7 @@ namespace Invoice.Forms
             // 
             // PrintMoneyReceiptPanel
             // 
+            this.PrintMoneyReceiptPanel.BackColor = System.Drawing.SystemColors.Window;
             this.PrintMoneyReceiptPanel.Controls.Add(this.InvoiceNumberLabel);
             this.PrintMoneyReceiptPanel.Controls.Add(this.SerialNumberLabel);
             this.PrintMoneyReceiptPanel.Controls.Add(this.SellerFirmCodeLabel);

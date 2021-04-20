@@ -148,6 +148,14 @@ namespace Invoice.Forms
                     TextAlignment.CENTER);
 
             newInvoiceDocument.Add(newInvoiceImage);
+
+            DialogResult dialogResult = _messageDialogService.ShowChoiceMessage("Ar norite suformuoti Sąskaitos kvitą");
+
+            if (dialogResult == DialogResult.OK)
+            {
+                SaveMoneyReceiptFormToPdf(newInvoiceDocument);
+            }
+
             newInvoiceDocument.Close();
 
             _messageDialogService.ShowInfoMessage("Sąskaitos faktūros anketa išsaugota į pdf failą");
@@ -168,12 +176,9 @@ namespace Invoice.Forms
 
             TotalPriceWithPvmRichTextBox.Text = _numberService
                 .CalculateTotalPriceWithPvm(ProductTotalPriceRichTextBox, PvmPriceRichTextBox).ToString();
-
-            FillMoneyReceiptForm();
-
         }
 
-        private void FillMoneyReceiptForm()
+        private void SaveMoneyReceiptFormToPdf(Document newInvoiceDocument)
         {
             var moneyReceiptForm = new MoneyReceiptForm();
 
@@ -192,10 +197,17 @@ namespace Invoice.Forms
                 InvoiceMaker = InvoiceMakerRichTextBox.Text
             };
 
-            moneyReceiptForm.FillMoneyReceiptForm(moneyReceiptInfo);
-
             moneyReceiptForm.Show();
 
+            var convertMoneyReceiptImageToByteArray =
+                ConvertImageToByteArray(moneyReceiptForm.SaveMoneyReceiptForm(moneyReceiptInfo));
+
+            var newMoneyReceiptImage =
+                new iText.Layout.Element.Image(ImageDataFactory.Create(convertMoneyReceiptImageToByteArray)).SetTextAlignment(
+                    TextAlignment.CENTER);
+
+            newInvoiceDocument.Add(newMoneyReceiptImage);
+            moneyReceiptForm.Close();
         }
 
         private InvoiceModel GetAllInfoFromRichTextBox()
