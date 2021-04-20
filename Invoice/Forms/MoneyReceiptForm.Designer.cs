@@ -288,6 +288,8 @@ namespace Invoice.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1040, 579);
             this.Controls.Add(this.PrintMoneyReceiptPanel);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "MoneyReceiptForm";
             this.Text = "MoneyRecepitForm";
             this.PrintMoneyReceiptPanel.ResumeLayout(false);
