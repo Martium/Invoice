@@ -6,7 +6,7 @@ namespace Invoice.Forms
 {
     public partial class MoneyReceiptForm : Form
     {
-        private Bitmap _MoneyReceiptMemoryImage;
+        private Bitmap _moneyReceiptMemoryImage;
         public MoneyReceiptForm()
         {
             InitializeComponent();
@@ -25,15 +25,15 @@ namespace Invoice.Forms
 
             CaptureMoneyReceiptFormScreen();
 
-            return _MoneyReceiptMemoryImage;
+            return _moneyReceiptMemoryImage;
         }
 
         private void CaptureMoneyReceiptFormScreen()
         {
-            _MoneyReceiptMemoryImage = new Bitmap(PrintMoneyReceiptPanel.Width, PrintMoneyReceiptPanel.Height);
+            _moneyReceiptMemoryImage = new Bitmap(PrintMoneyReceiptPanel.Width, PrintMoneyReceiptPanel.Height);
 
             PrintMoneyReceiptPanel.DrawToBitmap(
-                _MoneyReceiptMemoryImage,
+                _moneyReceiptMemoryImage,
                 new Rectangle(0, 0, PrintMoneyReceiptPanel.Width, PrintMoneyReceiptPanel.Height));
         }
     }

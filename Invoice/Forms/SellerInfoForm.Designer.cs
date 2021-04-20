@@ -248,6 +248,7 @@ namespace Invoice.Forms
             this.Controls.Add(this.SerialNumberLabel);
             this.MaximizeBox = false;
             this.Name = "SellerInfoForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SellerInfoForm";
             this.ResumeLayout(false);
             this.PerformLayout();
