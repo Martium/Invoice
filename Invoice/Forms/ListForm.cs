@@ -172,7 +172,7 @@ namespace Invoice.Forms
             {
                 SearchCancelButton.Enabled = true;
             }
-
+           
             IEnumerable<InvoiceListModel> invoiceListModels = _invoiceRepository.GetInvoiceList(searchPhrase);
 
             ToggleExistingListManaging(enabled: invoiceListModels.Any(), searchPhrase);
@@ -180,6 +180,15 @@ namespace Invoice.Forms
             invoiceListModelBindingSource.DataSource = invoiceListModels;
 
             ListOfInvoiceDataGridView.DataSource = invoiceListModelBindingSource;
+
+            if (ListOfInvoiceDataGridView.Rows.Count == 0)
+            {
+                ChangePaymentButton.Enabled = false;
+            }
+            else
+            {
+                ChangePaymentButton.Enabled = true;
+            }
 
             ChangeFormBackRoundColorByPaymentStatus();
         }
