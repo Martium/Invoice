@@ -335,5 +335,35 @@ namespace Invoice.Repositories
                 return biggestOrderNumber.Value + 1;
             }
         }
+
+        public bool CreateNewSellerInfo(SellerInfoModel sellerInfo)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string createNewSellerInfoCommand =
+                    $@"INSERT INTO 'SellerInfo'
+                        VALUES ( @SerialNumber, @SellerName, @SellerFirmCode, @SellerPvmCode, @SellerAddress, @SellerPhoneNumber, @SellerBank, @SellerBankAccountNumber, @SellerEmailAddress )
+                    ";
+
+                object queryParameters = new
+                {
+                    sellerInfo.SerialNumber,
+                    sellerInfo.SellerName,
+                    sellerInfo.SellerFirmCode,
+                    sellerInfo.SellerPvmCode,
+                    sellerInfo.SellerAddress,
+                    sellerInfo.SellerPhoneNumber,
+                    sellerInfo.SellerBank,
+                    sellerInfo.SellerBankAccountNumber,
+                    sellerInfo.SellerEmailAddress
+                };
+
+                int affectedRows = dbConnection.Execute(createNewSellerInfoCommand, queryParameters);
+
+                return affectedRows == 1;
+            }
+        }
     }
 }
