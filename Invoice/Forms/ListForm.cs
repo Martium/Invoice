@@ -181,14 +181,7 @@ namespace Invoice.Forms
 
             ListOfInvoiceDataGridView.DataSource = invoiceListModelBindingSource;
 
-            if (ListOfInvoiceDataGridView.Rows.Count == 0)
-            {
-                ChangePaymentButton.Enabled = false;
-            }
-            else
-            {
-                ChangePaymentButton.Enabled = true;
-            }
+            ChangePaymentButton.Enabled = ListOfInvoiceDataGridView.Rows.Count != 0;
 
             ChangeFormBackRoundColorByPaymentStatus();
         }

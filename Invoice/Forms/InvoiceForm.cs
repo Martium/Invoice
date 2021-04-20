@@ -167,6 +167,11 @@ namespace Invoice.Forms
 
         }
 
+        private void FillMoneyRecepitForm()
+        {
+
+        }
+
         private InvoiceModel GetAllInfoFromRichTextBox()
         {
 
@@ -547,7 +552,7 @@ namespace Invoice.Forms
                 new Rectangle(0, 0,PrintInvoicePanel.Width, PrintInvoicePanel.Height));
         }
 
-        public static byte[] ConvertImageToByteArray(System.Drawing.Image img)
+        private static byte[] ConvertImageToByteArray(System.Drawing.Image img)
         {
             ImageConverter converter = new ImageConverter();
             return (byte[])converter.ConvertTo(img, typeof(byte[]));
