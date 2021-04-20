@@ -159,6 +159,7 @@ namespace Invoice.Repositories
             string createSellerInfoTableQuery =
                 $@"
                    CREATE TABLE [SellerInfo] (
+                      [Id] [INTEGER] NOT NULL,
                       [SerialNumber] [nvarchar]({FormSettings.TextBoxLengths.SerialNumber}) NULL,
                       [SellerName] [nvarchar]({FormSettings.TextBoxLengths.SellerName}) NULL,
                       [SellerFirmCode] [nvarchar]({FormSettings.TextBoxLengths.SellerFirmCode}) NULL,

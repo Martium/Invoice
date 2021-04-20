@@ -52,7 +52,7 @@ namespace Invoice.Repositories
 
                 string getExistingServiceQuery =
                     @"SELECT  
-                        I.InvoiceDate , I.SerialNumber , I.SerialNumber , I.SellerName , I.SellerFirmCode , I.SellerPvmCode , I.SellerAddress , I.SellerPhoneNumber , I.SellerBank , I.SellerBankAccountNumber , I.SellerEmailAddress , 
+                        I.InvoiceDate , I.SerialNumber , I.SellerName , I.SellerFirmCode , I.SellerPvmCode , I.SellerAddress , I.SellerPhoneNumber , I.SellerBank , I.SellerBankAccountNumber , I.SellerEmailAddress , 
                         I.BuyerName , I.BuyerFirmCode , I.BuyerPvmCode , I.BuyerAddress , I.FirstProductName , I.SecondProductName , I.ThirdProductName , I.FourthProductName , I.FifthProductName , I.SixthProductName , 
                         I.SeventhProductName , I.EighthProductName , I.NinthProductName , I.TenProductName , I.EleventhProductName , I.TwelfthProductName , I.FirstProductSees , I.SecondProductSees , I.ThirdProductSees , 
                         I.ForthProductSees , I.FifthProductSees , I.SixthProductSees , I.SeventhProductSees , I.EighthProductSees , I.NinthProductSees , I.TenProductSees , I.EleventhProductSees , I.TwelfthProductSees , 
@@ -338,13 +338,14 @@ namespace Invoice.Repositories
 
         public bool CreateNewSellerInfo(SellerInfoModel sellerInfo)
         {
+            const int id = 1;
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
             {
                 dbConnection.Open();
 
                 string createNewSellerInfoCommand =
-                    $@"INSERT INTO 'SellerInfo'
-                        VALUES ( @SerialNumber, @SellerName, @SellerFirmCode, @SellerPvmCode, @SellerAddress, @SellerPhoneNumber, @SellerBank, @SellerBankAccountNumber, @SellerEmailAddress )
+                    $@"Insert Into 'SellerInfo'
+                        Values (@Id, @SerialNumber, @SellerName, @SellerFirmCode, @SellerPvmCode, @SellerAddress, @SellerPhoneNumber, @SellerBank, @SellerBankAccountNumber, @SellerEmailAddress )
                     ";
 
                 object queryParameters = new
@@ -357,12 +358,47 @@ namespace Invoice.Repositories
                     sellerInfo.SellerPhoneNumber,
                     sellerInfo.SellerBank,
                     sellerInfo.SellerBankAccountNumber,
-                    sellerInfo.SellerEmailAddress
+                    sellerInfo.SellerEmailAddress,
+
+                    Id = id
                 };
 
                 int affectedRows = dbConnection.Execute(createNewSellerInfoCommand, queryParameters);
 
                 return affectedRows == 1;
+            }
+        }
+
+        public SellerInfoModel GetSellerInfo()
+        {
+            const int id = 1;
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string getExistingSellerInfoCommand =
+                    $@"SELECT *  FROM SellerInfo SI
+                       WHERE SI.Id = @Id
+                    ";
+
+                object queryParameter = new
+                {
+                    Id = id
+                };
+
+                SellerInfoModel getSellerInfo;
+
+                try
+                {
+                    SellerInfoModel sellerInfo = dbConnection.QuerySingleOrDefault<SellerInfoModel>(getExistingSellerInfoCommand, queryParameter);
+                    getSellerInfo = sellerInfo;
+                }
+                catch
+                {
+                    getSellerInfo = null;
+                }
+
+                return getSellerInfo;
             }
         }
     }

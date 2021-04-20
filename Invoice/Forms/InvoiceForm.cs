@@ -19,8 +19,6 @@ namespace Invoice.Forms
     {
         private readonly InvoiceRepository _invoiceRepository;
 
-        private readonly FillDefaultSellerInfo _fillDefaultSellerInfo = new FillDefaultSellerInfo();
-
         private readonly MessageDialogService _messageDialogService = new MessageDialogService();
 
         private readonly NumberService _numberService = new NumberService();
@@ -362,16 +360,21 @@ namespace Invoice.Forms
         {
             if (_invoiceOperations == InvoiceOperations.Create)
             {
-                SerialNumberRichTextBox.Text = _fillDefaultSellerInfo.SerialNumber;
+                SellerInfoModel sellerInfo = _invoiceRepository.GetSellerInfo();
 
-                SellerNameRichTextBox.Text = _fillDefaultSellerInfo.SellerName;
-                SellerFirmCodeRichTextBox.Text = _fillDefaultSellerInfo.SellerFirmCode;
-                SellerPvmCodeRichTextBox.Text = _fillDefaultSellerInfo.SellerPvmCode;
-                SellerAddressRichTextBox.Text = _fillDefaultSellerInfo.SellerAddress;
-                SellerPhoneNumberRichTextBox.Text = _fillDefaultSellerInfo.SellerPhoneNumber;
-                SellerBankRichTextBox.Text = _fillDefaultSellerInfo.SellerBank;
-                SellerBankAccountNumberRichTextBox.Text = _fillDefaultSellerInfo.SellerBankAccount;
-                SellerEmailAddressRichTextBox.Text = _fillDefaultSellerInfo.SellerEmailAddress;
+                if (sellerInfo != null)
+                {
+                    SerialNumberRichTextBox.Text = sellerInfo.SerialNumber;
+
+                    SellerNameRichTextBox.Text = sellerInfo.SellerName;
+                    SellerFirmCodeRichTextBox.Text = sellerInfo.SellerFirmCode;
+                    SellerPvmCodeRichTextBox.Text = sellerInfo.SellerPvmCode;
+                    SellerAddressRichTextBox.Text = sellerInfo.SellerAddress;
+                    SellerPhoneNumberRichTextBox.Text = sellerInfo.SellerPhoneNumber;
+                    SellerBankRichTextBox.Text = sellerInfo.SellerBank;
+                    SellerBankAccountNumberRichTextBox.Text = sellerInfo.SellerBankAccountNumber;
+                    SellerEmailAddressRichTextBox.Text = sellerInfo.SellerEmailAddress;
+                }
             }
         }
 
