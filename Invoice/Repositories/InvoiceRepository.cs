@@ -8,6 +8,8 @@ namespace Invoice.Repositories
 {
     public class InvoiceRepository
     {
+        private const int sellerInfoId = 1;
+
         public IEnumerable<InvoiceListModel> GetInvoiceList(string searchPhrase = null)
         {
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
@@ -336,9 +338,24 @@ namespace Invoice.Repositories
             }
         }
 
+        public bool CheckSellerIdExists()
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string getIdNumberQuery =
+                    $@"SELECT EXISTS(SELECT 1 FROM SellerInfo WHERE Id = {sellerInfoId});
+                    ";
+
+                bool isSellerIdExists = dbConnection.QuerySingleOrDefault<bool>(getIdNumberQuery);
+
+                return isSellerIdExists;
+            }
+        }
+
         public bool CreateNewSellerInfo(SellerInfoModel sellerInfo)
         {
-            const int id = 1;
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
             {
                 dbConnection.Open();
@@ -360,7 +377,7 @@ namespace Invoice.Repositories
                     sellerInfo.SellerBankAccountNumber,
                     sellerInfo.SellerEmailAddress,
 
-                    Id = id
+                    Id = sellerInfoId
                 };
 
                 int affectedRows = dbConnection.Execute(createNewSellerInfoCommand, queryParameters);
@@ -369,9 +386,16 @@ namespace Invoice.Repositories
             }
         }
 
+      /*  public bool UodateSellerInfo(SellerInfoModel updateSellerInfo)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+            }
+        } */
+
         public SellerInfoModel GetSellerInfo()
         {
-            const int id = 1;
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
             {
                 dbConnection.Open();
@@ -383,7 +407,7 @@ namespace Invoice.Repositories
 
                 object queryParameter = new
                 {
-                    Id = id
+                    Id = sellerInfoId
                 };
 
                 SellerInfoModel getSellerInfo;

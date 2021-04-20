@@ -30,6 +30,13 @@ namespace Invoice.Forms
                 SellerEmailAddress = SellerEmailAddressRichTextBox.Text
             };
 
+            bool isIdExists = invoiceRepository.CheckSellerIdExists();
+
+            if (isIdExists)
+            {
+                messageDialogService.ShowInfoMessage("true");
+            }
+
             bool isSuccessful = invoiceRepository.CreateNewSellerInfo(sellerInfo);
 
             if (isSuccessful)
