@@ -212,6 +212,8 @@ namespace Invoice.Forms
 
             ChangePaymentButton.Enabled = ListOfInvoiceDataGridView.Rows.Count != 0;
 
+            TrySelectFirstRowInDataGridView();
+
             ChangeFormBackRoundColorByPaymentStatus();
         }
 
@@ -315,6 +317,14 @@ namespace Invoice.Forms
             catch
             {
                 this.BackColor = Color.Wheat;
+            }
+        }
+
+        private void TrySelectFirstRowInDataGridView()
+        {
+            if (ListOfInvoiceDataGridView.Rows.Count > 0)
+            {
+                ListOfInvoiceDataGridView.Select();
             }
         }
     }
