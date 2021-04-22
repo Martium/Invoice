@@ -138,46 +138,14 @@ namespace Invoice.Forms
 
             if (dialogResult == DialogResult.OK)
             {
-                CaptureInvoiceFormScreen();
-
-                PdfWriter newInvoicePdfWriter =
-                    new PdfWriter(
-                        $"{AppConfiguration.PdfFolder}\\Saskaitos faktura ir kvitas nr.{InvoiceNumberRichTextBox.Text} {BuyerNameRichTextBox.Text}.pdf");
-                PdfDocument newInvoicePdfDocument = new PdfDocument(newInvoicePdfWriter);
-                Document newInvoiceDocument = new Document(newInvoicePdfDocument);
-
-                var convertImageToByteArray = ConvertImageToByteArray(_invoiceMemoryImage);
-                var newInvoiceImage =
-                    new iText.Layout.Element.Image(ImageDataFactory.Create(convertImageToByteArray)).SetTextAlignment(
-                        TextAlignment.CENTER);
-
-                newInvoiceDocument.Add(newInvoiceImage);
-
-                SaveMoneyReceiptFormToPdf(newInvoiceDocument);
-
-                newInvoiceDocument.Close();
+                SaveInvoiceToPdf();
+                _messageDialogService.ShowInfoMessage("Sąskaitos faktūra išsaugota į pdf failą");
             }
             else
             {
-                CaptureInvoiceFormScreen();
-
-                PdfWriter newInvoicePdfWriter =
-                    new PdfWriter(
-                        $"{AppConfiguration.PdfFolder}\\Saskaitos faktura nr.{InvoiceNumberRichTextBox.Text} {BuyerNameRichTextBox.Text}.pdf");
-                PdfDocument newInvoicePdfDocument = new PdfDocument(newInvoicePdfWriter);
-                Document newInvoiceDocument = new Document(newInvoicePdfDocument);
-
-                var convertImageToByteArray = ConvertImageToByteArray(_invoiceMemoryImage);
-                var newInvoiceImage =
-                    new iText.Layout.Element.Image(ImageDataFactory.Create(convertImageToByteArray)).SetTextAlignment(
-                        TextAlignment.CENTER);
-
-                newInvoiceDocument.Add(newInvoiceImage);
-
-                newInvoiceDocument.Close();
+               SaveInvoiceAndMoneyReceiptToPdf();
+               _messageDialogService.ShowInfoMessage("Sąskaita faktūra ir kvitas išsaugota į pdf failą");
             }
-
-            _messageDialogService.ShowInfoMessage("Sąskaitos faktūros anketa išsaugota į pdf failą");
 
             SaveButton_Click(this, new EventArgs());
             this.Close();
@@ -225,6 +193,48 @@ namespace Invoice.Forms
         private void printDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
             e.Graphics.DrawImage(_invoiceMemoryImage, 0, this.PrintInvoicePanel.Location.Y);
+        }
+
+        private void SaveInvoiceToPdf()
+        {
+            CaptureInvoiceFormScreen();
+
+            PdfWriter newInvoicePdfWriter =
+                new PdfWriter(
+                    $"{AppConfiguration.PdfFolder}\\Saskaitos faktura ir kvitas nr.{InvoiceNumberRichTextBox.Text} {BuyerNameRichTextBox.Text}.pdf");
+            PdfDocument newInvoicePdfDocument = new PdfDocument(newInvoicePdfWriter);
+            Document newInvoiceDocument = new Document(newInvoicePdfDocument);
+
+            var convertImageToByteArray = ConvertImageToByteArray(_invoiceMemoryImage);
+            var newInvoiceImage =
+                new iText.Layout.Element.Image(ImageDataFactory.Create(convertImageToByteArray)).SetTextAlignment(
+                    TextAlignment.CENTER);
+
+            newInvoiceDocument.Add(newInvoiceImage);
+
+            SaveMoneyReceiptFormToPdf(newInvoiceDocument);
+
+            newInvoiceDocument.Close();
+        }
+
+        private void SaveInvoiceAndMoneyReceiptToPdf()
+        {
+            CaptureInvoiceFormScreen();
+
+            PdfWriter newInvoicePdfWriter =
+                new PdfWriter(
+                    $"{AppConfiguration.PdfFolder}\\Saskaitos faktura nr.{InvoiceNumberRichTextBox.Text} {BuyerNameRichTextBox.Text}.pdf");
+            PdfDocument newInvoicePdfDocument = new PdfDocument(newInvoicePdfWriter);
+            Document newInvoiceDocument = new Document(newInvoicePdfDocument);
+
+            var convertImageToByteArray = ConvertImageToByteArray(_invoiceMemoryImage);
+            var newInvoiceImage =
+                new iText.Layout.Element.Image(ImageDataFactory.Create(convertImageToByteArray)).SetTextAlignment(
+                    TextAlignment.CENTER);
+
+            newInvoiceDocument.Add(newInvoiceImage);
+
+            newInvoiceDocument.Close();
         }
 
         private void PrintInvoiceForm()
