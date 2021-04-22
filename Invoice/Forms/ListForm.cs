@@ -181,6 +181,7 @@ namespace Invoice.Forms
             HideListAndOpenSellerInfoForm(sellerInfoForm);
         }
 
+        #region Helpers
         private void HideListAndOpenInvoiceForm(Form invoiceForm)
         {
             this.Hide();
@@ -201,7 +202,7 @@ namespace Invoice.Forms
             {
                 SearchCancelButton.Enabled = true;
             }
-           
+
             IEnumerable<InvoiceListModel> invoiceListModels = _invoiceRepository.GetInvoiceList(searchPhrase);
 
             ToggleExistingListManaging(enabled: invoiceListModels.Any(), searchPhrase);
@@ -327,5 +328,7 @@ namespace Invoice.Forms
                 ListOfInvoiceDataGridView.Select();
             }
         }
+
+        #endregion
     }
 }
