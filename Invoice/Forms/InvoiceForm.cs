@@ -191,14 +191,54 @@ namespace Invoice.Forms
 
         private void PrintButton_Click(object sender, EventArgs e)
         {
-            CaptureInvoiceFormScreen();
-            printPreviewDialog.Document = printDocument;
-            printPreviewDialog.ShowDialog();
+            DialogResult dialogResult = _messageDialogService.ShowChoiceMessage("Ar norite spausdinti kvitą ?");
+
+            if (dialogResult == DialogResult.OK)
+            {
+                PrintMoneyReceiptForm();
+            }
+            else
+            {
+                CaptureInvoiceFormScreen();
+                printPreviewDialog.Document = printDocument;
+                printPreviewDialog.ShowDialog();
+            }
         }
 
         private void printDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
             e.Graphics.DrawImage(_invoiceMemoryImage, 0, this.PrintInvoicePanel.Location.Y);
+        }
+
+        private void PrintMoneyReceiptForm()
+        {
+            var moneyReceiptForm = new MoneyReceiptForm();
+
+            string allProducts = FillProductsToMoneyReceiptForm();
+
+            MoneyReceiptModel moneyReceiptInfo = new MoneyReceiptModel()
+            {
+                SellerInfo = SellerNameRichTextBox.Text,
+                SellerFirmCode = SellerFirmCodeRichTextBox.Text,
+                SerialNumber = SerialNumberRichTextBox.Text,
+                InvoiceNumber = InvoiceNumberRichTextBox.Text,
+                InvoiceDate = InvoiceDateRichTextBox.Text,
+                AllProducts = $@"{allProducts}",
+
+                PriceInWords = PriceInWordsRichTextBox.Text,
+                InvoiceMaker = InvoiceMakerRichTextBox.Text
+            };
+
+            moneyReceiptForm.Show();
+
+            _invoiceMemoryImage = moneyReceiptForm.SaveMoneyReceiptForm(moneyReceiptInfo);
+            printPreviewDialog.Document = printDocument;
+            printPreviewDialog.ShowDialog();
+
+            moneyReceiptForm.Close();
+
+
+
         }
 
         private void SaveMoneyReceiptFormToPdf(Document newInvoiceDocument)
@@ -282,9 +322,10 @@ namespace Invoice.Forms
 
 
 
-            allProducts = $@"{firstProductInfo} {secondProductInfo} {thirdProductInfo} {forthProductInfo}
-{fifthProductInfo} {sixthProductInfo} {seventhProductInfo} {eighthProductInfo} 
-{ninthProductInfo} {tenProductInfo} {eleventhProductInfo} {twelfthProductName}";
+            allProducts = $@"{firstProductInfo} {secondProductInfo} {thirdProductInfo} 
+{forthProductInfo}{fifthProductInfo} {sixthProductInfo} 
+{seventhProductInfo} {eighthProductInfo} {ninthProductInfo} 
+{tenProductInfo} {eleventhProductInfo} {twelfthProductName}";
 
             return allProducts;
         }

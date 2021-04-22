@@ -52,6 +52,8 @@ namespace Invoice.Forms
             this.MoneyAcceptedRecepitInfoLabel = new System.Windows.Forms.Label();
             this.SellerLabel = new System.Windows.Forms.Label();
             this.SellerInfoLabel = new System.Windows.Forms.Label();
+            this.PrintPreviewMoneyReceiptDialog = new System.Windows.Forms.PrintPreviewDialog();
+            this.PrintMoneyReceiptDocument = new System.Drawing.Printing.PrintDocument();
             this.PrintMoneyReceiptPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -81,13 +83,13 @@ namespace Invoice.Forms
             this.PrintMoneyReceiptPanel.Controls.Add(this.SellerInfoLabel);
             this.PrintMoneyReceiptPanel.Location = new System.Drawing.Point(133, 86);
             this.PrintMoneyReceiptPanel.Name = "PrintMoneyReceiptPanel";
-            this.PrintMoneyReceiptPanel.Size = new System.Drawing.Size(915, 437);
+            this.PrintMoneyReceiptPanel.Size = new System.Drawing.Size(820, 502);
             this.PrintMoneyReceiptPanel.TabIndex = 0;
             // 
             // InvoiceNumberLabel
             // 
             this.InvoiceNumberLabel.AutoSize = true;
-            this.InvoiceNumberLabel.Location = new System.Drawing.Point(489, 126);
+            this.InvoiceNumberLabel.Location = new System.Drawing.Point(466, 126);
             this.InvoiceNumberLabel.Name = "InvoiceNumberLabel";
             this.InvoiceNumberLabel.Size = new System.Drawing.Size(79, 13);
             this.InvoiceNumberLabel.TabIndex = 33;
@@ -96,7 +98,7 @@ namespace Invoice.Forms
             // SerialNumberLabel
             // 
             this.SerialNumberLabel.AutoSize = true;
-            this.SerialNumberLabel.Location = new System.Drawing.Point(352, 126);
+            this.SerialNumberLabel.Location = new System.Drawing.Point(324, 126);
             this.SerialNumberLabel.Name = "SerialNumberLabel";
             this.SerialNumberLabel.Size = new System.Drawing.Size(70, 13);
             this.SerialNumberLabel.TabIndex = 32;
@@ -114,7 +116,7 @@ namespace Invoice.Forms
             // SellerInfoGuideLabel
             // 
             this.SellerInfoGuideLabel.AutoSize = true;
-            this.SellerInfoGuideLabel.Location = new System.Drawing.Point(132, 406);
+            this.SellerInfoGuideLabel.Location = new System.Drawing.Point(132, 440);
             this.SellerInfoGuideLabel.Name = "SellerInfoGuideLabel";
             this.SellerInfoGuideLabel.Size = new System.Drawing.Size(294, 13);
             this.SellerInfoGuideLabel.TabIndex = 30;
@@ -123,7 +125,7 @@ namespace Invoice.Forms
             // BuyerInfoGuideLabel
             // 
             this.BuyerInfoGuideLabel.AutoSize = true;
-            this.BuyerInfoGuideLabel.Location = new System.Drawing.Point(132, 356);
+            this.BuyerInfoGuideLabel.Location = new System.Drawing.Point(132, 384);
             this.BuyerInfoGuideLabel.Name = "BuyerInfoGuideLabel";
             this.BuyerInfoGuideLabel.Size = new System.Drawing.Size(175, 13);
             this.BuyerInfoGuideLabel.TabIndex = 29;
@@ -132,7 +134,7 @@ namespace Invoice.Forms
             // InvoiceMakerLabel
             // 
             this.InvoiceMakerLabel.AutoSize = true;
-            this.InvoiceMakerLabel.Location = new System.Drawing.Point(136, 380);
+            this.InvoiceMakerLabel.Location = new System.Drawing.Point(136, 410);
             this.InvoiceMakerLabel.Name = "InvoiceMakerLabel";
             this.InvoiceMakerLabel.Size = new System.Drawing.Size(574, 13);
             this.InvoiceMakerLabel.TabIndex = 28;
@@ -143,7 +145,7 @@ namespace Invoice.Forms
             // 
             this.SellerAcceptedMoneyInfoLabel.AutoSize = true;
             this.SellerAcceptedMoneyInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SellerAcceptedMoneyInfoLabel.Location = new System.Drawing.Point(43, 380);
+            this.SellerAcceptedMoneyInfoLabel.Location = new System.Drawing.Point(43, 410);
             this.SellerAcceptedMoneyInfoLabel.Name = "SellerAcceptedMoneyInfoLabel";
             this.SellerAcceptedMoneyInfoLabel.Size = new System.Drawing.Size(87, 13);
             this.SellerAcceptedMoneyInfoLabel.TabIndex = 27;
@@ -152,18 +154,18 @@ namespace Invoice.Forms
             // BuyerPaidLabel
             // 
             this.BuyerPaidLabel.AutoSize = true;
-            this.BuyerPaidLabel.Location = new System.Drawing.Point(118, 330);
+            this.BuyerPaidLabel.Location = new System.Drawing.Point(118, 354);
             this.BuyerPaidLabel.Name = "BuyerPaidLabel";
-            this.BuyerPaidLabel.Size = new System.Drawing.Size(679, 13);
+            this.BuyerPaidLabel.Size = new System.Drawing.Size(652, 13);
             this.BuyerPaidLabel.TabIndex = 26;
             this.BuyerPaidLabel.Text = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _" +
-    " _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\r\n";
+    " _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\r\n";
             // 
             // BuyerPaidInfoLabel
             // 
             this.BuyerPaidInfoLabel.AutoSize = true;
             this.BuyerPaidInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BuyerPaidInfoLabel.Location = new System.Drawing.Point(43, 330);
+            this.BuyerPaidInfoLabel.Location = new System.Drawing.Point(43, 354);
             this.BuyerPaidInfoLabel.Name = "BuyerPaidInfoLabel";
             this.BuyerPaidInfoLabel.Size = new System.Drawing.Size(69, 13);
             this.BuyerPaidInfoLabel.TabIndex = 25;
@@ -172,7 +174,7 @@ namespace Invoice.Forms
             // AdditionalLinksAboutProductLabel
             // 
             this.AdditionalLinksAboutProductLabel.AutoSize = true;
-            this.AdditionalLinksAboutProductLabel.Location = new System.Drawing.Point(132, 253);
+            this.AdditionalLinksAboutProductLabel.Location = new System.Drawing.Point(132, 269);
             this.AdditionalLinksAboutProductLabel.Name = "AdditionalLinksAboutProductLabel";
             this.AdditionalLinksAboutProductLabel.Size = new System.Drawing.Size(355, 13);
             this.AdditionalLinksAboutProductLabel.TabIndex = 24;
@@ -181,7 +183,7 @@ namespace Invoice.Forms
             // additionalInfoPriceInWordsLabel
             // 
             this.additionalInfoPriceInWordsLabel.AutoSize = true;
-            this.additionalInfoPriceInWordsLabel.Location = new System.Drawing.Point(132, 299);
+            this.additionalInfoPriceInWordsLabel.Location = new System.Drawing.Point(132, 328);
             this.additionalInfoPriceInWordsLabel.Name = "additionalInfoPriceInWordsLabel";
             this.additionalInfoPriceInWordsLabel.Size = new System.Drawing.Size(238, 13);
             this.additionalInfoPriceInWordsLabel.TabIndex = 23;
@@ -190,7 +192,7 @@ namespace Invoice.Forms
             // PriceInWordsLabel
             // 
             this.PriceInWordsLabel.AutoSize = true;
-            this.PriceInWordsLabel.Location = new System.Drawing.Point(145, 277);
+            this.PriceInWordsLabel.Location = new System.Drawing.Point(145, 299);
             this.PriceInWordsLabel.Name = "PriceInWordsLabel";
             this.PriceInWordsLabel.Size = new System.Drawing.Size(364, 13);
             this.PriceInWordsLabel.TabIndex = 22;
@@ -200,7 +202,7 @@ namespace Invoice.Forms
             // 
             this.PaidPriceInfoLabel.AutoSize = true;
             this.PaidPriceInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PaidPriceInfoLabel.Location = new System.Drawing.Point(43, 277);
+            this.PaidPriceInfoLabel.Location = new System.Drawing.Point(43, 299);
             this.PaidPriceInfoLabel.Name = "PaidPriceInfoLabel";
             this.PaidPriceInfoLabel.Size = new System.Drawing.Size(96, 13);
             this.PaidPriceInfoLabel.TabIndex = 21;
@@ -211,7 +213,7 @@ namespace Invoice.Forms
             this.AllProductsLabel.AutoSize = true;
             this.AllProductsLabel.Location = new System.Drawing.Point(50, 205);
             this.AllProductsLabel.Name = "AllProductsLabel";
-            this.AllProductsLabel.Size = new System.Drawing.Size(763, 39);
+            this.AllProductsLabel.Size = new System.Drawing.Size(727, 52);
             this.AllProductsLabel.TabIndex = 20;
             this.AllProductsLabel.Text = resources.GetString("AllProductsLabel.Text");
             // 
@@ -238,7 +240,7 @@ namespace Invoice.Forms
             // 
             this.InvoiceNumberInfoLabel.AutoSize = true;
             this.InvoiceNumberInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.InvoiceNumberInfoLabel.Location = new System.Drawing.Point(459, 126);
+            this.InvoiceNumberInfoLabel.Location = new System.Drawing.Point(436, 126);
             this.InvoiceNumberInfoLabel.Name = "InvoiceNumberInfoLabel";
             this.InvoiceNumberInfoLabel.Size = new System.Drawing.Size(24, 13);
             this.InvoiceNumberInfoLabel.TabIndex = 16;
@@ -248,7 +250,7 @@ namespace Invoice.Forms
             // 
             this.SerialNameInfoLabel.AutoSize = true;
             this.SerialNameInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SerialNameInfoLabel.Location = new System.Drawing.Point(307, 126);
+            this.SerialNameInfoLabel.Location = new System.Drawing.Point(279, 126);
             this.SerialNameInfoLabel.Name = "SerialNameInfoLabel";
             this.SerialNameInfoLabel.Size = new System.Drawing.Size(39, 13);
             this.SerialNameInfoLabel.TabIndex = 15;
@@ -258,7 +260,7 @@ namespace Invoice.Forms
             // 
             this.MoneyAcceptedRecepitInfoLabel.AutoSize = true;
             this.MoneyAcceptedRecepitInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MoneyAcceptedRecepitInfoLabel.Location = new System.Drawing.Point(306, 88);
+            this.MoneyAcceptedRecepitInfoLabel.Location = new System.Drawing.Point(278, 88);
             this.MoneyAcceptedRecepitInfoLabel.Name = "MoneyAcceptedRecepitInfoLabel";
             this.MoneyAcceptedRecepitInfoLabel.Size = new System.Drawing.Size(262, 24);
             this.MoneyAcceptedRecepitInfoLabel.TabIndex = 14;
@@ -267,7 +269,7 @@ namespace Invoice.Forms
             // SellerLabel
             // 
             this.SellerLabel.AutoSize = true;
-            this.SellerLabel.Location = new System.Drawing.Point(261, 57);
+            this.SellerLabel.Location = new System.Drawing.Point(229, 57);
             this.SellerLabel.Name = "SellerLabel";
             this.SellerLabel.Size = new System.Drawing.Size(371, 13);
             this.SellerLabel.TabIndex = 1;
@@ -276,11 +278,21 @@ namespace Invoice.Forms
             // SellerInfoLabel
             // 
             this.SellerInfoLabel.AutoSize = true;
-            this.SellerInfoLabel.Location = new System.Drawing.Point(409, 25);
+            this.SellerInfoLabel.Location = new System.Drawing.Point(375, 24);
             this.SellerInfoLabel.Name = "SellerInfoLabel";
             this.SellerInfoLabel.Size = new System.Drawing.Size(51, 13);
             this.SellerInfoLabel.TabIndex = 0;
             this.SellerInfoLabel.Text = "SellerInfo\r\n";
+            // 
+            // PrintPreviewMoneyReceiptDialog
+            // 
+            this.PrintPreviewMoneyReceiptDialog.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.PrintPreviewMoneyReceiptDialog.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.PrintPreviewMoneyReceiptDialog.ClientSize = new System.Drawing.Size(400, 300);
+            this.PrintPreviewMoneyReceiptDialog.Enabled = true;
+            this.PrintPreviewMoneyReceiptDialog.Icon = ((System.Drawing.Icon)(resources.GetObject("PrintPreviewMoneyReceiptDialog.Icon")));
+            this.PrintPreviewMoneyReceiptDialog.Name = "PrintPreviewMoneyReceiptDialog";
+            this.PrintPreviewMoneyReceiptDialog.Visible = false;
             // 
             // MoneyReceiptForm
             // 
@@ -322,5 +334,7 @@ namespace Invoice.Forms
         private System.Windows.Forms.Label SellerFirmCodeLabel;
         private System.Windows.Forms.Label SerialNumberLabel;
         private System.Windows.Forms.Label InvoiceNumberLabel;
+        public System.Windows.Forms.PrintPreviewDialog PrintPreviewMoneyReceiptDialog;
+        public System.Drawing.Printing.PrintDocument PrintMoneyReceiptDocument;
     }
 }
