@@ -386,13 +386,39 @@ namespace Invoice.Repositories
             }
         }
 
-      /*  public bool UodateSellerInfo(SellerInfoModel updateSellerInfo)
+       public bool UodateSellerInfo(SellerInfoModel updateSellerInfo)
         {
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
             {
                 dbConnection.Open();
+
+                string updateSellerInfoCommand =
+                    $@"Update 'SellerInfo'
+                        SET SerialNumber = @SerialNumber, SellerName = @SellerName, SellerFirmCode = @SellerFirmCode, SellerPvmCode = @SellerPvmCode, SellerAddress = @SellerAddress, 
+                           SellerPhoneNumber = @SellerPhoneNumber, SellerBank = @SellerBank, SellerBankAccountNumber = @SellerBankAccountNumber, SellerEmailAddress = @SellerEmailAddress
+                       WHERE Id = @Id
+                    ";
+
+                object queryParameters = new
+                {
+                    updateSellerInfo.SerialNumber,
+                    updateSellerInfo.SellerName,
+                    updateSellerInfo.SellerFirmCode,
+                    updateSellerInfo.SellerPvmCode,
+                    updateSellerInfo.SellerAddress,
+                    updateSellerInfo.SellerPhoneNumber,
+                    updateSellerInfo.SellerBank,
+                    updateSellerInfo.SellerBankAccountNumber,
+                    updateSellerInfo.SellerEmailAddress,
+
+                    Id = sellerInfoId
+                };
+
+                int affectedRows = dbConnection.Execute(updateSellerInfoCommand, queryParameters);
+
+                return affectedRows == 1;
             }
-        } */
+        } 
 
         public SellerInfoModel GetSellerInfo()
         {

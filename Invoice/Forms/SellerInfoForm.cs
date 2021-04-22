@@ -31,13 +31,16 @@ namespace Invoice.Forms
             };
 
             bool isIdExists = invoiceRepository.CheckSellerIdExists();
+            bool isSuccessful;
 
             if (isIdExists)
             {
-                messageDialogService.ShowInfoMessage("true");
+               isSuccessful = invoiceRepository.UodateSellerInfo(sellerInfo);
             }
-
-            bool isSuccessful = invoiceRepository.CreateNewSellerInfo(sellerInfo);
+            else
+            {
+                isSuccessful = invoiceRepository.CreateNewSellerInfo(sellerInfo);
+            }
 
             if (isSuccessful)
             {
