@@ -31,6 +31,7 @@ namespace Invoice.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvoiceForm));
             this.PrintInvoicePanel = new System.Windows.Forms.Panel();
             this.ErrorMassageLabel = new System.Windows.Forms.Label();
             this.TotalPriceWithPvmRichTextBox = new System.Windows.Forms.RichTextBox();
@@ -131,6 +132,9 @@ namespace Invoice.Forms
             this.SaveButton = new System.Windows.Forms.Button();
             this.SaveToPdf = new System.Windows.Forms.Button();
             this.CalculateButton = new System.Windows.Forms.Button();
+            this.PrintButton = new System.Windows.Forms.Button();
+            this.printDocument = new System.Drawing.Printing.PrintDocument();
+            this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.PrintInvoicePanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -1220,11 +1224,36 @@ namespace Invoice.Forms
             this.CalculateButton.UseVisualStyleBackColor = true;
             this.CalculateButton.Click += new System.EventHandler(this.CalculateButton_Click);
             // 
+            // PrintButton
+            // 
+            this.PrintButton.Location = new System.Drawing.Point(321, 960);
+            this.PrintButton.Name = "PrintButton";
+            this.PrintButton.Size = new System.Drawing.Size(111, 29);
+            this.PrintButton.TabIndex = 4;
+            this.PrintButton.Text = "Spausdinti Formą";
+            this.PrintButton.UseVisualStyleBackColor = true;
+            this.PrintButton.Click += new System.EventHandler(this.PrintButton_Click);
+            // 
+            // printDocument
+            // 
+            this.printDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_PrintPage);
+            // 
+            // printPreviewDialog
+            // 
+            this.printPreviewDialog.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog.Enabled = true;
+            this.printPreviewDialog.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog.Icon")));
+            this.printPreviewDialog.Name = "printPreviewDialog";
+            this.printPreviewDialog.Visible = false;
+            // 
             // InvoiceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1064, 1001);
+            this.Controls.Add(this.PrintButton);
             this.Controls.Add(this.CalculateButton);
             this.Controls.Add(this.SaveToPdf);
             this.Controls.Add(this.SaveButton);
@@ -1341,5 +1370,8 @@ namespace Invoice.Forms
         private System.Windows.Forms.Label ErrorMassageLabel;
         private System.Windows.Forms.Button SaveToPdf;
         private System.Windows.Forms.Button CalculateButton;
+        private System.Windows.Forms.Button PrintButton;
+        private System.Drawing.Printing.PrintDocument printDocument;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog;
     }
 }

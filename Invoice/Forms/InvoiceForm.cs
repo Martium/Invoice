@@ -189,12 +189,23 @@ namespace Invoice.Forms
             }
         }
 
+        private void PrintButton_Click(object sender, EventArgs e)
+        {
+            CaptureInvoiceFormScreen();
+            printPreviewDialog.Document = printDocument;
+            printPreviewDialog.ShowDialog();
+        }
+
+        private void printDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            e.Graphics.DrawImage(_invoiceMemoryImage, 0, this.PrintInvoicePanel.Location.Y);
+        }
+
         private void SaveMoneyReceiptFormToPdf(Document newInvoiceDocument)
         {
             var moneyReceiptForm = new MoneyReceiptForm();
 
             string allProducts = FillProductsToMoneyReceiptForm();
-            
 
             MoneyReceiptModel moneyReceiptInfo = new MoneyReceiptModel()
             {
