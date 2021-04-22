@@ -134,7 +134,7 @@ namespace Invoice.Forms
         {
             CalculateButton_Click(this, new EventArgs());
 
-            DialogResult dialogResult = _messageDialogService.ShowChoiceMessage("Ar norite suformuoti Sąskaitos kvitą");
+            DialogResult dialogResult = _messageDialogService.ShowChoiceMessage("Ar norite suformuoti Sąskaita ir kvitą");
 
             if (dialogResult == DialogResult.OK)
             {
