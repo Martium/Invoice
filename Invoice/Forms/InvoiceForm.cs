@@ -180,14 +180,6 @@ namespace Invoice.Forms
                 .CalculateTotalPriceWithPvm(ProductTotalPriceRichTextBox, PvmPriceRichTextBox).ToString();
         }
 
-        private void Control_RichTextBoxesKeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl((RichTextBox)sender, true, true, true, true);
-            }
-        }
-
         private void SaveMoneyReceiptFormToPdf(Document newInvoiceDocument)
         {
             var moneyReceiptForm = new MoneyReceiptForm();
@@ -613,6 +605,14 @@ namespace Invoice.Forms
             ImageConverter converter = new ImageConverter();
             return (byte[]) converter.ConvertTo(img, typeof(byte[]));
         }
-        
+
+        private void ControlRichTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((RichTextBox)sender, true, true, true, true);
+                e.SuppressKeyPress = true;
+            }
+        }
     }
 }
