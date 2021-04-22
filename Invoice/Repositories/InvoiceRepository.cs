@@ -8,7 +8,7 @@ namespace Invoice.Repositories
 {
     public class InvoiceRepository
     {
-        private const int sellerInfoId = 1;
+        private const int SellerInfoId = 1;
 
         public IEnumerable<InvoiceListModel> GetInvoiceList(string searchPhrase = null)
         {
@@ -39,10 +39,10 @@ namespace Invoice.Repositories
                 getExistingInvoiceQuery += @" ORDER BY 
                                                I.InvoiceNumberYearCreation DESC, I.InvoiceNumber DESC";
 
-                IEnumerable<InvoiceListModel> InvoiceList =
+                IEnumerable<InvoiceListModel> invoiceList =
                     dbConnection.Query<InvoiceListModel>(getExistingInvoiceQuery, queryParameters);
 
-                return InvoiceList;
+                return invoiceList;
             }
         }
 
@@ -345,7 +345,7 @@ namespace Invoice.Repositories
                 dbConnection.Open();
 
                 string getIdNumberQuery =
-                    $@"SELECT EXISTS(SELECT 1 FROM SellerInfo WHERE Id = {sellerInfoId});
+                    $@"SELECT EXISTS(SELECT 1 FROM SellerInfo WHERE Id = {SellerInfoId});
                     ";
 
                 bool isSellerIdExists = dbConnection.QuerySingleOrDefault<bool>(getIdNumberQuery);
@@ -378,7 +378,7 @@ namespace Invoice.Repositories
                     sellerInfo.SellerEmailAddress,
                     sellerInfo.InvoiceMaker,
 
-                    Id = sellerInfoId
+                    Id = SellerInfoId
                 };
 
                 int affectedRows = dbConnection.Execute(createNewSellerInfoCommand, queryParameters);
@@ -414,7 +414,7 @@ namespace Invoice.Repositories
                     updateSellerInfo.SellerEmailAddress,
                     updateSellerInfo.InvoiceMaker,
 
-                    Id = sellerInfoId
+                    Id = SellerInfoId
                 };
 
                 int affectedRows = dbConnection.Execute(updateSellerInfoCommand, queryParameters);
@@ -436,7 +436,7 @@ namespace Invoice.Repositories
 
                 object queryParameter = new
                 {
-                    Id = sellerInfoId
+                    Id = SellerInfoId
                 };
 
                 SellerInfoModel getSellerInfo;

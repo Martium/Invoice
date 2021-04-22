@@ -125,7 +125,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\DataBaseInitializerRepository.cs" />
-    <Compile Include="Repositories\FillDefaultSellerInfo.cs" />
     <Compile Include="Repositories\InvoiceRepository.cs" />
     <Compile Include="Repositories\PdfFolderInitializer.cs" />
     <Compile Include="Service\MessageDialogService.cs" />
