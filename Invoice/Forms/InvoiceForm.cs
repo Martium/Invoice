@@ -195,6 +195,8 @@ namespace Invoice.Forms
             e.Graphics.DrawImage(_invoiceMemoryImage, 0, this.PrintInvoicePanel.Location.Y);
         }
 
+        #region Helpers
+
         private void SaveInvoiceToPdf()
         {
             CaptureInvoiceFormScreen();
@@ -287,7 +289,7 @@ namespace Invoice.Forms
                 InvoiceNumber = InvoiceNumberRichTextBox.Text,
                 InvoiceDate = InvoiceDateRichTextBox.Text,
                 AllProducts = $@"{allProducts}",
-                    
+
                 PriceInWords = PriceInWordsRichTextBox.Text,
                 InvoiceMaker = InvoiceMakerRichTextBox.Text
             };
@@ -754,7 +756,9 @@ namespace Invoice.Forms
         private static byte[] ConvertImageToByteArray(System.Drawing.Image img)
         {
             ImageConverter converter = new ImageConverter();
-            return (byte[]) converter.ConvertTo(img, typeof(byte[]));
+            return (byte[])converter.ConvertTo(img, typeof(byte[]));
         }
+
+        #endregion
     }
 }
