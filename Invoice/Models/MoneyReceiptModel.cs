@@ -10,6 +10,5 @@
         public string AllProducts { get; set; }
         public string PriceInWords { get; set; }
         public string InvoiceMaker { get; set; }
-
     }
 }
