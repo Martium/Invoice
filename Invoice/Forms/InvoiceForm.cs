@@ -134,29 +134,48 @@ namespace Invoice.Forms
         {
             CalculateButton_Click(this, new EventArgs());
 
-            CaptureInvoiceFormScreen();
-
-            PdfWriter newInvoicePdfWriter =
-                new PdfWriter(
-                    $"{AppConfiguration.PdfFolder}\\Saskaitos fakturos nr.{InvoiceNumberRichTextBox.Text} {BuyerNameRichTextBox.Text}.pdf");
-            PdfDocument newInvoicePdfDocument = new PdfDocument(newInvoicePdfWriter);
-            Document newInvoiceDocument = new Document(newInvoicePdfDocument);
-
-            var convertImageToByteArray = ConvertImageToByteArray(_invoiceMemoryImage);
-            var newInvoiceImage =
-                new iText.Layout.Element.Image(ImageDataFactory.Create(convertImageToByteArray)).SetTextAlignment(
-                    TextAlignment.CENTER);
-
-            newInvoiceDocument.Add(newInvoiceImage);
-
             DialogResult dialogResult = _messageDialogService.ShowChoiceMessage("Ar norite suformuoti Sąskaitos kvitą");
 
             if (dialogResult == DialogResult.OK)
             {
-                SaveMoneyReceiptFormToPdf(newInvoiceDocument);
-            }
+                CaptureInvoiceFormScreen();
 
-            newInvoiceDocument.Close();
+                PdfWriter newInvoicePdfWriter =
+                    new PdfWriter(
+                        $"{AppConfiguration.PdfFolder}\\Saskaitos faktura ir kvitas nr.{InvoiceNumberRichTextBox.Text} {BuyerNameRichTextBox.Text}.pdf");
+                PdfDocument newInvoicePdfDocument = new PdfDocument(newInvoicePdfWriter);
+                Document newInvoiceDocument = new Document(newInvoicePdfDocument);
+
+                var convertImageToByteArray = ConvertImageToByteArray(_invoiceMemoryImage);
+                var newInvoiceImage =
+                    new iText.Layout.Element.Image(ImageDataFactory.Create(convertImageToByteArray)).SetTextAlignment(
+                        TextAlignment.CENTER);
+
+                newInvoiceDocument.Add(newInvoiceImage);
+
+                SaveMoneyReceiptFormToPdf(newInvoiceDocument);
+
+                newInvoiceDocument.Close();
+            }
+            else
+            {
+                CaptureInvoiceFormScreen();
+
+                PdfWriter newInvoicePdfWriter =
+                    new PdfWriter(
+                        $"{AppConfiguration.PdfFolder}\\Saskaitos faktura nr.{InvoiceNumberRichTextBox.Text} {BuyerNameRichTextBox.Text}.pdf");
+                PdfDocument newInvoicePdfDocument = new PdfDocument(newInvoicePdfWriter);
+                Document newInvoiceDocument = new Document(newInvoicePdfDocument);
+
+                var convertImageToByteArray = ConvertImageToByteArray(_invoiceMemoryImage);
+                var newInvoiceImage =
+                    new iText.Layout.Element.Image(ImageDataFactory.Create(convertImageToByteArray)).SetTextAlignment(
+                        TextAlignment.CENTER);
+
+                newInvoiceDocument.Add(newInvoiceImage);
+
+                newInvoiceDocument.Close();
+            }
 
             _messageDialogService.ShowInfoMessage("Sąskaitos faktūros anketa išsaugota į pdf failą");
 
