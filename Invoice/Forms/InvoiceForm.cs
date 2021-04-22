@@ -201,7 +201,7 @@ namespace Invoice.Forms
 
             PdfWriter newInvoicePdfWriter =
                 new PdfWriter(
-                    $"{AppConfiguration.PdfFolder}\\Saskaitos faktura ir kvitas nr.{InvoiceNumberRichTextBox.Text} {BuyerNameRichTextBox.Text}.pdf");
+                    $"{AppConfiguration.PdfFolder}\\Saskaita faktura ir kvitas nr.{InvoiceNumberRichTextBox.Text} {BuyerNameRichTextBox.Text}.pdf");
             PdfDocument newInvoicePdfDocument = new PdfDocument(newInvoicePdfWriter);
             Document newInvoiceDocument = new Document(newInvoicePdfDocument);
 
@@ -223,7 +223,7 @@ namespace Invoice.Forms
 
             PdfWriter newInvoicePdfWriter =
                 new PdfWriter(
-                    $"{AppConfiguration.PdfFolder}\\Saskaitos faktura nr.{InvoiceNumberRichTextBox.Text} {BuyerNameRichTextBox.Text}.pdf");
+                    $"{AppConfiguration.PdfFolder}\\Saskaita faktura nr.{InvoiceNumberRichTextBox.Text} {BuyerNameRichTextBox.Text}.pdf");
             PdfDocument newInvoicePdfDocument = new PdfDocument(newInvoicePdfWriter);
             Document newInvoiceDocument = new Document(newInvoicePdfDocument);
 
