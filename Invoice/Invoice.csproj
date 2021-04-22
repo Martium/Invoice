@@ -111,14 +111,20 @@
     <Compile Include="Forms\MoneyReceiptForm.Designer.cs">
       <DependentUpon>MoneyReceiptForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\SellerInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SellerInfoForm.Designer.cs">
+      <DependentUpon>SellerInfoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\InvoiceListModel.cs" />
     <Compile Include="Models\InvoiceModel.cs" />
     <Compile Include="Models\InvoiceQuantityAndPriceModel.cs" />
     <Compile Include="Models\MoneyReceiptModel.cs" />
+    <Compile Include="Models\SellerInfoModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\DataBaseInitializerRepository.cs" />
-    <Compile Include="Repositories\FillDefaultSellerInfo.cs" />
     <Compile Include="Repositories\InvoiceRepository.cs" />
     <Compile Include="Repositories\PdfFolderInitializer.cs" />
     <Compile Include="Service\MessageDialogService.cs" />
@@ -131,6 +137,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MoneyReceiptForm.resx">
       <DependentUpon>MoneyReceiptForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SellerInfoForm.resx">
+      <DependentUpon>SellerInfoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

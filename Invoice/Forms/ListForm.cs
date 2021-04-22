@@ -166,6 +166,13 @@ namespace Invoice.Forms
             invoiceForm.Show(this);
         }
 
+        private void HideListAndOpenSellerInfoForm(Form sellerInfoForm)
+        {
+            this.Hide();
+
+            sellerInfoForm.Show(this);
+        }
+
         private void LoadInvoiceList(string searchPhrase = null)
         {
             if (_searchActive)
@@ -287,6 +294,15 @@ namespace Invoice.Forms
             {
                 this.BackColor = Color.Wheat;
             }
+        }
+
+        private void SellerInfoFormButton_Click(object sender, EventArgs e)
+        {
+            var sellerInfoForm = new SellerInfoForm();
+
+            sellerInfoForm.Closed += ShowAndRefreshListForm;
+
+            HideListAndOpenSellerInfoForm(sellerInfoForm);
         }
     }
 }

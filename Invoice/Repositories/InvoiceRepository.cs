@@ -8,6 +8,8 @@ namespace Invoice.Repositories
 {
     public class InvoiceRepository
     {
+        private const int SellerInfoId = 1;
+
         public IEnumerable<InvoiceListModel> GetInvoiceList(string searchPhrase = null)
         {
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
@@ -37,10 +39,10 @@ namespace Invoice.Repositories
                 getExistingInvoiceQuery += @" ORDER BY 
                                                I.InvoiceNumberYearCreation DESC, I.InvoiceNumber DESC";
 
-                IEnumerable<InvoiceListModel> InvoiceList =
+                IEnumerable<InvoiceListModel> invoiceList =
                     dbConnection.Query<InvoiceListModel>(getExistingInvoiceQuery, queryParameters);
 
-                return InvoiceList;
+                return invoiceList;
             }
         }
 
@@ -52,7 +54,7 @@ namespace Invoice.Repositories
 
                 string getExistingServiceQuery =
                     @"SELECT  
-                        I.InvoiceDate , I.SerialNumber , I.SerialNumber , I.SellerName , I.SellerFirmCode , I.SellerPvmCode , I.SellerAddress , I.SellerPhoneNumber , I.SellerBank , I.SellerBankAccountNumber , I.SellerEmailAddress , 
+                        I.InvoiceDate , I.SerialNumber , I.SellerName , I.SellerFirmCode , I.SellerPvmCode , I.SellerAddress , I.SellerPhoneNumber , I.SellerBank , I.SellerBankAccountNumber , I.SellerEmailAddress , 
                         I.BuyerName , I.BuyerFirmCode , I.BuyerPvmCode , I.BuyerAddress , I.FirstProductName , I.SecondProductName , I.ThirdProductName , I.FourthProductName , I.FifthProductName , I.SixthProductName , 
                         I.SeventhProductName , I.EighthProductName , I.NinthProductName , I.TenProductName , I.EleventhProductName , I.TwelfthProductName , I.FirstProductSees , I.SecondProductSees , I.ThirdProductSees , 
                         I.ForthProductSees , I.FifthProductSees , I.SixthProductSees , I.SeventhProductSees , I.EighthProductSees , I.NinthProductSees , I.TenProductSees , I.EleventhProductSees , I.TwelfthProductSees , 
@@ -333,6 +335,123 @@ namespace Invoice.Repositories
                     dbConnection.QuerySingleOrDefault<int?>(getBiggestInvoiceNumberQuery, queryParameters) ?? 0;
 
                 return biggestOrderNumber.Value + 1;
+            }
+        }
+
+        public bool CheckSellerIdExists()
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string getIdNumberQuery =
+                    $@"SELECT EXISTS(SELECT 1 FROM SellerInfo WHERE Id = {SellerInfoId});
+                    ";
+
+                bool isSellerIdExists = dbConnection.QuerySingleOrDefault<bool>(getIdNumberQuery);
+
+                return isSellerIdExists;
+            }
+        }
+
+        public bool CreateNewSellerInfo(SellerInfoModel sellerInfo)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string createNewSellerInfoCommand =
+                    $@"Insert Into 'SellerInfo'
+                        Values (@Id, @SerialNumber, @SellerName, @SellerFirmCode, @SellerPvmCode, @SellerAddress, @SellerPhoneNumber, @SellerBank, @SellerBankAccountNumber, @SellerEmailAddress, @InvoiceMaker )
+                    ";
+
+                object queryParameters = new
+                {
+                    sellerInfo.SerialNumber,
+                    sellerInfo.SellerName,
+                    sellerInfo.SellerFirmCode,
+                    sellerInfo.SellerPvmCode,
+                    sellerInfo.SellerAddress,
+                    sellerInfo.SellerPhoneNumber,
+                    sellerInfo.SellerBank,
+                    sellerInfo.SellerBankAccountNumber,
+                    sellerInfo.SellerEmailAddress,
+                    sellerInfo.InvoiceMaker,
+
+                    Id = SellerInfoId
+                };
+
+                int affectedRows = dbConnection.Execute(createNewSellerInfoCommand, queryParameters);
+
+                return affectedRows == 1;
+            }
+        }
+
+       public bool UodateSellerInfo(SellerInfoModel updateSellerInfo)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string updateSellerInfoCommand =
+                    $@"Update 'SellerInfo'
+                        SET SerialNumber = @SerialNumber, SellerName = @SellerName, SellerFirmCode = @SellerFirmCode, SellerPvmCode = @SellerPvmCode, SellerAddress = @SellerAddress, 
+                           SellerPhoneNumber = @SellerPhoneNumber, SellerBank = @SellerBank, SellerBankAccountNumber = @SellerBankAccountNumber, SellerEmailAddress = @SellerEmailAddress,
+                           InvoiceMaker = @InvoiceMaker
+                       WHERE Id = @Id
+                    ";
+
+                object queryParameters = new
+                {
+                    updateSellerInfo.SerialNumber,
+                    updateSellerInfo.SellerName,
+                    updateSellerInfo.SellerFirmCode,
+                    updateSellerInfo.SellerPvmCode,
+                    updateSellerInfo.SellerAddress,
+                    updateSellerInfo.SellerPhoneNumber,
+                    updateSellerInfo.SellerBank,
+                    updateSellerInfo.SellerBankAccountNumber,
+                    updateSellerInfo.SellerEmailAddress,
+                    updateSellerInfo.InvoiceMaker,
+
+                    Id = SellerInfoId
+                };
+
+                int affectedRows = dbConnection.Execute(updateSellerInfoCommand, queryParameters);
+
+                return affectedRows == 1;
+            }
+        } 
+
+        public SellerInfoModel GetSellerInfo()
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string getExistingSellerInfoCommand =
+                    $@"SELECT *  FROM SellerInfo SI
+                       WHERE SI.Id = @Id
+                    ";
+
+                object queryParameter = new
+                {
+                    Id = SellerInfoId
+                };
+
+                SellerInfoModel getSellerInfo;
+
+                try
+                {
+                    SellerInfoModel sellerInfo = dbConnection.QuerySingleOrDefault<SellerInfoModel>(getExistingSellerInfoCommand, queryParameter);
+                    getSellerInfo = sellerInfo;
+                }
+                catch
+                {
+                    getSellerInfo = null;
+                }
+
+                return getSellerInfo;
             }
         }
     }
