@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
+using System.Drawing.Printing;
 using System.Windows.Forms;
 using Invoice.Models;
 
@@ -7,6 +9,7 @@ namespace Invoice.Forms
     public partial class MoneyReceiptForm : Form
     {
         private Bitmap _moneyReceiptMemoryImage;
+
         public MoneyReceiptForm()
         {
             InitializeComponent();
