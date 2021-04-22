@@ -374,6 +374,7 @@ namespace Invoice.Forms
                     SellerBankRichTextBox.Text = sellerInfo.SellerBank;
                     SellerBankAccountNumberRichTextBox.Text = sellerInfo.SellerBankAccountNumber;
                     SellerEmailAddressRichTextBox.Text = sellerInfo.SellerEmailAddress;
+                    InvoiceMakerRichTextBox.Text = sellerInfo.InvoiceMaker;
                 }
             }
         }

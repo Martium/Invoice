@@ -362,7 +362,7 @@ namespace Invoice.Repositories
 
                 string createNewSellerInfoCommand =
                     $@"Insert Into 'SellerInfo'
-                        Values (@Id, @SerialNumber, @SellerName, @SellerFirmCode, @SellerPvmCode, @SellerAddress, @SellerPhoneNumber, @SellerBank, @SellerBankAccountNumber, @SellerEmailAddress )
+                        Values (@Id, @SerialNumber, @SellerName, @SellerFirmCode, @SellerPvmCode, @SellerAddress, @SellerPhoneNumber, @SellerBank, @SellerBankAccountNumber, @SellerEmailAddress, @InvoiceMaker )
                     ";
 
                 object queryParameters = new
@@ -376,6 +376,7 @@ namespace Invoice.Repositories
                     sellerInfo.SellerBank,
                     sellerInfo.SellerBankAccountNumber,
                     sellerInfo.SellerEmailAddress,
+                    sellerInfo.InvoiceMaker,
 
                     Id = sellerInfoId
                 };
@@ -395,7 +396,8 @@ namespace Invoice.Repositories
                 string updateSellerInfoCommand =
                     $@"Update 'SellerInfo'
                         SET SerialNumber = @SerialNumber, SellerName = @SellerName, SellerFirmCode = @SellerFirmCode, SellerPvmCode = @SellerPvmCode, SellerAddress = @SellerAddress, 
-                           SellerPhoneNumber = @SellerPhoneNumber, SellerBank = @SellerBank, SellerBankAccountNumber = @SellerBankAccountNumber, SellerEmailAddress = @SellerEmailAddress
+                           SellerPhoneNumber = @SellerPhoneNumber, SellerBank = @SellerBank, SellerBankAccountNumber = @SellerBankAccountNumber, SellerEmailAddress = @SellerEmailAddress,
+                           InvoiceMaker = @InvoiceMaker
                        WHERE Id = @Id
                     ";
 
@@ -410,6 +412,7 @@ namespace Invoice.Repositories
                     updateSellerInfo.SellerBank,
                     updateSellerInfo.SellerBankAccountNumber,
                     updateSellerInfo.SellerEmailAddress,
+                    updateSellerInfo.InvoiceMaker,
 
                     Id = sellerInfoId
                 };

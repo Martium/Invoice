@@ -29,7 +29,8 @@ namespace Invoice.Forms
                 SellerPhoneNumber = SellerPhoneNumberRichTextBox.Text,
                 SellerBank = SellerBankRichTextBox.Text,
                 SellerBankAccountNumber = SellerBankAccountNumberRichTextBox.Text,
-                SellerEmailAddress = SellerEmailAddressRichTextBox.Text
+                SellerEmailAddress = SellerEmailAddressRichTextBox.Text,
+                InvoiceMaker = InvoiceMakerRichTextBox.Text
             };
 
             bool isIdExists = invoiceRepository.CheckSellerIdExists();

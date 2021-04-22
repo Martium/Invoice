@@ -11,5 +11,6 @@
         public string SellerBank { get; set; }
         public string SellerBankAccountNumber { get; set; }
         public string SellerEmailAddress { get; set; }
+        public string InvoiceMaker { get; set; }
     }
 }
