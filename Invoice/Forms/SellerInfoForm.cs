@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using Invoice.Constants;
 using Invoice.Models;
 using Invoice.Repositories;
 using Invoice.Service;
@@ -10,6 +11,7 @@ namespace Invoice.Forms
         public SellerInfoForm()
         {
             InitializeComponent();
+            SetTextBoxLengths();
         }
 
         private void SaveButton_Click(object sender, System.EventArgs e)
@@ -35,10 +37,10 @@ namespace Invoice.Forms
 
             if (isIdExists)
             {
-               isSuccessful = invoiceRepository.UodateSellerInfo(sellerInfo);
+                isSuccessful = invoiceRepository.UodateSellerInfo(sellerInfo);
             }
             else
-            {
+            { 
                 isSuccessful = invoiceRepository.CreateNewSellerInfo(sellerInfo);
             }
 
@@ -52,6 +54,22 @@ namespace Invoice.Forms
             }
 
             this.Close();
+        }
+
+        private void SetTextBoxLengths()
+        {
+            SerialNumberRichTextBox.MaxLength = FormSettings.TextBoxLengths.SerialNumber;
+
+            SellerNameRichTextBox.MaxLength = FormSettings.TextBoxLengths.SellerName;
+            SellerFirmCodeRichTextBox.MaxLength = FormSettings.TextBoxLengths.SellerFirmCode;
+            SellerPvmCodeRichTextBox.MaxLength = FormSettings.TextBoxLengths.SellerPvmCode;
+            SellerAddressRichTextBox.MaxLength = FormSettings.TextBoxLengths.SellerAddress;
+            SellerPhoneNumberRichTextBox.MaxLength = FormSettings.TextBoxLengths.SellerPhoneNumber;
+            SellerBankRichTextBox.MaxLength = FormSettings.TextBoxLengths.SellerBank;
+            SellerBankAccountNumberRichTextBox.MaxLength = FormSettings.TextBoxLengths.SellerBankAccountNumber;
+            SellerEmailAddressRichTextBox.MaxLength = FormSettings.TextBoxLengths.SellerEmailAddress;
+
+            InvoiceMakerRichTextBox.MaxLength = FormSettings.TextBoxLengths.InvoiceMaker;
         }
     }
 }

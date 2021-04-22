@@ -48,6 +48,8 @@ namespace Invoice.Forms
             this.SellerBankAccountNumberRichTextBox = new System.Windows.Forms.RichTextBox();
             this.SellerEmailAddressRichTextBox = new System.Windows.Forms.RichTextBox();
             this.SaveButton = new System.Windows.Forms.Button();
+            this.InvoiceMakerLabel = new System.Windows.Forms.Label();
+            this.InvoiceMakerRichTextBox = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // SerialNumberLabel
@@ -215,7 +217,7 @@ namespace Invoice.Forms
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(135, 342);
+            this.SaveButton.Location = new System.Drawing.Point(135, 419);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(149, 23);
             this.SaveButton.TabIndex = 42;
@@ -223,11 +225,31 @@ namespace Invoice.Forms
             this.SaveButton.UseVisualStyleBackColor = true;
             this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
+            // InvoiceMakerLabel
+            // 
+            this.InvoiceMakerLabel.AutoSize = true;
+            this.InvoiceMakerLabel.Location = new System.Drawing.Point(132, 349);
+            this.InvoiceMakerLabel.Name = "InvoiceMakerLabel";
+            this.InvoiceMakerLabel.Size = new System.Drawing.Size(126, 26);
+            this.InvoiceMakerLabel.TabIndex = 44;
+            this.InvoiceMakerLabel.Text = "Sąskaitą sudarė pareigos\r\nvardas pavardė";
+            // 
+            // InvoiceMakerRichTextBox
+            // 
+            this.InvoiceMakerRichTextBox.Location = new System.Drawing.Point(12, 378);
+            this.InvoiceMakerRichTextBox.Multiline = false;
+            this.InvoiceMakerRichTextBox.Name = "InvoiceMakerRichTextBox";
+            this.InvoiceMakerRichTextBox.Size = new System.Drawing.Size(374, 19);
+            this.InvoiceMakerRichTextBox.TabIndex = 45;
+            this.InvoiceMakerRichTextBox.Text = "";
+            // 
             // SellerInfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(403, 377);
+            this.ClientSize = new System.Drawing.Size(407, 454);
+            this.Controls.Add(this.InvoiceMakerRichTextBox);
+            this.Controls.Add(this.InvoiceMakerLabel);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.SellerEmailAddressRichTextBox);
             this.Controls.Add(this.SellerBankAccountNumberRichTextBox);
@@ -277,5 +299,7 @@ namespace Invoice.Forms
         private System.Windows.Forms.RichTextBox SellerBankAccountNumberRichTextBox;
         private System.Windows.Forms.RichTextBox SellerEmailAddressRichTextBox;
         private System.Windows.Forms.Button SaveButton;
+        private System.Windows.Forms.Label InvoiceMakerLabel;
+        private System.Windows.Forms.RichTextBox InvoiceMakerRichTextBox;
     }
 }
