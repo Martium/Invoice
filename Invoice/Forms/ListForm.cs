@@ -152,11 +152,33 @@ namespace Invoice.Forms
             }
         }
 
+        private void ListOfInvoiceDataGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            EditButton_Click(this, new EventArgs());
+        }
+
+        private void ListOfInvoiceDataGridView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                EditButton_Click(this, new EventArgs());
+            }
+        }
+
         private void ListOfInvoiceDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             string paymentStatus = ListOfInvoiceDataGridView.SelectedRows[0].Cells[InvoiceIsPaidIndex].Value.ToString();
 
             this.BackColor = paymentStatus == "Atsiskaityta" ? Color.Chartreuse : Color.Red;
+        }
+
+        private void SellerInfoFormButton_Click(object sender, EventArgs e)
+        {
+            var sellerInfoForm = new SellerInfoForm();
+
+            sellerInfoForm.Closed += ShowAndRefreshListForm;
+
+            HideListAndOpenSellerInfoForm(sellerInfoForm);
         }
 
         private void HideListAndOpenInvoiceForm(Form invoiceForm)
@@ -189,6 +211,8 @@ namespace Invoice.Forms
             ListOfInvoiceDataGridView.DataSource = invoiceListModelBindingSource;
 
             ChangePaymentButton.Enabled = ListOfInvoiceDataGridView.Rows.Count != 0;
+
+            TrySelectFirstRowInDataGridView();
 
             ChangeFormBackRoundColorByPaymentStatus();
         }
@@ -286,7 +310,7 @@ namespace Invoice.Forms
         {
             try
             {
-                string paymentStatus = ListOfInvoiceDataGridView.SelectedRows[0].Cells[InvoiceIsPaidIndex].Value.ToString();
+                var paymentStatus = ListOfInvoiceDataGridView.SelectedRows[0].Cells[InvoiceIsPaidIndex].Value.ToString();
 
                 this.BackColor = paymentStatus == "Atsiskaityta" ? Color.Chartreuse : Color.Red;
             }
@@ -296,13 +320,12 @@ namespace Invoice.Forms
             }
         }
 
-        private void SellerInfoFormButton_Click(object sender, EventArgs e)
+        private void TrySelectFirstRowInDataGridView()
         {
-            var sellerInfoForm = new SellerInfoForm();
-
-            sellerInfoForm.Closed += ShowAndRefreshListForm;
-
-            HideListAndOpenSellerInfoForm(sellerInfoForm);
+            if (ListOfInvoiceDataGridView.Rows.Count > 0)
+            {
+                ListOfInvoiceDataGridView.Select();
+            }
         }
     }
 }
