@@ -28,7 +28,7 @@ namespace Invoice.Forms
         private readonly int? _invoiceNumberYearCreation;
         private string _paymentStatus = "Nesumokėta";
 
-        private Bitmap _InvoiceMemoryImage;
+        private Bitmap _invoiceMemoryImage;
 
         private const string DateFormat = "yyyy-MM-dd";
 
@@ -142,7 +142,7 @@ namespace Invoice.Forms
             PdfDocument newInvoicePdfDocument = new PdfDocument(newInvoicePdfWriter);
             Document newInvoiceDocument = new Document(newInvoicePdfDocument);
 
-            var convertImageToByteArray = ConvertImageToByteArray(_InvoiceMemoryImage);
+            var convertImageToByteArray = ConvertImageToByteArray(_invoiceMemoryImage);
             var newInvoiceImage =
                 new iText.Layout.Element.Image(ImageDataFactory.Create(convertImageToByteArray)).SetTextAlignment(
                     TextAlignment.CENTER);
@@ -178,6 +178,14 @@ namespace Invoice.Forms
 
             TotalPriceWithPvmRichTextBox.Text = _numberService
                 .CalculateTotalPriceWithPvm(ProductTotalPriceRichTextBox, PvmPriceRichTextBox).ToString();
+        }
+
+        private void Control_RichTextBoxesKeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((RichTextBox)sender, true, true, true, true);
+            }
         }
 
         private void SaveMoneyReceiptFormToPdf(Document newInvoiceDocument)
@@ -593,10 +601,10 @@ namespace Invoice.Forms
 
         private void CaptureInvoiceFormScreen()
         {
-            _InvoiceMemoryImage = new Bitmap(PrintInvoicePanel.Width, PrintInvoicePanel.Height);
+            _invoiceMemoryImage = new Bitmap(PrintInvoicePanel.Width, PrintInvoicePanel.Height);
 
             PrintInvoicePanel.DrawToBitmap(
-                _InvoiceMemoryImage,
+                _invoiceMemoryImage,
                 new Rectangle(0, 0, PrintInvoicePanel.Width, PrintInvoicePanel.Height));
         }
 
@@ -605,5 +613,6 @@ namespace Invoice.Forms
             ImageConverter converter = new ImageConverter();
             return (byte[]) converter.ConvertTo(img, typeof(byte[]));
         }
+        
     }
 }
