@@ -52,8 +52,6 @@ namespace Invoice.Forms
             this.MoneyAcceptedRecepitInfoLabel = new System.Windows.Forms.Label();
             this.SellerLabel = new System.Windows.Forms.Label();
             this.SellerInfoLabel = new System.Windows.Forms.Label();
-            this.PrintPreviewMoneyReceiptDialog = new System.Windows.Forms.PrintPreviewDialog();
-            this.PrintMoneyReceiptDocument = new System.Drawing.Printing.PrintDocument();
             this.PrintMoneyReceiptPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -284,16 +282,6 @@ namespace Invoice.Forms
             this.SellerInfoLabel.TabIndex = 0;
             this.SellerInfoLabel.Text = "SellerInfo\r\n";
             // 
-            // PrintPreviewMoneyReceiptDialog
-            // 
-            this.PrintPreviewMoneyReceiptDialog.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            this.PrintPreviewMoneyReceiptDialog.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.PrintPreviewMoneyReceiptDialog.ClientSize = new System.Drawing.Size(400, 300);
-            this.PrintPreviewMoneyReceiptDialog.Enabled = true;
-            this.PrintPreviewMoneyReceiptDialog.Icon = ((System.Drawing.Icon)(resources.GetObject("PrintPreviewMoneyReceiptDialog.Icon")));
-            this.PrintPreviewMoneyReceiptDialog.Name = "PrintPreviewMoneyReceiptDialog";
-            this.PrintPreviewMoneyReceiptDialog.Visible = false;
-            // 
             // MoneyReceiptForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -334,7 +322,5 @@ namespace Invoice.Forms
         private System.Windows.Forms.Label SellerFirmCodeLabel;
         private System.Windows.Forms.Label SerialNumberLabel;
         private System.Windows.Forms.Label InvoiceNumberLabel;
-        public System.Windows.Forms.PrintPreviewDialog PrintPreviewMoneyReceiptDialog;
-        public System.Drawing.Printing.PrintDocument PrintMoneyReceiptDocument;
     }
 }

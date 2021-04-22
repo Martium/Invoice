@@ -1243,6 +1243,7 @@ namespace Invoice.Forms
             this.printPreviewDialog.AutoScrollMargin = new System.Drawing.Size(0, 0);
             this.printPreviewDialog.AutoScrollMinSize = new System.Drawing.Size(0, 0);
             this.printPreviewDialog.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog.Document = this.printDocument;
             this.printPreviewDialog.Enabled = true;
             this.printPreviewDialog.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog.Icon")));
             this.printPreviewDialog.Name = "printPreviewDialog";

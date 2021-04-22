@@ -191,7 +191,7 @@ namespace Invoice.Forms
 
         private void PrintButton_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = _messageDialogService.ShowChoiceMessage("Ar norite spausdinti kvitą ?");
+            DialogResult dialogResult = _messageDialogService.ShowChoiceMessage("Ar norite spausdinti kvitą (jei paspausit 'OK' spausdins kvitą jei 'Cancel' spausdins Sąskaitą faktūrą) ?");
 
             if (dialogResult == DialogResult.OK)
             {
@@ -199,15 +199,20 @@ namespace Invoice.Forms
             }
             else
             {
-                CaptureInvoiceFormScreen();
-                printPreviewDialog.Document = printDocument;
-                printPreviewDialog.ShowDialog();
+                PrintInvoiceForm();
             }
         }
 
         private void printDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
             e.Graphics.DrawImage(_invoiceMemoryImage, 0, this.PrintInvoicePanel.Location.Y);
+        }
+
+        private void PrintInvoiceForm()
+        {
+            CaptureInvoiceFormScreen();
+            printPreviewDialog.Document = printDocument;
+            printPreviewDialog.ShowDialog();
         }
 
         private void PrintMoneyReceiptForm()
@@ -230,15 +235,13 @@ namespace Invoice.Forms
             };
 
             moneyReceiptForm.Show();
+            moneyReceiptForm.Hide();
 
             _invoiceMemoryImage = moneyReceiptForm.SaveMoneyReceiptForm(moneyReceiptInfo);
             printPreviewDialog.Document = printDocument;
             printPreviewDialog.ShowDialog();
 
             moneyReceiptForm.Close();
-
-
-
         }
 
         private void SaveMoneyReceiptFormToPdf(Document newInvoiceDocument)
@@ -472,6 +475,7 @@ namespace Invoice.Forms
         {
             this.StartPosition = FormStartPosition.CenterScreen;
             InvoiceNumberRichTextBox.ReadOnly = true;
+            (printPreviewDialog as Form).WindowState = FormWindowState.Maximized;
         }
 
         private void FillDefaultSellerInfoForNewInvoice()
