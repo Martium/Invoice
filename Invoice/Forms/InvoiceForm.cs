@@ -193,6 +193,9 @@ namespace Invoice.Forms
         {
             var moneyReceiptForm = new MoneyReceiptForm();
 
+            string allProducts = FillProductsToMoneyReceiptForm();
+            
+
             MoneyReceiptModel moneyReceiptInfo = new MoneyReceiptModel()
             {
                 SellerInfo = SellerNameRichTextBox.Text,
@@ -200,10 +203,8 @@ namespace Invoice.Forms
                 SerialNumber = SerialNumberRichTextBox.Text,
                 InvoiceNumber = InvoiceNumberRichTextBox.Text,
                 InvoiceDate = InvoiceDateRichTextBox.Text,
-                AllProducts =
-                    $@"{FirstProductNameRichTextBox.Text}, {FirstProductQuantityRichTextBox.Text} {FirstProductSeesRichTextBox.Text}, {FirstProductPriceRichTextBox.Text} EUR, {SecondProductNameRichTextBox.Text}, {SecondProductQuantityRichTextBox.Text} {SecondProductSeesRichTextBox.Text}, {SecondProductPriceRichTextBox.Text} EUR, {ThirdProductNameRichTextBox.Text}, {ThirdProductQuantityRichTextBox.Text} {ThirdProductSeesRichTextBox.Text}, {ThirdProductPriceRichTextBox.Text} EUR, {FourthProductNameRichTextBox.Text}, {FourthProductQuantityRichTextBox.Text} {FourthProductSeesRichTextBox.Text}, {FourthProductPriceRichTextBox.Text} EUR,
-{FifthProductNameRichTextBox.Text}, {FifthProductQuantityRichTextBox.Text} {FifthProductSeesRichTextBox.Text}, {FifthProductPriceRichTextBox.Text} EUR, {SixthProductNameRichTextBox.Text}, {SixthProductQuantityRichTextBox.Text} {SixthProductSeesRichTextBox.Text}, {SixthProductPriceRichTextBox.Text} EUR, {SeventhProductNameRichTextBox.Text}, {SeventhProductQuantityRichTextBox.Text} {SeventhProductSeesRichTextBox.Text}, {SeventhProductPriceRichTextBox.Text} EUR, {EighthProductNameRichTextBox.Text}, {EighthProductQuantityRichTextBox.Text} {EighthProductSeesRichTextBox.Text}, {EighthProductPriceRichTextBox.Text} EuR, 
-{NinthProductNameRichTextBox.Text}, {NinthProductQuantityRichTextBox.Text} {NinthProductSeesRichTextBox.Text} {NinthProductPriceRichTextBox.Text} EUR, {TenProductNameRichTextBox.Text}, {TenProductQuantityRichTextBox.Text} {TenProductSeesRichTextBox.Text}, {TenProductPriceRichTextBox.Text} EUR, {EleventhProductNameRichTextBox.Text}, {EleventhProductQuantityRichTextBox.Text} {EleventhProductSeesRichTextBox.Text}, {EleventhProductPriceRichTextBox.Text} EUR, {TwelfthProductNameRichTextBox.Text}, {TwelfthProductQuantityRichTextBox.Text} {TwelfthProductSeesRichTextBox.Text}, {TwelfthProductPriceRichTextBox.Text} EUR",
+                AllProducts = $@"{allProducts}",
+                    
                 PriceInWords = PriceInWordsRichTextBox.Text,
                 InvoiceMaker = InvoiceMakerRichTextBox.Text
             };
@@ -219,6 +220,62 @@ namespace Invoice.Forms
 
             newInvoiceDocument.Add(newMoneyReceiptImage);
             moneyReceiptForm.Close();
+        }
+
+        private string CheckProductsRichTextBox(RichTextBox productNameRichTextBox, RichTextBox productQuantityRichTextBox, RichTextBox productSeesRichTextBox, RichTextBox productPriceRichTextBox)
+        {
+            string productInfo;
+
+            if (string.IsNullOrWhiteSpace(productNameRichTextBox.Text) || string.IsNullOrWhiteSpace(productQuantityRichTextBox.Text) || string.IsNullOrWhiteSpace(productSeesRichTextBox.Text) || string.IsNullOrWhiteSpace(productPriceRichTextBox.Text))
+            {
+                productInfo = string.Empty;
+            }
+            else
+            {
+                productInfo = $"{productNameRichTextBox.Text}, {productQuantityRichTextBox.Text} {productSeesRichTextBox.Text}, {productPriceRichTextBox.Text} EUR. ";
+            }
+
+            return productInfo;
+        }
+
+        private string FillProductsToMoneyReceiptForm()
+        {
+            string allProducts;
+
+            string firstProductInfo = CheckProductsRichTextBox(FirstProductNameRichTextBox, FirstProductQuantityRichTextBox,
+                FirstProductSeesRichTextBox, FirstProductPriceRichTextBox);
+            string secondProductInfo = CheckProductsRichTextBox(SecondProductNameRichTextBox,
+                SecondProductQuantityRichTextBox, SecondProductSeesRichTextBox, SecondProductPriceRichTextBox);
+            string thirdProductInfo = CheckProductsRichTextBox(ThirdProductNameRichTextBox,
+                ThirdProductQuantityRichTextBox, ThirdProductSeesRichTextBox, ThirdProductPriceRichTextBox);
+            string forthProductInfo = CheckProductsRichTextBox(FourthProductNameRichTextBox,
+                FourthProductQuantityRichTextBox, FourthProductSeesRichTextBox, FourthProductPriceRichTextBox);
+
+            string fifthProductInfo = CheckProductsRichTextBox(FifthProductNameRichTextBox,
+                FifthProductQuantityRichTextBox, FifthProductSeesRichTextBox, FifthProductPriceRichTextBox);
+            string sixthProductInfo = CheckProductsRichTextBox(SixthProductNameRichTextBox,
+                SixthProductQuantityRichTextBox, SixthProductSeesRichTextBox, SixthProductPriceRichTextBox);
+            string seventhProductInfo = CheckProductsRichTextBox(SeventhProductNameRichTextBox,
+                SeventhProductQuantityRichTextBox, SeventhProductSeesRichTextBox, SeventhProductPriceRichTextBox);
+            string eighthProductInfo = CheckProductsRichTextBox(EighthProductNameRichTextBox,
+                EighthProductQuantityRichTextBox, EighthProductSeesRichTextBox, EighthProductPriceRichTextBox);
+
+            string ninthProductInfo = CheckProductsRichTextBox(NinthProductNameRichTextBox,
+                NinthProductQuantityRichTextBox, NinthProductSeesRichTextBox, NinthProductPriceRichTextBox);
+            string tenProductInfo = CheckProductsRichTextBox(TenProductNameRichTextBox, TenProductQuantityRichTextBox,
+                TenProductSeesRichTextBox, TenProductPriceRichTextBox);
+            string eleventhProductInfo = CheckProductsRichTextBox(EleventhProductNameRichTextBox,
+                EleventhProductQuantityRichTextBox, EleventhProductSeesRichTextBox, EleventhProductPriceRichTextBox);
+            string twelfthProductName = CheckProductsRichTextBox(TwelfthProductNameRichTextBox,
+                TwelfthProductQuantityRichTextBox, TwelfthProductSeesRichTextBox, TwelfthProductPriceRichTextBox);
+
+
+
+            allProducts = $@"{firstProductInfo} {secondProductInfo} {thirdProductInfo} {forthProductInfo}
+{fifthProductInfo} {sixthProductInfo} {seventhProductInfo} {eighthProductInfo} 
+{ninthProductInfo} {tenProductInfo} {eleventhProductInfo} {twelfthProductName}";
+
+            return allProducts;
         }
 
         private InvoiceModel GetAllInfoFromRichTextBox()
