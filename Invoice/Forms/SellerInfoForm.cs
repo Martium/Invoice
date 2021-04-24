@@ -57,6 +57,17 @@ namespace Invoice.Forms
             this.Close();
         }
 
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Escape))
+            {
+                this.Close();
+                return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
         private void SetTextBoxLengths()
         {
             SerialNumberRichTextBox.MaxLength = FormSettings.TextBoxLengths.SerialNumber;
