@@ -15,6 +15,7 @@ namespace Invoice.Forms
             InitializeComponent();
             SetTextBoxLengths();
             LoadSellerInfo();
+            SetCursorAtTextBoxStringEnd();
         }
 
         private void SaveButton_Click(object sender, System.EventArgs e)
@@ -58,6 +59,7 @@ namespace Invoice.Forms
             if (e.KeyCode == Keys.Enter)
             {
                 this.SelectNextControl((Control) sender, true, true, true, true);
+                SetCursorAtTextBoxStringEnd();
             }
         }
 
@@ -86,6 +88,22 @@ namespace Invoice.Forms
             SellerEmailAddressRichTextBox.MaxLength = FormSettings.TextBoxLengths.SellerEmailAddress;
 
             InvoiceMakerRichTextBox.MaxLength = FormSettings.TextBoxLengths.InvoiceMaker;
+        }
+
+        private void SetCursorAtTextBoxStringEnd()
+        {
+            SerialNumberRichTextBox.SelectionStart = SerialNumberRichTextBox.Text.Length;
+
+            SellerNameRichTextBox.SelectionStart = SellerNameRichTextBox.Text.Length;
+            SellerFirmCodeRichTextBox.SelectionStart = SellerFirmCodeRichTextBox.Text.Length;
+            SellerPvmCodeRichTextBox.SelectionStart = SellerPvmCodeRichTextBox.Text.Length;
+            SellerAddressRichTextBox.SelectionStart = SellerAddressRichTextBox.Text.Length;
+            SellerPhoneNumberRichTextBox.SelectionStart = SellerPhoneNumberRichTextBox.Text.Length;
+            SellerBankRichTextBox.SelectionStart = SellerBankRichTextBox.Text.Length;
+            SellerBankAccountNumberRichTextBox.SelectionStart = SellerBankAccountNumberRichTextBox.Text.Length;
+            SellerEmailAddressRichTextBox.SelectionStart = SellerEmailAddressRichTextBox.Text.Length;
+
+            InvoiceMakerRichTextBox.SelectionStart = InvoiceMakerRichTextBox.Text.Length;
         }
 
         private void LoadSellerInfo()
