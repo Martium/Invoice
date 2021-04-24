@@ -186,6 +186,17 @@ namespace Invoice.Forms
             HideListAndOpenSellerInfoForm(sellerInfoForm);
         }
 
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Escape))
+            {
+                this.Close();
+                return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
         #region Helpers
         private void HideListAndOpenInvoiceForm(Form invoiceForm)
         {
@@ -332,17 +343,6 @@ namespace Invoice.Forms
             {
                 ListOfInvoiceDataGridView.Select();
             }
-        }
-
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            if (keyData == (Keys.Escape))
-            {
-                this.Close();
-                return true;
-            }
-
-            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         #endregion

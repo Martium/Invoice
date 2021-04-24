@@ -759,6 +759,17 @@ namespace Invoice.Forms
             return (byte[])converter.ConvertTo(img, typeof(byte[]));
         }
 
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Escape))
+            {
+                this.Close();
+                return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
         #endregion
     }
 }
