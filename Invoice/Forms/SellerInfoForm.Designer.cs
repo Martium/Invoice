@@ -230,6 +230,7 @@ namespace Invoice.Forms
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(149, 23);
             this.SaveButton.TabIndex = 42;
+            this.SaveButton.TabStop = false;
             this.SaveButton.Text = "Išsaugoti";
             this.SaveButton.UseVisualStyleBackColor = true;
             this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);

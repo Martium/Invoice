@@ -36,9 +36,10 @@ namespace Invoice.Forms
             };
 
             bool isIdExists = _invoiceRepository.CheckSellerIdExists();
-            bool isSuccessful;
 
-            isSuccessful = isIdExists ? _invoiceRepository.UpdateSellerInfo(sellerInfo) : _invoiceRepository.CreateNewSellerInfo(sellerInfo);
+            bool isSuccessful = isIdExists
+                ? _invoiceRepository.UpdateSellerInfo(sellerInfo)
+                : _invoiceRepository.CreateNewSellerInfo(sellerInfo);
 
             if (isSuccessful)
             {
@@ -56,7 +57,7 @@ namespace Invoice.Forms
         {
             if (e.KeyCode == Keys.Enter)
             {
-                this.SelectNextControl((RichTextBox)sender, true, true, true, true);
+                this.SelectNextControl((RichTextBox) sender, true, true, true, true);
                 e.SuppressKeyPress = true;
             }
         }
@@ -70,7 +71,7 @@ namespace Invoice.Forms
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
-        }
+        } 
 
         private void SetTextBoxLengths()
         {
@@ -108,7 +109,6 @@ namespace Invoice.Forms
                 SellerEmailAddressRichTextBox.Text = sellerInfo.SellerEmailAddress;
 
                 InvoiceMakerRichTextBox.Text = sellerInfo.InvoiceMaker;
-
             }
         }
     }

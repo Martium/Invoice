@@ -262,6 +262,7 @@ namespace Invoice.Forms
             this.TotalPriceWithPvmRichTextBox.ReadOnly = true;
             this.TotalPriceWithPvmRichTextBox.Size = new System.Drawing.Size(96, 19);
             this.TotalPriceWithPvmRichTextBox.TabIndex = 96;
+            this.TotalPriceWithPvmRichTextBox.TabStop = false;
             this.TotalPriceWithPvmRichTextBox.Text = "";
             this.TotalPriceWithPvmRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ControlRichTextBox_KeyUp);
             // 
@@ -283,6 +284,7 @@ namespace Invoice.Forms
             this.PvmPriceRichTextBox.ReadOnly = true;
             this.PvmPriceRichTextBox.Size = new System.Drawing.Size(96, 19);
             this.PvmPriceRichTextBox.TabIndex = 94;
+            this.PvmPriceRichTextBox.TabStop = false;
             this.PvmPriceRichTextBox.Text = "";
             this.PvmPriceRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ControlRichTextBox_KeyUp);
             // 
@@ -304,6 +306,7 @@ namespace Invoice.Forms
             this.ProductTotalPriceRichTextBox.ReadOnly = true;
             this.ProductTotalPriceRichTextBox.Size = new System.Drawing.Size(96, 19);
             this.ProductTotalPriceRichTextBox.TabIndex = 92;
+            this.ProductTotalPriceRichTextBox.TabStop = false;
             this.ProductTotalPriceRichTextBox.Text = "";
             this.ProductTotalPriceRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ControlRichTextBox_KeyUp);
             // 
@@ -1141,6 +1144,7 @@ namespace Invoice.Forms
             this.InvoiceNumberRichTextBox.ReadOnly = true;
             this.InvoiceNumberRichTextBox.Size = new System.Drawing.Size(83, 19);
             this.InvoiceNumberRichTextBox.TabIndex = 7;
+            this.InvoiceNumberRichTextBox.TabStop = false;
             this.InvoiceNumberRichTextBox.Text = "";
             this.InvoiceNumberRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ControlRichTextBox_KeyUp);
             // 
@@ -1200,6 +1204,7 @@ namespace Invoice.Forms
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(92, 29);
             this.SaveButton.TabIndex = 1;
+            this.SaveButton.TabStop = false;
             this.SaveButton.Text = "Išsaugoti";
             this.SaveButton.UseVisualStyleBackColor = true;
             this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
@@ -1210,6 +1215,7 @@ namespace Invoice.Forms
             this.SaveToPdf.Name = "SaveToPdf";
             this.SaveToPdf.Size = new System.Drawing.Size(92, 29);
             this.SaveToPdf.TabIndex = 2;
+            this.SaveToPdf.TabStop = false;
             this.SaveToPdf.Text = "Išsaugoti į PDF";
             this.SaveToPdf.UseVisualStyleBackColor = true;
             this.SaveToPdf.Click += new System.EventHandler(this.SaveToPdf_Click);
@@ -1220,6 +1226,7 @@ namespace Invoice.Forms
             this.CalculateButton.Name = "CalculateButton";
             this.CalculateButton.Size = new System.Drawing.Size(92, 29);
             this.CalculateButton.TabIndex = 3;
+            this.CalculateButton.TabStop = false;
             this.CalculateButton.Text = "Skaičiuoti";
             this.CalculateButton.UseVisualStyleBackColor = true;
             this.CalculateButton.Click += new System.EventHandler(this.CalculateButton_Click);
@@ -1230,6 +1237,7 @@ namespace Invoice.Forms
             this.PrintButton.Name = "PrintButton";
             this.PrintButton.Size = new System.Drawing.Size(111, 29);
             this.PrintButton.TabIndex = 4;
+            this.PrintButton.TabStop = false;
             this.PrintButton.Text = "Spausdinti Formą";
             this.PrintButton.UseVisualStyleBackColor = true;
             this.PrintButton.Click += new System.EventHandler(this.PrintButton_Click);
