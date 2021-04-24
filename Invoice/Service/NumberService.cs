@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Windows.Forms;
 using Invoice.Models;
 
@@ -6,6 +7,7 @@ namespace Invoice.Service
 {
     public class NumberService
     {
+        private const int RoundDigitNumber = 2;
         public string ChangeCommaToDot(RichTextBox richTextBox)
         {
             string changeComma = richTextBox.Text;
@@ -153,12 +155,22 @@ namespace Invoice.Service
                 (invoiceQuantityAndPriceModel.EleventhProductQuantity * invoiceQuantityAndPriceModel.EleventhProductPrice) +
                 (invoiceQuantityAndPriceModel.TwelfthProductQuantity * invoiceQuantityAndPriceModel.TwelfthProductPrice);
 
+            if (calculateFullPrice.HasValue)
+            {
+                double roundCalculateFullPrice = Math.Round(calculateFullPrice.Value, RoundDigitNumber, MidpointRounding.ToEven);
+                calculateFullPrice = roundCalculateFullPrice;
+            }
+
             return calculateFullPrice;
         }
 
         public double? CalculatePvm(RichTextBox richTextBox)
         {
             double? calculatePvm = double.Parse(richTextBox.Text, CultureInfo.InvariantCulture) * 21 / 100;
+
+            double roundCalculatePvm = Math.Round(calculatePvm.Value, RoundDigitNumber, MidpointRounding.ToEven);
+            calculatePvm = roundCalculatePvm;
+
             return calculatePvm;
         }
 
@@ -166,6 +178,12 @@ namespace Invoice.Service
         {
             double? calculateTotalPriceWithPvm = double.Parse(productTotalPriceRichTextBox.Text, CultureInfo.InvariantCulture) +
                                                  double.Parse(pvmPriceRichTextBox.Text, CultureInfo.InvariantCulture);
+
+            double roundCalculateTotalPriceWithPvm =
+                    Math.Round(calculateTotalPriceWithPvm.Value, RoundDigitNumber, MidpointRounding.ToEven);
+
+            calculateTotalPriceWithPvm = roundCalculateTotalPriceWithPvm;
+
 
             return calculateTotalPriceWithPvm;
         }
