@@ -42,6 +42,9 @@ namespace Invoice.Forms
             this.ChangePaymentButton = new System.Windows.Forms.Button();
             this.SellerInfoFormButton = new System.Windows.Forms.Button();
             this.InvoiceNumberYearCreationComboBox = new System.Windows.Forms.ComboBox();
+            this.ProductTotalPriceTextBox = new System.Windows.Forms.TextBox();
+            this.PvmPriceTextBox = new System.Windows.Forms.TextBox();
+            this.TotalPriceWithPvmTextBox = new System.Windows.Forms.TextBox();
             this.invoiceNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoiceNumberYearCreationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoiceDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,9 +52,9 @@ namespace Invoice.Forms
             this.paymentStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.totalPriceWithPvmDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoiceListModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.ProductTotalPriceTextBox = new System.Windows.Forms.TextBox();
-            this.PvmPriceTextBox = new System.Windows.Forms.TextBox();
-            this.TotalPriceWithPvmTextBox = new System.Windows.Forms.TextBox();
+            this.ProductTotalPriceLabel = new System.Windows.Forms.Label();
+            this.PvmPriceLabel = new System.Windows.Forms.Label();
+            this.TotalPriceWithPvmLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ListOfInvoiceDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceListModelBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -179,6 +182,30 @@ namespace Invoice.Forms
             this.InvoiceNumberYearCreationComboBox.Size = new System.Drawing.Size(73, 21);
             this.InvoiceNumberYearCreationComboBox.TabIndex = 9;
             // 
+            // ProductTotalPriceTextBox
+            // 
+            this.ProductTotalPriceTextBox.Location = new System.Drawing.Point(433, 38);
+            this.ProductTotalPriceTextBox.Name = "ProductTotalPriceTextBox";
+            this.ProductTotalPriceTextBox.ReadOnly = true;
+            this.ProductTotalPriceTextBox.Size = new System.Drawing.Size(114, 20);
+            this.ProductTotalPriceTextBox.TabIndex = 10;
+            // 
+            // PvmPriceTextBox
+            // 
+            this.PvmPriceTextBox.Location = new System.Drawing.Point(556, 38);
+            this.PvmPriceTextBox.Name = "PvmPriceTextBox";
+            this.PvmPriceTextBox.ReadOnly = true;
+            this.PvmPriceTextBox.Size = new System.Drawing.Size(98, 20);
+            this.PvmPriceTextBox.TabIndex = 11;
+            // 
+            // TotalPriceWithPvmTextBox
+            // 
+            this.TotalPriceWithPvmTextBox.Location = new System.Drawing.Point(663, 38);
+            this.TotalPriceWithPvmTextBox.Name = "TotalPriceWithPvmTextBox";
+            this.TotalPriceWithPvmTextBox.ReadOnly = true;
+            this.TotalPriceWithPvmTextBox.Size = new System.Drawing.Size(98, 20);
+            this.TotalPriceWithPvmTextBox.TabIndex = 12;
+            // 
             // invoiceNumberDataGridViewTextBoxColumn
             // 
             this.invoiceNumberDataGridViewTextBoxColumn.DataPropertyName = "InvoiceNumber";
@@ -230,26 +257,32 @@ namespace Invoice.Forms
             // 
             this.invoiceListModelBindingSource.DataSource = typeof(Invoice.Models.InvoiceListModel);
             // 
-            // ProductTotalPriceTextBox
+            // ProductTotalPriceLabel
             // 
-            this.ProductTotalPriceTextBox.Location = new System.Drawing.Point(417, 36);
-            this.ProductTotalPriceTextBox.Name = "ProductTotalPriceTextBox";
-            this.ProductTotalPriceTextBox.Size = new System.Drawing.Size(80, 20);
-            this.ProductTotalPriceTextBox.TabIndex = 10;
+            this.ProductTotalPriceLabel.AutoSize = true;
+            this.ProductTotalPriceLabel.Location = new System.Drawing.Point(446, 9);
+            this.ProductTotalPriceLabel.Name = "ProductTotalPriceLabel";
+            this.ProductTotalPriceLabel.Size = new System.Drawing.Size(101, 26);
+            this.ProductTotalPriceLabel.TabIndex = 13;
+            this.ProductTotalPriceLabel.Text = "Visų metų produktų \r\n     pilna kaina";
             // 
-            // PvmPriceTextBox
+            // PvmPriceLabel
             // 
-            this.PvmPriceTextBox.Location = new System.Drawing.Point(503, 36);
-            this.PvmPriceTextBox.Name = "PvmPriceTextBox";
-            this.PvmPriceTextBox.Size = new System.Drawing.Size(80, 20);
-            this.PvmPriceTextBox.TabIndex = 11;
+            this.PvmPriceLabel.AutoSize = true;
+            this.PvmPriceLabel.Location = new System.Drawing.Point(553, 9);
+            this.PvmPriceLabel.Name = "PvmPriceLabel";
+            this.PvmPriceLabel.Size = new System.Drawing.Size(101, 26);
+            this.PvmPriceLabel.TabIndex = 14;
+            this.PvmPriceLabel.Text = "Visų metų produktų \r\n          PVM ";
             // 
-            // TotalPriceWithPvmTextBox
+            // TotalPriceWithPvmLabel
             // 
-            this.TotalPriceWithPvmTextBox.Location = new System.Drawing.Point(589, 36);
-            this.TotalPriceWithPvmTextBox.Name = "TotalPriceWithPvmTextBox";
-            this.TotalPriceWithPvmTextBox.Size = new System.Drawing.Size(80, 20);
-            this.TotalPriceWithPvmTextBox.TabIndex = 12;
+            this.TotalPriceWithPvmLabel.AutoSize = true;
+            this.TotalPriceWithPvmLabel.Location = new System.Drawing.Point(660, 9);
+            this.TotalPriceWithPvmLabel.Name = "TotalPriceWithPvmLabel";
+            this.TotalPriceWithPvmLabel.Size = new System.Drawing.Size(101, 26);
+            this.TotalPriceWithPvmLabel.TabIndex = 15;
+            this.TotalPriceWithPvmLabel.Text = "Visų metų produktų \r\n pilna kaina su PVM";
             // 
             // ListForm
             // 
@@ -257,6 +290,9 @@ namespace Invoice.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1064, 1001);
+            this.Controls.Add(this.TotalPriceWithPvmLabel);
+            this.Controls.Add(this.PvmPriceLabel);
+            this.Controls.Add(this.ProductTotalPriceLabel);
             this.Controls.Add(this.TotalPriceWithPvmTextBox);
             this.Controls.Add(this.PvmPriceTextBox);
             this.Controls.Add(this.ProductTotalPriceTextBox);
@@ -304,6 +340,9 @@ namespace Invoice.Forms
         private TextBox ProductTotalPriceTextBox;
         private TextBox PvmPriceTextBox;
         private TextBox TotalPriceWithPvmTextBox;
+        private Label ProductTotalPriceLabel;
+        private Label PvmPriceLabel;
+        private Label TotalPriceWithPvmLabel;
     }
 }
 
