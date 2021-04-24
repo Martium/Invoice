@@ -37,16 +37,16 @@ namespace Invoice.Forms
             this.SearchButton = new System.Windows.Forms.Button();
             this.NewInvoiceButton = new System.Windows.Forms.Button();
             this.ListOfInvoiceDataGridView = new System.Windows.Forms.DataGridView();
-            this.CopyButton = new System.Windows.Forms.Button();
-            this.SearchCancelButton = new System.Windows.Forms.Button();
-            this.ChangePaymentButton = new System.Windows.Forms.Button();
-            this.SellerInfoFormButton = new System.Windows.Forms.Button();
             this.invoiceNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoiceNumberYearCreationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoiceDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buyerNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoiceIsPaidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoiceListModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.CopyButton = new System.Windows.Forms.Button();
+            this.SearchCancelButton = new System.Windows.Forms.Button();
+            this.ChangePaymentButton = new System.Windows.Forms.Button();
+            this.SellerInfoFormButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ListOfInvoiceDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceListModelBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -116,53 +116,11 @@ namespace Invoice.Forms
             this.ListOfInvoiceDataGridView.Size = new System.Drawing.Size(1040, 825);
             this.ListOfInvoiceDataGridView.TabIndex = 4;
             this.ListOfInvoiceDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ListOfInvoiceDataGridView_CellClick);
-            this.ListOfInvoiceDataGridView.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ListOfInvoiceDataGridView_CellContentDoubleClick);
+            this.ListOfInvoiceDataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ListOfInvoiceDataGridView_CellDoubleClick);
             this.ListOfInvoiceDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.ListOfInvoiceDataGridView_CellFormatting);
+            this.ListOfInvoiceDataGridView.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.ListOfInvoiceDataGridView_RowHeaderMouseDoubleClick);
             this.ListOfInvoiceDataGridView.Paint += new System.Windows.Forms.PaintEventHandler(this.ListOfInvoiceDataGridView_Paint);
             this.ListOfInvoiceDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ListOfInvoiceDataGridView_KeyDown);
-            // 
-            // CopyButton
-            // 
-            this.CopyButton.BackColor = System.Drawing.SystemColors.Control;
-            this.CopyButton.Location = new System.Drawing.Point(12, 938);
-            this.CopyButton.Name = "CopyButton";
-            this.CopyButton.Size = new System.Drawing.Size(187, 37);
-            this.CopyButton.TabIndex = 5;
-            this.CopyButton.Text = "Kopijuoti sąskaitą ( kurti naują )";
-            this.CopyButton.UseVisualStyleBackColor = false;
-            this.CopyButton.Click += new System.EventHandler(this.CopyButton_Click);
-            // 
-            // SearchCancelButton
-            // 
-            this.SearchCancelButton.Location = new System.Drawing.Point(257, 37);
-            this.SearchCancelButton.Name = "SearchCancelButton";
-            this.SearchCancelButton.Size = new System.Drawing.Size(75, 20);
-            this.SearchCancelButton.TabIndex = 6;
-            this.SearchCancelButton.Text = "Atšaukti";
-            this.SearchCancelButton.UseVisualStyleBackColor = true;
-            this.SearchCancelButton.Click += new System.EventHandler(this.SearchCancelButton_Click);
-            // 
-            // ChangePaymentButton
-            // 
-            this.ChangePaymentButton.BackColor = System.Drawing.SystemColors.Control;
-            this.ChangePaymentButton.Location = new System.Drawing.Point(903, 938);
-            this.ChangePaymentButton.Name = "ChangePaymentButton";
-            this.ChangePaymentButton.Size = new System.Drawing.Size(149, 37);
-            this.ChangePaymentButton.TabIndex = 7;
-            this.ChangePaymentButton.Text = "Keisti sąskaitos būseną";
-            this.ChangePaymentButton.UseVisualStyleBackColor = false;
-            this.ChangePaymentButton.Click += new System.EventHandler(this.ChangePaymentButton_Click);
-            // 
-            // SellerInfoFormButton
-            // 
-            this.SellerInfoFormButton.BackColor = System.Drawing.SystemColors.Control;
-            this.SellerInfoFormButton.Location = new System.Drawing.Point(839, 24);
-            this.SellerInfoFormButton.Name = "SellerInfoFormButton";
-            this.SellerInfoFormButton.Size = new System.Drawing.Size(114, 45);
-            this.SellerInfoFormButton.TabIndex = 8;
-            this.SellerInfoFormButton.Text = "Pildyti Pardavėjo informaciją";
-            this.SellerInfoFormButton.UseVisualStyleBackColor = false;
-            this.SellerInfoFormButton.Click += new System.EventHandler(this.SellerInfoFormButton_Click);
             // 
             // invoiceNumberDataGridViewTextBoxColumn
             // 
@@ -207,6 +165,49 @@ namespace Invoice.Forms
             // 
             this.invoiceListModelBindingSource.DataSource = typeof(Invoice.Models.InvoiceListModel);
             // 
+            // CopyButton
+            // 
+            this.CopyButton.BackColor = System.Drawing.SystemColors.Control;
+            this.CopyButton.Location = new System.Drawing.Point(12, 938);
+            this.CopyButton.Name = "CopyButton";
+            this.CopyButton.Size = new System.Drawing.Size(187, 37);
+            this.CopyButton.TabIndex = 5;
+            this.CopyButton.Text = "Kopijuoti sąskaitą ( kurti naują )";
+            this.CopyButton.UseVisualStyleBackColor = false;
+            this.CopyButton.Click += new System.EventHandler(this.CopyButton_Click);
+            // 
+            // SearchCancelButton
+            // 
+            this.SearchCancelButton.Location = new System.Drawing.Point(257, 37);
+            this.SearchCancelButton.Name = "SearchCancelButton";
+            this.SearchCancelButton.Size = new System.Drawing.Size(75, 20);
+            this.SearchCancelButton.TabIndex = 6;
+            this.SearchCancelButton.Text = "Atšaukti";
+            this.SearchCancelButton.UseVisualStyleBackColor = true;
+            this.SearchCancelButton.Click += new System.EventHandler(this.SearchCancelButton_Click);
+            // 
+            // ChangePaymentButton
+            // 
+            this.ChangePaymentButton.BackColor = System.Drawing.SystemColors.Control;
+            this.ChangePaymentButton.Location = new System.Drawing.Point(903, 938);
+            this.ChangePaymentButton.Name = "ChangePaymentButton";
+            this.ChangePaymentButton.Size = new System.Drawing.Size(149, 37);
+            this.ChangePaymentButton.TabIndex = 7;
+            this.ChangePaymentButton.Text = "Keisti sąskaitos būseną";
+            this.ChangePaymentButton.UseVisualStyleBackColor = false;
+            this.ChangePaymentButton.Click += new System.EventHandler(this.ChangePaymentButton_Click);
+            // 
+            // SellerInfoFormButton
+            // 
+            this.SellerInfoFormButton.BackColor = System.Drawing.SystemColors.Control;
+            this.SellerInfoFormButton.Location = new System.Drawing.Point(839, 24);
+            this.SellerInfoFormButton.Name = "SellerInfoFormButton";
+            this.SellerInfoFormButton.Size = new System.Drawing.Size(114, 45);
+            this.SellerInfoFormButton.TabIndex = 8;
+            this.SellerInfoFormButton.Text = "Pildyti Pardavėjo informaciją";
+            this.SellerInfoFormButton.UseVisualStyleBackColor = false;
+            this.SellerInfoFormButton.Click += new System.EventHandler(this.SellerInfoFormButton_Click);
+            // 
             // ListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -227,6 +228,7 @@ namespace Invoice.Forms
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Vitalijaus Pranskūno sąskaitos";
             this.Load += new System.EventHandler(this.ListForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ListForm_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.ListOfInvoiceDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceListModelBindingSource)).EndInit();
             this.ResumeLayout(false);

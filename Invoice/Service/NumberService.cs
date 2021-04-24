@@ -8,6 +8,7 @@ namespace Invoice.Service
     public class NumberService
     {
         private const int RoundDigitNumber = 2;
+
         public string ChangeCommaToDot(RichTextBox richTextBox)
         {
             string changeComma = richTextBox.Text;

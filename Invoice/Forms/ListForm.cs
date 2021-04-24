@@ -152,11 +152,6 @@ namespace Invoice.Forms
             }
         }
 
-        private void ListOfInvoiceDataGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            EditButton_Click(this, new EventArgs());
-        }
-
         private void ListOfInvoiceDataGridView_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -170,6 +165,16 @@ namespace Invoice.Forms
             string paymentStatus = ListOfInvoiceDataGridView.SelectedRows[0].Cells[InvoiceIsPaidIndex].Value.ToString();
 
             this.BackColor = paymentStatus == "Atsiskaityta" ? Color.Chartreuse : Color.Red;
+        }
+
+        private void ListOfInvoiceDataGridView_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            EditButton_Click(this, new EventArgs());
+        }
+
+        private void ListOfInvoiceDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            EditButton_Click(this, new EventArgs());
         }
 
         private void SellerInfoFormButton_Click(object sender, EventArgs e)
@@ -330,5 +335,13 @@ namespace Invoice.Forms
         }
 
         #endregion
+
+        private void ListForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
+        }
     }
 }
