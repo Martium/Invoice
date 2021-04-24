@@ -8,16 +8,19 @@ namespace Invoice.Forms
 {
     public partial class SellerInfoForm : Form
     {
+        private readonly InvoiceRepository _invoiceRepository = new InvoiceRepository();
+
         public SellerInfoForm()
         {
             InitializeComponent();
             SetTextBoxLengths();
+            LoadSellerInfo();
+            SetCursorAtTextBoxStringEnd();
         }
 
         private void SaveButton_Click(object sender, System.EventArgs e)
         {
             MessageDialogService messageDialogService = new MessageDialogService();
-            InvoiceRepository invoiceRepository = new InvoiceRepository();
 
             SellerInfoModel sellerInfo = new SellerInfoModel()
             {
@@ -33,17 +36,11 @@ namespace Invoice.Forms
                 InvoiceMaker = InvoiceMakerRichTextBox.Text
             };
 
-            bool isIdExists = invoiceRepository.CheckSellerIdExists();
-            bool isSuccessful;
+            bool isIdExists = _invoiceRepository.CheckSellerIdExists();
 
-            if (isIdExists)
-            {
-                isSuccessful = invoiceRepository.UodateSellerInfo(sellerInfo);
-            }
-            else
-            { 
-                isSuccessful = invoiceRepository.CreateNewSellerInfo(sellerInfo);
-            }
+            bool isSuccessful = isIdExists
+                ? _invoiceRepository.UpdateSellerInfo(sellerInfo)
+                : _invoiceRepository.CreateNewSellerInfo(sellerInfo);
 
             if (isSuccessful)
             {
@@ -56,6 +53,26 @@ namespace Invoice.Forms
 
             this.Close();
         }
+
+        private void RichTextBoxes_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control) sender, true, true, true, true);
+                SetCursorAtTextBoxStringEnd();
+            }
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Escape))
+            {
+                this.Close();
+                return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        } 
 
         private void SetTextBoxLengths()
         {
@@ -71,6 +88,45 @@ namespace Invoice.Forms
             SellerEmailAddressRichTextBox.MaxLength = FormSettings.TextBoxLengths.SellerEmailAddress;
 
             InvoiceMakerRichTextBox.MaxLength = FormSettings.TextBoxLengths.InvoiceMaker;
+        }
+
+        private void SetCursorAtTextBoxStringEnd()
+        {
+            SerialNumberRichTextBox.SelectionStart = SerialNumberRichTextBox.Text.Length;
+
+            SellerNameRichTextBox.SelectionStart = SellerNameRichTextBox.Text.Length;
+            SellerFirmCodeRichTextBox.SelectionStart = SellerFirmCodeRichTextBox.Text.Length;
+            SellerPvmCodeRichTextBox.SelectionStart = SellerPvmCodeRichTextBox.Text.Length;
+            SellerAddressRichTextBox.SelectionStart = SellerAddressRichTextBox.Text.Length;
+            SellerPhoneNumberRichTextBox.SelectionStart = SellerPhoneNumberRichTextBox.Text.Length;
+            SellerBankRichTextBox.SelectionStart = SellerBankRichTextBox.Text.Length;
+            SellerBankAccountNumberRichTextBox.SelectionStart = SellerBankAccountNumberRichTextBox.Text.Length;
+            SellerEmailAddressRichTextBox.SelectionStart = SellerEmailAddressRichTextBox.Text.Length;
+
+            InvoiceMakerRichTextBox.SelectionStart = InvoiceMakerRichTextBox.Text.Length;
+        }
+
+        private void LoadSellerInfo()
+        {
+            bool isIdExists = _invoiceRepository.CheckSellerIdExists();
+
+            if (isIdExists)
+            {
+                SellerInfoModel sellerInfo = _invoiceRepository.GetSellerInfo();
+
+                SerialNumberRichTextBox.Text = sellerInfo.SerialNumber;
+
+                SellerNameRichTextBox.Text = sellerInfo.SellerName;
+                SellerFirmCodeRichTextBox.Text = sellerInfo.SellerFirmCode;
+                SellerPvmCodeRichTextBox.Text = sellerInfo.SellerPvmCode;
+                SellerAddressRichTextBox.Text = sellerInfo.SellerAddress;
+                SellerPhoneNumberRichTextBox.Text = sellerInfo.SellerPhoneNumber;
+                SellerBankRichTextBox.Text = sellerInfo.SellerBank;
+                SellerBankAccountNumberRichTextBox.Text = sellerInfo.SellerBankAccountNumber;
+                SellerEmailAddressRichTextBox.Text = sellerInfo.SellerEmailAddress;
+
+                InvoiceMakerRichTextBox.Text = sellerInfo.InvoiceMaker;
+            }
         }
     }
 }

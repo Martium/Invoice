@@ -152,11 +152,6 @@ namespace Invoice.Forms
             }
         }
 
-        private void ListOfInvoiceDataGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            EditButton_Click(this, new EventArgs());
-        }
-
         private void ListOfInvoiceDataGridView_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -172,6 +167,11 @@ namespace Invoice.Forms
             this.BackColor = paymentStatus == "Atsiskaityta" ? Color.Chartreuse : Color.Red;
         }
 
+        private void ListOfInvoiceDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            EditButton_Click(this, new EventArgs());
+        }
+
         private void SellerInfoFormButton_Click(object sender, EventArgs e)
         {
             var sellerInfoForm = new SellerInfoForm();
@@ -181,6 +181,18 @@ namespace Invoice.Forms
             HideListAndOpenSellerInfoForm(sellerInfoForm);
         }
 
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Escape))
+            {
+                this.Close();
+                return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        #region Helpers
         private void HideListAndOpenInvoiceForm(Form invoiceForm)
         {
             this.Hide();
@@ -201,7 +213,7 @@ namespace Invoice.Forms
             {
                 SearchCancelButton.Enabled = true;
             }
-           
+
             IEnumerable<InvoiceListModel> invoiceListModels = _invoiceRepository.GetInvoiceList(searchPhrase);
 
             ToggleExistingListManaging(enabled: invoiceListModels.Any(), searchPhrase);
@@ -327,5 +339,8 @@ namespace Invoice.Forms
                 ListOfInvoiceDataGridView.Select();
             }
         }
+
+        #endregion
+
     }
 }

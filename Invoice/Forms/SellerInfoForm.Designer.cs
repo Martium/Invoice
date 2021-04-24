@@ -142,6 +142,7 @@ namespace Invoice.Forms
             this.SerialNumberRichTextBox.Size = new System.Drawing.Size(83, 19);
             this.SerialNumberRichTextBox.TabIndex = 33;
             this.SerialNumberRichTextBox.Text = "";
+            this.SerialNumberRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBoxes_KeyUp);
             // 
             // SellerNameRichTextBox
             // 
@@ -151,6 +152,7 @@ namespace Invoice.Forms
             this.SellerNameRichTextBox.Size = new System.Drawing.Size(205, 19);
             this.SellerNameRichTextBox.TabIndex = 34;
             this.SellerNameRichTextBox.Text = "";
+            this.SellerNameRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBoxes_KeyUp);
             // 
             // SellerFirmCodeRichTextBox
             // 
@@ -160,6 +162,7 @@ namespace Invoice.Forms
             this.SellerFirmCodeRichTextBox.Size = new System.Drawing.Size(205, 19);
             this.SellerFirmCodeRichTextBox.TabIndex = 35;
             this.SellerFirmCodeRichTextBox.Text = "";
+            this.SellerFirmCodeRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBoxes_KeyUp);
             // 
             // SellerPvmCodeRichTextBox
             // 
@@ -169,6 +172,7 @@ namespace Invoice.Forms
             this.SellerPvmCodeRichTextBox.Size = new System.Drawing.Size(205, 19);
             this.SellerPvmCodeRichTextBox.TabIndex = 36;
             this.SellerPvmCodeRichTextBox.Text = "";
+            this.SellerPvmCodeRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBoxes_KeyUp);
             // 
             // SellerAddressRichTextBox
             // 
@@ -178,6 +182,7 @@ namespace Invoice.Forms
             this.SellerAddressRichTextBox.Size = new System.Drawing.Size(205, 19);
             this.SellerAddressRichTextBox.TabIndex = 37;
             this.SellerAddressRichTextBox.Text = "";
+            this.SellerAddressRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBoxes_KeyUp);
             // 
             // SellerPhoneNumberRichTextBox
             // 
@@ -187,6 +192,7 @@ namespace Invoice.Forms
             this.SellerPhoneNumberRichTextBox.Size = new System.Drawing.Size(205, 19);
             this.SellerPhoneNumberRichTextBox.TabIndex = 38;
             this.SellerPhoneNumberRichTextBox.Text = "";
+            this.SellerPhoneNumberRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBoxes_KeyUp);
             // 
             // SellerBankRichTextBox
             // 
@@ -196,6 +202,7 @@ namespace Invoice.Forms
             this.SellerBankRichTextBox.Size = new System.Drawing.Size(205, 19);
             this.SellerBankRichTextBox.TabIndex = 39;
             this.SellerBankRichTextBox.Text = "";
+            this.SellerBankRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBoxes_KeyUp);
             // 
             // SellerBankAccountNumberRichTextBox
             // 
@@ -205,6 +212,7 @@ namespace Invoice.Forms
             this.SellerBankAccountNumberRichTextBox.Size = new System.Drawing.Size(205, 19);
             this.SellerBankAccountNumberRichTextBox.TabIndex = 40;
             this.SellerBankAccountNumberRichTextBox.Text = "";
+            this.SellerBankAccountNumberRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBoxes_KeyUp);
             // 
             // SellerEmailAddressRichTextBox
             // 
@@ -214,6 +222,7 @@ namespace Invoice.Forms
             this.SellerEmailAddressRichTextBox.Size = new System.Drawing.Size(205, 19);
             this.SellerEmailAddressRichTextBox.TabIndex = 41;
             this.SellerEmailAddressRichTextBox.Text = "";
+            this.SellerEmailAddressRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBoxes_KeyUp);
             // 
             // SaveButton
             // 
@@ -221,6 +230,7 @@ namespace Invoice.Forms
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(149, 23);
             this.SaveButton.TabIndex = 42;
+            this.SaveButton.TabStop = false;
             this.SaveButton.Text = "Išsaugoti";
             this.SaveButton.UseVisualStyleBackColor = true;
             this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
@@ -242,6 +252,7 @@ namespace Invoice.Forms
             this.InvoiceMakerRichTextBox.Size = new System.Drawing.Size(374, 19);
             this.InvoiceMakerRichTextBox.TabIndex = 45;
             this.InvoiceMakerRichTextBox.Text = "";
+            this.InvoiceMakerRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBoxes_KeyUp);
             // 
             // SellerInfoForm
             // 

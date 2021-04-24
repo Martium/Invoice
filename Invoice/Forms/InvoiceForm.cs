@@ -56,6 +56,7 @@ namespace Invoice.Forms
         {
             ResolveInvoiceNumberText();
             LoadFormDataForEditOrCopy();
+            SetCursorAtDateTextBoxEnd();
         }
 
         private void InvoiceDateRichTextBox_TextChanged(object sender, EventArgs e)
@@ -134,31 +135,18 @@ namespace Invoice.Forms
         {
             CalculateButton_Click(this, new EventArgs());
 
-            CaptureInvoiceFormScreen();
-
-            PdfWriter newInvoicePdfWriter =
-                new PdfWriter(
-                    $"{AppConfiguration.PdfFolder}\\Saskaitos fakturos nr.{InvoiceNumberRichTextBox.Text} {BuyerNameRichTextBox.Text}.pdf");
-            PdfDocument newInvoicePdfDocument = new PdfDocument(newInvoicePdfWriter);
-            Document newInvoiceDocument = new Document(newInvoicePdfDocument);
-
-            var convertImageToByteArray = ConvertImageToByteArray(_invoiceMemoryImage);
-            var newInvoiceImage =
-                new iText.Layout.Element.Image(ImageDataFactory.Create(convertImageToByteArray)).SetTextAlignment(
-                    TextAlignment.CENTER);
-
-            newInvoiceDocument.Add(newInvoiceImage);
-
-            DialogResult dialogResult = _messageDialogService.ShowChoiceMessage("Ar norite suformuoti Sąskaitos kvitą");
+            DialogResult dialogResult = _messageDialogService.ShowChoiceMessage("Ar norite suformuoti Sąskaita ir kvitą");
 
             if (dialogResult == DialogResult.OK)
             {
-                SaveMoneyReceiptFormToPdf(newInvoiceDocument);
+                SaveInvoiceToPdf();
+                _messageDialogService.ShowInfoMessage("Sąskaitos faktūra išsaugota į pdf failą");
             }
-
-            newInvoiceDocument.Close();
-
-            _messageDialogService.ShowInfoMessage("Sąskaitos faktūros anketa išsaugota į pdf failą");
+            else
+            {
+               SaveInvoiceAndMoneyReceiptToPdf();
+               _messageDialogService.ShowInfoMessage("Sąskaita faktūra ir kvitas išsaugota į pdf failą");
+            }
 
             SaveButton_Click(this, new EventArgs());
             this.Close();
@@ -180,15 +168,6 @@ namespace Invoice.Forms
                 .CalculateTotalPriceWithPvm(ProductTotalPriceRichTextBox, PvmPriceRichTextBox).ToString();
         }
 
-        private void ControlRichTextBox_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl((RichTextBox)sender, true, true, true, true);
-                e.SuppressKeyPress = true;
-            }
-        }
-
         private void PrintButton_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = _messageDialogService.ShowChoiceMessage("Ar norite spausdinti kvitą (jei paspausit 'OK' spausdins kvitą jei 'Cancel' spausdins Sąskaitą faktūrą) ?");
@@ -206,6 +185,70 @@ namespace Invoice.Forms
         private void printDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
             e.Graphics.DrawImage(_invoiceMemoryImage, 0, this.PrintInvoicePanel.Location.Y);
+        }
+
+        private void RichTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                SetCursorAtTextBoxStringEnd();
+            }
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Escape))
+            {
+                this.Close();
+                return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        #region Helpers
+
+        private void SaveInvoiceToPdf()
+        {
+            CaptureInvoiceFormScreen();
+
+            PdfWriter newInvoicePdfWriter =
+                new PdfWriter(
+                    $"{AppConfiguration.PdfFolder}\\Saskaita faktura ir kvitas nr.{InvoiceNumberRichTextBox.Text} {BuyerNameRichTextBox.Text}.pdf");
+            PdfDocument newInvoicePdfDocument = new PdfDocument(newInvoicePdfWriter);
+            Document newInvoiceDocument = new Document(newInvoicePdfDocument);
+
+            var convertImageToByteArray = ConvertImageToByteArray(_invoiceMemoryImage);
+            var newInvoiceImage =
+                new iText.Layout.Element.Image(ImageDataFactory.Create(convertImageToByteArray)).SetTextAlignment(
+                    TextAlignment.CENTER);
+
+            newInvoiceDocument.Add(newInvoiceImage);
+
+            SaveMoneyReceiptFormToPdf(newInvoiceDocument);
+
+            newInvoiceDocument.Close();
+        }
+
+        private void SaveInvoiceAndMoneyReceiptToPdf()
+        {
+            CaptureInvoiceFormScreen();
+
+            PdfWriter newInvoicePdfWriter =
+                new PdfWriter(
+                    $"{AppConfiguration.PdfFolder}\\Saskaita faktura nr.{InvoiceNumberRichTextBox.Text} {BuyerNameRichTextBox.Text}.pdf");
+            PdfDocument newInvoicePdfDocument = new PdfDocument(newInvoicePdfWriter);
+            Document newInvoiceDocument = new Document(newInvoicePdfDocument);
+
+            var convertImageToByteArray = ConvertImageToByteArray(_invoiceMemoryImage);
+            var newInvoiceImage =
+                new iText.Layout.Element.Image(ImageDataFactory.Create(convertImageToByteArray)).SetTextAlignment(
+                    TextAlignment.CENTER);
+
+            newInvoiceDocument.Add(newInvoiceImage);
+
+            newInvoiceDocument.Close();
         }
 
         private void PrintInvoiceForm()
@@ -258,7 +301,7 @@ namespace Invoice.Forms
                 InvoiceNumber = InvoiceNumberRichTextBox.Text,
                 InvoiceDate = InvoiceDateRichTextBox.Text,
                 AllProducts = $@"{allProducts}",
-                    
+
                 PriceInWords = PriceInWordsRichTextBox.Text,
                 InvoiceMaker = InvoiceMakerRichTextBox.Text
             };
@@ -725,7 +768,91 @@ namespace Invoice.Forms
         private static byte[] ConvertImageToByteArray(System.Drawing.Image img)
         {
             ImageConverter converter = new ImageConverter();
-            return (byte[]) converter.ConvertTo(img, typeof(byte[]));
+            return (byte[])converter.ConvertTo(img, typeof(byte[]));
         }
+
+        private void SetCursorAtTextBoxStringEnd()
+        {
+            SerialNumberRichTextBox.SelectionStart = SerialNumberRichTextBox.Text.Length;
+            InvoiceDateRichTextBox.SelectionStart = InvoiceDateRichTextBox.Text.Length;
+
+            SellerNameRichTextBox.SelectionStart = SellerNameRichTextBox.Text.Length;
+            SellerFirmCodeRichTextBox.SelectionStart = SellerFirmCodeRichTextBox.Text.Length;
+            SellerPvmCodeRichTextBox.SelectionStart = SellerPvmCodeRichTextBox.Text.Length;
+            SellerAddressRichTextBox.SelectionStart = SellerAddressRichTextBox.Text.Length;
+            SellerPhoneNumberRichTextBox.SelectionStart= SellerPhoneNumberRichTextBox.Text.Length;
+            SellerBankRichTextBox.SelectionStart = SellerBankRichTextBox.Text.Length;
+            SellerBankAccountNumberRichTextBox.SelectionStart = SellerBankAccountNumberRichTextBox.Text.Length;
+            SellerEmailAddressRichTextBox.SelectionStart = SellerEmailAddressRichTextBox.Text.Length;
+
+            BuyerNameRichTextBox.SelectionStart = BuyerNameRichTextBox.Text.Length;
+            BuyerFirmCodeRichTextBox.SelectionStart = BuyerFirmCodeRichTextBox.Text.Length;
+            BuyerPvmCodeRichTextBox.SelectionStart = BuyerPvmCodeRichTextBox.Text.Length;
+            BuyerAddressRichTextBox.SelectionStart = BuyerAddressRichTextBox.Text.Length;
+
+            FirstProductNameRichTextBox.SelectionStart = FirstProductNameRichTextBox.Text.Length;
+            SecondProductNameRichTextBox.SelectionStart = SecondProductNameRichTextBox.Text.Length;
+            ThirdProductNameRichTextBox.SelectionStart = ThirdProductNameRichTextBox.Text.Length;
+            FourthProductNameRichTextBox.SelectionStart = FourthProductNameRichTextBox.Text.Length;
+            FifthProductNameRichTextBox.SelectionStart = FifthProductNameRichTextBox.Text.Length;
+            SixthProductNameRichTextBox.SelectionStart = SixthProductNameRichTextBox.Text.Length;
+            SeventhProductNameRichTextBox.SelectionStart = SeventhProductNameRichTextBox.Text.Length;
+            EighthProductNameRichTextBox.SelectionStart = EighthProductNameRichTextBox.Text.Length;
+            NinthProductNameRichTextBox.SelectionStart = NinthProductNameRichTextBox.Text.Length;
+            TenProductNameRichTextBox.SelectionStart = TenProductNameRichTextBox.Text.Length;
+            EleventhProductNameRichTextBox.SelectionStart = EleventhProductNameRichTextBox.Text.Length;
+            TwelfthProductNameRichTextBox.SelectionStart = TwelfthProductNameRichTextBox.Text.Length;
+
+            FirstProductSeesRichTextBox.SelectionStart = FirstProductSeesRichTextBox.Text.Length;
+            SecondProductSeesRichTextBox.SelectionStart = SecondProductSeesRichTextBox.Text.Length;
+            ThirdProductSeesRichTextBox.SelectionStart = ThirdProductSeesRichTextBox.Text.Length;
+            FourthProductSeesRichTextBox.SelectionStart = FourthProductSeesRichTextBox.Text.Length;
+            FifthProductSeesRichTextBox.SelectionStart = FifthProductSeesRichTextBox.Text.Length;
+            SixthProductSeesRichTextBox.SelectionStart = SixthProductSeesRichTextBox.Text.Length;
+            SeventhProductSeesRichTextBox.SelectionStart = SeventhProductSeesRichTextBox.Text.Length;
+            EighthProductSeesRichTextBox.SelectionStart = EighthProductSeesRichTextBox.Text.Length;
+            NinthProductSeesRichTextBox.SelectionStart = NinthProductSeesRichTextBox.Text.Length;
+            TenProductSeesRichTextBox.SelectionStart = TenProductSeesRichTextBox.Text.Length;
+            EleventhProductSeesRichTextBox.SelectionStart = EleventhProductSeesRichTextBox.Text.Length;
+            TwelfthProductSeesRichTextBox.SelectionStart = TwelfthProductSeesRichTextBox.Text.Length;
+
+            FirstProductQuantityRichTextBox.SelectionStart = FirstProductQuantityRichTextBox.Text.Length;
+            SecondProductQuantityRichTextBox.SelectionStart = SecondProductQuantityRichTextBox.Text.Length;
+            ThirdProductQuantityRichTextBox.SelectionStart = ThirdProductQuantityRichTextBox.Text.Length;
+            FourthProductQuantityRichTextBox.SelectionStart = FourthProductQuantityRichTextBox.Text.Length;
+            FifthProductQuantityRichTextBox.SelectionStart = FifthProductQuantityRichTextBox.Text.Length;
+            SixthProductQuantityRichTextBox.SelectionStart = SixthProductQuantityRichTextBox.Text.Length;
+            SeventhProductQuantityRichTextBox.SelectionStart = SeventhProductQuantityRichTextBox.Text.Length;
+            EighthProductQuantityRichTextBox.SelectionStart = EighthProductQuantityRichTextBox.Text.Length;
+            NinthProductQuantityRichTextBox.SelectionStart = NinthProductQuantityRichTextBox.Text.Length;
+            TenProductQuantityRichTextBox.SelectionStart = TenProductQuantityRichTextBox.Text.Length;
+            EleventhProductQuantityRichTextBox.SelectionStart = EleventhProductQuantityRichTextBox.Text.Length;
+            TwelfthProductQuantityRichTextBox.SelectionStart = TwelfthProductQuantityRichTextBox.Text.Length;
+
+            FirstProductPriceRichTextBox.SelectionStart = FirstProductPriceRichTextBox.Text.Length;
+            SecondProductPriceRichTextBox.SelectionStart = SecondProductPriceRichTextBox.Text.Length;
+            ThirdProductPriceRichTextBox.SelectionStart = ThirdProductPriceRichTextBox.Text.Length;
+            FourthProductPriceRichTextBox.SelectionStart = FourthProductPriceRichTextBox.Text.Length;
+            FifthProductPriceRichTextBox.SelectionStart = FifthProductPriceRichTextBox.Text.Length;
+            SixthProductPriceRichTextBox.SelectionStart = SixthProductPriceRichTextBox.Text.Length;
+            SeventhProductPriceRichTextBox.SelectionStart = SeventhProductPriceRichTextBox.Text.Length;
+            EighthProductPriceRichTextBox.SelectionStart = EighthProductPriceRichTextBox.Text.Length;
+            NinthProductPriceRichTextBox.SelectionStart = NinthProductPriceRichTextBox.Text.Length;
+            TenProductPriceRichTextBox.SelectionStart = TenProductPriceRichTextBox.Text.Length;
+            EleventhProductPriceRichTextBox.SelectionStart = EleventhProductPriceRichTextBox.Text.Length;
+            TwelfthProductPriceRichTextBox.SelectionStart = TwelfthProductPriceRichTextBox.Text.Length;
+
+            PriceInWordsRichTextBox.SelectionStart = PriceInWordsRichTextBox.Text.Length;
+            InvoiceMakerRichTextBox.SelectionStart = InvoiceMakerRichTextBox.Text.Length;
+            InvoiceAcceptedRichTextBox.SelectionStart = InvoiceAcceptedRichTextBox.Text.Length;
+        }
+
+        private void SetCursorAtDateTextBoxEnd()
+        {
+            InvoiceDateRichTextBox.SelectionStart = InvoiceDateRichTextBox.Text.Length;
+        }
+
+        #endregion
+
     }
 }
