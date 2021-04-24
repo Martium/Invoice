@@ -116,18 +116,18 @@ namespace Invoice.Forms
             this.SellerInfoGuideLabel.AutoSize = true;
             this.SellerInfoGuideLabel.Location = new System.Drawing.Point(132, 440);
             this.SellerInfoGuideLabel.Name = "SellerInfoGuideLabel";
-            this.SellerInfoGuideLabel.Size = new System.Drawing.Size(294, 13);
+            this.SellerInfoGuideLabel.Size = new System.Drawing.Size(297, 13);
             this.SellerInfoGuideLabel.TabIndex = 30;
-            this.SellerInfoGuideLabel.Text = "( pardavėjo pareigų pavadinimas, parašas vardas ir pavardė )";
+            this.SellerInfoGuideLabel.Text = "( pardavėjo pareigų pavadinimas, parašas, vardas ir pavardė )";
             // 
             // BuyerInfoGuideLabel
             // 
             this.BuyerInfoGuideLabel.AutoSize = true;
             this.BuyerInfoGuideLabel.Location = new System.Drawing.Point(132, 384);
             this.BuyerInfoGuideLabel.Name = "BuyerInfoGuideLabel";
-            this.BuyerInfoGuideLabel.Size = new System.Drawing.Size(175, 13);
+            this.BuyerInfoGuideLabel.Size = new System.Drawing.Size(178, 13);
             this.BuyerInfoGuideLabel.TabIndex = 29;
-            this.BuyerInfoGuideLabel.Text = "( pirkėjo parašas vardas ir pavardė )";
+            this.BuyerInfoGuideLabel.Text = "( pirkėjo parašas, vardas ir pavardė )";
             // 
             // InvoiceMakerLabel
             // 
