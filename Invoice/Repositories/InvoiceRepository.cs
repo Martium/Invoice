@@ -387,7 +387,7 @@ namespace Invoice.Repositories
             }
         }
 
-       public bool UodateSellerInfo(SellerInfoModel updateSellerInfo)
+       public bool UpdateSellerInfo(SellerInfoModel updateSellerInfo)
         {
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
             {

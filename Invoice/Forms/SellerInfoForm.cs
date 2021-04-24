@@ -8,16 +8,18 @@ namespace Invoice.Forms
 {
     public partial class SellerInfoForm : Form
     {
+        private readonly InvoiceRepository _invoiceRepository = new InvoiceRepository();
+
         public SellerInfoForm()
         {
             InitializeComponent();
             SetTextBoxLengths();
+            LoadSellerInfo();
         }
 
         private void SaveButton_Click(object sender, System.EventArgs e)
         {
             MessageDialogService messageDialogService = new MessageDialogService();
-            InvoiceRepository invoiceRepository = new InvoiceRepository();
 
             SellerInfoModel sellerInfo = new SellerInfoModel()
             {
@@ -33,17 +35,10 @@ namespace Invoice.Forms
                 InvoiceMaker = InvoiceMakerRichTextBox.Text
             };
 
-            bool isIdExists = invoiceRepository.CheckSellerIdExists();
+            bool isIdExists = _invoiceRepository.CheckSellerIdExists();
             bool isSuccessful;
 
-            if (isIdExists)
-            {
-                isSuccessful = invoiceRepository.UodateSellerInfo(sellerInfo);
-            }
-            else
-            { 
-                isSuccessful = invoiceRepository.CreateNewSellerInfo(sellerInfo);
-            }
+            isSuccessful = isIdExists ? _invoiceRepository.UpdateSellerInfo(sellerInfo) : _invoiceRepository.CreateNewSellerInfo(sellerInfo);
 
             if (isSuccessful)
             {
@@ -55,6 +50,15 @@ namespace Invoice.Forms
             }
 
             this.Close();
+        }
+
+        private void RichTextBoxes_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((RichTextBox)sender, true, true, true, true);
+                e.SuppressKeyPress = true;
+            }
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -82,6 +86,30 @@ namespace Invoice.Forms
             SellerEmailAddressRichTextBox.MaxLength = FormSettings.TextBoxLengths.SellerEmailAddress;
 
             InvoiceMakerRichTextBox.MaxLength = FormSettings.TextBoxLengths.InvoiceMaker;
+        }
+
+        private void LoadSellerInfo()
+        {
+            bool isIdExists = _invoiceRepository.CheckSellerIdExists();
+
+            if (isIdExists)
+            {
+                SellerInfoModel sellerInfo = _invoiceRepository.GetSellerInfo();
+
+                SerialNumberRichTextBox.Text = sellerInfo.SerialNumber;
+
+                SellerNameRichTextBox.Text = sellerInfo.SellerName;
+                SellerFirmCodeRichTextBox.Text = sellerInfo.SellerFirmCode;
+                SellerPvmCodeRichTextBox.Text = sellerInfo.SellerPvmCode;
+                SellerAddressRichTextBox.Text = sellerInfo.SellerAddress;
+                SellerPhoneNumberRichTextBox.Text = sellerInfo.SellerPhoneNumber;
+                SellerBankRichTextBox.Text = sellerInfo.SellerBank;
+                SellerBankAccountNumberRichTextBox.Text = sellerInfo.SellerBankAccountNumber;
+                SellerEmailAddressRichTextBox.Text = sellerInfo.SellerEmailAddress;
+
+                InvoiceMakerRichTextBox.Text = sellerInfo.InvoiceMaker;
+
+            }
         }
     }
 }
