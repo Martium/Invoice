@@ -228,7 +228,6 @@ namespace Invoice.Forms
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Vitalijaus Pranskūno sąskaitos";
             this.Load += new System.EventHandler(this.ListForm_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ListForm_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.ListOfInvoiceDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceListModelBindingSource)).EndInit();
             this.ResumeLayout(false);
