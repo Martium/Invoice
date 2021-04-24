@@ -455,6 +455,8 @@ namespace Invoice.Forms
                 InvoiceMaker = InvoiceMakerRichTextBox.Text,
                 InvoiceAccepted = InvoiceAcceptedRichTextBox.Text,
 
+                TotalPriceWithPvm = TotalPriceWithPvmRichTextBox.Text,
+
                 PaymentStatus = _paymentStatus
             };
             return invoiceModel;
