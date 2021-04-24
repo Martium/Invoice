@@ -167,14 +167,6 @@ namespace Invoice.Forms
                 .CalculateTotalPriceWithPvm(ProductTotalPriceRichTextBox, PvmPriceRichTextBox).ToString();
         }
 
-        private void ControlRichTextBox_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-            }
-        }
-
         private void PrintButton_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = _messageDialogService.ShowChoiceMessage("Ar norite spausdinti kvitą (jei paspausit 'OK' spausdins kvitą jei 'Cancel' spausdins Sąskaitą faktūrą) ?");
@@ -192,6 +184,14 @@ namespace Invoice.Forms
         private void printDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
             e.Graphics.DrawImage(_invoiceMemoryImage, 0, this.PrintInvoicePanel.Location.Y);
+        }
+
+        private void RichTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+            }
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -770,5 +770,6 @@ namespace Invoice.Forms
         }
 
         #endregion
+        
     }
 }
