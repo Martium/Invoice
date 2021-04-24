@@ -167,11 +167,6 @@ namespace Invoice.Forms
             this.BackColor = paymentStatus == "Atsiskaityta" ? Color.Chartreuse : Color.Red;
         }
 
-        private void ListOfInvoiceDataGridView_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            EditButton_Click(this, new EventArgs());
-        }
-
         private void ListOfInvoiceDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             EditButton_Click(this, new EventArgs());
