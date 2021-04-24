@@ -378,7 +378,6 @@ namespace Invoice.Forms
 
         private InvoiceModel GetAllInfoFromRichTextBox()
         {
-
             var invoiceModel = new InvoiceModel
             {
                 InvoiceDate =
@@ -459,6 +458,7 @@ namespace Invoice.Forms
 
                 PaymentStatus = _paymentStatus
             };
+
             return invoiceModel;
         }
 
