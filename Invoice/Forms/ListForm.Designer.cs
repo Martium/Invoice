@@ -49,6 +49,9 @@ namespace Invoice.Forms
             this.paymentStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.totalPriceWithPvmDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoiceListModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.ProductTotalPriceTextBox = new System.Windows.Forms.TextBox();
+            this.PvmPriceTextBox = new System.Windows.Forms.TextBox();
+            this.TotalPriceWithPvmTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.ListOfInvoiceDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceListModelBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -227,12 +230,36 @@ namespace Invoice.Forms
             // 
             this.invoiceListModelBindingSource.DataSource = typeof(Invoice.Models.InvoiceListModel);
             // 
+            // ProductTotalPriceTextBox
+            // 
+            this.ProductTotalPriceTextBox.Location = new System.Drawing.Point(417, 36);
+            this.ProductTotalPriceTextBox.Name = "ProductTotalPriceTextBox";
+            this.ProductTotalPriceTextBox.Size = new System.Drawing.Size(80, 20);
+            this.ProductTotalPriceTextBox.TabIndex = 10;
+            // 
+            // PvmPriceTextBox
+            // 
+            this.PvmPriceTextBox.Location = new System.Drawing.Point(503, 36);
+            this.PvmPriceTextBox.Name = "PvmPriceTextBox";
+            this.PvmPriceTextBox.Size = new System.Drawing.Size(80, 20);
+            this.PvmPriceTextBox.TabIndex = 11;
+            // 
+            // TotalPriceWithPvmTextBox
+            // 
+            this.TotalPriceWithPvmTextBox.Location = new System.Drawing.Point(589, 36);
+            this.TotalPriceWithPvmTextBox.Name = "TotalPriceWithPvmTextBox";
+            this.TotalPriceWithPvmTextBox.Size = new System.Drawing.Size(80, 20);
+            this.TotalPriceWithPvmTextBox.TabIndex = 12;
+            // 
             // ListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1064, 1001);
+            this.Controls.Add(this.TotalPriceWithPvmTextBox);
+            this.Controls.Add(this.PvmPriceTextBox);
+            this.Controls.Add(this.ProductTotalPriceTextBox);
             this.Controls.Add(this.InvoiceNumberYearCreationComboBox);
             this.Controls.Add(this.SellerInfoFormButton);
             this.Controls.Add(this.ChangePaymentButton);
@@ -274,6 +301,9 @@ namespace Invoice.Forms
         private DataGridViewTextBoxColumn paymentStatusDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn totalPriceWithPvmDataGridViewTextBoxColumn;
         private ComboBox InvoiceNumberYearCreationComboBox;
+        private TextBox ProductTotalPriceTextBox;
+        private TextBox PvmPriceTextBox;
+        private TextBox TotalPriceWithPvmTextBox;
     }
 }
 
