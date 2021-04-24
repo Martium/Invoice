@@ -119,6 +119,7 @@
     </Compile>
     <Compile Include="Models\InvoiceListModel.cs" />
     <Compile Include="Models\InvoiceModel.cs" />
+    <Compile Include="Models\InvoiceNumberYearCreationModel.cs" />
     <Compile Include="Models\InvoiceQuantityAndPriceModel.cs" />
     <Compile Include="Models\MoneyReceiptModel.cs" />
     <Compile Include="Models\SellerInfoModel.cs" />

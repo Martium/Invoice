@@ -315,6 +315,28 @@ namespace Invoice.Repositories
             }
         }
 
+        public IEnumerable<InvoiceNumberYearCreationModel> GetInvoiceNumberYearCreationList()
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string getExistingInvoiceQuery =
+                    @"SELECT DISTINCT 
+                        I.InvoiceNumberYearCreation
+                      FROM Invoice I
+                    ";
+
+                getExistingInvoiceQuery += @" ORDER BY 
+                                               I.InvoiceNumberYearCreation DESC";
+
+                IEnumerable<InvoiceNumberYearCreationModel> invoiceNumberYearCreationList =
+                    dbConnection.Query<InvoiceNumberYearCreationModel>(getExistingInvoiceQuery);
+
+                return invoiceNumberYearCreationList;
+            }
+        }
+
         public int GetNextInvoiceNumber()
         {
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))

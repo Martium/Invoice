@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -33,6 +35,8 @@ namespace Invoice.Forms
 
         private void ListForm_Load(object sender, EventArgs e)
         {
+            FillComboBox();
+
             LoadInvoiceList();
         }
 
@@ -338,6 +342,16 @@ namespace Invoice.Forms
             {
                 ListOfInvoiceDataGridView.Select();
             }
+        }
+
+        private void FillComboBox()
+        {
+            InvoiceNumberYearCreationComboBox.Items.Clear();
+
+            var allYears = _invoiceRepository.GetInvoiceNumberYearCreationList().ToList();
+
+            InvoiceNumberYearCreationComboBox.DataSource = allYears;
+            InvoiceNumberYearCreationComboBox.DisplayMember = "InvoiceNumberYearCreation";
         }
 
         #endregion
