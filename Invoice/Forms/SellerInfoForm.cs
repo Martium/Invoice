@@ -57,8 +57,7 @@ namespace Invoice.Forms
         {
             if (e.KeyCode == Keys.Enter)
             {
-                this.SelectNextControl((RichTextBox) sender, true, true, true, true);
-                e.SuppressKeyPress = true;
+                this.SelectNextControl((Control) sender, true, true, true, true);
             }
         }
 
