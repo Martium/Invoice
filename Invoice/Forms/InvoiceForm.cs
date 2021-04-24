@@ -56,6 +56,7 @@ namespace Invoice.Forms
         {
             ResolveInvoiceNumberText();
             LoadFormDataForEditOrCopy();
+            SetCursorAtDateTextBoxEnd();
         }
 
         private void InvoiceDateRichTextBox_TextChanged(object sender, EventArgs e)
@@ -191,6 +192,7 @@ namespace Invoice.Forms
             if (e.KeyCode == Keys.Enter)
             {
                 this.SelectNextControl((Control)sender, true, true, true, true);
+                SetCursorAtTextBoxStringEnd();
             }
         }
 
@@ -769,7 +771,88 @@ namespace Invoice.Forms
             return (byte[])converter.ConvertTo(img, typeof(byte[]));
         }
 
+        private void SetCursorAtTextBoxStringEnd()
+        {
+            SerialNumberRichTextBox.SelectionStart = SerialNumberRichTextBox.Text.Length;
+            InvoiceDateRichTextBox.SelectionStart = InvoiceDateRichTextBox.Text.Length;
+
+            SellerNameRichTextBox.SelectionStart = SellerNameRichTextBox.Text.Length;
+            SellerFirmCodeRichTextBox.SelectionStart = SellerFirmCodeRichTextBox.Text.Length;
+            SellerPvmCodeRichTextBox.SelectionStart = SellerPvmCodeRichTextBox.Text.Length;
+            SellerAddressRichTextBox.SelectionStart = SellerAddressRichTextBox.Text.Length;
+            SellerPhoneNumberRichTextBox.SelectionStart= SellerPhoneNumberRichTextBox.Text.Length;
+            SellerBankRichTextBox.SelectionStart = SellerBankRichTextBox.Text.Length;
+            SellerBankAccountNumberRichTextBox.SelectionStart = SellerBankAccountNumberRichTextBox.Text.Length;
+            SellerEmailAddressRichTextBox.SelectionStart = SellerEmailAddressRichTextBox.Text.Length;
+
+            BuyerNameRichTextBox.SelectionStart = BuyerNameRichTextBox.Text.Length;
+            BuyerFirmCodeRichTextBox.SelectionStart = BuyerFirmCodeRichTextBox.Text.Length;
+            BuyerPvmCodeRichTextBox.SelectionStart = BuyerPvmCodeRichTextBox.Text.Length;
+            BuyerAddressRichTextBox.SelectionStart = BuyerAddressRichTextBox.Text.Length;
+
+            FirstProductNameRichTextBox.SelectionStart = FirstProductNameRichTextBox.Text.Length;
+            SecondProductNameRichTextBox.SelectionStart = SecondProductNameRichTextBox.Text.Length;
+            ThirdProductNameRichTextBox.SelectionStart = ThirdProductNameRichTextBox.Text.Length;
+            FourthProductNameRichTextBox.SelectionStart = FourthProductNameRichTextBox.Text.Length;
+            FifthProductNameRichTextBox.SelectionStart = FifthProductNameRichTextBox.Text.Length;
+            SixthProductNameRichTextBox.SelectionStart = SixthProductNameRichTextBox.Text.Length;
+            SeventhProductNameRichTextBox.SelectionStart = SeventhProductNameRichTextBox.Text.Length;
+            EighthProductNameRichTextBox.SelectionStart = EighthProductNameRichTextBox.Text.Length;
+            NinthProductNameRichTextBox.SelectionStart = NinthProductNameRichTextBox.Text.Length;
+            TenProductNameRichTextBox.SelectionStart = TenProductNameRichTextBox.Text.Length;
+            EleventhProductNameRichTextBox.SelectionStart = EleventhProductNameRichTextBox.Text.Length;
+            TwelfthProductNameRichTextBox.SelectionStart = TwelfthProductNameRichTextBox.Text.Length;
+
+            FirstProductSeesRichTextBox.SelectionStart = FirstProductSeesRichTextBox.Text.Length;
+            SecondProductSeesRichTextBox.SelectionStart = SecondProductSeesRichTextBox.Text.Length;
+            ThirdProductSeesRichTextBox.SelectionStart = ThirdProductSeesRichTextBox.Text.Length;
+            FourthProductSeesRichTextBox.SelectionStart = FourthProductSeesRichTextBox.Text.Length;
+            FifthProductSeesRichTextBox.SelectionStart = FifthProductSeesRichTextBox.Text.Length;
+            SixthProductSeesRichTextBox.SelectionStart = SixthProductSeesRichTextBox.Text.Length;
+            SeventhProductSeesRichTextBox.SelectionStart = SeventhProductSeesRichTextBox.Text.Length;
+            EighthProductSeesRichTextBox.SelectionStart = EighthProductSeesRichTextBox.Text.Length;
+            NinthProductSeesRichTextBox.SelectionStart = NinthProductSeesRichTextBox.Text.Length;
+            TenProductSeesRichTextBox.SelectionStart = TenProductSeesRichTextBox.Text.Length;
+            EleventhProductSeesRichTextBox.SelectionStart = EleventhProductSeesRichTextBox.Text.Length;
+            TwelfthProductSeesRichTextBox.SelectionStart = TwelfthProductSeesRichTextBox.Text.Length;
+
+            FirstProductQuantityRichTextBox.SelectionStart = FirstProductQuantityRichTextBox.Text.Length;
+            SecondProductQuantityRichTextBox.SelectionStart = SecondProductQuantityRichTextBox.Text.Length;
+            ThirdProductQuantityRichTextBox.SelectionStart = ThirdProductQuantityRichTextBox.Text.Length;
+            FourthProductQuantityRichTextBox.SelectionStart = FourthProductQuantityRichTextBox.Text.Length;
+            FifthProductQuantityRichTextBox.SelectionStart = FifthProductQuantityRichTextBox.Text.Length;
+            SixthProductQuantityRichTextBox.SelectionStart = SixthProductQuantityRichTextBox.Text.Length;
+            SeventhProductQuantityRichTextBox.SelectionStart = SeventhProductQuantityRichTextBox.Text.Length;
+            EighthProductQuantityRichTextBox.SelectionStart = EighthProductQuantityRichTextBox.Text.Length;
+            NinthProductQuantityRichTextBox.SelectionStart = NinthProductQuantityRichTextBox.Text.Length;
+            TenProductQuantityRichTextBox.SelectionStart = TenProductQuantityRichTextBox.Text.Length;
+            EleventhProductQuantityRichTextBox.SelectionStart = EleventhProductQuantityRichTextBox.Text.Length;
+            TwelfthProductQuantityRichTextBox.SelectionStart = TwelfthProductQuantityRichTextBox.Text.Length;
+
+            FirstProductPriceRichTextBox.SelectionStart = FirstProductPriceRichTextBox.Text.Length;
+            SecondProductPriceRichTextBox.SelectionStart = SecondProductPriceRichTextBox.Text.Length;
+            ThirdProductPriceRichTextBox.SelectionStart = ThirdProductPriceRichTextBox.Text.Length;
+            FourthProductPriceRichTextBox.SelectionStart = FourthProductPriceRichTextBox.Text.Length;
+            FifthProductPriceRichTextBox.SelectionStart = FifthProductPriceRichTextBox.Text.Length;
+            SixthProductPriceRichTextBox.SelectionStart = SixthProductPriceRichTextBox.Text.Length;
+            SeventhProductPriceRichTextBox.SelectionStart = SeventhProductPriceRichTextBox.Text.Length;
+            EighthProductPriceRichTextBox.SelectionStart = EighthProductPriceRichTextBox.Text.Length;
+            NinthProductPriceRichTextBox.SelectionStart = NinthProductPriceRichTextBox.Text.Length;
+            TenProductPriceRichTextBox.SelectionStart = TenProductPriceRichTextBox.Text.Length;
+            EleventhProductPriceRichTextBox.SelectionStart = EleventhProductPriceRichTextBox.Text.Length;
+            TwelfthProductPriceRichTextBox.SelectionStart = TwelfthProductPriceRichTextBox.Text.Length;
+
+            PriceInWordsRichTextBox.SelectionStart = PriceInWordsRichTextBox.Text.Length;
+            InvoiceMakerRichTextBox.SelectionStart = InvoiceMakerRichTextBox.Text.Length;
+            InvoiceAcceptedRichTextBox.SelectionStart = InvoiceAcceptedRichTextBox.Text.Length;
+        }
+
+        private void SetCursorAtDateTextBoxEnd()
+        {
+            InvoiceDateRichTextBox.SelectionStart = InvoiceDateRichTextBox.Text.Length;
+        }
+
         #endregion
-        
+
     }
 }
