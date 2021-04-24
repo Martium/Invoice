@@ -254,6 +254,8 @@ namespace Invoice.Forms
             SearchTextBox.Text = SearchTextBoxPlaceholderText;
             SearchButton.Enabled = false;
             SearchCancelButton.Enabled = false;
+
+            InvoiceNumberYearCreationComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private static void DisplayEmptyListReason(string reason, PaintEventArgs e, DataGridView dataGridView)
@@ -356,5 +358,6 @@ namespace Invoice.Forms
 
         #endregion
 
+       
     }
 }
