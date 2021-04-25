@@ -37,7 +37,7 @@ namespace Invoice.Repositories
                 CreateSellerInfoTable(dbConnection);
 
 #if DEBUG
-                FillInvoiceTestingInfo(dbConnection);
+               // FillInvoiceTestingInfo(dbConnection);
 #endif
 
             }

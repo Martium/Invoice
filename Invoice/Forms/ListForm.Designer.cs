@@ -205,35 +205,35 @@ namespace Invoice.Forms
             this.TotalPriceWithPvmTextBox.Location = new System.Drawing.Point(723, 46);
             this.TotalPriceWithPvmTextBox.Name = "TotalPriceWithPvmTextBox";
             this.TotalPriceWithPvmTextBox.ReadOnly = true;
-            this.TotalPriceWithPvmTextBox.Size = new System.Drawing.Size(98, 20);
+            this.TotalPriceWithPvmTextBox.Size = new System.Drawing.Size(101, 20);
             this.TotalPriceWithPvmTextBox.TabIndex = 12;
             // 
             // ProductTotalPriceLabel
             // 
             this.ProductTotalPriceLabel.AutoSize = true;
-            this.ProductTotalPriceLabel.Location = new System.Drawing.Point(499, 17);
+            this.ProductTotalPriceLabel.Location = new System.Drawing.Point(516, 17);
             this.ProductTotalPriceLabel.Name = "ProductTotalPriceLabel";
-            this.ProductTotalPriceLabel.Size = new System.Drawing.Size(101, 26);
+            this.ProductTotalPriceLabel.Size = new System.Drawing.Size(79, 26);
             this.ProductTotalPriceLabel.TabIndex = 13;
-            this.ProductTotalPriceLabel.Text = "Visų metų produktų \r\n     pilna kaina";
+            this.ProductTotalPriceLabel.Text = "Sąskaitų suma \r\n   pilna kaina";
             // 
             // PvmPriceLabel
             // 
             this.PvmPriceLabel.AutoSize = true;
             this.PvmPriceLabel.Location = new System.Drawing.Point(616, 17);
             this.PvmPriceLabel.Name = "PvmPriceLabel";
-            this.PvmPriceLabel.Size = new System.Drawing.Size(101, 26);
+            this.PvmPriceLabel.Size = new System.Drawing.Size(83, 13);
             this.PvmPriceLabel.TabIndex = 14;
-            this.PvmPriceLabel.Text = "Visų metų produktų \r\n          PVM ";
+            this.PvmPriceLabel.Text = " Sąskaitų  PVM ";
             // 
             // TotalPriceWithPvmLabel
             // 
             this.TotalPriceWithPvmLabel.AutoSize = true;
             this.TotalPriceWithPvmLabel.Location = new System.Drawing.Point(720, 17);
             this.TotalPriceWithPvmLabel.Name = "TotalPriceWithPvmLabel";
-            this.TotalPriceWithPvmLabel.Size = new System.Drawing.Size(101, 26);
+            this.TotalPriceWithPvmLabel.Size = new System.Drawing.Size(104, 26);
             this.TotalPriceWithPvmLabel.TabIndex = 15;
-            this.TotalPriceWithPvmLabel.Text = "Visų metų produktų \r\n pilna kaina su PVM";
+            this.TotalPriceWithPvmLabel.Text = "Sąskaitų suma pilna \r\n     kaina su PVM";
             // 
             // GetSelectedYearButton
             // 
