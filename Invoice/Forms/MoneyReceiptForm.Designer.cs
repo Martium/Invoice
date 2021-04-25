@@ -174,18 +174,19 @@ namespace Invoice.Forms
             this.AdditionalLinksAboutProductLabel.AutoSize = true;
             this.AdditionalLinksAboutProductLabel.Location = new System.Drawing.Point(132, 269);
             this.AdditionalLinksAboutProductLabel.Name = "AdditionalLinksAboutProductLabel";
-            this.AdditionalLinksAboutProductLabel.Size = new System.Drawing.Size(355, 13);
+            this.AdditionalLinksAboutProductLabel.Size = new System.Drawing.Size(395, 13);
             this.AdditionalLinksAboutProductLabel.TabIndex = 24;
-            this.AdditionalLinksAboutProductLabel.Text = "( prekių/paslaugų pavadinimai, kiekiai, matavimo vienetai,  vieneto kaina )";
+            this.AdditionalLinksAboutProductLabel.Text = "( prekių/paslaugų pavadinimai, kiekiai, matavimo vienetai,  vieneto kaina su PVM " +
+    ")";
             // 
             // additionalInfoPriceInWordsLabel
             // 
             this.additionalInfoPriceInWordsLabel.AutoSize = true;
             this.additionalInfoPriceInWordsLabel.Location = new System.Drawing.Point(132, 328);
             this.additionalInfoPriceInWordsLabel.Name = "additionalInfoPriceInWordsLabel";
-            this.additionalInfoPriceInWordsLabel.Size = new System.Drawing.Size(238, 13);
+            this.additionalInfoPriceInWordsLabel.Size = new System.Drawing.Size(278, 13);
             this.additionalInfoPriceInWordsLabel.TabIndex = 23;
-            this.additionalInfoPriceInWordsLabel.Text = "( už prekes ar paslaugas sumokėta suma žodžiu )";
+            this.additionalInfoPriceInWordsLabel.Text = "( už prekes ar paslaugas sumokėta suma žodžiu su PVM )";
             // 
             // PriceInWordsLabel
             // 
