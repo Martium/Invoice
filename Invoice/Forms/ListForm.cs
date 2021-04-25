@@ -377,12 +377,37 @@ namespace Invoice.Forms
             PvmPriceTextBox.Text = _numberService.CalculatePvmFromTotalPriceWithPvm(_totalPriceWithPvm);
 
             ProductTotalPriceTextBox.Text = _numberService.CalculateFullPriceFromTotalPriceWithPvm(_totalPriceWithPvm);
-
         }
+
 
 
         #endregion
 
-       
+        private void GetSelectedYearButton_Click(object sender, EventArgs e)
+        {
+            string selectedYears = InvoiceNumberYearCreationComboBox.Text;
+            string typeOfInvoiceStatus;
+
+            DialogResult dialogResult = _messageDialogService.ShowChoiceMessage(
+                "Ar norite gauti pasirinktų metų visas atsiskaitytas sąskaitas (jei spausite cancel gausite neapmokėtas)");
+
+            if (dialogResult == DialogResult.OK)
+            {
+                typeOfInvoiceStatus = "Atsiskaityta";
+                _messageDialogService.ShowInfoMessage($"{selectedYears}");
+            }
+            else
+            {
+                typeOfInvoiceStatus = "Neapmokėta";
+            }
+
+            for (int i = 0; i <= ListOfInvoiceDataGridView.Rows.Count - 1; i++)
+            {
+                if (ListOfInvoiceDataGridView.Rows[i].Cells[InvoiceNumberYearCreationIndex].Value.ToString() == selectedYears && ListOfInvoiceDataGridView.Rows[i].Cells[InvoiceIsPaidIndex].Value.ToString() == typeOfInvoiceStatus)
+                {
+
+                }
+            }
+        }
     }
 }
