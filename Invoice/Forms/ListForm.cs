@@ -40,7 +40,9 @@ namespace Invoice.Forms
 
         private void ListForm_Load(object sender, EventArgs e)
         {
-            FillComboBox();
+            FillInvoiceNumberYearCreationComboBox();
+
+            FillPaymentStatusComboBox();
 
             LoadInvoiceList();
         }
@@ -195,12 +197,7 @@ namespace Invoice.Forms
         private void GetSelectedYearButton_Click(object sender, EventArgs e)
         {
             string invoiceNumberYearCreation = InvoiceNumberYearCreationComboBox.Text;
-            string paymentStatus;
-
-            DialogResult dialogResult = _messageDialogService.ShowChoiceMessage(
-                "Ar norite gauti pasirinktų metų visas atsiskaitytas sąskaitas (jei spausite cancel gausite neapmokėtas)");
-
-            paymentStatus = dialogResult == DialogResult.OK ? "Atsiskaityta" : "Nesumokėta";
+            string paymentStatus = PaymentStatusComboBox.Text;
 
             IEnumerable<InvoiceListModel> invoiceListModels =
                 _invoiceRepository.GetAllSelectedYearInfo(invoiceNumberYearCreation, paymentStatus);
@@ -301,6 +298,7 @@ namespace Invoice.Forms
             SearchCancelButton.Enabled = false;
 
             InvoiceNumberYearCreationComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            PaymentStatusComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private static void DisplayEmptyListReason(string reason, PaintEventArgs e, DataGridView dataGridView)
@@ -393,7 +391,7 @@ namespace Invoice.Forms
             }
         }
 
-        private void FillComboBox()
+        private void FillInvoiceNumberYearCreationComboBox()
         {
             InvoiceNumberYearCreationComboBox.Items.Clear();
 
@@ -401,6 +399,14 @@ namespace Invoice.Forms
 
             InvoiceNumberYearCreationComboBox.DataSource = allYears;
             InvoiceNumberYearCreationComboBox.DisplayMember = "InvoiceNumberYearCreation";
+        }
+
+        private void FillPaymentStatusComboBox()
+        {
+            string[] paymentStatus = {"Atsiskaityta", "Nesumokėta"};
+
+            PaymentStatusComboBox.DataSource = paymentStatus;
+            PaymentStatusComboBox.DisplayMember = "Atsiskaityta";
         }
 
         private void LoadAllTotalPriceSums()

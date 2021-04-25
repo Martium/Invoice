@@ -48,6 +48,8 @@ namespace Invoice.Forms
             this.ProductTotalPriceLabel = new System.Windows.Forms.Label();
             this.PvmPriceLabel = new System.Windows.Forms.Label();
             this.TotalPriceWithPvmLabel = new System.Windows.Forms.Label();
+            this.GetSelectedYearButton = new System.Windows.Forms.Button();
+            this.PaymentStatusComboBox = new System.Windows.Forms.ComboBox();
             this.invoiceNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoiceNumberYearCreationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoiceDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,7 +57,6 @@ namespace Invoice.Forms
             this.paymentStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.totalPriceWithPvmDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invoiceListModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.GetSelectedYearButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ListOfInvoiceDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceListModelBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -73,7 +74,7 @@ namespace Invoice.Forms
             // 
             // SearchTextBox
             // 
-            this.SearchTextBox.Location = new System.Drawing.Point(12, 37);
+            this.SearchTextBox.Location = new System.Drawing.Point(12, 38);
             this.SearchTextBox.Name = "SearchTextBox";
             this.SearchTextBox.Size = new System.Drawing.Size(158, 20);
             this.SearchTextBox.TabIndex = 1;
@@ -86,7 +87,7 @@ namespace Invoice.Forms
             // 
             this.SearchButton.Location = new System.Drawing.Point(176, 37);
             this.SearchButton.Name = "SearchButton";
-            this.SearchButton.Size = new System.Drawing.Size(75, 20);
+            this.SearchButton.Size = new System.Drawing.Size(50, 20);
             this.SearchButton.TabIndex = 2;
             this.SearchButton.Text = "ieškoti";
             this.SearchButton.UseVisualStyleBackColor = true;
@@ -144,9 +145,9 @@ namespace Invoice.Forms
             // 
             // SearchCancelButton
             // 
-            this.SearchCancelButton.Location = new System.Drawing.Point(257, 37);
+            this.SearchCancelButton.Location = new System.Drawing.Point(232, 37);
             this.SearchCancelButton.Name = "SearchCancelButton";
-            this.SearchCancelButton.Size = new System.Drawing.Size(75, 20);
+            this.SearchCancelButton.Size = new System.Drawing.Size(66, 20);
             this.SearchCancelButton.TabIndex = 6;
             this.SearchCancelButton.Text = "Atšaukti";
             this.SearchCancelButton.UseVisualStyleBackColor = true;
@@ -177,10 +178,10 @@ namespace Invoice.Forms
             // InvoiceNumberYearCreationComboBox
             // 
             this.InvoiceNumberYearCreationComboBox.FormattingEnabled = true;
-            this.InvoiceNumberYearCreationComboBox.Location = new System.Drawing.Point(374, 6);
+            this.InvoiceNumberYearCreationComboBox.Location = new System.Drawing.Point(304, 6);
             this.InvoiceNumberYearCreationComboBox.MaxDropDownItems = 100;
             this.InvoiceNumberYearCreationComboBox.Name = "InvoiceNumberYearCreationComboBox";
-            this.InvoiceNumberYearCreationComboBox.Size = new System.Drawing.Size(74, 21);
+            this.InvoiceNumberYearCreationComboBox.Size = new System.Drawing.Size(81, 21);
             this.InvoiceNumberYearCreationComboBox.TabIndex = 9;
             // 
             // ProductTotalPriceTextBox
@@ -234,6 +235,26 @@ namespace Invoice.Forms
             this.TotalPriceWithPvmLabel.TabIndex = 15;
             this.TotalPriceWithPvmLabel.Text = "Visų metų produktų \r\n pilna kaina su PVM";
             // 
+            // GetSelectedYearButton
+            // 
+            this.GetSelectedYearButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GetSelectedYearButton.Location = new System.Drawing.Point(304, 37);
+            this.GetSelectedYearButton.Name = "GetSelectedYearButton";
+            this.GetSelectedYearButton.Size = new System.Drawing.Size(189, 36);
+            this.GetSelectedYearButton.TabIndex = 16;
+            this.GetSelectedYearButton.Text = "Pateikti pasirinktų metų sąskaitas";
+            this.GetSelectedYearButton.UseVisualStyleBackColor = true;
+            this.GetSelectedYearButton.Click += new System.EventHandler(this.GetSelectedYearButton_Click);
+            // 
+            // PaymentStatusComboBox
+            // 
+            this.PaymentStatusComboBox.FormattingEnabled = true;
+            this.PaymentStatusComboBox.Location = new System.Drawing.Point(391, 6);
+            this.PaymentStatusComboBox.MaxDropDownItems = 100;
+            this.PaymentStatusComboBox.Name = "PaymentStatusComboBox";
+            this.PaymentStatusComboBox.Size = new System.Drawing.Size(102, 21);
+            this.PaymentStatusComboBox.TabIndex = 17;
+            // 
             // invoiceNumberDataGridViewTextBoxColumn
             // 
             this.invoiceNumberDataGridViewTextBoxColumn.DataPropertyName = "InvoiceNumber";
@@ -285,22 +306,13 @@ namespace Invoice.Forms
             // 
             this.invoiceListModelBindingSource.DataSource = typeof(Invoice.Models.InvoiceListModel);
             // 
-            // GetSelectedYearButton
-            // 
-            this.GetSelectedYearButton.Location = new System.Drawing.Point(374, 37);
-            this.GetSelectedYearButton.Name = "GetSelectedYearButton";
-            this.GetSelectedYearButton.Size = new System.Drawing.Size(119, 36);
-            this.GetSelectedYearButton.TabIndex = 16;
-            this.GetSelectedYearButton.Text = "Pateikti pasirntų metų sąskaitas";
-            this.GetSelectedYearButton.UseVisualStyleBackColor = true;
-            this.GetSelectedYearButton.Click += new System.EventHandler(this.GetSelectedYearButton_Click);
-            // 
             // ListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1064, 1001);
+            this.Controls.Add(this.PaymentStatusComboBox);
             this.Controls.Add(this.GetSelectedYearButton);
             this.Controls.Add(this.TotalPriceWithPvmLabel);
             this.Controls.Add(this.PvmPriceLabel);
@@ -356,6 +368,7 @@ namespace Invoice.Forms
         private Label PvmPriceLabel;
         private Label TotalPriceWithPvmLabel;
         private Button GetSelectedYearButton;
+        private ComboBox PaymentStatusComboBox;
     }
 }
 
