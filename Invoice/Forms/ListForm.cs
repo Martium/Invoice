@@ -398,7 +398,7 @@ namespace Invoice.Forms
             }
             else
             {
-                typeOfInvoiceStatus = "Neapmokėta";
+                typeOfInvoiceStatus = "Nesumokėta";
             }
 
             for (int i = 0; i <= ListOfInvoiceDataGridView.Rows.Count - 1; i++)
