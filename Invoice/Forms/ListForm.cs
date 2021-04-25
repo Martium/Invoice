@@ -374,7 +374,9 @@ namespace Invoice.Forms
 
             TotalPriceWithPvmTextBox.Text = _totalPriceWithPvm.ToString(CultureInfo.InvariantCulture);
 
+            PvmPriceTextBox.Text = _numberService.CalculatePvmFromTotalPriceWithPvm(_totalPriceWithPvm);
 
+            ProductTotalPriceTextBox.Text = _numberService.CalculateFullPriceFromTotalPriceWithPvm(_totalPriceWithPvm);
 
         }
 

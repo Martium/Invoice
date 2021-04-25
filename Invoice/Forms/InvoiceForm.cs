@@ -101,7 +101,7 @@ namespace Invoice.Forms
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            ChangeDoubleCommaToDot();
+            CalculateButton_Click(this, new EventArgs());
 
             var invoiceModel = GetAllInfoFromRichTextBox();
 

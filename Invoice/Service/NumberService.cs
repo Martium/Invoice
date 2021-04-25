@@ -188,5 +188,28 @@ namespace Invoice.Service
 
             return calculateTotalPriceWithPvm;
         }
+
+        public string CalculatePvmFromTotalPriceWithPvm(double totalPriceWithPvm)
+        {
+            double pvmFromTotalPriceWithPvm = totalPriceWithPvm * 21 / 121;
+
+            double roundPvmFromTotalPriceWithPvm =
+                Math.Round(pvmFromTotalPriceWithPvm, RoundDigitNumber, MidpointRounding.ToEven);
+
+           string pvm = roundPvmFromTotalPriceWithPvm.ToString(CultureInfo.InvariantCulture);
+
+            return pvm;
+        }
+
+        public string CalculateFullPriceFromTotalPriceWithPvm(double totalPriceWithPvm)
+        {
+            double fullProductPriceWithOutPvm = totalPriceWithPvm * 100 / 121;
+
+            double roundFullProductPrice = Math.Round(fullProductPriceWithOutPvm, RoundDigitNumber, MidpointRounding.ToEven);
+
+            string fullProductPrice = roundFullProductPrice.ToString(CultureInfo.InvariantCulture);
+
+            return fullProductPrice;
+        }
     }
 }
