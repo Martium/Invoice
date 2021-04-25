@@ -478,5 +478,33 @@ namespace Invoice.Repositories
                 return getSellerInfo;
             }
         }
+
+        public IEnumerable<InvoiceListModel> GetAllSelectedYearInfo(string invoiceNumberYearCreation, string paymentStatus)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string getExistingSelectedYearInfoCommand =
+                    $@"SELECT * FROM Invoice I
+                       WHERE I.InvoiceNumberYearCreation = @InvoiceNumberYearCreation AND I.PaymentStatus = @PaymentStatus
+                    ";
+
+                object queryParameters = new
+                {
+                    InvoiceNumberYearCreation = invoiceNumberYearCreation,
+                    PaymentStatus = paymentStatus
+                };
+
+                getExistingSelectedYearInfoCommand += @" ORDER BY 
+                                                         I.InvoiceNumberYearCreation DESC, I.InvoiceNumber DESC";
+
+
+                IEnumerable<InvoiceListModel> invoiceList =
+                    dbConnection.Query<InvoiceListModel>(getExistingSelectedYearInfoCommand, queryParameters);
+
+                return invoiceList;
+            }
+        }
     }
 }
