@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using Invoice.Enums;
@@ -16,9 +17,15 @@ namespace Invoice.Forms
 
         private readonly MessageDialogService _messageDialogService = new MessageDialogService();
 
+        private readonly NumberService _numberService = new NumberService();
+
         private static readonly string SearchTextBoxPlaceholderText = "Įveskite paieškos frazę...";
 
         private const int InvoiceIsPaidIndex = 4;
+        private const int InvoiceNumberYearCreationIndex = 1;
+        private const int TotalPriceWithPvmIndex = 5;
+
+        private double _totalPriceWithPvm = 0;
 
         private bool _searchActive;
 
@@ -33,6 +40,10 @@ namespace Invoice.Forms
 
         private void ListForm_Load(object sender, EventArgs e)
         {
+            FillInvoiceNumberYearCreationComboBox();
+
+            FillPaymentStatusComboBox();
+
             LoadInvoiceList();
         }
 
@@ -121,7 +132,7 @@ namespace Invoice.Forms
 
         private void ListOfInvoiceDataGridView_Paint(object sender, PaintEventArgs e)
         {
-            DataGridView dataGridView = (DataGridView)sender;
+            DataGridView dataGridView = (DataGridView) sender;
 
             if (dataGridView.Rows.Count == 0)
             {
@@ -148,7 +159,9 @@ namespace Invoice.Forms
         {
             foreach (DataGridViewRow row in ListOfInvoiceDataGridView.Rows)
             {
-                row.DefaultCellStyle.BackColor = row.Cells[InvoiceIsPaidIndex].Value.ToString() == "Atsiskaityta" ? Color.Chartreuse : Color.Red;
+                row.DefaultCellStyle.BackColor = row.Cells[InvoiceIsPaidIndex].Value.ToString() == "Atsiskaityta"
+                    ? Color.Chartreuse
+                    : Color.Red;
             }
         }
 
@@ -181,6 +194,36 @@ namespace Invoice.Forms
             HideListAndOpenSellerInfoForm(sellerInfoForm);
         }
 
+        private void GetSelectedYearButton_Click(object sender, EventArgs e)
+        {
+            string invoiceNumberYearCreation = InvoiceNumberYearCreationComboBox.Text;
+            string paymentStatus = PaymentStatusComboBox.Text;
+
+            IEnumerable<InvoiceListModel> invoiceListModels =
+                _invoiceRepository.GetAllSelectedYearInfo(invoiceNumberYearCreation, paymentStatus);
+
+            invoiceListModelBindingSource.DataSource = invoiceListModels;
+
+            ListOfInvoiceDataGridView.DataSource = invoiceListModelBindingSource;
+
+            ChangePaymentButton.Enabled = ListOfInvoiceDataGridView.Rows.Count != 0;
+
+            SearchCancelButton.Enabled = true;
+
+            if (ListOfInvoiceDataGridView.Rows.Count == 0)
+            {
+                EditButton.Enabled = false;
+                CopyButton.Enabled = false;
+            }
+            else
+            {
+                EditButton.Enabled = true;
+                CopyButton.Enabled = true;
+            }
+
+            LoadAllTotalPriceSums();
+        }
+
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == (Keys.Escape))
@@ -193,6 +236,7 @@ namespace Invoice.Forms
         }
 
         #region Helpers
+
         private void HideListAndOpenInvoiceForm(Form invoiceForm)
         {
             this.Hide();
@@ -227,6 +271,8 @@ namespace Invoice.Forms
             TrySelectFirstRowInDataGridView();
 
             ChangeFormBackRoundColorByPaymentStatus();
+
+            LoadAllTotalPriceSums();
         }
 
         private void ToggleExistingListManaging(bool enabled, string searchPhrase)
@@ -250,6 +296,9 @@ namespace Invoice.Forms
             SearchTextBox.Text = SearchTextBoxPlaceholderText;
             SearchButton.Enabled = false;
             SearchCancelButton.Enabled = false;
+
+            InvoiceNumberYearCreationComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            PaymentStatusComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private static void DisplayEmptyListReason(string reason, PaintEventArgs e, DataGridView dataGridView)
@@ -259,7 +308,8 @@ namespace Invoice.Forms
                 int leftPadding = 2;
                 int topPadding = 41;
                 int rowSelectionColumnWidth = 40;
-                int messageBackgroundWidth = dataGridView.Columns.GetColumnsWidth(DataGridViewElementStates.Displayed) + rowSelectionColumnWidth;
+                int messageBackgroundWidth = dataGridView.Columns.GetColumnsWidth(DataGridViewElementStates.Displayed) +
+                                             rowSelectionColumnWidth;
                 int messageBackgroundHeight = 25;
 
                 graphics.FillRectangle(
@@ -281,14 +331,14 @@ namespace Invoice.Forms
         {
             int invoiceNumberColumnIndex = 0;
 
-            return (int)ListOfInvoiceDataGridView.SelectedRows[0].Cells[invoiceNumberColumnIndex].Value;
+            return (int) ListOfInvoiceDataGridView.SelectedRows[0].Cells[invoiceNumberColumnIndex].Value;
         }
 
         private int GetSelectedOrderCreationYear()
         {
             int invoiceNumberYearCreationColumnIndex = 1;
 
-            return (int)ListOfInvoiceDataGridView.SelectedRows[0].Cells[invoiceNumberYearCreationColumnIndex].Value;
+            return (int) ListOfInvoiceDataGridView.SelectedRows[0].Cells[invoiceNumberYearCreationColumnIndex].Value;
         }
 
         private void ChangePaymentStatus()
@@ -322,7 +372,8 @@ namespace Invoice.Forms
         {
             try
             {
-                var paymentStatus = ListOfInvoiceDataGridView.SelectedRows[0].Cells[InvoiceIsPaidIndex].Value.ToString();
+                var paymentStatus = ListOfInvoiceDataGridView.SelectedRows[0].Cells[InvoiceIsPaidIndex].Value
+                    .ToString();
 
                 this.BackColor = paymentStatus == "Atsiskaityta" ? Color.Chartreuse : Color.Red;
             }
@@ -340,7 +391,43 @@ namespace Invoice.Forms
             }
         }
 
-        #endregion
+        private void FillInvoiceNumberYearCreationComboBox()
+        {
+            InvoiceNumberYearCreationComboBox.Items.Clear();
 
+            var allYears = _invoiceRepository.GetInvoiceNumberYearCreationList().ToList();
+
+            InvoiceNumberYearCreationComboBox.DataSource = allYears;
+            InvoiceNumberYearCreationComboBox.DisplayMember = "InvoiceNumberYearCreation";
+        }
+
+        private void FillPaymentStatusComboBox()
+        {
+            string[] paymentStatus = {"Atsiskaityta", "Nesumokėta"};
+
+            PaymentStatusComboBox.DataSource = paymentStatus;
+            PaymentStatusComboBox.DisplayMember = "Atsiskaityta";
+        }
+
+        private void LoadAllTotalPriceSums()
+        {
+            _totalPriceWithPvm = 0;
+
+            for (int i = 0; i <= ListOfInvoiceDataGridView.Rows.Count - 1; i++)
+            {
+                _totalPriceWithPvm = _totalPriceWithPvm +
+                                     double.Parse(ListOfInvoiceDataGridView.Rows[i].Cells[TotalPriceWithPvmIndex].Value
+                                         .ToString());
+            }
+
+            TotalPriceWithPvmTextBox.Text = _totalPriceWithPvm.ToString(CultureInfo.InvariantCulture);
+
+            PvmPriceTextBox.Text = _numberService.CalculatePvmFromTotalPriceWithPvm(_totalPriceWithPvm);
+
+            ProductTotalPriceTextBox.Text = _numberService.CalculateFullPriceFromTotalPriceWithPvm(_totalPriceWithPvm);
+        }
+
+        #endregion
+        
     }
 }

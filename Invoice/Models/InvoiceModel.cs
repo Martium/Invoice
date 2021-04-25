@@ -81,5 +81,7 @@ namespace Invoice.Models
         public string InvoiceMaker { get; set; }
         public string InvoiceAccepted { get; set; }
         public string PaymentStatus { get; set; }
+
+        public string TotalPriceWithPvm { get; set; }
     }
 }

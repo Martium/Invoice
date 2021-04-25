@@ -13,5 +13,7 @@ namespace Invoice.Models
         public DateTime InvoiceDate { get; set; }
         public string BuyerName { get; set; }
         public string PaymentStatus { get; set; }
+
+        public string TotalPriceWithPvm { get; set; }
     }
 }

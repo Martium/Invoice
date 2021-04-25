@@ -101,7 +101,7 @@ namespace Invoice.Forms
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            ChangeDoubleCommaToDot();
+            CalculateButton_Click(this, new EventArgs());
 
             var invoiceModel = GetAllInfoFromRichTextBox();
 
@@ -378,7 +378,6 @@ namespace Invoice.Forms
 
         private InvoiceModel GetAllInfoFromRichTextBox()
         {
-
             var invoiceModel = new InvoiceModel
             {
                 InvoiceDate =
@@ -455,8 +454,11 @@ namespace Invoice.Forms
                 InvoiceMaker = InvoiceMakerRichTextBox.Text,
                 InvoiceAccepted = InvoiceAcceptedRichTextBox.Text,
 
+                TotalPriceWithPvm = TotalPriceWithPvmRichTextBox.Text,
+
                 PaymentStatus = _paymentStatus
             };
+
             return invoiceModel;
         }
 
