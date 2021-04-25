@@ -192,6 +192,41 @@ namespace Invoice.Forms
             HideListAndOpenSellerInfoForm(sellerInfoForm);
         }
 
+        private void GetSelectedYearButton_Click(object sender, EventArgs e)
+        {
+            string invoiceNumberYearCreation = InvoiceNumberYearCreationComboBox.Text;
+            string paymentStatus;
+
+            DialogResult dialogResult = _messageDialogService.ShowChoiceMessage(
+                "Ar norite gauti pasirinktų metų visas atsiskaitytas sąskaitas (jei spausite cancel gausite neapmokėtas)");
+
+            paymentStatus = dialogResult == DialogResult.OK ? "Atsiskaityta" : "Nesumokėta";
+
+            IEnumerable<InvoiceListModel> invoiceListModels =
+                _invoiceRepository.GetAllSelectedYearInfo(invoiceNumberYearCreation, paymentStatus);
+
+            invoiceListModelBindingSource.DataSource = invoiceListModels;
+
+            ListOfInvoiceDataGridView.DataSource = invoiceListModelBindingSource;
+
+            ChangePaymentButton.Enabled = ListOfInvoiceDataGridView.Rows.Count != 0;
+
+            SearchCancelButton.Enabled = true;
+
+            if (ListOfInvoiceDataGridView.Rows.Count == 0)
+            {
+                EditButton.Enabled = false;
+                CopyButton.Enabled = false;
+            }
+            else
+            {
+                EditButton.Enabled = true;
+                CopyButton.Enabled = true;
+            }
+
+            LoadAllTotalPriceSums();
+        }
+
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == (Keys.Escape))
@@ -386,43 +421,7 @@ namespace Invoice.Forms
             ProductTotalPriceTextBox.Text = _numberService.CalculateFullPriceFromTotalPriceWithPvm(_totalPriceWithPvm);
         }
 
-
-
         #endregion
-
-        private void GetSelectedYearButton_Click(object sender, EventArgs e)
-        {
-            string invoiceNumberYearCreation = InvoiceNumberYearCreationComboBox.Text;
-            string paymentStatus;
-
-            DialogResult dialogResult = _messageDialogService.ShowChoiceMessage(
-                "Ar norite gauti pasirinktų metų visas atsiskaitytas sąskaitas (jei spausite cancel gausite neapmokėtas)");
-
-            paymentStatus = dialogResult == DialogResult.OK ? "Atsiskaityta" : "Nesumokėta";
-
-            IEnumerable<InvoiceListModel> invoiceListModels =
-                _invoiceRepository.GetAllSelectedYearInfo(invoiceNumberYearCreation, paymentStatus);
-
-            invoiceListModelBindingSource.DataSource = invoiceListModels;
-
-            ListOfInvoiceDataGridView.DataSource = invoiceListModelBindingSource;
-
-            ChangePaymentButton.Enabled = ListOfInvoiceDataGridView.Rows.Count != 0;
-
-            SearchCancelButton.Enabled = true;
-
-            if (ListOfInvoiceDataGridView.Rows.Count == 0)
-            {
-                EditButton.Enabled = false;
-                CopyButton.Enabled = false;
-            }
-            else
-            {
-                EditButton.Enabled = true;
-                CopyButton.Enabled = true;
-            }
-
-            LoadAllTotalPriceSums();
-        }
+        
     }
 }
