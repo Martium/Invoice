@@ -215,12 +215,12 @@ namespace Invoice.Forms
             this.ProductTotalPriceLabel.Name = "ProductTotalPriceLabel";
             this.ProductTotalPriceLabel.Size = new System.Drawing.Size(79, 26);
             this.ProductTotalPriceLabel.TabIndex = 13;
-            this.ProductTotalPriceLabel.Text = "Sąskaitų suma \r\n   pilna kaina";
+            this.ProductTotalPriceLabel.Text = "Sąskaitų suma \r\n   be PVM";
             // 
             // PvmPriceLabel
             // 
             this.PvmPriceLabel.AutoSize = true;
-            this.PvmPriceLabel.Location = new System.Drawing.Point(616, 17);
+            this.PvmPriceLabel.Location = new System.Drawing.Point(625, 24);
             this.PvmPriceLabel.Name = "PvmPriceLabel";
             this.PvmPriceLabel.Size = new System.Drawing.Size(83, 13);
             this.PvmPriceLabel.TabIndex = 14;
@@ -229,11 +229,11 @@ namespace Invoice.Forms
             // TotalPriceWithPvmLabel
             // 
             this.TotalPriceWithPvmLabel.AutoSize = true;
-            this.TotalPriceWithPvmLabel.Location = new System.Drawing.Point(720, 17);
+            this.TotalPriceWithPvmLabel.Location = new System.Drawing.Point(731, 17);
             this.TotalPriceWithPvmLabel.Name = "TotalPriceWithPvmLabel";
-            this.TotalPriceWithPvmLabel.Size = new System.Drawing.Size(104, 26);
+            this.TotalPriceWithPvmLabel.Size = new System.Drawing.Size(79, 26);
             this.TotalPriceWithPvmLabel.TabIndex = 15;
-            this.TotalPriceWithPvmLabel.Text = "Sąskaitų suma pilna \r\n     kaina su PVM";
+            this.TotalPriceWithPvmLabel.Text = "Sąskaitų suma \r\n      su PVM";
             // 
             // GetSelectedYearButton
             // 
