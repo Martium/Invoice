@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using Invoice.Enums;
@@ -18,9 +17,15 @@ namespace Invoice.Forms
 
         private readonly MessageDialogService _messageDialogService = new MessageDialogService();
 
+        private readonly NumberService _numberService = new NumberService();
+
         private static readonly string SearchTextBoxPlaceholderText = "Įveskite paieškos frazę...";
 
         private const int InvoiceIsPaidIndex = 4;
+        private const int InvoiceNumberYearCreationIndex = 1;
+        private const int TotalPriceWithPvmIndex = 5;
+
+        private double _totalPriceWithPvm = 0;
 
         private bool _searchActive;
 
@@ -231,6 +236,8 @@ namespace Invoice.Forms
             TrySelectFirstRowInDataGridView();
 
             ChangeFormBackRoundColorByPaymentStatus();
+
+            LoadAllTotalPriceSums();
         }
 
         private void ToggleExistingListManaging(bool enabled, string searchPhrase)
@@ -355,6 +362,22 @@ namespace Invoice.Forms
             InvoiceNumberYearCreationComboBox.DataSource = allYears;
             InvoiceNumberYearCreationComboBox.DisplayMember = "InvoiceNumberYearCreation";
         }
+
+        private void LoadAllTotalPriceSums()
+        {
+            _totalPriceWithPvm = 0;
+
+            for (int i = 0; i <= ListOfInvoiceDataGridView.Rows.Count -1; i++)
+            {
+                _totalPriceWithPvm = _totalPriceWithPvm + double.Parse(ListOfInvoiceDataGridView.Rows[i].Cells[TotalPriceWithPvmIndex].Value.ToString());
+            }
+
+            TotalPriceWithPvmTextBox.Text = _totalPriceWithPvm.ToString(CultureInfo.InvariantCulture);
+
+
+
+        }
+
 
         #endregion
 

@@ -117,6 +117,7 @@
     <Compile Include="Forms\SellerInfoForm.Designer.cs">
       <DependentUpon>SellerInfoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\AllYearsTotalPriceModel.cs" />
     <Compile Include="Models\InvoiceListModel.cs" />
     <Compile Include="Models\InvoiceModel.cs" />
     <Compile Include="Models\InvoiceNumberYearCreationModel.cs" />
