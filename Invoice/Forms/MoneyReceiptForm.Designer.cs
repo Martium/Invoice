@@ -229,7 +229,7 @@ namespace Invoice.Forms
             // InvoiceDateLabel
             // 
             this.InvoiceDateLabel.AutoSize = true;
-            this.InvoiceDateLabel.Location = new System.Drawing.Point(396, 157);
+            this.InvoiceDateLabel.Location = new System.Drawing.Point(375, 157);
             this.InvoiceDateLabel.Name = "InvoiceDateLabel";
             this.InvoiceDateLabel.Size = new System.Drawing.Size(30, 13);
             this.InvoiceDateLabel.TabIndex = 18;
