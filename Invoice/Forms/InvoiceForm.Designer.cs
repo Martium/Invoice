@@ -155,6 +155,11 @@ namespace Invoice.Forms
             this.FirstProductTypeQuantityTextBox = new System.Windows.Forms.TextBox();
             this.FirstProductTypeTextBox = new System.Windows.Forms.TextBox();
             this.TypeOfProductLabel = new System.Windows.Forms.Label();
+            this.AdditionalInfoFirstLineLabel = new System.Windows.Forms.Label();
+            this.AdditionalInfoSecondLineLabel = new System.Windows.Forms.Label();
+            this.AdditionalInfoFifthLineLabel = new System.Windows.Forms.Label();
+            this.AdditionalThirdLineInfoLabel = new System.Windows.Forms.Label();
+            this.AdditionalInfoFourthLineLabel = new System.Windows.Forms.Label();
             this.PrintInvoicePanel.SuspendLayout();
             this.ProductsTypesPanel.SuspendLayout();
             this.SuspendLayout();
@@ -1278,6 +1283,11 @@ namespace Invoice.Forms
             // ProductsTypesPanel
             // 
             this.ProductsTypesPanel.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.ProductsTypesPanel.Controls.Add(this.AdditionalInfoFifthLineLabel);
+            this.ProductsTypesPanel.Controls.Add(this.AdditionalInfoFourthLineLabel);
+            this.ProductsTypesPanel.Controls.Add(this.AdditionalThirdLineInfoLabel);
+            this.ProductsTypesPanel.Controls.Add(this.AdditionalInfoSecondLineLabel);
+            this.ProductsTypesPanel.Controls.Add(this.AdditionalInfoFirstLineLabel);
             this.ProductsTypesPanel.Controls.Add(this.AdditionalInfoLabel);
             this.ProductsTypesPanel.Controls.Add(this.FifthProductTypePriceTextBox);
             this.ProductsTypesPanel.Controls.Add(this.FourthProductTypePriceTextBox);
@@ -1297,9 +1307,9 @@ namespace Invoice.Forms
             this.ProductsTypesPanel.Controls.Add(this.FirstProductTypeQuantityTextBox);
             this.ProductsTypesPanel.Controls.Add(this.FirstProductTypeTextBox);
             this.ProductsTypesPanel.Controls.Add(this.TypeOfProductLabel);
-            this.ProductsTypesPanel.Location = new System.Drawing.Point(966, 31);
+            this.ProductsTypesPanel.Location = new System.Drawing.Point(932, 31);
             this.ProductsTypesPanel.Name = "ProductsTypesPanel";
-            this.ProductsTypesPanel.Size = new System.Drawing.Size(290, 251);
+            this.ProductsTypesPanel.Size = new System.Drawing.Size(303, 254);
             this.ProductsTypesPanel.TabIndex = 5;
             // 
             // AdditionalInfoLabel
@@ -1314,7 +1324,7 @@ namespace Invoice.Forms
             // 
             // FifthProductTypePriceTextBox
             // 
-            this.FifthProductTypePriceTextBox.Location = new System.Drawing.Point(208, 207);
+            this.FifthProductTypePriceTextBox.Location = new System.Drawing.Point(238, 207);
             this.FifthProductTypePriceTextBox.Name = "FifthProductTypePriceTextBox";
             this.FifthProductTypePriceTextBox.Size = new System.Drawing.Size(49, 20);
             this.FifthProductTypePriceTextBox.TabIndex = 17;
@@ -1322,7 +1332,7 @@ namespace Invoice.Forms
             // 
             // FourthProductTypePriceTextBox
             // 
-            this.FourthProductTypePriceTextBox.Location = new System.Drawing.Point(208, 173);
+            this.FourthProductTypePriceTextBox.Location = new System.Drawing.Point(238, 173);
             this.FourthProductTypePriceTextBox.Name = "FourthProductTypePriceTextBox";
             this.FourthProductTypePriceTextBox.Size = new System.Drawing.Size(49, 20);
             this.FourthProductTypePriceTextBox.TabIndex = 16;
@@ -1330,7 +1340,7 @@ namespace Invoice.Forms
             // 
             // FifthProductTypeQuantityTextBox
             // 
-            this.FifthProductTypeQuantityTextBox.Location = new System.Drawing.Point(153, 207);
+            this.FifthProductTypeQuantityTextBox.Location = new System.Drawing.Point(183, 207);
             this.FifthProductTypeQuantityTextBox.Name = "FifthProductTypeQuantityTextBox";
             this.FifthProductTypeQuantityTextBox.Size = new System.Drawing.Size(49, 20);
             this.FifthProductTypeQuantityTextBox.TabIndex = 15;
@@ -1338,7 +1348,7 @@ namespace Invoice.Forms
             // 
             // FourthProductTypeQuantityTextBox
             // 
-            this.FourthProductTypeQuantityTextBox.Location = new System.Drawing.Point(153, 173);
+            this.FourthProductTypeQuantityTextBox.Location = new System.Drawing.Point(183, 173);
             this.FourthProductTypeQuantityTextBox.Name = "FourthProductTypeQuantityTextBox";
             this.FourthProductTypeQuantityTextBox.Size = new System.Drawing.Size(49, 20);
             this.FourthProductTypeQuantityTextBox.TabIndex = 14;
@@ -1346,7 +1356,7 @@ namespace Invoice.Forms
             // 
             // FifthProductTypeTextBox
             // 
-            this.FifthProductTypeTextBox.Location = new System.Drawing.Point(25, 207);
+            this.FifthProductTypeTextBox.Location = new System.Drawing.Point(55, 207);
             this.FifthProductTypeTextBox.Name = "FifthProductTypeTextBox";
             this.FifthProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
             this.FifthProductTypeTextBox.TabIndex = 13;
@@ -1354,7 +1364,7 @@ namespace Invoice.Forms
             // 
             // FourthProductTypeTextBox
             // 
-            this.FourthProductTypeTextBox.Location = new System.Drawing.Point(25, 173);
+            this.FourthProductTypeTextBox.Location = new System.Drawing.Point(55, 173);
             this.FourthProductTypeTextBox.Name = "FourthProductTypeTextBox";
             this.FourthProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
             this.FourthProductTypeTextBox.TabIndex = 12;
@@ -1362,7 +1372,7 @@ namespace Invoice.Forms
             // 
             // ThirdProductTypePriceTextBox
             // 
-            this.ThirdProductTypePriceTextBox.Location = new System.Drawing.Point(208, 138);
+            this.ThirdProductTypePriceTextBox.Location = new System.Drawing.Point(238, 138);
             this.ThirdProductTypePriceTextBox.Name = "ThirdProductTypePriceTextBox";
             this.ThirdProductTypePriceTextBox.Size = new System.Drawing.Size(49, 20);
             this.ThirdProductTypePriceTextBox.TabIndex = 11;
@@ -1370,7 +1380,7 @@ namespace Invoice.Forms
             // 
             // ThirdProductTypeQuantityTextBox
             // 
-            this.ThirdProductTypeQuantityTextBox.Location = new System.Drawing.Point(153, 138);
+            this.ThirdProductTypeQuantityTextBox.Location = new System.Drawing.Point(183, 138);
             this.ThirdProductTypeQuantityTextBox.Name = "ThirdProductTypeQuantityTextBox";
             this.ThirdProductTypeQuantityTextBox.Size = new System.Drawing.Size(49, 20);
             this.ThirdProductTypeQuantityTextBox.TabIndex = 10;
@@ -1378,7 +1388,7 @@ namespace Invoice.Forms
             // 
             // ThirdProductTypeTextBox
             // 
-            this.ThirdProductTypeTextBox.Location = new System.Drawing.Point(25, 138);
+            this.ThirdProductTypeTextBox.Location = new System.Drawing.Point(55, 138);
             this.ThirdProductTypeTextBox.Name = "ThirdProductTypeTextBox";
             this.ThirdProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
             this.ThirdProductTypeTextBox.TabIndex = 9;
@@ -1386,7 +1396,7 @@ namespace Invoice.Forms
             // 
             // SecondProductTypePriceTextBox
             // 
-            this.SecondProductTypePriceTextBox.Location = new System.Drawing.Point(208, 102);
+            this.SecondProductTypePriceTextBox.Location = new System.Drawing.Point(238, 102);
             this.SecondProductTypePriceTextBox.Name = "SecondProductTypePriceTextBox";
             this.SecondProductTypePriceTextBox.Size = new System.Drawing.Size(49, 20);
             this.SecondProductTypePriceTextBox.TabIndex = 8;
@@ -1394,7 +1404,7 @@ namespace Invoice.Forms
             // 
             // SecondProductTypeQuantityTextBox
             // 
-            this.SecondProductTypeQuantityTextBox.Location = new System.Drawing.Point(153, 102);
+            this.SecondProductTypeQuantityTextBox.Location = new System.Drawing.Point(183, 102);
             this.SecondProductTypeQuantityTextBox.Name = "SecondProductTypeQuantityTextBox";
             this.SecondProductTypeQuantityTextBox.Size = new System.Drawing.Size(49, 20);
             this.SecondProductTypeQuantityTextBox.TabIndex = 7;
@@ -1402,7 +1412,7 @@ namespace Invoice.Forms
             // 
             // SecondProductTypeTextBox
             // 
-            this.SecondProductTypeTextBox.Location = new System.Drawing.Point(25, 102);
+            this.SecondProductTypeTextBox.Location = new System.Drawing.Point(55, 102);
             this.SecondProductTypeTextBox.Name = "SecondProductTypeTextBox";
             this.SecondProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
             this.SecondProductTypeTextBox.TabIndex = 6;
@@ -1411,7 +1421,7 @@ namespace Invoice.Forms
             // ProductOfTypePriceLabel
             // 
             this.ProductOfTypePriceLabel.AutoSize = true;
-            this.ProductOfTypePriceLabel.Location = new System.Drawing.Point(205, 43);
+            this.ProductOfTypePriceLabel.Location = new System.Drawing.Point(235, 46);
             this.ProductOfTypePriceLabel.Name = "ProductOfTypePriceLabel";
             this.ProductOfTypePriceLabel.Size = new System.Drawing.Size(55, 13);
             this.ProductOfTypePriceLabel.TabIndex = 5;
@@ -1420,7 +1430,7 @@ namespace Invoice.Forms
             // TypeOfQuantityLabel
             // 
             this.TypeOfQuantityLabel.AutoSize = true;
-            this.TypeOfQuantityLabel.Location = new System.Drawing.Point(150, 43);
+            this.TypeOfQuantityLabel.Location = new System.Drawing.Point(180, 46);
             this.TypeOfQuantityLabel.Name = "TypeOfQuantityLabel";
             this.TypeOfQuantityLabel.Size = new System.Drawing.Size(35, 13);
             this.TypeOfQuantityLabel.TabIndex = 4;
@@ -1428,7 +1438,7 @@ namespace Invoice.Forms
             // 
             // FirstProductTypePriceTextBox
             // 
-            this.FirstProductTypePriceTextBox.Location = new System.Drawing.Point(208, 66);
+            this.FirstProductTypePriceTextBox.Location = new System.Drawing.Point(238, 66);
             this.FirstProductTypePriceTextBox.Name = "FirstProductTypePriceTextBox";
             this.FirstProductTypePriceTextBox.Size = new System.Drawing.Size(49, 20);
             this.FirstProductTypePriceTextBox.TabIndex = 3;
@@ -1436,7 +1446,7 @@ namespace Invoice.Forms
             // 
             // FirstProductTypeQuantityTextBox
             // 
-            this.FirstProductTypeQuantityTextBox.Location = new System.Drawing.Point(153, 66);
+            this.FirstProductTypeQuantityTextBox.Location = new System.Drawing.Point(183, 66);
             this.FirstProductTypeQuantityTextBox.Name = "FirstProductTypeQuantityTextBox";
             this.FirstProductTypeQuantityTextBox.Size = new System.Drawing.Size(49, 20);
             this.FirstProductTypeQuantityTextBox.TabIndex = 2;
@@ -1444,7 +1454,7 @@ namespace Invoice.Forms
             // 
             // FirstProductTypeTextBox
             // 
-            this.FirstProductTypeTextBox.Location = new System.Drawing.Point(25, 66);
+            this.FirstProductTypeTextBox.Location = new System.Drawing.Point(55, 66);
             this.FirstProductTypeTextBox.Name = "FirstProductTypeTextBox";
             this.FirstProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
             this.FirstProductTypeTextBox.TabIndex = 1;
@@ -1453,11 +1463,56 @@ namespace Invoice.Forms
             // TypeOfProductLabel
             // 
             this.TypeOfProductLabel.AutoSize = true;
-            this.TypeOfProductLabel.Location = new System.Drawing.Point(22, 43);
+            this.TypeOfProductLabel.Location = new System.Drawing.Point(52, 46);
             this.TypeOfProductLabel.Name = "TypeOfProductLabel";
             this.TypeOfProductLabel.Size = new System.Drawing.Size(75, 13);
             this.TypeOfProductLabel.TabIndex = 0;
             this.TypeOfProductLabel.Text = "Produkto tipas";
+            // 
+            // AdditionalInfoFirstLineLabel
+            // 
+            this.AdditionalInfoFirstLineLabel.AutoSize = true;
+            this.AdditionalInfoFirstLineLabel.Location = new System.Drawing.Point(33, 69);
+            this.AdditionalInfoFirstLineLabel.Name = "AdditionalInfoFirstLineLabel";
+            this.AdditionalInfoFirstLineLabel.Size = new System.Drawing.Size(16, 13);
+            this.AdditionalInfoFirstLineLabel.TabIndex = 19;
+            this.AdditionalInfoFirstLineLabel.Text = "1)";
+            // 
+            // AdditionalInfoSecondLineLabel
+            // 
+            this.AdditionalInfoSecondLineLabel.AutoSize = true;
+            this.AdditionalInfoSecondLineLabel.Location = new System.Drawing.Point(33, 105);
+            this.AdditionalInfoSecondLineLabel.Name = "AdditionalInfoSecondLineLabel";
+            this.AdditionalInfoSecondLineLabel.Size = new System.Drawing.Size(16, 13);
+            this.AdditionalInfoSecondLineLabel.TabIndex = 20;
+            this.AdditionalInfoSecondLineLabel.Text = "2)";
+            // 
+            // AdditionalInfoFifthLineLabel
+            // 
+            this.AdditionalInfoFifthLineLabel.AutoSize = true;
+            this.AdditionalInfoFifthLineLabel.Location = new System.Drawing.Point(33, 210);
+            this.AdditionalInfoFifthLineLabel.Name = "AdditionalInfoFifthLineLabel";
+            this.AdditionalInfoFifthLineLabel.Size = new System.Drawing.Size(16, 13);
+            this.AdditionalInfoFifthLineLabel.TabIndex = 20;
+            this.AdditionalInfoFifthLineLabel.Text = "5)";
+            // 
+            // AdditionalThirdLineInfoLabel
+            // 
+            this.AdditionalThirdLineInfoLabel.AutoSize = true;
+            this.AdditionalThirdLineInfoLabel.Location = new System.Drawing.Point(33, 141);
+            this.AdditionalThirdLineInfoLabel.Name = "AdditionalThirdLineInfoLabel";
+            this.AdditionalThirdLineInfoLabel.Size = new System.Drawing.Size(16, 13);
+            this.AdditionalThirdLineInfoLabel.TabIndex = 21;
+            this.AdditionalThirdLineInfoLabel.Text = "3)";
+            // 
+            // AdditionalInfoFourthLineLabel
+            // 
+            this.AdditionalInfoFourthLineLabel.AutoSize = true;
+            this.AdditionalInfoFourthLineLabel.Location = new System.Drawing.Point(33, 176);
+            this.AdditionalInfoFourthLineLabel.Name = "AdditionalInfoFourthLineLabel";
+            this.AdditionalInfoFourthLineLabel.Size = new System.Drawing.Size(16, 13);
+            this.AdditionalInfoFourthLineLabel.TabIndex = 22;
+            this.AdditionalInfoFourthLineLabel.Text = "4)";
             // 
             // InvoiceForm
             // 
@@ -1607,5 +1662,10 @@ namespace Invoice.Forms
         private System.Windows.Forms.TextBox FifthProductTypeTextBox;
         private System.Windows.Forms.TextBox FourthProductTypeTextBox;
         private System.Windows.Forms.Label AdditionalInfoLabel;
+        private System.Windows.Forms.Label AdditionalInfoFifthLineLabel;
+        private System.Windows.Forms.Label AdditionalInfoFourthLineLabel;
+        private System.Windows.Forms.Label AdditionalThirdLineInfoLabel;
+        private System.Windows.Forms.Label AdditionalInfoSecondLineLabel;
+        private System.Windows.Forms.Label AdditionalInfoFirstLineLabel;
     }
 }
