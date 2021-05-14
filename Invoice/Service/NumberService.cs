@@ -9,7 +9,7 @@ namespace Invoice.Service
     {
         private const int RoundDigitNumber = 2;
 
-        public string ChangeCommaToDot(RichTextBox richTextBox)
+        public string ChangeCommaToDotFromRichTextBoxText(RichTextBox richTextBox)
         {
             string changeComma = richTextBox.Text;
 
@@ -23,12 +23,41 @@ namespace Invoice.Service
             return changeComma;
         }
 
-        public double? ParseToDoubleOrNull(RichTextBox richTexBox)
+        public string ChangeCommaToDotFromTextBoxText(TextBox textBox)
+        {
+            string changeComma = textBox.Text;
+
+            bool isComma = textBox.Text.Contains(",");
+
+            if (isComma)
+            {
+                changeComma = textBox.Text.Replace(",", ".");
+            }
+
+            return changeComma;
+        }
+
+        public double? ParseToDoubleOrNullFromRichTextBoxText(RichTextBox richTextBox)
         {
             double? doubleOrNull;
             try
             {
-                doubleOrNull = double.Parse(richTexBox.Text, CultureInfo.InvariantCulture);
+                doubleOrNull = double.Parse(richTextBox.Text, CultureInfo.InvariantCulture);
+            }
+            catch
+            {
+                doubleOrNull = null;
+            }
+
+            return doubleOrNull;
+        }
+
+        public double? ParseToDoubleOrNullFromTextBoxText(TextBox textBox)
+        {
+            double? doubleOrNull;
+            try
+            {
+                doubleOrNull = double.Parse(textBox.Text, CultureInfo.InvariantCulture);
             }
             catch
             {
@@ -53,7 +82,7 @@ namespace Invoice.Service
             return doubleOrDefault;
         }
 
-        public string ToStringDoubleOrEmpty(InvoiceModel invoiceModel, string invoiceModelProp)
+        public string DoubleToStringOrEmpty(InvoiceModel invoiceModel, string invoiceModelProp)
         {
             string newString;
 
@@ -132,8 +161,41 @@ namespace Invoice.Service
                 case "TwelfthProductPrice":
                     newString = invoiceModel.TwelfthProductPrice.HasValue ? invoiceModel.TwelfthProductPrice.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
                     break;
-                 default:
-                     newString = "coding map error";
+
+                case "FirstProductTypeQuantity":
+                    newString = invoiceModel.FirstProductTypeQuantity.HasValue ? invoiceModel.FirstProductTypeQuantity.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
+                    break;
+                case "SecondProductTypeQuantity":
+                    newString = invoiceModel.SecondProductTypeQuantity.HasValue ? invoiceModel.SecondProductTypeQuantity.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
+                    break;
+                case "ThirdProductTypeQuantity":
+                    newString = invoiceModel.ThirdProductTypeQuantity.HasValue ? invoiceModel.ThirdProductTypeQuantity.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
+                    break;
+                case "FourthProductTypeQuantity":
+                    newString = invoiceModel.FourthProductTypeQuantity.HasValue ? invoiceModel.FourthProductTypeQuantity.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
+                    break;
+                case "FifthProductTypeQuantity":
+                    newString = invoiceModel.FifthProductTypeQuantity.HasValue ? invoiceModel.FifthProductTypeQuantity.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
+                    break;
+
+                case "FirstProductTypePrice":
+                    newString = invoiceModel.FirstProductTypePrice.HasValue ? invoiceModel.FirstProductTypePrice.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
+                    break;
+                case "SecondProductTypePrice":
+                    newString = invoiceModel.SecondProductTypePrice.HasValue ? invoiceModel.SecondProductTypePrice.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
+                    break;
+                case "ThirdProductTypePrice":
+                    newString = invoiceModel.ThirdProductTypePrice.HasValue ? invoiceModel.ThirdProductTypePrice.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
+                    break;
+                case "FourthProductTypePrice":
+                    newString = invoiceModel.FourthProductTypePrice.HasValue ? invoiceModel.FourthProductTypePrice.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
+                    break;
+                case "FifthProductTypePrice":
+                    newString = invoiceModel.FifthProductTypePrice.HasValue ? invoiceModel.FifthProductTypePrice.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
+                    break;
+
+                default:
+                     newString = "wrong prop string was passed!";
                      break;
             }
 

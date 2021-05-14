@@ -103,7 +103,7 @@ namespace Invoice.Forms
         {
             CalculateButton_Click(this, new EventArgs());
 
-            var invoiceModel = GetAllInfoFromRichTextBox();
+            var invoiceModel = GetAllInfoFromAllTextBoxesAndRichTextBoxes();
 
             bool isSuccess;
             string successMessage;
@@ -377,7 +377,7 @@ namespace Invoice.Forms
             return allProducts;
         }
 
-        private InvoiceModel GetAllInfoFromRichTextBox()
+        private InvoiceModel GetAllInfoFromAllTextBoxesAndRichTextBoxes()
         {
             var invoiceModel = new InvoiceModel
             {
@@ -425,31 +425,31 @@ namespace Invoice.Forms
                 EleventhProductSees = EleventhProductSeesRichTextBox.Text,
                 TwelfthProductSees = TwelfthProductSeesRichTextBox.Text,
 
-                FirstProductQuantity = _numberService.ParseToDoubleOrNull(FirstProductQuantityRichTextBox),
-                SecondProductQuantity = _numberService.ParseToDoubleOrNull(SecondProductQuantityRichTextBox),
-                ThirdProductQuantity = _numberService.ParseToDoubleOrNull(ThirdProductQuantityRichTextBox),
-                FourthProductQuantity = _numberService.ParseToDoubleOrNull(FourthProductQuantityRichTextBox),
-                FifthProductQuantity = _numberService.ParseToDoubleOrNull(FifthProductQuantityRichTextBox),
-                SixthProductQuantity = _numberService.ParseToDoubleOrNull(SixthProductQuantityRichTextBox),
-                SeventhProductQuantity = _numberService.ParseToDoubleOrNull(SeventhProductQuantityRichTextBox),
-                EighthProductQuantity = _numberService.ParseToDoubleOrNull(EighthProductQuantityRichTextBox),
-                NinthProductQuantity = _numberService.ParseToDoubleOrNull(NinthProductQuantityRichTextBox),
-                TenProductQuantity = _numberService.ParseToDoubleOrNull(TenProductQuantityRichTextBox),
-                EleventhProductQuantity = _numberService.ParseToDoubleOrNull(EleventhProductQuantityRichTextBox),
-                TwelfthProductQuantity = _numberService.ParseToDoubleOrNull(TwelfthProductQuantityRichTextBox),
+                FirstProductQuantity = _numberService.ParseToDoubleOrNullFromRichTextBoxText(FirstProductQuantityRichTextBox),
+                SecondProductQuantity = _numberService.ParseToDoubleOrNullFromRichTextBoxText(SecondProductQuantityRichTextBox),
+                ThirdProductQuantity = _numberService.ParseToDoubleOrNullFromRichTextBoxText(ThirdProductQuantityRichTextBox),
+                FourthProductQuantity = _numberService.ParseToDoubleOrNullFromRichTextBoxText(FourthProductQuantityRichTextBox),
+                FifthProductQuantity = _numberService.ParseToDoubleOrNullFromRichTextBoxText(FifthProductQuantityRichTextBox),
+                SixthProductQuantity = _numberService.ParseToDoubleOrNullFromRichTextBoxText(SixthProductQuantityRichTextBox),
+                SeventhProductQuantity = _numberService.ParseToDoubleOrNullFromRichTextBoxText(SeventhProductQuantityRichTextBox),
+                EighthProductQuantity = _numberService.ParseToDoubleOrNullFromRichTextBoxText(EighthProductQuantityRichTextBox),
+                NinthProductQuantity = _numberService.ParseToDoubleOrNullFromRichTextBoxText(NinthProductQuantityRichTextBox),
+                TenProductQuantity = _numberService.ParseToDoubleOrNullFromRichTextBoxText(TenProductQuantityRichTextBox),
+                EleventhProductQuantity = _numberService.ParseToDoubleOrNullFromRichTextBoxText(EleventhProductQuantityRichTextBox),
+                TwelfthProductQuantity = _numberService.ParseToDoubleOrNullFromRichTextBoxText(TwelfthProductQuantityRichTextBox),
 
-                FirstProductPrice = _numberService.ParseToDoubleOrNull(FirstProductPriceRichTextBox),
-                SecondProductPrice = _numberService.ParseToDoubleOrNull(SecondProductPriceRichTextBox),
-                ThirdProductPrice = _numberService.ParseToDoubleOrNull(ThirdProductPriceRichTextBox),
-                FourthProductPrice = _numberService.ParseToDoubleOrNull(FourthProductPriceRichTextBox),
-                FifthProductPrice = _numberService.ParseToDoubleOrNull(FifthProductPriceRichTextBox),
-                SixthProductPrice = _numberService.ParseToDoubleOrNull(SixthProductPriceRichTextBox),
-                SeventhProductPrice = _numberService.ParseToDoubleOrNull(SeventhProductPriceRichTextBox),
-                EighthProductPrice = _numberService.ParseToDoubleOrNull(EighthProductPriceRichTextBox),
-                NinthProductPrice = _numberService.ParseToDoubleOrNull(NinthProductPriceRichTextBox),
-                TenProductPrice = _numberService.ParseToDoubleOrNull(TenProductPriceRichTextBox),
-                EleventhProductPrice = _numberService.ParseToDoubleOrNull(EleventhProductPriceRichTextBox),
-                TwelfthProductPrice = _numberService.ParseToDoubleOrNull(TwelfthProductPriceRichTextBox),
+                FirstProductPrice = _numberService.ParseToDoubleOrNullFromRichTextBoxText(FirstProductPriceRichTextBox),
+                SecondProductPrice = _numberService.ParseToDoubleOrNullFromRichTextBoxText(SecondProductPriceRichTextBox),
+                ThirdProductPrice = _numberService.ParseToDoubleOrNullFromRichTextBoxText(ThirdProductPriceRichTextBox),
+                FourthProductPrice = _numberService.ParseToDoubleOrNullFromRichTextBoxText(FourthProductPriceRichTextBox),
+                FifthProductPrice = _numberService.ParseToDoubleOrNullFromRichTextBoxText(FifthProductPriceRichTextBox),
+                SixthProductPrice = _numberService.ParseToDoubleOrNullFromRichTextBoxText(SixthProductPriceRichTextBox),
+                SeventhProductPrice = _numberService.ParseToDoubleOrNullFromRichTextBoxText(SeventhProductPriceRichTextBox),
+                EighthProductPrice = _numberService.ParseToDoubleOrNullFromRichTextBoxText(EighthProductPriceRichTextBox),
+                NinthProductPrice = _numberService.ParseToDoubleOrNullFromRichTextBoxText(NinthProductPriceRichTextBox),
+                TenProductPrice = _numberService.ParseToDoubleOrNullFromRichTextBoxText(TenProductPriceRichTextBox),
+                EleventhProductPrice = _numberService.ParseToDoubleOrNullFromRichTextBoxText(EleventhProductPriceRichTextBox),
+                TwelfthProductPrice = _numberService.ParseToDoubleOrNullFromRichTextBoxText(TwelfthProductPriceRichTextBox),
 
                 PriceInWords = PriceInWordsRichTextBox.Text,
                 InvoiceMaker = InvoiceMakerRichTextBox.Text,
@@ -457,7 +457,25 @@ namespace Invoice.Forms
 
                 TotalPriceWithPvm = TotalPriceWithPvmRichTextBox.Text,
 
-                PaymentStatus = _paymentStatus
+                PaymentStatus = _paymentStatus,
+
+                FirstProductType = FirstProductTypeTextBox.Text,
+                SecondProductType = SecondProductTypeTextBox.Text,
+                ThirdProductType = ThirdProductTypeTextBox.Text,
+                FourthProductType = FourthProductTypeTextBox.Text,
+                FifthProductType = FifthProductTypeTextBox.Text,
+
+                FirstProductTypeQuantity = _numberService.ParseToDoubleOrNullFromTextBoxText(FirstProductTypeQuantityTextBox),
+                SecondProductTypeQuantity = _numberService.ParseToDoubleOrNullFromTextBoxText(SecondProductTypeQuantityTextBox),
+                ThirdProductTypeQuantity = _numberService.ParseToDoubleOrNullFromTextBoxText(ThirdProductTypeQuantityTextBox),
+                FourthProductTypeQuantity = _numberService.ParseToDoubleOrNullFromTextBoxText(FourthProductTypeQuantityTextBox),
+                FifthProductTypeQuantity = _numberService.ParseToDoubleOrNullFromTextBoxText(FifthProductTypeQuantityTextBox),
+
+                FirstProductTypePrice = _numberService.ParseToDoubleOrNullFromTextBoxText(FirstProductTypePriceTextBox),
+                SecondProductTypePrice = _numberService.ParseToDoubleOrNullFromTextBoxText(SecondProductTypePriceTextBox),
+                ThirdProductTypePrice = _numberService.ParseToDoubleOrNullFromTextBoxText(ThirdProductTypePriceTextBox),
+                FourthProductTypePrice = _numberService.ParseToDoubleOrNullFromTextBoxText(FourthProductTypePriceTextBox),
+                FifthProductTypePrice = _numberService.ParseToDoubleOrNullFromTextBoxText(FifthProductTypePriceTextBox)
             };
 
             return invoiceModel;
@@ -612,57 +630,85 @@ namespace Invoice.Forms
                 TwelfthProductSeesRichTextBox.Text = invoiceModel.TwelfthProductSees;
 
                 FirstProductQuantityRichTextBox.Text =
-                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "FirstProductQuantity");
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "FirstProductQuantity");
                 SecondProductQuantityRichTextBox.Text =
-                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "SecondProductQuantity");
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "SecondProductQuantity");
                 ThirdProductQuantityRichTextBox.Text =
-                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "ThirdProductQuantity");
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "ThirdProductQuantity");
                 FourthProductQuantityRichTextBox.Text =
-                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "FourthProductQuantity");
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "FourthProductQuantity");
                 FifthProductQuantityRichTextBox.Text =
-                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "FifthProductQuantity");
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "FifthProductQuantity");
                 SixthProductQuantityRichTextBox.Text =
-                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "SixthProductQuantity");
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "SixthProductQuantity");
                 SeventhProductQuantityRichTextBox.Text =
-                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "SeventhProductQuantity");
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "SeventhProductQuantity");
                 EighthProductQuantityRichTextBox.Text =
-                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "EighthProductQuantity");
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "EighthProductQuantity");
                 NinthProductQuantityRichTextBox.Text =
-                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "NinthProductQuantity");
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "NinthProductQuantity");
                 TenProductQuantityRichTextBox.Text =
-                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "TenProductQuantity");
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "TenProductQuantity");
                 EleventhProductQuantityRichTextBox.Text =
-                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "EleventhProductQuantity");
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "EleventhProductQuantity");
                 TwelfthProductQuantityRichTextBox.Text =
-                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "TwelfthProductQuantity");
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "TwelfthProductQuantity");
 
                 FirstProductPriceRichTextBox.Text =
-                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "FirstProductPrice");
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "FirstProductPrice");
                 SecondProductPriceRichTextBox.Text =
-                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "SecondProductPrice");
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "SecondProductPrice");
                 ThirdProductPriceRichTextBox.Text =
-                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "ThirdProductPrice");
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "ThirdProductPrice");
                 FourthProductPriceRichTextBox.Text =
-                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "FourthProductPrice");
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "FourthProductPrice");
                 FifthProductPriceRichTextBox.Text =
-                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "FifthProductPrice");
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "FifthProductPrice");
                 SixthProductPriceRichTextBox.Text =
-                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "SixthProductPrice");
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "SixthProductPrice");
                 SeventhProductPriceRichTextBox.Text =
-                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "SeventhProductPrice");
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "SeventhProductPrice");
                 EighthProductPriceRichTextBox.Text =
-                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "EighthProductPrice");
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "EighthProductPrice");
                 NinthProductPriceRichTextBox.Text =
-                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "NinthProductPrice");
-                TenProductPriceRichTextBox.Text = _numberService.ToStringDoubleOrEmpty(invoiceModel, "TenProductPrice");
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "NinthProductPrice");
+                TenProductPriceRichTextBox.Text = _numberService.DoubleToStringOrEmpty(invoiceModel, "TenProductPrice");
                 EleventhProductPriceRichTextBox.Text =
-                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "EleventhProductPrice");
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "EleventhProductPrice");
                 TwelfthProductPriceRichTextBox.Text =
-                    _numberService.ToStringDoubleOrEmpty(invoiceModel, "TwelfthProductPrice");
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "TwelfthProductPrice");
 
                 PriceInWordsRichTextBox.Text = invoiceModel.PriceInWords;
                 InvoiceMakerRichTextBox.Text = invoiceModel.InvoiceMaker;
                 InvoiceAcceptedRichTextBox.Text = invoiceModel.InvoiceAccepted;
+
+                FirstProductTypeTextBox.Text = invoiceModel.FirstProductType;
+                SecondProductTypeTextBox.Text = invoiceModel.SecondProductType;
+                ThirdProductTypeTextBox.Text = invoiceModel.ThirdProductType;
+                FourthProductTypeTextBox.Text = invoiceModel.FourthProductType;
+                FifthProductTypeTextBox.Text = invoiceModel.FifthProductType;
+
+                FirstProductTypeQuantityTextBox.Text =
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "FirstProductTypeQuantity");
+                SecondProductTypeQuantityTextBox.Text =
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "SecondProductTypeQuantity");
+                ThirdProductTypeQuantityTextBox.Text =
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "ThirdProductTypeQuantity");
+                FourthProductTypeQuantityTextBox.Text =
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "FourthProductTypeQuantity");
+                FifthProductTypeQuantityTextBox.Text =
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "FifthProductTypeQuantity");
+
+                FirstProductTypePriceTextBox.Text =
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "FirstProductTypePrice");
+                SecondProductTypePriceTextBox.Text =
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "SecondProductTypePrice");
+                ThirdProductTypePriceTextBox.Text =
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "ThirdProductTypePrice");
+                FourthProductTypePriceTextBox.Text =
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "FourthProductTypePrice");
+                FifthProductTypePriceTextBox.Text =
+                    _numberService.DoubleToStringOrEmpty(invoiceModel, "FifthProductTypePrice");
 
                 if (invoiceModel.PaymentStatus == "Atsiskaityta" && _invoiceOperations == InvoiceOperations.Edit)
                 {
@@ -681,32 +727,49 @@ namespace Invoice.Forms
 
         private void ChangeDoubleCommaToDot()
         {
-            FirstProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(FirstProductQuantityRichTextBox);
-            SecondProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(SecondProductQuantityRichTextBox);
-            ThirdProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(ThirdProductQuantityRichTextBox);
-            FourthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(FourthProductQuantityRichTextBox);
-            FifthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(FifthProductQuantityRichTextBox);
-            SixthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(SixthProductQuantityRichTextBox);
-            SeventhProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(SeventhProductQuantityRichTextBox);
-            EighthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(EighthProductQuantityRichTextBox);
-            NinthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(NinthProductQuantityRichTextBox);
-            TenProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(TenProductQuantityRichTextBox);
-            EleventhProductQuantityRichTextBox.Text =
-                _numberService.ChangeCommaToDot(EleventhProductQuantityRichTextBox);
-            TwelfthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(TwelfthProductQuantityRichTextBox);
+            FirstProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDotFromRichTextBoxText(FirstProductQuantityRichTextBox);
+            SecondProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDotFromRichTextBoxText(SecondProductQuantityRichTextBox);
+            ThirdProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDotFromRichTextBoxText(ThirdProductQuantityRichTextBox);
+            FourthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDotFromRichTextBoxText(FourthProductQuantityRichTextBox);
+            FifthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDotFromRichTextBoxText(FifthProductQuantityRichTextBox);
+            SixthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDotFromRichTextBoxText(SixthProductQuantityRichTextBox);
+            SeventhProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDotFromRichTextBoxText(SeventhProductQuantityRichTextBox);
+            EighthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDotFromRichTextBoxText(EighthProductQuantityRichTextBox);
+            NinthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDotFromRichTextBoxText(NinthProductQuantityRichTextBox);
+            TenProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDotFromRichTextBoxText(TenProductQuantityRichTextBox);
+            EleventhProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDotFromRichTextBoxText(EleventhProductQuantityRichTextBox);
+            TwelfthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDotFromRichTextBoxText(TwelfthProductQuantityRichTextBox);
 
-            FirstProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(FirstProductPriceRichTextBox);
-            SecondProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(SecondProductPriceRichTextBox);
-            ThirdProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(ThirdProductPriceRichTextBox);
-            FourthProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(FourthProductPriceRichTextBox);
-            FifthProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(FifthProductPriceRichTextBox);
-            SixthProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(SixthProductPriceRichTextBox);
-            SeventhProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(SeventhProductPriceRichTextBox);
-            EighthProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(EighthProductPriceRichTextBox);
-            NinthProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(NinthProductPriceRichTextBox);
-            TenProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(TenProductPriceRichTextBox);
-            EleventhProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(EleventhProductPriceRichTextBox);
-            TwelfthProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(TwelfthProductPriceRichTextBox);
+            FirstProductPriceRichTextBox.Text = _numberService.ChangeCommaToDotFromRichTextBoxText(FirstProductPriceRichTextBox);
+            SecondProductPriceRichTextBox.Text = _numberService.ChangeCommaToDotFromRichTextBoxText(SecondProductPriceRichTextBox);
+            ThirdProductPriceRichTextBox.Text = _numberService.ChangeCommaToDotFromRichTextBoxText(ThirdProductPriceRichTextBox);
+            FourthProductPriceRichTextBox.Text = _numberService.ChangeCommaToDotFromRichTextBoxText(FourthProductPriceRichTextBox);
+            FifthProductPriceRichTextBox.Text = _numberService.ChangeCommaToDotFromRichTextBoxText(FifthProductPriceRichTextBox);
+            SixthProductPriceRichTextBox.Text = _numberService.ChangeCommaToDotFromRichTextBoxText(SixthProductPriceRichTextBox);
+            SeventhProductPriceRichTextBox.Text = _numberService.ChangeCommaToDotFromRichTextBoxText(SeventhProductPriceRichTextBox);
+            EighthProductPriceRichTextBox.Text = _numberService.ChangeCommaToDotFromRichTextBoxText(EighthProductPriceRichTextBox);
+            NinthProductPriceRichTextBox.Text = _numberService.ChangeCommaToDotFromRichTextBoxText(NinthProductPriceRichTextBox);
+            TenProductPriceRichTextBox.Text = _numberService.ChangeCommaToDotFromRichTextBoxText(TenProductPriceRichTextBox);
+            EleventhProductPriceRichTextBox.Text = _numberService.ChangeCommaToDotFromRichTextBoxText(EleventhProductPriceRichTextBox);
+            TwelfthProductPriceRichTextBox.Text = _numberService.ChangeCommaToDotFromRichTextBoxText(TwelfthProductPriceRichTextBox);
+
+            FirstProductTypeQuantityTextBox.Text =
+                _numberService.ChangeCommaToDotFromTextBoxText(FifthProductTypeQuantityTextBox);
+            SecondProductTypeQuantityTextBox.Text =
+                _numberService.ChangeCommaToDotFromTextBoxText(SecondProductTypeQuantityTextBox);
+            ThirdProductTypeQuantityTextBox.Text =
+                _numberService.ChangeCommaToDotFromTextBoxText(ThirdProductTypeQuantityTextBox);
+            FourthProductTypeQuantityTextBox.Text =
+                _numberService.ChangeCommaToDotFromTextBoxText(FourthProductTypeQuantityTextBox);
+            FifthProductTypeQuantityTextBox.Text =
+                _numberService.ChangeCommaToDotFromTextBoxText(FifthProductTypeQuantityTextBox);
+
+            FirstProductTypePriceTextBox.Text = _numberService.ChangeCommaToDotFromTextBoxText(FirstProductTypePriceTextBox);
+            SecondProductTypePriceTextBox.Text = _numberService.ChangeCommaToDotFromTextBoxText(SecondProductTypePriceTextBox);
+            ThirdProductTypePriceTextBox.Text = _numberService.ChangeCommaToDotFromTextBoxText(ThirdProductTypePriceTextBox);
+            FourthProductTypePriceTextBox.Text = _numberService.ChangeCommaToDotFromTextBoxText(FourthProductTypePriceTextBox);
+            FifthProductTypeTextBox.Text = _numberService.ChangeCommaToDotFromTextBoxText(FifthProductTypePriceTextBox);
+
 
         }
 
