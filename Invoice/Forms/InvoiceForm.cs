@@ -754,7 +754,7 @@ namespace Invoice.Forms
             TwelfthProductPriceRichTextBox.Text = _numberService.ChangeCommaToDotFromRichTextBoxText(TwelfthProductPriceRichTextBox);
 
             FirstProductTypeQuantityTextBox.Text =
-                _numberService.ChangeCommaToDotFromTextBoxText(FifthProductTypeQuantityTextBox);
+                _numberService.ChangeCommaToDotFromTextBoxText(FirstProductTypeQuantityTextBox);
             SecondProductTypeQuantityTextBox.Text =
                 _numberService.ChangeCommaToDotFromTextBoxText(SecondProductTypeQuantityTextBox);
             ThirdProductTypeQuantityTextBox.Text =
@@ -768,8 +768,7 @@ namespace Invoice.Forms
             SecondProductTypePriceTextBox.Text = _numberService.ChangeCommaToDotFromTextBoxText(SecondProductTypePriceTextBox);
             ThirdProductTypePriceTextBox.Text = _numberService.ChangeCommaToDotFromTextBoxText(ThirdProductTypePriceTextBox);
             FourthProductTypePriceTextBox.Text = _numberService.ChangeCommaToDotFromTextBoxText(FourthProductTypePriceTextBox);
-            FifthProductTypeTextBox.Text = _numberService.ChangeCommaToDotFromTextBoxText(FifthProductTypePriceTextBox);
-
+            FifthProductTypePriceTextBox.Text = _numberService.ChangeCommaToDotFromTextBoxText(FifthProductTypePriceTextBox);
 
         }
 
