@@ -35,6 +35,7 @@ namespace Invoice.Repositories
 
                 CreateInvoiceTable(dbConnection);
                 CreateSellerInfoTable(dbConnection);
+                CreateProductTypeTable(dbConnection);
 
 #if DEBUG
                 FillInvoiceTestingInfo(dbConnection);
@@ -196,6 +197,44 @@ namespace Invoice.Repositories
 
             SQLiteCommand createSellerInfoTableCommand = new SQLiteCommand(createSellerInfoTableQuery, dbConnection);
             createSellerInfoTableCommand.ExecuteNonQuery();
+        }
+
+        private void CreateProductTypeTable(SQLiteConnection dbConnection)
+        {
+            string dropProductTypeTableQuery = GetDropTableQuery("ProductType");
+            SQLiteCommand dropAProductTypeTableCommand = new SQLiteCommand(dropProductTypeTableQuery, dbConnection);
+            dropAProductTypeTableCommand.ExecuteNonQuery();
+
+            string createProductTypeTableQuery =
+                $@"
+                    CREATE TABLE [ProductType] (
+                        [Id] [INTEGER] NOT NULL,
+                        [YearId] [INTEGER] NOT NULL,
+                        
+                        [FirstProductType] [nvarchar]({FormSettings.TextBoxLengths.FirstProductType}) NULL,
+                        [SecondProductType] [nvarchar]({FormSettings.TextBoxLengths.SecondProductType}) NULL,
+                        [ThirdProductType] [nvarchar]({FormSettings.TextBoxLengths.ThirdProductType}) NULL,
+                        [FourthProductType] [nvarchar]({FormSettings.TextBoxLengths.FourthProductType}) NULL,
+                        [FifthProductType] [nvarchar]({FormSettings.TextBoxLengths.FifthProductType}) NULL,
+
+                        [FirstProductTypeQuantity] [NUMERIC] NULL,
+                        [SecondProductTypeQuantity] [NUMERIC] NULL,
+                        [ThirdProductTypeQuantity] [NUMERIC] NULL,
+                        [FourthProductTypeQuantity] [NUMERIC] NULL,
+                        [FifthProductTypeQuantity] [NUMERIC] NULL,
+
+                        [FirstProductTypePrice] [NUMERIC] NULL,
+                        [SecondProductTypePrice] [NUMERIC] NULL,
+                        [ThirdProductTypePrice] [NUMERIC] NULL,
+                        [FourthProductTypePrice] [NUMERIC] NULL,
+                        [FifthProductTypePrice] [NUMERIC] NULL,
+                        FOREIGN KEY (Id, YearId) REFERENCES Invoice (InvoiceNumber, InvoiceNumberYearCreation),
+                    UNIQUE(Id, YearId)
+                    );
+                ";
+
+            SQLiteCommand createProductTypeTableCommand = new SQLiteCommand(createProductTypeTableQuery, dbConnection);
+            createProductTypeTableCommand.ExecuteNonQuery();
         }
 
         private void FillInvoiceTestingInfo(SQLiteConnection dbConnection)
