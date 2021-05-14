@@ -192,9 +192,20 @@ namespace Invoice.Forms
             if (e.KeyCode == Keys.Enter)
             {
                 this.SelectNextControl((Control)sender, true, true, true, true);
-                SetCursorAtTextBoxStringEnd();
+                SetCursorAtRichTextBoxStringEnd();
             }
         }
+
+        private void TextBox_Keyup(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                SetCursorAtDateTextBoxEnd();
+            }
+        }
+
+
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
@@ -842,7 +853,7 @@ namespace Invoice.Forms
             return (byte[])converter.ConvertTo(img, typeof(byte[]));
         }
 
-        private void SetCursorAtTextBoxStringEnd()
+        private void SetCursorAtRichTextBoxStringEnd()
         {
             SerialNumberRichTextBox.SelectionStart = SerialNumberRichTextBox.Text.Length;
             InvoiceDateRichTextBox.SelectionStart = InvoiceDateRichTextBox.Text.Length;
@@ -916,8 +927,27 @@ namespace Invoice.Forms
             PriceInWordsRichTextBox.SelectionStart = PriceInWordsRichTextBox.Text.Length;
             InvoiceMakerRichTextBox.SelectionStart = InvoiceMakerRichTextBox.Text.Length;
             InvoiceAcceptedRichTextBox.SelectionStart = InvoiceAcceptedRichTextBox.Text.Length;
+        }
 
+        private void SerCursorAtTextBoxStringEnd()
+        {
+            FirstProductTypeTextBox.SelectionStart = FirstProductTypeTextBox.Text.Length;
+            SecondProductTypeTextBox.SelectionStart = SecondProductTypeTextBox.Text.Length;
+            ThirdProductTypeTextBox.SelectionStart = ThirdProductTypeTextBox.Text.Length;
+            FourthProductTypeTextBox.SelectionStart = FourthProductTypeTextBox.Text.Length;
+            FifthProductTypeTextBox.SelectionStart = FifthProductTypeTextBox.Text.Length;
 
+            FirstProductTypeQuantityTextBox.SelectionStart = FirstProductTypeQuantityTextBox.Text.Length;
+            SecondProductTypeQuantityTextBox.SelectionStart = SecondProductTypeQuantityTextBox.Text.Length;
+            ThirdProductTypeQuantityTextBox.SelectionStart = ThirdProductTypeQuantityTextBox.Text.Length;
+            FourthProductTypeQuantityTextBox.SelectionStart = FourthProductTypeQuantityTextBox.Text.Length;
+            FifthProductTypeQuantityTextBox.SelectionStart = FifthProductTypeQuantityTextBox.Text.Length;
+
+            FirstProductTypePriceTextBox.SelectionStart = FirstProductTypePriceTextBox.Text.Length;
+            SecondProductTypePriceTextBox.SelectionStart = SecondProductPriceRichTextBox.Text.Length;
+            ThirdProductTypePriceTextBox.SelectionStart = ThirdProductTypePriceTextBox.Text.Length;
+            FourthProductTypePriceTextBox.SelectionStart = FourthProductTypePriceTextBox.Text.Length;
+            FifthProductTypePriceTextBox.SelectionStart = FifthProductTypePriceTextBox.Text.Length;
         }
 
         private void SetCursorAtDateTextBoxEnd()
@@ -925,7 +955,8 @@ namespace Invoice.Forms
             InvoiceDateRichTextBox.SelectionStart = InvoiceDateRichTextBox.Text.Length;
         }
 
-        #endregion
 
+        #endregion
+        
     }
 }
