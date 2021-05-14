@@ -490,7 +490,7 @@ namespace Invoice.Repositories
                 dbConnection.Open();
 
                 string getExistingSellerInfoCommand =
-                    $@"SELECT *  FROM SellerInfo SI
+                    @"SELECT *  FROM SellerInfo SI
                        WHERE SI.Id = @Id
                     ";
 
@@ -522,7 +522,7 @@ namespace Invoice.Repositories
                 dbConnection.Open();
 
                 string getExistingSelectedYearInfoCommand =
-                    $@"SELECT * FROM Invoice I
+                    @"SELECT * FROM Invoice I
                        WHERE I.InvoiceNumberYearCreation = @InvoiceNumberYearCreation AND I.PaymentStatus = @PaymentStatus
                     ";
 
@@ -540,6 +540,41 @@ namespace Invoice.Repositories
                     dbConnection.Query<InvoiceListModel>(getExistingSelectedYearInfoCommand, queryParameters);
 
                 return invoiceList;
+            }
+        }
+
+        public ProductTypeModel GetProductTypeInfoFromInvoiceNumberAndCreationYear(int invoiceNumber, int invoiceNumberYearCreation)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string getExistingProductTypeCommand =
+                    $@"SELECT * FROM ProductType PT
+                        WHERE PT.Id = @InvoiceNumber AND PT.YearId = @InvoiceNumberYearCreation
+                    ";
+
+                object queryParameters = new
+                {
+                    InvoiceNumber = invoiceNumber,
+                    InvoiceNumberYearCreation = invoiceNumberYearCreation
+                };
+
+                ProductTypeModel productType;
+
+                try
+                {
+                    productType =
+                        dbConnection.QuerySingleOrDefault<ProductTypeModel>(getExistingProductTypeCommand,
+                            queryParameters);
+                }
+                catch
+                {
+                    productType = null;
+                }
+
+                return productType;
+
             }
         }
     }

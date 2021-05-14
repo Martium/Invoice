@@ -54,9 +54,9 @@ namespace Invoice.Repositories
                 file.Delete();
             }
 
-            foreach (DirectoryInfo subdirectory in directory.GetDirectories())
+            foreach (DirectoryInfo subdirectories in directory.GetDirectories())
             {
-                subdirectory.Delete(true);
+                subdirectories.Delete(true);
             }
         }
 
@@ -271,7 +271,7 @@ namespace Invoice.Repositories
                     INSERT INTO 'ProductType'
                         Values (2, {DateTime.Now.Year}, '3LITRAI', '5 LITRU PAKUOte', '200 litru pakuote', ' 1 litro pakuote', 'stikline pakuote', 10, 20, 30, 40, 50, 1, 2, 3, 4, 5);
                     INSERT INTO 'ProductType'
-                        Values (3, {DateTime.Now.Year}, '3LITRAI', '5 LITRU PAKUOte', '200 litru pakuote', ' 1 litro pakuote', 'stikline pakuote', 10, 20, 30, 40, 50, 1, 2, 3, 4, 5);
+                        Values (3, {DateTime.Now.Year}, '3LITRdAI', '5 LITRU PAKUOtes', '200 litru pakuotes', ' 1 litro pakuotes', 'stiklines pakuotes', 10, 20, 30, 40, 50, 1, 2, 3, 4, 5);
                    COMMIT;
                 ";
 

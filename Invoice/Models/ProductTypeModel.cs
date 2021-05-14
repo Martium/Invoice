@@ -1,6 +1,6 @@
 ﻿namespace Invoice.Models
 {
-    public class ProductTypeModel : InvoiceListModel
+    public class ProductTypeModel
     {
         public string FirstProductType { get; set; }
         public string SecondProductType { get; set; }

@@ -82,7 +82,7 @@ namespace Invoice.Service
             return doubleOrDefault;
         }
 
-        public string DoubleToStringOrEmpty(InvoiceModel invoiceModel, string invoiceModelProp)
+        public string DoubleToStringOrEmptyInvoiceModel(InvoiceModel invoiceModel, string invoiceModelProp)
         {
             string newString;
 
@@ -197,6 +197,52 @@ namespace Invoice.Service
                 default:
                      newString = "wrong prop string was passed!";
                      break;
+            }
+
+            return newString;
+        }
+
+        public string DoubleToStringOrEmptyProductTypeModel(ProductTypeModel productTypeModel, string productTypeProp)
+        {
+            string newString;
+
+            switch (productTypeProp)
+            {
+                case "FirstProductTypeQuantity":
+                    newString = productTypeModel.FirstProductTypeQuantity.HasValue ? productTypeModel.FirstProductTypeQuantity.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
+                    break;
+                case "SecondProductTypeQuantity":
+                    newString = productTypeModel.SecondProductTypeQuantity.HasValue ? productTypeModel.SecondProductTypeQuantity.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
+                    break;
+                case "ThirdProductTypeQuantity":
+                    newString = productTypeModel.ThirdProductTypeQuantity.HasValue ? productTypeModel.ThirdProductTypeQuantity.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
+                    break;
+                case "FourthProductTypeQuantity":
+                    newString = productTypeModel.FourthProductTypeQuantity.HasValue ? productTypeModel.FourthProductTypeQuantity.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
+                    break;
+                case "FifthProductTypeQuantity":
+                    newString = productTypeModel.FifthProductTypeQuantity.HasValue ? productTypeModel.FifthProductTypeQuantity.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
+                    break;
+
+                case "FirstProductTypePrice":
+                    newString = productTypeModel.FirstProductTypePrice.HasValue ? productTypeModel.FirstProductTypePrice.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
+                    break;
+                case "SecondProductTypePrice":
+                    newString = productTypeModel.SecondProductTypePrice.HasValue ? productTypeModel.SecondProductTypePrice.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
+                    break;
+                case "ThirdProductTypePrice":
+                    newString = productTypeModel.ThirdProductTypePrice.HasValue ? productTypeModel.ThirdProductTypePrice.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
+                    break;
+                case "FourthProductTypePrice":
+                    newString = productTypeModel.FourthProductTypePrice.HasValue ? productTypeModel.FourthProductTypePrice.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
+                    break;
+                case "FifthProductTypePrice":
+                    newString = productTypeModel.FifthProductTypePrice.HasValue ? productTypeModel.FifthProductTypePrice.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
+                    break;
+
+                default:
+                    newString = "wrong prop string was passed!";
+                    break;
             }
 
             return newString;
