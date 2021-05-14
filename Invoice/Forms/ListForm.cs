@@ -22,7 +22,6 @@ namespace Invoice.Forms
         private static readonly string SearchTextBoxPlaceholderText = "Įveskite paieškos frazę...";
 
         private const int InvoiceIsPaidIndex = 4;
-        private const int InvoiceNumberYearCreationIndex = 1;
         private const int TotalPriceWithPvmIndex = 5;
 
         private double _totalPriceWithPvm = 0;
