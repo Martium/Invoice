@@ -1,6 +1,4 @@
-﻿using System;
-using System.Drawing;
-using System.Drawing.Printing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 using Invoice.Models;
 
