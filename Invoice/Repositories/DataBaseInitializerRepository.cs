@@ -146,10 +146,10 @@ namespace Invoice.Repositories
                         [TotalPriceWithPvm] [nvarchar]({FormSettings.TextBoxLengths.TotalPriceWithPvm}) NULL,
                         
                         [FirstProductType] [nvarchar]({FormSettings.TextBoxLengths.FirstProductType}) NULL,
-                        [FirstProductType] [nvarchar]({FormSettings.TextBoxLengths.SecondProductType}) NULL,
-                        [FirstProductType] [nvarchar]({FormSettings.TextBoxLengths.ThirdProductType}) NULL,
-                        [FirstProductType] [nvarchar]({FormSettings.TextBoxLengths.FourthProductType}) NULL,
-                        [FirstProductType] [nvarchar]({FormSettings.TextBoxLengths.FifthProductType}) NULL,
+                        [SecondProductType] [nvarchar]({FormSettings.TextBoxLengths.SecondProductType}) NULL,
+                        [ThirdProductType] [nvarchar]({FormSettings.TextBoxLengths.ThirdProductType}) NULL,
+                        [FourthProductType] [nvarchar]({FormSettings.TextBoxLengths.FourthProductType}) NULL,
+                        [FifthProductType] [nvarchar]({FormSettings.TextBoxLengths.FifthProductType}) NULL,
 
                         [FirstProductTypeQuantity] [NUMERIC] NULL,
                         [SecondProductTypeQuantity] [NUMERIC] NULL,
