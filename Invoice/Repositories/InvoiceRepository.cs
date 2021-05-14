@@ -347,16 +347,10 @@ namespace Invoice.Repositories
                     @"SELECT  
                         MAX(I.InvoiceNumber)
                       FROM Invoice I
-                      WHERE I.InvoiceNumberYearCreation = @InvoiceNumberYearCreation
                     ";
 
-                object queryParameters = new
-                {
-                    InvoiceNumberYearCreation = DateTime.Now.Year
-                };
-
                 int? biggestOrderNumber =
-                    dbConnection.QuerySingleOrDefault<int?>(getBiggestInvoiceNumberQuery, queryParameters) ?? 0;
+                    dbConnection.QuerySingleOrDefault<int?>(getBiggestInvoiceNumberQuery) ?? 0;
 
                 return biggestOrderNumber.Value + 1;
             }

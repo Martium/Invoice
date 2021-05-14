@@ -135,7 +135,28 @@ namespace Invoice.Forms
             this.PrintButton = new System.Windows.Forms.Button();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
+            this.ProductsTypesPanel = new System.Windows.Forms.Panel();
+            this.TypeOfProductLabel = new System.Windows.Forms.Label();
+            this.FirstProductTypeTextBox = new System.Windows.Forms.TextBox();
+            this.FirstProductTypeQuantityTextBox = new System.Windows.Forms.TextBox();
+            this.FirstProductTypePriceTextBox = new System.Windows.Forms.TextBox();
+            this.TypeOfQuantityLabel = new System.Windows.Forms.Label();
+            this.ProductOfTypePriceLabel = new System.Windows.Forms.Label();
+            this.SecondProductTypeTextBox = new System.Windows.Forms.TextBox();
+            this.SecondProductTypeQuantityTextBox = new System.Windows.Forms.TextBox();
+            this.SecondProductTypePriceTextBox = new System.Windows.Forms.TextBox();
+            this.ThirdProductTypeTextBox = new System.Windows.Forms.TextBox();
+            this.ThirdProductTypeQuantityTextBox = new System.Windows.Forms.TextBox();
+            this.ThirdProductTypePriceTextBox = new System.Windows.Forms.TextBox();
+            this.FourthProductTypeTextBox = new System.Windows.Forms.TextBox();
+            this.FifthProductTypeTextBox = new System.Windows.Forms.TextBox();
+            this.FourthProductTypeQuantityTextBox = new System.Windows.Forms.TextBox();
+            this.FifthProductTypeQuantityTextBox = new System.Windows.Forms.TextBox();
+            this.FourthProductTypePriceTextBox = new System.Windows.Forms.TextBox();
+            this.FifthProductTypePriceTextBox = new System.Windows.Forms.TextBox();
+            this.AdditionalInfoLabel = new System.Windows.Forms.Label();
             this.PrintInvoicePanel.SuspendLayout();
+            this.ProductsTypesPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // PrintInvoicePanel
@@ -237,7 +258,7 @@ namespace Invoice.Forms
             this.PrintInvoicePanel.Controls.Add(this.InvoiceNumberLabel);
             this.PrintInvoicePanel.Controls.Add(this.SerialNumberLabel);
             this.PrintInvoicePanel.Controls.Add(this.InvoiceNameLabel);
-            this.PrintInvoicePanel.Location = new System.Drawing.Point(125, 12);
+            this.PrintInvoicePanel.Location = new System.Drawing.Point(72, 31);
             this.PrintInvoicePanel.Name = "PrintInvoicePanel";
             this.PrintInvoicePanel.Size = new System.Drawing.Size(820, 926);
             this.PrintInvoicePanel.TabIndex = 0;
@@ -1196,7 +1217,7 @@ namespace Invoice.Forms
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(125, 960);
+            this.SaveButton.Location = new System.Drawing.Point(72, 976);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(92, 29);
             this.SaveButton.TabIndex = 1;
@@ -1207,7 +1228,7 @@ namespace Invoice.Forms
             // 
             // SaveToPdf
             // 
-            this.SaveToPdf.Location = new System.Drawing.Point(223, 960);
+            this.SaveToPdf.Location = new System.Drawing.Point(170, 976);
             this.SaveToPdf.Name = "SaveToPdf";
             this.SaveToPdf.Size = new System.Drawing.Size(92, 29);
             this.SaveToPdf.TabIndex = 2;
@@ -1218,9 +1239,9 @@ namespace Invoice.Forms
             // 
             // CalculateButton
             // 
-            this.CalculateButton.Location = new System.Drawing.Point(853, 960);
+            this.CalculateButton.Location = new System.Drawing.Point(781, 976);
             this.CalculateButton.Name = "CalculateButton";
-            this.CalculateButton.Size = new System.Drawing.Size(92, 29);
+            this.CalculateButton.Size = new System.Drawing.Size(111, 29);
             this.CalculateButton.TabIndex = 3;
             this.CalculateButton.TabStop = false;
             this.CalculateButton.Text = "Skaičiuoti";
@@ -1230,7 +1251,7 @@ namespace Invoice.Forms
             // 
             // PrintButton
             // 
-            this.PrintButton.Location = new System.Drawing.Point(321, 960);
+            this.PrintButton.Location = new System.Drawing.Point(268, 976);
             this.PrintButton.Name = "PrintButton";
             this.PrintButton.Size = new System.Drawing.Size(111, 29);
             this.PrintButton.TabIndex = 4;
@@ -1254,11 +1275,181 @@ namespace Invoice.Forms
             this.printPreviewDialog.Name = "printPreviewDialog";
             this.printPreviewDialog.Visible = false;
             // 
+            // ProductsTypesPanel
+            // 
+            this.ProductsTypesPanel.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.ProductsTypesPanel.Controls.Add(this.AdditionalInfoLabel);
+            this.ProductsTypesPanel.Controls.Add(this.FifthProductTypePriceTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.FourthProductTypePriceTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.FifthProductTypeQuantityTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.FourthProductTypeQuantityTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.FifthProductTypeTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.FourthProductTypeTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.ThirdProductTypePriceTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.ThirdProductTypeQuantityTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.ThirdProductTypeTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.SecondProductTypePriceTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.SecondProductTypeQuantityTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.SecondProductTypeTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.ProductOfTypePriceLabel);
+            this.ProductsTypesPanel.Controls.Add(this.TypeOfQuantityLabel);
+            this.ProductsTypesPanel.Controls.Add(this.FirstProductTypePriceTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.FirstProductTypeQuantityTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.FirstProductTypeTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.TypeOfProductLabel);
+            this.ProductsTypesPanel.Location = new System.Drawing.Point(966, 31);
+            this.ProductsTypesPanel.Name = "ProductsTypesPanel";
+            this.ProductsTypesPanel.Size = new System.Drawing.Size(290, 251);
+            this.ProductsTypesPanel.TabIndex = 5;
+            // 
+            // TypeOfProductLabel
+            // 
+            this.TypeOfProductLabel.AutoSize = true;
+            this.TypeOfProductLabel.Location = new System.Drawing.Point(22, 43);
+            this.TypeOfProductLabel.Name = "TypeOfProductLabel";
+            this.TypeOfProductLabel.Size = new System.Drawing.Size(75, 13);
+            this.TypeOfProductLabel.TabIndex = 0;
+            this.TypeOfProductLabel.Text = "Produkto tipas";
+            // 
+            // FirstProductTypeTextBox
+            // 
+            this.FirstProductTypeTextBox.Location = new System.Drawing.Point(25, 66);
+            this.FirstProductTypeTextBox.Name = "FirstProductTypeTextBox";
+            this.FirstProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
+            this.FirstProductTypeTextBox.TabIndex = 1;
+            // 
+            // FirstProductTypeQuantityTextBox
+            // 
+            this.FirstProductTypeQuantityTextBox.Location = new System.Drawing.Point(153, 66);
+            this.FirstProductTypeQuantityTextBox.Name = "FirstProductTypeQuantityTextBox";
+            this.FirstProductTypeQuantityTextBox.Size = new System.Drawing.Size(49, 20);
+            this.FirstProductTypeQuantityTextBox.TabIndex = 2;
+            // 
+            // FirstProductTypePriceTextBox
+            // 
+            this.FirstProductTypePriceTextBox.Location = new System.Drawing.Point(208, 66);
+            this.FirstProductTypePriceTextBox.Name = "FirstProductTypePriceTextBox";
+            this.FirstProductTypePriceTextBox.Size = new System.Drawing.Size(49, 20);
+            this.FirstProductTypePriceTextBox.TabIndex = 3;
+            // 
+            // TypeOfQuantityLabel
+            // 
+            this.TypeOfQuantityLabel.AutoSize = true;
+            this.TypeOfQuantityLabel.Location = new System.Drawing.Point(150, 43);
+            this.TypeOfQuantityLabel.Name = "TypeOfQuantityLabel";
+            this.TypeOfQuantityLabel.Size = new System.Drawing.Size(35, 13);
+            this.TypeOfQuantityLabel.TabIndex = 4;
+            this.TypeOfQuantityLabel.Text = "Kiekis";
+            // 
+            // ProductOfTypePriceLabel
+            // 
+            this.ProductOfTypePriceLabel.AutoSize = true;
+            this.ProductOfTypePriceLabel.Location = new System.Drawing.Point(205, 43);
+            this.ProductOfTypePriceLabel.Name = "ProductOfTypePriceLabel";
+            this.ProductOfTypePriceLabel.Size = new System.Drawing.Size(55, 13);
+            this.ProductOfTypePriceLabel.TabIndex = 5;
+            this.ProductOfTypePriceLabel.Text = "Kaina vnt.";
+            // 
+            // SecondProductTypeTextBox
+            // 
+            this.SecondProductTypeTextBox.Location = new System.Drawing.Point(25, 102);
+            this.SecondProductTypeTextBox.Name = "SecondProductTypeTextBox";
+            this.SecondProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
+            this.SecondProductTypeTextBox.TabIndex = 6;
+            // 
+            // SecondProductTypeQuantityTextBox
+            // 
+            this.SecondProductTypeQuantityTextBox.Location = new System.Drawing.Point(153, 102);
+            this.SecondProductTypeQuantityTextBox.Name = "SecondProductTypeQuantityTextBox";
+            this.SecondProductTypeQuantityTextBox.Size = new System.Drawing.Size(49, 20);
+            this.SecondProductTypeQuantityTextBox.TabIndex = 7;
+            // 
+            // SecondProductTypePriceTextBox
+            // 
+            this.SecondProductTypePriceTextBox.Location = new System.Drawing.Point(208, 102);
+            this.SecondProductTypePriceTextBox.Name = "SecondProductTypePriceTextBox";
+            this.SecondProductTypePriceTextBox.Size = new System.Drawing.Size(49, 20);
+            this.SecondProductTypePriceTextBox.TabIndex = 8;
+            // 
+            // ThirdProductTypeTextBox
+            // 
+            this.ThirdProductTypeTextBox.Location = new System.Drawing.Point(25, 138);
+            this.ThirdProductTypeTextBox.Name = "ThirdProductTypeTextBox";
+            this.ThirdProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
+            this.ThirdProductTypeTextBox.TabIndex = 9;
+            // 
+            // ThirdProductTypeQuantityTextBox
+            // 
+            this.ThirdProductTypeQuantityTextBox.Location = new System.Drawing.Point(153, 138);
+            this.ThirdProductTypeQuantityTextBox.Name = "ThirdProductTypeQuantityTextBox";
+            this.ThirdProductTypeQuantityTextBox.Size = new System.Drawing.Size(49, 20);
+            this.ThirdProductTypeQuantityTextBox.TabIndex = 10;
+            // 
+            // ThirdProductTypePriceTextBox
+            // 
+            this.ThirdProductTypePriceTextBox.Location = new System.Drawing.Point(208, 138);
+            this.ThirdProductTypePriceTextBox.Name = "ThirdProductTypePriceTextBox";
+            this.ThirdProductTypePriceTextBox.Size = new System.Drawing.Size(49, 20);
+            this.ThirdProductTypePriceTextBox.TabIndex = 11;
+            // 
+            // FourthProductTypeTextBox
+            // 
+            this.FourthProductTypeTextBox.Location = new System.Drawing.Point(25, 173);
+            this.FourthProductTypeTextBox.Name = "FourthProductTypeTextBox";
+            this.FourthProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
+            this.FourthProductTypeTextBox.TabIndex = 12;
+            // 
+            // FifthProductTypeTextBox
+            // 
+            this.FifthProductTypeTextBox.Location = new System.Drawing.Point(25, 207);
+            this.FifthProductTypeTextBox.Name = "FifthProductTypeTextBox";
+            this.FifthProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
+            this.FifthProductTypeTextBox.TabIndex = 13;
+            // 
+            // FourthProductTypeQuantityTextBox
+            // 
+            this.FourthProductTypeQuantityTextBox.Location = new System.Drawing.Point(153, 173);
+            this.FourthProductTypeQuantityTextBox.Name = "FourthProductTypeQuantityTextBox";
+            this.FourthProductTypeQuantityTextBox.Size = new System.Drawing.Size(49, 20);
+            this.FourthProductTypeQuantityTextBox.TabIndex = 14;
+            // 
+            // FifthProductTypeQuantityTextBox
+            // 
+            this.FifthProductTypeQuantityTextBox.Location = new System.Drawing.Point(153, 207);
+            this.FifthProductTypeQuantityTextBox.Name = "FifthProductTypeQuantityTextBox";
+            this.FifthProductTypeQuantityTextBox.Size = new System.Drawing.Size(49, 20);
+            this.FifthProductTypeQuantityTextBox.TabIndex = 15;
+            // 
+            // FourthProductTypePriceTextBox
+            // 
+            this.FourthProductTypePriceTextBox.Location = new System.Drawing.Point(208, 173);
+            this.FourthProductTypePriceTextBox.Name = "FourthProductTypePriceTextBox";
+            this.FourthProductTypePriceTextBox.Size = new System.Drawing.Size(49, 20);
+            this.FourthProductTypePriceTextBox.TabIndex = 16;
+            // 
+            // FifthProductTypePriceTextBox
+            // 
+            this.FifthProductTypePriceTextBox.Location = new System.Drawing.Point(208, 207);
+            this.FifthProductTypePriceTextBox.Name = "FifthProductTypePriceTextBox";
+            this.FifthProductTypePriceTextBox.Size = new System.Drawing.Size(49, 20);
+            this.FifthProductTypePriceTextBox.TabIndex = 17;
+            // 
+            // AdditionalInfoLabel
+            // 
+            this.AdditionalInfoLabel.AutoSize = true;
+            this.AdditionalInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AdditionalInfoLabel.Location = new System.Drawing.Point(67, 11);
+            this.AdditionalInfoLabel.Name = "AdditionalInfoLabel";
+            this.AdditionalInfoLabel.Size = new System.Drawing.Size(167, 16);
+            this.AdditionalInfoLabel.TabIndex = 18;
+            this.AdditionalInfoLabel.Text = "Papildoma informacija ";
+            // 
             // InvoiceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1064, 1001);
+            this.ClientSize = new System.Drawing.Size(1268, 1017);
+            this.Controls.Add(this.ProductsTypesPanel);
             this.Controls.Add(this.PrintButton);
             this.Controls.Add(this.CalculateButton);
             this.Controls.Add(this.SaveToPdf);
@@ -1270,6 +1461,8 @@ namespace Invoice.Forms
             this.Load += new System.EventHandler(this.InvoiceForm_Load);
             this.PrintInvoicePanel.ResumeLayout(false);
             this.PrintInvoicePanel.PerformLayout();
+            this.ProductsTypesPanel.ResumeLayout(false);
+            this.ProductsTypesPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1379,5 +1572,25 @@ namespace Invoice.Forms
         private System.Windows.Forms.Button PrintButton;
         private System.Drawing.Printing.PrintDocument printDocument;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog;
+        private System.Windows.Forms.Panel ProductsTypesPanel;
+        private System.Windows.Forms.TextBox FirstProductTypeTextBox;
+        private System.Windows.Forms.Label TypeOfProductLabel;
+        private System.Windows.Forms.TextBox FirstProductTypeQuantityTextBox;
+        private System.Windows.Forms.Label ProductOfTypePriceLabel;
+        private System.Windows.Forms.Label TypeOfQuantityLabel;
+        private System.Windows.Forms.TextBox FirstProductTypePriceTextBox;
+        private System.Windows.Forms.TextBox ThirdProductTypePriceTextBox;
+        private System.Windows.Forms.TextBox ThirdProductTypeQuantityTextBox;
+        private System.Windows.Forms.TextBox ThirdProductTypeTextBox;
+        private System.Windows.Forms.TextBox SecondProductTypePriceTextBox;
+        private System.Windows.Forms.TextBox SecondProductTypeQuantityTextBox;
+        private System.Windows.Forms.TextBox SecondProductTypeTextBox;
+        private System.Windows.Forms.TextBox FifthProductTypePriceTextBox;
+        private System.Windows.Forms.TextBox FourthProductTypePriceTextBox;
+        private System.Windows.Forms.TextBox FifthProductTypeQuantityTextBox;
+        private System.Windows.Forms.TextBox FourthProductTypeQuantityTextBox;
+        private System.Windows.Forms.TextBox FifthProductTypeTextBox;
+        private System.Windows.Forms.TextBox FourthProductTypeTextBox;
+        private System.Windows.Forms.Label AdditionalInfoLabel;
     }
 }
