@@ -39,6 +39,7 @@ namespace Invoice.Repositories
 
 #if DEBUG
                 FillInvoiceTestingInfo(dbConnection);
+                FillProductTypeTestingInfo(dbConnection);
 #endif
 
             }
@@ -259,6 +260,23 @@ namespace Invoice.Repositories
 
             SQLiteCommand fillInvoiceTestingInfoTableCommand = new SQLiteCommand(fillInvoiceTestingInfo, dbConnection);
             fillInvoiceTestingInfoTableCommand.ExecuteNonQuery();
+        }
+
+        private void FillProductTypeTestingInfo(SQLiteConnection dbConnection)
+        {
+            string fillProductTypeTestingInfo =
+                $@"BEGIN TRANSACTION;
+                    INSERT INTO 'ProductType'
+                        Values (1, {DateTime.Now.AddYears(-1).Year}, '3LITRAI', '5 LITRU PAKUOte', '200 litru pakuote', ' 1 litro pakuote', 'stikline pakuote', 10, 20, 30, 40, 50, 1, 2, 3, 4, 5);
+                    INSERT INTO 'ProductType'
+                        Values (2, {DateTime.Now.Year}, '3LITRAI', '5 LITRU PAKUOte', '200 litru pakuote', ' 1 litro pakuote', 'stikline pakuote', 10, 20, 30, 40, 50, 1, 2, 3, 4, 5);
+                    INSERT INTO 'ProductType'
+                        Values (3, {DateTime.Now.Year}, '3LITRAI', '5 LITRU PAKUOte', '200 litru pakuote', ' 1 litro pakuote', 'stikline pakuote', 10, 20, 30, 40, 50, 1, 2, 3, 4, 5);
+                   COMMIT;
+                ";
+
+            SQLiteCommand fillProductTypeCommand = new SQLiteCommand(fillProductTypeTestingInfo, dbConnection);
+            fillProductTypeCommand.ExecuteNonQuery();
         }
 
         private string GetDropTableQuery(string tableName)
