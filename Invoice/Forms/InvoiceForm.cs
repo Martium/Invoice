@@ -819,6 +819,12 @@ namespace Invoice.Forms
             PriceInWordsRichTextBox.MaxLength = FormSettings.TextBoxLengths.PriceInWords;
             InvoiceMakerRichTextBox.MaxLength = FormSettings.TextBoxLengths.InvoiceMaker;
             InvoiceAcceptedRichTextBox.MaxLength = FormSettings.TextBoxLengths.InvoiceAccepted;
+
+            FirstProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.FirstProductType;
+            SecondProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.SecondProductType;
+            ThirdProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ThirdProductType;
+            FourthProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.FourthProductType;
+            FifthProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.FifthProductType;
         }
 
         private void CaptureInvoiceFormScreen()
@@ -910,6 +916,8 @@ namespace Invoice.Forms
             PriceInWordsRichTextBox.SelectionStart = PriceInWordsRichTextBox.Text.Length;
             InvoiceMakerRichTextBox.SelectionStart = InvoiceMakerRichTextBox.Text.Length;
             InvoiceAcceptedRichTextBox.SelectionStart = InvoiceAcceptedRichTextBox.Text.Length;
+
+
         }
 
         private void SetCursorAtDateTextBoxEnd()
