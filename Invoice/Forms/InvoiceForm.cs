@@ -750,10 +750,9 @@ namespace Invoice.Forms
             }
             else
             {
-                int lastInvoiceNumber = _invoiceRepository.GetMaxInvoiceNumber();
 
                 ProductTypeNameModel productTypeNameModel =
-                    _productTypeRepository.GetProductTypeNameInfoFromInvoiceAndCreationYear(lastInvoiceNumber);
+                    _productTypeRepository.GetProductTypeNameInfo();
 
                 AddItemsToProductTypeComboBoxes(productTypeNameModel);
                 SetTextToProductTypeComboBoxes(productTypeNameModel);
@@ -1016,8 +1015,36 @@ namespace Invoice.Forms
             }
         }
 
+
         #endregion
 
-       
+        private void FirstProductTypeTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SaveProductTypesButton_Click(object sender, EventArgs e)
+        {
+
+            ProductTypeNameModel productTypeNameModel = new ProductTypeNameModel()
+            {
+                FirstProductType = FirstProductTypeTextBox.Text
+            };
+            
+            int invoiceNumber = Int32.Parse(InvoiceNumberRichTextBox.Text);
+
+            int invoiceNumberYearCreation = DateTime.Now.Year;
+
+            bool succsess = _productTypeRepository.CreateNewProductType(invoiceNumber, invoiceNumberYearCreation, productTypeNameModel);
+
+            if (succsess)
+            {
+               _messageDialogService.ShowInfoMessage("bingo");
+            }
+            else
+            {
+               _messageDialogService.ShowInfoMessage("damm");
+            }
+        }
     }
 }

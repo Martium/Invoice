@@ -136,10 +136,15 @@ namespace Invoice.Forms
             this.printDocument = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.ProductsTypesPanel = new System.Windows.Forms.Panel();
+            this.FifthProductTypeComboBox = new System.Windows.Forms.ComboBox();
             this.AdditionalInfoFifthLineLabel = new System.Windows.Forms.Label();
+            this.FourthProductTypeComboBox = new System.Windows.Forms.ComboBox();
             this.AdditionalInfoFourthLineLabel = new System.Windows.Forms.Label();
+            this.ThirdProductTypeComboBox = new System.Windows.Forms.ComboBox();
             this.AdditionalThirdLineInfoLabel = new System.Windows.Forms.Label();
+            this.SecondProductTypeComboBox = new System.Windows.Forms.ComboBox();
             this.AdditionalInfoSecondLineLabel = new System.Windows.Forms.Label();
+            this.FirstProductTypeComboBox = new System.Windows.Forms.ComboBox();
             this.AdditionalInfoFirstLineLabel = new System.Windows.Forms.Label();
             this.AdditionalInfoLabel = new System.Windows.Forms.Label();
             this.FifthProductTypePriceTextBox = new System.Windows.Forms.TextBox();
@@ -155,11 +160,19 @@ namespace Invoice.Forms
             this.FirstProductTypePriceTextBox = new System.Windows.Forms.TextBox();
             this.FirstProductTypeQuantityTextBox = new System.Windows.Forms.TextBox();
             this.TypeOfProductLabel = new System.Windows.Forms.Label();
-            this.FirstProductTypeComboBox = new System.Windows.Forms.ComboBox();
-            this.SecondProductTypeComboBox = new System.Windows.Forms.ComboBox();
-            this.ThirdProductTypeComboBox = new System.Windows.Forms.ComboBox();
-            this.FourthProductTypeComboBox = new System.Windows.Forms.ComboBox();
-            this.FifthProductTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.ProductTypeNameLabel = new System.Windows.Forms.Label();
+            this.FirstProductTypeTextBox = new System.Windows.Forms.TextBox();
+            this.SecondProductTypeTextBox = new System.Windows.Forms.TextBox();
+            this.ThirdProductTypeTextBox = new System.Windows.Forms.TextBox();
+            this.FourthProductTypeTextBox = new System.Windows.Forms.TextBox();
+            this.FifthProductTypeTextBox = new System.Windows.Forms.TextBox();
+            this.FirstNumberLineProductTypesLabel = new System.Windows.Forms.Label();
+            this.SecondNumberLineProductTypeLabel = new System.Windows.Forms.Label();
+            this.ThirdNumberLineProductTypeLabel = new System.Windows.Forms.Label();
+            this.FourthNumberLineProductTypeLabel = new System.Windows.Forms.Label();
+            this.FifthNumberLineProductTypeLabel = new System.Windows.Forms.Label();
+            this.SaveProductTypesButton = new System.Windows.Forms.Button();
+            this.SaveProductTypeInfoButton = new System.Windows.Forms.Button();
             this.PrintInvoicePanel.SuspendLayout();
             this.ProductsTypesPanel.SuspendLayout();
             this.SuspendLayout();
@@ -1283,6 +1296,19 @@ namespace Invoice.Forms
             // ProductsTypesPanel
             // 
             this.ProductsTypesPanel.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.ProductsTypesPanel.Controls.Add(this.SaveProductTypeInfoButton);
+            this.ProductsTypesPanel.Controls.Add(this.SaveProductTypesButton);
+            this.ProductsTypesPanel.Controls.Add(this.FifthNumberLineProductTypeLabel);
+            this.ProductsTypesPanel.Controls.Add(this.FourthNumberLineProductTypeLabel);
+            this.ProductsTypesPanel.Controls.Add(this.ThirdNumberLineProductTypeLabel);
+            this.ProductsTypesPanel.Controls.Add(this.SecondNumberLineProductTypeLabel);
+            this.ProductsTypesPanel.Controls.Add(this.FirstNumberLineProductTypesLabel);
+            this.ProductsTypesPanel.Controls.Add(this.FifthProductTypeTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.FourthProductTypeTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.ThirdProductTypeTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.SecondProductTypeTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.FirstProductTypeTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.ProductTypeNameLabel);
             this.ProductsTypesPanel.Controls.Add(this.FifthProductTypeComboBox);
             this.ProductsTypesPanel.Controls.Add(this.AdditionalInfoFifthLineLabel);
             this.ProductsTypesPanel.Controls.Add(this.FourthProductTypeComboBox);
@@ -1309,8 +1335,16 @@ namespace Invoice.Forms
             this.ProductsTypesPanel.Controls.Add(this.TypeOfProductLabel);
             this.ProductsTypesPanel.Location = new System.Drawing.Point(932, 31);
             this.ProductsTypesPanel.Name = "ProductsTypesPanel";
-            this.ProductsTypesPanel.Size = new System.Drawing.Size(303, 254);
+            this.ProductsTypesPanel.Size = new System.Drawing.Size(303, 926);
             this.ProductsTypesPanel.TabIndex = 5;
+            // 
+            // FifthProductTypeComboBox
+            // 
+            this.FifthProductTypeComboBox.FormattingEnabled = true;
+            this.FifthProductTypeComboBox.Location = new System.Drawing.Point(55, 207);
+            this.FifthProductTypeComboBox.Name = "FifthProductTypeComboBox";
+            this.FifthProductTypeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.FifthProductTypeComboBox.TabIndex = 10;
             // 
             // AdditionalInfoFifthLineLabel
             // 
@@ -1321,6 +1355,14 @@ namespace Invoice.Forms
             this.AdditionalInfoFifthLineLabel.TabIndex = 20;
             this.AdditionalInfoFifthLineLabel.Text = "5)";
             // 
+            // FourthProductTypeComboBox
+            // 
+            this.FourthProductTypeComboBox.FormattingEnabled = true;
+            this.FourthProductTypeComboBox.Location = new System.Drawing.Point(55, 173);
+            this.FourthProductTypeComboBox.Name = "FourthProductTypeComboBox";
+            this.FourthProductTypeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.FourthProductTypeComboBox.TabIndex = 9;
+            // 
             // AdditionalInfoFourthLineLabel
             // 
             this.AdditionalInfoFourthLineLabel.AutoSize = true;
@@ -1329,6 +1371,14 @@ namespace Invoice.Forms
             this.AdditionalInfoFourthLineLabel.Size = new System.Drawing.Size(16, 13);
             this.AdditionalInfoFourthLineLabel.TabIndex = 22;
             this.AdditionalInfoFourthLineLabel.Text = "4)";
+            // 
+            // ThirdProductTypeComboBox
+            // 
+            this.ThirdProductTypeComboBox.FormattingEnabled = true;
+            this.ThirdProductTypeComboBox.Location = new System.Drawing.Point(56, 138);
+            this.ThirdProductTypeComboBox.Name = "ThirdProductTypeComboBox";
+            this.ThirdProductTypeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.ThirdProductTypeComboBox.TabIndex = 8;
             // 
             // AdditionalThirdLineInfoLabel
             // 
@@ -1339,6 +1389,14 @@ namespace Invoice.Forms
             this.AdditionalThirdLineInfoLabel.TabIndex = 21;
             this.AdditionalThirdLineInfoLabel.Text = "3)";
             // 
+            // SecondProductTypeComboBox
+            // 
+            this.SecondProductTypeComboBox.FormattingEnabled = true;
+            this.SecondProductTypeComboBox.Location = new System.Drawing.Point(56, 101);
+            this.SecondProductTypeComboBox.Name = "SecondProductTypeComboBox";
+            this.SecondProductTypeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.SecondProductTypeComboBox.TabIndex = 7;
+            // 
             // AdditionalInfoSecondLineLabel
             // 
             this.AdditionalInfoSecondLineLabel.AutoSize = true;
@@ -1347,6 +1405,14 @@ namespace Invoice.Forms
             this.AdditionalInfoSecondLineLabel.Size = new System.Drawing.Size(16, 13);
             this.AdditionalInfoSecondLineLabel.TabIndex = 20;
             this.AdditionalInfoSecondLineLabel.Text = "2)";
+            // 
+            // FirstProductTypeComboBox
+            // 
+            this.FirstProductTypeComboBox.FormattingEnabled = true;
+            this.FirstProductTypeComboBox.Location = new System.Drawing.Point(56, 66);
+            this.FirstProductTypeComboBox.Name = "FirstProductTypeComboBox";
+            this.FirstProductTypeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.FirstProductTypeComboBox.TabIndex = 6;
             // 
             // AdditionalInfoFirstLineLabel
             // 
@@ -1474,45 +1540,117 @@ namespace Invoice.Forms
             this.TypeOfProductLabel.TabIndex = 0;
             this.TypeOfProductLabel.Text = "Produkto tipas";
             // 
-            // FirstProductTypeComboBox
+            // ProductTypeNameLabel
             // 
-            this.FirstProductTypeComboBox.FormattingEnabled = true;
-            this.FirstProductTypeComboBox.Location = new System.Drawing.Point(56, 66);
-            this.FirstProductTypeComboBox.Name = "FirstProductTypeComboBox";
-            this.FirstProductTypeComboBox.Size = new System.Drawing.Size(121, 21);
-            this.FirstProductTypeComboBox.TabIndex = 6;
+            this.ProductTypeNameLabel.AutoSize = true;
+            this.ProductTypeNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProductTypeNameLabel.Location = new System.Drawing.Point(59, 309);
+            this.ProductTypeNameLabel.Name = "ProductTypeNameLabel";
+            this.ProductTypeNameLabel.Size = new System.Drawing.Size(228, 16);
+            this.ProductTypeNameLabel.TabIndex = 23;
+            this.ProductTypeNameLabel.Text = "Produktų tipų suvedimo lentelės";
             // 
-            // SecondProductTypeComboBox
+            // FirstProductTypeTextBox
             // 
-            this.SecondProductTypeComboBox.FormattingEnabled = true;
-            this.SecondProductTypeComboBox.Location = new System.Drawing.Point(56, 101);
-            this.SecondProductTypeComboBox.Name = "SecondProductTypeComboBox";
-            this.SecondProductTypeComboBox.Size = new System.Drawing.Size(121, 21);
-            this.SecondProductTypeComboBox.TabIndex = 7;
+            this.FirstProductTypeTextBox.Location = new System.Drawing.Point(56, 395);
+            this.FirstProductTypeTextBox.Name = "FirstProductTypeTextBox";
+            this.FirstProductTypeTextBox.Size = new System.Drawing.Size(123, 20);
+            this.FirstProductTypeTextBox.TabIndex = 24;
+            this.FirstProductTypeTextBox.TextChanged += new System.EventHandler(this.FirstProductTypeTextBox_TextChanged);
             // 
-            // ThirdProductTypeComboBox
+            // SecondProductTypeTextBox
             // 
-            this.ThirdProductTypeComboBox.FormattingEnabled = true;
-            this.ThirdProductTypeComboBox.Location = new System.Drawing.Point(56, 138);
-            this.ThirdProductTypeComboBox.Name = "ThirdProductTypeComboBox";
-            this.ThirdProductTypeComboBox.Size = new System.Drawing.Size(121, 21);
-            this.ThirdProductTypeComboBox.TabIndex = 8;
+            this.SecondProductTypeTextBox.Location = new System.Drawing.Point(56, 430);
+            this.SecondProductTypeTextBox.Name = "SecondProductTypeTextBox";
+            this.SecondProductTypeTextBox.Size = new System.Drawing.Size(123, 20);
+            this.SecondProductTypeTextBox.TabIndex = 25;
             // 
-            // FourthProductTypeComboBox
+            // ThirdProductTypeTextBox
             // 
-            this.FourthProductTypeComboBox.FormattingEnabled = true;
-            this.FourthProductTypeComboBox.Location = new System.Drawing.Point(55, 173);
-            this.FourthProductTypeComboBox.Name = "FourthProductTypeComboBox";
-            this.FourthProductTypeComboBox.Size = new System.Drawing.Size(121, 21);
-            this.FourthProductTypeComboBox.TabIndex = 9;
+            this.ThirdProductTypeTextBox.Location = new System.Drawing.Point(56, 471);
+            this.ThirdProductTypeTextBox.Name = "ThirdProductTypeTextBox";
+            this.ThirdProductTypeTextBox.Size = new System.Drawing.Size(123, 20);
+            this.ThirdProductTypeTextBox.TabIndex = 26;
             // 
-            // FifthProductTypeComboBox
+            // FourthProductTypeTextBox
             // 
-            this.FifthProductTypeComboBox.FormattingEnabled = true;
-            this.FifthProductTypeComboBox.Location = new System.Drawing.Point(55, 207);
-            this.FifthProductTypeComboBox.Name = "FifthProductTypeComboBox";
-            this.FifthProductTypeComboBox.Size = new System.Drawing.Size(121, 21);
-            this.FifthProductTypeComboBox.TabIndex = 10;
+            this.FourthProductTypeTextBox.Location = new System.Drawing.Point(56, 509);
+            this.FourthProductTypeTextBox.Name = "FourthProductTypeTextBox";
+            this.FourthProductTypeTextBox.Size = new System.Drawing.Size(123, 20);
+            this.FourthProductTypeTextBox.TabIndex = 27;
+            // 
+            // FifthProductTypeTextBox
+            // 
+            this.FifthProductTypeTextBox.Location = new System.Drawing.Point(56, 545);
+            this.FifthProductTypeTextBox.Name = "FifthProductTypeTextBox";
+            this.FifthProductTypeTextBox.Size = new System.Drawing.Size(123, 20);
+            this.FifthProductTypeTextBox.TabIndex = 28;
+            // 
+            // FirstNumberLineProductTypesLabel
+            // 
+            this.FirstNumberLineProductTypesLabel.AutoSize = true;
+            this.FirstNumberLineProductTypesLabel.Location = new System.Drawing.Point(34, 398);
+            this.FirstNumberLineProductTypesLabel.Name = "FirstNumberLineProductTypesLabel";
+            this.FirstNumberLineProductTypesLabel.Size = new System.Drawing.Size(16, 13);
+            this.FirstNumberLineProductTypesLabel.TabIndex = 29;
+            this.FirstNumberLineProductTypesLabel.Text = "1)";
+            // 
+            // SecondNumberLineProductTypeLabel
+            // 
+            this.SecondNumberLineProductTypeLabel.AutoSize = true;
+            this.SecondNumberLineProductTypeLabel.Location = new System.Drawing.Point(34, 433);
+            this.SecondNumberLineProductTypeLabel.Name = "SecondNumberLineProductTypeLabel";
+            this.SecondNumberLineProductTypeLabel.Size = new System.Drawing.Size(16, 13);
+            this.SecondNumberLineProductTypeLabel.TabIndex = 30;
+            this.SecondNumberLineProductTypeLabel.Text = "2)";
+            // 
+            // ThirdNumberLineProductTypeLabel
+            // 
+            this.ThirdNumberLineProductTypeLabel.AutoSize = true;
+            this.ThirdNumberLineProductTypeLabel.Location = new System.Drawing.Point(34, 474);
+            this.ThirdNumberLineProductTypeLabel.Name = "ThirdNumberLineProductTypeLabel";
+            this.ThirdNumberLineProductTypeLabel.Size = new System.Drawing.Size(16, 13);
+            this.ThirdNumberLineProductTypeLabel.TabIndex = 31;
+            this.ThirdNumberLineProductTypeLabel.Text = "3)";
+            // 
+            // FourthNumberLineProductTypeLabel
+            // 
+            this.FourthNumberLineProductTypeLabel.AutoSize = true;
+            this.FourthNumberLineProductTypeLabel.Location = new System.Drawing.Point(34, 512);
+            this.FourthNumberLineProductTypeLabel.Name = "FourthNumberLineProductTypeLabel";
+            this.FourthNumberLineProductTypeLabel.Size = new System.Drawing.Size(16, 13);
+            this.FourthNumberLineProductTypeLabel.TabIndex = 32;
+            this.FourthNumberLineProductTypeLabel.Text = "4)";
+            // 
+            // FifthNumberLineProductTypeLabel
+            // 
+            this.FifthNumberLineProductTypeLabel.AutoSize = true;
+            this.FifthNumberLineProductTypeLabel.Location = new System.Drawing.Point(34, 548);
+            this.FifthNumberLineProductTypeLabel.Name = "FifthNumberLineProductTypeLabel";
+            this.FifthNumberLineProductTypeLabel.Size = new System.Drawing.Size(16, 13);
+            this.FifthNumberLineProductTypeLabel.TabIndex = 33;
+            this.FifthNumberLineProductTypeLabel.Text = "5)";
+            // 
+            // SaveProductTypesButton
+            // 
+            this.SaveProductTypesButton.Location = new System.Drawing.Point(56, 571);
+            this.SaveProductTypesButton.Name = "SaveProductTypesButton";
+            this.SaveProductTypesButton.Size = new System.Drawing.Size(178, 29);
+            this.SaveProductTypesButton.TabIndex = 6;
+            this.SaveProductTypesButton.TabStop = false;
+            this.SaveProductTypesButton.Text = "Išsaugoti produktų tipus";
+            this.SaveProductTypesButton.UseVisualStyleBackColor = true;
+            this.SaveProductTypesButton.Click += new System.EventHandler(this.SaveProductTypesButton_Click);
+            // 
+            // SaveProductTypeInfoButton
+            // 
+            this.SaveProductTypeInfoButton.Location = new System.Drawing.Point(54, 241);
+            this.SaveProductTypeInfoButton.Name = "SaveProductTypeInfoButton";
+            this.SaveProductTypeInfoButton.Size = new System.Drawing.Size(178, 29);
+            this.SaveProductTypeInfoButton.TabIndex = 34;
+            this.SaveProductTypeInfoButton.TabStop = false;
+            this.SaveProductTypeInfoButton.Text = "Išsaugoti produktų informaciją";
+            this.SaveProductTypeInfoButton.UseVisualStyleBackColor = true;
             // 
             // InvoiceForm
             // 
@@ -1667,5 +1805,18 @@ namespace Invoice.Forms
         private System.Windows.Forms.ComboBox ThirdProductTypeComboBox;
         private System.Windows.Forms.ComboBox FourthProductTypeComboBox;
         private System.Windows.Forms.ComboBox FifthProductTypeComboBox;
+        private System.Windows.Forms.Label ProductTypeNameLabel;
+        private System.Windows.Forms.TextBox FirstProductTypeTextBox;
+        private System.Windows.Forms.TextBox SecondProductTypeTextBox;
+        private System.Windows.Forms.TextBox ThirdProductTypeTextBox;
+        private System.Windows.Forms.TextBox FourthProductTypeTextBox;
+        private System.Windows.Forms.TextBox FifthProductTypeTextBox;
+        private System.Windows.Forms.Button SaveProductTypeInfoButton;
+        private System.Windows.Forms.Button SaveProductTypesButton;
+        private System.Windows.Forms.Label FifthNumberLineProductTypeLabel;
+        private System.Windows.Forms.Label FourthNumberLineProductTypeLabel;
+        private System.Windows.Forms.Label ThirdNumberLineProductTypeLabel;
+        private System.Windows.Forms.Label SecondNumberLineProductTypeLabel;
+        private System.Windows.Forms.Label FirstNumberLineProductTypesLabel;
     }
 }

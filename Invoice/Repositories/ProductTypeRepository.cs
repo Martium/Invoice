@@ -42,40 +42,64 @@ namespace Invoice.Repositories
             }
         }
 
-        public ProductTypeNameModel GetProductTypeNameInfoFromInvoiceAndCreationYear(int lastInvoiceNumber)
+        public ProductTypeNameModel GetProductTypeNameInfo()
         {
-            int year = DateTime.Now.Year;
-            ProductTypeNameModel productTypeNameModel;
 
-            if (lastInvoiceNumber == 0)
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
             {
-                productTypeNameModel = null;
-            }
-            else
-            {
-                using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
-                {
-                    dbConnection.Open();
+                dbConnection.Open();
 
-                    string getAllExistingNamesCommand =
-                        $@"SELECT
+                string getAllExistingNamesCommand =
+                    @"SELECT
                         PT.FirstProductType, PT.SecondProductType, PT.ThirdProductType, PT.FourthProductType, PT.FifthProductType
                       FROM ProductType PT 
-                      WHERE PT.Id = {lastInvoiceNumber} AND PT.YearId = {year}
-                    ";
+                        ";
 
-                    try
-                    {
-                        productTypeNameModel = dbConnection.QuerySingleOrDefault<ProductTypeNameModel>(getAllExistingNamesCommand);
-                    }
-                    catch
-                    {
-                        productTypeNameModel = null;
-                    }
+                ProductTypeNameModel productTypeNameModel;
+
+                try
+                {
+                    productTypeNameModel =
+                        dbConnection.QuerySingleOrDefault<ProductTypeNameModel>(getAllExistingNamesCommand);
                 }
+                catch
+                {
+                    productTypeNameModel = null;
+                }
+
+                return productTypeNameModel;
             }
 
-            return productTypeNameModel;
+        }
+
+        public bool CreateNewProductType(int invoiceNumber, int invoiceNumberYearCreation,
+            ProductTypeNameModel productTypeNameModel)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string createNewProductTypeCommand =
+                    $@"INSERT INTO 'ProductType'
+                        VALUES (@Id, @YearId, @FirstProductType, @SecondProductType, @ThirdProductType, @FourthProductType, @FifthProductType)
+                    ";
+
+                object queryParameters = new
+                {
+                    Id = invoiceNumber,
+                    YearId = invoiceNumberYearCreation,
+
+                    productTypeNameModel.FirstProductType,
+                    productTypeNameModel.SecondProductType,
+                    productTypeNameModel.ThirdProductType,
+                    productTypeNameModel.FourthProductType,
+                    productTypeNameModel.FifthProductType
+                };
+
+                int affectedRows = dbConnection.Execute(createNewProductTypeCommand, queryParameters);
+
+                return affectedRows == 1;
+            }
         }
     }
 }
