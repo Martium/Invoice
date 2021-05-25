@@ -162,7 +162,7 @@ namespace Invoice.Service
                     newString = invoiceModel.TwelfthProductPrice.HasValue ? invoiceModel.TwelfthProductPrice.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
                     break;
 
-                case "FirstProductTypeQuantity":
+               /* case "FirstProductTypeQuantity":
                     newString = invoiceModel.FirstProductTypeQuantity.HasValue ? invoiceModel.FirstProductTypeQuantity.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
                     break;
                 case "SecondProductTypeQuantity":
@@ -192,7 +192,7 @@ namespace Invoice.Service
                     break;
                 case "FifthProductTypePrice":
                     newString = invoiceModel.FifthProductTypePrice.HasValue ? invoiceModel.FifthProductTypePrice.Value.ToString(CultureInfo.InvariantCulture) : string.Empty;
-                    break;
+                    break; */
 
                 default:
                      newString = "wrong prop string was passed!";

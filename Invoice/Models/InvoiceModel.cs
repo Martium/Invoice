@@ -80,7 +80,7 @@ namespace Invoice.Models
 
         public string TotalPriceWithPvm { get; set; }
 
-        public string FirstProductType { get; set; }
+       /* public string FirstProductType { get; set; }
         public string SecondProductType { get; set; }
         public string ThirdProductType { get; set; }
         public string FourthProductType { get; set; }
@@ -96,7 +96,7 @@ namespace Invoice.Models
         public double? SecondProductTypePrice { get; set; }
         public double? ThirdProductTypePrice { get; set; }
         public double? FourthProductTypePrice { get; set; }
-        public double? FifthProductTypePrice { get; set; }
+        public double? FifthProductTypePrice { get; set; } */
 
     }
 }

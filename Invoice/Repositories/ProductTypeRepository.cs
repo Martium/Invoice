@@ -6,7 +6,8 @@ namespace Invoice.Repositories
 {
     public class ProductTypeRepository
     {
-        public ProductTypeModel GetProductTypeInfoFromInvoiceNumberAndCreationYear(int invoiceNumber, int invoiceNumberYearCreation)
+        public ProductTypeModel GetProductTypeInfoFromInvoiceNumberAndCreationYear(int invoiceNumber,
+            int invoiceNumberYearCreation)
         {
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
             {
@@ -40,4 +41,5 @@ namespace Invoice.Repositories
 
             }
         }
+    }
 }

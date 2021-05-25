@@ -468,7 +468,7 @@ namespace Invoice.Forms
 
                 PaymentStatus = _paymentStatus,
 
-                FirstProductType = FirstProductTypeTextBox.Text,
+               /* FirstProductType = FirstProductTypeTextBox.Text,
                 SecondProductType = SecondProductTypeTextBox.Text,
                 ThirdProductType = ThirdProductTypeTextBox.Text,
                 FourthProductType = FourthProductTypeTextBox.Text,
@@ -484,7 +484,7 @@ namespace Invoice.Forms
                 SecondProductTypePrice = _numberService.ParseToDoubleOrNullFromTextBoxText(SecondProductTypePriceTextBox),
                 ThirdProductTypePrice = _numberService.ParseToDoubleOrNullFromTextBoxText(ThirdProductTypePriceTextBox),
                 FourthProductTypePrice = _numberService.ParseToDoubleOrNullFromTextBoxText(FourthProductTypePriceTextBox),
-                FifthProductTypePrice = _numberService.ParseToDoubleOrNullFromTextBoxText(FifthProductTypePriceTextBox)
+                FifthProductTypePrice = _numberService.ParseToDoubleOrNullFromTextBoxText(FifthProductTypePriceTextBox) */
             };
 
             return invoiceModel;

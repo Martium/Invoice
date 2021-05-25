@@ -147,24 +147,6 @@ namespace Invoice.Repositories
 
                         [TotalPriceWithPvm] [nvarchar]({FormSettings.TextBoxLengths.TotalPriceWithPvm}) NULL,
                         
-                        [FirstProductType] [nvarchar]({FormSettings.TextBoxLengths.FirstProductType}) NULL,
-                        [SecondProductType] [nvarchar]({FormSettings.TextBoxLengths.SecondProductType}) NULL,
-                        [ThirdProductType] [nvarchar]({FormSettings.TextBoxLengths.ThirdProductType}) NULL,
-                        [FourthProductType] [nvarchar]({FormSettings.TextBoxLengths.FourthProductType}) NULL,
-                        [FifthProductType] [nvarchar]({FormSettings.TextBoxLengths.FifthProductType}) NULL,
-
-                        [FirstProductTypeQuantity] [NUMERIC] NULL,
-                        [SecondProductTypeQuantity] [NUMERIC] NULL,
-                        [ThirdProductTypeQuantity] [NUMERIC] NULL,
-                        [FourthProductTypeQuantity] [NUMERIC] NULL,
-                        [FifthProductTypeQuantity] [NUMERIC] NULL,
-
-                        [FirstProductTypePrice] [NUMERIC] NULL,
-                        [SecondProductTypePrice] [NUMERIC] NULL,
-                        [ThirdProductTypePrice] [NUMERIC] NULL,
-                        [FourthProductTypePrice] [NUMERIC] NULL,
-                        [FifthProductTypePrice] [NUMERIC] NULL,
-                        
                         UNIQUE(InvoiceNumber, InvoiceNumberYearCreation)
                     );
                  ";
@@ -246,15 +228,15 @@ namespace Invoice.Repositories
                     INSERT INTO 'Invoice'
                         Values (1, {DateTime.Now.AddYears(-1).Year}, '2021-04-02', 'ANA', 'Ežio ūkis', '305652600', 'LT 100013527916', 'Europos pr. 34-47, LT 46370 Kaunas', '867538581', 'Swedbank', 'LT857300010165352098', 
                         'ezioukis@gmail.com', 'Litbana', '110395066', 'LT100000022014', 'Kirtimų g. 57D, Vilnius', 'obuoliu sultys 3l 1', 'granatu sultys 3l 2', 'apelsinu sultys 3l 3', 'morku obuoliu mandarinu sultys 3l 4', 
-                        'morku obuoliu  sultys 3l 5', 'imbiero obuliu sultys 3l 6', 'obuliu kriausiu 3l 7', 'obuoliu vynuogiu 3l 8', ' obuoliu aronijų 3l 9', ' obuoliu juodujų serbentų sultys 3l 10', 'obuoliai 5l 11', 'obuoliu apelsinu 5l 12', 'vnt1', 'vnt2', 'vnt3', 'vnt4', 'vnt5', 'vnt6', 'vnt7', 'vnt8', 'vnt9', 'vnt10', 'vnt11', 'vnt12', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1.1, 2.2, 2.3, 4.4, 5.5, 2.6, 2.7, 2.8, 2.9, 1, 1.11, 1.12, 'devyniasdešimtdevyni eurai 75ct', 'Direktorius Vitalijus Pranskūnas', 'Bazinga Bazingius is Libanos', 'Nesumokėta', '213.14', '3LITRAI', '5 LITRU PAKUOte', '200 litru pakuote', ' 1 litro pakuote', 'stikline pakuote', 10, 20, 30, 40, 50, 1, 2, 3, 4, 5 );
+                        'morku obuoliu  sultys 3l 5', 'imbiero obuliu sultys 3l 6', 'obuliu kriausiu 3l 7', 'obuoliu vynuogiu 3l 8', ' obuoliu aronijų 3l 9', ' obuoliu juodujų serbentų sultys 3l 10', 'obuoliai 5l 11', 'obuoliu apelsinu 5l 12', 'vnt1', 'vnt2', 'vnt3', 'vnt4', 'vnt5', 'vnt6', 'vnt7', 'vnt8', 'vnt9', 'vnt10', 'vnt11', 'vnt12', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1.1, 2.2, 2.3, 4.4, 5.5, 2.6, 2.7, 2.8, 2.9, 1, 1.11, 1.12, 'devyniasdešimtdevyni eurai 75ct', 'Direktorius Vitalijus Pranskūnas', 'Bazinga Bazingius is Libanos', 'Nesumokėta', '213.14');
                     INSERT INTO 'Invoice'
                         Values (2, {DateTime.Now.Year}, '2021-08-30', 'ANA', 'Ežio ūkis', '305652600', 'LT 100013527916', 'Europos pr. 34-47, LT 46370 Kaunas', '867538581', 'Swedbank', 'LT857300010165352098', 
                         'ezioukis@gmail.com', 'Kazkas', '110395066', 'LT100000022014', 'Kirtimų g. 57D, Vilnius', 'obuoliu sultys 3l', 'granatu sultys 3l', 'apelsinu sultys 3l', 'morku obuoliu mandarinu sultys 3l', 
-                        'morku obuoliu  sultys 3l', 'imbiero obuliu sultys 3l', 'obuliu kriausiu 3l', 'obuoliu vynuogiu 3l', ' obuoliu aronijų 3l', ' obuoliu juodujų serbentų sultys 3l', 'obuoliai 5l', 'obuoliu apelsinu 5l', 'vnt1', 'vnt2', 'vnt3', 'vnt4', 'vnt5', 'vnt6', 'vnt7', 'vnt8', 'vnt9', 'vnt10', 'vnt11', 'vnt12', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1.1, 2.2, 2.3, 4.4, 5.5, 2.6, 2.7, 2.8, 2.9, 1, 1.11, 1.12, 'devyniasdešimtdevyni eurai 75ct', 'Direktorius Vitalijus Pranskūnas', 'Bazinga Bazingius is Libanos', 'Nesumokėta', '213.14', '3LITRAI', '5 LITRU PAKUOte', '200 litru pakuote', ' 1 litro pakuote', 'stikline pakuote', 10, 20, 30, 40, 50, 1, 2, 3, 4, 5 );
+                        'morku obuoliu  sultys 3l', 'imbiero obuliu sultys 3l', 'obuliu kriausiu 3l', 'obuoliu vynuogiu 3l', ' obuoliu aronijų 3l', ' obuoliu juodujų serbentų sultys 3l', 'obuoliai 5l', 'obuoliu apelsinu 5l', 'vnt1', 'vnt2', 'vnt3', 'vnt4', 'vnt5', 'vnt6', 'vnt7', 'vnt8', 'vnt9', 'vnt10', 'vnt11', 'vnt12', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1.1, 2.2, 2.3, 4.4, 5.5, 2.6, 2.7, 2.8, 2.9, 1, 1.11, 1.12, 'devyniasdešimtdevyni eurai 75ct', 'Direktorius Vitalijus Pranskūnas', 'Bazinga Bazingius is Libanos', 'Nesumokėta', '213.14');
                     INSERT INTO 'Invoice'
                         Values (3, {DateTime.Now.Year}, '2020-04-02', 'ANA', 'Ežio ūkis', '305652600', 'LT 100013527916', 'Europos pr. 34-47, LT 46370 Kaunas', '867538581', 'Swedbank', 'LT857300010165352098', 
                         'ezioukis@gmail.com', 'bazinga', '110395066', 'LT100000022014', 'Kirtimų g. 57D, Vilnius', 'obuoliu sultys 3l', 'granatu sultys 3l', 'apelsinu sultys 3l', 'morku obuoliu mandarinu sultys 3l', 
-                        'morku obuoliu  sultys 3l', 'imbiero obuliu sultys 3l', 'obuliu kriausiu 3l', 'obuoliu vynuogiu 3l', ' obuoliu aronijų 3l', ' obuoliu juodujų serbentų sultys 3l', 'obuoliai 5l', 'obuoliu apelsinu 5l', 'vnt1', 'vnt2', 'vnt3', 'vnt4', 'vnt5', 'vnt6', 'vnt7', 'vnt8', 'vnt9', 'vnt10', 'vnt11', 'vnt12', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1.1, 2.2, 2.3, 4.4, 5.5, 2.6, 2.7, 2.8, 2.9, 1, 1.11, 1.12, 'devyniasdešimtdevyni eurai 75ct', 'Direktorius Vitalijus Pranskūnas', 'Bazinga Bazingius is Libanos', 'Atsiskaityta', '213.14', '3LITRAI', '5 LITRU PAKUOte', '200 litru pakuote', ' 1 litro pakuote', 'stikline pakuote', 10, 20, 30, 40, 50, 1, 2, 3, 4, 5 );
+                        'morku obuoliu  sultys 3l', 'imbiero obuliu sultys 3l', 'obuliu kriausiu 3l', 'obuoliu vynuogiu 3l', ' obuoliu aronijų 3l', ' obuoliu juodujų serbentų sultys 3l', 'obuoliai 5l', 'obuoliu apelsinu 5l', 'vnt1', 'vnt2', 'vnt3', 'vnt4', 'vnt5', 'vnt6', 'vnt7', 'vnt8', 'vnt9', 'vnt10', 'vnt11', 'vnt12', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1.1, 2.2, 2.3, 4.4, 5.5, 2.6, 2.7, 2.8, 2.9, 1, 1.11, 1.12, 'devyniasdešimtdevyni eurai 75ct', 'Direktorius Vitalijus Pranskūnas', 'Bazinga Bazingius is Libanos', 'Atsiskaityta', '213.14');
                    COMMIT;
                   ";
 

@@ -61,7 +61,7 @@ namespace Invoice.Repositories
                         I.FirstProductQuantity , I.SecondProductQuantity , I.ThirdProductQuantity , I.FourthProductQuantity , I.FifthProductQuantity , I.SixthProductQuantity , I.SeventhProductQuantity , 
                         I.EighthProductQuantity , I.NinthProductQuantity , i.TenProductQuantity , I.EleventhProductQuantity , I.TwelfthProductQuantity , I.FirstProductPrice , I.SecondProductPrice , I.ThirdProductPrice , 
                         I.FourthProductPrice , I.FifthProductPrice , I.SixthProductPrice , I.SeventhProductPrice , I.EighthProductPrice , I.NinthProductPrice , I.TenProductPrice , I.EleventhProductPrice , 
-                        I.TwelfthProductPrice , I.PriceInWords , I.InvoiceMaker , I.InvoiceAccepted , I.PaymentStatus , I.FirstProductType , I.SecondProductType , I.ThirdProductType , I.FourthProductType , I.FifthProductType , I.FirstProductTypeQuantity , I.SecondProductTypeQuantity , I.ThirdProductTypeQuantity , I.FourthProductTypeQuantity , I.FifthProductTypeQuantity , I.FirstProductTypePrice , I.SecondProductTypePrice , I.ThirdProductTypePrice , I.FourthProductTypePrice , I.FifthProductTypePrice
+                        I.TwelfthProductPrice , I.PriceInWords , I.InvoiceMaker , I.InvoiceAccepted , I.PaymentStatus 
                       FROM Invoice I
                       WHERE I.InvoiceNumber = @InvoiceNumber AND InvoiceNumberYearCreation = @InvoiceNumberYearCreation";
 
@@ -93,8 +93,7 @@ namespace Invoice.Repositories
                           @FifthProductSees, @SixthProductSees, @SeventhProductSees, @EighthProductSees, @NinthProductSees, @TenProductSees, @EleventhProductSees, @TwelfthProductSees, @FirstProductQuantity, @SecondProductQuantity, 
                           @ThirdProductQuantity, @FourthProductQuantity, @FifthProductQuantity, @SixthProductQuantity, @SeventhProductQuantity, @EighthProductQuantity, @NinthProductQuantity, @TenProductQuantity, 
                           @EleventhProductQuantity, @TwelfthProductQuantity, @FirstProductPrice, @SecondProductPrice, @ThirdProductPrice, @FourthProductPrice, @FifthProductPrice, @SixthProductPrice, @SeventhProductPrice,
-                          @EighthProductPrice, @NinthProductPrice, @TenProductPrice, @EleventhProductPrice, @TwelfthProductPrice, @PriceInWords, @InvoiceMaker, @InvoiceAccepted, @PaymentStatus, @TotalPriceWithPvm, @FirstProductType, @SecondProductType, @ThirdProductType, @FourthProductType, @FifthProductType, @FirstProductTypeQuantity, @SecondProductTypeQuantity,
-                          @ThirdProductTypeQuantity, @FourthProductTypeQuantity, @FifthProductTypeQuantity, @FirstProductTypePrice, @SecondProductTypePrice, @ThirdProductTypePrice, @FourthProductTypePrice, @FifthProductTypePrice
+                          @EighthProductPrice, @NinthProductPrice, @TenProductPrice, @EleventhProductPrice, @TwelfthProductPrice, @PriceInWords, @InvoiceMaker, @InvoiceAccepted, @PaymentStatus, @TotalPriceWithPvm
                      )";
 
                 object queryParameters = new
@@ -175,24 +174,7 @@ namespace Invoice.Repositories
                     invoiceModel.InvoiceAccepted,
                     invoiceModel.PaymentStatus,
                     invoiceModel.TotalPriceWithPvm,
-
-                    invoiceModel.FirstProductType,
-                    invoiceModel.SecondProductType,
-                    invoiceModel.ThirdProductType,
-                    invoiceModel.FourthProductType,
-                    invoiceModel.FifthProductType,
-
-                    invoiceModel.FirstProductTypeQuantity,
-                    invoiceModel.SecondProductTypeQuantity,
-                    invoiceModel.ThirdProductTypeQuantity,
-                    invoiceModel.FourthProductTypeQuantity,
-                    invoiceModel.FifthProductTypeQuantity,
-
-                    invoiceModel.FirstProductTypePrice,
-                    invoiceModel.SecondProductTypePrice,
-                    invoiceModel.ThirdProductTypePrice,
-                    invoiceModel.FourthProductTypePrice,
-                    invoiceModel.FifthProductTypePrice
+                    
                 };
 
                 int affectedRows = dbConnection.Execute(createNewInvoiceCommand, queryParameters);
@@ -216,12 +198,7 @@ namespace Invoice.Repositories
                            SeventhProductName = @SeventhProductName, EighthProductName = @EighthProductName, NinthProductName = @NinthProductName, TenProductName = @TenProductName, EleventhProductName = @EleventhProductName, TwelfthProductName = @TwelfthProductName, FirstProductSees = @FirstProductSees, SecondProductSees = @SecondProductSees, ThirdProductSees = @ThirdProductSees, ForthProductSees = @ForthProductSees, 
                           FifthProductSees = @FifthProductSees, SixthProductSees = @SixthProductSees, SeventhProductSees = @SeventhProductSees, EighthProductSees = @EighthProductSees, NinthProductSees = @NinthProductSees,  TenProductSees = @TenProductSees, EleventhProductSees = @EleventhProductSees, TwelfthProductSees = @TwelfthProductSees, FirstProductQuantity = @FirstProductQuantity, 
                           SecondProductQuantity = @SecondProductQuantity, ThirdProductQuantity = @ThirdProductQuantity, FourthProductQuantity = @FourthProductQuantity, FifthProductQuantity = @FifthProductQuantity,  SixthProductQuantity = @SixthProductQuantity, SeventhProductQuantity = @SeventhProductQuantity, EighthProductQuantity = @EighthProductQuantity, NinthProductQuantity = @NinthProductQuantity, TenProductQuantity = @TenProductQuantity, EleventhProductQuantity = @EleventhProductQuantity, TwelfthProductQuantity = @TwelfthProductQuantity, FirstProductPrice = @FirstProductPrice, 
-                          SecondProductPrice = @SecondProductPrice, ThirdProductPrice = @ThirdProductPrice, FourthProductPrice = @FourthProductPrice, FifthProductPrice = @FifthProductPrice, SixthProductPrice = @SixthProductPrice, SeventhProductPrice = @SeventhProductPrice, EighthProductPrice = @EighthProductPrice, NinthProductPrice = @NinthProductPrice,TenProductPrice = @TenProductPrice, EleventhProductPrice = @EleventhProductPrice,  TwelfthProductPrice = @TwelfthProductPrice, PriceInWords = @PriceInWords, InvoiceMaker = @InvoiceMaker, InvoiceAccepted = @InvoiceAccepted, PaymentStatus = @PaymentStatus, TotalPriceWithPvm = @TotalPriceWithPvm,
-                          FirstProductType = @FirstProductType, SecondProductType = @SecondProductType, ThirdProductType = @ThirdProductType, FourthProductType = @FourthProductType, 
-                          FifthProductType = @FifthProductType, FirstProductTypeQuantity = @FirstProductTypeQuantity, SecondProductTypeQuantity = @SecondProductTypeQuantity, 
-                          ThirdProductTypeQuantity = @ThirdProductTypeQuantity, FourthProductTypeQuantity = @FourthProductTypeQuantity, FifthProductTypeQuantity = @FifthProductTypeQuantity,
-                          FirstProductTypePrice = @FirstProductTypePrice, SecondProductTypePrice = @SecondProductTypePrice, ThirdProductTypePrice = @ThirdProductTypePrice, 
-                          FourthProductTypePrice = @FourthProductTypePrice, FifthProductTypePrice = @FifthProductTypePrice
+                          SecondProductPrice = @SecondProductPrice, ThirdProductPrice = @ThirdProductPrice, FourthProductPrice = @FourthProductPrice, FifthProductPrice = @FifthProductPrice, SixthProductPrice = @SixthProductPrice, SeventhProductPrice = @SeventhProductPrice, EighthProductPrice = @EighthProductPrice, NinthProductPrice = @NinthProductPrice,TenProductPrice = @TenProductPrice, EleventhProductPrice = @EleventhProductPrice,  TwelfthProductPrice = @TwelfthProductPrice, PriceInWords = @PriceInWords, InvoiceMaker = @InvoiceMaker, InvoiceAccepted = @InvoiceAccepted, PaymentStatus = @PaymentStatus, TotalPriceWithPvm = @TotalPriceWithPvm
                       WHERE InvoiceNumber = @InvoiceNumber AND InvoiceNumberYearCreation = @InvoiceNumberYearCreation
 
                      ";
@@ -302,24 +279,6 @@ namespace Invoice.Repositories
                     updatedInvoice.InvoiceAccepted,
                     updatedInvoice.PaymentStatus,
                     updatedInvoice.TotalPriceWithPvm,
-
-                    updatedInvoice.FirstProductType,
-                    updatedInvoice.SecondProductType,
-                    updatedInvoice.ThirdProductType,
-                    updatedInvoice.FourthProductType,
-                    updatedInvoice.FifthProductType,
-
-                    updatedInvoice.FirstProductTypeQuantity,
-                    updatedInvoice.SecondProductTypeQuantity,
-                    updatedInvoice.ThirdProductTypeQuantity,
-                    updatedInvoice.FourthProductTypeQuantity,
-                    updatedInvoice.FifthProductTypeQuantity,
-
-                    updatedInvoice.FirstProductTypePrice,
-                    updatedInvoice.SecondProductTypePrice,
-                    updatedInvoice.ThirdProductTypePrice,
-                    updatedInvoice.FourthProductTypePrice,
-                    updatedInvoice.FifthProductTypePrice,
 
                     InvoiceNumber = invoiceNumber,
                     InvoiceNumberYearCreation = invoiceNumberYearCreation
