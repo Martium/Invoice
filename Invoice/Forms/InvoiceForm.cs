@@ -529,15 +529,12 @@ namespace Invoice.Forms
             {
                 case InvoiceOperations.Create:
                     this.Text = "Nauja Sąskaita faktūra";
-                    //this.Icon = Properties.Resources.CreateIcon;
                     break;
                 case InvoiceOperations.Edit:
                     this.Text = "Esamos Sąskaitos faktūros keitimas (Peržiūrėti)";
-                    //this.Icon = Properties.Resources.EditIcon;
                     break;
                 case InvoiceOperations.Copy:
                     this.Text = "Esamos Sąskaitos faktūros kopijavimas (sukurti naują)";
-                    //this.Icon = Properties.Resources.CopyIcon;
                     break;
                 default:
                     throw new Exception($"Paslaugų valdymo formoje gauta nežinoma opercija: '{_invoiceOperations}'");
@@ -549,6 +546,8 @@ namespace Invoice.Forms
             this.StartPosition = FormStartPosition.CenterScreen;
             InvoiceNumberRichTextBox.ReadOnly = true;
             (printPreviewDialog as Form).WindowState = FormWindowState.Maximized;
+
+            SetProductTypeComboBoxControl();
         }
 
         private void FillDefaultSellerInfoForNewInvoice()
@@ -694,6 +693,17 @@ namespace Invoice.Forms
                 ProductTypeModel productTypeModel =
                     _invoiceRepository.GetProductTypeInfoFromInvoiceNumberAndCreationYear(_invoiceNumber.Value,
                         _invoiceNumberYearCreation.Value);
+
+                ProductTypeNameModel productTypeNameModel = new ProductTypeNameModel()
+                {
+                    FirstProductType = productTypeModel.FirstProductType,
+                    SecondProductType = productTypeModel.SecondProductType,
+                    ThirdProductType = productTypeModel.ThirdProductType,
+                    FourthProductType = productTypeModel.FourthProductType,
+                    FifthProductType = productTypeModel.FifthProductType
+                };
+
+                AddItemsToProductTypeComboBoxes(productTypeNameModel);
 
                 FirstProductTypeComboBox.Text = productTypeModel.FirstProductType;
                 SecondProductTypeComboBox.Text = productTypeModel.SecondProductType;
@@ -951,6 +961,32 @@ namespace Invoice.Forms
             InvoiceDateRichTextBox.SelectionStart = InvoiceDateRichTextBox.Text.Length;
         }
 
+        private void SetProductTypeComboBoxControl()
+        {
+            FirstProductTypeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            SecondProductTypeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            ThirdProductTypeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            FourthProductTypeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            FifthProductTypeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+        }
+
+        private void AddItemsToProductTypeComboBoxes(ProductTypeNameModel productTypeNameModel)
+        {
+            AddInfoToProductTypeToSpecificComboBox(FirstProductTypeComboBox, productTypeNameModel);
+            AddInfoToProductTypeToSpecificComboBox(SecondProductTypeComboBox, productTypeNameModel);
+            AddInfoToProductTypeToSpecificComboBox(ThirdProductTypeComboBox,productTypeNameModel);
+            AddInfoToProductTypeToSpecificComboBox(FourthProductTypeComboBox,productTypeNameModel);
+            AddInfoToProductTypeToSpecificComboBox(FifthProductTypeComboBox,productTypeNameModel);
+        }
+
+        private void AddInfoToProductTypeToSpecificComboBox(ComboBox comboBox, ProductTypeNameModel productTypeNameModel)
+        {
+            comboBox.Items.Add(productTypeNameModel.FirstProductType);
+            comboBox.Items.Add(productTypeNameModel.SecondProductType);
+            comboBox.Items.Add(productTypeNameModel.ThirdProductType);
+            comboBox.Items.Add(productTypeNameModel.FourthProductType);
+            comboBox.Items.Add(productTypeNameModel.FifthProductType);
+        }
 
         #endregion
         
