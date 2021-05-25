@@ -357,6 +357,25 @@ namespace Invoice.Repositories
             }
         }
 
+        public int GetMaxInvoiceNumber()
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string getBiggestInvoiceNumberQuery =
+                    @"SELECT  
+                        MAX(I.InvoiceNumber)
+                      FROM Invoice I
+                    ";
+
+                int? biggestOrderNumber =
+                    dbConnection.QuerySingleOrDefault<int?>(getBiggestInvoiceNumberQuery) ?? 0;
+
+                return biggestOrderNumber.Value;
+            }
+        }
+
         public bool CheckSellerIdExists()
         {
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))

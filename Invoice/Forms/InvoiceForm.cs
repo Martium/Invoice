@@ -19,6 +19,8 @@ namespace Invoice.Forms
     {
         private readonly InvoiceRepository _invoiceRepository;
 
+        private readonly ProductTypeRepository _productTypeRepository;
+
         private readonly MessageDialogService _messageDialogService = new MessageDialogService();
 
         private readonly NumberService _numberService = new NumberService();
@@ -36,6 +38,7 @@ namespace Invoice.Forms
             int? invoiceNumberYearCreation = null)
         {
             _invoiceRepository = new InvoiceRepository();
+            _productTypeRepository = new ProductTypeRepository();
 
             _invoiceOperations = invoiceOperations;
             _invoiceNumber = invoiceNumber;
@@ -705,11 +708,7 @@ namespace Invoice.Forms
 
                 AddItemsToProductTypeComboBoxes(productTypeNameModel);
 
-                FirstProductTypeComboBox.Text = productTypeModel.FirstProductType;
-                SecondProductTypeComboBox.Text = productTypeModel.SecondProductType;
-                ThirdProductTypeComboBox.Text = productTypeModel.ThirdProductType;
-                FourthProductTypeComboBox.Text = productTypeModel.FourthProductType;
-                FifthProductTypeComboBox.Text = productTypeModel.FifthProductType;
+                SetTextToProductTypeComboBoxes(productTypeNameModel);
 
                 FirstProductTypeQuantityTextBox.Text =
                     _numberService.DoubleToStringOrEmptyProductTypeModel(productTypeModel, "FirstProductTypeQuantity");
@@ -746,6 +745,25 @@ namespace Invoice.Forms
 
                 CalculateButton_Click(this, new EventArgs());
             }
+            else
+            {
+                int lastInvoiceNumber = _invoiceRepository.GetMaxInvoiceNumber();
+
+                ProductTypeNameModel productTypeNameModel =
+                    _productTypeRepository.GetProductTypeNameInfoFromInvoiceAndCreationYear(lastInvoiceNumber);
+
+                AddItemsToProductTypeComboBoxes(productTypeNameModel);
+                SetTextToProductTypeComboBoxes(productTypeNameModel);
+            }
+        }
+
+        private void SetTextToProductTypeComboBoxes(ProductTypeNameModel productTypeNameModel)
+        {
+            FirstProductTypeComboBox.Text = productTypeNameModel.FirstProductType;
+            SecondProductTypeComboBox.Text = productTypeNameModel.SecondProductType;
+            ThirdProductTypeComboBox.Text = productTypeNameModel.ThirdProductType;
+            FourthProductTypeComboBox.Text = productTypeNameModel.FourthProductType;
+            FifthProductTypeComboBox.Text = productTypeNameModel.FifthProductType;
         }
 
         private void ChangeDoubleCommaToDot()
@@ -981,14 +999,19 @@ namespace Invoice.Forms
 
         private void AddInfoToProductTypeToSpecificComboBox(ComboBox comboBox, ProductTypeNameModel productTypeNameModel)
         {
-            comboBox.Items.Add(productTypeNameModel.FirstProductType);
-            comboBox.Items.Add(productTypeNameModel.SecondProductType);
-            comboBox.Items.Add(productTypeNameModel.ThirdProductType);
-            comboBox.Items.Add(productTypeNameModel.FourthProductType);
-            comboBox.Items.Add(productTypeNameModel.FifthProductType);
+
+            if (productTypeNameModel != null)
+            {
+                comboBox.Items.Add(productTypeNameModel.FirstProductType);
+                comboBox.Items.Add(productTypeNameModel.SecondProductType);
+                comboBox.Items.Add(productTypeNameModel.ThirdProductType);
+                comboBox.Items.Add(productTypeNameModel.FourthProductType);
+                comboBox.Items.Add(productTypeNameModel.FifthProductType);
+            }
         }
 
         #endregion
-        
+
+       
     }
 }
