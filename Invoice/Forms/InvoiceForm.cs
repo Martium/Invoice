@@ -697,40 +697,43 @@ namespace Invoice.Forms
                     _invoiceRepository.GetProductTypeInfoFromInvoiceNumberAndCreationYear(_invoiceNumber.Value,
                         _invoiceNumberYearCreation.Value);
 
-                ProductTypeNameModel productTypeNameModel = new ProductTypeNameModel()
+                if (productTypeModel != null)
                 {
-                    FirstProductType = productTypeModel.FirstProductType,
-                    SecondProductType = productTypeModel.SecondProductType,
-                    ThirdProductType = productTypeModel.ThirdProductType,
-                    FourthProductType = productTypeModel.FourthProductType,
-                    FifthProductType = productTypeModel.FifthProductType
-                };
+                    ProductTypeNameModel productTypeNameModel = new ProductTypeNameModel()
+                    {
+                        FirstProductType = productTypeModel.FirstProductType,
+                        SecondProductType = productTypeModel.SecondProductType,
+                        ThirdProductType = productTypeModel.ThirdProductType,
+                        FourthProductType = productTypeModel.FourthProductType,
+                        FifthProductType = productTypeModel.FifthProductType
+                    };
 
-                AddItemsToProductTypeComboBoxes(productTypeNameModel);
+                    AddItemsToProductTypeComboBoxes(productTypeNameModel);
 
-                SetTextToProductTypeComboBoxes(productTypeNameModel);
+                    SetTextToProductTypeComboBoxes(productTypeNameModel);
 
-                FirstProductTypeQuantityTextBox.Text =
-                    _numberService.DoubleToStringOrEmptyProductTypeModel(productTypeModel, "FirstProductTypeQuantity");
-                SecondProductTypeQuantityTextBox.Text =
-                    _numberService.DoubleToStringOrEmptyProductTypeModel(productTypeModel, "SecondProductTypeQuantity");
-                ThirdProductTypeQuantityTextBox.Text =
-                    _numberService.DoubleToStringOrEmptyProductTypeModel(productTypeModel, "ThirdProductTypeQuantity");
-                FourthProductTypeQuantityTextBox.Text =
-                    _numberService.DoubleToStringOrEmptyProductTypeModel(productTypeModel, "FourthProductTypeQuantity");
-                FifthProductTypeQuantityTextBox.Text =
-                    _numberService.DoubleToStringOrEmptyProductTypeModel(productTypeModel, "FifthProductTypeQuantity");
+                    FirstProductTypeQuantityTextBox.Text =
+                        _numberService.DoubleToStringOrEmptyProductTypeModel(productTypeModel, "FirstProductTypeQuantity");
+                    SecondProductTypeQuantityTextBox.Text =
+                        _numberService.DoubleToStringOrEmptyProductTypeModel(productTypeModel, "SecondProductTypeQuantity");
+                    ThirdProductTypeQuantityTextBox.Text =
+                        _numberService.DoubleToStringOrEmptyProductTypeModel(productTypeModel, "ThirdProductTypeQuantity");
+                    FourthProductTypeQuantityTextBox.Text =
+                        _numberService.DoubleToStringOrEmptyProductTypeModel(productTypeModel, "FourthProductTypeQuantity");
+                    FifthProductTypeQuantityTextBox.Text =
+                        _numberService.DoubleToStringOrEmptyProductTypeModel(productTypeModel, "FifthProductTypeQuantity");
 
-                FirstProductTypePriceTextBox.Text =
-                    _numberService.DoubleToStringOrEmptyProductTypeModel(productTypeModel, "FirstProductTypePrice");
-                SecondProductTypePriceTextBox.Text =
-                    _numberService.DoubleToStringOrEmptyProductTypeModel(productTypeModel, "SecondProductTypePrice");
-                ThirdProductTypePriceTextBox.Text =
-                    _numberService.DoubleToStringOrEmptyProductTypeModel(productTypeModel, "ThirdProductTypePrice");
-                FourthProductTypePriceTextBox.Text =
-                    _numberService.DoubleToStringOrEmptyProductTypeModel(productTypeModel, "FourthProductTypePrice");
-                FifthProductTypePriceTextBox.Text =
-                    _numberService.DoubleToStringOrEmptyProductTypeModel(productTypeModel, "FifthProductTypePrice");
+                    FirstProductTypePriceTextBox.Text =
+                        _numberService.DoubleToStringOrEmptyProductTypeModel(productTypeModel, "FirstProductTypePrice");
+                    SecondProductTypePriceTextBox.Text =
+                        _numberService.DoubleToStringOrEmptyProductTypeModel(productTypeModel, "SecondProductTypePrice");
+                    ThirdProductTypePriceTextBox.Text =
+                        _numberService.DoubleToStringOrEmptyProductTypeModel(productTypeModel, "ThirdProductTypePrice");
+                    FourthProductTypePriceTextBox.Text =
+                        _numberService.DoubleToStringOrEmptyProductTypeModel(productTypeModel, "FourthProductTypePrice");
+                    FifthProductTypePriceTextBox.Text =
+                        _numberService.DoubleToStringOrEmptyProductTypeModel(productTypeModel, "FifthProductTypePrice");
+                }
 
                 if (invoiceModel.PaymentStatus == "Atsiskaityta" && _invoiceOperations == InvoiceOperations.Edit)
                 {
@@ -759,11 +762,14 @@ namespace Invoice.Forms
 
         private void SetTextToProductTypeComboBoxes(ProductTypeNameModel productTypeNameModel)
         {
-            FirstProductTypeComboBox.Text = productTypeNameModel.FirstProductType;
-            SecondProductTypeComboBox.Text = productTypeNameModel.SecondProductType;
-            ThirdProductTypeComboBox.Text = productTypeNameModel.ThirdProductType;
-            FourthProductTypeComboBox.Text = productTypeNameModel.FourthProductType;
-            FifthProductTypeComboBox.Text = productTypeNameModel.FifthProductType;
+            if (productTypeNameModel != null)
+            {
+                FirstProductTypeComboBox.Text = productTypeNameModel.FirstProductType;
+                SecondProductTypeComboBox.Text = productTypeNameModel.SecondProductType;
+                ThirdProductTypeComboBox.Text = productTypeNameModel.ThirdProductType;
+                FourthProductTypeComboBox.Text = productTypeNameModel.FourthProductType;
+                FifthProductTypeComboBox.Text = productTypeNameModel.FifthProductType;
+            }
         }
 
         private void ChangeDoubleCommaToDot()
