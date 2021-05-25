@@ -136,6 +136,7 @@
     <Compile Include="Repositories\DataBaseInitializerRepository.cs" />
     <Compile Include="Repositories\InvoiceRepository.cs" />
     <Compile Include="Repositories\PdfFolderInitializer.cs" />
+    <Compile Include="Repositories\ProductTypeRepository.cs" />
     <Compile Include="Service\MessageDialogService.cs" />
     <Compile Include="Service\NumberService.cs" />
     <EmbeddedResource Include="Forms\InvoiceForm.resx">

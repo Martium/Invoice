@@ -136,6 +136,11 @@ namespace Invoice.Forms
             this.printDocument = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.ProductsTypesPanel = new System.Windows.Forms.Panel();
+            this.AdditionalInfoFifthLineLabel = new System.Windows.Forms.Label();
+            this.AdditionalInfoFourthLineLabel = new System.Windows.Forms.Label();
+            this.AdditionalThirdLineInfoLabel = new System.Windows.Forms.Label();
+            this.AdditionalInfoSecondLineLabel = new System.Windows.Forms.Label();
+            this.AdditionalInfoFirstLineLabel = new System.Windows.Forms.Label();
             this.AdditionalInfoLabel = new System.Windows.Forms.Label();
             this.FifthProductTypePriceTextBox = new System.Windows.Forms.TextBox();
             this.FourthProductTypePriceTextBox = new System.Windows.Forms.TextBox();
@@ -155,11 +160,11 @@ namespace Invoice.Forms
             this.FirstProductTypeQuantityTextBox = new System.Windows.Forms.TextBox();
             this.FirstProductTypeTextBox = new System.Windows.Forms.TextBox();
             this.TypeOfProductLabel = new System.Windows.Forms.Label();
-            this.AdditionalInfoFirstLineLabel = new System.Windows.Forms.Label();
-            this.AdditionalInfoSecondLineLabel = new System.Windows.Forms.Label();
-            this.AdditionalInfoFifthLineLabel = new System.Windows.Forms.Label();
-            this.AdditionalThirdLineInfoLabel = new System.Windows.Forms.Label();
-            this.AdditionalInfoFourthLineLabel = new System.Windows.Forms.Label();
+            this.FirstProductTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.SecondProductTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.ThirdProductTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.FourthProductTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.FifthProductTypeComboBox = new System.Windows.Forms.ComboBox();
             this.PrintInvoicePanel.SuspendLayout();
             this.ProductsTypesPanel.SuspendLayout();
             this.SuspendLayout();
@@ -1312,6 +1317,51 @@ namespace Invoice.Forms
             this.ProductsTypesPanel.Size = new System.Drawing.Size(303, 254);
             this.ProductsTypesPanel.TabIndex = 5;
             // 
+            // AdditionalInfoFifthLineLabel
+            // 
+            this.AdditionalInfoFifthLineLabel.AutoSize = true;
+            this.AdditionalInfoFifthLineLabel.Location = new System.Drawing.Point(33, 210);
+            this.AdditionalInfoFifthLineLabel.Name = "AdditionalInfoFifthLineLabel";
+            this.AdditionalInfoFifthLineLabel.Size = new System.Drawing.Size(16, 13);
+            this.AdditionalInfoFifthLineLabel.TabIndex = 20;
+            this.AdditionalInfoFifthLineLabel.Text = "5)";
+            // 
+            // AdditionalInfoFourthLineLabel
+            // 
+            this.AdditionalInfoFourthLineLabel.AutoSize = true;
+            this.AdditionalInfoFourthLineLabel.Location = new System.Drawing.Point(33, 176);
+            this.AdditionalInfoFourthLineLabel.Name = "AdditionalInfoFourthLineLabel";
+            this.AdditionalInfoFourthLineLabel.Size = new System.Drawing.Size(16, 13);
+            this.AdditionalInfoFourthLineLabel.TabIndex = 22;
+            this.AdditionalInfoFourthLineLabel.Text = "4)";
+            // 
+            // AdditionalThirdLineInfoLabel
+            // 
+            this.AdditionalThirdLineInfoLabel.AutoSize = true;
+            this.AdditionalThirdLineInfoLabel.Location = new System.Drawing.Point(33, 141);
+            this.AdditionalThirdLineInfoLabel.Name = "AdditionalThirdLineInfoLabel";
+            this.AdditionalThirdLineInfoLabel.Size = new System.Drawing.Size(16, 13);
+            this.AdditionalThirdLineInfoLabel.TabIndex = 21;
+            this.AdditionalThirdLineInfoLabel.Text = "3)";
+            // 
+            // AdditionalInfoSecondLineLabel
+            // 
+            this.AdditionalInfoSecondLineLabel.AutoSize = true;
+            this.AdditionalInfoSecondLineLabel.Location = new System.Drawing.Point(33, 105);
+            this.AdditionalInfoSecondLineLabel.Name = "AdditionalInfoSecondLineLabel";
+            this.AdditionalInfoSecondLineLabel.Size = new System.Drawing.Size(16, 13);
+            this.AdditionalInfoSecondLineLabel.TabIndex = 20;
+            this.AdditionalInfoSecondLineLabel.Text = "2)";
+            // 
+            // AdditionalInfoFirstLineLabel
+            // 
+            this.AdditionalInfoFirstLineLabel.AutoSize = true;
+            this.AdditionalInfoFirstLineLabel.Location = new System.Drawing.Point(33, 69);
+            this.AdditionalInfoFirstLineLabel.Name = "AdditionalInfoFirstLineLabel";
+            this.AdditionalInfoFirstLineLabel.Size = new System.Drawing.Size(16, 13);
+            this.AdditionalInfoFirstLineLabel.TabIndex = 19;
+            this.AdditionalInfoFirstLineLabel.Text = "1)";
+            // 
             // AdditionalInfoLabel
             // 
             this.AdditionalInfoLabel.AutoSize = true;
@@ -1469,56 +1519,56 @@ namespace Invoice.Forms
             this.TypeOfProductLabel.TabIndex = 0;
             this.TypeOfProductLabel.Text = "Produkto tipas";
             // 
-            // AdditionalInfoFirstLineLabel
+            // FirstProductTypeComboBox
             // 
-            this.AdditionalInfoFirstLineLabel.AutoSize = true;
-            this.AdditionalInfoFirstLineLabel.Location = new System.Drawing.Point(33, 69);
-            this.AdditionalInfoFirstLineLabel.Name = "AdditionalInfoFirstLineLabel";
-            this.AdditionalInfoFirstLineLabel.Size = new System.Drawing.Size(16, 13);
-            this.AdditionalInfoFirstLineLabel.TabIndex = 19;
-            this.AdditionalInfoFirstLineLabel.Text = "1)";
+            this.FirstProductTypeComboBox.FormattingEnabled = true;
+            this.FirstProductTypeComboBox.Location = new System.Drawing.Point(987, 336);
+            this.FirstProductTypeComboBox.Name = "FirstProductTypeComboBox";
+            this.FirstProductTypeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.FirstProductTypeComboBox.TabIndex = 6;
             // 
-            // AdditionalInfoSecondLineLabel
+            // SecondProductTypeComboBox
             // 
-            this.AdditionalInfoSecondLineLabel.AutoSize = true;
-            this.AdditionalInfoSecondLineLabel.Location = new System.Drawing.Point(33, 105);
-            this.AdditionalInfoSecondLineLabel.Name = "AdditionalInfoSecondLineLabel";
-            this.AdditionalInfoSecondLineLabel.Size = new System.Drawing.Size(16, 13);
-            this.AdditionalInfoSecondLineLabel.TabIndex = 20;
-            this.AdditionalInfoSecondLineLabel.Text = "2)";
+            this.SecondProductTypeComboBox.FormattingEnabled = true;
+            this.SecondProductTypeComboBox.Location = new System.Drawing.Point(987, 375);
+            this.SecondProductTypeComboBox.Name = "SecondProductTypeComboBox";
+            this.SecondProductTypeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.SecondProductTypeComboBox.TabIndex = 7;
             // 
-            // AdditionalInfoFifthLineLabel
+            // ThirdProductTypeComboBox
             // 
-            this.AdditionalInfoFifthLineLabel.AutoSize = true;
-            this.AdditionalInfoFifthLineLabel.Location = new System.Drawing.Point(33, 210);
-            this.AdditionalInfoFifthLineLabel.Name = "AdditionalInfoFifthLineLabel";
-            this.AdditionalInfoFifthLineLabel.Size = new System.Drawing.Size(16, 13);
-            this.AdditionalInfoFifthLineLabel.TabIndex = 20;
-            this.AdditionalInfoFifthLineLabel.Text = "5)";
+            this.ThirdProductTypeComboBox.FormattingEnabled = true;
+            this.ThirdProductTypeComboBox.Location = new System.Drawing.Point(987, 412);
+            this.ThirdProductTypeComboBox.Name = "ThirdProductTypeComboBox";
+            this.ThirdProductTypeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.ThirdProductTypeComboBox.TabIndex = 8;
             // 
-            // AdditionalThirdLineInfoLabel
+            // FourthProductTypeComboBox
             // 
-            this.AdditionalThirdLineInfoLabel.AutoSize = true;
-            this.AdditionalThirdLineInfoLabel.Location = new System.Drawing.Point(33, 141);
-            this.AdditionalThirdLineInfoLabel.Name = "AdditionalThirdLineInfoLabel";
-            this.AdditionalThirdLineInfoLabel.Size = new System.Drawing.Size(16, 13);
-            this.AdditionalThirdLineInfoLabel.TabIndex = 21;
-            this.AdditionalThirdLineInfoLabel.Text = "3)";
+            this.FourthProductTypeComboBox.FormattingEnabled = true;
+            this.FourthProductTypeComboBox.Location = new System.Drawing.Point(988, 453);
+            this.FourthProductTypeComboBox.Name = "FourthProductTypeComboBox";
+            this.FourthProductTypeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.FourthProductTypeComboBox.TabIndex = 9;
             // 
-            // AdditionalInfoFourthLineLabel
+            // FifthProductTypeComboBox
             // 
-            this.AdditionalInfoFourthLineLabel.AutoSize = true;
-            this.AdditionalInfoFourthLineLabel.Location = new System.Drawing.Point(33, 176);
-            this.AdditionalInfoFourthLineLabel.Name = "AdditionalInfoFourthLineLabel";
-            this.AdditionalInfoFourthLineLabel.Size = new System.Drawing.Size(16, 13);
-            this.AdditionalInfoFourthLineLabel.TabIndex = 22;
-            this.AdditionalInfoFourthLineLabel.Text = "4)";
+            this.FifthProductTypeComboBox.FormattingEnabled = true;
+            this.FifthProductTypeComboBox.Location = new System.Drawing.Point(988, 493);
+            this.FifthProductTypeComboBox.Name = "FifthProductTypeComboBox";
+            this.FifthProductTypeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.FifthProductTypeComboBox.TabIndex = 10;
             // 
             // InvoiceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1268, 1017);
+            this.Controls.Add(this.FifthProductTypeComboBox);
+            this.Controls.Add(this.FourthProductTypeComboBox);
+            this.Controls.Add(this.ThirdProductTypeComboBox);
+            this.Controls.Add(this.SecondProductTypeComboBox);
+            this.Controls.Add(this.FirstProductTypeComboBox);
             this.Controls.Add(this.ProductsTypesPanel);
             this.Controls.Add(this.PrintButton);
             this.Controls.Add(this.CalculateButton);
@@ -1667,5 +1717,10 @@ namespace Invoice.Forms
         private System.Windows.Forms.Label AdditionalThirdLineInfoLabel;
         private System.Windows.Forms.Label AdditionalInfoSecondLineLabel;
         private System.Windows.Forms.Label AdditionalInfoFirstLineLabel;
+        private System.Windows.Forms.ComboBox FirstProductTypeComboBox;
+        private System.Windows.Forms.ComboBox SecondProductTypeComboBox;
+        private System.Windows.Forms.ComboBox ThirdProductTypeComboBox;
+        private System.Windows.Forms.ComboBox FourthProductTypeComboBox;
+        private System.Windows.Forms.ComboBox FifthProductTypeComboBox;
     }
 }

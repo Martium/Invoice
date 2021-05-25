@@ -205,8 +205,6 @@ namespace Invoice.Forms
             }
         }
 
-
-
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == (Keys.Escape))
