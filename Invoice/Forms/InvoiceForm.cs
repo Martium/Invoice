@@ -695,11 +695,11 @@ namespace Invoice.Forms
                     _invoiceRepository.GetProductTypeInfoFromInvoiceNumberAndCreationYear(_invoiceNumber.Value,
                         _invoiceNumberYearCreation.Value);
 
-                FirstProductTypeTextBox.Text = productTypeModel.FirstProductType;
-                SecondProductTypeTextBox.Text = productTypeModel.SecondProductType;
-                ThirdProductTypeTextBox.Text = productTypeModel.ThirdProductType;
-                FourthProductTypeTextBox.Text = productTypeModel.FourthProductType;
-                FifthProductTypeTextBox.Text = productTypeModel.FifthProductType;
+                FirstProductTypeComboBox.Text = productTypeModel.FirstProductType;
+                SecondProductTypeComboBox.Text = productTypeModel.SecondProductType;
+                ThirdProductTypeComboBox.Text = productTypeModel.ThirdProductType;
+                FourthProductTypeComboBox.Text = productTypeModel.FourthProductType;
+                FifthProductTypeComboBox.Text = productTypeModel.FifthProductType;
 
                 FirstProductTypeQuantityTextBox.Text =
                     _numberService.DoubleToStringOrEmptyProductTypeModel(productTypeModel, "FirstProductTypeQuantity");
@@ -833,11 +833,11 @@ namespace Invoice.Forms
             InvoiceMakerRichTextBox.MaxLength = FormSettings.TextBoxLengths.InvoiceMaker;
             InvoiceAcceptedRichTextBox.MaxLength = FormSettings.TextBoxLengths.InvoiceAccepted;
 
-            FirstProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.FirstProductType;
-            SecondProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.SecondProductType;
-            ThirdProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ThirdProductType;
-            FourthProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.FourthProductType;
-            FifthProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.FifthProductType;
+           // FirstProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.FirstProductType;
+           // SecondProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.SecondProductType;
+           // ThirdProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ThirdProductType;
+           // FourthProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.FourthProductType;
+           // FifthProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.FifthProductType;
         }
 
         private void CaptureInvoiceFormScreen()
@@ -933,12 +933,6 @@ namespace Invoice.Forms
 
         private void SerCursorAtTextBoxStringEnd()
         {
-            FirstProductTypeTextBox.SelectionStart = FirstProductTypeTextBox.Text.Length;
-            SecondProductTypeTextBox.SelectionStart = SecondProductTypeTextBox.Text.Length;
-            ThirdProductTypeTextBox.SelectionStart = ThirdProductTypeTextBox.Text.Length;
-            FourthProductTypeTextBox.SelectionStart = FourthProductTypeTextBox.Text.Length;
-            FifthProductTypeTextBox.SelectionStart = FifthProductTypeTextBox.Text.Length;
-
             FirstProductTypeQuantityTextBox.SelectionStart = FirstProductTypeQuantityTextBox.Text.Length;
             SecondProductTypeQuantityTextBox.SelectionStart = SecondProductTypeQuantityTextBox.Text.Length;
             ThirdProductTypeQuantityTextBox.SelectionStart = ThirdProductTypeQuantityTextBox.Text.Length;
