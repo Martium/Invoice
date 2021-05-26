@@ -19,6 +19,8 @@ namespace Invoice.Forms
     {
         private readonly InvoiceRepository _invoiceRepository;
 
+        private readonly ProductTypeRepository _productTypeRepository;
+
         private readonly MessageDialogService _messageDialogService = new MessageDialogService();
 
         private readonly NumberService _numberService = new NumberService();
@@ -36,6 +38,7 @@ namespace Invoice.Forms
             int? invoiceNumberYearCreation = null)
         {
             _invoiceRepository = new InvoiceRepository();
+            _productTypeRepository = new ProductTypeRepository();
 
             _invoiceOperations = invoiceOperations;
             _invoiceNumber = invoiceNumber;
@@ -675,6 +678,8 @@ namespace Invoice.Forms
                     this.BackColor = Color.Red;
                 }
 
+                GetExistingProductTypeInfo();
+
                 CalculateButton_Click(this, new EventArgs());
             }
         }
@@ -768,7 +773,7 @@ namespace Invoice.Forms
             EighthProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
             NinthProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
             TenProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
-            EleventhProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
+            EleventhProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
             TwelfthProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
         }
 
@@ -866,6 +871,56 @@ namespace Invoice.Forms
         private void SetCursorAtDateTextBoxEnd()
         {
             InvoiceDateRichTextBox.SelectionStart = InvoiceDateRichTextBox.Text.Length;
+        }
+
+        private void GetExistingProductTypeInfo()
+        {
+            if (_invoiceNumber.HasValue && _invoiceNumberYearCreation.HasValue)
+            {
+                ProductTypeModel getExistingProductTypes =
+                    _productTypeRepository.GetExistingProductType(_invoiceNumber.Value, _invoiceNumberYearCreation.Value);
+
+                FirstProductTypeTextBox.Text = getExistingProductTypes.FirstProductType;
+                SecondProductTypeTextBox.Text = getExistingProductTypes.SecondProductType;
+                ThirdProductTypeTextBox.Text = getExistingProductTypes.ThirdProductType;
+                FourthProductTypeTextBox.Text = getExistingProductTypes.FourthProductType;
+                FifthProductTypeTextBox.Text = getExistingProductTypes.FifthProductType;
+                SixthProductTypeTextBox.Text = getExistingProductTypes.SixthProductType;
+                SeventhProductTypeTextBox.Text = getExistingProductTypes.SeventhProductType;
+                EighthProductTypeTextBox.Text = getExistingProductTypes.EighthProductType;
+                NinthProductTypeTextBox.Text = getExistingProductTypes.NinthProductType;
+                TenProductTypeTextBox.Text = getExistingProductTypes.TenProductType;
+                EleventhProductTypeTextBox.Text = getExistingProductTypes.EleventhProductType;
+                TwelfthProductTypeTextBox.Text = getExistingProductTypes.TwelfthProductType;
+
+                FirstProductTypeQuantityTextBox.Text = getExistingProductTypes.FirstProductTypeQuantity.ToString();
+                SecondProductTypeQuantityTextBox.Text = getExistingProductTypes.SecondProductTypeQuantity.ToString();
+                ThirdProductTypeQuantityTextBox.Text = getExistingProductTypes.ThirdProductTypeQuantity.ToString();
+                FourthProductTypeQuantityTextBox.Text = getExistingProductTypes.FourthProductTypeQuantity.ToString();
+                FifthProductTypeQuantityTextBox.Text = getExistingProductTypes.FifthProductTypeQuantity.ToString();
+                SixthProductTypeQuantityTextBox.Text = getExistingProductTypes.SixthProductTypeQuantity.ToString();
+                SeventhProductTypeQuantityTextBox.Text = getExistingProductTypes.SeventhProductTypeQuantity.ToString();
+                EighthProductTypeQuantityTextBox.Text = getExistingProductTypes.EighthProductTypeQuantity.ToString();
+                NinthProductTypeQuantityTextBox.Text = getExistingProductTypes.NinthProductTypeQuantity.ToString();
+                TenProductTypeQuantityTextBox.Text = getExistingProductTypes.TenProductTypeQuantity.ToString();
+                EleventhProductTypeQuantityTextBox.Text = getExistingProductTypes.EleventhProductTypeQuantity.ToString();
+                TwelfthProductTypeQuantityTextBox.Text = getExistingProductTypes.TwelfthProductTypeQuantity.ToString();
+
+                FirstProductTypePriceTextBox.Text = getExistingProductTypes.FirstProductTypePrice.ToString();
+                SecondProductTypePriceTextBox.Text = getExistingProductTypes.SecondProductTypePrice.ToString();
+                ThirdProductTypePriceTextBox.Text = getExistingProductTypes.ThirdProductTypePrice.ToString();
+                FourthProductTypePriceTextBox.Text = getExistingProductTypes.FourthProductTypePrice.ToString();
+                FifthProductTypePriceTextBox.Text = getExistingProductTypes.FifthProductTypePrice.ToString();
+                SixthProductTypePriceTextBox.Text = getExistingProductTypes.SixthProductTypePrice.ToString();
+                SeventhProductTypePriceTextBox.Text = getExistingProductTypes.SeventhProductTypePrice.ToString();
+                EighthProductTypePriceTextBox.Text = getExistingProductTypes.EighthProductTypePrice.ToString();
+                NinthProductTypePriceTextBox.Text = getExistingProductTypes.NinthProductTypePrice.ToString();
+                TenProductTypePriceTextBox.Text = getExistingProductTypes.TenProductTypePrice.ToString();
+                EleventhProductTypePriceTextBox.Text = getExistingProductTypes.EleventhProductTypePrice.ToString();
+                TwelfthProductTypePriceTextBox.Text = getExistingProductTypes.TwelfthProductTypePrice.ToString();
+
+            }
+            
         }
 
         #endregion

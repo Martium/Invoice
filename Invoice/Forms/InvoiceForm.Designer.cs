@@ -160,7 +160,7 @@ namespace Invoice.Forms
             this.EighthProductTypeTextBox = new System.Windows.Forms.TextBox();
             this.NinthProductTypeTextBox = new System.Windows.Forms.TextBox();
             this.TenProductTypeTextBox = new System.Windows.Forms.TextBox();
-            this.TEleventhProductTypeTextBox = new System.Windows.Forms.TextBox();
+            this.EleventhProductTypeTextBox = new System.Windows.Forms.TextBox();
             this.TwelfthProductTypeTextBox = new System.Windows.Forms.TextBox();
             this.SixthProductTypeQuantityTextBox = new System.Windows.Forms.TextBox();
             this.SixthProductTypePriceTextBox = new System.Windows.Forms.TextBox();
@@ -1314,7 +1314,7 @@ namespace Invoice.Forms
             this.ProductsTypesPanel.Controls.Add(this.SixthProductTypePriceTextBox);
             this.ProductsTypesPanel.Controls.Add(this.SixthProductTypeQuantityTextBox);
             this.ProductsTypesPanel.Controls.Add(this.TwelfthProductTypeTextBox);
-            this.ProductsTypesPanel.Controls.Add(this.TEleventhProductTypeTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.EleventhProductTypeTextBox);
             this.ProductsTypesPanel.Controls.Add(this.TenProductTypeTextBox);
             this.ProductsTypesPanel.Controls.Add(this.NinthProductTypeTextBox);
             this.ProductsTypesPanel.Controls.Add(this.EighthProductTypeTextBox);
@@ -1521,12 +1521,12 @@ namespace Invoice.Forms
             this.TenProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
             this.TenProductTypeTextBox.TabIndex = 23;
             // 
-            // TEleventhProductTypeTextBox
+            // EleventhProductTypeTextBox
             // 
-            this.TEleventhProductTypeTextBox.Location = new System.Drawing.Point(25, 409);
-            this.TEleventhProductTypeTextBox.Name = "TEleventhProductTypeTextBox";
-            this.TEleventhProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
-            this.TEleventhProductTypeTextBox.TabIndex = 24;
+            this.EleventhProductTypeTextBox.Location = new System.Drawing.Point(25, 409);
+            this.EleventhProductTypeTextBox.Name = "EleventhProductTypeTextBox";
+            this.EleventhProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
+            this.EleventhProductTypeTextBox.TabIndex = 24;
             // 
             // TwelfthProductTypeTextBox
             // 
@@ -1796,7 +1796,7 @@ namespace Invoice.Forms
         private System.Windows.Forms.TextBox SixthProductTypePriceTextBox;
         private System.Windows.Forms.TextBox SixthProductTypeQuantityTextBox;
         private System.Windows.Forms.TextBox TwelfthProductTypeTextBox;
-        private System.Windows.Forms.TextBox TEleventhProductTypeTextBox;
+        private System.Windows.Forms.TextBox EleventhProductTypeTextBox;
         private System.Windows.Forms.TextBox TenProductTypeTextBox;
         private System.Windows.Forms.TextBox NinthProductTypeTextBox;
         private System.Windows.Forms.TextBox EighthProductTypeTextBox;

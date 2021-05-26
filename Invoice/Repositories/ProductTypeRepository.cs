@@ -19,7 +19,7 @@ namespace Invoice.Repositories
                       WHERE IdByInvoiceNumber = {invoiceNumber} AND IdByInvoiceNumberYearCreation = {invoiceNumberYearCreation}
                     ";
 
-                ProductTypeModel getExistingProductType = dbConnection.QuerySingleOrDefault(getExistingServiceQuery);
+                ProductTypeModel getExistingProductType = dbConnection.QuerySingleOrDefault<ProductTypeModel>(getExistingServiceQuery);
 
                 return getExistingProductType;
             }
