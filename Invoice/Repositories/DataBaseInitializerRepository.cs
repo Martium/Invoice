@@ -35,6 +35,7 @@ namespace Invoice.Repositories
 
                 CreateInvoiceTable(dbConnection);
                 CreateSellerInfoTable(dbConnection);
+                CreateProductTypeTable(dbConnection);
 
 #if DEBUG
                 FillInvoiceTestingInfo(dbConnection);
@@ -177,6 +178,62 @@ namespace Invoice.Repositories
 
             SQLiteCommand createSellerInfoTableCommand = new SQLiteCommand(createSellerInfoTableQuery, dbConnection);
             createSellerInfoTableCommand.ExecuteNonQuery();
+        }
+
+        private void CreateProductTypeTable(SQLiteConnection dbConnection)
+        {
+            string dropProductTypeTable = GetDropTableQuery("ProductType");
+            SQLiteCommand dropaProductTypeTableCommand = new SQLiteCommand(dropProductTypeTable, dbConnection);
+            dropaProductTypeTableCommand.ExecuteNonQuery();
+
+            string createProductTypeTableQuery =
+                $@"
+                    CREATE TABLE [ProductType] (
+                        [IdByInvoiceNumber] [INTEGER] NOT NULL,
+                        [IdByInvoiceNumberYearCreation] [INTEGER] NOT NULL,
+                        
+                        [FirstProductType] [nvarchar] () NULL,
+                        [SecondProductType] [nvarchar] () NULL,
+                        [ThirdProductType] [nvarchar] () NULL,
+                        [FourthProductType] [nvarchar] () NULL,
+                        [FifthProductType] [nvarchar] () NULL,
+                        [SixthProductType] [nvarchar] () NULL,
+                        [SeventhProductType] [nvarchar] () NULL,
+                        [EighthProductType] [nvarchar] () NULL,
+                        [NinthProductType] [nvarchar] () NULL,
+                        [TenProductType] [nvarchar] () NULL,
+                        [EleventhProductType] [nvarchar] () NULL,
+                        [TwelfthProductType] [nvarchar] () NULL,
+
+                        [FirstProductTypeQuantity] [nvarchar] () NULL,
+                        [SecondProductTypeQuantity] [nvarchar] () NULL,
+                        [ThirdProductTypeQuantity] [nvarchar] () NULL,
+                        [FourthProductTypeQuantity] [nvarchar] () NULL,
+                        [FifthProductTypeQuantity] [nvarchar] () NULL,
+                        [SixthProductTypeQuantity] [nvarchar] () NULL,
+                        [SeventhProductTypeQuantity] [nvarchar] () NULL,
+                        [EighthProductTypeQuantity] [nvarchar] () NULL,
+                        [NinthProductTypeQuantity] [nvarchar] () NULL,
+                        [TenProductTypeQuantity] [nvarchar] () NULL,
+                        [EleventhProductTypeQuantity] [nvarchar] () NULL,
+                        [TwelfthProductTypeQuantity] [nvarchar] () NULL,
+
+                        [FirstProductTypePrice] [nvarchar] () NULL,
+                        [SecondProductTypePrice] [nvarchar] () NULL,
+                        [ThirdProductTypePrice] [nvarchar] () NULL,
+                        [FourthProductTypePrice] [nvarchar] () NULL,
+                        [FifthProductTypePrice] [nvarchar] () NULL,
+                        [SixthProductTypePrice] [nvarchar] () NULL,
+                        [SeventhProductTypePrice] [nvarchar] () NULL,
+                        [EighthProductTypePrice] [nvarchar] () NULL,
+                        [NinthProductTypePrice] [nvarchar] () NULL,
+                        [TenProductTypePrice] [nvarchar] () NULL,
+                        [EleventhProductTypePrice] [nvarchar] () NULL,
+                        [TwelfthProductTypePrice] [nvarchar] () NULL,
+                        
+                        UNIQUE (IdByInvoiceNumber, IdByInvoiceNumberYearCreation)
+                    );
+                ";
         }
 
         private void FillInvoiceTestingInfo(SQLiteConnection dbConnection)
