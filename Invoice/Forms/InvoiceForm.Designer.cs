@@ -155,6 +155,27 @@ namespace Invoice.Forms
             this.FirstProductTypeQuantityTextBox = new System.Windows.Forms.TextBox();
             this.FirstProductTypeTextBox = new System.Windows.Forms.TextBox();
             this.TypeOfProductLabel = new System.Windows.Forms.Label();
+            this.SixthProductTypeTextBox = new System.Windows.Forms.TextBox();
+            this.SeventhProductTypeTextBox = new System.Windows.Forms.TextBox();
+            this.EighthProductTypeTextBox = new System.Windows.Forms.TextBox();
+            this.NinthProductTypeTextBox = new System.Windows.Forms.TextBox();
+            this.TenProductTypeTextBox = new System.Windows.Forms.TextBox();
+            this.TEleventhProductTypeTextBox = new System.Windows.Forms.TextBox();
+            this.TwelfthProductTypeTextBox = new System.Windows.Forms.TextBox();
+            this.SixthProductTypeQuantityTextBox = new System.Windows.Forms.TextBox();
+            this.SixthProductTypePriceTextBox = new System.Windows.Forms.TextBox();
+            this.SeventhProductTypeQuantityTextBox = new System.Windows.Forms.TextBox();
+            this.SeventhProductTypePriceTextBox = new System.Windows.Forms.TextBox();
+            this.EighthProductTypeQuantityTextBox = new System.Windows.Forms.TextBox();
+            this.EighthProductTypePriceTextBox = new System.Windows.Forms.TextBox();
+            this.NinthProductTypeQuantityTextBox = new System.Windows.Forms.TextBox();
+            this.NinthProductTypePriceTextBox = new System.Windows.Forms.TextBox();
+            this.TenProductTypeQuantityTextBox = new System.Windows.Forms.TextBox();
+            this.TenProductTypePriceTextBox = new System.Windows.Forms.TextBox();
+            this.EleventhProductTypeQuantityTextBox = new System.Windows.Forms.TextBox();
+            this.EleventhProductTypePriceTextBox = new System.Windows.Forms.TextBox();
+            this.TwelfthProductTypeQuantityTextBox = new System.Windows.Forms.TextBox();
+            this.TwelfthProductTypePriceTextBox = new System.Windows.Forms.TextBox();
             this.PrintInvoicePanel.SuspendLayout();
             this.ProductsTypesPanel.SuspendLayout();
             this.SuspendLayout();
@@ -1278,6 +1299,27 @@ namespace Invoice.Forms
             // ProductsTypesPanel
             // 
             this.ProductsTypesPanel.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.ProductsTypesPanel.Controls.Add(this.TwelfthProductTypePriceTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.TwelfthProductTypeQuantityTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.EleventhProductTypePriceTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.EleventhProductTypeQuantityTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.TenProductTypePriceTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.TenProductTypeQuantityTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.NinthProductTypePriceTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.NinthProductTypeQuantityTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.EighthProductTypePriceTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.EighthProductTypeQuantityTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.SeventhProductTypePriceTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.SeventhProductTypeQuantityTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.SixthProductTypePriceTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.SixthProductTypeQuantityTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.TwelfthProductTypeTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.TEleventhProductTypeTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.TenProductTypeTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.NinthProductTypeTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.EighthProductTypeTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.SeventhProductTypeTextBox);
+            this.ProductsTypesPanel.Controls.Add(this.SixthProductTypeTextBox);
             this.ProductsTypesPanel.Controls.Add(this.AdditionalInfoLabel);
             this.ProductsTypesPanel.Controls.Add(this.FifthProductTypePriceTextBox);
             this.ProductsTypesPanel.Controls.Add(this.FourthProductTypePriceTextBox);
@@ -1299,7 +1341,7 @@ namespace Invoice.Forms
             this.ProductsTypesPanel.Controls.Add(this.TypeOfProductLabel);
             this.ProductsTypesPanel.Location = new System.Drawing.Point(966, 31);
             this.ProductsTypesPanel.Name = "ProductsTypesPanel";
-            this.ProductsTypesPanel.Size = new System.Drawing.Size(290, 290);
+            this.ProductsTypesPanel.Size = new System.Drawing.Size(290, 510);
             this.ProductsTypesPanel.TabIndex = 5;
             // 
             // AdditionalInfoLabel
@@ -1443,6 +1485,153 @@ namespace Invoice.Forms
             this.TypeOfProductLabel.Size = new System.Drawing.Size(75, 13);
             this.TypeOfProductLabel.TabIndex = 0;
             this.TypeOfProductLabel.Text = "Produkto tipas";
+            // 
+            // SixthProductTypeTextBox
+            // 
+            this.SixthProductTypeTextBox.Location = new System.Drawing.Point(25, 241);
+            this.SixthProductTypeTextBox.Name = "SixthProductTypeTextBox";
+            this.SixthProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
+            this.SixthProductTypeTextBox.TabIndex = 19;
+            // 
+            // SeventhProductTypeTextBox
+            // 
+            this.SeventhProductTypeTextBox.Location = new System.Drawing.Point(25, 273);
+            this.SeventhProductTypeTextBox.Name = "SeventhProductTypeTextBox";
+            this.SeventhProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
+            this.SeventhProductTypeTextBox.TabIndex = 20;
+            // 
+            // EighthProductTypeTextBox
+            // 
+            this.EighthProductTypeTextBox.Location = new System.Drawing.Point(25, 305);
+            this.EighthProductTypeTextBox.Name = "EighthProductTypeTextBox";
+            this.EighthProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
+            this.EighthProductTypeTextBox.TabIndex = 21;
+            // 
+            // NinthProductTypeTextBox
+            // 
+            this.NinthProductTypeTextBox.Location = new System.Drawing.Point(25, 340);
+            this.NinthProductTypeTextBox.Name = "NinthProductTypeTextBox";
+            this.NinthProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
+            this.NinthProductTypeTextBox.TabIndex = 22;
+            // 
+            // TenProductTypeTextBox
+            // 
+            this.TenProductTypeTextBox.Location = new System.Drawing.Point(25, 374);
+            this.TenProductTypeTextBox.Name = "TenProductTypeTextBox";
+            this.TenProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
+            this.TenProductTypeTextBox.TabIndex = 23;
+            // 
+            // TEleventhProductTypeTextBox
+            // 
+            this.TEleventhProductTypeTextBox.Location = new System.Drawing.Point(25, 409);
+            this.TEleventhProductTypeTextBox.Name = "TEleventhProductTypeTextBox";
+            this.TEleventhProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
+            this.TEleventhProductTypeTextBox.TabIndex = 24;
+            // 
+            // TwelfthProductTypeTextBox
+            // 
+            this.TwelfthProductTypeTextBox.Location = new System.Drawing.Point(25, 444);
+            this.TwelfthProductTypeTextBox.Name = "TwelfthProductTypeTextBox";
+            this.TwelfthProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
+            this.TwelfthProductTypeTextBox.TabIndex = 25;
+            // 
+            // SixthProductTypeQuantityTextBox
+            // 
+            this.SixthProductTypeQuantityTextBox.Location = new System.Drawing.Point(153, 241);
+            this.SixthProductTypeQuantityTextBox.Name = "SixthProductTypeQuantityTextBox";
+            this.SixthProductTypeQuantityTextBox.Size = new System.Drawing.Size(49, 20);
+            this.SixthProductTypeQuantityTextBox.TabIndex = 26;
+            // 
+            // SixthProductTypePriceTextBox
+            // 
+            this.SixthProductTypePriceTextBox.Location = new System.Drawing.Point(208, 241);
+            this.SixthProductTypePriceTextBox.Name = "SixthProductTypePriceTextBox";
+            this.SixthProductTypePriceTextBox.Size = new System.Drawing.Size(49, 20);
+            this.SixthProductTypePriceTextBox.TabIndex = 27;
+            // 
+            // SeventhProductTypeQuantityTextBox
+            // 
+            this.SeventhProductTypeQuantityTextBox.Location = new System.Drawing.Point(153, 273);
+            this.SeventhProductTypeQuantityTextBox.Name = "SeventhProductTypeQuantityTextBox";
+            this.SeventhProductTypeQuantityTextBox.Size = new System.Drawing.Size(49, 20);
+            this.SeventhProductTypeQuantityTextBox.TabIndex = 28;
+            // 
+            // SeventhProductTypePriceTextBox
+            // 
+            this.SeventhProductTypePriceTextBox.Location = new System.Drawing.Point(208, 273);
+            this.SeventhProductTypePriceTextBox.Name = "SeventhProductTypePriceTextBox";
+            this.SeventhProductTypePriceTextBox.Size = new System.Drawing.Size(49, 20);
+            this.SeventhProductTypePriceTextBox.TabIndex = 29;
+            // 
+            // EighthProductTypeQuantityTextBox
+            // 
+            this.EighthProductTypeQuantityTextBox.Location = new System.Drawing.Point(153, 305);
+            this.EighthProductTypeQuantityTextBox.Name = "EighthProductTypeQuantityTextBox";
+            this.EighthProductTypeQuantityTextBox.Size = new System.Drawing.Size(49, 20);
+            this.EighthProductTypeQuantityTextBox.TabIndex = 30;
+            // 
+            // EighthProductTypePriceTextBox
+            // 
+            this.EighthProductTypePriceTextBox.Location = new System.Drawing.Point(208, 305);
+            this.EighthProductTypePriceTextBox.Name = "EighthProductTypePriceTextBox";
+            this.EighthProductTypePriceTextBox.Size = new System.Drawing.Size(49, 20);
+            this.EighthProductTypePriceTextBox.TabIndex = 31;
+            // 
+            // NinthProductTypeQuantityTextBox
+            // 
+            this.NinthProductTypeQuantityTextBox.Location = new System.Drawing.Point(153, 340);
+            this.NinthProductTypeQuantityTextBox.Name = "NinthProductTypeQuantityTextBox";
+            this.NinthProductTypeQuantityTextBox.Size = new System.Drawing.Size(49, 20);
+            this.NinthProductTypeQuantityTextBox.TabIndex = 32;
+            // 
+            // NinthProductTypePriceTextBox
+            // 
+            this.NinthProductTypePriceTextBox.Location = new System.Drawing.Point(208, 340);
+            this.NinthProductTypePriceTextBox.Name = "NinthProductTypePriceTextBox";
+            this.NinthProductTypePriceTextBox.Size = new System.Drawing.Size(49, 20);
+            this.NinthProductTypePriceTextBox.TabIndex = 33;
+            // 
+            // TenProductTypeQuantityTextBox
+            // 
+            this.TenProductTypeQuantityTextBox.Location = new System.Drawing.Point(153, 374);
+            this.TenProductTypeQuantityTextBox.Name = "TenProductTypeQuantityTextBox";
+            this.TenProductTypeQuantityTextBox.Size = new System.Drawing.Size(49, 20);
+            this.TenProductTypeQuantityTextBox.TabIndex = 34;
+            // 
+            // TenProductTypePriceTextBox
+            // 
+            this.TenProductTypePriceTextBox.Location = new System.Drawing.Point(208, 374);
+            this.TenProductTypePriceTextBox.Name = "TenProductTypePriceTextBox";
+            this.TenProductTypePriceTextBox.Size = new System.Drawing.Size(49, 20);
+            this.TenProductTypePriceTextBox.TabIndex = 35;
+            // 
+            // EleventhProductTypeQuantityTextBox
+            // 
+            this.EleventhProductTypeQuantityTextBox.Location = new System.Drawing.Point(153, 409);
+            this.EleventhProductTypeQuantityTextBox.Name = "EleventhProductTypeQuantityTextBox";
+            this.EleventhProductTypeQuantityTextBox.Size = new System.Drawing.Size(49, 20);
+            this.EleventhProductTypeQuantityTextBox.TabIndex = 36;
+            // 
+            // EleventhProductTypePriceTextBox
+            // 
+            this.EleventhProductTypePriceTextBox.Location = new System.Drawing.Point(208, 409);
+            this.EleventhProductTypePriceTextBox.Name = "EleventhProductTypePriceTextBox";
+            this.EleventhProductTypePriceTextBox.Size = new System.Drawing.Size(49, 20);
+            this.EleventhProductTypePriceTextBox.TabIndex = 37;
+            // 
+            // TwelfthProductTypeQuantityTextBox
+            // 
+            this.TwelfthProductTypeQuantityTextBox.Location = new System.Drawing.Point(153, 444);
+            this.TwelfthProductTypeQuantityTextBox.Name = "TwelfthProductTypeQuantityTextBox";
+            this.TwelfthProductTypeQuantityTextBox.Size = new System.Drawing.Size(49, 20);
+            this.TwelfthProductTypeQuantityTextBox.TabIndex = 38;
+            // 
+            // TwelfthProductTypePriceTextBox
+            // 
+            this.TwelfthProductTypePriceTextBox.Location = new System.Drawing.Point(208, 444);
+            this.TwelfthProductTypePriceTextBox.Name = "TwelfthProductTypePriceTextBox";
+            this.TwelfthProductTypePriceTextBox.Size = new System.Drawing.Size(49, 20);
+            this.TwelfthProductTypePriceTextBox.TabIndex = 39;
             // 
             // InvoiceForm
             // 
@@ -1592,5 +1781,26 @@ namespace Invoice.Forms
         private System.Windows.Forms.TextBox FifthProductTypeTextBox;
         private System.Windows.Forms.TextBox FourthProductTypeTextBox;
         private System.Windows.Forms.Label AdditionalInfoLabel;
+        private System.Windows.Forms.TextBox TwelfthProductTypePriceTextBox;
+        private System.Windows.Forms.TextBox TwelfthProductTypeQuantityTextBox;
+        private System.Windows.Forms.TextBox EleventhProductTypePriceTextBox;
+        private System.Windows.Forms.TextBox EleventhProductTypeQuantityTextBox;
+        private System.Windows.Forms.TextBox TenProductTypePriceTextBox;
+        private System.Windows.Forms.TextBox TenProductTypeQuantityTextBox;
+        private System.Windows.Forms.TextBox NinthProductTypePriceTextBox;
+        private System.Windows.Forms.TextBox NinthProductTypeQuantityTextBox;
+        private System.Windows.Forms.TextBox EighthProductTypePriceTextBox;
+        private System.Windows.Forms.TextBox EighthProductTypeQuantityTextBox;
+        private System.Windows.Forms.TextBox SeventhProductTypePriceTextBox;
+        private System.Windows.Forms.TextBox SeventhProductTypeQuantityTextBox;
+        private System.Windows.Forms.TextBox SixthProductTypePriceTextBox;
+        private System.Windows.Forms.TextBox SixthProductTypeQuantityTextBox;
+        private System.Windows.Forms.TextBox TwelfthProductTypeTextBox;
+        private System.Windows.Forms.TextBox TEleventhProductTypeTextBox;
+        private System.Windows.Forms.TextBox TenProductTypeTextBox;
+        private System.Windows.Forms.TextBox NinthProductTypeTextBox;
+        private System.Windows.Forms.TextBox EighthProductTypeTextBox;
+        private System.Windows.Forms.TextBox SeventhProductTypeTextBox;
+        private System.Windows.Forms.TextBox SixthProductTypeTextBox;
     }
 }
