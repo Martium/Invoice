@@ -111,7 +111,7 @@ namespace Invoice.Forms
             bool isSuccess;
             string successMessage;
 
-            if (_invoiceOperations == InvoiceOperations.Edit)
+            if (_invoiceOperations == InvoiceOperations.Edit && _invoiceNumber.HasValue && _invoiceNumberYearCreation.HasValue)
             {
                 isSuccess = _invoiceRepository.UpdateExistingInvoice(_invoiceNumber.Value,
                     _invoiceNumberYearCreation.Value, invoiceModel);
@@ -505,15 +505,12 @@ namespace Invoice.Forms
             {
                 case InvoiceOperations.Create:
                     this.Text = "Nauja Sąskaita faktūra";
-                    //this.Icon = Properties.Resources.CreateIcon;
                     break;
                 case InvoiceOperations.Edit:
                     this.Text = "Esamos Sąskaitos faktūros keitimas (Peržiūrėti)";
-                    //this.Icon = Properties.Resources.EditIcon;
                     break;
                 case InvoiceOperations.Copy:
                     this.Text = "Esamos Sąskaitos faktūros kopijavimas (sukurti naują)";
-                    //this.Icon = Properties.Resources.CopyIcon;
                     break;
                 default:
                     throw new Exception($"Paslaugų valdymo formoje gauta nežinoma opercija: '{_invoiceOperations}'");
@@ -552,7 +549,7 @@ namespace Invoice.Forms
 
         private void ResolveInvoiceNumberText()
         {
-            if (_invoiceOperations == InvoiceOperations.Edit)
+            if (_invoiceOperations == InvoiceOperations.Edit && _invoiceNumber.HasValue)
             {
                 InvoiceNumberRichTextBox.Text = _invoiceNumber.Value.ToString();
             }
@@ -567,6 +564,18 @@ namespace Invoice.Forms
         private void LoadFormDataForEditOrCopy()
         {
             if (_invoiceOperations == InvoiceOperations.Edit || _invoiceOperations == InvoiceOperations.Copy)
+            {
+                GetExistingInvoiceInfo();
+
+                GetExistingProductTypeInfo();
+
+                CalculateButton_Click(this, new EventArgs());
+            }
+        }
+
+        private void GetExistingInvoiceInfo()
+        {
+            if (_invoiceNumber.HasValue && _invoiceNumberYearCreation.HasValue)
             {
                 InvoiceModel invoiceModel =
                     _invoiceRepository.GetExistingInvoice(_invoiceNumber.Value, _invoiceNumberYearCreation.Value);
@@ -671,16 +680,11 @@ namespace Invoice.Forms
                 {
                     this.BackColor = Color.Chartreuse;
                     _paymentStatus = "Atsiskaityta";
-
                 }
                 else if (_invoiceOperations == InvoiceOperations.Edit)
                 {
                     this.BackColor = Color.Red;
                 }
-
-                GetExistingProductTypeInfo();
-
-                CalculateButton_Click(this, new EventArgs());
             }
         }
 
@@ -786,7 +790,7 @@ namespace Invoice.Forms
                 new Rectangle(0, 0, PrintInvoicePanel.Width, PrintInvoicePanel.Height));
         }
 
-        private static byte[] ConvertImageToByteArray(System.Drawing.Image img)
+        private static byte[] ConvertImageToByteArray(Image img)
         {
             ImageConverter converter = new ImageConverter();
             return (byte[])converter.ConvertTo(img, typeof(byte[]));
@@ -875,49 +879,53 @@ namespace Invoice.Forms
 
         private void GetExistingProductTypeInfo()
         {
-            if (!_invoiceNumber.HasValue || !_invoiceNumberYearCreation.HasValue) return;
-            ProductTypeModel getExistingProductTypes =
-                _productTypeRepository.GetExistingProductType(_invoiceNumber.Value, _invoiceNumberYearCreation.Value);
+            if (_invoiceNumber.HasValue && _invoiceNumberYearCreation.HasValue)
+            {
+                ProductTypeModel getExistingProductTypes =
+                    _productTypeRepository.GetExistingProductType(_invoiceNumber.Value, _invoiceNumberYearCreation.Value);
 
-            FirstProductTypeTextBox.Text = getExistingProductTypes.FirstProductType;
-            SecondProductTypeTextBox.Text = getExistingProductTypes.SecondProductType;
-            ThirdProductTypeTextBox.Text = getExistingProductTypes.ThirdProductType;
-            FourthProductTypeTextBox.Text = getExistingProductTypes.FourthProductType;
-            FifthProductTypeTextBox.Text = getExistingProductTypes.FifthProductType;
-            SixthProductTypeTextBox.Text = getExistingProductTypes.SixthProductType;
-            SeventhProductTypeTextBox.Text = getExistingProductTypes.SeventhProductType;
-            EighthProductTypeTextBox.Text = getExistingProductTypes.EighthProductType;
-            NinthProductTypeTextBox.Text = getExistingProductTypes.NinthProductType;
-            TenProductTypeTextBox.Text = getExistingProductTypes.TenProductType;
-            EleventhProductTypeTextBox.Text = getExistingProductTypes.EleventhProductType;
-            TwelfthProductTypeTextBox.Text = getExistingProductTypes.TwelfthProductType;
+                if (getExistingProductTypes != null)
+                {
+                    FirstProductTypeTextBox.Text = getExistingProductTypes.FirstProductType;
+                    SecondProductTypeTextBox.Text = getExistingProductTypes.SecondProductType;
+                    ThirdProductTypeTextBox.Text = getExistingProductTypes.ThirdProductType;
+                    FourthProductTypeTextBox.Text = getExistingProductTypes.FourthProductType;
+                    FifthProductTypeTextBox.Text = getExistingProductTypes.FifthProductType;
+                    SixthProductTypeTextBox.Text = getExistingProductTypes.SixthProductType;
+                    SeventhProductTypeTextBox.Text = getExistingProductTypes.SeventhProductType;
+                    EighthProductTypeTextBox.Text = getExistingProductTypes.EighthProductType;
+                    NinthProductTypeTextBox.Text = getExistingProductTypes.NinthProductType;
+                    TenProductTypeTextBox.Text = getExistingProductTypes.TenProductType;
+                    EleventhProductTypeTextBox.Text = getExistingProductTypes.EleventhProductType;
+                    TwelfthProductTypeTextBox.Text = getExistingProductTypes.TwelfthProductType;
 
-            FirstProductTypeQuantityTextBox.Text = getExistingProductTypes.FirstProductTypeQuantity.ToString();
-            SecondProductTypeQuantityTextBox.Text = getExistingProductTypes.SecondProductTypeQuantity.ToString();
-            ThirdProductTypeQuantityTextBox.Text = getExistingProductTypes.ThirdProductTypeQuantity.ToString();
-            FourthProductTypeQuantityTextBox.Text = getExistingProductTypes.FourthProductTypeQuantity.ToString();
-            FifthProductTypeQuantityTextBox.Text = getExistingProductTypes.FifthProductTypeQuantity.ToString();
-            SixthProductTypeQuantityTextBox.Text = getExistingProductTypes.SixthProductTypeQuantity.ToString();
-            SeventhProductTypeQuantityTextBox.Text = getExistingProductTypes.SeventhProductTypeQuantity.ToString();
-            EighthProductTypeQuantityTextBox.Text = getExistingProductTypes.EighthProductTypeQuantity.ToString();
-            NinthProductTypeQuantityTextBox.Text = getExistingProductTypes.NinthProductTypeQuantity.ToString();
-            TenProductTypeQuantityTextBox.Text = getExistingProductTypes.TenProductTypeQuantity.ToString();
-            EleventhProductTypeQuantityTextBox.Text = getExistingProductTypes.EleventhProductTypeQuantity.ToString();
-            TwelfthProductTypeQuantityTextBox.Text = getExistingProductTypes.TwelfthProductTypeQuantity.ToString();
+                    FirstProductTypeQuantityTextBox.Text = getExistingProductTypes.FirstProductTypeQuantity.ToString();
+                    SecondProductTypeQuantityTextBox.Text = getExistingProductTypes.SecondProductTypeQuantity.ToString();
+                    ThirdProductTypeQuantityTextBox.Text = getExistingProductTypes.ThirdProductTypeQuantity.ToString();
+                    FourthProductTypeQuantityTextBox.Text = getExistingProductTypes.FourthProductTypeQuantity.ToString();
+                    FifthProductTypeQuantityTextBox.Text = getExistingProductTypes.FifthProductTypeQuantity.ToString();
+                    SixthProductTypeQuantityTextBox.Text = getExistingProductTypes.SixthProductTypeQuantity.ToString();
+                    SeventhProductTypeQuantityTextBox.Text = getExistingProductTypes.SeventhProductTypeQuantity.ToString();
+                    EighthProductTypeQuantityTextBox.Text = getExistingProductTypes.EighthProductTypeQuantity.ToString();
+                    NinthProductTypeQuantityTextBox.Text = getExistingProductTypes.NinthProductTypeQuantity.ToString();
+                    TenProductTypeQuantityTextBox.Text = getExistingProductTypes.TenProductTypeQuantity.ToString();
+                    EleventhProductTypeQuantityTextBox.Text = getExistingProductTypes.EleventhProductTypeQuantity.ToString();
+                    TwelfthProductTypeQuantityTextBox.Text = getExistingProductTypes.TwelfthProductTypeQuantity.ToString();
 
-            FirstProductTypePriceTextBox.Text = getExistingProductTypes.FirstProductTypePrice.ToString();
-            SecondProductTypePriceTextBox.Text = getExistingProductTypes.SecondProductTypePrice.ToString();
-            ThirdProductTypePriceTextBox.Text = getExistingProductTypes.ThirdProductTypePrice.ToString();
-            FourthProductTypePriceTextBox.Text = getExistingProductTypes.FourthProductTypePrice.ToString();
-            FifthProductTypePriceTextBox.Text = getExistingProductTypes.FifthProductTypePrice.ToString();
-            SixthProductTypePriceTextBox.Text = getExistingProductTypes.SixthProductTypePrice.ToString();
-            SeventhProductTypePriceTextBox.Text = getExistingProductTypes.SeventhProductTypePrice.ToString();
-            EighthProductTypePriceTextBox.Text = getExistingProductTypes.EighthProductTypePrice.ToString();
-            NinthProductTypePriceTextBox.Text = getExistingProductTypes.NinthProductTypePrice.ToString();
-            TenProductTypePriceTextBox.Text = getExistingProductTypes.TenProductTypePrice.ToString();
-            EleventhProductTypePriceTextBox.Text = getExistingProductTypes.EleventhProductTypePrice.ToString();
-            TwelfthProductTypePriceTextBox.Text = getExistingProductTypes.TwelfthProductTypePrice.ToString();
-
+                    FirstProductTypePriceTextBox.Text = getExistingProductTypes.FirstProductTypePrice.ToString();
+                    SecondProductTypePriceTextBox.Text = getExistingProductTypes.SecondProductTypePrice.ToString();
+                    ThirdProductTypePriceTextBox.Text = getExistingProductTypes.ThirdProductTypePrice.ToString();
+                    FourthProductTypePriceTextBox.Text = getExistingProductTypes.FourthProductTypePrice.ToString();
+                    FifthProductTypePriceTextBox.Text = getExistingProductTypes.FifthProductTypePrice.ToString();
+                    SixthProductTypePriceTextBox.Text = getExistingProductTypes.SixthProductTypePrice.ToString();
+                    SeventhProductTypePriceTextBox.Text = getExistingProductTypes.SeventhProductTypePrice.ToString();
+                    EighthProductTypePriceTextBox.Text = getExistingProductTypes.EighthProductTypePrice.ToString();
+                    NinthProductTypePriceTextBox.Text = getExistingProductTypes.NinthProductTypePrice.ToString();
+                    TenProductTypePriceTextBox.Text = getExistingProductTypes.TenProductTypePrice.ToString();
+                    EleventhProductTypePriceTextBox.Text = getExistingProductTypes.EleventhProductTypePrice.ToString();
+                    TwelfthProductTypePriceTextBox.Text = getExistingProductTypes.TwelfthProductTypePrice.ToString();
+                }
+            }
         }
 
         #endregion
