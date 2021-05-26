@@ -981,19 +981,16 @@ namespace Invoice.Forms
         {
             ProductTypeModel productType = GetAllInfoFromProductTypeTextBox();
 
-            if (_invoiceNumber.HasValue && _invoiceNumberYearCreation.HasValue)
+            if (_invoiceOperations == InvoiceOperations.Edit && _invoiceNumber.HasValue && _invoiceNumberYearCreation.HasValue)
             {
-                bool success = _productTypeRepository.CreateNewProductType(_invoiceNumber.Value,
+                 _productTypeRepository.CreateNewProductType(_invoiceNumber.Value,
                     _invoiceNumberYearCreation.Value, productType);
-
-                if (success)
-                {
-                    _messageDialogService.ShowInfoMessage("true");
-                }
-                else
-                {
-                    _messageDialogService.ShowErrorMassage("false");
-                }
+            }
+            else
+            {
+                int invoiceNumber = int.Parse(InvoiceNumberRichTextBox.Text);
+                int invoiceNumberYearCreation = DateTime.Now.Year;
+                _productTypeRepository.CreateNewProductType(invoiceNumber, invoiceNumberYearCreation, productType);
             }
         }
 
