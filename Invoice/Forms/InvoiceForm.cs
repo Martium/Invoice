@@ -757,6 +757,19 @@ namespace Invoice.Forms
             PriceInWordsRichTextBox.MaxLength = FormSettings.TextBoxLengths.PriceInWords;
             InvoiceMakerRichTextBox.MaxLength = FormSettings.TextBoxLengths.InvoiceMaker;
             InvoiceAcceptedRichTextBox.MaxLength = FormSettings.TextBoxLengths.InvoiceAccepted;
+
+            FirstProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
+            SecondProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
+            ThirdProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
+            FourthProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
+            FifthProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
+            SixthProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
+            SeventhProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
+            EighthProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
+            NinthProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
+            TenProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
+            EleventhProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
+            TwelfthProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
         }
 
         private void CaptureInvoiceFormScreen()
