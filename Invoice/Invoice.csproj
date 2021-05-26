@@ -93,6 +93,8 @@
     <Compile Include="AppConfiguration.cs" />
     <Compile Include="Constants\FormSettings.cs" />
     <Compile Include="Enums\InvoiceOperations.cs" />
+    <Compile Include="Enums\ProductTypePriceOperations.cs" />
+    <Compile Include="Enums\ProductTypeQuantityOperations.cs" />
     <Compile Include="Forms\InvoiceForm.cs">
       <SubType>Form</SubType>
     </Compile>

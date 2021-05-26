@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Forms;
+using Invoice.Enums;
 using Invoice.Models;
 
 namespace Invoice.Service
@@ -219,6 +220,169 @@ namespace Invoice.Service
             double roundProductPrice = Math.Round(productPriceWithPvm, RoundDigitNumber, MidpointRounding.ToEven);
 
             return roundProductPrice;
+        }
+
+        public string ToStringProductTypeQuantityOrEmpty(ProductTypeQuantityOperations productTypeQuantityOperations, ProductTypeModel productType)
+        {
+            string newString;
+
+            switch (productTypeQuantityOperations)
+            {
+                case ProductTypeQuantityOperations.FirstProductTypeQuantity:
+                    newString = productType.FirstProductTypeQuantity.HasValue 
+                        ? productType.FirstProductTypeQuantity.Value.ToString(CultureInfo.InvariantCulture) 
+                        : string.Empty;
+                    break;
+                case ProductTypeQuantityOperations.SecondProductTypeQuantity:
+                    newString = productType.SecondProductTypeQuantity.HasValue 
+                        ? productType.SecondProductTypeQuantity.Value.ToString(CultureInfo.InvariantCulture) 
+                        : string.Empty;
+                    break;
+                case ProductTypeQuantityOperations.ThirdProductTypeQuantity:
+                    newString = productType.ThirdProductTypeQuantity.HasValue
+                        ? productType.ThirdProductTypeQuantity.Value.ToString(CultureInfo.InvariantCulture)
+                        : string.Empty;
+                    break;
+                case ProductTypeQuantityOperations.FourthProductTypeQuantity:
+                    newString = productType.FourthProductTypeQuantity.HasValue
+                        ? productType.FourthProductTypeQuantity.Value.ToString(CultureInfo.InvariantCulture)
+                        : string.Empty;
+                    break;
+                case ProductTypeQuantityOperations.FifthProductTypeQuantity:
+                    newString = productType.FifthProductTypeQuantity.HasValue
+                        ? productType.FifthProductTypeQuantity.Value.ToString(CultureInfo.InvariantCulture)
+                        : string.Empty;
+                    break;
+                case ProductTypeQuantityOperations.SixthProductTypeQuantity:
+                    newString = productType.SixthProductTypeQuantity.HasValue
+                        ? productType.SixthProductTypeQuantity.Value.ToString(CultureInfo.InvariantCulture)
+                        : string.Empty;
+                    break;
+                case ProductTypeQuantityOperations.SeventhProductTypeQuantity:
+                    newString = productType.SeventhProductTypeQuantity.HasValue
+                        ? productType.SeventhProductTypeQuantity.Value.ToString(CultureInfo.InvariantCulture)
+                        : string.Empty;
+                    break;
+                case ProductTypeQuantityOperations.EighthProductTypeQuantity:
+                    newString = productType.EighthProductTypeQuantity.HasValue
+                        ? productType.EighthProductTypeQuantity.Value.ToString(CultureInfo.InvariantCulture)
+                        : string.Empty;
+                    break;
+                case ProductTypeQuantityOperations.NinthProductTypeQuantity:
+                    newString = productType.NinthProductTypeQuantity.HasValue
+                        ? productType.NinthProductTypeQuantity.Value.ToString(CultureInfo.InvariantCulture)
+                        : string.Empty;
+                    break;
+                case ProductTypeQuantityOperations.TenProductTypeQuantity:
+                    newString = productType.TenProductTypeQuantity.HasValue
+                        ? productType.TenProductTypeQuantity.Value.ToString(CultureInfo.InvariantCulture)
+                        : string.Empty;
+                    break;
+                case ProductTypeQuantityOperations.EleventhProductTypeQuantity:
+                    newString = productType.EleventhProductTypeQuantity.HasValue
+                        ? productType.EleventhProductTypeQuantity.Value.ToString(CultureInfo.InvariantCulture)
+                        : string.Empty;
+                    break;
+                case ProductTypeQuantityOperations.TwelfthProductTypeQuantity:
+                    newString = productType.TwelfthProductTypeQuantity.HasValue
+                        ? productType.TwelfthProductTypeQuantity.Value.ToString(CultureInfo.InvariantCulture)
+                        : string.Empty;
+                    break;
+                default:
+                    newString = "code map error";
+                    break;
+            }
+
+            return newString;
+        }
+
+        public string ToStringProductTypePriceOrEmpty(ProductTypePriceOperations productTypePriceOperations, ProductTypeModel productType)
+        {
+            string newString;
+
+            switch (productTypePriceOperations)
+            {
+                case ProductTypePriceOperations.FirstProductTypePrice:
+                    newString = productType.FirstProductTypePrice.HasValue
+                        ? productType.FirstProductTypePrice.Value.ToString(CultureInfo.InvariantCulture)
+                        : string.Empty;
+                    break;
+                case ProductTypePriceOperations.SecondProductTypePrice:
+                    newString = productType.SecondProductTypePrice.HasValue
+                        ? productType.SecondProductTypePrice.Value.ToString(CultureInfo.InvariantCulture)
+                        : string.Empty;
+                    break;
+                case ProductTypePriceOperations.ThirdProductTypePrice:
+                    newString = productType.ThirdProductTypePrice.HasValue
+                        ? productType.ThirdProductTypePrice.Value.ToString(CultureInfo.InvariantCulture)
+                        : string.Empty;
+                    break;
+                case ProductTypePriceOperations.FourthProductTypePrice:
+                    newString = productType.FourthProductTypePrice.HasValue
+                        ? productType.FourthProductTypePrice.Value.ToString(CultureInfo.InvariantCulture)
+                        : string.Empty;
+                    break;
+                case ProductTypePriceOperations.FifthProductTypePrice:
+                    newString = productType.FifthProductTypePrice.HasValue
+                        ? productType.FifthProductTypePrice.Value.ToString(CultureInfo.InvariantCulture)
+                        : string.Empty;
+                    break;
+                case ProductTypePriceOperations.SixthProductTypePrice:
+                    newString = productType.SixthProductTypePrice.HasValue
+                        ? productType.SixthProductTypePrice.Value.ToString(CultureInfo.InvariantCulture)
+                        : string.Empty;
+                    break;
+                case ProductTypePriceOperations.SeventhProductTypePrice:
+                    newString = productType.SeventhProductTypePrice.HasValue
+                        ? productType.SeventhProductTypePrice.Value.ToString(CultureInfo.InvariantCulture)
+                        : string.Empty;
+                    break;
+                case ProductTypePriceOperations.EighthProductTypePrice:
+                    newString = productType.EighthProductTypePrice.HasValue
+                        ? productType.EighthProductTypePrice.Value.ToString(CultureInfo.InvariantCulture)
+                        : string.Empty;
+                    break;
+                case ProductTypePriceOperations.NinthProductTypePrice:
+                    newString = productType.NinthProductTypePrice.HasValue
+                        ? productType.NinthProductTypePrice.Value.ToString(CultureInfo.InvariantCulture)
+                        : string.Empty;
+                    break;
+                case ProductTypePriceOperations.TenProductTypePrice:
+                    newString = productType.TenProductTypePrice.HasValue
+                        ? productType.TenProductTypePrice.Value.ToString(CultureInfo.InvariantCulture)
+                        : string.Empty;
+                    break;
+                case ProductTypePriceOperations.EleventhProductTypePrice:
+                    newString = productType.EleventhProductTypePrice.HasValue
+                        ? productType.EleventhProductTypePrice.Value.ToString(CultureInfo.InvariantCulture)
+                        : string.Empty;
+                    break;
+                case ProductTypePriceOperations.TwelfthProductTypePrice:
+                    newString = productType.TwelfthProductTypePrice.HasValue
+                        ? productType.TwelfthProductTypePrice.Value.ToString(CultureInfo.InvariantCulture)
+                        : string.Empty;
+                    break;
+                default:
+                    newString = "code map error";
+                    break;
+            }
+
+            return newString;
+        }
+
+        public double? ParseToDoubleOrNull(TextBox textBox)
+        {
+            double? doubleOrNull;
+            try
+            {
+                doubleOrNull = double.Parse(textBox.Text, CultureInfo.InvariantCulture);
+            }
+            catch
+            {
+                doubleOrNull = null;
+            }
+
+            return doubleOrNull;
         }
     }
 }
