@@ -35,9 +35,11 @@ namespace Invoice.Repositories
 
                 CreateInvoiceTable(dbConnection);
                 CreateSellerInfoTable(dbConnection);
+                CreateProductTypeTable(dbConnection);
 
 #if DEBUG
                 FillInvoiceTestingInfo(dbConnection);
+                FillProductTypeTestingInfo(dbConnection);
 #endif
 
             }
@@ -179,6 +181,66 @@ namespace Invoice.Repositories
             createSellerInfoTableCommand.ExecuteNonQuery();
         }
 
+        private void CreateProductTypeTable(SQLiteConnection dbConnection)
+        {
+            string dropProductTypeTable = GetDropTableQuery("ProductType");
+            SQLiteCommand dropaProductTypeTableCommand = new SQLiteCommand(dropProductTypeTable, dbConnection);
+            dropaProductTypeTableCommand.ExecuteNonQuery();
+
+            string createProductTypeTableQuery =
+                $@"
+                    CREATE TABLE [ProductType] (
+                        [IdByInvoiceNumber] [INTEGER] NOT NULL,
+                        [IdByInvoiceNumberYearCreation] [INTEGER] NOT NULL,
+                        
+                        [FirstProductType] [nvarchar] ({FormSettings.TextBoxLengths.ProductType}) NULL,
+                        [SecondProductType] [nvarchar] ({FormSettings.TextBoxLengths.ProductType}) NULL,
+                        [ThirdProductType] [nvarchar] ({FormSettings.TextBoxLengths.ProductType}) NULL,
+                        [FourthProductType] [nvarchar] ({FormSettings.TextBoxLengths.ProductType}) NULL,
+                        [FifthProductType] [nvarchar] ({FormSettings.TextBoxLengths.ProductType}) NULL,
+                        [SixthProductType] [nvarchar] ({FormSettings.TextBoxLengths.ProductType}) NULL,
+                        [SeventhProductType] [nvarchar] ({FormSettings.TextBoxLengths.ProductType}) NULL,
+                        [EighthProductType] [nvarchar] ({FormSettings.TextBoxLengths.ProductType}) NULL,
+                        [NinthProductType] [nvarchar] ({FormSettings.TextBoxLengths.ProductType}) NULL,
+                        [TenProductType] [nvarchar] ({FormSettings.TextBoxLengths.ProductType}) NULL,
+                        [EleventhProductType] [nvarchar] ({FormSettings.TextBoxLengths.ProductType}) NULL,
+                        [TwelfthProductType] [nvarchar] ({FormSettings.TextBoxLengths.ProductType}) NULL,
+
+                        [FirstProductTypeQuantity] [NUMERIC] NULL,
+                        [SecondProductTypeQuantity] [NUMERIC] NULL,
+                        [ThirdProductTypeQuantity] [NUMERIC] NULL,
+                        [FourthProductTypeQuantity] [NUMERIC] NULL,
+                        [FifthProductTypeQuantity] [NUMERIC] NULL,
+                        [SixthProductTypeQuantity] [NUMERIC] NULL,
+                        [SeventhProductTypeQuantity] [NUMERIC] NULL,
+                        [EighthProductTypeQuantity] [NUMERIC] NULL,
+                        [NinthProductTypeQuantity] [NUMERIC] NULL,
+                        [TenProductTypeQuantity] [NUMERIC] NULL,
+                        [EleventhProductTypeQuantity] [NUMERIC] NULL,
+                        [TwelfthProductTypeQuantity] [NUMERIC] NULL,
+
+                        [FirstProductTypePrice] [NUMERIC] NULL,
+                        [SecondProductTypePrice] [NUMERIC] NULL,
+                        [ThirdProductTypePrice] [NUMERIC] NULL,
+                        [FourthProductTypePrice] [NUMERIC] NULL,
+                        [FifthProductTypePrice] [NUMERIC] NULL,
+                        [SixthProductTypePrice] [NUMERIC] NULL,
+                        [SeventhProductTypePrice] [NUMERIC] NULL,
+                        [EighthProductTypePrice] [NUMERIC] NULL,
+                        [NinthProductTypePrice] [NUMERIC] NULL,
+                        [TenProductTypePrice] [NUMERIC] NULL,
+                        [EleventhProductTypePrice] [NUMERIC] NULL,
+                        [TwelfthProductTypePrice] [NUMERIC] NULL,
+                        
+                        UNIQUE (IdByInvoiceNumber, IdByInvoiceNumberYearCreation)
+                    );
+                        
+                ";
+
+            SQLiteCommand createProductTypeTableCommand = new SQLiteCommand(createProductTypeTableQuery, dbConnection);
+            createProductTypeTableCommand.ExecuteNonQuery();
+        }
+
         private void FillInvoiceTestingInfo(SQLiteConnection dbConnection)
         {
 
@@ -201,6 +263,23 @@ namespace Invoice.Repositories
 
             SQLiteCommand fillInvoiceTestingInfoTableCommand = new SQLiteCommand(fillInvoiceTestingInfo, dbConnection);
             fillInvoiceTestingInfoTableCommand.ExecuteNonQuery();
+        }
+
+        private void FillProductTypeTestingInfo(SQLiteConnection dbConnection)
+        {
+            string fillProductTypeTestingInfo =
+                $@"BEGIN TRANSACTION;
+                    INSERT INTO 'ProductType'
+                        Values (1, {DateTime.Now.AddYears(-1).Year}, '1l', '2l', '3l', '4l', '5l', '6l', '7l', '8l', '9l', '10l', '11l', '12l', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9, 10.1, 11.11, 12.12 );
+                    INSERT INTO 'ProductType'
+                        Values (2, {DateTime.Now.Year}, '1l', '2l', '3l', '4l', '5l', '6l', '7l', '8l', '9l', '10l', '11l', '12l', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9, 10.1, 11.11, 12.12 );
+                    INSERT INTO 'ProductType'
+                        Values (3, {DateTime.Now.Year}, '1l', '2l', '3l', '4l', '5l', '6l', '7l', '8l', '9l', '10l', '11l', '12l', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9, 10.1, 11.11, 12.12 );
+                   COMMIT;
+                ";
+
+            SQLiteCommand fillProductTypeTestingInfoCommand = new SQLiteCommand(fillProductTypeTestingInfo, dbConnection);
+            fillProductTypeTestingInfoCommand.ExecuteNonQuery();
         }
 
         private string GetDropTableQuery(string tableName)

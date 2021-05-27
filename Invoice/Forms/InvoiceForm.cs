@@ -19,6 +19,8 @@ namespace Invoice.Forms
     {
         private readonly InvoiceRepository _invoiceRepository;
 
+        private readonly ProductTypeRepository _productTypeRepository;
+
         private readonly MessageDialogService _messageDialogService = new MessageDialogService();
 
         private readonly NumberService _numberService = new NumberService();
@@ -36,6 +38,7 @@ namespace Invoice.Forms
             int? invoiceNumberYearCreation = null)
         {
             _invoiceRepository = new InvoiceRepository();
+            _productTypeRepository = new ProductTypeRepository();
 
             _invoiceOperations = invoiceOperations;
             _invoiceNumber = invoiceNumber;
@@ -108,7 +111,7 @@ namespace Invoice.Forms
             bool isSuccess;
             string successMessage;
 
-            if (_invoiceOperations == InvoiceOperations.Edit)
+            if (_invoiceOperations == InvoiceOperations.Edit && _invoiceNumber.HasValue && _invoiceNumberYearCreation.HasValue)
             {
                 isSuccess = _invoiceRepository.UpdateExistingInvoice(_invoiceNumber.Value,
                     _invoiceNumberYearCreation.Value, invoiceModel);
@@ -123,6 +126,7 @@ namespace Invoice.Forms
             if (isSuccess)
             {
                 _messageDialogService.ShowInfoMessage(successMessage);
+                GetAllProductTypeForNewInvoice();
                 this.Close();
             }
             else
@@ -501,16 +505,13 @@ namespace Invoice.Forms
             switch (_invoiceOperations)
             {
                 case InvoiceOperations.Create:
-                    this.Text = "Nauja Sąskaita faktūra";
-                    //this.Icon = Properties.Resources.CreateIcon;
+                    this.Text = @"Nauja Sąskaita faktūra";
                     break;
                 case InvoiceOperations.Edit:
-                    this.Text = "Esamos Sąskaitos faktūros keitimas (Peržiūrėti)";
-                    //this.Icon = Properties.Resources.EditIcon;
+                    this.Text = @"Esamos Sąskaitos faktūros keitimas (Peržiūrėti)";
                     break;
                 case InvoiceOperations.Copy:
-                    this.Text = "Esamos Sąskaitos faktūros kopijavimas (sukurti naują)";
-                    //this.Icon = Properties.Resources.CopyIcon;
+                    this.Text = @"Esamos Sąskaitos faktūros kopijavimas (sukurti naują)";
                     break;
                 default:
                     throw new Exception($"Paslaugų valdymo formoje gauta nežinoma opercija: '{_invoiceOperations}'");
@@ -549,7 +550,7 @@ namespace Invoice.Forms
 
         private void ResolveInvoiceNumberText()
         {
-            if (_invoiceOperations == InvoiceOperations.Edit)
+            if (_invoiceOperations == InvoiceOperations.Edit && _invoiceNumber.HasValue)
             {
                 InvoiceNumberRichTextBox.Text = _invoiceNumber.Value.ToString();
             }
@@ -564,6 +565,18 @@ namespace Invoice.Forms
         private void LoadFormDataForEditOrCopy()
         {
             if (_invoiceOperations == InvoiceOperations.Edit || _invoiceOperations == InvoiceOperations.Copy)
+            {
+                GetExistingInvoiceInfo();
+
+                GetExistingProductTypeInfo();
+
+                CalculateButton_Click(this, new EventArgs());
+            }
+        }
+
+        private void GetExistingInvoiceInfo()
+        {
+            if (_invoiceNumber.HasValue && _invoiceNumberYearCreation.HasValue)
             {
                 InvoiceModel invoiceModel =
                     _invoiceRepository.GetExistingInvoice(_invoiceNumber.Value, _invoiceNumberYearCreation.Value);
@@ -668,14 +681,11 @@ namespace Invoice.Forms
                 {
                     this.BackColor = Color.Chartreuse;
                     _paymentStatus = "Atsiskaityta";
-
                 }
                 else if (_invoiceOperations == InvoiceOperations.Edit)
                 {
                     this.BackColor = Color.Red;
                 }
-
-                CalculateButton_Click(this, new EventArgs());
             }
         }
 
@@ -757,6 +767,19 @@ namespace Invoice.Forms
             PriceInWordsRichTextBox.MaxLength = FormSettings.TextBoxLengths.PriceInWords;
             InvoiceMakerRichTextBox.MaxLength = FormSettings.TextBoxLengths.InvoiceMaker;
             InvoiceAcceptedRichTextBox.MaxLength = FormSettings.TextBoxLengths.InvoiceAccepted;
+
+            FirstProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
+            SecondProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
+            ThirdProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
+            FourthProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
+            FifthProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
+            SixthProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
+            SeventhProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
+            EighthProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
+            NinthProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
+            TenProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
+            EleventhProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
+            TwelfthProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
         }
 
         private void CaptureInvoiceFormScreen()
@@ -768,7 +791,7 @@ namespace Invoice.Forms
                 new Rectangle(0, 0, PrintInvoicePanel.Width, PrintInvoicePanel.Height));
         }
 
-        private static byte[] ConvertImageToByteArray(System.Drawing.Image img)
+        private static byte[] ConvertImageToByteArray(Image img)
         {
             ImageConverter converter = new ImageConverter();
             return (byte[])converter.ConvertTo(img, typeof(byte[]));
@@ -853,6 +876,201 @@ namespace Invoice.Forms
         private void SetCursorAtDateTextBoxEnd()
         {
             InvoiceDateRichTextBox.SelectionStart = InvoiceDateRichTextBox.Text.Length;
+        }
+
+        private void GetExistingProductTypeInfo()
+        {
+            if (_invoiceNumber.HasValue && _invoiceNumberYearCreation.HasValue)
+            {
+                ProductTypeModel getExistingProductTypes =
+                    _productTypeRepository.GetExistingProductType(_invoiceNumber.Value, _invoiceNumberYearCreation.Value);
+
+                if (getExistingProductTypes != null)
+                {
+                    FirstProductTypeTextBox.Text = getExistingProductTypes.FirstProductType;
+                    SecondProductTypeTextBox.Text = getExistingProductTypes.SecondProductType;
+                    ThirdProductTypeTextBox.Text = getExistingProductTypes.ThirdProductType;
+                    FourthProductTypeTextBox.Text = getExistingProductTypes.FourthProductType;
+                    FifthProductTypeTextBox.Text = getExistingProductTypes.FifthProductType;
+                    SixthProductTypeTextBox.Text = getExistingProductTypes.SixthProductType;
+                    SeventhProductTypeTextBox.Text = getExistingProductTypes.SeventhProductType;
+                    EighthProductTypeTextBox.Text = getExistingProductTypes.EighthProductType;
+                    NinthProductTypeTextBox.Text = getExistingProductTypes.NinthProductType;
+                    TenProductTypeTextBox.Text = getExistingProductTypes.TenProductType;
+                    EleventhProductTypeTextBox.Text = getExistingProductTypes.EleventhProductType;
+                    TwelfthProductTypeTextBox.Text = getExistingProductTypes.TwelfthProductType;
+
+                    FirstProductTypeQuantityTextBox.Text =
+                        _numberService.ToStringProductTypeQuantityOrEmpty(
+                            ProductTypeQuantityOperations.FirstProductTypeQuantity, getExistingProductTypes);
+
+                    SecondProductTypeQuantityTextBox.Text =
+                        _numberService.ToStringProductTypeQuantityOrEmpty(
+                            ProductTypeQuantityOperations.SecondProductTypeQuantity, getExistingProductTypes);
+
+                    ThirdProductTypeQuantityTextBox.Text = _numberService.ToStringProductTypeQuantityOrEmpty(
+                        ProductTypeQuantityOperations.ThirdProductTypeQuantity, getExistingProductTypes);
+
+                    FourthProductTypeQuantityTextBox.Text = _numberService.ToStringProductTypeQuantityOrEmpty(
+                        ProductTypeQuantityOperations.FourthProductTypeQuantity, getExistingProductTypes);
+
+                    FifthProductTypeQuantityTextBox.Text = _numberService.ToStringProductTypeQuantityOrEmpty(
+                        ProductTypeQuantityOperations.FifthProductTypeQuantity, getExistingProductTypes);
+
+                    SixthProductTypeQuantityTextBox.Text = _numberService.ToStringProductTypeQuantityOrEmpty(
+                        ProductTypeQuantityOperations.SixthProductTypeQuantity, getExistingProductTypes);
+
+                    SeventhProductTypeQuantityTextBox.Text = _numberService.ToStringProductTypeQuantityOrEmpty(
+                        ProductTypeQuantityOperations.SeventhProductTypeQuantity, getExistingProductTypes);
+
+                    EighthProductTypeQuantityTextBox.Text = _numberService.ToStringProductTypeQuantityOrEmpty(
+                        ProductTypeQuantityOperations.EighthProductTypeQuantity, getExistingProductTypes);
+
+                    NinthProductTypeQuantityTextBox.Text = _numberService.ToStringProductTypeQuantityOrEmpty(
+                        ProductTypeQuantityOperations.NinthProductTypeQuantity, getExistingProductTypes);
+
+                    TenProductTypeQuantityTextBox.Text = _numberService.ToStringProductTypeQuantityOrEmpty(
+                        ProductTypeQuantityOperations.TenProductTypeQuantity, getExistingProductTypes);
+
+                    EleventhProductTypeQuantityTextBox.Text = _numberService.ToStringProductTypeQuantityOrEmpty(
+                        ProductTypeQuantityOperations.EleventhProductTypeQuantity, getExistingProductTypes);
+
+                    TwelfthProductTypeQuantityTextBox.Text = _numberService.ToStringProductTypeQuantityOrEmpty(
+                        ProductTypeQuantityOperations.TwelfthProductTypeQuantity, getExistingProductTypes);
+
+                    FirstProductTypePriceTextBox.Text =
+                        _numberService.ToStringProductTypePriceOrEmpty(ProductTypePriceOperations.FirstProductTypePrice,
+                            getExistingProductTypes);
+
+                    SecondProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(ProductTypePriceOperations.SecondProductTypePrice,
+                        getExistingProductTypes);
+
+                    ThirdProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(ProductTypePriceOperations.ThirdProductTypePrice,
+                        getExistingProductTypes);
+
+                    FourthProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(ProductTypePriceOperations.FourthProductTypePrice,
+                        getExistingProductTypes);
+
+                    FifthProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(ProductTypePriceOperations.FifthProductTypePrice,
+                        getExistingProductTypes);
+
+                    SixthProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(ProductTypePriceOperations.SixthProductTypePrice,
+                        getExistingProductTypes);
+
+                    SeventhProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(ProductTypePriceOperations.SeventhProductTypePrice,
+                        getExistingProductTypes);
+
+                    EighthProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(ProductTypePriceOperations.EighthProductTypePrice,
+                        getExistingProductTypes);
+
+                    NinthProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(ProductTypePriceOperations.NinthProductTypePrice,
+                        getExistingProductTypes);
+                    TenProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(ProductTypePriceOperations.TenProductTypePrice,
+                        getExistingProductTypes);
+
+                    EleventhProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(ProductTypePriceOperations.EleventhProductTypePrice,
+                        getExistingProductTypes);
+
+                    TwelfthProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(ProductTypePriceOperations.TwelfthProductTypePrice,
+                        getExistingProductTypes);
+                }
+            }
+        }
+
+        private void GetAllProductTypeForNewInvoice()
+        {
+            ChangeProductTypeQuantityAndPriceFromCommaToDot();
+            ProductTypeModel productType = GetAllInfoFromProductTypeTextBox();
+
+            if (_invoiceOperations == InvoiceOperations.Edit && _invoiceNumber.HasValue && _invoiceNumberYearCreation.HasValue)
+            {
+                 _productTypeRepository.CreateNewProductType(_invoiceNumber.Value,
+                    _invoiceNumberYearCreation.Value, productType);
+            }
+            else
+            {
+                int invoiceNumber = int.Parse(InvoiceNumberRichTextBox.Text);
+                int invoiceNumberYearCreation = DateTime.Now.Year;
+                _productTypeRepository.CreateNewProductType(invoiceNumber, invoiceNumberYearCreation, productType);
+            }
+        }
+
+        private void ChangeProductTypeQuantityAndPriceFromCommaToDot()
+        {
+            FirstProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(FirstProductTypeQuantityTextBox);
+            SecondProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(SecondProductTypeQuantityTextBox);
+            ThirdProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(ThirdProductTypeQuantityTextBox);
+            FourthProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(ThirdProductTypeQuantityTextBox);
+            FifthProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(FifthProductTypeQuantityTextBox);
+            SixthProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(SixthProductTypeQuantityTextBox);
+            SeventhProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(SeventhProductTypeQuantityTextBox);
+            EighthProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(EighthProductTypeQuantityTextBox);
+            NinthProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(NinthProductTypeQuantityTextBox);
+            TenProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(TenProductTypeQuantityTextBox);
+            EleventhProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(EleventhProductTypeQuantityTextBox);
+            TwelfthProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(TwelfthProductTypeQuantityTextBox);
+
+            FirstProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(FirstProductTypePriceTextBox);
+            SecondProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(SecondProductTypePriceTextBox);
+            ThirdProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(ThirdProductTypePriceTextBox);
+            FourthProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(FourthProductTypePriceTextBox);
+            FifthProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(FifthProductTypePriceTextBox);
+            SixthProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(SixthProductTypePriceTextBox);
+            SeventhProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(SeventhProductTypePriceTextBox);
+            EighthProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(EighthProductTypePriceTextBox);
+            NinthProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(NinthProductTypePriceTextBox);
+            TenProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(TenProductTypePriceTextBox);
+            EleventhProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(EleventhProductTypePriceTextBox);
+            TwelfthProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(TwelfthProductTypePriceTextBox);
+
+
+        }
+
+        private ProductTypeModel GetAllInfoFromProductTypeTextBox()
+        {
+            ProductTypeModel getAllInfo = new ProductTypeModel()
+            {
+                FirstProductType = FirstProductTypeTextBox.Text,
+                SecondProductType = SecondProductTypeTextBox.Text,
+                ThirdProductType = ThirdProductTypeTextBox.Text,
+                FourthProductType = FourthProductTypeTextBox.Text,
+                FifthProductType = FifthProductTypeTextBox.Text,
+                SixthProductType = SixthProductTypeTextBox.Text,
+                SeventhProductType = SeventhProductTypeTextBox.Text,
+                EighthProductType = EighthProductTypeTextBox.Text,
+                NinthProductType = NinthProductTypeTextBox.Text,
+                TenProductType = TenProductTypeTextBox.Text,
+                EleventhProductType = EleventhProductTypeTextBox.Text,
+                TwelfthProductType = TwelfthProductTypeTextBox.Text,
+
+                FirstProductTypeQuantity = _numberService.ParseToDoubleOrNull(FirstProductTypeQuantityTextBox),
+                SecondProductTypeQuantity = _numberService.ParseToDoubleOrNull(SecondProductTypeQuantityTextBox),
+                ThirdProductTypeQuantity = _numberService.ParseToDoubleOrNull(ThirdProductTypeQuantityTextBox),
+                FourthProductTypeQuantity = _numberService.ParseToDoubleOrNull(FourthProductTypeQuantityTextBox),
+                FifthProductTypeQuantity = _numberService.ParseToDoubleOrNull(FifthProductTypeQuantityTextBox),
+                SixthProductTypeQuantity = _numberService.ParseToDoubleOrNull(SixthProductTypeQuantityTextBox),
+                SeventhProductTypeQuantity = _numberService.ParseToDoubleOrNull(SeventhProductTypeQuantityTextBox),
+                EighthProductTypeQuantity = _numberService.ParseToDoubleOrNull(EighthProductTypeQuantityTextBox),
+                NinthProductTypeQuantity = _numberService.ParseToDoubleOrNull(NinthProductTypeQuantityTextBox),
+                TenProductTypeQuantity = _numberService.ParseToDoubleOrNull(TenProductTypeQuantityTextBox),
+                EleventhProductTypeQuantity = _numberService.ParseToDoubleOrNull(EleventhProductTypeQuantityTextBox),
+                TwelfthProductTypeQuantity = _numberService.ParseToDoubleOrNull(TwelfthProductTypeQuantityTextBox),
+
+                FirstProductTypePrice = _numberService.ParseToDoubleOrNull(FirstProductTypePriceTextBox),
+                SecondProductTypePrice = _numberService.ParseToDoubleOrNull(SecondProductTypePriceTextBox),
+                ThirdProductTypePrice = _numberService.ParseToDoubleOrNull(ThirdProductTypePriceTextBox),
+                FourthProductTypePrice = _numberService.ParseToDoubleOrNull(FourthProductTypePriceTextBox),
+                FifthProductTypePrice = _numberService.ParseToDoubleOrNull(FifthProductTypePriceTextBox),
+                SixthProductTypePrice = _numberService.ParseToDoubleOrNull(SixthProductTypePriceTextBox),
+                SeventhProductTypePrice = _numberService.ParseToDoubleOrNull(SeventhProductTypePriceTextBox),
+                EighthProductTypePrice = _numberService.ParseToDoubleOrNull(EighthProductTypePriceTextBox),
+                NinthProductTypePrice = _numberService.ParseToDoubleOrNull(NinthProductTypePriceTextBox),
+                TenProductTypePrice = _numberService.ParseToDoubleOrNull(TenProductTypePriceTextBox),
+                EleventhProductTypePrice = _numberService.ParseToDoubleOrNull(EleventhProductTypePriceTextBox),
+                TwelfthProductTypePrice = _numberService.ParseToDoubleOrNull(TwelfthProductTypePriceTextBox),
+            };
+
+            return getAllInfo;
         }
 
         #endregion

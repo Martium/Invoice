@@ -51,6 +51,8 @@
             public static int InvoiceAccepted => 75;
             public static int InvoiceIsPaid => 12;
             public static int TotalPriceWithPvm => 20;
+
+            public static int ProductType => 45;
         }
     }
 }
