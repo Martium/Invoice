@@ -1,5 +1,6 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Data.SQLite;
+using System.Linq;
 using Dapper;
 using Invoice.Models;
 
@@ -23,6 +24,26 @@ namespace Invoice.Repositories
                 ProductTypeModel getExistingProductType = dbConnection.QuerySingleOrDefault<ProductTypeModel>(getExistingServiceQuery);
 
                 return getExistingProductType;
+            }
+        }
+
+        public List<FirstSpecificProductTypeModel> GetSpecificProductTypeBySpecialName(string productType, string productTypeName)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string getExistingServiceQuery =
+                    $@"SELECT * FROM ProductType PT
+                       WHERE PT.{productType} = @{productTypeName};
+                    ";
+                
+
+                IEnumerable<FirstSpecificProductTypeModel> getAllSpecificProductType =
+                    dbConnection.Query<FirstSpecificProductTypeModel>(getExistingServiceQuery);
+
+                return getAllSpecificProductType.ToList();
+
             }
         }
 

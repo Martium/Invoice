@@ -98,7 +98,7 @@ namespace Invoice.Forms
 
             createNewInvoice.Closed += ShowAndRefreshListForm;
 
-            HideListAndOpenInvoiceForm(createNewInvoice);
+            HideListAndOpenAnotherForm(createNewInvoice);
         }
 
         private void EditButton_Click(object sender, EventArgs e)
@@ -110,7 +110,7 @@ namespace Invoice.Forms
 
             editSelectedInvoice.Closed += ShowAndRefreshListForm;
 
-            HideListAndOpenInvoiceForm(editSelectedInvoice);
+            HideListAndOpenAnotherForm(editSelectedInvoice);
         }
 
         private void CopyButton_Click(object sender, EventArgs e)
@@ -122,7 +122,7 @@ namespace Invoice.Forms
 
             copySelectedInvoice.Closed += ShowAndRefreshListForm;
 
-            HideListAndOpenInvoiceForm(copySelectedInvoice);
+            HideListAndOpenAnotherForm(copySelectedInvoice);
         }
 
         private void ChangePaymentButton_Click(object sender, EventArgs e)
@@ -191,7 +191,8 @@ namespace Invoice.Forms
 
             sellerInfoForm.Closed += ShowAndRefreshListForm;
 
-            HideListAndOpenSellerInfoForm(sellerInfoForm);
+            HideListAndOpenAnotherForm(sellerInfoForm);
+
         }
 
         private void GetSelectedYearButton_Click(object sender, EventArgs e)
@@ -224,6 +225,15 @@ namespace Invoice.Forms
             LoadAllTotalPriceSums();
         }
 
+        private void OpenProductTypeStorageFormButton_Click(object sender, EventArgs e)
+        {
+            var productTypeStorageForm = new ProductTypeStorageForm();
+
+            productTypeStorageForm.Closed += ShowAndRefreshListForm;
+
+            HideListAndOpenAnotherForm(productTypeStorageForm);
+        }
+
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == (Keys.Escape))
@@ -237,18 +247,11 @@ namespace Invoice.Forms
 
         #region Helpers
 
-        private void HideListAndOpenInvoiceForm(Form invoiceForm)
+        private void HideListAndOpenAnotherForm(Form form)
         {
             this.Hide();
 
-            invoiceForm.Show(this);
-        }
-
-        private void HideListAndOpenSellerInfoForm(Form sellerInfoForm)
-        {
-            this.Hide();
-
-            sellerInfoForm.Show(this);
+            form.Show(this);
         }
 
         private void LoadInvoiceList(string searchPhrase = null)
@@ -428,6 +431,6 @@ namespace Invoice.Forms
         }
 
         #endregion
-        
+
     }
 }

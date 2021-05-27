@@ -113,6 +113,12 @@
     <Compile Include="Forms\MoneyReceiptForm.Designer.cs">
       <DependentUpon>MoneyReceiptForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ProductTypeStorageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProductTypeStorageForm.Designer.cs">
+      <DependentUpon>ProductTypeStorageForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\SellerInfoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,6 +133,7 @@
     <Compile Include="Models\MoneyReceiptModel.cs" />
     <Compile Include="Models\ProductTypeModel.cs" />
     <Compile Include="Models\SellerInfoModel.cs" />
+    <Compile Include="Models\FirstSpecificProductTypeModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\DataBaseInitializerRepository.cs" />
@@ -143,6 +150,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MoneyReceiptForm.resx">
       <DependentUpon>MoneyReceiptForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProductTypeStorageForm.resx">
+      <DependentUpon>ProductTypeStorageForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SellerInfoForm.resx">
       <DependentUpon>SellerInfoForm.cs</DependentUpon>
