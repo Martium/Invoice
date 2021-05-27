@@ -183,13 +183,13 @@ namespace Invoice.Repositories
 
         private void CreateProductTypeTable(SQLiteConnection dbConnection)
         {
-            string dropProductTypeTable = GetDropTableQuery("ProductType");
+            string dropProductTypeTable = GetDropTableQuery("FirstProductType");
             SQLiteCommand dropaProductTypeTableCommand = new SQLiteCommand(dropProductTypeTable, dbConnection);
             dropaProductTypeTableCommand.ExecuteNonQuery();
 
             string createProductTypeTableQuery =
                 $@"
-                    CREATE TABLE [ProductType] (
+                    CREATE TABLE [FirstProductType] (
                         [IdByInvoiceNumber] [INTEGER] NOT NULL,
                         [IdByInvoiceNumberYearCreation] [INTEGER] NOT NULL,
                         
@@ -269,11 +269,11 @@ namespace Invoice.Repositories
         {
             string fillProductTypeTestingInfo =
                 $@"BEGIN TRANSACTION;
-                    INSERT INTO 'ProductType'
+                    INSERT INTO 'FirstProductType'
                         Values (1, {DateTime.Now.AddYears(-1).Year}, '1l', '2l', '3l', '4l', '5l', '6l', '7l', '8l', '9l', '10l', '11l', '12l', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9, 10.1, 11.11, 12.12 );
-                    INSERT INTO 'ProductType'
+                    INSERT INTO 'FirstProductType'
                         Values (2, {DateTime.Now.Year}, '1l', '2l', '3l', '4l', '5l', '6l', '7l', '8l', '9l', '10l', '11l', '12l', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9, 10.1, 11.11, 12.12 );
-                    INSERT INTO 'ProductType'
+                    INSERT INTO 'FirstProductType'
                         Values (3, {DateTime.Now.Year}, '1l', '2l', '3l', '4l', '5l', '6l', '7l', '8l', '9l', '10l', '11l', '12l', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9, 10.1, 11.11, 12.12 );
                    COMMIT;
                 ";

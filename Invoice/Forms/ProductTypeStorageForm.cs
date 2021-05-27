@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Invoice.Models;
+using Invoice.Enums;
+using Invoice.Models.ProductType;
 using Invoice.Repositories;
 
 namespace Invoice.Forms
@@ -19,7 +20,7 @@ namespace Invoice.Forms
         {
             string productType = "FirstProductType";
             List<FirstSpecificProductTypeModel> testingInfo =
-                _productTypeRepository.GetSpecificProductTypeBySpecialName(productType, "1l");
+                _productTypeRepository.GetSpecificProductTypeBySpecialName(productType, "1l", ProductTypeOperations.FirstProductType);
 
             foreach (var info in testingInfo)
             {

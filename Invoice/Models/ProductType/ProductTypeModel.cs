@@ -1,4 +1,4 @@
-﻿namespace Invoice.Models
+﻿namespace Invoice.Models.ProductType
 {
     public class ProductTypeModel
     {

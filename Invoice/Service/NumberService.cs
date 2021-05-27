@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Windows.Forms;
 using Invoice.Enums;
 using Invoice.Models;
+using Invoice.Models.ProductType;
 
 namespace Invoice.Service
 {
