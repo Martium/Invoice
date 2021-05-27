@@ -24,6 +24,20 @@ namespace Invoice.Service
             return changeComma;
         }
 
+        public string ChangeCommaToDot(TextBox textBox)
+        {
+            string changeComma = textBox.Text;
+
+            bool isComma = textBox.Text.Contains(",");
+
+            if (isComma)
+            {
+                changeComma = textBox.Text.Replace(",", ".");
+            }
+
+            return changeComma;
+        }
+
         public double? ParseToDoubleOrNull(RichTextBox richTexBox)
         {
             double? doubleOrNull;

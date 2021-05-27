@@ -979,6 +979,7 @@ namespace Invoice.Forms
 
         private void GetAllProductTypeForNewInvoice()
         {
+            ChangeProductTypeQuantityAndPriceFromCommaToDot();
             ProductTypeModel productType = GetAllInfoFromProductTypeTextBox();
 
             if (_invoiceOperations == InvoiceOperations.Edit && _invoiceNumber.HasValue && _invoiceNumberYearCreation.HasValue)
@@ -992,6 +993,37 @@ namespace Invoice.Forms
                 int invoiceNumberYearCreation = DateTime.Now.Year;
                 _productTypeRepository.CreateNewProductType(invoiceNumber, invoiceNumberYearCreation, productType);
             }
+        }
+
+        private void ChangeProductTypeQuantityAndPriceFromCommaToDot()
+        {
+            FirstProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(FirstProductTypeQuantityTextBox);
+            SecondProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(SecondProductTypeQuantityTextBox);
+            ThirdProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(ThirdProductTypeQuantityTextBox);
+            FourthProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(ThirdProductTypeQuantityTextBox);
+            FifthProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(FifthProductTypeQuantityTextBox);
+            SixthProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(SixthProductTypeQuantityTextBox);
+            SeventhProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(SeventhProductTypeQuantityTextBox);
+            EighthProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(EighthProductTypeQuantityTextBox);
+            NinthProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(NinthProductTypeQuantityTextBox);
+            TenProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(TenProductTypeQuantityTextBox);
+            EleventhProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(EleventhProductTypeQuantityTextBox);
+            TwelfthProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(TwelfthProductTypeQuantityTextBox);
+
+            FirstProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(FirstProductTypePriceTextBox);
+            SecondProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(SecondProductTypePriceTextBox);
+            ThirdProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(ThirdProductTypePriceTextBox);
+            FourthProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(FourthProductTypePriceTextBox);
+            FifthProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(FifthProductTypePriceTextBox);
+            SixthProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(SixthProductTypePriceTextBox);
+            SeventhProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(SeventhProductTypePriceTextBox);
+            EighthProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(EighthProductTypePriceTextBox);
+            NinthProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(NinthProductTypePriceTextBox);
+            TenProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(TenProductTypePriceTextBox);
+            EleventhProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(EleventhProductTypePriceTextBox);
+            TwelfthProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(TwelfthProductTypePriceTextBox);
+
+
         }
 
         private ProductTypeModel GetAllInfoFromProductTypeTextBox()
