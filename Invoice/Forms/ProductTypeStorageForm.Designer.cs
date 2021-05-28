@@ -39,8 +39,10 @@ namespace Invoice.Forms
             // 
             this.ProductTypeDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ProductTypeDataGridView.Location = new System.Drawing.Point(40, 93);
+            this.ProductTypeDataGridView.MultiSelect = false;
             this.ProductTypeDataGridView.Name = "ProductTypeDataGridView";
-            this.ProductTypeDataGridView.Size = new System.Drawing.Size(938, 563);
+            this.ProductTypeDataGridView.ReadOnly = true;
+            this.ProductTypeDataGridView.Size = new System.Drawing.Size(557, 563);
             this.ProductTypeDataGridView.TabIndex = 0;
             // 
             // GetProductTypeButton

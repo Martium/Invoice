@@ -1,5 +1,7 @@
-﻿using System.Windows.Forms;
+﻿using System.Collections.Generic;
+using System.Windows.Forms;
 using Invoice.Enums;
+using Invoice.Models.ProductType;
 using Invoice.Repositories;
 
 namespace Invoice.Forms
@@ -14,6 +16,7 @@ namespace Invoice.Forms
             _productTypeRepository = new ProductTypeRepository();
             InitializeComponent();
             SetControlInitialState();
+            SetProductTypeDataSource();
         }
 
         private void ProductTypeStorageForm_Load(object sender, System.EventArgs e)
@@ -106,6 +109,33 @@ namespace Invoice.Forms
             }
 
             return productTypeOperations;
+        }
+
+        private void SetProductTypeDataSource()
+        {
+            FirstSpecificProductTypeModel model = new FirstSpecificProductTypeModel();
+
+            List <FirstSpecificProductTypeModel> info =
+                _productTypeRepository.GetSpecificProductTypeFullInfoBySpecialName("1l",
+                    ProductTypeOperations.FirstProductType);
+
+            BindingSource bindingSource = new BindingSource {model};
+
+            bindingSource.DataSource = info;
+
+            ProductTypeDataGridView.DataSource = bindingSource;
+
+            ProductTypeDataGridView.Columns[0].HeaderText = "Sąskaitos Nr.";
+            ProductTypeDataGridView.Columns[1].HeaderText = "Metai";
+            ProductTypeDataGridView.Columns[2].HeaderText = "Tipas";
+            ProductTypeDataGridView.Columns[3].HeaderText = "Kiekis";
+            ProductTypeDataGridView.Columns[4].HeaderText = "Vnt. Kaina";
+
+            
+
+            ProductTypeDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+
         }
 
 
