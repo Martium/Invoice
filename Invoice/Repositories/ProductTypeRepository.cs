@@ -3,13 +3,20 @@ using System.Data.SQLite;
 using System.Linq;
 using Dapper;
 using Invoice.Enums;
-using Invoice.Models;
 using Invoice.Models.ProductType;
+using Invoice.Service;
 
 namespace Invoice.Repositories
 {
     public class ProductTypeRepository
     {
+        private readonly ProductTypeStringService _productTypeStringService;
+
+        public ProductTypeRepository()
+        {
+            _productTypeStringService = new ProductTypeStringService();
+        }
+
         public ProductTypeModel GetExistingProductType(int invoiceNumber, int invoiceNumberYearCreation)
         {
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
@@ -19,7 +26,7 @@ namespace Invoice.Repositories
                 string getExistingServiceQuery =
                     $@"SELECT
                         PT.FirstProductType, PT.SecondProductType, PT.ThirdProductType, PT.FourthProductType, PT.FifthProductType, PT.SixthProductType, PT.SeventhProductType, PT.EighthProductType, PT.NinthProductType, PT.TenProductType, PT.EleventhProductType, PT.TwelfthProductType, PT.FirstProductTypeQuantity, PT.SecondProductTypeQuantity, PT.ThirdProductTypeQuantity, PT.FourthProductTypeQuantity, PT.FifthProductTypeQuantity, PT.SixthProductTypeQuantity, PT.SeventhProductTypeQuantity, PT.EighthProductTypeQuantity, PT.NinthProductTypeQuantity, PT.TenProductTypeQuantity, PT.EleventhProductTypeQuantity, PT.TwelfthProductTypeQuantity, PT.FirstProductTypePrice, PT.SecondProductTypePrice, PT.ThirdProductTypePrice, PT.FourthProductTypePrice, PT.FifthProductTypePrice, PT.SixthProductTypePrice, PT.SeventhProductTypePrice, PT.EighthProductTypePrice, PT.NinthProductTypePrice, PT.TenProductTypePrice, PT.EleventhProductTypePrice, PT.TwelfthProductTypePrice
-                      FROM FirstProductType PT
+                      FROM ProductType PT
                       WHERE IdByInvoiceNumber = {invoiceNumber} AND IdByInvoiceNumberYearCreation = {invoiceNumberYearCreation}
                     ";
 
@@ -29,17 +36,38 @@ namespace Invoice.Repositories
             }
         }
 
-        public dynamic GetSpecificProductTypeBySpecialName(string productType, string productTypeName, ProductTypeOperations productTypeOperations)
+        public dynamic GetExistingProductTypeName(ProductTypeOperations productTypeOperations)
         {
+            string productType = _productTypeStringService.SetProductType(productTypeOperations);
+
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
             {
                 dbConnection.Open();
 
                 string getExistingServiceQuery =
-                    $@"SELECT * FROM FirstProductType PT
-                       WHERE PT.{productType} = '{productTypeName}';
+                    $@"SELECT 
+                        {productType}
+                      FROM ProductType PT 
                     ";
 
+                IEnumerable<string> getAllSpecificProductType = dbConnection.Query<string>(getExistingServiceQuery);
+
+                return getAllSpecificProductType.ToList();
+            }
+        }
+
+        public dynamic GetSpecificProductTypeFullInfoBySpecialName(string productTypeName, ProductTypeOperations productTypeOperations)
+        {
+            string productType = _productTypeStringService.SetProductType(productTypeOperations);
+
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string getExistingServiceQuery =
+                    $@"SELECT * FROM ProductType PT
+                       WHERE PT.{productType} = '{productTypeName}';
+                    ";
 
                 switch (productTypeOperations)
                 {
@@ -115,7 +143,7 @@ namespace Invoice.Repositories
                 dbConnection.Open();
 
                 string createNewProductTypeCommand =
-                    @"INSERT OR REPLACE INTO 'FirstProductType'
+                    @"INSERT OR REPLACE INTO 'ProductType'
                         VALUES ( @IdByInvoiceNumber, @IdByInvoiceNumberYearCreation, @FirstProductType, @SecondProductType, @ThirdProductType, @FourthProductType, @FifthProductType, @SixthProductType, @SeventhProductType, @EighthProductType, @NinthProductType, @TenProductType, @EleventhProductType, @TwelfthProductType, @FirstProductTypeQuantity, @SecondProductTypeQuantity, @ThirdProductTypeQuantity, @FourthProductTypeQuantity, @FifthProductTypeQuantity, @SixthProductTypeQuantity, @SeventhProductTypeQuantity, @EighthProductTypeQuantity, @NinthProductTypeQuantity, @TenProductTypeQuantity, @EleventhProductTypeQuantity, @TwelfthProductTypeQuantity, @FirstProductTypePrice, @SecondProductTypePrice, @ThirdProductTypePrice, @FourthProductTypePrice, @FifthProductTypePrice, @SixthProductTypePrice, @SeventhProductTypePrice, @EighthProductTypePrice, @NinthProductTypePrice, @TenProductTypePrice, @EleventhProductTypePrice, @TwelfthProductTypePrice
                         );
                     ";

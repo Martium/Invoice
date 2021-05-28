@@ -29,88 +29,60 @@ namespace Invoice.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.ProductTypeDataGridView = new System.Windows.Forms.DataGridView();
+            this.GetProductTypeButton = new System.Windows.Forms.Button();
+            this.SpecificProductTypeComboBox = new System.Windows.Forms.ComboBox();
+            ((System.ComponentModel.ISupportInitialize)(this.ProductTypeDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // comboBox1
+            // ProductTypeDataGridView
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(81, 57);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(77, 21);
-            this.comboBox1.TabIndex = 0;
+            this.ProductTypeDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ProductTypeDataGridView.Location = new System.Drawing.Point(40, 93);
+            this.ProductTypeDataGridView.Name = "ProductTypeDataGridView";
+            this.ProductTypeDataGridView.Size = new System.Drawing.Size(938, 563);
+            this.ProductTypeDataGridView.TabIndex = 0;
             // 
-            // comboBox2
+            // GetProductTypeButton
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(164, 57);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(77, 21);
-            this.comboBox2.TabIndex = 1;
+            this.GetProductTypeButton.Location = new System.Drawing.Point(193, 13);
+            this.GetProductTypeButton.Name = "GetProductTypeButton";
+            this.GetProductTypeButton.Size = new System.Drawing.Size(85, 21);
+            this.GetProductTypeButton.TabIndex = 1;
+            this.GetProductTypeButton.Text = "Gauti išrašus";
+            this.GetProductTypeButton.UseVisualStyleBackColor = true;
+            this.GetProductTypeButton.Click += new System.EventHandler(this.GetProductTypeButton_Click);
             // 
-            // comboBox3
+            // SpecificProductTypeComboBox
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(247, 57);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(133, 21);
-            this.comboBox3.TabIndex = 2;
-            // 
-            // comboBox4
-            // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(386, 57);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(77, 21);
-            this.comboBox4.TabIndex = 3;
-            // 
-            // comboBox5
-            // 
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(469, 57);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(77, 21);
-            this.comboBox5.TabIndex = 4;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(170, 144);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(86, 27);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.SpecificProductTypeComboBox.FormattingEnabled = true;
+            this.SpecificProductTypeComboBox.Location = new System.Drawing.Point(40, 13);
+            this.SpecificProductTypeComboBox.Name = "SpecificProductTypeComboBox";
+            this.SpecificProductTypeComboBox.Size = new System.Drawing.Size(147, 21);
+            this.SpecificProductTypeComboBox.TabIndex = 2;
             // 
             // ProductTypeStorageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.comboBox5);
-            this.Controls.Add(this.comboBox4);
-            this.Controls.Add(this.comboBox3);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
+            this.ClientSize = new System.Drawing.Size(1024, 786);
+            this.Controls.Add(this.SpecificProductTypeComboBox);
+            this.Controls.Add(this.GetProductTypeButton);
+            this.Controls.Add(this.ProductTypeDataGridView);
+            this.MaximizeBox = false;
             this.Name = "ProductTypeStorageForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Produktų Sandėlys";
+            this.Load += new System.EventHandler(this.ProductTypeStorageForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.ProductTypeDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.ComboBox comboBox4;
-        private System.Windows.Forms.ComboBox comboBox5;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridView ProductTypeDataGridView;
+        private System.Windows.Forms.Button GetProductTypeButton;
+        private System.Windows.Forms.ComboBox SpecificProductTypeComboBox;
     }
 }

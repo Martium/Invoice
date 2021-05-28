@@ -154,6 +154,7 @@
     <Compile Include="Repositories\ProductTypeRepository.cs" />
     <Compile Include="Service\MessageDialogService.cs" />
     <Compile Include="Service\NumberService.cs" />
+    <Compile Include="Service\ProductTypeStringService.cs" />
     <EmbeddedResource Include="Forms\InvoiceForm.resx">
       <DependentUpon>InvoiceForm.cs</DependentUpon>
     </EmbeddedResource>
