@@ -36,7 +36,7 @@ namespace Invoice.Repositories
             }
         }
 
-        public dynamic GetExistingProductTypeName(ProductTypeOperations productTypeOperations)
+        public List<string> GetExistingProductTypeNames(ProductTypeOperations productTypeOperations)
         {
             string productType = _productTypeStringService.SetProductType(productTypeOperations);
 
