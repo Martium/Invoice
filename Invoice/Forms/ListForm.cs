@@ -174,14 +174,20 @@ namespace Invoice.Forms
 
         private void ListOfInvoiceDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            string paymentStatus = ListOfInvoiceDataGridView.SelectedRows[0].Cells[InvoiceIsPaidIndex].Value.ToString();
+            if (ListOfInvoiceDataGridView.Rows.Count != 0)
+            {
+                string paymentStatus = ListOfInvoiceDataGridView.SelectedRows[0].Cells[InvoiceIsPaidIndex].Value.ToString();
+                this.BackColor = paymentStatus == "Atsiskaityta" ? Color.Chartreuse : Color.Red;
+            }
 
-            this.BackColor = paymentStatus == "Atsiskaityta" ? Color.Chartreuse : Color.Red;
         }
 
         private void ListOfInvoiceDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            EditButton_Click(this, new EventArgs());
+            if (ListOfInvoiceDataGridView.Rows.Count != 0)
+            {
+                EditButton_Click(this, new EventArgs());
+            }
         }
 
         private void SellerInfoFormButton_Click(object sender, EventArgs e)
@@ -301,6 +307,7 @@ namespace Invoice.Forms
 
             InvoiceNumberYearCreationComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             PaymentStatusComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+           
         }
 
         private static void DisplayEmptyListReason(string reason, PaintEventArgs e, DataGridView dataGridView)

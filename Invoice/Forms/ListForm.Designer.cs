@@ -37,6 +37,13 @@ namespace Invoice.Forms
             this.SearchButton = new System.Windows.Forms.Button();
             this.NewInvoiceButton = new System.Windows.Forms.Button();
             this.ListOfInvoiceDataGridView = new System.Windows.Forms.DataGridView();
+            this.invoiceNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.invoiceNumberYearCreationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.invoiceDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buyerNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.paymentStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalPriceWithPvmDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.invoiceListModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.CopyButton = new System.Windows.Forms.Button();
             this.SearchCancelButton = new System.Windows.Forms.Button();
             this.ChangePaymentButton = new System.Windows.Forms.Button();
@@ -51,13 +58,6 @@ namespace Invoice.Forms
             this.GetSelectedYearButton = new System.Windows.Forms.Button();
             this.PaymentStatusComboBox = new System.Windows.Forms.ComboBox();
             this.OpenProductTypeStorageFormButton = new System.Windows.Forms.Button();
-            this.invoiceNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.invoiceNumberYearCreationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.invoiceDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buyerNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.paymentStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalPriceWithPvmDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.invoiceListModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.ListOfInvoiceDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceListModelBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -109,6 +109,8 @@ namespace Invoice.Forms
             // 
             this.ListOfInvoiceDataGridView.AllowUserToAddRows = false;
             this.ListOfInvoiceDataGridView.AllowUserToDeleteRows = false;
+            this.ListOfInvoiceDataGridView.AllowUserToResizeColumns = false;
+            this.ListOfInvoiceDataGridView.AllowUserToResizeRows = false;
             this.ListOfInvoiceDataGridView.AutoGenerateColumns = false;
             this.ListOfInvoiceDataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonShadow;
             this.ListOfInvoiceDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -132,6 +134,57 @@ namespace Invoice.Forms
             this.ListOfInvoiceDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.ListOfInvoiceDataGridView_CellFormatting);
             this.ListOfInvoiceDataGridView.Paint += new System.Windows.Forms.PaintEventHandler(this.ListOfInvoiceDataGridView_Paint);
             this.ListOfInvoiceDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ListOfInvoiceDataGridView_KeyDown);
+            // 
+            // invoiceNumberDataGridViewTextBoxColumn
+            // 
+            this.invoiceNumberDataGridViewTextBoxColumn.DataPropertyName = "InvoiceNumber";
+            this.invoiceNumberDataGridViewTextBoxColumn.HeaderText = "Sąskaitos numeris";
+            this.invoiceNumberDataGridViewTextBoxColumn.Name = "invoiceNumberDataGridViewTextBoxColumn";
+            this.invoiceNumberDataGridViewTextBoxColumn.ReadOnly = true;
+            this.invoiceNumberDataGridViewTextBoxColumn.Width = 120;
+            // 
+            // invoiceNumberYearCreationDataGridViewTextBoxColumn
+            // 
+            this.invoiceNumberYearCreationDataGridViewTextBoxColumn.DataPropertyName = "InvoiceNumberYearCreation";
+            this.invoiceNumberYearCreationDataGridViewTextBoxColumn.HeaderText = "Sąskaitos sukūrimo metai";
+            this.invoiceNumberYearCreationDataGridViewTextBoxColumn.Name = "invoiceNumberYearCreationDataGridViewTextBoxColumn";
+            this.invoiceNumberYearCreationDataGridViewTextBoxColumn.ReadOnly = true;
+            this.invoiceNumberYearCreationDataGridViewTextBoxColumn.Width = 120;
+            // 
+            // invoiceDateDataGridViewTextBoxColumn
+            // 
+            this.invoiceDateDataGridViewTextBoxColumn.DataPropertyName = "InvoiceDate";
+            this.invoiceDateDataGridViewTextBoxColumn.HeaderText = "Data";
+            this.invoiceDateDataGridViewTextBoxColumn.Name = "invoiceDateDataGridViewTextBoxColumn";
+            this.invoiceDateDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // buyerNameDataGridViewTextBoxColumn
+            // 
+            this.buyerNameDataGridViewTextBoxColumn.DataPropertyName = "BuyerName";
+            this.buyerNameDataGridViewTextBoxColumn.HeaderText = "Pirkėjas";
+            this.buyerNameDataGridViewTextBoxColumn.Name = "buyerNameDataGridViewTextBoxColumn";
+            this.buyerNameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.buyerNameDataGridViewTextBoxColumn.Width = 320;
+            // 
+            // paymentStatusDataGridViewTextBoxColumn
+            // 
+            this.paymentStatusDataGridViewTextBoxColumn.DataPropertyName = "PaymentStatus";
+            this.paymentStatusDataGridViewTextBoxColumn.HeaderText = "Sąskaitos Būsena";
+            this.paymentStatusDataGridViewTextBoxColumn.Name = "paymentStatusDataGridViewTextBoxColumn";
+            this.paymentStatusDataGridViewTextBoxColumn.ReadOnly = true;
+            this.paymentStatusDataGridViewTextBoxColumn.Width = 180;
+            // 
+            // totalPriceWithPvmDataGridViewTextBoxColumn
+            // 
+            this.totalPriceWithPvmDataGridViewTextBoxColumn.DataPropertyName = "TotalPriceWithPvm";
+            this.totalPriceWithPvmDataGridViewTextBoxColumn.HeaderText = "Pilna suma su PVM";
+            this.totalPriceWithPvmDataGridViewTextBoxColumn.Name = "totalPriceWithPvmDataGridViewTextBoxColumn";
+            this.totalPriceWithPvmDataGridViewTextBoxColumn.ReadOnly = true;
+            this.totalPriceWithPvmDataGridViewTextBoxColumn.Width = 140;
+            // 
+            // invoiceListModelBindingSource
+            // 
+            this.invoiceListModelBindingSource.DataSource = typeof(Invoice.Models.InvoiceListModel);
             // 
             // CopyButton
             // 
@@ -266,57 +319,6 @@ namespace Invoice.Forms
             this.OpenProductTypeStorageFormButton.Text = "Atidaryti Produktų Sandelį";
             this.OpenProductTypeStorageFormButton.UseVisualStyleBackColor = false;
             this.OpenProductTypeStorageFormButton.Click += new System.EventHandler(this.OpenProductTypeStorageFormButton_Click);
-            // 
-            // invoiceNumberDataGridViewTextBoxColumn
-            // 
-            this.invoiceNumberDataGridViewTextBoxColumn.DataPropertyName = "InvoiceNumber";
-            this.invoiceNumberDataGridViewTextBoxColumn.HeaderText = "Sąskaitos numeris";
-            this.invoiceNumberDataGridViewTextBoxColumn.Name = "invoiceNumberDataGridViewTextBoxColumn";
-            this.invoiceNumberDataGridViewTextBoxColumn.ReadOnly = true;
-            this.invoiceNumberDataGridViewTextBoxColumn.Width = 120;
-            // 
-            // invoiceNumberYearCreationDataGridViewTextBoxColumn
-            // 
-            this.invoiceNumberYearCreationDataGridViewTextBoxColumn.DataPropertyName = "InvoiceNumberYearCreation";
-            this.invoiceNumberYearCreationDataGridViewTextBoxColumn.HeaderText = "Sąskaitos sukūrimo metai";
-            this.invoiceNumberYearCreationDataGridViewTextBoxColumn.Name = "invoiceNumberYearCreationDataGridViewTextBoxColumn";
-            this.invoiceNumberYearCreationDataGridViewTextBoxColumn.ReadOnly = true;
-            this.invoiceNumberYearCreationDataGridViewTextBoxColumn.Width = 120;
-            // 
-            // invoiceDateDataGridViewTextBoxColumn
-            // 
-            this.invoiceDateDataGridViewTextBoxColumn.DataPropertyName = "InvoiceDate";
-            this.invoiceDateDataGridViewTextBoxColumn.HeaderText = "Data";
-            this.invoiceDateDataGridViewTextBoxColumn.Name = "invoiceDateDataGridViewTextBoxColumn";
-            this.invoiceDateDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // buyerNameDataGridViewTextBoxColumn
-            // 
-            this.buyerNameDataGridViewTextBoxColumn.DataPropertyName = "BuyerName";
-            this.buyerNameDataGridViewTextBoxColumn.HeaderText = "Pirkėjas";
-            this.buyerNameDataGridViewTextBoxColumn.Name = "buyerNameDataGridViewTextBoxColumn";
-            this.buyerNameDataGridViewTextBoxColumn.ReadOnly = true;
-            this.buyerNameDataGridViewTextBoxColumn.Width = 320;
-            // 
-            // paymentStatusDataGridViewTextBoxColumn
-            // 
-            this.paymentStatusDataGridViewTextBoxColumn.DataPropertyName = "PaymentStatus";
-            this.paymentStatusDataGridViewTextBoxColumn.HeaderText = "Sąskaitos Būsena";
-            this.paymentStatusDataGridViewTextBoxColumn.Name = "paymentStatusDataGridViewTextBoxColumn";
-            this.paymentStatusDataGridViewTextBoxColumn.ReadOnly = true;
-            this.paymentStatusDataGridViewTextBoxColumn.Width = 180;
-            // 
-            // totalPriceWithPvmDataGridViewTextBoxColumn
-            // 
-            this.totalPriceWithPvmDataGridViewTextBoxColumn.DataPropertyName = "TotalPriceWithPvm";
-            this.totalPriceWithPvmDataGridViewTextBoxColumn.HeaderText = "Pilna suma su PVM";
-            this.totalPriceWithPvmDataGridViewTextBoxColumn.Name = "totalPriceWithPvmDataGridViewTextBoxColumn";
-            this.totalPriceWithPvmDataGridViewTextBoxColumn.ReadOnly = true;
-            this.totalPriceWithPvmDataGridViewTextBoxColumn.Width = 140;
-            // 
-            // invoiceListModelBindingSource
-            // 
-            this.invoiceListModelBindingSource.DataSource = typeof(Invoice.Models.InvoiceListModel);
             // 
             // ListForm
             // 
