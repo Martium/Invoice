@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 using Invoice.Enums;
 using Invoice.Models;
@@ -399,5 +400,19 @@ namespace Invoice.Service
 
             return doubleOrNull;
         }
+
+        public double SumAllDataGridViewRowsSpecificColumns(DataGridView dataGridView, int rowsCount, int cellIndex)
+        {
+            double sum = 0;
+
+            for (int i = 0; i <= rowsCount - 1; i++)
+            {
+                sum = sum + double.Parse(dataGridView.Rows[i].Cells[cellIndex].Value.ToString());
+            }
+
+            return sum;
+        }
+
+       
     }
 }

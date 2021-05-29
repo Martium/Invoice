@@ -420,20 +420,19 @@ namespace Invoice.Forms
 
         private void LoadAllTotalPriceSums()
         {
-            _totalPriceWithPvm = 0;
 
-            for (int i = 0; i <= ListOfInvoiceDataGridView.Rows.Count - 1; i++)
-            {
-                _totalPriceWithPvm = _totalPriceWithPvm +
-                                     double.Parse(ListOfInvoiceDataGridView.Rows[i].Cells[TotalPriceWithPvmIndex].Value
-                                         .ToString());
-            }
+            int rowsCount = ListOfInvoiceDataGridView.Rows.Count;
 
-            TotalPriceWithPvmTextBox.Text = _totalPriceWithPvm.ToString(CultureInfo.InvariantCulture);
+            double totalPriceWithPvm =
+                _numberService.SumAllDataGridViewRowsSpecificColumns(ListOfInvoiceDataGridView, rowsCount,
+                    TotalPriceWithPvmIndex);
 
-            PvmPriceTextBox.Text = _numberService.CalculatePvmFromTotalPriceWithPvm(_totalPriceWithPvm);
+            TotalPriceWithPvmTextBox.Text = totalPriceWithPvm.ToString(CultureInfo.InvariantCulture);
 
-            ProductTotalPriceTextBox.Text = _numberService.CalculateFullPriceFromTotalPriceWithPvm(_totalPriceWithPvm);
+            PvmPriceTextBox.Text = _numberService.CalculatePvmFromTotalPriceWithPvm(totalPriceWithPvm);
+
+            ProductTotalPriceTextBox.Text = _numberService.CalculateFullPriceFromTotalPriceWithPvm(totalPriceWithPvm);
+
         }
 
         #endregion

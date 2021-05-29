@@ -1,19 +1,26 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
+using System.Globalization;
 using System.Windows.Forms;
 using Invoice.Enums;
 using Invoice.Models.ProductType;
 using Invoice.Repositories;
+using Invoice.Service;
 
 namespace Invoice.Forms
 {
     public partial class ProductTypeStorageForm : Form
     {
         private readonly ProductTypeRepository _productTypeRepository;
+
+        private readonly NumberService _numberService;
         
 
         public ProductTypeStorageForm()
         {
             _productTypeRepository = new ProductTypeRepository();
+            _numberService = new NumberService();
+
             InitializeComponent();
             SetControlInitialState();
         }
@@ -21,6 +28,8 @@ namespace Invoice.Forms
         private void ProductTypeStorageForm_Load(object sender, System.EventArgs e)
         {
             FillSpecificProductTypeComboBox();
+
+            LoadSpecificProductTypeToDataGridView(ProductTypeOperations.FirstProductType);
         }
 
         private void GetProductTypeButton_Click(object sender, System.EventArgs e)
@@ -29,6 +38,17 @@ namespace Invoice.Forms
 
             LoadSpecificProductTypeToDataGridView(productTypeOperation);
 
+            CalculateFullProductTypeQuantity();
+        }
+
+        private void ProductTypeDataGridView_Paint(object sender, PaintEventArgs e)
+        {
+            DataGridView dataGridView = (DataGridView)sender;
+
+            if (ProductTypeDataGridView.Rows.Count == 0)
+            {
+                DisplayEmptyListReason("Informacijos Nerasta pasirinkite kitą lentelę ir spauskite Gauti išrašus", e, dataGridView);
+            }
         }
 
         #region Helpers
@@ -36,7 +56,12 @@ namespace Invoice.Forms
         private void SetControlInitialState()
         {
             this.StartPosition = FormStartPosition.CenterScreen;
+
+            ProductTypeDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
             SpecificProductTypeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            ProductTypeYearComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            ProductTypeSpecificNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void FillSpecificProductTypeComboBox()
@@ -58,6 +83,8 @@ namespace Invoice.Forms
             } ;
 
             SpecificProductTypeComboBox.Items.AddRange(productTypes);
+
+            SpecificProductTypeComboBox.Text = productTypes[0].ToString();
         }
 
         private ProductTypeOperations GetProductTypeOperations(ComboBox comboBox)
@@ -113,7 +140,6 @@ namespace Invoice.Forms
 
         private void LoadSpecificProductTypeToDataGridView(ProductTypeOperations productTypeOperations)
         {
-
             var specificModel = GetSpecificProductModel(productTypeOperations);
 
             BindingSource bindingSource = new BindingSource {specificModel};
@@ -126,17 +152,15 @@ namespace Invoice.Forms
 
             ChangeDataGridViewHeaderText();
 
-            ProductTypeDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-
         }
 
         private void ChangeDataGridViewHeaderText()
         {
-            ProductTypeDataGridView.Columns[0].HeaderText = "Sąskaitos Nr.";
-            ProductTypeDataGridView.Columns[1].HeaderText = "Metai";
-            ProductTypeDataGridView.Columns[2].HeaderText = "Tipas";
-            ProductTypeDataGridView.Columns[3].HeaderText = "Kiekis";
-            ProductTypeDataGridView.Columns[4].HeaderText = "Vnt. Kaina";
+            ProductTypeDataGridView.Columns[0].HeaderText = @"Sąskaitos Nr.";
+            ProductTypeDataGridView.Columns[1].HeaderText = @"Metai";
+            ProductTypeDataGridView.Columns[2].HeaderText = @"Tipas";
+            ProductTypeDataGridView.Columns[3].HeaderText = @"Kiekis";
+            ProductTypeDataGridView.Columns[4].HeaderText = @"Vnt. Kaina";
         }
 
         private dynamic GetSpecificProductModel(ProductTypeOperations productTypeOperations)
@@ -245,8 +269,43 @@ namespace Invoice.Forms
             }
         }
 
-        #endregion
+        private static void DisplayEmptyListReason(string reason, PaintEventArgs e, DataGridView dataGridView)
+        {
+            using (Graphics graphics = e.Graphics)
+            {
+                int leftPadding = 2;
+                int topPadding = 41;
+                int rowSelectionColumnWidth = 40;
+                int messageBackgroundWidth = dataGridView.Columns.GetColumnsWidth(DataGridViewElementStates.Displayed) +
+                                             rowSelectionColumnWidth;
+                int messageBackgroundHeight = 25;
 
-    
+                graphics.FillRectangle(
+                    Brushes.White,
+                    new Rectangle(
+                        new Point(leftPadding, topPadding),
+                        new Size(messageBackgroundWidth, messageBackgroundHeight)
+                    )
+                );
+                graphics.DrawString(
+                    reason,
+                    new Font("Times New Roman", 12),
+                    Brushes.DarkGray,
+                    new PointF(leftPadding, topPadding));
+            }
+        }
+
+        private void CalculateFullProductTypeQuantity()
+        {
+            
+        }
+
+        private void CalculateFullProductTypePrice()
+        {
+
+        }
+
+        #endregion
+       
     }
 }
