@@ -14,7 +14,9 @@ namespace Invoice.Forms
         private readonly ProductTypeRepository _productTypeRepository;
 
         private readonly NumberService _numberService;
-        
+
+        private const int ProductTypeQuantityIndex = 3;
+        private const int ProductTypePriceIndex = 4;
 
         public ProductTypeStorageForm()
         {
@@ -38,7 +40,7 @@ namespace Invoice.Forms
 
             LoadSpecificProductTypeToDataGridView(productTypeOperation);
 
-            CalculateFullProductTypeQuantity();
+            CalculateFullProductTypeQuantityAndPrice();
         }
 
         private void ProductTypeDataGridView_Paint(object sender, PaintEventArgs e)
@@ -295,15 +297,23 @@ namespace Invoice.Forms
             }
         }
 
-        private void CalculateFullProductTypeQuantity()
+        private void CalculateFullProductTypeQuantityAndPrice()
         {
-            
+            int rowsCount = ProductTypeDataGridView.Rows.Count;
+
+            double calculateFullProductTypeQuantity =
+                _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeDataGridView, rowsCount,
+                    ProductTypeQuantityIndex);
+
+            double calculateFullProductTypePrice =
+                _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeDataGridView, rowsCount,
+                    ProductTypePriceIndex);
+
+            FullProductTypeQuantityTextBox.Text = calculateFullProductTypeQuantity.ToString(CultureInfo.InvariantCulture);
+            FullProductTypePriceTextBox.Text = calculateFullProductTypePrice.ToString(CultureInfo.InvariantCulture);
         }
 
-        private void CalculateFullProductTypePrice()
-        {
-
-        }
+        
 
         #endregion
        

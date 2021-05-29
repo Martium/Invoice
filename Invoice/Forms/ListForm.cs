@@ -24,8 +24,6 @@ namespace Invoice.Forms
         private const int InvoiceIsPaidIndex = 4;
         private const int TotalPriceWithPvmIndex = 5;
 
-        private double _totalPriceWithPvm;
-
         private bool _searchActive;
 
         public ListForm()
@@ -420,7 +418,6 @@ namespace Invoice.Forms
 
         private void LoadAllTotalPriceSums()
         {
-
             int rowsCount = ListOfInvoiceDataGridView.Rows.Count;
 
             double totalPriceWithPvm =
