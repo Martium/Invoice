@@ -16,7 +16,6 @@ namespace Invoice.Forms
             _productTypeRepository = new ProductTypeRepository();
             InitializeComponent();
             SetControlInitialState();
-            SetProductTypeDataSource();
         }
 
         private void ProductTypeStorageForm_Load(object sender, System.EventArgs e)
@@ -28,6 +27,7 @@ namespace Invoice.Forms
         {
             ProductTypeOperations productTypeOperation = GetProductTypeOperations(SpecificProductTypeComboBox);
 
+            LoadSpecificProductTypeToDataGridView(productTypeOperation);
 
         }
 
@@ -111,17 +111,16 @@ namespace Invoice.Forms
             return productTypeOperations;
         }
 
-        private void SetProductTypeDataSource()
+        private void LoadSpecificProductTypeToDataGridView(ProductTypeOperations productTypeOperations)
         {
-            FirstSpecificProductTypeModel model = new FirstSpecificProductTypeModel();
 
-            List <FirstSpecificProductTypeModel> info =
-                _productTypeRepository.GetSpecificProductTypeFullInfoBySpecialName("1l",
-                    ProductTypeOperations.FirstProductType);
+            var specificModel = GetSpecificProductModel(productTypeOperations);
 
-            BindingSource bindingSource = new BindingSource {model};
+            BindingSource bindingSource = new BindingSource {specificModel};
 
-            bindingSource.DataSource = info;
+            var specificProductTypeFullInfo = LoadSpecificProductType(productTypeOperations);
+
+            bindingSource.DataSource = specificProductTypeFullInfo;
 
             ProductTypeDataGridView.DataSource = bindingSource;
 
@@ -135,9 +134,113 @@ namespace Invoice.Forms
 
             ProductTypeDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
-
         }
 
+        private dynamic GetSpecificProductModel(ProductTypeOperations productTypeOperations)
+        {
+            switch (productTypeOperations)
+            {
+                case ProductTypeOperations.FirstProductType:
+                    FirstSpecificProductTypeModel firstModel = new FirstSpecificProductTypeModel();
+                    return firstModel;
+                case ProductTypeOperations.SecondProductType:
+                    SecondSpecificProductTypeModel secondModel = new SecondSpecificProductTypeModel();
+                    return secondModel;
+                case ProductTypeOperations.ThirdProductType:
+                    ThirdSpecificProductTypeModel thirdModel = new ThirdSpecificProductTypeModel();
+                    return thirdModel;
+                case ProductTypeOperations.FourthProductType:
+                    FourthSpecificProductTypeModel fourthModel = new FourthSpecificProductTypeModel();
+                    return fourthModel;
+                case ProductTypeOperations.FifthProductType:
+                    FifthSpecificProductTypeModel fifthModel = new FifthSpecificProductTypeModel();
+                    return fifthModel;
+                case ProductTypeOperations.SixthProductType:
+                    SixthSpecificProductTypeModel sixthModel = new SixthSpecificProductTypeModel();
+                    return sixthModel;
+                case ProductTypeOperations.SeventhProductType:
+                    SeventhSpecificProductTypeModel seventhModel = new SeventhSpecificProductTypeModel();
+                    return seventhModel;
+                case ProductTypeOperations.EighthProductType:
+                    EighthSpecificProductTypeModel eighthModel = new EighthSpecificProductTypeModel();
+                    return eighthModel;
+                case ProductTypeOperations.NinthProductType:
+                    NinthSpecificProductTypeModel ninthModel = new NinthSpecificProductTypeModel();
+                    return ninthModel;
+                case ProductTypeOperations.TenProductType:
+                    TenSpecificProductTypeModel tenModel = new TenSpecificProductTypeModel();
+                    return tenModel;
+                case ProductTypeOperations.EleventhProductType:
+                    EleventhSpecificProductTypeModel eleventhModel = new EleventhSpecificProductTypeModel();
+                    return eleventhModel;
+                case ProductTypeOperations.TwelfthProductType:
+                    TwelfthSpecificProductTypeModel twelfthModel = new TwelfthSpecificProductTypeModel();
+                    return twelfthModel;
+                default:
+                    FirstSpecificProductTypeModel defaultModel = new FirstSpecificProductTypeModel();
+                    return defaultModel;
+            }
+        }
+
+        private dynamic LoadSpecificProductType(ProductTypeOperations productTypeOperations)
+        {
+            switch (productTypeOperations)
+            {
+                case ProductTypeOperations.FirstProductType:
+                    IEnumerable<FirstSpecificProductTypeModel> firstSpecificProductType =
+                        _productTypeRepository.GetSpecificProductTypeFullInfo(productTypeOperations);
+                    return firstSpecificProductType;
+                case ProductTypeOperations.SecondProductType:
+                    IEnumerable<SecondSpecificProductTypeModel> secondSpecificProductType =
+                        _productTypeRepository.GetSpecificProductTypeFullInfo(productTypeOperations);
+                    return secondSpecificProductType;
+                case ProductTypeOperations.ThirdProductType:
+                    IEnumerable<ThirdSpecificProductTypeModel> thirdSpecificProductType =
+                        _productTypeRepository.GetSpecificProductTypeFullInfo(productTypeOperations);
+                    return thirdSpecificProductType;
+                case ProductTypeOperations.FourthProductType:
+                    IEnumerable<FourthSpecificProductTypeModel> fourthSpecificProductType =
+                        _productTypeRepository.GetSpecificProductTypeFullInfo(productTypeOperations);
+                    return fourthSpecificProductType;
+                case ProductTypeOperations.FifthProductType:
+                    IEnumerable<FifthSpecificProductTypeModel> fifthSpecificProductType =
+                        _productTypeRepository.GetSpecificProductTypeFullInfo(productTypeOperations);
+                    return fifthSpecificProductType;
+                case ProductTypeOperations.SixthProductType:
+                    IEnumerable<SixthSpecificProductTypeModel> sixthSpecificProductType =
+                        _productTypeRepository.GetSpecificProductTypeFullInfo(productTypeOperations);
+                    return sixthSpecificProductType;
+                case ProductTypeOperations.SeventhProductType:
+                    IEnumerable<SeventhSpecificProductTypeModel> seventhSpecificProductType =
+                        _productTypeRepository.GetSpecificProductTypeFullInfo(productTypeOperations);
+                    return seventhSpecificProductType;
+                case ProductTypeOperations.EighthProductType:
+                    IEnumerable<EighthSpecificProductTypeModel> eighthSpecificProductType =
+                        _productTypeRepository.GetSpecificProductTypeFullInfo(productTypeOperations);
+                    return eighthSpecificProductType;
+                case ProductTypeOperations.NinthProductType:
+                    IEnumerable<NinthSpecificProductTypeModel> ninthSpecificProductType =
+                        _productTypeRepository.GetSpecificProductTypeFullInfo(productTypeOperations);
+                    return ninthSpecificProductType;
+                case ProductTypeOperations.TenProductType:
+                    IEnumerable<TenSpecificProductTypeModel> tenSpecificProductType =
+                        _productTypeRepository.GetSpecificProductTypeFullInfo(productTypeOperations);
+                    return tenSpecificProductType;
+                case ProductTypeOperations.EleventhProductType:
+                    IEnumerable<EleventhSpecificProductTypeModel> eleventhSpecificProductType =
+                        _productTypeRepository.GetSpecificProductTypeFullInfo(productTypeOperations);
+                    return eleventhSpecificProductType;
+                case ProductTypeOperations.TwelfthProductType:
+                    IEnumerable<TwelfthSpecificProductTypeModel> twelfthSpecificProductType =
+                        _productTypeRepository.GetSpecificProductTypeFullInfo(productTypeOperations);
+                    return twelfthSpecificProductType;
+
+                default:
+                    IEnumerable<FirstSpecificProductTypeModel> defaultSpecificProductType =
+                        _productTypeRepository.GetSpecificProductTypeFullInfo(productTypeOperations);
+                    return defaultSpecificProductType;
+            }
+        }
 
         #endregion
 

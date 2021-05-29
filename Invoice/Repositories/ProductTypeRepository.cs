@@ -56,6 +56,89 @@ namespace Invoice.Repositories
             }
         }
 
+        public dynamic GetSpecificProductTypeFullInfo(ProductTypeOperations productTypeOperations)
+        {
+            string productType = _productTypeStringService.SetProductType(productTypeOperations);
+            string productTypeQuantity = _productTypeStringService.SetProductTypeQuantity(productTypeOperations);
+            string productTypePrice = _productTypeStringService.SetProductTypePrice(productTypeOperations);
+
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string getExistingServiceQuery =
+                    $@"SELECT IdByInvoiceNumber, IdByInvoiceNumberYearCreation, {productType}, {productTypeQuantity}, {productTypePrice}
+                       FROM ProductType 
+                    ";
+
+                switch (productTypeOperations)
+                {
+                    case ProductTypeOperations.FirstProductType:
+                        IEnumerable<FirstSpecificProductTypeModel> getAllFirstSpecificProductType =
+                            dbConnection.Query<FirstSpecificProductTypeModel>(getExistingServiceQuery);
+                        return getAllFirstSpecificProductType;
+
+                    case ProductTypeOperations.SecondProductType:
+                        IEnumerable<SecondSpecificProductTypeModel> getAllSecondSpecificProductType =
+                            dbConnection.Query<SecondSpecificProductTypeModel>(getExistingServiceQuery);
+                        return getAllSecondSpecificProductType;
+
+                    case ProductTypeOperations.ThirdProductType:
+                        IEnumerable<ThirdSpecificProductTypeModel> getAllThirdSpecificProductType =
+                            dbConnection.Query<ThirdSpecificProductTypeModel>(getExistingServiceQuery);
+                        return getAllThirdSpecificProductType;
+
+                    case ProductTypeOperations.FourthProductType:
+                        IEnumerable<FourthSpecificProductTypeModel> getAllFourthSpecificProductType =
+                            dbConnection.Query<FourthSpecificProductTypeModel>(getExistingServiceQuery);
+                        return getAllFourthSpecificProductType;
+
+                    case ProductTypeOperations.FifthProductType:
+                        IEnumerable<FifthSpecificProductTypeModel> getAllFifthSpecificProductType =
+                            dbConnection.Query<FifthSpecificProductTypeModel>(getExistingServiceQuery);
+                        return getAllFifthSpecificProductType;
+
+                    case ProductTypeOperations.SixthProductType:
+                        IEnumerable<SixthSpecificProductTypeModel> getAllSixthSpecificProductType =
+                            dbConnection.Query<SixthSpecificProductTypeModel>(getExistingServiceQuery);
+                        return getAllSixthSpecificProductType;
+
+                    case ProductTypeOperations.SeventhProductType:
+                        IEnumerable<SeventhSpecificProductTypeModel> getAllSeventhSpecificProductType =
+                            dbConnection.Query<SeventhSpecificProductTypeModel>(getExistingServiceQuery);
+                        return getAllSeventhSpecificProductType;
+
+                    case ProductTypeOperations.EighthProductType:
+                        IEnumerable<EighthSpecificProductTypeModel> getAllEighthSpecificProductType =
+                            dbConnection.Query<EighthSpecificProductTypeModel>(getExistingServiceQuery);
+                        return getAllEighthSpecificProductType;
+
+                    case ProductTypeOperations.NinthProductType:
+                        IEnumerable<NinthSpecificProductTypeModel> getAllNinthSpecificProductType =
+                            dbConnection.Query<NinthSpecificProductTypeModel>(getExistingServiceQuery);
+                        return getAllNinthSpecificProductType;
+
+                    case ProductTypeOperations.TenProductType:
+                        IEnumerable<TenSpecificProductTypeModel> getAllTenSpecificProductType =
+                            dbConnection.Query<TenSpecificProductTypeModel>(getExistingServiceQuery);
+                        return getAllTenSpecificProductType;
+
+                    case ProductTypeOperations.EleventhProductType:
+                        IEnumerable<EleventhSpecificProductTypeModel> getAllEleventhSpecificProductType =
+                            dbConnection.Query<EleventhSpecificProductTypeModel>(getExistingServiceQuery);
+                        return getAllEleventhSpecificProductType;
+
+                    case ProductTypeOperations.TwelfthProductType:
+                        IEnumerable<TwelfthSpecificProductTypeModel> getAllTwelfthSpecificProductType =
+                            dbConnection.Query<TwelfthSpecificProductTypeModel>(getExistingServiceQuery);
+                        return getAllTwelfthSpecificProductType;
+                    default:
+                        return null;
+                }
+            }
+
+        }
+
         public dynamic GetSpecificProductTypeFullInfoBySpecialName(string productTypeName, ProductTypeOperations productTypeOperations)
         {
             string productType = _productTypeStringService.SetProductType(productTypeOperations);
@@ -74,62 +157,62 @@ namespace Invoice.Repositories
                     case ProductTypeOperations.FirstProductType:
                         IEnumerable<FirstSpecificProductTypeModel> getAllFirstSpecificProductType =
                             dbConnection.Query<FirstSpecificProductTypeModel>(getExistingServiceQuery);
-                        return getAllFirstSpecificProductType.ToList();
+                        return getAllFirstSpecificProductType;
 
                     case ProductTypeOperations.SecondProductType:
                         IEnumerable<SecondSpecificProductTypeModel> getAllSecondSpecificProductType =
                             dbConnection.Query<SecondSpecificProductTypeModel>(getExistingServiceQuery);
-                        return getAllSecondSpecificProductType.ToList();
+                        return getAllSecondSpecificProductType;
 
                     case ProductTypeOperations.ThirdProductType:
                         IEnumerable<ThirdSpecificProductTypeModel> getAllThirdSpecificProductType =
                             dbConnection.Query<ThirdSpecificProductTypeModel>(getExistingServiceQuery);
-                        return getAllThirdSpecificProductType.ToList();
+                        return getAllThirdSpecificProductType;
 
                     case ProductTypeOperations.FourthProductType:
                         IEnumerable<FourthSpecificProductTypeModel> getAllFourthSpecificProductType =
                             dbConnection.Query<FourthSpecificProductTypeModel>(getExistingServiceQuery);
-                        return getAllFourthSpecificProductType.ToList();
+                        return getAllFourthSpecificProductType;
 
                     case ProductTypeOperations.FifthProductType:
                         IEnumerable<FifthSpecificProductTypeModel> getAllFifthSpecificProductType =
                             dbConnection.Query<FifthSpecificProductTypeModel>(getExistingServiceQuery);
-                        return getAllFifthSpecificProductType.ToList();
+                        return getAllFifthSpecificProductType;
 
                     case ProductTypeOperations.SixthProductType:
                         IEnumerable<SixthSpecificProductTypeModel> getAllSixthSpecificProductType =
                             dbConnection.Query<SixthSpecificProductTypeModel>(getExistingServiceQuery);
-                        return getAllSixthSpecificProductType.ToList();
+                        return getAllSixthSpecificProductType;
 
                     case ProductTypeOperations.SeventhProductType:
                         IEnumerable<SeventhSpecificProductTypeModel> getAllSeventhSpecificProductType =
                             dbConnection.Query<SeventhSpecificProductTypeModel>(getExistingServiceQuery);
-                        return getAllSeventhSpecificProductType.ToList();
+                        return getAllSeventhSpecificProductType;
 
                     case ProductTypeOperations.EighthProductType:
                         IEnumerable<EighthSpecificProductTypeModel> getAllEighthSpecificProductType =
                             dbConnection.Query<EighthSpecificProductTypeModel>(getExistingServiceQuery);
-                        return getAllEighthSpecificProductType.ToList();
+                        return getAllEighthSpecificProductType;
 
                     case ProductTypeOperations.NinthProductType:
                         IEnumerable<NinthSpecificProductTypeModel> getAllNinthSpecificProductType =
                             dbConnection.Query<NinthSpecificProductTypeModel>(getExistingServiceQuery);
-                        return getAllNinthSpecificProductType.ToList();
+                        return getAllNinthSpecificProductType;
 
                     case ProductTypeOperations.TenProductType:
                         IEnumerable<TenSpecificProductTypeModel> getAllTenSpecificProductType =
                             dbConnection.Query<TenSpecificProductTypeModel>(getExistingServiceQuery);
-                        return getAllTenSpecificProductType.ToList();
+                        return getAllTenSpecificProductType;
 
                     case ProductTypeOperations.EleventhProductType:
                         IEnumerable<EleventhSpecificProductTypeModel> getAllEleventhSpecificProductType =
                             dbConnection.Query<EleventhSpecificProductTypeModel>(getExistingServiceQuery);
-                        return getAllEleventhSpecificProductType.ToList();
+                        return getAllEleventhSpecificProductType;
 
                     case ProductTypeOperations.TwelfthProductType:
                         IEnumerable<TwelfthSpecificProductTypeModel> getAllTwelfthSpecificProductType =
                             dbConnection.Query<TwelfthSpecificProductTypeModel>(getExistingServiceQuery);
-                        return getAllTwelfthSpecificProductType.ToList();
+                        return getAllTwelfthSpecificProductType;
                     default:
                         return null;
                 }

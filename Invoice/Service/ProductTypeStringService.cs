@@ -54,5 +54,107 @@ namespace Invoice.Service
 
             return productType;
         }
+
+        public string SetProductTypeQuantity(ProductTypeOperations productTypeOperations)
+        {
+            string productTypeQuantity;
+
+            switch (productTypeOperations)
+            {
+                case ProductTypeOperations.FirstProductType:
+                    productTypeQuantity = "FirstProductTypeQuantity";
+                    break;
+                case ProductTypeOperations.SecondProductType:
+                    productTypeQuantity = "SecondProductTypeQuantity";
+                    break;
+                case ProductTypeOperations.ThirdProductType:
+                    productTypeQuantity = "ThirdProductTypeQuantity";
+                    break;
+                case ProductTypeOperations.FourthProductType:
+                    productTypeQuantity = "FourthProductTypeQuantity";
+                    break;
+                case ProductTypeOperations.FifthProductType:
+                    productTypeQuantity = "FifthProductTypeQuantity";
+                    break;
+                case ProductTypeOperations.SixthProductType:
+                    productTypeQuantity = "SixthProductTypeQuantity";
+                    break;
+                case ProductTypeOperations.SeventhProductType:
+                    productTypeQuantity = "SeventhProductTypeQuantity";
+                    break;
+                case ProductTypeOperations.EighthProductType:
+                    productTypeQuantity = "EighthProductTypeQuantity";
+                    break;
+                case ProductTypeOperations.NinthProductType:
+                    productTypeQuantity = "NinthProductTypeQuantity";
+                    break;
+                case ProductTypeOperations.TenProductType:
+                    productTypeQuantity = "TenProductTypeQuantity";
+                    break;
+                case ProductTypeOperations.EleventhProductType:
+                    productTypeQuantity = "EleventhProductTypeQuantity";
+                    break;
+                case ProductTypeOperations.TwelfthProductType:
+                    productTypeQuantity = "TwelfthProductTypeQuantity";
+                    break;
+
+                default:
+                    productTypeQuantity = "FirstProductTypeQuantity";
+                    break;
+            }
+
+            return productTypeQuantity;
+        }
+
+        public string SetProductTypePrice(ProductTypeOperations productTypeOperations)
+        {
+            string productTypePrice;
+
+            switch (productTypeOperations)
+            {
+                case ProductTypeOperations.FirstProductType:
+                    productTypePrice = "FirstProductTypePrice";
+                    break;
+                case ProductTypeOperations.SecondProductType:
+                    productTypePrice = "SecondProductTypePrice";
+                    break;
+                case ProductTypeOperations.ThirdProductType:
+                    productTypePrice = "ThirdProductTypePrice";
+                    break;
+                case ProductTypeOperations.FourthProductType:
+                    productTypePrice = "FourthProductTypePrice";
+                    break;
+                case ProductTypeOperations.FifthProductType:
+                    productTypePrice = "FifthProductTypePrice";
+                    break;
+                case ProductTypeOperations.SixthProductType:
+                    productTypePrice = "SixthProductTypePrice";
+                    break;
+                case ProductTypeOperations.SeventhProductType:
+                    productTypePrice = "SeventhProductTypePrice";
+                    break;
+                case ProductTypeOperations.EighthProductType:
+                    productTypePrice = "EighthProductTypePrice";
+                    break;
+                case ProductTypeOperations.NinthProductType:
+                    productTypePrice = "NinthProductTypePrice";
+                    break;
+                case ProductTypeOperations.TenProductType:
+                    productTypePrice = "TenProductTypePrice";
+                    break;
+                case ProductTypeOperations.EleventhProductType:
+                    productTypePrice = "EleventhProductTypePrice";
+                    break;
+                case ProductTypeOperations.TwelfthProductType:
+                    productTypePrice = "TwelfthProductTypePrice";
+                    break;
+
+                default:
+                    productTypePrice = "FirstProductTypePrice";
+                    break;
+            }
+
+            return productTypePrice;
+        }
     }
 }
