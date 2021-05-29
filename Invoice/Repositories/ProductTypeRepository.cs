@@ -36,7 +36,7 @@ namespace Invoice.Repositories
             }
         }
 
-        public List<string> GetExistingProductTypeNames(ProductTypeOperations productTypeOperations)
+        public IEnumerable<string> GetExistingProductTypeNames(ProductTypeOperations productTypeOperations)
         {
             string productType = _productTypeStringService.SetProductType(productTypeOperations);
 
@@ -52,7 +52,7 @@ namespace Invoice.Repositories
 
                 IEnumerable<string> getAllSpecificProductType = dbConnection.Query<string>(getExistingServiceQuery);
 
-                return getAllSpecificProductType.ToList();
+                return getAllSpecificProductType;
             }
         }
 

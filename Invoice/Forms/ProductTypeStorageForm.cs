@@ -124,16 +124,19 @@ namespace Invoice.Forms
 
             ProductTypeDataGridView.DataSource = bindingSource;
 
+            ChangeDataGridViewHeaderText();
+
+            ProductTypeDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+        }
+
+        private void ChangeDataGridViewHeaderText()
+        {
             ProductTypeDataGridView.Columns[0].HeaderText = "Sąskaitos Nr.";
             ProductTypeDataGridView.Columns[1].HeaderText = "Metai";
             ProductTypeDataGridView.Columns[2].HeaderText = "Tipas";
             ProductTypeDataGridView.Columns[3].HeaderText = "Kiekis";
             ProductTypeDataGridView.Columns[4].HeaderText = "Vnt. Kaina";
-
-            
-
-            ProductTypeDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-
         }
 
         private dynamic GetSpecificProductModel(ProductTypeOperations productTypeOperations)
