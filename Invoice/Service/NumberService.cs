@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.Linq;
 using System.Windows.Forms;
 using Invoice.Enums;
 using Invoice.Models;
@@ -407,7 +406,14 @@ namespace Invoice.Service
 
             for (int i = 0; i <= rowsCount - 1; i++)
             {
-                sum = sum + double.Parse(dataGridView.Rows[i].Cells[cellIndex].Value.ToString());
+                try
+                {
+                    sum = sum + double.Parse(dataGridView.Rows[i].Cells[cellIndex].Value.ToString());
+                }
+                catch
+                {
+                    sum = sum + 0;
+                }
             }
 
             return sum;

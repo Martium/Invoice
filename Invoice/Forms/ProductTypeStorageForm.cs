@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 using Invoice.Enums;
 using Invoice.Models.ProductType;
@@ -15,6 +16,7 @@ namespace Invoice.Forms
 
         private readonly NumberService _numberService;
 
+        private const int ProductTypeNameIndex = 2;
         private const int ProductTypeQuantityIndex = 3;
         private const int ProductTypePriceIndex = 4;
 
@@ -43,6 +45,8 @@ namespace Invoice.Forms
             LoadSpecificProductTypeToDataGridView(productTypeOperation);
 
             CalculateFullProductTypeQuantityAndPrice();
+
+            TryFillProductTypeSpecificNameComboBoxByDataGridResults();
         }
 
         private void ProductTypeDataGridView_Paint(object sender, PaintEventArgs e)
@@ -53,6 +57,11 @@ namespace Invoice.Forms
             {
                 DisplayEmptyListReason("Informacijos Nerasta pasirinkite kitą lentelę ir spauskite Gauti išrašus", e, dataGridView);
             }
+        }
+
+        private void GetAllInfoByProductNameButton_Click(object sender, System.EventArgs e)
+        {
+
         }
 
         #region Helpers
@@ -315,7 +324,30 @@ namespace Invoice.Forms
             FullProductTypePriceTextBox.Text = calculateFullProductTypePrice.ToString(CultureInfo.InvariantCulture);
         }
 
+        private void TryFillProductTypeSpecificNameComboBoxByDataGridResults()
+        {
+            ProductTypeSpecificNameComboBox.Items.Clear();
+
+            if (ProductTypeDataGridView.Rows.Count != 0)
+            {
+                List<object> allNames = new List<object>();
+
+                for (int i = 0; i <= ProductTypeDataGridView.Rows.Count - 1; i++)
+                {
+                    allNames.Add(ProductTypeDataGridView.Rows[i].Cells[ProductTypeNameIndex].Value);
+                }
+
+                IEnumerable<object> distinctAllNames = allNames.Distinct();
+
+                foreach (var productTypeName in distinctAllNames)
+                {
+                    ProductTypeSpecificNameComboBox.Items.Add(productTypeName);
+                }
+            }
+        }
+
         #endregion
-       
+
+        
     }
 }

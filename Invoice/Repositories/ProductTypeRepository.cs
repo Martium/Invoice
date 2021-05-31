@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Data.SQLite;
-using System.Linq;
 using Dapper;
 using Invoice.Enums;
 using Invoice.Models.ProductType;
@@ -69,6 +68,7 @@ namespace Invoice.Repositories
                 string getExistingServiceQuery =
                     $@"SELECT PT.IdByInvoiceNumber, PT.IdByInvoiceNumberYearCreation, PT.{productType}, PT.{productTypeQuantity}, PT.{productTypePrice}
                        FROM ProductType PT
+                       WHERE PT.{productType} IS NOT NULL AND PT.{productTypeQuantity} IS NOT NULL AND PT.{productTypePrice} IS NOT NULL
                        ORDER BY PT.IdByInvoiceNumber DESC, PT.IdByInvoiceNumberYearCreation DESC
                     ";
 
@@ -150,7 +150,8 @@ namespace Invoice.Repositories
 
                 string getExistingServiceQuery =
                     $@"SELECT * FROM ProductType PT
-                       WHERE PT.{productType} = '{productTypeName}';
+                       WHERE PT.{productType} = '{productTypeName}'
+                       ORDER BY PT.IdByInvoiceNumber DESC, PT.IdByInvoiceNumberYearCreation DESC
                     ";
 
                 switch (productTypeOperations)

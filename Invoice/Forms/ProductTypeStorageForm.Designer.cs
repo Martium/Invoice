@@ -93,6 +93,7 @@ namespace Invoice.Forms
             this.GetAllInfoByProductNameButton.TabIndex = 4;
             this.GetAllInfoByProductNameButton.Text = "Rūšiuoti pagal pavadinimą";
             this.GetAllInfoByProductNameButton.UseVisualStyleBackColor = true;
+            this.GetAllInfoByProductNameButton.Click += new System.EventHandler(this.GetAllInfoByProductNameButton_Click);
             // 
             // ProductTypeYearComboBox
             // 
