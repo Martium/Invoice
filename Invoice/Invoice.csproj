@@ -138,6 +138,7 @@
     <Compile Include="Models\ProductType\FifthSpecificProductTypeModel.cs" />
     <Compile Include="Models\ProductType\FourthSpecificProductTypeModel.cs" />
     <Compile Include="Models\ProductType\NinthSpecificProductTypeModel.cs" />
+    <Compile Include="Models\ProductType\ProductTypeSpecificNamesModel.cs" />
     <Compile Include="Models\ProductType\SecondSpecificProductTypeModel.cs" />
     <Compile Include="Models\ProductType\SeventhSpecificProductTypeModel.cs" />
     <Compile Include="Models\ProductType\SixthSpecificProductTypeModel.cs" />

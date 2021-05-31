@@ -35,6 +35,26 @@ namespace Invoice.Repositories
             }
         }
 
+        public IEnumerable<ProductTypeSpecificNamesModel> GetAllExistingProductTypeNames()
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string getExistingAllNamesQuery =
+                    @"SELECT DISTINCT
+                        PT.FirstProductType, PT.SecondProductType, PT.ThirdProductType, PT.FourthProductType,
+                        PT.FifthProductType, PT.SixthProductType, PT.SeventhProductType, PT.EighthProductType,
+                        PT.NinthProductType, PT.TenProductType, PT.EleventhProductType, PT.TwelfthProductType
+                      FROM ProductType PT
+                    ";
+
+                IEnumerable<ProductTypeSpecificNamesModel> getExistingNames = dbConnection.Query<ProductTypeSpecificNamesModel>(getExistingAllNamesQuery);
+
+                return getExistingNames;
+            }
+        }
+
         public IEnumerable<string> GetExistingProductTypeNames(ProductTypeOperations productTypeOperations)
         {
             string productType = _productTypeStringService.SetProductType(productTypeOperations);
@@ -143,6 +163,8 @@ namespace Invoice.Repositories
         public dynamic GetSpecificProductTypeFullInfoBySpecialName(string productTypeName, ProductTypeOperations productTypeOperations)
         {
             string productType = _productTypeStringService.SetProductType(productTypeOperations);
+            string productTypeQuantity = _productTypeStringService.SetProductTypeQuantity(productTypeOperations);
+            string productTypePrice = _productTypeStringService.SetProductTypePrice(productTypeOperations);
 
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
             {
@@ -150,7 +172,7 @@ namespace Invoice.Repositories
 
                 string getExistingServiceQuery =
                     $@"SELECT * FROM ProductType PT
-                       WHERE PT.{productType} = '{productTypeName}'
+                       WHERE PT.{productType} = '{productTypeName}' AND PT.{productType} IS NOT NULL AND PT.{productTypeQuantity} IS NOT NULL AND PT.{productTypePrice} IS NOT NULL
                        ORDER BY PT.IdByInvoiceNumber DESC, PT.IdByInvoiceNumberYearCreation DESC
                     ";
 

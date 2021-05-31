@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
-using System.Linq;
 using System.Windows.Forms;
 using Invoice.Enums;
 using Invoice.Models.ProductType;
@@ -36,6 +36,8 @@ namespace Invoice.Forms
             LoadSpecificProductTypeToDataGridView(ProductTypeOperations.FirstProductType);
 
             CalculateFullProductTypeQuantityAndPrice();
+
+            TryFillProductTypeSpecificNameComboBoxByDataGridResults();
         }
 
         private void GetProductTypeButton_Click(object sender, System.EventArgs e)
@@ -328,22 +330,53 @@ namespace Invoice.Forms
         {
             ProductTypeSpecificNameComboBox.Items.Clear();
 
-            if (ProductTypeDataGridView.Rows.Count != 0)
+            IEnumerable<ProductTypeSpecificNamesModel> getInfo = _productTypeRepository.GetAllExistingProductTypeNames();
+
+            foreach (var info in getInfo)
             {
-                List<object> allNames = new List<object>();
+                if (info.FirstProductType != string.Empty)
+                    ProductTypeSpecificNameComboBox.Items.Add(info.FirstProductType);
 
-                for (int i = 0; i <= ProductTypeDataGridView.Rows.Count - 1; i++)
-                {
-                    allNames.Add(ProductTypeDataGridView.Rows[i].Cells[ProductTypeNameIndex].Value);
-                }
+                if (info.SecondProductType != string.Empty)
+                    ProductTypeSpecificNameComboBox.Items.Add(info.SecondProductType);
 
-                IEnumerable<object> distinctAllNames = allNames.Distinct();
+                if (info.ThirdProductType != string.Empty)
+                    ProductTypeSpecificNameComboBox.Items.Add(info.ThirdProductType);
 
-                foreach (var productTypeName in distinctAllNames)
-                {
-                    ProductTypeSpecificNameComboBox.Items.Add(productTypeName);
-                }
+                if (info.FourthProductType != string.Empty)
+                    ProductTypeSpecificNameComboBox.Items.Add(info.FourthProductType);
+
+                if (info.FifthProductType != string.Empty)
+                    ProductTypeSpecificNameComboBox.Items.Add(info.FifthProductType);
+
+                if (info.SixthProductType != string.Empty)
+                    ProductTypeSpecificNameComboBox.Items.Add(info.SixthProductType);
+
+                if (info.SeventhProductType != string.Empty)
+                    ProductTypeSpecificNameComboBox.Items.Add(info.SeventhProductType);
+
+                if (info.EighthProductType != string.Empty)
+                    ProductTypeSpecificNameComboBox.Items.Add(info.EighthProductType);
+
+                if (info.NinthProductType != string.Empty)
+                    ProductTypeSpecificNameComboBox.Items.Add(info.NinthProductType);
+
+                if (info.TenProductType != string.Empty)
+                    ProductTypeSpecificNameComboBox.Items.Add(info.TenProductType);
+
+                if (info.EleventhProductType != string.Empty)
+                    ProductTypeSpecificNameComboBox.Items.Add(info.EleventhProductType);
+
+                if (info.TwelfthProductType != string.Empty)
+                    ProductTypeSpecificNameComboBox.Items.Add(info.TwelfthProductType);
+
             }
+
+            if (ProductTypeSpecificNameComboBox.Items.Count != 0)
+            {
+                ProductTypeSpecificNameComboBox.Text = ProductTypeSpecificNameComboBox.Items[0].ToString();
+            }
+
         }
 
         #endregion
