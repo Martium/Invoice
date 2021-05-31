@@ -67,8 +67,9 @@ namespace Invoice.Repositories
                 dbConnection.Open();
 
                 string getExistingServiceQuery =
-                    $@"SELECT IdByInvoiceNumber, IdByInvoiceNumberYearCreation, {productType}, {productTypeQuantity}, {productTypePrice}
-                       FROM ProductType 
+                    $@"SELECT PT.IdByInvoiceNumber, PT.IdByInvoiceNumberYearCreation, PT.{productType}, PT.{productTypeQuantity}, PT.{productTypePrice}
+                       FROM ProductType PT
+                       ORDER BY PT.IdByInvoiceNumber DESC, PT.IdByInvoiceNumberYearCreation DESC
                     ";
 
                 switch (productTypeOperations)
