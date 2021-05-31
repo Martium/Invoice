@@ -32,6 +32,8 @@ namespace Invoice.Forms
             FillSpecificProductTypeComboBox();
 
             LoadSpecificProductTypeToDataGridView(ProductTypeOperations.FirstProductType);
+
+            CalculateFullProductTypeQuantityAndPrice();
         }
 
         private void GetProductTypeButton_Click(object sender, System.EventArgs e)
@@ -312,8 +314,6 @@ namespace Invoice.Forms
             FullProductTypeQuantityTextBox.Text = calculateFullProductTypeQuantity.ToString(CultureInfo.InvariantCulture);
             FullProductTypePriceTextBox.Text = calculateFullProductTypePrice.ToString(CultureInfo.InvariantCulture);
         }
-
-        
 
         #endregion
        
