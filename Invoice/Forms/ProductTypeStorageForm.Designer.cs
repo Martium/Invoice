@@ -87,11 +87,11 @@ namespace Invoice.Forms
             // 
             // GetAllInfoByProductNameButton
             // 
-            this.GetAllInfoByProductNameButton.Location = new System.Drawing.Point(403, 24);
+            this.GetAllInfoByProductNameButton.Location = new System.Drawing.Point(756, 294);
             this.GetAllInfoByProductNameButton.Name = "GetAllInfoByProductNameButton";
-            this.GetAllInfoByProductNameButton.Size = new System.Drawing.Size(140, 22);
+            this.GetAllInfoByProductNameButton.Size = new System.Drawing.Size(140, 51);
             this.GetAllInfoByProductNameButton.TabIndex = 4;
-            this.GetAllInfoByProductNameButton.Text = "Rūšiuoti pagal pavadinimą";
+            this.GetAllInfoByProductNameButton.Text = "Gauti visą kiekio ir\r\nkainos informaciją \r\npagal pavadinimą";
             this.GetAllInfoByProductNameButton.UseVisualStyleBackColor = true;
             this.GetAllInfoByProductNameButton.Click += new System.EventHandler(this.GetAllInfoByProductNameButton_Click);
             // 
@@ -106,7 +106,7 @@ namespace Invoice.Forms
             // ProductTypeSpecificNameComboBox
             // 
             this.ProductTypeSpecificNameComboBox.FormattingEnabled = true;
-            this.ProductTypeSpecificNameComboBox.Location = new System.Drawing.Point(250, 24);
+            this.ProductTypeSpecificNameComboBox.Location = new System.Drawing.Point(603, 295);
             this.ProductTypeSpecificNameComboBox.Name = "ProductTypeSpecificNameComboBox";
             this.ProductTypeSpecificNameComboBox.Size = new System.Drawing.Size(147, 21);
             this.ProductTypeSpecificNameComboBox.TabIndex = 7;

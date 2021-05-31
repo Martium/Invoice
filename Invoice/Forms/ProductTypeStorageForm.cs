@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 using Invoice.Enums;
 using Invoice.Models.ProductType;
@@ -37,7 +37,7 @@ namespace Invoice.Forms
 
             CalculateFullProductTypeQuantityAndPrice();
 
-            TryFillProductTypeSpecificNameComboBoxByDataGridResults();
+            TryFillProductTypeSpecificNamesToComboBox();
         }
 
         private void GetProductTypeButton_Click(object sender, System.EventArgs e)
@@ -48,7 +48,7 @@ namespace Invoice.Forms
 
             CalculateFullProductTypeQuantityAndPrice();
 
-            TryFillProductTypeSpecificNameComboBoxByDataGridResults();
+            TryFillProductTypeSpecificNamesToComboBox();
         }
 
         private void ProductTypeDataGridView_Paint(object sender, PaintEventArgs e)
@@ -63,7 +63,7 @@ namespace Invoice.Forms
 
         private void GetAllInfoByProductNameButton_Click(object sender, System.EventArgs e)
         {
-
+            AddQuantityAndPriceAllInfoBySpecialProductTypeName();
         }
 
         #region Helpers
@@ -326,7 +326,7 @@ namespace Invoice.Forms
             FullProductTypePriceTextBox.Text = calculateFullProductTypePrice.ToString(CultureInfo.InvariantCulture);
         }
 
-        private void TryFillProductTypeSpecificNameComboBoxByDataGridResults()
+        private void TryFillProductTypeSpecificNamesToComboBox()
         {
             ProductTypeSpecificNameComboBox.Items.Clear();
 
@@ -377,6 +377,77 @@ namespace Invoice.Forms
                 ProductTypeSpecificNameComboBox.Text = ProductTypeSpecificNameComboBox.Items[0].ToString();
             }
 
+        }
+
+        private void AddQuantityAndPriceAllInfoBySpecialProductTypeName()
+        {
+            IEnumerable<FirstSpecificProductTypeModel> firstSpecificProductInfo =
+                _productTypeRepository.GetSpecificProductTypeFullInfoBySpecialName(ProductTypeSpecificNameComboBox.Text,
+                    ProductTypeOperations.FirstProductType);
+            IEnumerable<SecondSpecificProductTypeModel> secondSpecificProductInfo =
+                _productTypeRepository.GetSpecificProductTypeFullInfoBySpecialName(ProductTypeSpecificNameComboBox.Text,
+                    ProductTypeOperations.SecondProductType);
+            IEnumerable<ThirdSpecificProductTypeModel> thirdSpecificProductInfo =
+                _productTypeRepository.GetSpecificProductTypeFullInfoBySpecialName(ProductTypeSpecificNameComboBox.Text,
+                    ProductTypeOperations.ThirdProductType);
+            IEnumerable<FourthSpecificProductTypeModel> fourthSpecificProductInfo =
+                _productTypeRepository.GetSpecificProductTypeFullInfoBySpecialName(ProductTypeSpecificNameComboBox.Text,
+                    ProductTypeOperations.FourthProductType);
+            IEnumerable<FifthSpecificProductTypeModel> fifthSpecificProductInfo =
+                _productTypeRepository.GetSpecificProductTypeFullInfoBySpecialName(ProductTypeSpecificNameComboBox.Text,
+                    ProductTypeOperations.FifthProductType);
+            IEnumerable<SixthSpecificProductTypeModel> sixthSpecificProductInfo =
+                _productTypeRepository.GetSpecificProductTypeFullInfoBySpecialName(ProductTypeSpecificNameComboBox.Text,
+                    ProductTypeOperations.SixthProductType);
+            IEnumerable<SeventhSpecificProductTypeModel> seventhSpecificProductInfo =
+                _productTypeRepository.GetSpecificProductTypeFullInfoBySpecialName(ProductTypeSpecificNameComboBox.Text,
+                    ProductTypeOperations.SeventhProductType);
+            IEnumerable<EighthSpecificProductTypeModel> eighthSpecificProductInfo =
+                _productTypeRepository.GetSpecificProductTypeFullInfoBySpecialName(ProductTypeSpecificNameComboBox.Text,
+                    ProductTypeOperations.EighthProductType);
+            IEnumerable<NinthSpecificProductTypeModel> ninthSpecificProductInfo =
+                _productTypeRepository.GetSpecificProductTypeFullInfoBySpecialName(ProductTypeSpecificNameComboBox.Text,
+                    ProductTypeOperations.NinthProductType);
+            IEnumerable<TenSpecificProductTypeModel> tenSpecificProductInfo =
+                _productTypeRepository.GetSpecificProductTypeFullInfoBySpecialName(ProductTypeSpecificNameComboBox.Text,
+                    ProductTypeOperations.TenProductType);
+            IEnumerable<EleventhSpecificProductTypeModel> eleventhSpecificProductInfo =
+                _productTypeRepository.GetSpecificProductTypeFullInfoBySpecialName(ProductTypeSpecificNameComboBox.Text,
+                    ProductTypeOperations.EleventhProductType);
+            IEnumerable<TwelfthSpecificProductTypeModel> twelfthSpecificProductInfo =
+                _productTypeRepository.GetSpecificProductTypeFullInfoBySpecialName(ProductTypeSpecificNameComboBox.Text,
+                    ProductTypeOperations.TwelfthProductType);
+
+            List<ProductTypeQuantityAndPriceModel> allInfoQuantityAndPrice = (from firstInfo in firstSpecificProductInfo where firstInfo.FirstProductTypeQuantity.HasValue && firstInfo.FirstProductTypePrice.HasValue select new ProductTypeQuantityAndPriceModel() { Quantity = firstInfo.FirstProductTypeQuantity.Value, Price = firstInfo.FirstProductTypePrice.Value }).ToList();
+
+            allInfoQuantityAndPrice.AddRange(from secondInfo in secondSpecificProductInfo where secondInfo.SecondProductTypeQuantity.HasValue && secondInfo.SecondProductTypePrice.HasValue select new ProductTypeQuantityAndPriceModel() { Quantity = secondInfo.SecondProductTypeQuantity.Value, Price = secondInfo.SecondProductTypePrice.Value });
+
+            allInfoQuantityAndPrice.AddRange(from thirdInfo in thirdSpecificProductInfo where thirdInfo.ThirdProductTypeQuantity.HasValue && thirdInfo.ThirdProductTypePrice.HasValue select new ProductTypeQuantityAndPriceModel() { Quantity = thirdInfo.ThirdProductTypeQuantity.Value, Price = thirdInfo.ThirdProductTypePrice.Value });
+
+            allInfoQuantityAndPrice.AddRange(from fourthInfo in fourthSpecificProductInfo where fourthInfo.FourthProductTypeQuantity.HasValue && fourthInfo.FourthProductTypePrice.HasValue select new ProductTypeQuantityAndPriceModel() { Quantity = fourthInfo.FourthProductTypeQuantity.Value, Price = fourthInfo.FourthProductTypePrice.Value });
+
+            allInfoQuantityAndPrice.AddRange(from fifthInfo in fifthSpecificProductInfo where fifthInfo.FifthProductTypeQuantity.HasValue && fifthInfo.FifthProductTypePrice.HasValue select new ProductTypeQuantityAndPriceModel() { Quantity = fifthInfo.FifthProductTypeQuantity.Value, Price = fifthInfo.FifthProductTypePrice.Value });
+
+            allInfoQuantityAndPrice.AddRange(from sixthInfo in sixthSpecificProductInfo where sixthInfo.SixthProductTypeQuantity.HasValue && sixthInfo.SixthProductTypePrice.HasValue select new ProductTypeQuantityAndPriceModel() { Quantity = sixthInfo.SixthProductTypeQuantity.Value, Price = sixthInfo.SixthProductTypePrice.Value });
+
+            allInfoQuantityAndPrice.AddRange(from seventhInfo in seventhSpecificProductInfo where seventhInfo.SeventhProductTypeQuantity.HasValue && seventhInfo.SeventhProductTypePrice.HasValue select new ProductTypeQuantityAndPriceModel() { Quantity = seventhInfo.SeventhProductTypeQuantity.Value, Price = seventhInfo.SeventhProductTypePrice.Value });
+
+            allInfoQuantityAndPrice.AddRange(from eighthInfo in eighthSpecificProductInfo where eighthInfo.EighthProductTypeQuantity.HasValue && eighthInfo.EighthProductTypePrice.HasValue select new ProductTypeQuantityAndPriceModel() { Quantity = eighthInfo.EighthProductTypeQuantity.Value, Price = eighthInfo.EighthProductTypePrice.Value });
+
+            allInfoQuantityAndPrice.AddRange(from ninthInfo in ninthSpecificProductInfo where ninthInfo.NinthProductTypeQuantity.HasValue && ninthInfo.NinthProductTypePrice.HasValue select new ProductTypeQuantityAndPriceModel() { Quantity = ninthInfo.NinthProductTypeQuantity.Value, Price = ninthInfo.NinthProductTypePrice.Value });
+
+            allInfoQuantityAndPrice.AddRange(from tenInfo in tenSpecificProductInfo where tenInfo.TenProductTypeQuantity.HasValue && tenInfo.TenProductTypePrice.HasValue select new ProductTypeQuantityAndPriceModel() { Quantity = tenInfo.TenProductTypeQuantity.Value, Price = tenInfo.TenProductTypePrice.Value });
+
+            allInfoQuantityAndPrice.AddRange(from eleventhInfo in eleventhSpecificProductInfo where eleventhInfo.EleventhProductTypeQuantity.HasValue && eleventhInfo.EleventhProductTypePrice.HasValue select new ProductTypeQuantityAndPriceModel() { Quantity = eleventhInfo.EleventhProductTypeQuantity.Value, Price = eleventhInfo.EleventhProductTypePrice.Value });
+
+            allInfoQuantityAndPrice.AddRange(from twelfthInfo in twelfthSpecificProductInfo where twelfthInfo.TwelfthProductTypeQuantity.HasValue && twelfthInfo.TwelfthProductTypePrice.HasValue select new ProductTypeQuantityAndPriceModel() { Quantity = twelfthInfo.TwelfthProductTypeQuantity.Value, Price = twelfthInfo.TwelfthProductTypePrice.Value });
+
+
+            double totalQuantitySum = allInfoQuantityAndPrice.Sum(q => q.Quantity);
+            double totalPriceSum = allInfoQuantityAndPrice.Sum(p => p.Price);
+
+            FullProductTypeQuantityTextBox.Text = totalQuantitySum.ToString(CultureInfo.InvariantCulture);
+            FullProductTypePriceTextBox.Text = totalPriceSum.ToString(CultureInfo.InvariantCulture);
         }
 
         #endregion
