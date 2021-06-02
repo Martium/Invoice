@@ -38,8 +38,8 @@ namespace Invoice.Repositories
                 CreateProductTypeTable(dbConnection);
 
 #if DEBUG
-               // FillInvoiceTestingInfo(dbConnection);
-               // FillProductTypeTestingInfo(dbConnection);
+                FillInvoiceTestingInfo(dbConnection);
+                FillProductTypeTestingInfo(dbConnection);
 #endif
 
             }

@@ -38,6 +38,8 @@ namespace Invoice.Forms
             this.FullProductTypePriceLabel = new System.Windows.Forms.Label();
             this.FullProductTypeQuantityTextBox = new System.Windows.Forms.TextBox();
             this.FullProductTypePriceTextBox = new System.Windows.Forms.TextBox();
+            this.ProductTypeInfoLabel = new System.Windows.Forms.Label();
+            this.ProductTypeYearInfoLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ProductTypeDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,11 +60,11 @@ namespace Invoice.Forms
             // 
             // GetAllInfoByYearButton
             // 
-            this.GetAllInfoByYearButton.Location = new System.Drawing.Point(125, 23);
+            this.GetAllInfoByYearButton.Location = new System.Drawing.Point(857, 88);
             this.GetAllInfoByYearButton.Name = "GetAllInfoByYearButton";
-            this.GetAllInfoByYearButton.Size = new System.Drawing.Size(119, 22);
+            this.GetAllInfoByYearButton.Size = new System.Drawing.Size(94, 35);
             this.GetAllInfoByYearButton.TabIndex = 3;
-            this.GetAllInfoByYearButton.Text = "Rūšiuot pagal metus";
+            this.GetAllInfoByYearButton.Text = "  Gauti Info \r\npagal metus ";
             this.GetAllInfoByYearButton.UseVisualStyleBackColor = true;
             this.GetAllInfoByYearButton.Click += new System.EventHandler(this.GetAllInfoByYearButton_Click);
             // 
@@ -79,7 +81,7 @@ namespace Invoice.Forms
             // ProductTypeYearComboBox
             // 
             this.ProductTypeYearComboBox.FormattingEnabled = true;
-            this.ProductTypeYearComboBox.Location = new System.Drawing.Point(40, 23);
+            this.ProductTypeYearComboBox.Location = new System.Drawing.Point(603, 147);
             this.ProductTypeYearComboBox.Name = "ProductTypeYearComboBox";
             this.ProductTypeYearComboBox.Size = new System.Drawing.Size(79, 21);
             this.ProductTypeYearComboBox.TabIndex = 6;
@@ -95,7 +97,7 @@ namespace Invoice.Forms
             // FullProductTypeQuantityLabel
             // 
             this.FullProductTypeQuantityLabel.AutoSize = true;
-            this.FullProductTypeQuantityLabel.Location = new System.Drawing.Point(603, 161);
+            this.FullProductTypeQuantityLabel.Location = new System.Drawing.Point(603, 244);
             this.FullProductTypeQuantityLabel.Name = "FullProductTypeQuantityLabel";
             this.FullProductTypeQuantityLabel.Size = new System.Drawing.Size(143, 13);
             this.FullProductTypeQuantityLabel.TabIndex = 8;
@@ -104,7 +106,7 @@ namespace Invoice.Forms
             // FullProductTypePriceLabel
             // 
             this.FullProductTypePriceLabel.AutoSize = true;
-            this.FullProductTypePriceLabel.Location = new System.Drawing.Point(603, 232);
+            this.FullProductTypePriceLabel.Location = new System.Drawing.Point(603, 307);
             this.FullProductTypePriceLabel.Name = "FullProductTypePriceLabel";
             this.FullProductTypePriceLabel.Size = new System.Drawing.Size(137, 13);
             this.FullProductTypePriceLabel.TabIndex = 9;
@@ -113,7 +115,7 @@ namespace Invoice.Forms
             // FullProductTypeQuantityTextBox
             // 
             this.FullProductTypeQuantityTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.FullProductTypeQuantityTextBox.Location = new System.Drawing.Point(603, 188);
+            this.FullProductTypeQuantityTextBox.Location = new System.Drawing.Point(603, 273);
             this.FullProductTypeQuantityTextBox.Name = "FullProductTypeQuantityTextBox";
             this.FullProductTypeQuantityTextBox.ReadOnly = true;
             this.FullProductTypeQuantityTextBox.Size = new System.Drawing.Size(147, 20);
@@ -122,17 +124,37 @@ namespace Invoice.Forms
             // FullProductTypePriceTextBox
             // 
             this.FullProductTypePriceTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.FullProductTypePriceTextBox.Location = new System.Drawing.Point(603, 259);
+            this.FullProductTypePriceTextBox.Location = new System.Drawing.Point(603, 334);
             this.FullProductTypePriceTextBox.Name = "FullProductTypePriceTextBox";
             this.FullProductTypePriceTextBox.ReadOnly = true;
             this.FullProductTypePriceTextBox.Size = new System.Drawing.Size(147, 20);
             this.FullProductTypePriceTextBox.TabIndex = 11;
+            // 
+            // ProductTypeInfoLabel
+            // 
+            this.ProductTypeInfoLabel.AutoSize = true;
+            this.ProductTypeInfoLabel.Location = new System.Drawing.Point(603, 72);
+            this.ProductTypeInfoLabel.Name = "ProductTypeInfoLabel";
+            this.ProductTypeInfoLabel.Size = new System.Drawing.Size(75, 13);
+            this.ProductTypeInfoLabel.TabIndex = 12;
+            this.ProductTypeInfoLabel.Text = "Produkto tipas";
+            // 
+            // ProductTypeYearInfoLabel
+            // 
+            this.ProductTypeYearInfoLabel.AutoSize = true;
+            this.ProductTypeYearInfoLabel.Location = new System.Drawing.Point(603, 131);
+            this.ProductTypeYearInfoLabel.Name = "ProductTypeYearInfoLabel";
+            this.ProductTypeYearInfoLabel.Size = new System.Drawing.Size(33, 13);
+            this.ProductTypeYearInfoLabel.TabIndex = 13;
+            this.ProductTypeYearInfoLabel.Text = "Metai";
             // 
             // ProductTypeStorageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1024, 786);
+            this.Controls.Add(this.ProductTypeYearInfoLabel);
+            this.Controls.Add(this.ProductTypeInfoLabel);
             this.Controls.Add(this.FullProductTypePriceTextBox);
             this.Controls.Add(this.FullProductTypeQuantityTextBox);
             this.Controls.Add(this.FullProductTypePriceLabel);
@@ -164,5 +186,7 @@ namespace Invoice.Forms
         private System.Windows.Forms.Label FullProductTypePriceLabel;
         private System.Windows.Forms.TextBox FullProductTypeQuantityTextBox;
         private System.Windows.Forms.TextBox FullProductTypePriceTextBox;
+        private System.Windows.Forms.Label ProductTypeInfoLabel;
+        private System.Windows.Forms.Label ProductTypeYearInfoLabel;
     }
 }
