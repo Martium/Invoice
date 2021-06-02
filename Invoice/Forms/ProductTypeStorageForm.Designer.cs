@@ -64,6 +64,7 @@ namespace Invoice.Forms
             this.GetAllInfoByYearButton.TabIndex = 3;
             this.GetAllInfoByYearButton.Text = "Rūšiuot pagal metus";
             this.GetAllInfoByYearButton.UseVisualStyleBackColor = true;
+            this.GetAllInfoByYearButton.Click += new System.EventHandler(this.GetAllInfoByYearButton_Click);
             // 
             // GetAllInfoByProductNameButton
             // 
