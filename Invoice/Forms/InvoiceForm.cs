@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Invoice.Constants;
 using Invoice.Enums;
 using Invoice.Models;
+using Invoice.Models.ProductType;
 using Invoice.Repositories;
 using Invoice.Service;
 using iText.IO.Image;

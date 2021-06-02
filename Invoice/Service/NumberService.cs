@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Windows.Forms;
 using Invoice.Enums;
 using Invoice.Models;
+using Invoice.Models.ProductType;
 
 namespace Invoice.Service
 {
@@ -398,5 +399,26 @@ namespace Invoice.Service
 
             return doubleOrNull;
         }
+
+        public double SumAllDataGridViewRowsSpecificColumns(DataGridView dataGridView, int rowsCount, int cellIndex)
+        {
+            double sum = 0;
+
+            for (int i = 0; i <= rowsCount - 1; i++)
+            {
+                try
+                {
+                    sum = sum + double.Parse(dataGridView.Rows[i].Cells[cellIndex].Value.ToString());
+                }
+                catch
+                {
+                    sum = sum + 0;
+                }
+            }
+
+            return sum;
+        }
+
+       
     }
 }

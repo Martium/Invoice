@@ -22,10 +22,7 @@ namespace Invoice.Forms
         private static readonly string SearchTextBoxPlaceholderText = "Įveskite paieškos frazę...";
 
         private const int InvoiceIsPaidIndex = 4;
-        private const int InvoiceNumberYearCreationIndex = 1;
         private const int TotalPriceWithPvmIndex = 5;
-
-        private double _totalPriceWithPvm = 0;
 
         private bool _searchActive;
 
@@ -98,7 +95,7 @@ namespace Invoice.Forms
 
             createNewInvoice.Closed += ShowAndRefreshListForm;
 
-            HideListAndOpenInvoiceForm(createNewInvoice);
+            HideListAndOpenAnotherForm(createNewInvoice);
         }
 
         private void EditButton_Click(object sender, EventArgs e)
@@ -110,7 +107,7 @@ namespace Invoice.Forms
 
             editSelectedInvoice.Closed += ShowAndRefreshListForm;
 
-            HideListAndOpenInvoiceForm(editSelectedInvoice);
+            HideListAndOpenAnotherForm(editSelectedInvoice);
         }
 
         private void CopyButton_Click(object sender, EventArgs e)
@@ -122,7 +119,7 @@ namespace Invoice.Forms
 
             copySelectedInvoice.Closed += ShowAndRefreshListForm;
 
-            HideListAndOpenInvoiceForm(copySelectedInvoice);
+            HideListAndOpenAnotherForm(copySelectedInvoice);
         }
 
         private void ChangePaymentButton_Click(object sender, EventArgs e)
@@ -175,14 +172,20 @@ namespace Invoice.Forms
 
         private void ListOfInvoiceDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            string paymentStatus = ListOfInvoiceDataGridView.SelectedRows[0].Cells[InvoiceIsPaidIndex].Value.ToString();
+            if (ListOfInvoiceDataGridView.Rows.Count != 0)
+            {
+                string paymentStatus = ListOfInvoiceDataGridView.SelectedRows[0].Cells[InvoiceIsPaidIndex].Value.ToString();
+                this.BackColor = paymentStatus == "Atsiskaityta" ? Color.Chartreuse : Color.Red;
+            }
 
-            this.BackColor = paymentStatus == "Atsiskaityta" ? Color.Chartreuse : Color.Red;
         }
 
         private void ListOfInvoiceDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            EditButton_Click(this, new EventArgs());
+            if (ListOfInvoiceDataGridView.Rows.Count != 0)
+            {
+                EditButton_Click(this, new EventArgs());
+            }
         }
 
         private void SellerInfoFormButton_Click(object sender, EventArgs e)
@@ -191,7 +194,8 @@ namespace Invoice.Forms
 
             sellerInfoForm.Closed += ShowAndRefreshListForm;
 
-            HideListAndOpenSellerInfoForm(sellerInfoForm);
+            HideListAndOpenAnotherForm(sellerInfoForm);
+
         }
 
         private void GetSelectedYearButton_Click(object sender, EventArgs e)
@@ -224,6 +228,15 @@ namespace Invoice.Forms
             LoadAllTotalPriceSums();
         }
 
+        private void OpenProductTypeStorageFormButton_Click(object sender, EventArgs e)
+        {
+            var productTypeStorageForm = new ProductTypeStorageForm();
+
+            productTypeStorageForm.Closed += ShowAndRefreshListForm;
+
+            HideListAndOpenAnotherForm(productTypeStorageForm);
+        }
+
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == (Keys.Escape))
@@ -237,18 +250,11 @@ namespace Invoice.Forms
 
         #region Helpers
 
-        private void HideListAndOpenInvoiceForm(Form invoiceForm)
+        private void HideListAndOpenAnotherForm(Form form)
         {
             this.Hide();
 
-            invoiceForm.Show(this);
-        }
-
-        private void HideListAndOpenSellerInfoForm(Form sellerInfoForm)
-        {
-            this.Hide();
-
-            sellerInfoForm.Show(this);
+            form.Show(this);
         }
 
         private void LoadInvoiceList(string searchPhrase = null)
@@ -299,6 +305,7 @@ namespace Invoice.Forms
 
             InvoiceNumberYearCreationComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             PaymentStatusComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+           
         }
 
         private static void DisplayEmptyListReason(string reason, PaintEventArgs e, DataGridView dataGridView)
@@ -411,23 +418,21 @@ namespace Invoice.Forms
 
         private void LoadAllTotalPriceSums()
         {
-            _totalPriceWithPvm = 0;
+            int rowsCount = ListOfInvoiceDataGridView.Rows.Count;
 
-            for (int i = 0; i <= ListOfInvoiceDataGridView.Rows.Count - 1; i++)
-            {
-                _totalPriceWithPvm = _totalPriceWithPvm +
-                                     double.Parse(ListOfInvoiceDataGridView.Rows[i].Cells[TotalPriceWithPvmIndex].Value
-                                         .ToString());
-            }
+            double totalPriceWithPvm =
+                _numberService.SumAllDataGridViewRowsSpecificColumns(ListOfInvoiceDataGridView, rowsCount,
+                    TotalPriceWithPvmIndex);
 
-            TotalPriceWithPvmTextBox.Text = _totalPriceWithPvm.ToString(CultureInfo.InvariantCulture);
+            TotalPriceWithPvmTextBox.Text = totalPriceWithPvm.ToString(CultureInfo.InvariantCulture);
 
-            PvmPriceTextBox.Text = _numberService.CalculatePvmFromTotalPriceWithPvm(_totalPriceWithPvm);
+            PvmPriceTextBox.Text = _numberService.CalculatePvmFromTotalPriceWithPvm(totalPriceWithPvm);
 
-            ProductTotalPriceTextBox.Text = _numberService.CalculateFullPriceFromTotalPriceWithPvm(_totalPriceWithPvm);
+            ProductTotalPriceTextBox.Text = _numberService.CalculateFullPriceFromTotalPriceWithPvm(totalPriceWithPvm);
+
         }
 
         #endregion
-        
+
     }
 }

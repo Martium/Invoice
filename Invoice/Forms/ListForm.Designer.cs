@@ -57,6 +57,7 @@ namespace Invoice.Forms
             this.TotalPriceWithPvmLabel = new System.Windows.Forms.Label();
             this.GetSelectedYearButton = new System.Windows.Forms.Button();
             this.PaymentStatusComboBox = new System.Windows.Forms.ComboBox();
+            this.OpenProductTypeStorageFormButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ListOfInvoiceDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceListModelBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -108,6 +109,8 @@ namespace Invoice.Forms
             // 
             this.ListOfInvoiceDataGridView.AllowUserToAddRows = false;
             this.ListOfInvoiceDataGridView.AllowUserToDeleteRows = false;
+            this.ListOfInvoiceDataGridView.AllowUserToResizeColumns = false;
+            this.ListOfInvoiceDataGridView.AllowUserToResizeRows = false;
             this.ListOfInvoiceDataGridView.AutoGenerateColumns = false;
             this.ListOfInvoiceDataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonShadow;
             this.ListOfInvoiceDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -306,12 +309,24 @@ namespace Invoice.Forms
             this.PaymentStatusComboBox.Size = new System.Drawing.Size(102, 21);
             this.PaymentStatusComboBox.TabIndex = 17;
             // 
+            // OpenProductTypeStorageFormButton
+            // 
+            this.OpenProductTypeStorageFormButton.BackColor = System.Drawing.SystemColors.Control;
+            this.OpenProductTypeStorageFormButton.Location = new System.Drawing.Point(391, 938);
+            this.OpenProductTypeStorageFormButton.Name = "OpenProductTypeStorageFormButton";
+            this.OpenProductTypeStorageFormButton.Size = new System.Drawing.Size(180, 37);
+            this.OpenProductTypeStorageFormButton.TabIndex = 18;
+            this.OpenProductTypeStorageFormButton.Text = "Atidaryti Produktų Sandelį";
+            this.OpenProductTypeStorageFormButton.UseVisualStyleBackColor = false;
+            this.OpenProductTypeStorageFormButton.Click += new System.EventHandler(this.OpenProductTypeStorageFormButton_Click);
+            // 
             // ListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1064, 1001);
+            this.Controls.Add(this.OpenProductTypeStorageFormButton);
             this.Controls.Add(this.PaymentStatusComboBox);
             this.Controls.Add(this.GetSelectedYearButton);
             this.Controls.Add(this.TotalPriceWithPvmLabel);
@@ -369,6 +384,7 @@ namespace Invoice.Forms
         private Label TotalPriceWithPvmLabel;
         private Button GetSelectedYearButton;
         private ComboBox PaymentStatusComboBox;
+        private Button OpenProductTypeStorageFormButton;
     }
 }
 
