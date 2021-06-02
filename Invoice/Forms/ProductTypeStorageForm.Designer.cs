@@ -30,8 +30,6 @@ namespace Invoice.Forms
         private void InitializeComponent()
         {
             this.ProductTypeDataGridView = new System.Windows.Forms.DataGridView();
-            this.GetProductTypeButton = new System.Windows.Forms.Button();
-            this.SpecificProductTypeComboBox = new System.Windows.Forms.ComboBox();
             this.GetAllInfoByYearButton = new System.Windows.Forms.Button();
             this.GetAllInfoByProductNameButton = new System.Windows.Forms.Button();
             this.ProductTypeYearComboBox = new System.Windows.Forms.ComboBox();
@@ -58,24 +56,6 @@ namespace Invoice.Forms
             this.ProductTypeDataGridView.TabIndex = 0;
             this.ProductTypeDataGridView.Paint += new System.Windows.Forms.PaintEventHandler(this.ProductTypeDataGridView_Paint);
             // 
-            // GetProductTypeButton
-            // 
-            this.GetProductTypeButton.Location = new System.Drawing.Point(756, 88);
-            this.GetProductTypeButton.Name = "GetProductTypeButton";
-            this.GetProductTypeButton.Size = new System.Drawing.Size(85, 21);
-            this.GetProductTypeButton.TabIndex = 1;
-            this.GetProductTypeButton.Text = "Gauti išrašus";
-            this.GetProductTypeButton.UseVisualStyleBackColor = true;
-            this.GetProductTypeButton.Click += new System.EventHandler(this.GetProductTypeButton_Click);
-            // 
-            // SpecificProductTypeComboBox
-            // 
-            this.SpecificProductTypeComboBox.FormattingEnabled = true;
-            this.SpecificProductTypeComboBox.Location = new System.Drawing.Point(603, 88);
-            this.SpecificProductTypeComboBox.Name = "SpecificProductTypeComboBox";
-            this.SpecificProductTypeComboBox.Size = new System.Drawing.Size(147, 21);
-            this.SpecificProductTypeComboBox.TabIndex = 2;
-            // 
             // GetAllInfoByYearButton
             // 
             this.GetAllInfoByYearButton.Location = new System.Drawing.Point(125, 23);
@@ -87,11 +67,11 @@ namespace Invoice.Forms
             // 
             // GetAllInfoByProductNameButton
             // 
-            this.GetAllInfoByProductNameButton.Location = new System.Drawing.Point(756, 294);
+            this.GetAllInfoByProductNameButton.Location = new System.Drawing.Point(756, 88);
             this.GetAllInfoByProductNameButton.Name = "GetAllInfoByProductNameButton";
-            this.GetAllInfoByProductNameButton.Size = new System.Drawing.Size(140, 51);
+            this.GetAllInfoByProductNameButton.Size = new System.Drawing.Size(95, 35);
             this.GetAllInfoByProductNameButton.TabIndex = 4;
-            this.GetAllInfoByProductNameButton.Text = "Gauti visą kiekio ir\r\nkainos informaciją \r\npagal pavadinimą";
+            this.GetAllInfoByProductNameButton.Text = "Gauti Info";
             this.GetAllInfoByProductNameButton.UseVisualStyleBackColor = true;
             this.GetAllInfoByProductNameButton.Click += new System.EventHandler(this.GetAllInfoByProductNameButton_Click);
             // 
@@ -106,7 +86,7 @@ namespace Invoice.Forms
             // ProductTypeSpecificNameComboBox
             // 
             this.ProductTypeSpecificNameComboBox.FormattingEnabled = true;
-            this.ProductTypeSpecificNameComboBox.Location = new System.Drawing.Point(603, 295);
+            this.ProductTypeSpecificNameComboBox.Location = new System.Drawing.Point(603, 88);
             this.ProductTypeSpecificNameComboBox.Name = "ProductTypeSpecificNameComboBox";
             this.ProductTypeSpecificNameComboBox.Size = new System.Drawing.Size(147, 21);
             this.ProductTypeSpecificNameComboBox.TabIndex = 7;
@@ -160,8 +140,6 @@ namespace Invoice.Forms
             this.Controls.Add(this.ProductTypeYearComboBox);
             this.Controls.Add(this.GetAllInfoByProductNameButton);
             this.Controls.Add(this.GetAllInfoByYearButton);
-            this.Controls.Add(this.SpecificProductTypeComboBox);
-            this.Controls.Add(this.GetProductTypeButton);
             this.Controls.Add(this.ProductTypeDataGridView);
             this.MaximizeBox = false;
             this.Name = "ProductTypeStorageForm";
@@ -177,8 +155,6 @@ namespace Invoice.Forms
         #endregion
 
         private System.Windows.Forms.DataGridView ProductTypeDataGridView;
-        private System.Windows.Forms.Button GetProductTypeButton;
-        private System.Windows.Forms.ComboBox SpecificProductTypeComboBox;
         private System.Windows.Forms.Button GetAllInfoByYearButton;
         private System.Windows.Forms.Button GetAllInfoByProductNameButton;
         private System.Windows.Forms.ComboBox ProductTypeYearComboBox;
