@@ -55,6 +55,24 @@ namespace Invoice.Repositories
             }
         }
 
+        public IEnumerable<int> GetAllExistingProductTypeYears()
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string getExistingYearsQuery =
+                    @"SELECT DISTINCT
+                        PT.IdByInvoiceNumberYearCreation
+                      FROM ProductType PT
+                      ORDER BY PT.IdByInvoiceNumberYearCreation DESC
+                    ";
+
+                IEnumerable<int> getExistingYears = dbConnection.Query<int>(getExistingYearsQuery);
+
+                return getExistingYears;
+            }
+        }
 
         public dynamic GetSpecificProductTypeFullInfoBySpecialName(string productTypeName, ProductTypeOperations productTypeOperations)
         {

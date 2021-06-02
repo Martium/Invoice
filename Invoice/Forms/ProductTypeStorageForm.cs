@@ -18,7 +18,6 @@ namespace Invoice.Forms
 
         private List<SpecificNameProductTypeModel> _specificProductTypeAllInfo;
 
-        private const int ProductTypeNameIndex = 2;
         private const int ProductTypeQuantityIndex = 3;
         private const int ProductTypePriceIndex = 4;
 
@@ -34,6 +33,8 @@ namespace Invoice.Forms
 
         private void ProductTypeStorageForm_Load(object sender, System.EventArgs e)
         {
+            TryFillProductTypeYearComboBox();
+
             TryFillProductTypeSpecificNamesToComboBox();
 
             GetAllInfoBySpecialProductTypeName();
@@ -195,7 +196,20 @@ namespace Invoice.Forms
 
         private void TryFillProductTypeYearComboBox()
         {
+            ProductTypeYearComboBox.Items.Clear();
 
+            IEnumerable<int> allYears = _productTypeRepository.GetAllExistingProductTypeYears();
+
+            foreach (var year in allYears)
+            {
+                if (year != default)
+                    ProductTypeYearComboBox.Items.Add(year);
+            }
+
+            if (ProductTypeYearComboBox.Items.Count != 0)
+            {
+                ProductTypeYearComboBox.Text = ProductTypeYearComboBox.Items[0].ToString();
+            }
         }
 
         private void GetAllInfoBySpecialProductTypeName()
