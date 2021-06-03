@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using Invoice.Enums;
+using Invoice.Models;
 using Invoice.Models.ProductType;
 using Invoice.Repositories;
 using Invoice.Service;
@@ -13,6 +14,8 @@ namespace Invoice.Forms
     public partial class ProductTypeStorageForm : Form
     {
         private readonly ProductTypeRepository _productTypeRepository;
+
+        private readonly StorageRepository _storageRepository;
 
         private readonly NumberService _numberService;
 
@@ -25,6 +28,7 @@ namespace Invoice.Forms
         {
             _specificProductTypeAllInfo = new List<SpecificNameProductTypeModel>();
             _productTypeRepository = new ProductTypeRepository();
+            _storageRepository = new StorageRepository();
             _numberService = new NumberService();
 
             InitializeComponent();
@@ -105,16 +109,45 @@ namespace Invoice.Forms
 
             ProductTypeDataGridView.DataSource = bindingSource;
 
-            ChangeDataGridViewHeaderText();
+            ChangeDataGridViewHeaderText(isProductType: true);
         }
 
-        private void ChangeDataGridViewHeaderText()
+        private void LoadStorageModelToDataGridView()
         {
-            ProductTypeDataGridView.Columns[0].HeaderText = @"Sąskaitos Nr.";
-            ProductTypeDataGridView.Columns[1].HeaderText = @"Metai";
-            ProductTypeDataGridView.Columns[2].HeaderText = @"Tipas";
-            ProductTypeDataGridView.Columns[3].HeaderText = @"Kiekis";
-            ProductTypeDataGridView.Columns[4].HeaderText = @"Vnt. Kaina";
+            var storage = _storageRepository.GetStorageInfo();
+
+            var bidingSourceModel = new StorageModel();
+
+            BindingSource bindingSource = new BindingSource {bidingSourceModel};
+
+            bindingSource.DataSource = storage;
+
+            ProductTypeDataGridView.DataSource = bindingSource;
+
+            ChangeDataGridViewHeaderText(isProductType: false);
+
+        }
+
+        private void ChangeDataGridViewHeaderText(bool isProductType)
+        {
+            if (isProductType)
+            {
+                ProductTypeDataGridView.Columns[0].HeaderText = @"Sąskaitos Nr.";
+                ProductTypeDataGridView.Columns[1].HeaderText = @"Metai";
+                ProductTypeDataGridView.Columns[2].HeaderText = @"Tipas";
+                ProductTypeDataGridView.Columns[3].HeaderText = @"Kiekis";
+                ProductTypeDataGridView.Columns[4].HeaderText = @"Vnt. Kaina";
+            }
+            else
+            {
+                ProductTypeDataGridView.Columns[0].HeaderText = @"Id";
+                ProductTypeDataGridView.Columns[1].HeaderText = @"Serija";
+                ProductTypeDataGridView.Columns[2].HeaderText = @"Tipas";
+                ProductTypeDataGridView.Columns[3].HeaderText = @"Sukūrimo Data";
+                ProductTypeDataGridView.Columns[4].HeaderText = @"Galiojimo Data";
+                ProductTypeDataGridView.Columns[5].HeaderText = @"Kiekis";
+                ProductTypeDataGridView.Columns[6].HeaderText = @"Kaina";
+            }
         }
 
         private static void DisplayEmptyListReason(string reason, PaintEventArgs e, DataGridView dataGridView)
@@ -379,5 +412,10 @@ namespace Invoice.Forms
         }
 
         #endregion
+
+        private void button1_Click(object sender, System.EventArgs e)
+        {
+            LoadStorageModelToDataGridView();
+        }
     }
 }

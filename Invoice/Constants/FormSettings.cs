@@ -53,6 +53,9 @@
             public static int TotalPriceWithPvm => 20;
 
             public static int ProductType => 45;
+
+            public static int StorageSerialNumber => 50;
+            public static int StorageProductName => 45;
         }
     }
 }

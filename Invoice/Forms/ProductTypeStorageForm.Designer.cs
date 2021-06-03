@@ -40,6 +40,7 @@ namespace Invoice.Forms
             this.FullProductTypePriceTextBox = new System.Windows.Forms.TextBox();
             this.ProductTypeInfoLabel = new System.Windows.Forms.Label();
             this.ProductTypeYearInfoLabel = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ProductTypeDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -148,11 +149,22 @@ namespace Invoice.Forms
             this.ProductTypeYearInfoLabel.TabIndex = 13;
             this.ProductTypeYearInfoLabel.Text = "Metai";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(713, 486);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(105, 29);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // ProductTypeStorageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1024, 786);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.ProductTypeYearInfoLabel);
             this.Controls.Add(this.ProductTypeInfoLabel);
             this.Controls.Add(this.FullProductTypePriceTextBox);
@@ -188,5 +200,6 @@ namespace Invoice.Forms
         private System.Windows.Forms.TextBox FullProductTypePriceTextBox;
         private System.Windows.Forms.Label ProductTypeInfoLabel;
         private System.Windows.Forms.Label ProductTypeYearInfoLabel;
+        private System.Windows.Forms.Button button1;
     }
 }
