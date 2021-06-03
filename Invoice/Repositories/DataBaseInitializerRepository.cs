@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data.SQLite;
-using System.Globalization;
 using System.IO;
 using Invoice.Constants;
 
@@ -166,7 +165,7 @@ namespace Invoice.Repositories
             string createStorageTableQuery =
                 $@"
                     CREATE TABLE [Storage] (
-                        [Id] [INTEGER] NOT NULL,
+                        [Id] [INTEGER] PRIMARY KEY NOT NULL,
                         
                         [StorageSerialNumber] [nvarchar] ({FormSettings.TextBoxLengths.StorageSerialNumber}) NOT NULL,
                         [StorageProductName] [nvarchar] ({FormSettings.TextBoxLengths.StorageProductName}) NOT NULL,
@@ -316,11 +315,11 @@ namespace Invoice.Repositories
             string fillStorageTestingInfoQuery =
                 @"BEGIN TRANSACTION;
                     INSERT INTO 'Storage'
-                        Values (1, 'A-1234BC', '1L APELSINAS', '2021-06-03', '2022-06-03', 1, 1.1);
+                        Values (NULL, 'A-1234BC', '1L APELSINAS', '2021-06-03', '2022-06-03', 1, 1.1);
                     INSERT INTO 'Storage'
-                        Values (2, 'B-1234BC', '1L APELSINAS', '2021-06-03', '2022-06-03', 2, 2.2);
+                        Values (NULL, 'B-1234BC', '1L APELSINAS', '2021-06-04', '2022-06-03', 2, 2.2);
                     INSERT INTO 'Storage'
-                        Values (3, 'C-1234BC', '1L APELSINAS', '2021-06-03', '2022-06-03', 3, 3.3);
+                        Values (NULL, 'C-1234BC', '1L APELSINAS', '2021-05-05', '2022-06-03', 3, 3.3);
                    COMMIT;
                 ";
 

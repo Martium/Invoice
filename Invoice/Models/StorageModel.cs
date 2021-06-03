@@ -4,7 +4,6 @@ namespace Invoice.Models
 {
     public class StorageModel
     {
-        public int Id { get; set; }
         public string StorageSerialNumber { get; set; }
         public string StorageProductName { get; set; }
         public DateTime StorageProductMadeDate { get; set; }

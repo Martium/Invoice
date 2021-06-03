@@ -125,6 +125,7 @@ namespace Invoice.Forms
             ProductTypeDataGridView.DataSource = bindingSource;
 
             ChangeDataGridViewHeaderText(isProductType: false);
+            ChangeDataGridViewHeadersSize();
 
         }
 
@@ -140,14 +141,21 @@ namespace Invoice.Forms
             }
             else
             {
-                ProductTypeDataGridView.Columns[0].HeaderText = @"Id";
-                ProductTypeDataGridView.Columns[1].HeaderText = @"Serija";
-                ProductTypeDataGridView.Columns[2].HeaderText = @"Tipas";
-                ProductTypeDataGridView.Columns[3].HeaderText = @"Sukūrimo Data";
-                ProductTypeDataGridView.Columns[4].HeaderText = @"Galiojimo Data";
-                ProductTypeDataGridView.Columns[5].HeaderText = @"Kiekis";
-                ProductTypeDataGridView.Columns[6].HeaderText = @"Kaina";
+                ProductTypeDataGridView.Columns[0].HeaderText = @"Serija";
+                ProductTypeDataGridView.Columns[1].HeaderText = @"Tipas";
+                ProductTypeDataGridView.Columns[2].HeaderText = @"Sukūrimo Data";
+                ProductTypeDataGridView.Columns[3].HeaderText = @"Galiojimo Data";
+                ProductTypeDataGridView.Columns[4].HeaderText = @"Kiekis";
+                ProductTypeDataGridView.Columns[5].HeaderText = @"Kaina";
             }
+        }
+
+        private void ChangeDataGridViewHeadersSize()
+        {
+            ProductTypeDataGridView.Columns[2].Width = 80;
+            ProductTypeDataGridView.Columns[3].Width = 80;
+            ProductTypeDataGridView.Columns[4].Width = 70;
+            ProductTypeDataGridView.Columns[5].Width = 70;
         }
 
         private static void DisplayEmptyListReason(string reason, PaintEventArgs e, DataGridView dataGridView)

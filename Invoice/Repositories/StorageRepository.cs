@@ -15,8 +15,9 @@ namespace Invoice.Repositories
 
                 string getExistingStorage =
                     @"SELECT 
-                        S.Id, S.StorageSerialNumber, S.StorageProductName, S.StorageProductMadeDate, S.StorageProductExpireDate, S.StorageProductQuantity, S.StorageProductPrice
+                         S.StorageSerialNumber, S.StorageProductName, S.StorageProductMadeDate, S.StorageProductExpireDate, S.StorageProductQuantity, S.StorageProductPrice
                       FROM Storage S
+                      ORDER BY S.StorageProductMadeDate DESC
                     ";
 
                 IEnumerable<StorageModel> getAllStorageInfo = dbConnection.Query<StorageModel>(getExistingStorage);
