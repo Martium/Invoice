@@ -15,7 +15,7 @@ namespace Invoice.Repositories
 
                 string getExistingStorage =
                     @"SELECT 
-                         S.StorageSerialNumber, S.StorageProductName, S.StorageProductMadeDate, S.StorageProductExpireDate, S.StorageProductQuantity, S.StorageProductPrice
+                        S.Id, S.StorageSerialNumber, S.StorageProductName, S.StorageProductMadeDate, S.StorageProductExpireDate, S.StorageProductQuantity, S.StorageProductPrice
                       FROM Storage S
                       ORDER BY S.StorageProductMadeDate DESC
                     ";
@@ -23,6 +23,43 @@ namespace Invoice.Repositories
                 IEnumerable<StorageModel> getAllStorageInfo = dbConnection.Query<StorageModel>(getExistingStorage);
 
                 return getAllStorageInfo;
+            }
+        }
+
+        public IEnumerable<StorageModel> GetALLInfoByProductName(string storageProductName)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string getExistingStorageByNameQuery =
+                    $@"SELECT * FROM Storage S
+                      WHERE S.StorageProductName = '{storageProductName}'
+                      ORDER BY S.StorageProductMadeDate DESC
+                    ";
+
+                IEnumerable<StorageModel> getExistingStorageByName =
+                    dbConnection.Query<StorageModel>(getExistingStorageByNameQuery);
+
+                return getExistingStorageByName;
+            }
+        }
+
+        public IEnumerable<string> GetAllStorageInfoProductNames()
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string getAllNamesQuery =
+                    @"SELECT DISTINCT
+                        S.StorageProductName
+                      FROM Storage S
+                    ";
+
+                IEnumerable<string> getAllNames = dbConnection.Query<string>(getAllNamesQuery);
+
+                return getAllNames;
             }
         }
     }

@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
+using Invoice.Constants;
 using Invoice.Enums;
 using Invoice.Models;
 using Invoice.Models.ProductType;
@@ -21,25 +22,34 @@ namespace Invoice.Forms
 
         private List<SpecificNameProductTypeModel> _specificProductTypeAllInfo;
 
+        private List<StorageModel> _storageInfo;
+
         private const int ProductTypeQuantityIndex = 3;
         private const int ProductTypePriceIndex = 4;
+
+        private const int StorageQuantityIndex = 5;
+        private const int StoragePriceIndex = 6;
 
         public ProductTypeStorageForm()
         {
             _specificProductTypeAllInfo = new List<SpecificNameProductTypeModel>();
             _productTypeRepository = new ProductTypeRepository();
             _storageRepository = new StorageRepository();
+            _storageInfo = new List<StorageModel>();
             _numberService = new NumberService();
 
             InitializeComponent();
+
             SetControlInitialState();
+            SetTextBoxMaxLengths();
+
+            TryFillProductTypeYearComboBox();
+            TryFillProductTypeSpecificNamesToComboBox();
+            TryFillStorageProductNameComboBox();
         }
 
         private void ProductTypeStorageForm_Load(object sender, System.EventArgs e)
         {
-            TryFillProductTypeYearComboBox();
-
-            TryFillProductTypeSpecificNamesToComboBox();
 
             InitializeButtonControl();
 
@@ -47,7 +57,7 @@ namespace Invoice.Forms
 
             LoadSpecificProductTypeToDataGridView();
 
-            CalculateFullProductTypeQuantityAndPrice();
+            CalculateFullProductTypeQuantityAndPrice(isProductType: true);
         }
 
         private void ProductTypeDataGridView_Paint(object sender, PaintEventArgs e)
@@ -75,7 +85,7 @@ namespace Invoice.Forms
 
             LoadSpecificProductTypeToDataGridView();
 
-            CalculateFullProductTypeQuantityAndPrice();
+            CalculateFullProductTypeQuantityAndPrice(isProductType: true);
         }
 
         private void GetAllInfoByYearButton_Click(object sender, System.EventArgs e)
@@ -84,7 +94,25 @@ namespace Invoice.Forms
 
             LoadSpecificProductTypeToDataGridView();
 
-            CalculateFullProductTypeQuantityAndPrice();
+            CalculateFullProductTypeQuantityAndPrice(isProductType: true);
+        }
+
+        private void GetAllInfoStorage_Click(object sender, System.EventArgs e)
+        {
+            GetStorageAllInfo();
+
+            LoadStorageModelToDataGridView();
+
+            CalculateFullProductTypeQuantityAndPrice(isProductType: false);
+        }
+
+        private void GetStorageInfoByNameButton_Click(object sender, System.EventArgs e)
+        {
+            GetAllStorageInfoByProductName();
+
+            LoadStorageModelToDataGridView();
+
+            CalculateFullProductTypeQuantityAndPrice(isProductType: false);
         }
 
         #region Helpers
@@ -97,6 +125,7 @@ namespace Invoice.Forms
 
             ProductTypeYearComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             ProductTypeSpecificNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            StorageProductNameListComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void LoadSpecificProductTypeToDataGridView()
@@ -114,19 +143,30 @@ namespace Invoice.Forms
 
         private void LoadStorageModelToDataGridView()
         {
-            var storage = _storageRepository.GetStorageInfo();
-
             var bidingSourceModel = new StorageModel();
 
             BindingSource bindingSource = new BindingSource {bidingSourceModel};
 
-            bindingSource.DataSource = storage;
+            bindingSource.DataSource = _storageInfo;
 
             ProductTypeDataGridView.DataSource = bindingSource;
 
             ChangeDataGridViewHeaderText(isProductType: false);
             ChangeDataGridViewHeadersSize();
+        }
 
+        private void GetStorageAllInfo()
+        {
+            _storageInfo.Clear();
+
+            _storageInfo = _storageRepository.GetStorageInfo().ToList();
+        }
+
+        private void GetAllStorageInfoByProductName()
+        {
+            _storageInfo.Clear();
+
+            _storageInfo = _storageRepository.GetALLInfoByProductName(StorageProductNameListComboBox.Text).ToList();
         }
 
         private void ChangeDataGridViewHeaderText(bool isProductType)
@@ -141,21 +181,22 @@ namespace Invoice.Forms
             }
             else
             {
-                ProductTypeDataGridView.Columns[0].HeaderText = @"Serija";
-                ProductTypeDataGridView.Columns[1].HeaderText = @"Tipas";
-                ProductTypeDataGridView.Columns[2].HeaderText = @"Sukūrimo Data";
-                ProductTypeDataGridView.Columns[3].HeaderText = @"Galiojimo Data";
-                ProductTypeDataGridView.Columns[4].HeaderText = @"Kiekis";
-                ProductTypeDataGridView.Columns[5].HeaderText = @"Kaina";
+                ProductTypeDataGridView.Columns[1].HeaderText = @"Serija";
+                ProductTypeDataGridView.Columns[2].HeaderText = @"Tipas";
+                ProductTypeDataGridView.Columns[3].HeaderText = @"Sukūrimo Data";
+                ProductTypeDataGridView.Columns[4].HeaderText = @"Galiojimo Data";
+                ProductTypeDataGridView.Columns[5].HeaderText = @"Kiekis";
+                ProductTypeDataGridView.Columns[6].HeaderText = @"Kaina";
             }
         }
 
         private void ChangeDataGridViewHeadersSize()
         {
-            ProductTypeDataGridView.Columns[2].Width = 80;
-            ProductTypeDataGridView.Columns[3].Width = 80;
+            ProductTypeDataGridView.Columns[0].Width = 30;
+            ProductTypeDataGridView.Columns[3].Width = 70;
             ProductTypeDataGridView.Columns[4].Width = 70;
-            ProductTypeDataGridView.Columns[5].Width = 70;
+            ProductTypeDataGridView.Columns[StorageQuantityIndex].Width = 60;
+            ProductTypeDataGridView.Columns[StoragePriceIndex].Width = 60;
         }
 
         private static void DisplayEmptyListReason(string reason, PaintEventArgs e, DataGridView dataGridView)
@@ -184,20 +225,33 @@ namespace Invoice.Forms
             }
         }
 
-        private void CalculateFullProductTypeQuantityAndPrice()
+        private void CalculateFullProductTypeQuantityAndPrice(bool isProductType)
         {
             int rowsCount = ProductTypeDataGridView.Rows.Count;
 
-            double calculateFullProductTypeQuantity =
-                _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeDataGridView, rowsCount,
-                    ProductTypeQuantityIndex);
+            if (isProductType)
+            {
+                double calculateFullProductTypeQuantity =
+                    _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeDataGridView, rowsCount,
+                        ProductTypeQuantityIndex);
 
-            double calculateFullProductTypePrice =
-                _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeDataGridView, rowsCount,
-                    ProductTypePriceIndex);
+                double calculateFullProductTypePrice =
+                    _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeDataGridView, rowsCount,
+                        ProductTypePriceIndex);
 
-            FullProductTypeQuantityTextBox.Text = calculateFullProductTypeQuantity.ToString(CultureInfo.InvariantCulture);
-            FullProductTypePriceTextBox.Text = calculateFullProductTypePrice.ToString(CultureInfo.InvariantCulture);
+                FullProductTypeQuantityTextBox.Text = calculateFullProductTypeQuantity.ToString(CultureInfo.InvariantCulture);
+                FullProductTypePriceTextBox.Text = calculateFullProductTypePrice.ToString(CultureInfo.InvariantCulture);
+            }
+            else
+            {
+                double calculateFullStorageQuantity = _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeDataGridView, rowsCount, StorageQuantityIndex);
+
+                double calculateFullStoragePrice = _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeDataGridView, rowsCount, StoragePriceIndex);
+
+                FullProductTypeQuantityTextBox.Text = calculateFullStorageQuantity.ToString(CultureInfo.InvariantCulture);
+                FullProductTypePriceTextBox.Text = calculateFullStoragePrice.ToString(CultureInfo.InvariantCulture);
+            }
+            
         }
 
         private void TryFillProductTypeSpecificNamesToComboBox()
@@ -419,11 +473,32 @@ namespace Invoice.Forms
             }
         }
 
-        #endregion
-
-        private void button1_Click(object sender, System.EventArgs e)
+        private void TryFillStorageProductNameComboBox()
         {
-            LoadStorageModelToDataGridView();
+            StorageProductNameListComboBox.Items.Clear();
+
+            IEnumerable<string> allProductNames = _storageRepository.GetAllStorageInfoProductNames();
+
+            foreach (var productName in allProductNames)
+            {
+                StorageProductNameListComboBox.Items.Add(productName);
+            }
+
+            if (StorageProductNameListComboBox.Items.Count != 0)
+            {
+                StorageProductNameListComboBox.Text = StorageProductNameListComboBox.Items[0].ToString();
+            }
         }
+
+        private void SetTextBoxMaxLengths()
+        {
+            StorageSerialNumberTextBox.MaxLength = FormSettings.TextBoxLengths.StorageSerialNumber;
+            StorageProductNameTextBox.MaxLength = FormSettings.TextBoxLengths.StorageProductName;
+        }
+
+
+
+        #endregion
+       
     }
 }
