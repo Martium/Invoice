@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.SQLite;
+using System.Globalization;
 using System.IO;
 using Invoice.Constants;
 
@@ -165,7 +166,7 @@ namespace Invoice.Repositories
             string createStorageTableQuery =
                 $@"
                     CREATE TABLE [Storage] (
-                        [Id] [INTEGER] PRIMARY KEY NOT NULL,
+                        [Id] [INTEGER] NOT NULL,
                         
                         [StorageSerialNumber] [nvarchar] ({FormSettings.TextBoxLengths.StorageSerialNumber}) NOT NULL,
                         [StorageProductName] [nvarchar] ({FormSettings.TextBoxLengths.StorageProductName}) NOT NULL,
@@ -313,13 +314,14 @@ namespace Invoice.Repositories
         private void FillStorageTestingInfo(SQLiteConnection dbConnection)
         {
             string fillStorageTestingInfoQuery =
-                $@"BEGIN TRANSACTION;
+                @"BEGIN TRANSACTION;
                     INSERT INTO 'Storage'
-                        Values (1, 'A-1234BC', '1L APELSINAS', '{DateTime.Now}', '{DateTime.Now.AddYears(1)}', 1, 1.1);
+                        Values (1, 'A-1234BC', '1L APELSINAS', '2021-06-03', '2022-06-03', 1, 1.1);
                     INSERT INTO 'Storage'
-                        Values (2, 'B-1234BC', '1L APELSINAS', '{DateTime.Now}', '{DateTime.Now.AddYears(1)}', 2, 2.2);
+                        Values (2, 'B-1234BC', '1L APELSINAS', '2021-06-03', '2022-06-03', 2, 2.2);
                     INSERT INTO 'Storage'
-                        Values (3, 'C-1234BC', '1L APELSINAS', '{DateTime.Now}', '{DateTime.Now.AddYears(1)}', 3, 3.3);
+                        Values (3, 'C-1234BC', '1L APELSINAS', '2021-06-03', '2022-06-03', 3, 3.3);
+                   COMMIT;
                 ";
 
             SQLiteCommand fillStorageTestingInfoCommand = new SQLiteCommand(fillStorageTestingInfoQuery, dbConnection);
