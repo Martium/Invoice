@@ -36,10 +36,12 @@ namespace Invoice.Repositories
                 CreateInvoiceTable(dbConnection);
                 CreateSellerInfoTable(dbConnection);
                 CreateProductTypeTable(dbConnection);
+                CreateStorageTable(dbConnection);
 
 #if DEBUG
                 FillInvoiceTestingInfo(dbConnection);
                 FillProductTypeTestingInfo(dbConnection);
+                FillStorageTestingInfo(dbConnection);
 #endif
 
             }
@@ -54,9 +56,9 @@ namespace Invoice.Repositories
                 file.Delete();
             }
 
-            foreach (DirectoryInfo subdirectory in directory.GetDirectories())
+            foreach (DirectoryInfo subdirectories in directory.GetDirectories())
             {
-                subdirectory.Delete(true);
+                subdirectories.Delete(true);
             }
         }
 
@@ -152,6 +154,32 @@ namespace Invoice.Repositories
 
             SQLiteCommand createInvoiceTableCommand = new SQLiteCommand(createInvoiceTableQuery, dbConnection);
             createInvoiceTableCommand.ExecuteNonQuery();
+        }
+
+        private void CreateStorageTable(SQLiteConnection dbConnection)
+        {
+            string dropAStorageTableQuery = GetDropTableQuery("Storage");
+            SQLiteCommand dropAStorageTableCommand = new SQLiteCommand(dropAStorageTableQuery, dbConnection);
+            dropAStorageTableCommand.ExecuteNonQuery();
+
+            string createStorageTableQuery =
+                $@"
+                    CREATE TABLE [Storage] (
+                        [Id] [INTEGER] PRIMARY KEY AUTOINCREMENT NOT NULL,
+                        
+                        [StorageSerialNumber] [nvarchar] ({FormSettings.TextBoxLengths.StorageSerialNumber}) NOT NULL,
+                        [StorageProductName] [nvarchar] ({FormSettings.TextBoxLengths.StorageProductName}) NOT NULL,
+                        [StorageProductMadeDate] [Date] NOT NULL,
+                        [StorageProductExpireDate] [Date] NOT NULL,
+                        [StorageProductQuantity] [Numeric] NOT NULL,
+                        [StorageProductPrice] [Numeric]  NULL,
+                        
+                        UNIQUE (Id)
+                    );
+                ";
+
+            SQLiteCommand createStorageTableCommand = new SQLiteCommand(createStorageTableQuery, dbConnection);
+            createStorageTableCommand.ExecuteNonQuery();
         }
 
         private void CreateSellerInfoTable(SQLiteConnection dbConnection)
@@ -280,6 +308,23 @@ namespace Invoice.Repositories
 
             SQLiteCommand fillProductTypeTestingInfoCommand = new SQLiteCommand(fillProductTypeTestingInfo, dbConnection);
             fillProductTypeTestingInfoCommand.ExecuteNonQuery();
+        }
+
+        private void FillStorageTestingInfo(SQLiteConnection dbConnection)
+        {
+            string fillStorageTestingInfoQuery =
+                @"BEGIN TRANSACTION;
+                    INSERT INTO 'Storage'
+                        Values (NULL, 'A-1234BC', '1L APELSINAS', '2021-06-03', '2022-06-03', 1, 1.1);
+                    INSERT INTO 'Storage'
+                        Values (NULL, 'B-1234BC', '2L APELSINAS', '2021-06-04', '2022-06-03', 2, 2.2);
+                    INSERT INTO 'Storage'
+                        Values (NULL, 'C-1234BC', '2L APELSINAS', '2021-05-05', '2022-06-03', 3, 3.3);
+                   COMMIT;
+                ";
+
+            SQLiteCommand fillStorageTestingInfoCommand = new SQLiteCommand(fillStorageTestingInfoQuery, dbConnection);
+            fillStorageTestingInfoCommand.ExecuteNonQuery();
         }
 
         private string GetDropTableQuery(string tableName)

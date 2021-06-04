@@ -132,6 +132,7 @@
     <Compile Include="Models\InvoiceNumberYearCreationModel.cs" />
     <Compile Include="Models\InvoiceQuantityAndPriceModel.cs" />
     <Compile Include="Models\MoneyReceiptModel.cs" />
+    <Compile Include="Models\NewProductStorageModel.cs" />
     <Compile Include="Models\ProductType\ProductTypeModel.cs" />
     <Compile Include="Models\ProductType\EighthSpecificProductTypeModel.cs" />
     <Compile Include="Models\ProductType\EleventhSpecificProductTypeModel.cs" />
@@ -148,12 +149,14 @@
     <Compile Include="Models\ProductType\TwelfthSpecificProductTypeModel.cs" />
     <Compile Include="Models\SellerInfoModel.cs" />
     <Compile Include="Models\ProductType\FirstSpecificProductTypeModel.cs" />
+    <Compile Include="Models\StorageModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\DataBaseInitializerRepository.cs" />
     <Compile Include="Repositories\InvoiceRepository.cs" />
     <Compile Include="Repositories\PdfFolderInitializer.cs" />
     <Compile Include="Repositories\ProductTypeRepository.cs" />
+    <Compile Include="Repositories\StorageRepository.cs" />
     <Compile Include="Service\MessageDialogService.cs" />
     <Compile Include="Service\NumberService.cs" />
     <Compile Include="Service\ProductTypeStringService.cs" />

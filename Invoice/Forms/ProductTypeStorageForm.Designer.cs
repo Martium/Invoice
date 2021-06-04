@@ -40,6 +40,27 @@ namespace Invoice.Forms
             this.FullProductTypePriceTextBox = new System.Windows.Forms.TextBox();
             this.ProductTypeInfoLabel = new System.Windows.Forms.Label();
             this.ProductTypeYearInfoLabel = new System.Windows.Forms.Label();
+            this.GetAllInfoStorage = new System.Windows.Forms.Button();
+            this.ProductTypeInformationLabel = new System.Windows.Forms.Label();
+            this.StorageInformationLabel = new System.Windows.Forms.Label();
+            this.SerialInfoLabel = new System.Windows.Forms.Label();
+            this.StorageProductNameInfoLabel = new System.Windows.Forms.Label();
+            this.MadeDateInfoLabel = new System.Windows.Forms.Label();
+            this.ExpireDateInfoLabel = new System.Windows.Forms.Label();
+            this.StorageQuantityIInfoLabel = new System.Windows.Forms.Label();
+            this.StoragePriceInfoLabel = new System.Windows.Forms.Label();
+            this.StorageSerialNumberTextBox = new System.Windows.Forms.TextBox();
+            this.StorageProductNameTextBox = new System.Windows.Forms.TextBox();
+            this.StorageProductMadeDateTextBox = new System.Windows.Forms.TextBox();
+            this.StorageProductExpireDateTextBox = new System.Windows.Forms.TextBox();
+            this.StorageProductQuantityTextBox = new System.Windows.Forms.TextBox();
+            this.StorageProductPriceTextBox = new System.Windows.Forms.TextBox();
+            this.StorageProductNameListComboBox = new System.Windows.Forms.ComboBox();
+            this.StorageProductnameInformationLabel = new System.Windows.Forms.Label();
+            this.NewStorageInfoLabel = new System.Windows.Forms.Label();
+            this.GetStorageInfoByNameButton = new System.Windows.Forms.Button();
+            this.CreateNewStorageButton = new System.Windows.Forms.Button();
+            this.ErrorLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ProductTypeDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,7 +83,7 @@ namespace Invoice.Forms
             // 
             this.GetAllInfoByYearButton.Location = new System.Drawing.Point(857, 88);
             this.GetAllInfoByYearButton.Name = "GetAllInfoByYearButton";
-            this.GetAllInfoByYearButton.Size = new System.Drawing.Size(94, 35);
+            this.GetAllInfoByYearButton.Size = new System.Drawing.Size(109, 35);
             this.GetAllInfoByYearButton.TabIndex = 3;
             this.GetAllInfoByYearButton.Text = "  Gauti Info \r\npagal metus ";
             this.GetAllInfoByYearButton.UseVisualStyleBackColor = true;
@@ -97,7 +118,7 @@ namespace Invoice.Forms
             // FullProductTypeQuantityLabel
             // 
             this.FullProductTypeQuantityLabel.AutoSize = true;
-            this.FullProductTypeQuantityLabel.Location = new System.Drawing.Point(603, 244);
+            this.FullProductTypeQuantityLabel.Location = new System.Drawing.Point(37, 669);
             this.FullProductTypeQuantityLabel.Name = "FullProductTypeQuantityLabel";
             this.FullProductTypeQuantityLabel.Size = new System.Drawing.Size(143, 13);
             this.FullProductTypeQuantityLabel.TabIndex = 8;
@@ -106,7 +127,7 @@ namespace Invoice.Forms
             // FullProductTypePriceLabel
             // 
             this.FullProductTypePriceLabel.AutoSize = true;
-            this.FullProductTypePriceLabel.Location = new System.Drawing.Point(603, 307);
+            this.FullProductTypePriceLabel.Location = new System.Drawing.Point(190, 669);
             this.FullProductTypePriceLabel.Name = "FullProductTypePriceLabel";
             this.FullProductTypePriceLabel.Size = new System.Drawing.Size(137, 13);
             this.FullProductTypePriceLabel.TabIndex = 9;
@@ -115,7 +136,7 @@ namespace Invoice.Forms
             // FullProductTypeQuantityTextBox
             // 
             this.FullProductTypeQuantityTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.FullProductTypeQuantityTextBox.Location = new System.Drawing.Point(603, 273);
+            this.FullProductTypeQuantityTextBox.Location = new System.Drawing.Point(40, 696);
             this.FullProductTypeQuantityTextBox.Name = "FullProductTypeQuantityTextBox";
             this.FullProductTypeQuantityTextBox.ReadOnly = true;
             this.FullProductTypeQuantityTextBox.Size = new System.Drawing.Size(147, 20);
@@ -124,7 +145,7 @@ namespace Invoice.Forms
             // FullProductTypePriceTextBox
             // 
             this.FullProductTypePriceTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.FullProductTypePriceTextBox.Location = new System.Drawing.Point(603, 334);
+            this.FullProductTypePriceTextBox.Location = new System.Drawing.Point(193, 696);
             this.FullProductTypePriceTextBox.Name = "FullProductTypePriceTextBox";
             this.FullProductTypePriceTextBox.ReadOnly = true;
             this.FullProductTypePriceTextBox.Size = new System.Drawing.Size(147, 20);
@@ -148,11 +169,222 @@ namespace Invoice.Forms
             this.ProductTypeYearInfoLabel.TabIndex = 13;
             this.ProductTypeYearInfoLabel.Text = "Metai";
             // 
+            // GetAllInfoStorage
+            // 
+            this.GetAllInfoStorage.Location = new System.Drawing.Point(763, 223);
+            this.GetAllInfoStorage.Name = "GetAllInfoStorage";
+            this.GetAllInfoStorage.Size = new System.Drawing.Size(88, 47);
+            this.GetAllInfoStorage.TabIndex = 14;
+            this.GetAllInfoStorage.Text = "Gauti Sandėlio \r\nPilną Info";
+            this.GetAllInfoStorage.UseVisualStyleBackColor = true;
+            this.GetAllInfoStorage.Click += new System.EventHandler(this.GetAllInfoStorage_Click);
+            // 
+            // ProductTypeInformationLabel
+            // 
+            this.ProductTypeInformationLabel.AutoSize = true;
+            this.ProductTypeInformationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProductTypeInformationLabel.Location = new System.Drawing.Point(637, 31);
+            this.ProductTypeInformationLabel.Name = "ProductTypeInformationLabel";
+            this.ProductTypeInformationLabel.Size = new System.Drawing.Size(294, 20);
+            this.ProductTypeInformationLabel.TabIndex = 15;
+            this.ProductTypeInformationLabel.Text = "Produktai pagal Sąskaitas Faktūras";
+            // 
+            // StorageInformationLabel
+            // 
+            this.StorageInformationLabel.AutoSize = true;
+            this.StorageInformationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StorageInformationLabel.Location = new System.Drawing.Point(637, 191);
+            this.StorageInformationLabel.Name = "StorageInformationLabel";
+            this.StorageInformationLabel.Size = new System.Drawing.Size(157, 20);
+            this.StorageInformationLabel.TabIndex = 16;
+            this.StorageInformationLabel.Text = "Sandėlio valdymas";
+            // 
+            // SerialInfoLabel
+            // 
+            this.SerialInfoLabel.AutoSize = true;
+            this.SerialInfoLabel.Location = new System.Drawing.Point(657, 348);
+            this.SerialInfoLabel.Name = "SerialInfoLabel";
+            this.SerialInfoLabel.Size = new System.Drawing.Size(33, 13);
+            this.SerialInfoLabel.TabIndex = 17;
+            this.SerialInfoLabel.Text = "Serija";
+            // 
+            // StorageProductNameInfoLabel
+            // 
+            this.StorageProductNameInfoLabel.AutoSize = true;
+            this.StorageProductNameInfoLabel.Location = new System.Drawing.Point(631, 374);
+            this.StorageProductNameInfoLabel.Name = "StorageProductNameInfoLabel";
+            this.StorageProductNameInfoLabel.Size = new System.Drawing.Size(79, 13);
+            this.StorageProductNameInfoLabel.TabIndex = 18;
+            this.StorageProductNameInfoLabel.Text = "Produkto Tipas";
+            // 
+            // MadeDateInfoLabel
+            // 
+            this.MadeDateInfoLabel.AutoSize = true;
+            this.MadeDateInfoLabel.Location = new System.Drawing.Point(631, 400);
+            this.MadeDateInfoLabel.Name = "MadeDateInfoLabel";
+            this.MadeDateInfoLabel.Size = new System.Drawing.Size(90, 13);
+            this.MadeDateInfoLabel.TabIndex = 19;
+            this.MadeDateInfoLabel.Text = "Pagaminimo Data";
+            // 
+            // ExpireDateInfoLabel
+            // 
+            this.ExpireDateInfoLabel.AutoSize = true;
+            this.ExpireDateInfoLabel.Location = new System.Drawing.Point(638, 426);
+            this.ExpireDateInfoLabel.Name = "ExpireDateInfoLabel";
+            this.ExpireDateInfoLabel.Size = new System.Drawing.Size(75, 13);
+            this.ExpireDateInfoLabel.TabIndex = 20;
+            this.ExpireDateInfoLabel.Text = "Galiojimo Data";
+            // 
+            // StorageQuantityIInfoLabel
+            // 
+            this.StorageQuantityIInfoLabel.AutoSize = true;
+            this.StorageQuantityIInfoLabel.Location = new System.Drawing.Point(657, 455);
+            this.StorageQuantityIInfoLabel.Name = "StorageQuantityIInfoLabel";
+            this.StorageQuantityIInfoLabel.Size = new System.Drawing.Size(35, 13);
+            this.StorageQuantityIInfoLabel.TabIndex = 21;
+            this.StorageQuantityIInfoLabel.Text = "Kiekis";
+            // 
+            // StoragePriceInfoLabel
+            // 
+            this.StoragePriceInfoLabel.AutoSize = true;
+            this.StoragePriceInfoLabel.Location = new System.Drawing.Point(657, 484);
+            this.StoragePriceInfoLabel.Name = "StoragePriceInfoLabel";
+            this.StoragePriceInfoLabel.Size = new System.Drawing.Size(34, 13);
+            this.StoragePriceInfoLabel.TabIndex = 22;
+            this.StoragePriceInfoLabel.Text = "Kaina";
+            // 
+            // StorageSerialNumberTextBox
+            // 
+            this.StorageSerialNumberTextBox.Location = new System.Drawing.Point(727, 345);
+            this.StorageSerialNumberTextBox.Name = "StorageSerialNumberTextBox";
+            this.StorageSerialNumberTextBox.Size = new System.Drawing.Size(239, 20);
+            this.StorageSerialNumberTextBox.TabIndex = 23;
+            this.StorageSerialNumberTextBox.TextChanged += new System.EventHandler(this.StorageSerialNumberTextBox_TextChanged);
+            // 
+            // StorageProductNameTextBox
+            // 
+            this.StorageProductNameTextBox.Location = new System.Drawing.Point(727, 371);
+            this.StorageProductNameTextBox.Name = "StorageProductNameTextBox";
+            this.StorageProductNameTextBox.Size = new System.Drawing.Size(239, 20);
+            this.StorageProductNameTextBox.TabIndex = 24;
+            this.StorageProductNameTextBox.TextChanged += new System.EventHandler(this.StorageProductNameTextBox_TextChanged);
+            // 
+            // StorageProductMadeDateTextBox
+            // 
+            this.StorageProductMadeDateTextBox.Location = new System.Drawing.Point(727, 397);
+            this.StorageProductMadeDateTextBox.Name = "StorageProductMadeDateTextBox";
+            this.StorageProductMadeDateTextBox.Size = new System.Drawing.Size(112, 20);
+            this.StorageProductMadeDateTextBox.TabIndex = 25;
+            this.StorageProductMadeDateTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.StorageProductMadeDateTextBox_Validating);
+            // 
+            // StorageProductExpireDateTextBox
+            // 
+            this.StorageProductExpireDateTextBox.Location = new System.Drawing.Point(727, 423);
+            this.StorageProductExpireDateTextBox.Name = "StorageProductExpireDateTextBox";
+            this.StorageProductExpireDateTextBox.Size = new System.Drawing.Size(112, 20);
+            this.StorageProductExpireDateTextBox.TabIndex = 26;
+            this.StorageProductExpireDateTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.StorageProductExpireDateTextBox_Validating);
+            // 
+            // StorageProductQuantityTextBox
+            // 
+            this.StorageProductQuantityTextBox.Location = new System.Drawing.Point(727, 452);
+            this.StorageProductQuantityTextBox.Name = "StorageProductQuantityTextBox";
+            this.StorageProductQuantityTextBox.Size = new System.Drawing.Size(112, 20);
+            this.StorageProductQuantityTextBox.TabIndex = 27;
+            this.StorageProductQuantityTextBox.TextChanged += new System.EventHandler(this.StorageProductQuantityTextBox_TextChanged);
+            // 
+            // StorageProductPriceTextBox
+            // 
+            this.StorageProductPriceTextBox.Location = new System.Drawing.Point(727, 481);
+            this.StorageProductPriceTextBox.Name = "StorageProductPriceTextBox";
+            this.StorageProductPriceTextBox.Size = new System.Drawing.Size(112, 20);
+            this.StorageProductPriceTextBox.TabIndex = 28;
+            this.StorageProductPriceTextBox.TextChanged += new System.EventHandler(this.StorageProductPriceTextBox_TextChanged);
+            // 
+            // StorageProductNameListComboBox
+            // 
+            this.StorageProductNameListComboBox.FormattingEnabled = true;
+            this.StorageProductNameListComboBox.Location = new System.Drawing.Point(603, 237);
+            this.StorageProductNameListComboBox.Name = "StorageProductNameListComboBox";
+            this.StorageProductNameListComboBox.Size = new System.Drawing.Size(147, 21);
+            this.StorageProductNameListComboBox.TabIndex = 29;
+            // 
+            // StorageProductnameInformationLabel
+            // 
+            this.StorageProductnameInformationLabel.AutoSize = true;
+            this.StorageProductnameInformationLabel.Location = new System.Drawing.Point(603, 221);
+            this.StorageProductnameInformationLabel.Name = "StorageProductnameInformationLabel";
+            this.StorageProductnameInformationLabel.Size = new System.Drawing.Size(75, 13);
+            this.StorageProductnameInformationLabel.TabIndex = 30;
+            this.StorageProductnameInformationLabel.Text = "Produkto tipas";
+            // 
+            // NewStorageInfoLabel
+            // 
+            this.NewStorageInfoLabel.AutoSize = true;
+            this.NewStorageInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NewStorageInfoLabel.Location = new System.Drawing.Point(638, 307);
+            this.NewStorageInfoLabel.Name = "NewStorageInfoLabel";
+            this.NewStorageInfoLabel.Size = new System.Drawing.Size(131, 16);
+            this.NewStorageInfoLabel.TabIndex = 31;
+            this.NewStorageInfoLabel.Text = "Naujas Produktas";
+            // 
+            // GetStorageInfoByNameButton
+            // 
+            this.GetStorageInfoByNameButton.Location = new System.Drawing.Point(857, 223);
+            this.GetStorageInfoByNameButton.Name = "GetStorageInfoByNameButton";
+            this.GetStorageInfoByNameButton.Size = new System.Drawing.Size(109, 47);
+            this.GetStorageInfoByNameButton.TabIndex = 32;
+            this.GetStorageInfoByNameButton.Text = "Gauti Sandėlio info\r\npagal pavadinimą";
+            this.GetStorageInfoByNameButton.UseVisualStyleBackColor = true;
+            this.GetStorageInfoByNameButton.Click += new System.EventHandler(this.GetStorageInfoByNameButton_Click);
+            // 
+            // CreateNewStorageButton
+            // 
+            this.CreateNewStorageButton.Location = new System.Drawing.Point(641, 556);
+            this.CreateNewStorageButton.Name = "CreateNewStorageButton";
+            this.CreateNewStorageButton.Size = new System.Drawing.Size(128, 37);
+            this.CreateNewStorageButton.TabIndex = 33;
+            this.CreateNewStorageButton.Text = "  Sukurt Naują \r\nProduktą Sandėlyje";
+            this.CreateNewStorageButton.UseVisualStyleBackColor = true;
+            this.CreateNewStorageButton.Click += new System.EventHandler(this.CreateNewStorageButton_Click);
+            // 
+            // ErrorLabel
+            // 
+            this.ErrorLabel.AutoSize = true;
+            this.ErrorLabel.ForeColor = System.Drawing.Color.Red;
+            this.ErrorLabel.Location = new System.Drawing.Point(638, 523);
+            this.ErrorLabel.Name = "ErrorLabel";
+            this.ErrorLabel.Size = new System.Drawing.Size(57, 13);
+            this.ErrorLabel.TabIndex = 34;
+            this.ErrorLabel.Text = "error Label";
+            this.ErrorLabel.Visible = false;
+            // 
             // ProductTypeStorageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1024, 786);
+            this.Controls.Add(this.ErrorLabel);
+            this.Controls.Add(this.CreateNewStorageButton);
+            this.Controls.Add(this.GetStorageInfoByNameButton);
+            this.Controls.Add(this.NewStorageInfoLabel);
+            this.Controls.Add(this.StorageProductnameInformationLabel);
+            this.Controls.Add(this.StorageProductNameListComboBox);
+            this.Controls.Add(this.StorageProductPriceTextBox);
+            this.Controls.Add(this.StorageProductQuantityTextBox);
+            this.Controls.Add(this.StorageProductExpireDateTextBox);
+            this.Controls.Add(this.StorageProductMadeDateTextBox);
+            this.Controls.Add(this.StorageProductNameTextBox);
+            this.Controls.Add(this.StorageSerialNumberTextBox);
+            this.Controls.Add(this.StoragePriceInfoLabel);
+            this.Controls.Add(this.StorageQuantityIInfoLabel);
+            this.Controls.Add(this.ExpireDateInfoLabel);
+            this.Controls.Add(this.MadeDateInfoLabel);
+            this.Controls.Add(this.StorageProductNameInfoLabel);
+            this.Controls.Add(this.SerialInfoLabel);
+            this.Controls.Add(this.StorageInformationLabel);
+            this.Controls.Add(this.ProductTypeInformationLabel);
+            this.Controls.Add(this.GetAllInfoStorage);
             this.Controls.Add(this.ProductTypeYearInfoLabel);
             this.Controls.Add(this.ProductTypeInfoLabel);
             this.Controls.Add(this.FullProductTypePriceTextBox);
@@ -188,5 +420,26 @@ namespace Invoice.Forms
         private System.Windows.Forms.TextBox FullProductTypePriceTextBox;
         private System.Windows.Forms.Label ProductTypeInfoLabel;
         private System.Windows.Forms.Label ProductTypeYearInfoLabel;
+        private System.Windows.Forms.Button GetAllInfoStorage;
+        private System.Windows.Forms.Label ProductTypeInformationLabel;
+        private System.Windows.Forms.Label StorageInformationLabel;
+        private System.Windows.Forms.Label SerialInfoLabel;
+        private System.Windows.Forms.Label StorageProductNameInfoLabel;
+        private System.Windows.Forms.Label MadeDateInfoLabel;
+        private System.Windows.Forms.Label ExpireDateInfoLabel;
+        private System.Windows.Forms.Label StorageQuantityIInfoLabel;
+        private System.Windows.Forms.Label StoragePriceInfoLabel;
+        private System.Windows.Forms.TextBox StorageSerialNumberTextBox;
+        private System.Windows.Forms.TextBox StorageProductNameTextBox;
+        private System.Windows.Forms.TextBox StorageProductMadeDateTextBox;
+        private System.Windows.Forms.TextBox StorageProductExpireDateTextBox;
+        private System.Windows.Forms.TextBox StorageProductQuantityTextBox;
+        private System.Windows.Forms.TextBox StorageProductPriceTextBox;
+        private System.Windows.Forms.ComboBox StorageProductNameListComboBox;
+        private System.Windows.Forms.Label StorageProductnameInformationLabel;
+        private System.Windows.Forms.Label NewStorageInfoLabel;
+        private System.Windows.Forms.Button GetStorageInfoByNameButton;
+        private System.Windows.Forms.Button CreateNewStorageButton;
+        private System.Windows.Forms.Label ErrorLabel;
     }
 }

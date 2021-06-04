@@ -29,10 +29,23 @@ namespace Invoice.Service
             label.Visible = true;
         }
 
+        public void DisplayLabelAndTextBoxError(string errorText, TextBox textBox, Label label)
+        {
+            textBox.BackColor = Color.Red;
+            label.Text = errorText;
+            label.Visible = true;
+        }
+
         public void HideLabelAndTextBoxError(Label label, RichTextBox richTextBox)
         {
             label.Visible = false;
-            richTextBox.BackColor = Color.White;
+            richTextBox.BackColor = default;
+        }
+
+        public void HideLabelAndTextBoxError(Label label, TextBox textBox)
+        {
+            label.Visible = false;
+            textBox.BackColor = default;
         }
     }
 }
