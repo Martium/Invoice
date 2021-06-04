@@ -71,7 +71,7 @@ namespace Invoice.Repositories
 
                 string createNewProductCommand =
                     $@"INSERT INTO 'Storage'
-                        Values ( last_insert_rowid(), @StorageSerialNumber, @StorageProductName, @StorageProductMadeDate, @StorageProductExpireDate, 
+                        Values ( NULL, @StorageSerialNumber, @StorageProductName, @StorageProductMadeDate, @StorageProductExpireDate, 
                          @StorageProductQuantity, @StorageProductPrice )
                     ";
 

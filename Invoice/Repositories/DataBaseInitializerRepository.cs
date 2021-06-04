@@ -165,7 +165,7 @@ namespace Invoice.Repositories
             string createStorageTableQuery =
                 $@"
                     CREATE TABLE [Storage] (
-                        [Id] [INTEGER] PRIMARY KEY NOT NULL,
+                        [Id] [INTEGER] PRIMARY KEY AUTOINCREMENT NOT NULL,
                         
                         [StorageSerialNumber] [nvarchar] ({FormSettings.TextBoxLengths.StorageSerialNumber}) NOT NULL,
                         [StorageProductName] [nvarchar] ({FormSettings.TextBoxLengths.StorageProductName}) NOT NULL,

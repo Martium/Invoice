@@ -94,7 +94,7 @@ namespace Invoice.Forms
             CalculateFullProductTypeQuantityAndPrice(isProductType: true);
         }
 
-        private void GetAllInfoByYearButton_Click(object sender, System.EventArgs e)
+        private void GetAllInfoByYearButton_Click(object sender, EventArgs e)
         {
             GetAllInfoBySpecialProductTypeNameAndYear();
 
@@ -103,7 +103,7 @@ namespace Invoice.Forms
             CalculateFullProductTypeQuantityAndPrice(isProductType: true);
         }
 
-        private void GetAllInfoStorage_Click(object sender, System.EventArgs e)
+        private void GetAllInfoStorage_Click(object sender, EventArgs e)
         {
             GetStorageAllInfo();
 
@@ -112,7 +112,7 @@ namespace Invoice.Forms
             CalculateFullProductTypeQuantityAndPrice(isProductType: false);
         }
 
-        private void GetStorageInfoByNameButton_Click(object sender, System.EventArgs e)
+        private void GetStorageInfoByNameButton_Click(object sender, EventArgs e)
         {
             GetAllStorageInfoByProductName();
 
@@ -121,7 +121,7 @@ namespace Invoice.Forms
             CalculateFullProductTypeQuantityAndPrice(isProductType: false);
         }
 
-        private void CreateNewStorageButton_Click(object sender, System.EventArgs e)
+        private void CreateNewStorageButton_Click(object sender, EventArgs e)
         {
             if ( string.IsNullOrWhiteSpace(StorageSerialNumberTextBox.Text) || string.IsNullOrWhiteSpace(StorageProductNameTextBox.Text) || 
                 string.IsNullOrWhiteSpace(StorageProductMadeDateTextBox.Text) || string.IsNullOrWhiteSpace(StorageProductExpireDateTextBox.Text) ||
@@ -160,6 +160,15 @@ namespace Invoice.Forms
                 };
 
                 bool isCreated = _storageRepository.CreateNewProduct(newProductStorage);
+
+                if (isCreated)
+                {
+                    _messageDialogService.ShowInfoMessage("Sekmingai išsaugota į Sandėlį");
+                }
+                else
+                {
+                    _messageDialogService.ShowErrorMassage("Nepavyko išsaugoti");
+                }
             }
            
         }
