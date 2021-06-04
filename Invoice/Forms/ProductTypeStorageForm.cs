@@ -57,7 +57,6 @@ namespace Invoice.Forms
 
         private void ProductTypeStorageForm_Load(object sender, EventArgs e)
         {
-
             InitializeButtonControl();
 
             GetAllInfoBySpecialProductTypeName();
@@ -156,6 +155,8 @@ namespace Invoice.Forms
             }
             else
             {
+                StorageProductQuantityTextBox.Text = _numberService.ChangeCommaToDot(StorageProductQuantityTextBox);
+                StorageProductPriceTextBox.Text = _numberService.ChangeCommaToDot(StorageProductPriceTextBox);
 
                 NewProductStorageModel newProductStorage = new NewProductStorageModel
                 {
@@ -174,13 +175,13 @@ namespace Invoice.Forms
                 if (isCreated)
                 {
                     _messageDialogService.ShowInfoMessage("Sekmingai išsaugota į Sandėlį");
+                    TryFillStorageProductNameComboBox();
                 }
                 else
                 {
                     _messageDialogService.ShowErrorMassage("Nepavyko išsaugoti");
                 }
             }
-
         }
 
         private void StorageSerialNumberTextBox_TextChanged(object sender, EventArgs e)
@@ -192,7 +193,6 @@ namespace Invoice.Forms
         {
             SetTextBoxBackColorToDefault(StorageProductNameTextBox);
         }
-
 
         private void StorageProductMadeDateTextBox_Validating(object sender, CancelEventArgs e)
         {
