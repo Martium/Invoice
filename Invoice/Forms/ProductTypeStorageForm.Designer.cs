@@ -60,6 +60,7 @@ namespace Invoice.Forms
             this.NewStorageInfoLabel = new System.Windows.Forms.Label();
             this.GetStorageInfoByNameButton = new System.Windows.Forms.Button();
             this.CreateNewStorageButton = new System.Windows.Forms.Button();
+            this.ErrorLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ProductTypeDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -274,6 +275,7 @@ namespace Invoice.Forms
             this.StorageProductMadeDateTextBox.Name = "StorageProductMadeDateTextBox";
             this.StorageProductMadeDateTextBox.Size = new System.Drawing.Size(112, 20);
             this.StorageProductMadeDateTextBox.TabIndex = 25;
+            this.StorageProductMadeDateTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.StorageProductMadeDateTextBox_Validated);
             // 
             // StorageProductExpireDateTextBox
             // 
@@ -343,11 +345,22 @@ namespace Invoice.Forms
             this.CreateNewStorageButton.UseVisualStyleBackColor = true;
             this.CreateNewStorageButton.Click += new System.EventHandler(this.CreateNewStorageButton_Click);
             // 
+            // ErrorLabel
+            // 
+            this.ErrorLabel.AutoSize = true;
+            this.ErrorLabel.ForeColor = System.Drawing.Color.Red;
+            this.ErrorLabel.Location = new System.Drawing.Point(845, 400);
+            this.ErrorLabel.Name = "ErrorLabel";
+            this.ErrorLabel.Size = new System.Drawing.Size(57, 13);
+            this.ErrorLabel.TabIndex = 34;
+            this.ErrorLabel.Text = "error Label";
+            // 
             // ProductTypeStorageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1024, 786);
+            this.Controls.Add(this.ErrorLabel);
             this.Controls.Add(this.CreateNewStorageButton);
             this.Controls.Add(this.GetStorageInfoByNameButton);
             this.Controls.Add(this.NewStorageInfoLabel);
@@ -423,5 +436,6 @@ namespace Invoice.Forms
         private System.Windows.Forms.Label NewStorageInfoLabel;
         private System.Windows.Forms.Button GetStorageInfoByNameButton;
         private System.Windows.Forms.Button CreateNewStorageButton;
+        private System.Windows.Forms.Label ErrorLabel;
     }
 }
