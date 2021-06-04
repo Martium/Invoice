@@ -135,27 +135,28 @@ namespace Invoice.Forms
                 string.IsNullOrWhiteSpace(StorageProductPriceTextBox.Text))
             {
                 if (string.IsNullOrWhiteSpace(StorageSerialNumberTextBox.Text))
-                    StorageSerialNumberTextBox.BackColor = Color.Red;
+                    StorageSerialNumberTextBox.BackColor = Color.Yellow;
 
                 if (string.IsNullOrWhiteSpace(StorageProductNameTextBox.Text))
-                    StorageProductNameTextBox.BackColor = Color.Red;
+                    StorageProductNameTextBox.BackColor = Color.Yellow;
 
                 if (string.IsNullOrWhiteSpace(StorageProductMadeDateTextBox.Text))
-                    StorageProductMadeDateTextBox.BackColor = Color.Red;
+                    StorageProductMadeDateTextBox.BackColor = Color.Yellow;
 
                 if (string.IsNullOrWhiteSpace(StorageProductExpireDateTextBox.Text))
-                    StorageProductExpireDateTextBox.BackColor = Color.Red;
+                    StorageProductExpireDateTextBox.BackColor = Color.Yellow;
 
                 if (string.IsNullOrWhiteSpace(StorageProductQuantityTextBox.Text))
-                    StorageProductQuantityTextBox.BackColor = Color.Red;
+                    StorageProductQuantityTextBox.BackColor = Color.Yellow;
 
                 if (string.IsNullOrWhiteSpace(StorageProductPriceTextBox.Text))
-                    StorageProductPriceTextBox.BackColor = Color.Red;
+                    StorageProductPriceTextBox.BackColor = Color.Yellow;
 
-                _messageDialogService.ShowErrorMassage("Raudoni langeliai turi būt supildyti");
+                _messageDialogService.ShowErrorMassage("Geltoni langeliai turi būt supildyti");
             }
             else
             {
+
                 NewProductStorageModel newProductStorage = new NewProductStorageModel
                 {
                     StorageSerialNumber = StorageSerialNumberTextBox.Text,
@@ -180,6 +181,41 @@ namespace Invoice.Forms
                 }
             }
 
+        }
+
+        private void StorageSerialNumberTextBox_TextChanged(object sender, EventArgs e)
+        {
+            SetTextBoxBackColorToDefault(StorageSerialNumberTextBox);
+        }
+
+        private void StorageProductNameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            SetTextBoxBackColorToDefault(StorageProductNameTextBox);
+        }
+
+
+        private void StorageProductMadeDateTextBox_Validating(object sender, CancelEventArgs e)
+        {
+            SetTextBoxBackColorToDefault(StorageProductMadeDateTextBox);
+            ValidateDateFormat(StorageProductMadeDateTextBox, e);
+        }
+
+        private void StorageProductExpireDateTextBox_Validating(object sender, CancelEventArgs e)
+        {
+            SetTextBoxBackColorToDefault(StorageProductExpireDateTextBox);
+            ValidateDateFormat(StorageProductExpireDateTextBox, e);
+        }
+
+        private void StorageProductQuantityTextBox_TextChanged(object sender, EventArgs e)
+        {
+            SetTextBoxBackColorToDefault(StorageProductQuantityTextBox);
+            ValidateTextIsDouble(StorageProductQuantityTextBox);
+        }
+
+        private void StorageProductPriceTextBox_TextChanged(object sender, EventArgs e)
+        {
+            SetTextBoxBackColorToDefault(StorageProductPriceTextBox);
+            ValidateTextIsDouble(StorageProductPriceTextBox);
         }
 
         #region Helpers
@@ -789,29 +825,61 @@ namespace Invoice.Forms
             StorageProductNameTextBox.MaxLength = FormSettings.TextBoxLengths.StorageProductName;
         }
 
-        private void ValidateDateFormat()
+        private void ValidateDateFormat(TextBox textBox, CancelEventArgs e)
         {
-
+            if (string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                e.Cancel = true;
+                CreateNewStorageButton.Enabled = false;
+                _messageDialogService.DisplayLabelAndTextBoxError(
+                    $"Raudonas langelis negali būti tuščias! pvz.: {DateTime.Now.ToString(DateFormat)}", textBox, ErrorLabel);
+            }
+            else if (!DateTime.TryParseExact(textBox.Text, DateFormat, CultureInfo.InvariantCulture,
+                DateTimeStyles.None, out _))
+            {
+                e.Cancel = true;
+                CreateNewStorageButton.Enabled = false;
+                _messageDialogService.DisplayLabelAndTextBoxError(
+                    $"Raudonam langelyje įveskite teisingą datą! pvz.: {DateTime.Now.ToString(DateFormat)}", textBox, ErrorLabel);
+            }
+            else
+            {
+                e.Cancel = false;
+                CreateNewStorageButton.Enabled = true;
+                _messageDialogService.HideLabelAndTextBoxError(ErrorLabel, textBox);
+            }
         }
 
+        private void ValidateTextIsDouble(TextBox textBox)
+        {
+            bool isNumber = double.TryParse(textBox.Text, out double number);
 
+            if (isNumber)
+            {
+                CreateNewStorageButton.Enabled = true;
+                _messageDialogService.HideLabelAndTextBoxError(ErrorLabel, textBox);
+            }
+            else if (string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                CreateNewStorageButton.Enabled = false;
+                _messageDialogService.DisplayLabelAndTextBoxError("Raudonam langelyje turi būti skaičius, negali būti tuščias",
+                    textBox, ErrorLabel);
+            }
+            else
+            {
+                CreateNewStorageButton.Enabled = false;
+                _messageDialogService.DisplayLabelAndTextBoxError("Raudonam langelyje tai ką įvedėte nėra skaičius, turi būti skaičius",
+                    textBox, ErrorLabel);
+            }
+        }
+
+        private void SetTextBoxBackColorToDefault(TextBox textBox)
+        {
+            textBox.BackColor = default;
+        }
 
         #endregion
 
-        private void StorageSerialNumberTextBox_TextChanged(object sender, EventArgs e)
-        {
-            StorageSerialNumberTextBox.BackColor = default;
-        }
 
-        private void StorageProductNameTextBox_TextChanged(object sender, EventArgs e)
-        {
-            StorageProductNameTextBox.BackColor = default;
-        }
-
-
-        private void StorageProductMadeDateTextBox_Validated(object sender, CancelEventArgs e)
-        {
-
-        }
     }
 }

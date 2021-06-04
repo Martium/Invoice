@@ -42,10 +42,10 @@ namespace Invoice.Service
             richTextBox.BackColor = default;
         }
 
-        public void HideLabelAndTextBoxError(Label label, TextBox TextBox)
+        public void HideLabelAndTextBoxError(Label label, TextBox textBox)
         {
             label.Visible = false;
-            TextBox.BackColor = default;
+            textBox.BackColor = default;
         }
     }
 }

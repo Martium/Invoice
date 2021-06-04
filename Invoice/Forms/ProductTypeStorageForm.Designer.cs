@@ -275,7 +275,7 @@ namespace Invoice.Forms
             this.StorageProductMadeDateTextBox.Name = "StorageProductMadeDateTextBox";
             this.StorageProductMadeDateTextBox.Size = new System.Drawing.Size(112, 20);
             this.StorageProductMadeDateTextBox.TabIndex = 25;
-            this.StorageProductMadeDateTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.StorageProductMadeDateTextBox_Validated);
+            this.StorageProductMadeDateTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.StorageProductMadeDateTextBox_Validating);
             // 
             // StorageProductExpireDateTextBox
             // 
@@ -283,6 +283,7 @@ namespace Invoice.Forms
             this.StorageProductExpireDateTextBox.Name = "StorageProductExpireDateTextBox";
             this.StorageProductExpireDateTextBox.Size = new System.Drawing.Size(112, 20);
             this.StorageProductExpireDateTextBox.TabIndex = 26;
+            this.StorageProductExpireDateTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.StorageProductExpireDateTextBox_Validating);
             // 
             // StorageProductQuantityTextBox
             // 
@@ -290,6 +291,7 @@ namespace Invoice.Forms
             this.StorageProductQuantityTextBox.Name = "StorageProductQuantityTextBox";
             this.StorageProductQuantityTextBox.Size = new System.Drawing.Size(112, 20);
             this.StorageProductQuantityTextBox.TabIndex = 27;
+            this.StorageProductQuantityTextBox.TextChanged += new System.EventHandler(this.StorageProductQuantityTextBox_TextChanged);
             // 
             // StorageProductPriceTextBox
             // 
@@ -297,6 +299,7 @@ namespace Invoice.Forms
             this.StorageProductPriceTextBox.Name = "StorageProductPriceTextBox";
             this.StorageProductPriceTextBox.Size = new System.Drawing.Size(112, 20);
             this.StorageProductPriceTextBox.TabIndex = 28;
+            this.StorageProductPriceTextBox.TextChanged += new System.EventHandler(this.StorageProductPriceTextBox_TextChanged);
             // 
             // StorageProductNameListComboBox
             // 
@@ -337,7 +340,7 @@ namespace Invoice.Forms
             // 
             // CreateNewStorageButton
             // 
-            this.CreateNewStorageButton.Location = new System.Drawing.Point(641, 531);
+            this.CreateNewStorageButton.Location = new System.Drawing.Point(641, 556);
             this.CreateNewStorageButton.Name = "CreateNewStorageButton";
             this.CreateNewStorageButton.Size = new System.Drawing.Size(128, 37);
             this.CreateNewStorageButton.TabIndex = 33;
@@ -349,11 +352,12 @@ namespace Invoice.Forms
             // 
             this.ErrorLabel.AutoSize = true;
             this.ErrorLabel.ForeColor = System.Drawing.Color.Red;
-            this.ErrorLabel.Location = new System.Drawing.Point(845, 400);
+            this.ErrorLabel.Location = new System.Drawing.Point(638, 523);
             this.ErrorLabel.Name = "ErrorLabel";
             this.ErrorLabel.Size = new System.Drawing.Size(57, 13);
             this.ErrorLabel.TabIndex = 34;
             this.ErrorLabel.Text = "error Label";
+            this.ErrorLabel.Visible = false;
             // 
             // ProductTypeStorageForm
             // 
