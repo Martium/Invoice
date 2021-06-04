@@ -59,6 +59,7 @@ namespace Invoice.Forms
             this.StorageProductnameInformationLabel = new System.Windows.Forms.Label();
             this.NewStorageInfoLabel = new System.Windows.Forms.Label();
             this.GetStorageInfoByNameButton = new System.Windows.Forms.Button();
+            this.CreateNewStorageButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ProductTypeDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -330,11 +331,22 @@ namespace Invoice.Forms
             this.GetStorageInfoByNameButton.UseVisualStyleBackColor = true;
             this.GetStorageInfoByNameButton.Click += new System.EventHandler(this.GetStorageInfoByNameButton_Click);
             // 
+            // CreateNewStorageButton
+            // 
+            this.CreateNewStorageButton.Location = new System.Drawing.Point(641, 531);
+            this.CreateNewStorageButton.Name = "CreateNewStorageButton";
+            this.CreateNewStorageButton.Size = new System.Drawing.Size(128, 37);
+            this.CreateNewStorageButton.TabIndex = 33;
+            this.CreateNewStorageButton.Text = "  Sukurt Naują \r\nProduktą Sandėlyje";
+            this.CreateNewStorageButton.UseVisualStyleBackColor = true;
+            this.CreateNewStorageButton.Click += new System.EventHandler(this.CreateNewStorageButton_Click);
+            // 
             // ProductTypeStorageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1024, 786);
+            this.Controls.Add(this.CreateNewStorageButton);
             this.Controls.Add(this.GetStorageInfoByNameButton);
             this.Controls.Add(this.NewStorageInfoLabel);
             this.Controls.Add(this.StorageProductnameInformationLabel);
@@ -408,5 +420,6 @@ namespace Invoice.Forms
         private System.Windows.Forms.Label StorageProductnameInformationLabel;
         private System.Windows.Forms.Label NewStorageInfoLabel;
         private System.Windows.Forms.Button GetStorageInfoByNameButton;
+        private System.Windows.Forms.Button CreateNewStorageButton;
     }
 }

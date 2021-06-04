@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
@@ -18,6 +19,8 @@ namespace Invoice.Forms
 
         private readonly StorageRepository _storageRepository;
 
+        private readonly MessageDialogService _messageDialogService;
+
         private readonly NumberService _numberService;
 
         private List<SpecificNameProductTypeModel> _specificProductTypeAllInfo;
@@ -30,6 +33,8 @@ namespace Invoice.Forms
         private const int StorageQuantityIndex = 5;
         private const int StoragePriceIndex = 6;
 
+        private const string DateFormat = "yyyy-MM-dd";
+
         public ProductTypeStorageForm()
         {
             _specificProductTypeAllInfo = new List<SpecificNameProductTypeModel>();
@@ -37,6 +42,7 @@ namespace Invoice.Forms
             _storageRepository = new StorageRepository();
             _storageInfo = new List<StorageModel>();
             _numberService = new NumberService();
+            _messageDialogService = new MessageDialogService();
 
             InitializeComponent();
 
@@ -166,7 +172,7 @@ namespace Invoice.Forms
         {
             _storageInfo.Clear();
 
-            _storageInfo = _storageRepository.GetALLInfoByProductName(StorageProductNameListComboBox.Text).ToList();
+            _storageInfo = _storageRepository.GetAllInfoByProductName(StorageProductNameListComboBox.Text).ToList();
         }
 
         private void ChangeDataGridViewHeaderText(bool isProductType)
@@ -499,6 +505,30 @@ namespace Invoice.Forms
 
 
         #endregion
-       
+
+        private void CreateNewStorageButton_Click(object sender, System.EventArgs e)
+        {
+           
+            NewProductStorageModel newProductStorage = new NewProductStorageModel
+            {
+                StorageSerialNumber = StorageSerialNumberTextBox.Text,
+                StorageProductName = StorageProductNameTextBox.Text,
+                StorageProductMadeDate = DateTime.ParseExact(StorageProductMadeDateTextBox.Text, DateFormat, CultureInfo.InvariantCulture),
+                StorageProductExpireDate = DateTime.ParseExact(StorageProductExpireDateTextBox.Text, DateFormat, CultureInfo.InvariantCulture),
+                StorageProductQuantity = double.Parse(StorageProductQuantityTextBox.Text),
+                StorageProductPrice = double.Parse(StorageProductPriceTextBox.Text)
+            };
+
+            bool isCreated = _storageRepository.CreateNewProduct(newProductStorage);
+
+            if (isCreated)
+            {
+                _messageDialogService.ShowInfoMessage("true");
+            }
+            else
+            {
+                _messageDialogService.ShowErrorMassage("False");
+            }
+        }
     }
 }

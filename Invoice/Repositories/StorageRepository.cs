@@ -26,7 +26,7 @@ namespace Invoice.Repositories
             }
         }
 
-        public IEnumerable<StorageModel> GetALLInfoByProductName(string storageProductName)
+        public IEnumerable<StorageModel> GetAllInfoByProductName(string storageProductName)
         {
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
             {
@@ -60,6 +60,34 @@ namespace Invoice.Repositories
                 IEnumerable<string> getAllNames = dbConnection.Query<string>(getAllNamesQuery);
 
                 return getAllNames;
+            }
+        }
+
+        public bool CreateNewProduct(NewProductStorageModel newProductStorage)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string createNewProductCommand =
+                    $@"INSERT INTO 'Storage'
+                        Values ( last_insert_rowid(), @StorageSerialNumber, @StorageProductName, @StorageProductMadeDate, @StorageProductExpireDate, 
+                         @StorageProductQuantity, @StorageProductPrice )
+                    ";
+
+                object queryParameters = new
+                {
+                    newProductStorage.StorageSerialNumber,
+                    newProductStorage.StorageProductName,
+                    newProductStorage.StorageProductMadeDate,
+                    newProductStorage.StorageProductExpireDate,
+                    newProductStorage.StorageProductQuantity,
+                    newProductStorage.StorageProductPrice
+                };
+
+                int affectedRows = dbConnection.Execute(createNewProductCommand, queryParameters);
+
+                return affectedRows == 1;
             }
         }
     }

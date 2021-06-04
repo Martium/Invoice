@@ -56,9 +56,9 @@ namespace Invoice.Repositories
                 file.Delete();
             }
 
-            foreach (DirectoryInfo subdirectory in directory.GetDirectories())
+            foreach (DirectoryInfo subdirectories in directory.GetDirectories())
             {
-                subdirectory.Delete(true);
+                subdirectories.Delete(true);
             }
         }
 
