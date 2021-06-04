@@ -121,6 +121,49 @@ namespace Invoice.Forms
             CalculateFullProductTypeQuantityAndPrice(isProductType: false);
         }
 
+        private void CreateNewStorageButton_Click(object sender, System.EventArgs e)
+        {
+            if ( string.IsNullOrWhiteSpace(StorageSerialNumberTextBox.Text) || string.IsNullOrWhiteSpace(StorageProductNameTextBox.Text) || 
+                string.IsNullOrWhiteSpace(StorageProductMadeDateTextBox.Text) || string.IsNullOrWhiteSpace(StorageProductExpireDateTextBox.Text) ||
+                string.IsNullOrWhiteSpace(StorageProductQuantityTextBox.Text) || string.IsNullOrWhiteSpace(StorageProductPriceTextBox.Text) )
+            {
+                if (string.IsNullOrWhiteSpace(StorageSerialNumberTextBox.Text))
+                    StorageSerialNumberTextBox.BackColor = Color.Red;
+
+                if (string.IsNullOrWhiteSpace(StorageProductNameTextBox.Text))
+                    StorageProductNameTextBox.BackColor = Color.Red;
+
+                if (string.IsNullOrWhiteSpace(StorageProductMadeDateTextBox.Text))
+                    StorageProductMadeDateTextBox.BackColor = Color.Red;
+
+                if (string.IsNullOrWhiteSpace(StorageProductExpireDateTextBox.Text))
+                    StorageProductExpireDateTextBox.BackColor = Color.Red;
+
+                if (string.IsNullOrWhiteSpace(StorageProductQuantityTextBox.Text))
+                    StorageProductQuantityTextBox.BackColor = Color.Red;
+
+                if (string.IsNullOrWhiteSpace(StorageProductPriceTextBox.Text))
+                    StorageProductPriceTextBox.BackColor = Color.Red;
+
+                _messageDialogService.ShowErrorMassage("Raudoni langeliai turi būt supildyti");
+            }
+            else
+            {
+                NewProductStorageModel newProductStorage = new NewProductStorageModel
+                {
+                    StorageSerialNumber = StorageSerialNumberTextBox.Text,
+                    StorageProductName = StorageProductNameTextBox.Text,
+                    StorageProductMadeDate = DateTime.ParseExact(StorageProductMadeDateTextBox.Text, DateFormat, CultureInfo.InvariantCulture),
+                    StorageProductExpireDate = DateTime.ParseExact(StorageProductExpireDateTextBox.Text, DateFormat, CultureInfo.InvariantCulture),
+                    StorageProductQuantity = double.Parse(StorageProductQuantityTextBox.Text),
+                    StorageProductPrice = double.Parse(StorageProductPriceTextBox.Text)
+                };
+
+                bool isCreated = _storageRepository.CreateNewProduct(newProductStorage);
+            }
+           
+        }
+
         #region Helpers
 
         private void SetControlInitialState()
@@ -506,29 +549,14 @@ namespace Invoice.Forms
 
         #endregion
 
-        private void CreateNewStorageButton_Click(object sender, System.EventArgs e)
+        private void StorageSerialNumberTextBox_TextChanged(object sender, EventArgs e)
         {
-           
-            NewProductStorageModel newProductStorage = new NewProductStorageModel
-            {
-                StorageSerialNumber = StorageSerialNumberTextBox.Text,
-                StorageProductName = StorageProductNameTextBox.Text,
-                StorageProductMadeDate = DateTime.ParseExact(StorageProductMadeDateTextBox.Text, DateFormat, CultureInfo.InvariantCulture),
-                StorageProductExpireDate = DateTime.ParseExact(StorageProductExpireDateTextBox.Text, DateFormat, CultureInfo.InvariantCulture),
-                StorageProductQuantity = double.Parse(StorageProductQuantityTextBox.Text),
-                StorageProductPrice = double.Parse(StorageProductPriceTextBox.Text)
-            };
+            StorageSerialNumberTextBox.BackColor = default;
+        }
 
-            bool isCreated = _storageRepository.CreateNewProduct(newProductStorage);
-
-            if (isCreated)
-            {
-                _messageDialogService.ShowInfoMessage("true");
-            }
-            else
-            {
-                _messageDialogService.ShowErrorMassage("False");
-            }
+        private void StorageProductNameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            StorageProductNameTextBox.BackColor = default;
         }
     }
 }

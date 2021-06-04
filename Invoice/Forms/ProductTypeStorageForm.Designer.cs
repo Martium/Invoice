@@ -258,6 +258,7 @@ namespace Invoice.Forms
             this.StorageSerialNumberTextBox.Name = "StorageSerialNumberTextBox";
             this.StorageSerialNumberTextBox.Size = new System.Drawing.Size(239, 20);
             this.StorageSerialNumberTextBox.TabIndex = 23;
+            this.StorageSerialNumberTextBox.TextChanged += new System.EventHandler(this.StorageSerialNumberTextBox_TextChanged);
             // 
             // StorageProductNameTextBox
             // 
@@ -265,6 +266,7 @@ namespace Invoice.Forms
             this.StorageProductNameTextBox.Name = "StorageProductNameTextBox";
             this.StorageProductNameTextBox.Size = new System.Drawing.Size(239, 20);
             this.StorageProductNameTextBox.TabIndex = 24;
+            this.StorageProductNameTextBox.TextChanged += new System.EventHandler(this.StorageProductNameTextBox_TextChanged);
             // 
             // StorageProductMadeDateTextBox
             // 
