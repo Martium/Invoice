@@ -70,7 +70,7 @@ namespace Invoice.Repositories
                 dbConnection.Open();
 
                 string createNewProductCommand =
-                    $@"INSERT INTO 'Storage'
+                    @"INSERT INTO 'Storage'
                         Values ( NULL, @StorageSerialNumber, @StorageProductName, @StorageProductMadeDate, @StorageProductExpireDate, 
                          @StorageProductQuantity, @StorageProductPrice )
                     ";
@@ -86,6 +86,37 @@ namespace Invoice.Repositories
                 };
 
                 int affectedRows = dbConnection.Execute(createNewProductCommand, queryParameters);
+
+                return affectedRows == 1;
+            }
+        }
+
+        public bool UpdateProduct(StorageModel storageModel)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string updateProductCommand =
+                    $@"UPDATE 'Storage'
+                        SET StorageSerialNumber = @StorageSerialNumber, StorageProductName = @StorageProductName, StorageProductMadeDate = @StorageProductMadeDate,
+                            StorageProductExpireDate = @StorageProductExpireDate, StorageProductQuantity = @StorageProductQuantity, StorageProductPrice = @StorageProductPrice
+                       WHERE Id = @Id
+                    ";
+
+                object queryParameters = new
+                {
+                    storageModel.StorageSerialNumber,
+                    storageModel.StorageProductName,
+                    storageModel.StorageProductMadeDate,
+                    storageModel.StorageProductExpireDate,
+                    storageModel.StorageProductQuantity,
+                    storageModel.StorageProductPrice,
+
+                    storageModel.Id
+                };
+
+                int affectedRows = dbConnection.Execute(updateProductCommand, queryParameters);
 
                 return affectedRows == 1;
             }
