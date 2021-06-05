@@ -282,11 +282,14 @@ namespace Invoice.Forms
 
                 StorageProductPriceTextBox.Text = ProductTypeOrStorageDataGridView.SelectedRows[0]
                     .Cells[StoragePriceIndex].Value.ToString();
-
-
-
-
-
+            }
+            else if (ProductTypeOrStorageDataGridView.ColumnCount < StorageColumnCount && ProductTypeOrStorageDataGridView.Rows.Count != 0)
+            {
+                _messageDialogService.ShowErrorMassage("Produktų tipas nepriklauso sandėlio informacijai, informaciją kurią pasirinkote priklauso Sąskaitoms faktūroms");
+            }
+            else
+            {
+                _messageDialogService.ShowErrorMassage("Nėra jokios informacijos kurią būtų galima įkelti");
             }
         }
 
