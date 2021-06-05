@@ -369,7 +369,7 @@ namespace Invoice.Forms
             this.StoreInfoForUpdateButton.TabIndex = 35;
             this.StoreInfoForUpdateButton.Text = "Sukelti informaciją \r\natnaujinimui";
             this.StoreInfoForUpdateButton.UseVisualStyleBackColor = true;
-            this.StoreInfoForUpdateButton.Click += new System.EventHandler(this.StoreInfoFromDataGridViewForUpdateButton_Click);
+            this.StoreInfoForUpdateButton.Click += new System.EventHandler(this.StoreInfoFromDataGridViewButton_Click);
             // 
             // ProductTypeStorageForm
             // 

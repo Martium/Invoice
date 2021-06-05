@@ -255,14 +255,10 @@ namespace Invoice.Forms
             }
         }
 
-        private void StoreInfoFromDataGridViewForUpdateButton_Click(object sender, EventArgs e)
+        private void StoreInfoFromDataGridViewButton_Click(object sender, EventArgs e)
         {
             if (ProductTypeOrStorageDataGridView.ColumnCount == StorageColumnCount && ProductTypeOrStorageDataGridView.Rows.Count != 0)
             {
-                int id = int.Parse(ProductTypeOrStorageDataGridView.SelectedRows[0].Cells[0].Value.ToString());
-
-                DateTime madeDate = DateTime.Parse(ProductTypeOrStorageDataGridView.SelectedRows[0].Cells[StorageMadeDateIndex].Value.ToString());
-
                 StorageSerialNumberTextBox.Text = ProductTypeOrStorageDataGridView.SelectedRows[0]
                     .Cells[StorageSerialNumberIndex].Value.ToString();
 
