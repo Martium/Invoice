@@ -57,7 +57,7 @@ namespace Invoice.Forms
             this.StorageProductPriceTextBox = new System.Windows.Forms.TextBox();
             this.StorageProductNameListComboBox = new System.Windows.Forms.ComboBox();
             this.StorageProductnameInformationLabel = new System.Windows.Forms.Label();
-            this.NewStorageInfoLabel = new System.Windows.Forms.Label();
+            this.NewOrUpdateStorageInfoLabel = new System.Windows.Forms.Label();
             this.GetStorageInfoByNameButton = new System.Windows.Forms.Button();
             this.CreateNewStorageButton = new System.Windows.Forms.Button();
             this.ErrorLabel = new System.Windows.Forms.Label();
@@ -77,6 +77,7 @@ namespace Invoice.Forms
             this.ProductTypeDataGridView.ReadOnly = true;
             this.ProductTypeDataGridView.Size = new System.Drawing.Size(557, 563);
             this.ProductTypeDataGridView.TabIndex = 0;
+            this.ProductTypeDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.ProductTypeDataGridView_CellFormatting);
             this.ProductTypeDataGridView.Paint += new System.Windows.Forms.PaintEventHandler(this.ProductTypeDataGridView_Paint);
             // 
             // GetAllInfoByYearButton
@@ -318,15 +319,15 @@ namespace Invoice.Forms
             this.StorageProductnameInformationLabel.TabIndex = 30;
             this.StorageProductnameInformationLabel.Text = "Produkto tipas";
             // 
-            // NewStorageInfoLabel
+            // NewOrUpdateStorageInfoLabel
             // 
-            this.NewStorageInfoLabel.AutoSize = true;
-            this.NewStorageInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NewStorageInfoLabel.Location = new System.Drawing.Point(638, 307);
-            this.NewStorageInfoLabel.Name = "NewStorageInfoLabel";
-            this.NewStorageInfoLabel.Size = new System.Drawing.Size(131, 16);
-            this.NewStorageInfoLabel.TabIndex = 31;
-            this.NewStorageInfoLabel.Text = "Naujas Produktas";
+            this.NewOrUpdateStorageInfoLabel.AutoSize = true;
+            this.NewOrUpdateStorageInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NewOrUpdateStorageInfoLabel.Location = new System.Drawing.Point(638, 307);
+            this.NewOrUpdateStorageInfoLabel.Name = "NewOrUpdateStorageInfoLabel";
+            this.NewOrUpdateStorageInfoLabel.Size = new System.Drawing.Size(335, 16);
+            this.NewOrUpdateStorageInfoLabel.TabIndex = 31;
+            this.NewOrUpdateStorageInfoLabel.Text = "Atnaujinti arba sukurti naują produktą sandėlyje";
             // 
             // GetStorageInfoByNameButton
             // 
@@ -367,7 +368,7 @@ namespace Invoice.Forms
             this.Controls.Add(this.ErrorLabel);
             this.Controls.Add(this.CreateNewStorageButton);
             this.Controls.Add(this.GetStorageInfoByNameButton);
-            this.Controls.Add(this.NewStorageInfoLabel);
+            this.Controls.Add(this.NewOrUpdateStorageInfoLabel);
             this.Controls.Add(this.StorageProductnameInformationLabel);
             this.Controls.Add(this.StorageProductNameListComboBox);
             this.Controls.Add(this.StorageProductPriceTextBox);
@@ -437,7 +438,7 @@ namespace Invoice.Forms
         private System.Windows.Forms.TextBox StorageProductPriceTextBox;
         private System.Windows.Forms.ComboBox StorageProductNameListComboBox;
         private System.Windows.Forms.Label StorageProductnameInformationLabel;
-        private System.Windows.Forms.Label NewStorageInfoLabel;
+        private System.Windows.Forms.Label NewOrUpdateStorageInfoLabel;
         private System.Windows.Forms.Button GetStorageInfoByNameButton;
         private System.Windows.Forms.Button CreateNewStorageButton;
         private System.Windows.Forms.Label ErrorLabel;

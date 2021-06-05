@@ -28,9 +28,13 @@ namespace Invoice.Forms
 
         private List<StorageModel> _storageInfo;
 
+        private const int StorageColumnCount = 7;
+
         private const int ProductTypeQuantityIndex = 3;
         private const int ProductTypePriceIndex = 4;
 
+        private const int StorageMadeDateIndex = 3;
+        private const int StorageExpireDateIndex = 4;
         private const int StorageQuantityIndex = 5;
         private const int StoragePriceIndex = 6;
 
@@ -218,6 +222,36 @@ namespace Invoice.Forms
             ValidateTextIsDouble(StorageProductPriceTextBox);
         }
 
+        private void ProductTypeDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (ProductTypeDataGridView.ColumnCount == StorageColumnCount)
+            {
+                int rowIndex = e.RowIndex;
+
+                DateTime madeDate = DateTime.Parse(ProductTypeDataGridView.Rows[rowIndex].Cells[StorageMadeDateIndex].Value.ToString());
+                DateTime expireDate = DateTime.Parse(ProductTypeDataGridView.Rows[rowIndex].Cells[StorageExpireDateIndex].Value.ToString());
+
+                int monthDifference = ((expireDate.Year - madeDate.Year) * 12) + expireDate.Month - madeDate.Month;
+
+                if (monthDifference >= 6)
+                {
+                    ProductTypeDataGridView.Rows[rowIndex].DefaultCellStyle.BackColor = Color.Chartreuse;
+                }
+                else if (monthDifference >= 3)
+                {
+                    ProductTypeDataGridView.Rows[rowIndex].DefaultCellStyle.BackColor = Color.Yellow;
+                }
+                else if (monthDifference >= 1)
+                {
+                    ProductTypeDataGridView.Rows[rowIndex].DefaultCellStyle.BackColor = Color.Red;
+                }
+                else
+                {
+                    ProductTypeDataGridView.Rows[rowIndex].DefaultCellStyle.BackColor = Color.Black;
+                }
+            }
+        }
+
         #region Helpers
 
         private void SetControlInitialState()
@@ -279,25 +313,25 @@ namespace Invoice.Forms
                 ProductTypeDataGridView.Columns[0].HeaderText = @"Sąskaitos Nr.";
                 ProductTypeDataGridView.Columns[1].HeaderText = @"Metai";
                 ProductTypeDataGridView.Columns[2].HeaderText = @"Tipas";
-                ProductTypeDataGridView.Columns[3].HeaderText = @"Kiekis";
-                ProductTypeDataGridView.Columns[4].HeaderText = @"Vnt. Kaina";
+                ProductTypeDataGridView.Columns[ProductTypeQuantityIndex].HeaderText = @"Kiekis";
+                ProductTypeDataGridView.Columns[ProductTypePriceIndex].HeaderText = @"Vnt. Kaina";
             }
             else
             {
                 ProductTypeDataGridView.Columns[1].HeaderText = @"Serija";
                 ProductTypeDataGridView.Columns[2].HeaderText = @"Tipas";
-                ProductTypeDataGridView.Columns[3].HeaderText = @"Sukūrimo Data";
-                ProductTypeDataGridView.Columns[4].HeaderText = @"Galiojimo Data";
-                ProductTypeDataGridView.Columns[5].HeaderText = @"Kiekis";
-                ProductTypeDataGridView.Columns[6].HeaderText = @"Kaina";
+                ProductTypeDataGridView.Columns[StorageMadeDateIndex].HeaderText = @"Sukūrimo Data";
+                ProductTypeDataGridView.Columns[StorageExpireDateIndex].HeaderText = @"Galiojimo Data";
+                ProductTypeDataGridView.Columns[StorageQuantityIndex].HeaderText = @"Kiekis";
+                ProductTypeDataGridView.Columns[StoragePriceIndex].HeaderText = @"Kaina";
             }
         }
 
         private void ChangeDataGridViewHeadersSize()
         {
             ProductTypeDataGridView.Columns[0].Width = 30;
-            ProductTypeDataGridView.Columns[3].Width = 70;
-            ProductTypeDataGridView.Columns[4].Width = 70;
+            ProductTypeDataGridView.Columns[StorageMadeDateIndex].Width = 70;
+            ProductTypeDataGridView.Columns[StorageExpireDateIndex].Width = 70;
             ProductTypeDataGridView.Columns[StorageQuantityIndex].Width = 60;
             ProductTypeDataGridView.Columns[StoragePriceIndex].Width = 60;
         }
@@ -878,8 +912,8 @@ namespace Invoice.Forms
             textBox.BackColor = default;
         }
 
+
         #endregion
-
-
+        
     }
 }
