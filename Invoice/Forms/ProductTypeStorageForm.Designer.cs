@@ -62,6 +62,7 @@ namespace Invoice.Forms
             this.CreateNewStorageButton = new System.Windows.Forms.Button();
             this.ErrorLabel = new System.Windows.Forms.Label();
             this.StoreInfoForUpdateButton = new System.Windows.Forms.Button();
+            this.UpdateStorageButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ProductTypeOrStorageDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -371,11 +372,22 @@ namespace Invoice.Forms
             this.StoreInfoForUpdateButton.UseVisualStyleBackColor = true;
             this.StoreInfoForUpdateButton.Click += new System.EventHandler(this.StoreInfoFromDataGridViewButton_Click);
             // 
+            // UpdateStorageButton
+            // 
+            this.UpdateStorageButton.Location = new System.Drawing.Point(775, 556);
+            this.UpdateStorageButton.Name = "UpdateStorageButton";
+            this.UpdateStorageButton.Size = new System.Drawing.Size(128, 37);
+            this.UpdateStorageButton.TabIndex = 36;
+            this.UpdateStorageButton.Text = "Atnaujinti Produktą\r\n Sandėlyje";
+            this.UpdateStorageButton.UseVisualStyleBackColor = true;
+            this.UpdateStorageButton.Click += new System.EventHandler(this.UpdateStorageButton_Click);
+            // 
             // ProductTypeStorageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1024, 786);
+            this.Controls.Add(this.UpdateStorageButton);
             this.Controls.Add(this.StoreInfoForUpdateButton);
             this.Controls.Add(this.ErrorLabel);
             this.Controls.Add(this.CreateNewStorageButton);
@@ -455,5 +467,6 @@ namespace Invoice.Forms
         private System.Windows.Forms.Button CreateNewStorageButton;
         private System.Windows.Forms.Label ErrorLabel;
         private System.Windows.Forms.Button StoreInfoForUpdateButton;
+        private System.Windows.Forms.Button UpdateStorageButton;
     }
 }
