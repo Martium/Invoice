@@ -33,6 +33,9 @@ namespace Invoice.Forms
         private const int ProductTypeQuantityIndex = 3;
         private const int ProductTypePriceIndex = 4;
 
+        private const int StorageIdIndex = 0;
+        private const int StorageSerialNumberIndex = 1;
+        private const int StorageProductNameIndex = 2;
         private const int StorageMadeDateIndex = 3;
         private const int StorageExpireDateIndex = 4;
         private const int StorageQuantityIndex = 5;
@@ -85,7 +88,7 @@ namespace Invoice.Forms
                 DisplayEmptyListReason("Nesupildėte pakankamai informacijos kad galėtumėte naudotis produktų sandėliu",
                     e, dataGridView);
             }
-            else if (ProductTypeDataGridView.Rows.Count == 0)
+            else if (ProductTypeOrStorageDataGridView.Rows.Count == 0)
             {
                 DisplayEmptyListReason("Informacijos Nerasta pasirinkite tipą iš lentelės ir spauskite Gauti info", e,
                     dataGridView);
@@ -224,31 +227,66 @@ namespace Invoice.Forms
 
         private void ProductTypeDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (ProductTypeDataGridView.ColumnCount == StorageColumnCount)
+            if (ProductTypeOrStorageDataGridView.ColumnCount == StorageColumnCount && ProductTypeOrStorageDataGridView.Rows.Count != 0)
             {
                 int rowIndex = e.RowIndex;
 
-                DateTime madeDate = DateTime.Parse(ProductTypeDataGridView.Rows[rowIndex].Cells[StorageMadeDateIndex].Value.ToString());
-                DateTime expireDate = DateTime.Parse(ProductTypeDataGridView.Rows[rowIndex].Cells[StorageExpireDateIndex].Value.ToString());
+                DateTime madeDate = DateTime.Parse(ProductTypeOrStorageDataGridView.Rows[rowIndex].Cells[StorageMadeDateIndex].Value.ToString());
+                DateTime expireDate = DateTime.Parse(ProductTypeOrStorageDataGridView.Rows[rowIndex].Cells[StorageExpireDateIndex].Value.ToString());
 
                 int monthDifference = ((expireDate.Year - madeDate.Year) * 12) + expireDate.Month - madeDate.Month;
 
                 if (monthDifference >= 6)
                 {
-                    ProductTypeDataGridView.Rows[rowIndex].DefaultCellStyle.BackColor = Color.Chartreuse;
+                    ProductTypeOrStorageDataGridView.Rows[rowIndex].DefaultCellStyle.BackColor = Color.Chartreuse;
                 }
                 else if (monthDifference >= 3)
                 {
-                    ProductTypeDataGridView.Rows[rowIndex].DefaultCellStyle.BackColor = Color.Yellow;
+                    ProductTypeOrStorageDataGridView.Rows[rowIndex].DefaultCellStyle.BackColor = Color.Yellow;
                 }
                 else if (monthDifference >= 1)
                 {
-                    ProductTypeDataGridView.Rows[rowIndex].DefaultCellStyle.BackColor = Color.Red;
+                    ProductTypeOrStorageDataGridView.Rows[rowIndex].DefaultCellStyle.BackColor = Color.Red;
                 }
                 else
                 {
-                    ProductTypeDataGridView.Rows[rowIndex].DefaultCellStyle.BackColor = Color.Black;
+                    ProductTypeOrStorageDataGridView.Rows[rowIndex].DefaultCellStyle.BackColor = Color.Black;
                 }
+            }
+        }
+
+        private void StoreInfoFromDataGridViewForUpdateButton_Click(object sender, EventArgs e)
+        {
+            if (ProductTypeOrStorageDataGridView.ColumnCount == StorageColumnCount && ProductTypeOrStorageDataGridView.Rows.Count != 0)
+            {
+                int id = int.Parse(ProductTypeOrStorageDataGridView.SelectedRows[0].Cells[0].Value.ToString());
+
+                DateTime madeDate = DateTime.Parse(ProductTypeOrStorageDataGridView.SelectedRows[0].Cells[StorageMadeDateIndex].Value.ToString());
+
+                StorageSerialNumberTextBox.Text = ProductTypeOrStorageDataGridView.SelectedRows[0]
+                    .Cells[StorageSerialNumberIndex].Value.ToString();
+
+                StorageProductNameTextBox.Text = ProductTypeOrStorageDataGridView.SelectedRows[0]
+                    .Cells[StorageProductNameIndex].Value.ToString();
+
+                StorageProductMadeDateTextBox.Text = DateTime
+                    .Parse(ProductTypeOrStorageDataGridView.SelectedRows[0].Cells[StorageMadeDateIndex].Value
+                        .ToString()).ToString(DateFormat);
+
+                StorageProductExpireDateTextBox.Text = DateTime.Parse(ProductTypeOrStorageDataGridView.SelectedRows[0]
+                    .Cells[StorageExpireDateIndex].Value
+                    .ToString()).ToString(DateFormat);
+
+                StorageProductQuantityTextBox.Text = ProductTypeOrStorageDataGridView.SelectedRows[0]
+                    .Cells[StorageQuantityIndex].Value.ToString();
+
+                StorageProductPriceTextBox.Text = ProductTypeOrStorageDataGridView.SelectedRows[0]
+                    .Cells[StoragePriceIndex].Value.ToString();
+
+
+
+
+
             }
         }
 
@@ -258,7 +296,7 @@ namespace Invoice.Forms
         {
             this.StartPosition = FormStartPosition.CenterScreen;
 
-            ProductTypeDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            ProductTypeOrStorageDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
             ProductTypeYearComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             ProductTypeSpecificNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -273,7 +311,7 @@ namespace Invoice.Forms
 
             bindingSource.DataSource = _specificProductTypeAllInfo;
 
-            ProductTypeDataGridView.DataSource = bindingSource;
+            ProductTypeOrStorageDataGridView.DataSource = bindingSource;
 
             ChangeDataGridViewHeaderText(isProductType: true);
         }
@@ -286,7 +324,7 @@ namespace Invoice.Forms
 
             bindingSource.DataSource = _storageInfo;
 
-            ProductTypeDataGridView.DataSource = bindingSource;
+            ProductTypeOrStorageDataGridView.DataSource = bindingSource;
 
             ChangeDataGridViewHeaderText(isProductType: false);
             ChangeDataGridViewHeadersSize();
@@ -310,30 +348,30 @@ namespace Invoice.Forms
         {
             if (isProductType)
             {
-                ProductTypeDataGridView.Columns[0].HeaderText = @"Sąskaitos Nr.";
-                ProductTypeDataGridView.Columns[1].HeaderText = @"Metai";
-                ProductTypeDataGridView.Columns[2].HeaderText = @"Tipas";
-                ProductTypeDataGridView.Columns[ProductTypeQuantityIndex].HeaderText = @"Kiekis";
-                ProductTypeDataGridView.Columns[ProductTypePriceIndex].HeaderText = @"Vnt. Kaina";
+                ProductTypeOrStorageDataGridView.Columns[0].HeaderText = @"Sąskaitos Nr.";
+                ProductTypeOrStorageDataGridView.Columns[1].HeaderText = @"Metai";
+                ProductTypeOrStorageDataGridView.Columns[2].HeaderText = @"Tipas";
+                ProductTypeOrStorageDataGridView.Columns[ProductTypeQuantityIndex].HeaderText = @"Kiekis";
+                ProductTypeOrStorageDataGridView.Columns[ProductTypePriceIndex].HeaderText = @"Vnt. Kaina";
             }
             else
             {
-                ProductTypeDataGridView.Columns[1].HeaderText = @"Serija";
-                ProductTypeDataGridView.Columns[2].HeaderText = @"Tipas";
-                ProductTypeDataGridView.Columns[StorageMadeDateIndex].HeaderText = @"Sukūrimo Data";
-                ProductTypeDataGridView.Columns[StorageExpireDateIndex].HeaderText = @"Galiojimo Data";
-                ProductTypeDataGridView.Columns[StorageQuantityIndex].HeaderText = @"Kiekis";
-                ProductTypeDataGridView.Columns[StoragePriceIndex].HeaderText = @"Kaina";
+                ProductTypeOrStorageDataGridView.Columns[StorageSerialNumberIndex].HeaderText = @"Serija";
+                ProductTypeOrStorageDataGridView.Columns[StorageProductNameIndex].HeaderText = @"Tipas";
+                ProductTypeOrStorageDataGridView.Columns[StorageMadeDateIndex].HeaderText = @"Sukūrimo Data";
+                ProductTypeOrStorageDataGridView.Columns[StorageExpireDateIndex].HeaderText = @"Galiojimo Data";
+                ProductTypeOrStorageDataGridView.Columns[StorageQuantityIndex].HeaderText = @"Kiekis";
+                ProductTypeOrStorageDataGridView.Columns[StoragePriceIndex].HeaderText = @"Kaina";
             }
         }
 
         private void ChangeDataGridViewHeadersSize()
         {
-            ProductTypeDataGridView.Columns[0].Width = 30;
-            ProductTypeDataGridView.Columns[StorageMadeDateIndex].Width = 70;
-            ProductTypeDataGridView.Columns[StorageExpireDateIndex].Width = 70;
-            ProductTypeDataGridView.Columns[StorageQuantityIndex].Width = 60;
-            ProductTypeDataGridView.Columns[StoragePriceIndex].Width = 60;
+            ProductTypeOrStorageDataGridView.Columns[StorageIdIndex].Width = 30;
+            ProductTypeOrStorageDataGridView.Columns[StorageMadeDateIndex].Width = 70;
+            ProductTypeOrStorageDataGridView.Columns[StorageExpireDateIndex].Width = 70;
+            ProductTypeOrStorageDataGridView.Columns[StorageQuantityIndex].Width = 60;
+            ProductTypeOrStorageDataGridView.Columns[StoragePriceIndex].Width = 60;
         }
 
         private static void DisplayEmptyListReason(string reason, PaintEventArgs e, DataGridView dataGridView)
@@ -364,16 +402,16 @@ namespace Invoice.Forms
 
         private void CalculateFullProductTypeQuantityAndPrice(bool isProductType)
         {
-            int rowsCount = ProductTypeDataGridView.Rows.Count;
+            int rowsCount = ProductTypeOrStorageDataGridView.Rows.Count;
 
             if (isProductType)
             {
                 double calculateFullProductTypeQuantity =
-                    _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeDataGridView, rowsCount,
+                    _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeOrStorageDataGridView, rowsCount,
                         ProductTypeQuantityIndex);
 
                 double calculateFullProductTypePrice =
-                    _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeDataGridView, rowsCount,
+                    _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeOrStorageDataGridView, rowsCount,
                         ProductTypePriceIndex);
 
                 FullProductTypeQuantityTextBox.Text =
@@ -383,11 +421,11 @@ namespace Invoice.Forms
             else
             {
                 double calculateFullStorageQuantity =
-                    _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeDataGridView, rowsCount,
+                    _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeOrStorageDataGridView, rowsCount,
                         StorageQuantityIndex);
 
                 double calculateFullStoragePrice =
-                    _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeDataGridView, rowsCount,
+                    _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeOrStorageDataGridView, rowsCount,
                         StoragePriceIndex);
 
                 FullProductTypeQuantityTextBox.Text =
@@ -886,7 +924,7 @@ namespace Invoice.Forms
 
         private void ValidateTextIsDouble(TextBox textBox)
         {
-            bool isNumber = double.TryParse(textBox.Text, out double number);
+            bool isNumber = double.TryParse(textBox.Text, out _);
 
             if (isNumber)
             {

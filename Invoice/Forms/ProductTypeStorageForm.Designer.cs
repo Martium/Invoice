@@ -29,7 +29,7 @@ namespace Invoice.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.ProductTypeDataGridView = new System.Windows.Forms.DataGridView();
+            this.ProductTypeOrStorageDataGridView = new System.Windows.Forms.DataGridView();
             this.GetAllInfoByYearButton = new System.Windows.Forms.Button();
             this.GetAllInfoByProductNameButton = new System.Windows.Forms.Button();
             this.ProductTypeYearComboBox = new System.Windows.Forms.ComboBox();
@@ -61,24 +61,25 @@ namespace Invoice.Forms
             this.GetStorageInfoByNameButton = new System.Windows.Forms.Button();
             this.CreateNewStorageButton = new System.Windows.Forms.Button();
             this.ErrorLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.ProductTypeDataGridView)).BeginInit();
+            this.StoreInfoForUpdateButton = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.ProductTypeOrStorageDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // ProductTypeDataGridView
+            // ProductTypeOrStorageDataGridView
             // 
-            this.ProductTypeDataGridView.AllowUserToAddRows = false;
-            this.ProductTypeDataGridView.AllowUserToDeleteRows = false;
-            this.ProductTypeDataGridView.AllowUserToResizeColumns = false;
-            this.ProductTypeDataGridView.AllowUserToResizeRows = false;
-            this.ProductTypeDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ProductTypeDataGridView.Location = new System.Drawing.Point(40, 88);
-            this.ProductTypeDataGridView.MultiSelect = false;
-            this.ProductTypeDataGridView.Name = "ProductTypeDataGridView";
-            this.ProductTypeDataGridView.ReadOnly = true;
-            this.ProductTypeDataGridView.Size = new System.Drawing.Size(557, 563);
-            this.ProductTypeDataGridView.TabIndex = 0;
-            this.ProductTypeDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.ProductTypeDataGridView_CellFormatting);
-            this.ProductTypeDataGridView.Paint += new System.Windows.Forms.PaintEventHandler(this.ProductTypeDataGridView_Paint);
+            this.ProductTypeOrStorageDataGridView.AllowUserToAddRows = false;
+            this.ProductTypeOrStorageDataGridView.AllowUserToDeleteRows = false;
+            this.ProductTypeOrStorageDataGridView.AllowUserToResizeColumns = false;
+            this.ProductTypeOrStorageDataGridView.AllowUserToResizeRows = false;
+            this.ProductTypeOrStorageDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ProductTypeOrStorageDataGridView.Location = new System.Drawing.Point(40, 88);
+            this.ProductTypeOrStorageDataGridView.MultiSelect = false;
+            this.ProductTypeOrStorageDataGridView.Name = "ProductTypeOrStorageDataGridView";
+            this.ProductTypeOrStorageDataGridView.ReadOnly = true;
+            this.ProductTypeOrStorageDataGridView.Size = new System.Drawing.Size(557, 563);
+            this.ProductTypeOrStorageDataGridView.TabIndex = 0;
+            this.ProductTypeOrStorageDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.ProductTypeDataGridView_CellFormatting);
+            this.ProductTypeOrStorageDataGridView.Paint += new System.Windows.Forms.PaintEventHandler(this.ProductTypeDataGridView_Paint);
             // 
             // GetAllInfoByYearButton
             // 
@@ -360,11 +361,22 @@ namespace Invoice.Forms
             this.ErrorLabel.Text = "error Label";
             this.ErrorLabel.Visible = false;
             // 
+            // StoreInfoForUpdateButton
+            // 
+            this.StoreInfoForUpdateButton.Location = new System.Drawing.Point(483, 669);
+            this.StoreInfoForUpdateButton.Name = "StoreInfoForUpdateButton";
+            this.StoreInfoForUpdateButton.Size = new System.Drawing.Size(114, 38);
+            this.StoreInfoForUpdateButton.TabIndex = 35;
+            this.StoreInfoForUpdateButton.Text = "Sukelti informaciją \r\natnaujinimui";
+            this.StoreInfoForUpdateButton.UseVisualStyleBackColor = true;
+            this.StoreInfoForUpdateButton.Click += new System.EventHandler(this.StoreInfoFromDataGridViewForUpdateButton_Click);
+            // 
             // ProductTypeStorageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1024, 786);
+            this.Controls.Add(this.StoreInfoForUpdateButton);
             this.Controls.Add(this.ErrorLabel);
             this.Controls.Add(this.CreateNewStorageButton);
             this.Controls.Add(this.GetStorageInfoByNameButton);
@@ -396,13 +408,13 @@ namespace Invoice.Forms
             this.Controls.Add(this.ProductTypeYearComboBox);
             this.Controls.Add(this.GetAllInfoByProductNameButton);
             this.Controls.Add(this.GetAllInfoByYearButton);
-            this.Controls.Add(this.ProductTypeDataGridView);
+            this.Controls.Add(this.ProductTypeOrStorageDataGridView);
             this.MaximizeBox = false;
             this.Name = "ProductTypeStorageForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Produktų Sandėlys";
             this.Load += new System.EventHandler(this.ProductTypeStorageForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.ProductTypeDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ProductTypeOrStorageDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -410,7 +422,7 @@ namespace Invoice.Forms
 
         #endregion
 
-        private System.Windows.Forms.DataGridView ProductTypeDataGridView;
+        private System.Windows.Forms.DataGridView ProductTypeOrStorageDataGridView;
         private System.Windows.Forms.Button GetAllInfoByYearButton;
         private System.Windows.Forms.Button GetAllInfoByProductNameButton;
         private System.Windows.Forms.ComboBox ProductTypeYearComboBox;
@@ -442,5 +454,6 @@ namespace Invoice.Forms
         private System.Windows.Forms.Button GetStorageInfoByNameButton;
         private System.Windows.Forms.Button CreateNewStorageButton;
         private System.Windows.Forms.Label ErrorLabel;
+        private System.Windows.Forms.Button StoreInfoForUpdateButton;
     }
 }
