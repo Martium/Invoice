@@ -251,6 +251,11 @@ namespace Invoice.Forms
             ChangeButtonTextIfNumberIsPositiveOrNegative(isNumber);
         }
 
+        private void DeleteStorageButton_Click(object sender, EventArgs e)
+        {
+            DeleteStorageProduct();
+        }
+
         #region Helpers
 
         private void SetControlInitialState()
@@ -289,12 +294,40 @@ namespace Invoice.Forms
                 {
                     _messageDialogService.ShowInfoMessage("Sekmingai išsaugota į Sandėlį");
                     TryFillStorageProductNameComboBox();
-                    // need created here add new or call refresh method datagridview method
+                    GetAllInfoStorage_Click(this, new EventArgs());
                 }
                 else
                 {
                     _messageDialogService.ShowErrorMassage("Nepavyko išsaugoti");
                 }
+            }
+        }
+
+        private void DeleteStorageProduct()
+        {
+            if (ProductTypeOrStorageDataGridView.ColumnCount == StorageColumnCount && ProductTypeOrStorageDataGridView.Rows.Count != 0)
+            {
+                int id = int.Parse(ProductTypeOrStorageDataGridView.SelectedRows[0].Cells[StorageIdIndex].Value.ToString());
+                bool isDeleted = _storageRepository.DeleteStorageProductById(id);
+
+                if (isDeleted)
+                {
+                    _messageDialogService.ShowInfoMessage("Sekmingai Ištrinta");
+                    TryFillStorageProductNameComboBox();
+                    GetAllInfoStorage_Click(this, new EventArgs());
+                }
+                else
+                {
+                    _messageDialogService.ShowErrorMassage("Nepavyko ištrinti");
+                }
+            }
+            else if (ProductTypeOrStorageDataGridView.ColumnCount != StorageColumnCount && ProductTypeOrStorageDataGridView.Rows.Count != 0)
+            {
+                _messageDialogService.ShowErrorMassage("Produktų tipas nepriklauso sandėlio informacijai, informaciją kurią pasirinkote priklauso Sąskaitoms faktūroms");
+            }
+            else
+            {
+                _messageDialogService.ShowErrorMassage("Nėra jokios informacijos kurią būtų galima atnaujinti");
             }
         }
 
@@ -310,6 +343,7 @@ namespace Invoice.Forms
                 if (isAdd)
                 {
                     _messageDialogService.ShowInfoMessage("Atnaujinta Sėkmingai");
+                    GetAllInfoStorage_Click(this, new EventArgs());
                 }
                 else
                 {
@@ -344,7 +378,7 @@ namespace Invoice.Forms
                 {
                     _messageDialogService.ShowInfoMessage("Sekmingai atnaujinta");
                     TryFillStorageProductNameComboBox();
-                    // need created here update datagridview method
+                    GetAllInfoStorage_Click(this, new EventArgs());
                 }
                 else
                 {
@@ -1099,6 +1133,7 @@ namespace Invoice.Forms
 
 
         #endregion
+
         
     }
 }

@@ -139,5 +139,22 @@ namespace Invoice.Repositories
                 return affectedRows == 1;
             }
         }
+
+        public bool DeleteStorageProductById(int id)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string deleteStorageProductCommand = 
+                    $@"DELETE FROM 'Storage'
+                      WHERE Id = {id}
+                    ";
+
+                int affectedRows = dbConnection.Execute(deleteStorageProductCommand);
+
+                return affectedRows == 1;
+            }
+        }
     }
 }
