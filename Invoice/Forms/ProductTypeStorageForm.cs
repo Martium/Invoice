@@ -163,13 +163,13 @@ namespace Invoice.Forms
         private void StorageProductQuantityTextBox_TextChanged(object sender, EventArgs e)
         {
             SetTextBoxBackColorToDefault(StorageProductQuantityTextBox);
-            ValidateTextIsDouble(StorageProductQuantityTextBox);
+            ValidateTextIsDouble(StorageProductQuantityTextBox, CreateNewStorageButton);
         }
 
         private void StorageProductPriceTextBox_TextChanged(object sender, EventArgs e)
         {
             SetTextBoxBackColorToDefault(StorageProductPriceTextBox);
-            ValidateTextIsDouble(StorageProductPriceTextBox);
+            ValidateTextIsDouble(StorageProductPriceTextBox, CreateNewStorageButton);
         }
 
         private void ProductTypeDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -215,7 +215,40 @@ namespace Invoice.Forms
 
                 UpdateStorageProduct(isAllTextBoxFilled);
             }
+            else if (ProductTypeOrStorageDataGridView.ColumnCount != StorageColumnCount && ProductTypeOrStorageDataGridView.Rows.Count != 0)
+            {
+                _messageDialogService.ShowErrorMassage("Produktų tipas nepriklauso sandėlio informacijai, informaciją kurią pasirinkote priklauso Sąskaitoms faktūroms");
+            }
+            else
+            {
+                _messageDialogService.ShowErrorMassage("Nėra jokios informacijos kurią būtų galima atnaujinti");
+            }
+        }
 
+        private void AddStorageQuantityButton_Click(object sender, EventArgs e)
+        {
+            if (ProductTypeOrStorageDataGridView.ColumnCount == StorageColumnCount && ProductTypeOrStorageDataGridView.Rows.Count != 0)
+            {
+                bool isStorageQuantityTextBoxFilled = CheckAddStorageQuantityTextBoxIsFilled();
+                UpdateStorageQuantity(isStorageQuantityTextBoxFilled);
+            }
+            else if (ProductTypeOrStorageDataGridView.ColumnCount != StorageColumnCount && ProductTypeOrStorageDataGridView.Rows.Count != 0)
+            {
+                _messageDialogService.ShowErrorMassage("Produktų tipas nepriklauso sandėlio informacijai, informaciją kurią pasirinkote priklauso Sąskaitoms faktūroms");
+            }
+            else
+            {
+                _messageDialogService.ShowErrorMassage("Nėra jokios informacijos kurią būtų galima atnaujinti");
+            }
+        }
+
+        private void AddStorageQuantityTextBox_TextChanged(object sender, EventArgs e)
+        {
+            SetTextBoxBackColorToDefault(AddStorageQuantityTextBox);
+
+            bool isNumber = ValidateTextIsDouble(AddStorageQuantityTextBox, AddStorageQuantityButton);
+
+            ChangeButtonTextIfNumberIsPositiveOrNegative(isNumber);
         }
 
         #region Helpers
@@ -261,6 +294,26 @@ namespace Invoice.Forms
                 else
                 {
                     _messageDialogService.ShowErrorMassage("Nepavyko išsaugoti");
+                }
+            }
+        }
+
+        private void UpdateStorageQuantity(bool isStorageQuantityTextBoxFilled)
+        {
+            if (isStorageQuantityTextBoxFilled)
+            {
+                double add = double.Parse(AddStorageQuantityTextBox.Text);
+                int id = int.Parse(ProductTypeOrStorageDataGridView.SelectedRows[0].Cells[StorageIdIndex].Value.ToString());
+
+                bool isAdd = _storageRepository.UpdateQuantityById(add, id);
+
+                if (isAdd)
+                {
+                    _messageDialogService.ShowInfoMessage("Atnaujinta Sėkmingai");
+                }
+                else
+                {
+                    _messageDialogService.ShowErrorMassage("Neatnaujinta bandykit dar kartą (Kreiptis į Administratorių)");
                 }
             }
         }
@@ -334,6 +387,20 @@ namespace Invoice.Forms
             }
 
             return isAllTextBoxFilled;
+        }
+
+        private bool CheckAddStorageQuantityTextBoxIsFilled()
+        {
+            bool isStorageQuantityTextBoxFilled = true;
+
+            if (string.IsNullOrWhiteSpace(AddStorageQuantityTextBox.Text))
+            {
+                AddStorageQuantityTextBox.BackColor = Color.Yellow;
+                _messageDialogService.ShowErrorMassage("Geltoni langeliai turi būt supildyti");
+                isStorageQuantityTextBoxFilled = false;
+            }
+
+            return isStorageQuantityTextBoxFilled;
         }
 
         private void LoadSpecificProductTypeToDataGridView()
@@ -955,27 +1022,29 @@ namespace Invoice.Forms
             }
         }
 
-        private void ValidateTextIsDouble(TextBox textBox)
+        private bool ValidateTextIsDouble(TextBox textBox, Button button)
         {
             bool isNumber = double.TryParse(textBox.Text, out _);
 
             if (isNumber)
             {
-                CreateNewStorageButton.Enabled = true;
+                button.Enabled = true;
                 _messageDialogService.HideLabelAndTextBoxError(ErrorLabel, textBox);
             }
             else if (string.IsNullOrWhiteSpace(textBox.Text))
             {
-                CreateNewStorageButton.Enabled = false;
+                button.Enabled = false;
                 _messageDialogService.DisplayLabelAndTextBoxError("Raudonam langelyje turi būti skaičius, negali būti tuščias",
                     textBox, ErrorLabel);
             }
             else
             {
-                CreateNewStorageButton.Enabled = false;
+                button.Enabled = false;
                 _messageDialogService.DisplayLabelAndTextBoxError("Raudonam langelyje tai ką įvedėte nėra skaičius, turi būti skaičius",
                     textBox, ErrorLabel);
             }
+
+            return isNumber;
         }
 
         private void SetTextBoxBackColorToDefault(TextBox textBox)
@@ -1007,7 +1076,6 @@ namespace Invoice.Forms
 
                 StorageProductPriceTextBox.Text = ProductTypeOrStorageDataGridView.SelectedRows[0]
                     .Cells[StoragePriceIndex].Value.ToString();
-
             }
             else if (ProductTypeOrStorageDataGridView.ColumnCount < StorageColumnCount && ProductTypeOrStorageDataGridView.Rows.Count != 0)
             {
@@ -1019,8 +1087,18 @@ namespace Invoice.Forms
             }
         }
 
+        private void ChangeButtonTextIfNumberIsPositiveOrNegative(bool isNumber)
+        {
+            if (isNumber)
+            {
+                double numberValue = double.Parse(AddStorageQuantityTextBox.Text);
+
+                AddStorageQuantityButton.Text = numberValue >= 0 ? "Pridėti" : "Atimti";
+            }
+        }
+
 
         #endregion
-
+        
     }
 }

@@ -61,8 +61,11 @@ namespace Invoice.Forms
             this.GetStorageInfoByNameButton = new System.Windows.Forms.Button();
             this.CreateNewStorageButton = new System.Windows.Forms.Button();
             this.ErrorLabel = new System.Windows.Forms.Label();
-            this.StoreInfoForUpdateButton = new System.Windows.Forms.Button();
+            this.StoreInfoInStorageTextBoxButton = new System.Windows.Forms.Button();
             this.UpdateStorageButton = new System.Windows.Forms.Button();
+            this.AddStorageQuantityTextBox = new System.Windows.Forms.TextBox();
+            this.AddStorageQuantityButton = new System.Windows.Forms.Button();
+            this.AddQuantityInfoLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ProductTypeOrStorageDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -362,15 +365,15 @@ namespace Invoice.Forms
             this.ErrorLabel.Text = "error Label";
             this.ErrorLabel.Visible = false;
             // 
-            // StoreInfoForUpdateButton
+            // StoreInfoInStorageTextBoxButton
             // 
-            this.StoreInfoForUpdateButton.Location = new System.Drawing.Point(483, 669);
-            this.StoreInfoForUpdateButton.Name = "StoreInfoForUpdateButton";
-            this.StoreInfoForUpdateButton.Size = new System.Drawing.Size(114, 38);
-            this.StoreInfoForUpdateButton.TabIndex = 35;
-            this.StoreInfoForUpdateButton.Text = "Sukelti informaciją \r\natnaujinimui";
-            this.StoreInfoForUpdateButton.UseVisualStyleBackColor = true;
-            this.StoreInfoForUpdateButton.Click += new System.EventHandler(this.StoreInfoFromDataGridViewButton_Click);
+            this.StoreInfoInStorageTextBoxButton.Location = new System.Drawing.Point(483, 661);
+            this.StoreInfoInStorageTextBoxButton.Name = "StoreInfoInStorageTextBoxButton";
+            this.StoreInfoInStorageTextBoxButton.Size = new System.Drawing.Size(114, 29);
+            this.StoreInfoInStorageTextBoxButton.TabIndex = 35;
+            this.StoreInfoInStorageTextBoxButton.Text = "Sukelti informaciją ";
+            this.StoreInfoInStorageTextBoxButton.UseVisualStyleBackColor = true;
+            this.StoreInfoInStorageTextBoxButton.Click += new System.EventHandler(this.StoreInfoFromDataGridViewButton_Click);
             // 
             // UpdateStorageButton
             // 
@@ -382,13 +385,44 @@ namespace Invoice.Forms
             this.UpdateStorageButton.UseVisualStyleBackColor = true;
             this.UpdateStorageButton.Click += new System.EventHandler(this.UpdateStorageButton_Click);
             // 
+            // AddStorageQuantityTextBox
+            // 
+            this.AddStorageQuantityTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.AddStorageQuantityTextBox.Location = new System.Drawing.Point(641, 630);
+            this.AddStorageQuantityTextBox.Name = "AddStorageQuantityTextBox";
+            this.AddStorageQuantityTextBox.Size = new System.Drawing.Size(98, 20);
+            this.AddStorageQuantityTextBox.TabIndex = 37;
+            this.AddStorageQuantityTextBox.TextChanged += new System.EventHandler(this.AddStorageQuantityTextBox_TextChanged);
+            // 
+            // AddStorageQuantityButton
+            // 
+            this.AddStorageQuantityButton.Location = new System.Drawing.Point(775, 630);
+            this.AddStorageQuantityButton.Name = "AddStorageQuantityButton";
+            this.AddStorageQuantityButton.Size = new System.Drawing.Size(83, 20);
+            this.AddStorageQuantityButton.TabIndex = 38;
+            this.AddStorageQuantityButton.Text = "Pridėti";
+            this.AddStorageQuantityButton.UseVisualStyleBackColor = true;
+            this.AddStorageQuantityButton.Click += new System.EventHandler(this.AddStorageQuantityButton_Click);
+            // 
+            // AddQuantityInfoLabel
+            // 
+            this.AddQuantityInfoLabel.AutoSize = true;
+            this.AddQuantityInfoLabel.Location = new System.Drawing.Point(638, 615);
+            this.AddQuantityInfoLabel.Name = "AddQuantityInfoLabel";
+            this.AddQuantityInfoLabel.Size = new System.Drawing.Size(101, 13);
+            this.AddQuantityInfoLabel.TabIndex = 39;
+            this.AddQuantityInfoLabel.Text = "Pridėti ar Atimti kiekį";
+            // 
             // ProductTypeStorageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1024, 786);
+            this.Controls.Add(this.AddQuantityInfoLabel);
+            this.Controls.Add(this.AddStorageQuantityButton);
+            this.Controls.Add(this.AddStorageQuantityTextBox);
             this.Controls.Add(this.UpdateStorageButton);
-            this.Controls.Add(this.StoreInfoForUpdateButton);
+            this.Controls.Add(this.StoreInfoInStorageTextBoxButton);
             this.Controls.Add(this.ErrorLabel);
             this.Controls.Add(this.CreateNewStorageButton);
             this.Controls.Add(this.GetStorageInfoByNameButton);
@@ -466,7 +500,10 @@ namespace Invoice.Forms
         private System.Windows.Forms.Button GetStorageInfoByNameButton;
         private System.Windows.Forms.Button CreateNewStorageButton;
         private System.Windows.Forms.Label ErrorLabel;
-        private System.Windows.Forms.Button StoreInfoForUpdateButton;
+        private System.Windows.Forms.Button StoreInfoInStorageTextBoxButton;
         private System.Windows.Forms.Button UpdateStorageButton;
+        private System.Windows.Forms.TextBox AddStorageQuantityTextBox;
+        private System.Windows.Forms.Button AddStorageQuantityButton;
+        private System.Windows.Forms.Label AddQuantityInfoLabel;
     }
 }

@@ -121,5 +121,23 @@ namespace Invoice.Repositories
                 return affectedRows == 1;
             }
         }
+
+        public bool UpdateQuantityById(double storageQuantity, int id)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string updateStorageQuantityCommand =
+                    $@"UPDATE 'Storage'
+                        SET StorageProductQuantity = StorageProductQuantity + {storageQuantity}
+                      WHERE ID = {id}
+                    ";
+
+                int affectedRows = dbConnection.Execute(updateStorageQuantityCommand);
+
+                return affectedRows == 1;
+            }
+        }
     }
 }
