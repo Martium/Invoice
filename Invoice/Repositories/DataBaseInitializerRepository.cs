@@ -317,9 +317,9 @@ namespace Invoice.Repositories
                     INSERT INTO 'Storage'
                         Values (NULL, 'A-1234BC', '1L APELSINAS', '2021-06-03', '2022-06-03', 1, 1.1);
                     INSERT INTO 'Storage'
-                        Values (NULL, 'B-1234BC', '2L APELSINAS', '2021-06-04', '2022-06-03', 2, 2.2);
+                        Values (NULL, 'B-1234BC', '2L APELSINAS', '2022-02-04', '2022-06-03', 2, 2.2);
                     INSERT INTO 'Storage'
-                        Values (NULL, 'C-1234BC', '2L APELSINAS', '2021-05-05', '2022-06-03', 3, 3.3);
+                        Values (NULL, 'C-1234BC', '2L APELSINAS', '2022-05-05', '2022-06-03', 3, 3.3);
                    COMMIT;
                 ";
 

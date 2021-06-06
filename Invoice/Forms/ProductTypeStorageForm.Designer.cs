@@ -29,7 +29,7 @@ namespace Invoice.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.ProductTypeDataGridView = new System.Windows.Forms.DataGridView();
+            this.ProductTypeOrStorageDataGridView = new System.Windows.Forms.DataGridView();
             this.GetAllInfoByYearButton = new System.Windows.Forms.Button();
             this.GetAllInfoByProductNameButton = new System.Windows.Forms.Button();
             this.ProductTypeYearComboBox = new System.Windows.Forms.ComboBox();
@@ -57,27 +57,33 @@ namespace Invoice.Forms
             this.StorageProductPriceTextBox = new System.Windows.Forms.TextBox();
             this.StorageProductNameListComboBox = new System.Windows.Forms.ComboBox();
             this.StorageProductnameInformationLabel = new System.Windows.Forms.Label();
-            this.NewStorageInfoLabel = new System.Windows.Forms.Label();
+            this.NewOrUpdateStorageInfoLabel = new System.Windows.Forms.Label();
             this.GetStorageInfoByNameButton = new System.Windows.Forms.Button();
             this.CreateNewStorageButton = new System.Windows.Forms.Button();
             this.ErrorLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.ProductTypeDataGridView)).BeginInit();
+            this.StoreInfoInStorageTextBoxButton = new System.Windows.Forms.Button();
+            this.UpdateStorageButton = new System.Windows.Forms.Button();
+            this.AddStorageQuantityTextBox = new System.Windows.Forms.TextBox();
+            this.AddStorageQuantityButton = new System.Windows.Forms.Button();
+            this.AddQuantityInfoLabel = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.ProductTypeOrStorageDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // ProductTypeDataGridView
+            // ProductTypeOrStorageDataGridView
             // 
-            this.ProductTypeDataGridView.AllowUserToAddRows = false;
-            this.ProductTypeDataGridView.AllowUserToDeleteRows = false;
-            this.ProductTypeDataGridView.AllowUserToResizeColumns = false;
-            this.ProductTypeDataGridView.AllowUserToResizeRows = false;
-            this.ProductTypeDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ProductTypeDataGridView.Location = new System.Drawing.Point(40, 88);
-            this.ProductTypeDataGridView.MultiSelect = false;
-            this.ProductTypeDataGridView.Name = "ProductTypeDataGridView";
-            this.ProductTypeDataGridView.ReadOnly = true;
-            this.ProductTypeDataGridView.Size = new System.Drawing.Size(557, 563);
-            this.ProductTypeDataGridView.TabIndex = 0;
-            this.ProductTypeDataGridView.Paint += new System.Windows.Forms.PaintEventHandler(this.ProductTypeDataGridView_Paint);
+            this.ProductTypeOrStorageDataGridView.AllowUserToAddRows = false;
+            this.ProductTypeOrStorageDataGridView.AllowUserToDeleteRows = false;
+            this.ProductTypeOrStorageDataGridView.AllowUserToResizeColumns = false;
+            this.ProductTypeOrStorageDataGridView.AllowUserToResizeRows = false;
+            this.ProductTypeOrStorageDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ProductTypeOrStorageDataGridView.Location = new System.Drawing.Point(40, 88);
+            this.ProductTypeOrStorageDataGridView.MultiSelect = false;
+            this.ProductTypeOrStorageDataGridView.Name = "ProductTypeOrStorageDataGridView";
+            this.ProductTypeOrStorageDataGridView.ReadOnly = true;
+            this.ProductTypeOrStorageDataGridView.Size = new System.Drawing.Size(557, 563);
+            this.ProductTypeOrStorageDataGridView.TabIndex = 0;
+            this.ProductTypeOrStorageDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.ProductTypeDataGridView_CellFormatting);
+            this.ProductTypeOrStorageDataGridView.Paint += new System.Windows.Forms.PaintEventHandler(this.ProductTypeDataGridView_Paint);
             // 
             // GetAllInfoByYearButton
             // 
@@ -318,15 +324,15 @@ namespace Invoice.Forms
             this.StorageProductnameInformationLabel.TabIndex = 30;
             this.StorageProductnameInformationLabel.Text = "Produkto tipas";
             // 
-            // NewStorageInfoLabel
+            // NewOrUpdateStorageInfoLabel
             // 
-            this.NewStorageInfoLabel.AutoSize = true;
-            this.NewStorageInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NewStorageInfoLabel.Location = new System.Drawing.Point(638, 307);
-            this.NewStorageInfoLabel.Name = "NewStorageInfoLabel";
-            this.NewStorageInfoLabel.Size = new System.Drawing.Size(131, 16);
-            this.NewStorageInfoLabel.TabIndex = 31;
-            this.NewStorageInfoLabel.Text = "Naujas Produktas";
+            this.NewOrUpdateStorageInfoLabel.AutoSize = true;
+            this.NewOrUpdateStorageInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NewOrUpdateStorageInfoLabel.Location = new System.Drawing.Point(638, 307);
+            this.NewOrUpdateStorageInfoLabel.Name = "NewOrUpdateStorageInfoLabel";
+            this.NewOrUpdateStorageInfoLabel.Size = new System.Drawing.Size(335, 16);
+            this.NewOrUpdateStorageInfoLabel.TabIndex = 31;
+            this.NewOrUpdateStorageInfoLabel.Text = "Atnaujinti arba sukurti naują produktą sandėlyje";
             // 
             // GetStorageInfoByNameButton
             // 
@@ -359,15 +365,68 @@ namespace Invoice.Forms
             this.ErrorLabel.Text = "error Label";
             this.ErrorLabel.Visible = false;
             // 
+            // StoreInfoInStorageTextBoxButton
+            // 
+            this.StoreInfoInStorageTextBoxButton.Location = new System.Drawing.Point(483, 661);
+            this.StoreInfoInStorageTextBoxButton.Name = "StoreInfoInStorageTextBoxButton";
+            this.StoreInfoInStorageTextBoxButton.Size = new System.Drawing.Size(114, 29);
+            this.StoreInfoInStorageTextBoxButton.TabIndex = 35;
+            this.StoreInfoInStorageTextBoxButton.Text = "Sukelti informaciją ";
+            this.StoreInfoInStorageTextBoxButton.UseVisualStyleBackColor = true;
+            this.StoreInfoInStorageTextBoxButton.Click += new System.EventHandler(this.StoreInfoFromDataGridViewButton_Click);
+            // 
+            // UpdateStorageButton
+            // 
+            this.UpdateStorageButton.Location = new System.Drawing.Point(775, 556);
+            this.UpdateStorageButton.Name = "UpdateStorageButton";
+            this.UpdateStorageButton.Size = new System.Drawing.Size(128, 37);
+            this.UpdateStorageButton.TabIndex = 36;
+            this.UpdateStorageButton.Text = "Atnaujinti Produktą\r\n Sandėlyje";
+            this.UpdateStorageButton.UseVisualStyleBackColor = true;
+            this.UpdateStorageButton.Click += new System.EventHandler(this.UpdateStorageButton_Click);
+            // 
+            // AddStorageQuantityTextBox
+            // 
+            this.AddStorageQuantityTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.AddStorageQuantityTextBox.Location = new System.Drawing.Point(641, 630);
+            this.AddStorageQuantityTextBox.Name = "AddStorageQuantityTextBox";
+            this.AddStorageQuantityTextBox.Size = new System.Drawing.Size(98, 20);
+            this.AddStorageQuantityTextBox.TabIndex = 37;
+            this.AddStorageQuantityTextBox.TextChanged += new System.EventHandler(this.AddStorageQuantityTextBox_TextChanged);
+            // 
+            // AddStorageQuantityButton
+            // 
+            this.AddStorageQuantityButton.Location = new System.Drawing.Point(775, 630);
+            this.AddStorageQuantityButton.Name = "AddStorageQuantityButton";
+            this.AddStorageQuantityButton.Size = new System.Drawing.Size(83, 20);
+            this.AddStorageQuantityButton.TabIndex = 38;
+            this.AddStorageQuantityButton.Text = "Pridėti";
+            this.AddStorageQuantityButton.UseVisualStyleBackColor = true;
+            this.AddStorageQuantityButton.Click += new System.EventHandler(this.AddStorageQuantityButton_Click);
+            // 
+            // AddQuantityInfoLabel
+            // 
+            this.AddQuantityInfoLabel.AutoSize = true;
+            this.AddQuantityInfoLabel.Location = new System.Drawing.Point(638, 615);
+            this.AddQuantityInfoLabel.Name = "AddQuantityInfoLabel";
+            this.AddQuantityInfoLabel.Size = new System.Drawing.Size(101, 13);
+            this.AddQuantityInfoLabel.TabIndex = 39;
+            this.AddQuantityInfoLabel.Text = "Pridėti ar Atimti kiekį";
+            // 
             // ProductTypeStorageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1024, 786);
+            this.Controls.Add(this.AddQuantityInfoLabel);
+            this.Controls.Add(this.AddStorageQuantityButton);
+            this.Controls.Add(this.AddStorageQuantityTextBox);
+            this.Controls.Add(this.UpdateStorageButton);
+            this.Controls.Add(this.StoreInfoInStorageTextBoxButton);
             this.Controls.Add(this.ErrorLabel);
             this.Controls.Add(this.CreateNewStorageButton);
             this.Controls.Add(this.GetStorageInfoByNameButton);
-            this.Controls.Add(this.NewStorageInfoLabel);
+            this.Controls.Add(this.NewOrUpdateStorageInfoLabel);
             this.Controls.Add(this.StorageProductnameInformationLabel);
             this.Controls.Add(this.StorageProductNameListComboBox);
             this.Controls.Add(this.StorageProductPriceTextBox);
@@ -395,13 +454,13 @@ namespace Invoice.Forms
             this.Controls.Add(this.ProductTypeYearComboBox);
             this.Controls.Add(this.GetAllInfoByProductNameButton);
             this.Controls.Add(this.GetAllInfoByYearButton);
-            this.Controls.Add(this.ProductTypeDataGridView);
+            this.Controls.Add(this.ProductTypeOrStorageDataGridView);
             this.MaximizeBox = false;
             this.Name = "ProductTypeStorageForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Produktų Sandėlys";
             this.Load += new System.EventHandler(this.ProductTypeStorageForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.ProductTypeDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ProductTypeOrStorageDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -409,7 +468,7 @@ namespace Invoice.Forms
 
         #endregion
 
-        private System.Windows.Forms.DataGridView ProductTypeDataGridView;
+        private System.Windows.Forms.DataGridView ProductTypeOrStorageDataGridView;
         private System.Windows.Forms.Button GetAllInfoByYearButton;
         private System.Windows.Forms.Button GetAllInfoByProductNameButton;
         private System.Windows.Forms.ComboBox ProductTypeYearComboBox;
@@ -437,9 +496,14 @@ namespace Invoice.Forms
         private System.Windows.Forms.TextBox StorageProductPriceTextBox;
         private System.Windows.Forms.ComboBox StorageProductNameListComboBox;
         private System.Windows.Forms.Label StorageProductnameInformationLabel;
-        private System.Windows.Forms.Label NewStorageInfoLabel;
+        private System.Windows.Forms.Label NewOrUpdateStorageInfoLabel;
         private System.Windows.Forms.Button GetStorageInfoByNameButton;
         private System.Windows.Forms.Button CreateNewStorageButton;
         private System.Windows.Forms.Label ErrorLabel;
+        private System.Windows.Forms.Button StoreInfoInStorageTextBoxButton;
+        private System.Windows.Forms.Button UpdateStorageButton;
+        private System.Windows.Forms.TextBox AddStorageQuantityTextBox;
+        private System.Windows.Forms.Button AddStorageQuantityButton;
+        private System.Windows.Forms.Label AddQuantityInfoLabel;
     }
 }

@@ -28,9 +28,16 @@ namespace Invoice.Forms
 
         private List<StorageModel> _storageInfo;
 
+        private const int StorageColumnCount = 7;
+
         private const int ProductTypeQuantityIndex = 3;
         private const int ProductTypePriceIndex = 4;
 
+        private const int StorageIdIndex = 0;
+        private const int StorageSerialNumberIndex = 1;
+        private const int StorageProductNameIndex = 2;
+        private const int StorageMadeDateIndex = 3;
+        private const int StorageExpireDateIndex = 4;
         private const int StorageQuantityIndex = 5;
         private const int StoragePriceIndex = 6;
 
@@ -81,7 +88,7 @@ namespace Invoice.Forms
                 DisplayEmptyListReason("Nesupildėte pakankamai informacijos kad galėtumėte naudotis produktų sandėliu",
                     e, dataGridView);
             }
-            else if (ProductTypeDataGridView.Rows.Count == 0)
+            else if (ProductTypeOrStorageDataGridView.Rows.Count == 0)
             {
                 DisplayEmptyListReason("Informacijos Nerasta pasirinkite tipą iš lentelės ir spauskite Gauti info", e,
                     dataGridView);
@@ -126,62 +133,9 @@ namespace Invoice.Forms
 
         private void CreateNewStorageButton_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(StorageSerialNumberTextBox.Text) ||
-                string.IsNullOrWhiteSpace(StorageProductNameTextBox.Text) ||
-                string.IsNullOrWhiteSpace(StorageProductMadeDateTextBox.Text) ||
-                string.IsNullOrWhiteSpace(StorageProductExpireDateTextBox.Text) ||
-                string.IsNullOrWhiteSpace(StorageProductQuantityTextBox.Text) ||
-                string.IsNullOrWhiteSpace(StorageProductPriceTextBox.Text))
-            {
-                if (string.IsNullOrWhiteSpace(StorageSerialNumberTextBox.Text))
-                    StorageSerialNumberTextBox.BackColor = Color.Yellow;
+            bool isAllTextBoxFilled = CheckIsStorageTextBoxAllFilled();
 
-                if (string.IsNullOrWhiteSpace(StorageProductNameTextBox.Text))
-                    StorageProductNameTextBox.BackColor = Color.Yellow;
-
-                if (string.IsNullOrWhiteSpace(StorageProductMadeDateTextBox.Text))
-                    StorageProductMadeDateTextBox.BackColor = Color.Yellow;
-
-                if (string.IsNullOrWhiteSpace(StorageProductExpireDateTextBox.Text))
-                    StorageProductExpireDateTextBox.BackColor = Color.Yellow;
-
-                if (string.IsNullOrWhiteSpace(StorageProductQuantityTextBox.Text))
-                    StorageProductQuantityTextBox.BackColor = Color.Yellow;
-
-                if (string.IsNullOrWhiteSpace(StorageProductPriceTextBox.Text))
-                    StorageProductPriceTextBox.BackColor = Color.Yellow;
-
-                _messageDialogService.ShowErrorMassage("Geltoni langeliai turi būt supildyti");
-            }
-            else
-            {
-                StorageProductQuantityTextBox.Text = _numberService.ChangeCommaToDot(StorageProductQuantityTextBox);
-                StorageProductPriceTextBox.Text = _numberService.ChangeCommaToDot(StorageProductPriceTextBox);
-
-                NewProductStorageModel newProductStorage = new NewProductStorageModel
-                {
-                    StorageSerialNumber = StorageSerialNumberTextBox.Text,
-                    StorageProductName = StorageProductNameTextBox.Text,
-                    StorageProductMadeDate = DateTime.ParseExact(StorageProductMadeDateTextBox.Text, DateFormat,
-                        CultureInfo.InvariantCulture),
-                    StorageProductExpireDate = DateTime.ParseExact(StorageProductExpireDateTextBox.Text, DateFormat,
-                        CultureInfo.InvariantCulture),
-                    StorageProductQuantity = double.Parse(StorageProductQuantityTextBox.Text),
-                    StorageProductPrice = double.Parse(StorageProductPriceTextBox.Text)
-                };
-
-                bool isCreated = _storageRepository.CreateNewProduct(newProductStorage);
-
-                if (isCreated)
-                {
-                    _messageDialogService.ShowInfoMessage("Sekmingai išsaugota į Sandėlį");
-                    TryFillStorageProductNameComboBox();
-                }
-                else
-                {
-                    _messageDialogService.ShowErrorMassage("Nepavyko išsaugoti");
-                }
-            }
+            CreateNewStorageProduct(isAllTextBoxFilled);
         }
 
         private void StorageSerialNumberTextBox_TextChanged(object sender, EventArgs e)
@@ -209,13 +163,92 @@ namespace Invoice.Forms
         private void StorageProductQuantityTextBox_TextChanged(object sender, EventArgs e)
         {
             SetTextBoxBackColorToDefault(StorageProductQuantityTextBox);
-            ValidateTextIsDouble(StorageProductQuantityTextBox);
+            ValidateTextIsDouble(StorageProductQuantityTextBox, CreateNewStorageButton);
         }
 
         private void StorageProductPriceTextBox_TextChanged(object sender, EventArgs e)
         {
             SetTextBoxBackColorToDefault(StorageProductPriceTextBox);
-            ValidateTextIsDouble(StorageProductPriceTextBox);
+            ValidateTextIsDouble(StorageProductPriceTextBox, CreateNewStorageButton);
+        }
+
+        private void ProductTypeDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (ProductTypeOrStorageDataGridView.ColumnCount == StorageColumnCount && ProductTypeOrStorageDataGridView.Rows.Count != 0)
+            {
+                int rowIndex = e.RowIndex;
+
+                DateTime madeDate = DateTime.Parse(ProductTypeOrStorageDataGridView.Rows[rowIndex].Cells[StorageMadeDateIndex].Value.ToString());
+                DateTime expireDate = DateTime.Parse(ProductTypeOrStorageDataGridView.Rows[rowIndex].Cells[StorageExpireDateIndex].Value.ToString());
+
+                int monthDifference = ((expireDate.Year - madeDate.Year) * 12) + expireDate.Month - madeDate.Month;
+
+                if (monthDifference >= 6)
+                {
+                    ProductTypeOrStorageDataGridView.Rows[rowIndex].DefaultCellStyle.BackColor = Color.Chartreuse;
+                }
+                else if (monthDifference >= 3)
+                {
+                    ProductTypeOrStorageDataGridView.Rows[rowIndex].DefaultCellStyle.BackColor = Color.Yellow;
+                }
+                else if (monthDifference >= 1)
+                {
+                    ProductTypeOrStorageDataGridView.Rows[rowIndex].DefaultCellStyle.BackColor = Color.Red;
+                }
+                else
+                {
+                    ProductTypeOrStorageDataGridView.Rows[rowIndex].DefaultCellStyle.BackColor = Color.Black;
+                }
+            }
+        }
+
+        private void StoreInfoFromDataGridViewButton_Click(object sender, EventArgs e)
+        {
+            TryStoreStorageInfoFromDataGridViewToTextBox();
+        }
+
+        private void UpdateStorageButton_Click(object sender, EventArgs e)
+        {
+            if (ProductTypeOrStorageDataGridView.ColumnCount == StorageColumnCount && ProductTypeOrStorageDataGridView.Rows.Count != 0)
+            {
+                bool isAllTextBoxFilled = CheckIsStorageTextBoxAllFilled();
+
+                UpdateStorageProduct(isAllTextBoxFilled);
+            }
+            else if (ProductTypeOrStorageDataGridView.ColumnCount != StorageColumnCount && ProductTypeOrStorageDataGridView.Rows.Count != 0)
+            {
+                _messageDialogService.ShowErrorMassage("Produktų tipas nepriklauso sandėlio informacijai, informaciją kurią pasirinkote priklauso Sąskaitoms faktūroms");
+            }
+            else
+            {
+                _messageDialogService.ShowErrorMassage("Nėra jokios informacijos kurią būtų galima atnaujinti");
+            }
+        }
+
+        private void AddStorageQuantityButton_Click(object sender, EventArgs e)
+        {
+            if (ProductTypeOrStorageDataGridView.ColumnCount == StorageColumnCount && ProductTypeOrStorageDataGridView.Rows.Count != 0)
+            {
+                bool isStorageQuantityTextBoxFilled = CheckAddStorageQuantityTextBoxIsFilled();
+                UpdateStorageQuantity(isStorageQuantityTextBoxFilled);
+            }
+            else if (ProductTypeOrStorageDataGridView.ColumnCount != StorageColumnCount && ProductTypeOrStorageDataGridView.Rows.Count != 0)
+            {
+                _messageDialogService.ShowErrorMassage("Produktų tipas nepriklauso sandėlio informacijai, informaciją kurią pasirinkote priklauso Sąskaitoms faktūroms");
+            }
+            else
+            {
+                _messageDialogService.ShowErrorMassage("Nėra jokios informacijos kurią būtų galima atnaujinti");
+            }
+        }
+
+        private void AddStorageQuantityTextBox_TextChanged(object sender, EventArgs e)
+        {
+            SetTextBoxBackColorToDefault(AddStorageQuantityTextBox);
+
+            bool isNumber = ValidateTextIsDouble(AddStorageQuantityTextBox, AddStorageQuantityButton);
+
+            ChangeButtonTextIfNumberIsPositiveOrNegative(isNumber);
         }
 
         #region Helpers
@@ -224,11 +257,150 @@ namespace Invoice.Forms
         {
             this.StartPosition = FormStartPosition.CenterScreen;
 
-            ProductTypeDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            ProductTypeOrStorageDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
             ProductTypeYearComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             ProductTypeSpecificNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             StorageProductNameListComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+        }
+
+        private void CreateNewStorageProduct(bool isAllTextBoxFilled)
+        {
+            if (isAllTextBoxFilled)
+            {
+                StorageProductQuantityTextBox.Text = _numberService.ChangeCommaToDot(StorageProductQuantityTextBox);
+                StorageProductPriceTextBox.Text = _numberService.ChangeCommaToDot(StorageProductPriceTextBox);
+
+                NewProductStorageModel newProductStorage = new NewProductStorageModel
+                {
+                    StorageSerialNumber = StorageSerialNumberTextBox.Text,
+                    StorageProductName = StorageProductNameTextBox.Text,
+                    StorageProductMadeDate = DateTime.ParseExact(StorageProductMadeDateTextBox.Text, DateFormat,
+                        CultureInfo.InvariantCulture),
+                    StorageProductExpireDate = DateTime.ParseExact(StorageProductExpireDateTextBox.Text, DateFormat,
+                        CultureInfo.InvariantCulture),
+                    StorageProductQuantity = double.Parse(StorageProductQuantityTextBox.Text),
+                    StorageProductPrice = double.Parse(StorageProductPriceTextBox.Text)
+                };
+
+                bool isCreated = _storageRepository.CreateNewProduct(newProductStorage);
+
+                if (isCreated)
+                {
+                    _messageDialogService.ShowInfoMessage("Sekmingai išsaugota į Sandėlį");
+                    TryFillStorageProductNameComboBox();
+                    // need created here add new or call refresh method datagridview method
+                }
+                else
+                {
+                    _messageDialogService.ShowErrorMassage("Nepavyko išsaugoti");
+                }
+            }
+        }
+
+        private void UpdateStorageQuantity(bool isStorageQuantityTextBoxFilled)
+        {
+            if (isStorageQuantityTextBoxFilled)
+            {
+                double add = double.Parse(AddStorageQuantityTextBox.Text);
+                int id = int.Parse(ProductTypeOrStorageDataGridView.SelectedRows[0].Cells[StorageIdIndex].Value.ToString());
+
+                bool isAdd = _storageRepository.UpdateQuantityById(add, id);
+
+                if (isAdd)
+                {
+                    _messageDialogService.ShowInfoMessage("Atnaujinta Sėkmingai");
+                }
+                else
+                {
+                    _messageDialogService.ShowErrorMassage("Neatnaujinta bandykit dar kartą (Kreiptis į Administratorių)");
+                }
+            }
+        }
+
+        private void UpdateStorageProduct(bool isAllTextBoxFilled)
+        {
+            if (isAllTextBoxFilled)
+            {
+                StorageProductQuantityTextBox.Text = _numberService.ChangeCommaToDot(StorageProductQuantityTextBox);
+                StorageProductPriceTextBox.Text = _numberService.ChangeCommaToDot(StorageProductPriceTextBox);
+
+                StorageModel updateStorage = new StorageModel
+                {
+                    Id = int.Parse(ProductTypeOrStorageDataGridView.SelectedRows[0].Cells[StorageIdIndex].Value.ToString()),
+                    StorageSerialNumber = StorageSerialNumberTextBox.Text,
+                    StorageProductName = StorageProductNameTextBox.Text,
+                    StorageProductMadeDate = DateTime.ParseExact(StorageProductMadeDateTextBox.Text, DateFormat,
+                        CultureInfo.InvariantCulture),
+                    StorageProductExpireDate = DateTime.ParseExact(StorageProductExpireDateTextBox.Text, DateFormat,
+                        CultureInfo.InvariantCulture),
+                    StorageProductQuantity = double.Parse(StorageProductQuantityTextBox.Text),
+                    StorageProductPrice = double.Parse(StorageProductPriceTextBox.Text)
+                };
+
+                bool isUpdated = _storageRepository.UpdateProduct(updateStorage);
+
+                if (isUpdated)
+                {
+                    _messageDialogService.ShowInfoMessage("Sekmingai atnaujinta");
+                    TryFillStorageProductNameComboBox();
+                    // need created here update datagridview method
+                }
+                else
+                {
+                    _messageDialogService.ShowErrorMassage("Nepavyko atnaujinti");
+                }
+            }
+        }
+
+        private bool CheckIsStorageTextBoxAllFilled()
+        {
+            bool isAllTextBoxFilled = true;
+
+            if (string.IsNullOrWhiteSpace(StorageSerialNumberTextBox.Text) ||
+                string.IsNullOrWhiteSpace(StorageProductNameTextBox.Text) ||
+                string.IsNullOrWhiteSpace(StorageProductMadeDateTextBox.Text) ||
+                string.IsNullOrWhiteSpace(StorageProductExpireDateTextBox.Text) ||
+                string.IsNullOrWhiteSpace(StorageProductQuantityTextBox.Text) ||
+                string.IsNullOrWhiteSpace(StorageProductPriceTextBox.Text))
+            {
+                if (string.IsNullOrWhiteSpace(StorageSerialNumberTextBox.Text))
+                    StorageSerialNumberTextBox.BackColor = Color.Yellow;
+
+                if (string.IsNullOrWhiteSpace(StorageProductNameTextBox.Text))
+                    StorageProductNameTextBox.BackColor = Color.Yellow;
+
+                if (string.IsNullOrWhiteSpace(StorageProductMadeDateTextBox.Text))
+                    StorageProductMadeDateTextBox.BackColor = Color.Yellow;
+
+                if (string.IsNullOrWhiteSpace(StorageProductExpireDateTextBox.Text))
+                    StorageProductExpireDateTextBox.BackColor = Color.Yellow;
+
+                if (string.IsNullOrWhiteSpace(StorageProductQuantityTextBox.Text))
+                    StorageProductQuantityTextBox.BackColor = Color.Yellow;
+
+                if (string.IsNullOrWhiteSpace(StorageProductPriceTextBox.Text))
+                    StorageProductPriceTextBox.BackColor = Color.Yellow;
+
+                _messageDialogService.ShowErrorMassage("Geltoni langeliai turi būt supildyti");
+                isAllTextBoxFilled = false;
+            }
+
+            return isAllTextBoxFilled;
+        }
+
+        private bool CheckAddStorageQuantityTextBoxIsFilled()
+        {
+            bool isStorageQuantityTextBoxFilled = true;
+
+            if (string.IsNullOrWhiteSpace(AddStorageQuantityTextBox.Text))
+            {
+                AddStorageQuantityTextBox.BackColor = Color.Yellow;
+                _messageDialogService.ShowErrorMassage("Geltoni langeliai turi būt supildyti");
+                isStorageQuantityTextBoxFilled = false;
+            }
+
+            return isStorageQuantityTextBoxFilled;
         }
 
         private void LoadSpecificProductTypeToDataGridView()
@@ -239,7 +411,7 @@ namespace Invoice.Forms
 
             bindingSource.DataSource = _specificProductTypeAllInfo;
 
-            ProductTypeDataGridView.DataSource = bindingSource;
+            ProductTypeOrStorageDataGridView.DataSource = bindingSource;
 
             ChangeDataGridViewHeaderText(isProductType: true);
         }
@@ -252,7 +424,7 @@ namespace Invoice.Forms
 
             bindingSource.DataSource = _storageInfo;
 
-            ProductTypeDataGridView.DataSource = bindingSource;
+            ProductTypeOrStorageDataGridView.DataSource = bindingSource;
 
             ChangeDataGridViewHeaderText(isProductType: false);
             ChangeDataGridViewHeadersSize();
@@ -276,30 +448,30 @@ namespace Invoice.Forms
         {
             if (isProductType)
             {
-                ProductTypeDataGridView.Columns[0].HeaderText = @"Sąskaitos Nr.";
-                ProductTypeDataGridView.Columns[1].HeaderText = @"Metai";
-                ProductTypeDataGridView.Columns[2].HeaderText = @"Tipas";
-                ProductTypeDataGridView.Columns[3].HeaderText = @"Kiekis";
-                ProductTypeDataGridView.Columns[4].HeaderText = @"Vnt. Kaina";
+                ProductTypeOrStorageDataGridView.Columns[0].HeaderText = @"Sąskaitos Nr.";
+                ProductTypeOrStorageDataGridView.Columns[1].HeaderText = @"Metai";
+                ProductTypeOrStorageDataGridView.Columns[2].HeaderText = @"Tipas";
+                ProductTypeOrStorageDataGridView.Columns[ProductTypeQuantityIndex].HeaderText = @"Kiekis";
+                ProductTypeOrStorageDataGridView.Columns[ProductTypePriceIndex].HeaderText = @"Vnt. Kaina";
             }
             else
             {
-                ProductTypeDataGridView.Columns[1].HeaderText = @"Serija";
-                ProductTypeDataGridView.Columns[2].HeaderText = @"Tipas";
-                ProductTypeDataGridView.Columns[3].HeaderText = @"Sukūrimo Data";
-                ProductTypeDataGridView.Columns[4].HeaderText = @"Galiojimo Data";
-                ProductTypeDataGridView.Columns[5].HeaderText = @"Kiekis";
-                ProductTypeDataGridView.Columns[6].HeaderText = @"Kaina";
+                ProductTypeOrStorageDataGridView.Columns[StorageSerialNumberIndex].HeaderText = @"Serija";
+                ProductTypeOrStorageDataGridView.Columns[StorageProductNameIndex].HeaderText = @"Tipas";
+                ProductTypeOrStorageDataGridView.Columns[StorageMadeDateIndex].HeaderText = @"Sukūrimo Data";
+                ProductTypeOrStorageDataGridView.Columns[StorageExpireDateIndex].HeaderText = @"Galiojimo Data";
+                ProductTypeOrStorageDataGridView.Columns[StorageQuantityIndex].HeaderText = @"Kiekis";
+                ProductTypeOrStorageDataGridView.Columns[StoragePriceIndex].HeaderText = @"Kaina";
             }
         }
 
         private void ChangeDataGridViewHeadersSize()
         {
-            ProductTypeDataGridView.Columns[0].Width = 30;
-            ProductTypeDataGridView.Columns[3].Width = 70;
-            ProductTypeDataGridView.Columns[4].Width = 70;
-            ProductTypeDataGridView.Columns[StorageQuantityIndex].Width = 60;
-            ProductTypeDataGridView.Columns[StoragePriceIndex].Width = 60;
+            ProductTypeOrStorageDataGridView.Columns[StorageIdIndex].Width = 30;
+            ProductTypeOrStorageDataGridView.Columns[StorageMadeDateIndex].Width = 70;
+            ProductTypeOrStorageDataGridView.Columns[StorageExpireDateIndex].Width = 70;
+            ProductTypeOrStorageDataGridView.Columns[StorageQuantityIndex].Width = 60;
+            ProductTypeOrStorageDataGridView.Columns[StoragePriceIndex].Width = 60;
         }
 
         private static void DisplayEmptyListReason(string reason, PaintEventArgs e, DataGridView dataGridView)
@@ -330,16 +502,16 @@ namespace Invoice.Forms
 
         private void CalculateFullProductTypeQuantityAndPrice(bool isProductType)
         {
-            int rowsCount = ProductTypeDataGridView.Rows.Count;
+            int rowsCount = ProductTypeOrStorageDataGridView.Rows.Count;
 
             if (isProductType)
             {
                 double calculateFullProductTypeQuantity =
-                    _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeDataGridView, rowsCount,
+                    _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeOrStorageDataGridView, rowsCount,
                         ProductTypeQuantityIndex);
 
                 double calculateFullProductTypePrice =
-                    _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeDataGridView, rowsCount,
+                    _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeOrStorageDataGridView, rowsCount,
                         ProductTypePriceIndex);
 
                 FullProductTypeQuantityTextBox.Text =
@@ -349,11 +521,11 @@ namespace Invoice.Forms
             else
             {
                 double calculateFullStorageQuantity =
-                    _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeDataGridView, rowsCount,
+                    _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeOrStorageDataGridView, rowsCount,
                         StorageQuantityIndex);
 
                 double calculateFullStoragePrice =
-                    _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeDataGridView, rowsCount,
+                    _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeOrStorageDataGridView, rowsCount,
                         StoragePriceIndex);
 
                 FullProductTypeQuantityTextBox.Text =
@@ -850,27 +1022,29 @@ namespace Invoice.Forms
             }
         }
 
-        private void ValidateTextIsDouble(TextBox textBox)
+        private bool ValidateTextIsDouble(TextBox textBox, Button button)
         {
-            bool isNumber = double.TryParse(textBox.Text, out double number);
+            bool isNumber = double.TryParse(textBox.Text, out _);
 
             if (isNumber)
             {
-                CreateNewStorageButton.Enabled = true;
+                button.Enabled = true;
                 _messageDialogService.HideLabelAndTextBoxError(ErrorLabel, textBox);
             }
             else if (string.IsNullOrWhiteSpace(textBox.Text))
             {
-                CreateNewStorageButton.Enabled = false;
+                button.Enabled = false;
                 _messageDialogService.DisplayLabelAndTextBoxError("Raudonam langelyje turi būti skaičius, negali būti tuščias",
                     textBox, ErrorLabel);
             }
             else
             {
-                CreateNewStorageButton.Enabled = false;
+                button.Enabled = false;
                 _messageDialogService.DisplayLabelAndTextBoxError("Raudonam langelyje tai ką įvedėte nėra skaičius, turi būti skaičius",
                     textBox, ErrorLabel);
             }
+
+            return isNumber;
         }
 
         private void SetTextBoxBackColorToDefault(TextBox textBox)
@@ -878,8 +1052,53 @@ namespace Invoice.Forms
             textBox.BackColor = default;
         }
 
+        private void TryStoreStorageInfoFromDataGridViewToTextBox()
+        {
+
+            if (ProductTypeOrStorageDataGridView.ColumnCount == StorageColumnCount && ProductTypeOrStorageDataGridView.Rows.Count != 0)
+            {
+                StorageSerialNumberTextBox.Text = ProductTypeOrStorageDataGridView.SelectedRows[0]
+                    .Cells[StorageSerialNumberIndex].Value.ToString();
+
+                StorageProductNameTextBox.Text = ProductTypeOrStorageDataGridView.SelectedRows[0]
+                    .Cells[StorageProductNameIndex].Value.ToString();
+
+                StorageProductMadeDateTextBox.Text = DateTime
+                    .Parse(ProductTypeOrStorageDataGridView.SelectedRows[0].Cells[StorageMadeDateIndex].Value
+                        .ToString()).ToString(DateFormat);
+
+                StorageProductExpireDateTextBox.Text = DateTime.Parse(ProductTypeOrStorageDataGridView.SelectedRows[0]
+                    .Cells[StorageExpireDateIndex].Value
+                    .ToString()).ToString(DateFormat);
+
+                StorageProductQuantityTextBox.Text = ProductTypeOrStorageDataGridView.SelectedRows[0]
+                    .Cells[StorageQuantityIndex].Value.ToString();
+
+                StorageProductPriceTextBox.Text = ProductTypeOrStorageDataGridView.SelectedRows[0]
+                    .Cells[StoragePriceIndex].Value.ToString();
+            }
+            else if (ProductTypeOrStorageDataGridView.ColumnCount < StorageColumnCount && ProductTypeOrStorageDataGridView.Rows.Count != 0)
+            {
+                _messageDialogService.ShowErrorMassage("Produktų tipas nepriklauso sandėlio informacijai, informaciją kurią pasirinkote priklauso Sąskaitoms faktūroms");
+            }
+            else
+            {
+                _messageDialogService.ShowErrorMassage("Nėra jokios informacijos kurią būtų galima įkelti");
+            }
+        }
+
+        private void ChangeButtonTextIfNumberIsPositiveOrNegative(bool isNumber)
+        {
+            if (isNumber)
+            {
+                double numberValue = double.Parse(AddStorageQuantityTextBox.Text);
+
+                AddStorageQuantityButton.Text = numberValue >= 0 ? "Pridėti" : "Atimti";
+            }
+        }
+
+
         #endregion
-
-
+        
     }
 }
