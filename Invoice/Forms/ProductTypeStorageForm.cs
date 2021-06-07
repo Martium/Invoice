@@ -335,6 +335,7 @@ namespace Invoice.Forms
         {
             if (isStorageQuantityTextBoxFilled)
             {
+                AddStorageQuantityTextBox.Text = _numberService.ChangeCommaToDot(AddStorageQuantityTextBox);
                 double add = double.Parse(AddStorageQuantityTextBox.Text);
                 int id = int.Parse(ProductTypeOrStorageDataGridView.SelectedRows[0].Cells[StorageIdIndex].Value.ToString());
 
