@@ -87,6 +87,7 @@ namespace Invoice.Forms
             this.ProductTypeOrStorageDataGridView.Size = new System.Drawing.Size(557, 563);
             this.ProductTypeOrStorageDataGridView.TabIndex = 0;
             this.ProductTypeOrStorageDataGridView.TabStop = false;
+            this.ProductTypeOrStorageDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ProductTypeOrStorageDataGridView_CellClick);
             this.ProductTypeOrStorageDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.ProductTypeDataGridView_CellFormatting);
             this.ProductTypeOrStorageDataGridView.Paint += new System.Windows.Forms.PaintEventHandler(this.ProductTypeDataGridView_Paint);
             // 

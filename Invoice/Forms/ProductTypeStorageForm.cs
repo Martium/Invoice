@@ -1226,5 +1226,17 @@ namespace Invoice.Forms
         }
 
         #endregion
+
+        private void ProductTypeOrStorageDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (ProductTypeOrStorageDataGridView.Rows.Count != 0 && ProductTypeOrStorageDataGridView.ColumnCount == StorageColumnCount)
+            {
+                DateTime expireDate = DateTime.Parse(ProductTypeOrStorageDataGridView.SelectedRows[0].Cells[StorageExpireDateIndex].Value.ToString());
+
+                int monthDifference = ((expireDate.Year - DateTime.Now.Year) * 12) + expireDate.Month - DateTime.Now.Month;
+
+                StorageProductMonthsLeftTextBox.Text = monthDifference.ToString();
+            }
+        }
     }
 }
