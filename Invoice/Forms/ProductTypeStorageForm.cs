@@ -472,6 +472,8 @@ namespace Invoice.Forms
             ProductTypeOrStorageDataGridView.DataSource = bindingSource;
 
             ChangeDataGridViewHeaderText(isProductType: true);
+
+            SetInformationOfDataGridViewTypeLabel(ProductTypeOrStorageListOperation.ProductType);
         }
 
         private void LoadStorageModelToDataGridView()
@@ -486,6 +488,8 @@ namespace Invoice.Forms
 
             ChangeDataGridViewHeaderText(isProductType: false);
             ChangeDataGridViewHeadersSize();
+
+            SetInformationOfDataGridViewTypeLabel(ProductTypeOrStorageListOperation.Storage);
         }
 
         private void GetStorageAllInfo()
@@ -1217,6 +1221,10 @@ namespace Invoice.Forms
             StorageProductPriceTextBox.SelectionStart = StorageProductPriceTextBox.Text.Length;
         }
 
+        private void SetInformationOfDataGridViewTypeLabel(ProductTypeOrStorageListOperation productTypeOrStorageList)
+        {
+            InformationOfDataGridViewTypeLabel.Text = productTypeOrStorageList == ProductTypeOrStorageListOperation.ProductType ? "Produktai pagal Sąskaitas Faktūras" : "Sandėlio informacija";
+        }
 
         #endregion
     }

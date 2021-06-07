@@ -67,6 +67,7 @@ namespace Invoice.Forms
             this.AddStorageQuantityButton = new System.Windows.Forms.Button();
             this.AddQuantityInfoLabel = new System.Windows.Forms.Label();
             this.DeleteStorageButton = new System.Windows.Forms.Button();
+            this.InformationOfDataGridViewTypeLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ProductTypeOrStorageDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -446,11 +447,22 @@ namespace Invoice.Forms
             this.DeleteStorageButton.UseVisualStyleBackColor = true;
             this.DeleteStorageButton.Click += new System.EventHandler(this.DeleteStorageButton_Click);
             // 
+            // InformationOfDataGridViewTypeLabel
+            // 
+            this.InformationOfDataGridViewTypeLabel.AutoSize = true;
+            this.InformationOfDataGridViewTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InformationOfDataGridViewTypeLabel.Location = new System.Drawing.Point(36, 31);
+            this.InformationOfDataGridViewTypeLabel.Name = "InformationOfDataGridViewTypeLabel";
+            this.InformationOfDataGridViewTypeLabel.Size = new System.Drawing.Size(92, 20);
+            this.InformationOfDataGridViewTypeLabel.TabIndex = 41;
+            this.InformationOfDataGridViewTypeLabel.Text = "Data type ";
+            // 
             // ProductTypeStorageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1024, 786);
+            this.Controls.Add(this.InformationOfDataGridViewTypeLabel);
             this.Controls.Add(this.DeleteStorageButton);
             this.Controls.Add(this.AddQuantityInfoLabel);
             this.Controls.Add(this.AddStorageQuantityButton);
@@ -540,5 +552,6 @@ namespace Invoice.Forms
         private System.Windows.Forms.Button AddStorageQuantityButton;
         private System.Windows.Forms.Label AddQuantityInfoLabel;
         private System.Windows.Forms.Button DeleteStorageButton;
+        private System.Windows.Forms.Label InformationOfDataGridViewTypeLabel;
     }
 }
