@@ -37,6 +37,9 @@ namespace Invoice.Repositories
                 CreateSellerInfoTable(dbConnection);
                 CreateProductTypeTable(dbConnection);
                 CreateStorageTable(dbConnection);
+                CreatePasswordTable(dbConnection);
+
+                SetDefaultPassword(dbConnection);
 
 #if DEBUG
                 FillInvoiceTestingInfo(dbConnection);
@@ -267,6 +270,39 @@ namespace Invoice.Repositories
 
             SQLiteCommand createProductTypeTableCommand = new SQLiteCommand(createProductTypeTableQuery, dbConnection);
             createProductTypeTableCommand.ExecuteNonQuery();
+        }
+
+        private void CreatePasswordTable(SQLiteConnection dbConnection)
+        {
+            string dropPasswordTable = GetDropTableQuery("Password");
+            SQLiteCommand dropAPasswordTableCommand = new SQLiteCommand(dropPasswordTable, dbConnection);
+            dropAPasswordTableCommand.ExecuteNonQuery();
+
+            string createPasswordTableQuery = 
+                $@"
+                    CREATE TABLE [Password] (
+                        [Id] [INTEGER]  NOT NULL,
+                        [Password] [nvarchar] ({FormSettings.TextBoxLengths.Password}) NOT NULL,
+
+                        UNIQUE (Id)
+                    );
+                ";
+
+            SQLiteCommand createPasswordCommand = new SQLiteCommand(createPasswordTableQuery, dbConnection);
+            createPasswordCommand.ExecuteNonQuery();
+        }
+
+        private void SetDefaultPassword(SQLiteConnection dbConnection)
+        {
+            string setDefaultPassword =
+                @"BEGIN TRANSACTION;
+                    INSERT INTO 'Password'
+                        VALUES (1, '1234');
+                  COMMIT;
+                ";
+
+            SQLiteCommand setDefaultPasswordCommand = new SQLiteCommand(setDefaultPassword, dbConnection);
+            setDefaultPasswordCommand.ExecuteNonQuery();
         }
 
         private void FillInvoiceTestingInfo(SQLiteConnection dbConnection)

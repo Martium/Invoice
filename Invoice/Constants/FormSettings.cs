@@ -56,6 +56,8 @@
 
             public static int StorageSerialNumber => 50;
             public static int StorageProductName => 45;
+
+            public static int Password => 45;
         }
     }
 }
