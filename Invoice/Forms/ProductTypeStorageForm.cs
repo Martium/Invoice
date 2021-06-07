@@ -78,12 +78,12 @@ namespace Invoice.Forms
             DataGridView dataGridView = (DataGridView) sender;
 
             if (string.IsNullOrWhiteSpace(ProductTypeSpecificNameComboBox.Text) &&
-                string.IsNullOrWhiteSpace(ProductTypeYearComboBox.Text))
+                string.IsNullOrWhiteSpace(ProductTypeYearComboBox.Text) && ProductTypeOrStorageDataGridView.Rows.Count == 0)
             {
                 DisplayEmptyListReason("Informacijos nėra sukurkite bent vieną sąskaitą", e, dataGridView);
 
             }
-            else if (string.IsNullOrWhiteSpace(ProductTypeSpecificNameComboBox.Text))
+            else if (string.IsNullOrWhiteSpace(ProductTypeSpecificNameComboBox.Text) && ProductTypeOrStorageDataGridView.Rows.Count == 0)
             {
                 DisplayEmptyListReason("Nesupildėte pakankamai informacijos kad galėtumėte naudotis produktų sandėliu",
                     e, dataGridView);
@@ -315,6 +315,9 @@ namespace Invoice.Forms
                     _messageDialogService.ShowInfoMessage("Sekmingai išsaugota į Sandėlį");
                     TryFillStorageProductNameComboBox();
                     GetAllInfoStorage_Click(this, new EventArgs());
+
+                    GetAllInfoStorage.Enabled = true;
+                    GetStorageInfoByNameButton.Enabled = true;
                 }
                 else
                 {
@@ -1027,6 +1030,17 @@ namespace Invoice.Forms
                 GetAllInfoByProductNameButton.Enabled = true;
                 GetAllInfoByYearButton.Enabled = true;
             }
+
+            if (string.IsNullOrWhiteSpace(StorageProductNameListComboBox.Text))
+            {
+                GetAllInfoStorage.Enabled = false;
+                GetStorageInfoByNameButton.Enabled = false;
+            }
+            else
+            {
+                GetAllInfoStorage.Enabled = true;
+                GetStorageInfoByNameButton.Enabled = true;
+            }
         }
 
         private void TryFillStorageProductNameComboBox()
@@ -1141,7 +1155,6 @@ namespace Invoice.Forms
                 _messageDialogService.DisplayLabelAndTextBoxError("Raudonas langelis negali būti tuščias",
                     secondTextBox, ErrorLabel);
             }
-            
         }
 
         private void SetTextBoxBackColorToDefault(TextBox textBox)
