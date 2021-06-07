@@ -22,7 +22,7 @@ namespace Invoice.Forms
             InitializeComponent();
         }
 
-        private void LoginButton_Click(object sender, System.EventArgs e)
+        private void LoginButton_Click(object sender, EventArgs e)
         {
             _password = _loginRepository.GetPassword().First();
 
@@ -38,7 +38,7 @@ namespace Invoice.Forms
 
         }
 
-        private void ChangePasswordButton_Click(object sender, System.EventArgs e)
+        private void ChangePasswordButton_Click(object sender, EventArgs e)
         {
             _password = _loginRepository.GetPassword().First();
 
