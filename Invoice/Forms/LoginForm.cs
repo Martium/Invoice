@@ -35,7 +35,6 @@ namespace Invoice.Forms
             {
                 _messageDialogService.ShowErrorMassage("Neteisingas slaptažodis");
             }
-
         }
 
         private void ChangePasswordButton_Click(object sender, EventArgs e)
