@@ -43,8 +43,8 @@ namespace Invoice
 
                     if (isPasswordCorrect == "true")
                     {
-                        Application.Run(new ListForm());
                         loginRepository.ChangeIsPasswordCorrect(false);
+                        Application.Run(new ListForm());
                     }
                 }
             }

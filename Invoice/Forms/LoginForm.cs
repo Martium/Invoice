@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using Invoice.Models;
 using Invoice.Repositories;
@@ -67,6 +68,33 @@ namespace Invoice.Forms
             {
                 _messageDialogService.ShowErrorMassage("Turite slaptažodžio tekste įvesti teisingą slaptažodį, tik tuomet galėsite pakeisti slaptažodį");
             }
+        }
+
+        private void PasswordTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                LoginButton_Click(this, new EventArgs());
+            }
+        }
+
+        private void ChangePasswordTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                ChangePasswordButton_Click(this, new EventArgs());
+            }
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Escape))
+            {
+                this.Close();
+                return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

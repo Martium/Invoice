@@ -54,6 +54,7 @@ namespace Invoice.Forms
             this.PasswordTextBox.Name = "PasswordTextBox";
             this.PasswordTextBox.Size = new System.Drawing.Size(168, 20);
             this.PasswordTextBox.TabIndex = 3;
+            this.PasswordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PasswordTextBox_KeyDown);
             // 
             // LoginButton
             // 
@@ -83,6 +84,7 @@ namespace Invoice.Forms
             this.ChangePasswordTextBox.Name = "ChangePasswordTextBox";
             this.ChangePasswordTextBox.Size = new System.Drawing.Size(168, 20);
             this.ChangePasswordTextBox.TabIndex = 6;
+            this.ChangePasswordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ChangePasswordTextBox_KeyDown);
             // 
             // NewPasswordLabel
             // 
