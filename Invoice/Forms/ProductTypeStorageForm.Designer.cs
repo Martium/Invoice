@@ -275,6 +275,7 @@ namespace Invoice.Forms
             this.StorageSerialNumberTextBox.Size = new System.Drawing.Size(239, 20);
             this.StorageSerialNumberTextBox.TabIndex = 23;
             this.StorageSerialNumberTextBox.TextChanged += new System.EventHandler(this.StorageSerialNumberTextBox_TextChanged);
+            this.StorageSerialNumberTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.StorageTextBoxes_KeyUp);
             // 
             // StorageProductNameTextBox
             // 
@@ -283,6 +284,7 @@ namespace Invoice.Forms
             this.StorageProductNameTextBox.Size = new System.Drawing.Size(239, 20);
             this.StorageProductNameTextBox.TabIndex = 24;
             this.StorageProductNameTextBox.TextChanged += new System.EventHandler(this.StorageProductNameTextBox_TextChanged);
+            this.StorageProductNameTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.StorageTextBoxes_KeyUp);
             // 
             // StorageProductMadeDateTextBox
             // 
@@ -290,6 +292,7 @@ namespace Invoice.Forms
             this.StorageProductMadeDateTextBox.Name = "StorageProductMadeDateTextBox";
             this.StorageProductMadeDateTextBox.Size = new System.Drawing.Size(112, 20);
             this.StorageProductMadeDateTextBox.TabIndex = 25;
+            this.StorageProductMadeDateTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.StorageTextBoxes_KeyUp);
             this.StorageProductMadeDateTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.StorageProductMadeDateTextBox_Validating);
             // 
             // StorageProductExpireDateTextBox
@@ -298,6 +301,7 @@ namespace Invoice.Forms
             this.StorageProductExpireDateTextBox.Name = "StorageProductExpireDateTextBox";
             this.StorageProductExpireDateTextBox.Size = new System.Drawing.Size(112, 20);
             this.StorageProductExpireDateTextBox.TabIndex = 26;
+            this.StorageProductExpireDateTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.StorageTextBoxes_KeyUp);
             this.StorageProductExpireDateTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.StorageProductExpireDateTextBox_Validating);
             // 
             // StorageProductQuantityTextBox
@@ -307,6 +311,7 @@ namespace Invoice.Forms
             this.StorageProductQuantityTextBox.Size = new System.Drawing.Size(112, 20);
             this.StorageProductQuantityTextBox.TabIndex = 27;
             this.StorageProductQuantityTextBox.TextChanged += new System.EventHandler(this.StorageProductQuantityTextBox_TextChanged);
+            this.StorageProductQuantityTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.StorageTextBoxes_KeyUp);
             // 
             // StorageProductPriceTextBox
             // 
@@ -315,6 +320,7 @@ namespace Invoice.Forms
             this.StorageProductPriceTextBox.Size = new System.Drawing.Size(112, 20);
             this.StorageProductPriceTextBox.TabIndex = 28;
             this.StorageProductPriceTextBox.TextChanged += new System.EventHandler(this.StorageProductPriceTextBox_TextChanged);
+            this.StorageProductPriceTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.StorageTextBoxes_KeyUp);
             // 
             // StorageProductNameListComboBox
             // 

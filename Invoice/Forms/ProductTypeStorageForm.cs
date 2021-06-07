@@ -163,13 +163,13 @@ namespace Invoice.Forms
         private void StorageProductQuantityTextBox_TextChanged(object sender, EventArgs e)
         {
             SetTextBoxBackColorToDefault(StorageProductQuantityTextBox);
-            ValidateTextIsDouble(StorageProductQuantityTextBox, CreateNewStorageButton);
+            ValidateTextIsDouble(StorageProductQuantityTextBox, StorageProductPriceTextBox, CreateNewStorageButton, UpdateStorageButton);
         }
 
         private void StorageProductPriceTextBox_TextChanged(object sender, EventArgs e)
         {
             SetTextBoxBackColorToDefault(StorageProductPriceTextBox);
-            ValidateTextIsDouble(StorageProductPriceTextBox, CreateNewStorageButton);
+            ValidateTextIsDouble(StorageProductPriceTextBox, StorageProductQuantityTextBox, CreateNewStorageButton, UpdateStorageButton);
         }
 
         private void ProductTypeDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -265,6 +265,15 @@ namespace Invoice.Forms
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void StorageTextBoxes_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                SetCursorAtTextBoxStringEnd();
+            }
         }
 
         #region Helpers
@@ -1093,6 +1102,48 @@ namespace Invoice.Forms
             return isNumber;
         }
 
+        private void ValidateTextIsDouble(TextBox textBox, TextBox secondTextBox, Button button, Button secondButton)
+        {
+            button.Enabled = false;
+            secondButton.Enabled = false;
+
+            bool isNumber = double.TryParse(textBox.Text, out _);
+            bool isSecondNumber = double.TryParse(secondTextBox.Text, out _);
+
+            if (isNumber && isSecondNumber)
+            {
+                button.Enabled = true;
+                secondButton.Enabled = true;
+            }
+
+            if (isNumber)
+            {
+                _messageDialogService.HideLabelAndTextBoxError(ErrorLabel, textBox);
+            }
+            else if (string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                _messageDialogService.DisplayLabelAndTextBoxError("Raudonam langelyje turi būti skaičius, negali būti tuščias",
+                    textBox, ErrorLabel);
+            }
+            else
+            {
+                _messageDialogService.DisplayLabelAndTextBoxError("Raudonam langelyje tai ką įvedėte nėra skaičius, turi būti skaičius",
+                    textBox, ErrorLabel);
+            }
+
+            if (isNumber && !isSecondNumber)
+            {
+                _messageDialogService.DisplayLabelAndTextBoxError("Raudonas langelis nėra skaičius, turi būti skaičius",
+                    secondTextBox, ErrorLabel);
+            }
+            else if (isNumber && string.IsNullOrWhiteSpace(secondTextBox.Text))
+            {
+                _messageDialogService.DisplayLabelAndTextBoxError("Raudonas langelis negali būti tuščias",
+                    secondTextBox, ErrorLabel);
+            }
+            
+        }
+
         private void SetTextBoxBackColorToDefault(TextBox textBox)
         {
             textBox.BackColor = default;
@@ -1143,8 +1194,17 @@ namespace Invoice.Forms
             }
         }
 
-        #endregion
+        private void SetCursorAtTextBoxStringEnd()
+        {
+            StorageSerialNumberTextBox.SelectionStart = StorageSerialNumberTextBox.Text.Length;
+            StorageProductNameTextBox.SelectionStart = StorageProductNameTextBox.Text.Length;
+            StorageProductMadeDateTextBox.SelectionStart = StorageProductMadeDateTextBox.Text.Length;
+            StorageProductExpireDateTextBox.SelectionStart = StorageProductExpireDateTextBox.Text.Length;
+            StorageProductQuantityTextBox.SelectionStart = StorageProductQuantityTextBox.Text.Length;
+            StorageProductPriceTextBox.SelectionStart = StorageProductPriceTextBox.Text.Length;
+        }
 
-        
+
+        #endregion
     }
 }
