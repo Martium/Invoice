@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using Invoice.Forms;
@@ -6,7 +7,7 @@ using Invoice.Repositories;
 
 namespace Invoice
 {
-    static class Program
+    class Program
     {
         private const string AppUuid = "caa556c2 - 952b-11eb-a8b3-0242ac130003";
 
@@ -35,7 +36,16 @@ namespace Invoice
 
                 if (isDataBaseInitialize && isPdfFolderInitialize)
                 {
-                    Application.Run(new ListForm());
+                    Application.Run(new LoginForm());
+
+                    LoginRepository loginRepository = new LoginRepository();
+                    string isPasswordCorrect = loginRepository.GetIsPasswordCorrect().First().ToLower();
+
+                    if (isPasswordCorrect == "true")
+                    {
+                        loginRepository.ChangeIsPasswordCorrect(false);
+                        Application.Run(new ListForm());
+                    }
                 }
             }
         }
