@@ -350,7 +350,7 @@ namespace Invoice.Forms
             }
             else
             {
-                _messageDialogService.ShowErrorMassage("Nėra jokios informacijos kurią būtų galima atnaujinti");
+                _messageDialogService.ShowErrorMassage("Nėra jokios informacijos kurią būtų galima trinti");
             }
         }
 
