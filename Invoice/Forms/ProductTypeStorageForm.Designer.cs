@@ -83,6 +83,7 @@ namespace Invoice.Forms
             this.ProductTypeOrStorageDataGridView.ReadOnly = true;
             this.ProductTypeOrStorageDataGridView.Size = new System.Drawing.Size(557, 563);
             this.ProductTypeOrStorageDataGridView.TabIndex = 0;
+            this.ProductTypeOrStorageDataGridView.TabStop = false;
             this.ProductTypeOrStorageDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.ProductTypeDataGridView_CellFormatting);
             this.ProductTypeOrStorageDataGridView.Paint += new System.Windows.Forms.PaintEventHandler(this.ProductTypeDataGridView_Paint);
             // 
@@ -92,6 +93,7 @@ namespace Invoice.Forms
             this.GetAllInfoByYearButton.Name = "GetAllInfoByYearButton";
             this.GetAllInfoByYearButton.Size = new System.Drawing.Size(109, 35);
             this.GetAllInfoByYearButton.TabIndex = 3;
+            this.GetAllInfoByYearButton.TabStop = false;
             this.GetAllInfoByYearButton.Text = "  Gauti Info \r\npagal metus ";
             this.GetAllInfoByYearButton.UseVisualStyleBackColor = true;
             this.GetAllInfoByYearButton.Click += new System.EventHandler(this.GetAllInfoByYearButton_Click);
@@ -102,6 +104,7 @@ namespace Invoice.Forms
             this.GetAllInfoByProductNameButton.Name = "GetAllInfoByProductNameButton";
             this.GetAllInfoByProductNameButton.Size = new System.Drawing.Size(95, 35);
             this.GetAllInfoByProductNameButton.TabIndex = 4;
+            this.GetAllInfoByProductNameButton.TabStop = false;
             this.GetAllInfoByProductNameButton.Text = "Gauti Info";
             this.GetAllInfoByProductNameButton.UseVisualStyleBackColor = true;
             this.GetAllInfoByProductNameButton.Click += new System.EventHandler(this.GetAllInfoByProductNameButton_Click);
@@ -113,6 +116,7 @@ namespace Invoice.Forms
             this.ProductTypeYearComboBox.Name = "ProductTypeYearComboBox";
             this.ProductTypeYearComboBox.Size = new System.Drawing.Size(79, 21);
             this.ProductTypeYearComboBox.TabIndex = 6;
+            this.ProductTypeYearComboBox.TabStop = false;
             // 
             // ProductTypeSpecificNameComboBox
             // 
@@ -121,6 +125,7 @@ namespace Invoice.Forms
             this.ProductTypeSpecificNameComboBox.Name = "ProductTypeSpecificNameComboBox";
             this.ProductTypeSpecificNameComboBox.Size = new System.Drawing.Size(147, 21);
             this.ProductTypeSpecificNameComboBox.TabIndex = 7;
+            this.ProductTypeSpecificNameComboBox.TabStop = false;
             // 
             // FullProductTypeQuantityLabel
             // 
@@ -148,6 +153,7 @@ namespace Invoice.Forms
             this.FullProductTypeQuantityTextBox.ReadOnly = true;
             this.FullProductTypeQuantityTextBox.Size = new System.Drawing.Size(147, 20);
             this.FullProductTypeQuantityTextBox.TabIndex = 10;
+            this.FullProductTypeQuantityTextBox.TabStop = false;
             // 
             // FullProductTypePriceTextBox
             // 
@@ -157,6 +163,7 @@ namespace Invoice.Forms
             this.FullProductTypePriceTextBox.ReadOnly = true;
             this.FullProductTypePriceTextBox.Size = new System.Drawing.Size(147, 20);
             this.FullProductTypePriceTextBox.TabIndex = 11;
+            this.FullProductTypePriceTextBox.TabStop = false;
             // 
             // ProductTypeInfoLabel
             // 
@@ -182,6 +189,7 @@ namespace Invoice.Forms
             this.GetAllInfoStorage.Name = "GetAllInfoStorage";
             this.GetAllInfoStorage.Size = new System.Drawing.Size(88, 47);
             this.GetAllInfoStorage.TabIndex = 14;
+            this.GetAllInfoStorage.TabStop = false;
             this.GetAllInfoStorage.Text = "Gauti Sandėlio \r\nPilną Info";
             this.GetAllInfoStorage.UseVisualStyleBackColor = true;
             this.GetAllInfoStorage.Click += new System.EventHandler(this.GetAllInfoStorage_Click);
@@ -315,6 +323,7 @@ namespace Invoice.Forms
             this.StorageProductNameListComboBox.Name = "StorageProductNameListComboBox";
             this.StorageProductNameListComboBox.Size = new System.Drawing.Size(147, 21);
             this.StorageProductNameListComboBox.TabIndex = 29;
+            this.StorageProductNameListComboBox.TabStop = false;
             // 
             // StorageProductnameInformationLabel
             // 
@@ -341,6 +350,7 @@ namespace Invoice.Forms
             this.GetStorageInfoByNameButton.Name = "GetStorageInfoByNameButton";
             this.GetStorageInfoByNameButton.Size = new System.Drawing.Size(109, 47);
             this.GetStorageInfoByNameButton.TabIndex = 32;
+            this.GetStorageInfoByNameButton.TabStop = false;
             this.GetStorageInfoByNameButton.Text = "Gauti Sandėlio info\r\npagal pavadinimą";
             this.GetStorageInfoByNameButton.UseVisualStyleBackColor = true;
             this.GetStorageInfoByNameButton.Click += new System.EventHandler(this.GetStorageInfoByNameButton_Click);
@@ -351,6 +361,7 @@ namespace Invoice.Forms
             this.CreateNewStorageButton.Name = "CreateNewStorageButton";
             this.CreateNewStorageButton.Size = new System.Drawing.Size(128, 37);
             this.CreateNewStorageButton.TabIndex = 33;
+            this.CreateNewStorageButton.TabStop = false;
             this.CreateNewStorageButton.Text = "  Sukurt Naują \r\nProduktą Sandėlyje";
             this.CreateNewStorageButton.UseVisualStyleBackColor = true;
             this.CreateNewStorageButton.Click += new System.EventHandler(this.CreateNewStorageButton_Click);
@@ -372,6 +383,7 @@ namespace Invoice.Forms
             this.StoreInfoInStorageTextBoxButton.Name = "StoreInfoInStorageTextBoxButton";
             this.StoreInfoInStorageTextBoxButton.Size = new System.Drawing.Size(114, 29);
             this.StoreInfoInStorageTextBoxButton.TabIndex = 35;
+            this.StoreInfoInStorageTextBoxButton.TabStop = false;
             this.StoreInfoInStorageTextBoxButton.Text = "Sukelti informaciją ";
             this.StoreInfoInStorageTextBoxButton.UseVisualStyleBackColor = true;
             this.StoreInfoInStorageTextBoxButton.Click += new System.EventHandler(this.StoreInfoFromDataGridViewButton_Click);
@@ -382,6 +394,7 @@ namespace Invoice.Forms
             this.UpdateStorageButton.Name = "UpdateStorageButton";
             this.UpdateStorageButton.Size = new System.Drawing.Size(128, 37);
             this.UpdateStorageButton.TabIndex = 36;
+            this.UpdateStorageButton.TabStop = false;
             this.UpdateStorageButton.Text = "Atnaujinti Produktą\r\n Sandėlyje";
             this.UpdateStorageButton.UseVisualStyleBackColor = true;
             this.UpdateStorageButton.Click += new System.EventHandler(this.UpdateStorageButton_Click);
@@ -393,6 +406,7 @@ namespace Invoice.Forms
             this.AddStorageQuantityTextBox.Name = "AddStorageQuantityTextBox";
             this.AddStorageQuantityTextBox.Size = new System.Drawing.Size(98, 20);
             this.AddStorageQuantityTextBox.TabIndex = 37;
+            this.AddStorageQuantityTextBox.TabStop = false;
             this.AddStorageQuantityTextBox.TextChanged += new System.EventHandler(this.AddStorageQuantityTextBox_TextChanged);
             // 
             // AddStorageQuantityButton
@@ -401,6 +415,7 @@ namespace Invoice.Forms
             this.AddStorageQuantityButton.Name = "AddStorageQuantityButton";
             this.AddStorageQuantityButton.Size = new System.Drawing.Size(83, 20);
             this.AddStorageQuantityButton.TabIndex = 38;
+            this.AddStorageQuantityButton.TabStop = false;
             this.AddStorageQuantityButton.Text = "Pridėti";
             this.AddStorageQuantityButton.UseVisualStyleBackColor = true;
             this.AddStorageQuantityButton.Click += new System.EventHandler(this.AddStorageQuantityButton_Click);
@@ -420,6 +435,7 @@ namespace Invoice.Forms
             this.DeleteStorageButton.Name = "DeleteStorageButton";
             this.DeleteStorageButton.Size = new System.Drawing.Size(98, 37);
             this.DeleteStorageButton.TabIndex = 40;
+            this.DeleteStorageButton.TabStop = false;
             this.DeleteStorageButton.Text = "Trinti produktą\r\nSandėlyje";
             this.DeleteStorageButton.UseVisualStyleBackColor = true;
             this.DeleteStorageButton.Click += new System.EventHandler(this.DeleteStorageButton_Click);
