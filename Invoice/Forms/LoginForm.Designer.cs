@@ -35,6 +35,7 @@ namespace Invoice.Forms
             this.ChangePasswordButton = new System.Windows.Forms.Button();
             this.ChangePasswordTextBox = new System.Windows.Forms.TextBox();
             this.NewPasswordLabel = new System.Windows.Forms.Label();
+            this.GreetingsLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // PasswordLabel
@@ -87,17 +88,28 @@ namespace Invoice.Forms
             // 
             this.NewPasswordLabel.AutoSize = true;
             this.NewPasswordLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NewPasswordLabel.Location = new System.Drawing.Point(142, 377);
+            this.NewPasswordLabel.Location = new System.Drawing.Point(89, 377);
             this.NewPasswordLabel.Name = "NewPasswordLabel";
-            this.NewPasswordLabel.Size = new System.Drawing.Size(90, 16);
+            this.NewPasswordLabel.Size = new System.Drawing.Size(143, 16);
             this.NewPasswordLabel.TabIndex = 7;
-            this.NewPasswordLabel.Text = "Slaptažodis";
+            this.NewPasswordLabel.Text = "Naujas Slaptažodis";
+            // 
+            // GreetingsLabel
+            // 
+            this.GreetingsLabel.AutoSize = true;
+            this.GreetingsLabel.Font = new System.Drawing.Font("Monotype Corsiva", 20.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GreetingsLabel.Location = new System.Drawing.Point(234, 45);
+            this.GreetingsLabel.Name = "GreetingsLabel";
+            this.GreetingsLabel.Size = new System.Drawing.Size(155, 33);
+            this.GreetingsLabel.TabIndex = 8;
+            this.GreetingsLabel.Text = "Sveiki Sugryžę";
             // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(598, 453);
+            this.Controls.Add(this.GreetingsLabel);
             this.Controls.Add(this.NewPasswordLabel);
             this.Controls.Add(this.ChangePasswordTextBox);
             this.Controls.Add(this.ChangePasswordButton);
@@ -121,5 +133,6 @@ namespace Invoice.Forms
         private System.Windows.Forms.Button ChangePasswordButton;
         private System.Windows.Forms.TextBox ChangePasswordTextBox;
         private System.Windows.Forms.Label NewPasswordLabel;
+        private System.Windows.Forms.Label GreetingsLabel;
     }
 }

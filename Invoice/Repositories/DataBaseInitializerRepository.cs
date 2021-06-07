@@ -283,6 +283,7 @@ namespace Invoice.Repositories
                     CREATE TABLE [Password] (
                         [Id] [INTEGER]  NOT NULL,
                         [Password] [nvarchar] ({FormSettings.TextBoxLengths.Password}) NOT NULL,
+                        [IsPasswordCorrect] [nvarchar] ({FormSettings.TextBoxLengths.IsPasswordCorrect}) NOT NULL,
 
                         UNIQUE (Id)
                     );
@@ -297,7 +298,7 @@ namespace Invoice.Repositories
             string setDefaultPassword =
                 @"BEGIN TRANSACTION;
                     INSERT INTO 'Password'
-                        VALUES (1, '1234');
+                        VALUES (1, '1234', 'false');
                   COMMIT;
                 ";
 

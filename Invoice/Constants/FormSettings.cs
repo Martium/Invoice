@@ -58,6 +58,7 @@
             public static int StorageProductName => 45;
 
             public static int Password => 45;
+            public static int IsPasswordCorrect => 5;
         }
     }
 }
