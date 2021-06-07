@@ -178,10 +178,9 @@ namespace Invoice.Forms
             {
                 int rowIndex = e.RowIndex;
 
-                DateTime madeDate = DateTime.Parse(ProductTypeOrStorageDataGridView.Rows[rowIndex].Cells[StorageMadeDateIndex].Value.ToString());
                 DateTime expireDate = DateTime.Parse(ProductTypeOrStorageDataGridView.Rows[rowIndex].Cells[StorageExpireDateIndex].Value.ToString());
 
-                int monthDifference = ((expireDate.Year - madeDate.Year) * 12) + expireDate.Month - madeDate.Month;
+                int monthDifference = ((expireDate.Year - DateTime.Now.Year) * 12) + expireDate.Month - DateTime.Now.Month;
 
                 if (monthDifference >= 6)
                 {
@@ -520,7 +519,7 @@ namespace Invoice.Forms
             {
                 ProductTypeOrStorageDataGridView.Columns[StorageSerialNumberIndex].HeaderText = @"Serija";
                 ProductTypeOrStorageDataGridView.Columns[StorageProductNameIndex].HeaderText = @"Tipas";
-                ProductTypeOrStorageDataGridView.Columns[StorageMadeDateIndex].HeaderText = @"Sukūrimo Data";
+                ProductTypeOrStorageDataGridView.Columns[StorageMadeDateIndex].HeaderText = @"Pagaminimo Data";
                 ProductTypeOrStorageDataGridView.Columns[StorageExpireDateIndex].HeaderText = @"Galiojimo Data";
                 ProductTypeOrStorageDataGridView.Columns[StorageQuantityIndex].HeaderText = @"Kiekis";
                 ProductTypeOrStorageDataGridView.Columns[StoragePriceIndex].HeaderText = @"Kaina";

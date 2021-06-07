@@ -68,6 +68,8 @@ namespace Invoice.Forms
             this.AddQuantityInfoLabel = new System.Windows.Forms.Label();
             this.DeleteStorageButton = new System.Windows.Forms.Button();
             this.InformationOfDataGridViewTypeLabel = new System.Windows.Forms.Label();
+            this.StorageProductMonthsLeftTextBox = new System.Windows.Forms.TextBox();
+            this.StorageMonthsLeftInfoLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ProductTypeOrStorageDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -457,11 +459,32 @@ namespace Invoice.Forms
             this.InformationOfDataGridViewTypeLabel.TabIndex = 41;
             this.InformationOfDataGridViewTypeLabel.Text = "Data type ";
             // 
+            // StorageProductMonthsLeftTextBox
+            // 
+            this.StorageProductMonthsLeftTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.StorageProductMonthsLeftTextBox.Location = new System.Drawing.Point(112, 727);
+            this.StorageProductMonthsLeftTextBox.Name = "StorageProductMonthsLeftTextBox";
+            this.StorageProductMonthsLeftTextBox.ReadOnly = true;
+            this.StorageProductMonthsLeftTextBox.Size = new System.Drawing.Size(75, 20);
+            this.StorageProductMonthsLeftTextBox.TabIndex = 42;
+            this.StorageProductMonthsLeftTextBox.TabStop = false;
+            // 
+            // StorageMonthsLeftInfoLabel
+            // 
+            this.StorageMonthsLeftInfoLabel.AutoSize = true;
+            this.StorageMonthsLeftInfoLabel.Location = new System.Drawing.Point(37, 730);
+            this.StorageMonthsLeftInfoLabel.Name = "StorageMonthsLeftInfoLabel";
+            this.StorageMonthsLeftInfoLabel.Size = new System.Drawing.Size(69, 13);
+            this.StorageMonthsLeftInfoLabel.TabIndex = 43;
+            this.StorageMonthsLeftInfoLabel.Text = "Liko mėnesių";
+            // 
             // ProductTypeStorageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1024, 786);
+            this.Controls.Add(this.StorageMonthsLeftInfoLabel);
+            this.Controls.Add(this.StorageProductMonthsLeftTextBox);
             this.Controls.Add(this.InformationOfDataGridViewTypeLabel);
             this.Controls.Add(this.DeleteStorageButton);
             this.Controls.Add(this.AddQuantityInfoLabel);
@@ -553,5 +576,7 @@ namespace Invoice.Forms
         private System.Windows.Forms.Label AddQuantityInfoLabel;
         private System.Windows.Forms.Button DeleteStorageButton;
         private System.Windows.Forms.Label InformationOfDataGridViewTypeLabel;
+        private System.Windows.Forms.TextBox StorageProductMonthsLeftTextBox;
+        private System.Windows.Forms.Label StorageMonthsLeftInfoLabel;
     }
 }
