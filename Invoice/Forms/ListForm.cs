@@ -177,7 +177,6 @@ namespace Invoice.Forms
                 string paymentStatus = ListOfInvoiceDataGridView.SelectedRows[0].Cells[InvoiceIsPaidIndex].Value.ToString();
                 this.BackColor = paymentStatus == "Atsiskaityta" ? Color.Chartreuse : Color.Red;
             }
-
         }
 
         private void ListOfInvoiceDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -195,7 +194,6 @@ namespace Invoice.Forms
             sellerInfoForm.Closed += ShowAndRefreshListForm;
 
             HideListAndOpenAnotherForm(sellerInfoForm);
-
         }
 
         private void GetSelectedYearButton_Click(object sender, EventArgs e)
@@ -429,10 +427,8 @@ namespace Invoice.Forms
             PvmPriceTextBox.Text = _numberService.CalculatePvmFromTotalPriceWithPvm(totalPriceWithPvm);
 
             ProductTotalPriceTextBox.Text = _numberService.CalculateFullPriceFromTotalPriceWithPvm(totalPriceWithPvm);
-
         }
 
         #endregion
-
     }
 }

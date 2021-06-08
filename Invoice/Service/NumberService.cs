@@ -419,6 +419,25 @@ namespace Invoice.Service
             return sum;
         }
 
-       
+        public double MultiplyAndSumAllDataGridViewRowsTwoSpecificColumns(DataGridView dataGridView, int rowsCount, int cellIndex, int secondCellIndex)
+        {
+            double multiplication = 0;
+
+            for (int i = 0; i <= rowsCount; i++)
+            {
+                try
+                {
+                    multiplication = multiplication +
+                                     (double.Parse(dataGridView.Rows[i].Cells[cellIndex].Value.ToString()) *
+                                      double.Parse(dataGridView.Rows[i].Cells[secondCellIndex].Value.ToString()));
+                }
+                catch
+                {
+                    multiplication = multiplication + 0;
+                }
+            }
+
+            return multiplication;
+        }
     }
 }
