@@ -61,7 +61,7 @@ namespace Invoice.Forms
             }
             else if (string.IsNullOrWhiteSpace(ChangePasswordTextBox.Text))
             {
-                _messageDialogService.ShowErrorMassage("Norint Pakeisti slaptažodį turite įvesti naują slaptažodį ");
+                _messageDialogService.ShowErrorMassage("Norint Pakeisti slaptažodį turite įvesti seną slaptažodį į slaptažožio lentelę");
             }
             else
             {

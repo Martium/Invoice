@@ -216,11 +216,11 @@ namespace Invoice.Forms
             }
             else if (ProductTypeOrStorageDataGridView.ColumnCount != StorageColumnCount && ProductTypeOrStorageDataGridView.Rows.Count != 0)
             {
-                _messageDialogService.ShowErrorMassage("Produktų tipas nepriklauso sandėlio informacijai, informaciją kurią pasirinkote priklauso Sąskaitoms faktūroms");
+                _messageDialogService.ShowErrorMassage("Produktų tipas nepriklauso sandėlio informacijai, informaciją kurią pasirinkote, priklauso Sąskaitoms faktūroms");
             }
             else
             {
-                _messageDialogService.ShowErrorMassage("Nėra jokios informacijos kurią būtų galima atnaujinti");
+                _messageDialogService.ShowErrorMassage("Nėra jokios informacijos, kurią būtų galima atnaujinti");
             }
         }
 
@@ -233,11 +233,11 @@ namespace Invoice.Forms
             }
             else if (ProductTypeOrStorageDataGridView.ColumnCount != StorageColumnCount && ProductTypeOrStorageDataGridView.Rows.Count != 0)
             {
-                _messageDialogService.ShowErrorMassage("Produktų tipas nepriklauso sandėlio informacijai, informaciją kurią pasirinkote priklauso Sąskaitoms faktūroms");
+                _messageDialogService.ShowErrorMassage("Produktų tipas nepriklauso sandėlio informacijai, informaciją kurią pasirinkote, priklauso Sąskaitoms faktūroms");
             }
             else
             {
-                _messageDialogService.ShowErrorMassage("Nėra jokios informacijos kurią būtų galima atnaujinti");
+                _messageDialogService.ShowErrorMassage("Nėra jokios informacijos, kurią būtų galima atnaujinti");
             }
         }
 
@@ -583,9 +583,10 @@ namespace Invoice.Forms
                     _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeOrStorageDataGridView, rowsCount,
                         ProductTypeQuantityIndex);
 
-                double calculateFullProductTypePrice =
-                    _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeOrStorageDataGridView, rowsCount,
-                        ProductTypePriceIndex);
+               // double calculateFullProductTypePrice = _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeOrStorageDataGridView, rowsCount, ProductTypePriceIndex);
+
+               double calculateFullProductTypePrice = _numberService.SumAllDataGridViewRowsTwoSpecificColumns(
+                   ProductTypeOrStorageDataGridView, rowsCount, ProductTypePriceIndex, ProductTypeQuantityIndex);
 
                 FullProductTypeQuantityTextBox.Text =
                     calculateFullProductTypeQuantity.ToString(CultureInfo.InvariantCulture);
@@ -597,9 +598,10 @@ namespace Invoice.Forms
                     _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeOrStorageDataGridView, rowsCount,
                         StorageQuantityIndex);
 
-                double calculateFullStoragePrice =
-                    _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeOrStorageDataGridView, rowsCount,
-                        StoragePriceIndex);
+               // double calculateFullStoragePrice = _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeOrStorageDataGridView, rowsCount, StoragePriceIndex);
+               double calculateFullStoragePrice =
+                   _numberService.SumAllDataGridViewRowsTwoSpecificColumns(ProductTypeOrStorageDataGridView, rowsCount,
+                       StoragePriceIndex, StorageQuantityIndex);
 
                 FullProductTypeQuantityTextBox.Text =
                     calculateFullStorageQuantity.ToString(CultureInfo.InvariantCulture);
@@ -1118,13 +1120,13 @@ namespace Invoice.Forms
             else if (string.IsNullOrWhiteSpace(textBox.Text))
             {
                 button.Enabled = false;
-                _messageDialogService.DisplayLabelAndTextBoxError("Raudonam langelyje turi būti skaičius, negali būti tuščias",
+                _messageDialogService.DisplayLabelAndTextBoxError("Raudonam langelis negali būti tuščias. Jame turi būti skaičius",
                     textBox, ErrorLabel);
             }
             else
             {
                 button.Enabled = false;
-                _messageDialogService.DisplayLabelAndTextBoxError("Raudonam langelyje tai ką įvedėte nėra skaičius, turi būti skaičius",
+                _messageDialogService.DisplayLabelAndTextBoxError("Raudonam langelyje turi būti skaičius (tai, ką įvedėte, nėra skaičius)",
                     textBox, ErrorLabel);
             }
 
