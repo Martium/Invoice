@@ -196,7 +196,7 @@ namespace Invoice.Forms
                 }
                 else
                 {
-                    ProductTypeOrStorageDataGridView.Rows[rowIndex].DefaultCellStyle.BackColor = Color.Black;
+                    ProductTypeOrStorageDataGridView.Rows[rowIndex].DefaultCellStyle.BackColor = Color.DarkRed;
                 }
             }
         }
