@@ -583,9 +583,7 @@ namespace Invoice.Forms
                     _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeOrStorageDataGridView, rowsCount,
                         ProductTypeQuantityIndex);
 
-               // double calculateFullProductTypePrice = _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeOrStorageDataGridView, rowsCount, ProductTypePriceIndex);
-
-               double calculateFullProductTypePrice = _numberService.SumAllDataGridViewRowsTwoSpecificColumns(
+               double calculateFullProductTypePrice = _numberService.MultiplyAndSumAllDataGridViewRowsTwoSpecificColumns(
                    ProductTypeOrStorageDataGridView, rowsCount, ProductTypePriceIndex, ProductTypeQuantityIndex);
 
                 FullProductTypeQuantityTextBox.Text =
@@ -598,9 +596,8 @@ namespace Invoice.Forms
                     _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeOrStorageDataGridView, rowsCount,
                         StorageQuantityIndex);
 
-               // double calculateFullStoragePrice = _numberService.SumAllDataGridViewRowsSpecificColumns(ProductTypeOrStorageDataGridView, rowsCount, StoragePriceIndex);
                double calculateFullStoragePrice =
-                   _numberService.SumAllDataGridViewRowsTwoSpecificColumns(ProductTypeOrStorageDataGridView, rowsCount,
+                   _numberService.MultiplyAndSumAllDataGridViewRowsTwoSpecificColumns(ProductTypeOrStorageDataGridView, rowsCount,
                        StoragePriceIndex, StorageQuantityIndex);
 
                 FullProductTypeQuantityTextBox.Text =

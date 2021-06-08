@@ -419,7 +419,7 @@ namespace Invoice.Service
             return sum;
         }
 
-        public double SumAllDataGridViewRowsTwoSpecificColumns(DataGridView dataGridView, int rowsCount, int cellIndex, int secondCellIndex)
+        public double MultiplyAndSumAllDataGridViewRowsTwoSpecificColumns(DataGridView dataGridView, int rowsCount, int cellIndex, int secondCellIndex)
         {
             double multiplication = 0;
 
