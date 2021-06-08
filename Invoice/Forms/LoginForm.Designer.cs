@@ -36,6 +36,8 @@ namespace Invoice.Forms
             this.ChangePasswordTextBox = new System.Windows.Forms.TextBox();
             this.NewPasswordLabel = new System.Windows.Forms.Label();
             this.GreetingsLabel = new System.Windows.Forms.Label();
+            this.RepeatNewPasswordLabel = new System.Windows.Forms.Label();
+            this.RepeatNewPasswordTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // PasswordLabel
@@ -80,7 +82,7 @@ namespace Invoice.Forms
             // 
             // ChangePasswordTextBox
             // 
-            this.ChangePasswordTextBox.Location = new System.Drawing.Point(238, 376);
+            this.ChangePasswordTextBox.Location = new System.Drawing.Point(238, 326);
             this.ChangePasswordTextBox.Name = "ChangePasswordTextBox";
             this.ChangePasswordTextBox.Size = new System.Drawing.Size(168, 20);
             this.ChangePasswordTextBox.TabIndex = 6;
@@ -90,7 +92,7 @@ namespace Invoice.Forms
             // 
             this.NewPasswordLabel.AutoSize = true;
             this.NewPasswordLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NewPasswordLabel.Location = new System.Drawing.Point(89, 377);
+            this.NewPasswordLabel.Location = new System.Drawing.Point(89, 327);
             this.NewPasswordLabel.Name = "NewPasswordLabel";
             this.NewPasswordLabel.Size = new System.Drawing.Size(143, 16);
             this.NewPasswordLabel.TabIndex = 7;
@@ -106,11 +108,31 @@ namespace Invoice.Forms
             this.GreetingsLabel.TabIndex = 8;
             this.GreetingsLabel.Text = "Sveiki Sugryžę";
             // 
+            // RepeatNewPasswordLabel
+            // 
+            this.RepeatNewPasswordLabel.AutoSize = true;
+            this.RepeatNewPasswordLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RepeatNewPasswordLabel.Location = new System.Drawing.Point(44, 365);
+            this.RepeatNewPasswordLabel.Name = "RepeatNewPasswordLabel";
+            this.RepeatNewPasswordLabel.Size = new System.Drawing.Size(188, 16);
+            this.RepeatNewPasswordLabel.TabIndex = 9;
+            this.RepeatNewPasswordLabel.Text = "Pakartoti naują slaptažodį";
+            // 
+            // RepeatNewPasswordTextBox
+            // 
+            this.RepeatNewPasswordTextBox.Location = new System.Drawing.Point(238, 365);
+            this.RepeatNewPasswordTextBox.Name = "RepeatNewPasswordTextBox";
+            this.RepeatNewPasswordTextBox.Size = new System.Drawing.Size(168, 20);
+            this.RepeatNewPasswordTextBox.TabIndex = 10;
+            this.RepeatNewPasswordTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RepeatNewPasswordTextBox_KeyDown);
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(598, 453);
+            this.Controls.Add(this.RepeatNewPasswordTextBox);
+            this.Controls.Add(this.RepeatNewPasswordLabel);
             this.Controls.Add(this.GreetingsLabel);
             this.Controls.Add(this.NewPasswordLabel);
             this.Controls.Add(this.ChangePasswordTextBox);
@@ -136,5 +158,7 @@ namespace Invoice.Forms
         private System.Windows.Forms.TextBox ChangePasswordTextBox;
         private System.Windows.Forms.Label NewPasswordLabel;
         private System.Windows.Forms.Label GreetingsLabel;
+        private System.Windows.Forms.Label RepeatNewPasswordLabel;
+        private System.Windows.Forms.TextBox RepeatNewPasswordTextBox;
     }
 }

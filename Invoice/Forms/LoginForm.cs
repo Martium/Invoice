@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
+using Invoice.Constants;
 using Invoice.Models;
 using Invoice.Repositories;
 using Invoice.Service;
@@ -20,6 +21,10 @@ namespace Invoice.Forms
             _messageDialogService = new MessageDialogService();
 
             InitializeComponent();
+
+            SetTextBoxMaxLengths();
+
+            ChangeTextBoxTypingType();
         }
 
         private void LoginButton_Click(object sender, EventArgs e)
@@ -41,7 +46,7 @@ namespace Invoice.Forms
         {
             _password = _loginRepository.GetPassword().First();
 
-            if (PasswordTextBox.Text == _password && !string.IsNullOrWhiteSpace(ChangePasswordTextBox.Text))
+            if (PasswordTextBox.Text == _password && !string.IsNullOrWhiteSpace(ChangePasswordTextBox.Text) && RepeatNewPasswordTextBox.Text == ChangePasswordTextBox.Text)
             {
                 PasswordModel newPassword = new PasswordModel
                 {
@@ -59,13 +64,15 @@ namespace Invoice.Forms
                     _messageDialogService.ShowErrorMassage("nepavyko pakeisti");
                 }
             }
-            else if (string.IsNullOrWhiteSpace(ChangePasswordTextBox.Text))
+            else if (string.IsNullOrWhiteSpace(ChangePasswordTextBox.Text) || string.IsNullOrWhiteSpace(RepeatNewPasswordTextBox.Text) || string.IsNullOrWhiteSpace(PasswordTextBox.Text))
             {
-                _messageDialogService.ShowErrorMassage("Norint Pakeisti slaptažodį turite įvesti seną slaptažodį į slaptažožio lentelę");
+                _messageDialogService.ShowErrorMassage("Norint Pakeisti slaptažodį 1) Turite įvesti seną slaptažodį (į slaptažožio lentelę.) " +
+                                                       "2) Turite įvesti naują slaptažodį (į naujas slaptažodį lentelę) " +
+                                                       "3) Turite pakartoti naują slaptažodį ( į pakartoti naują slaptažodį lentelę) ");
             }
             else
             {
-                _messageDialogService.ShowErrorMassage("Turite slaptažodžio tekste įvesti teisingą slaptažodį, tik tuomet galėsite pakeisti slaptažodį");
+                _messageDialogService.ShowErrorMassage("Slaptažodis neatitinka");
             }
         }
 
@@ -81,7 +88,7 @@ namespace Invoice.Forms
         {
             if (e.KeyCode == Keys.Enter)
             {
-                ChangePasswordButton_Click(this, new EventArgs());
+                this.SelectNextControl((Control) sender, true, true, true, true);
             }
         }
 
@@ -94,6 +101,28 @@ namespace Invoice.Forms
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void RepeatNewPasswordTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                ChangePasswordButton_Click(this, new EventArgs());
+            }
+        }
+
+        private void ChangeTextBoxTypingType()
+        {
+            PasswordTextBox.PasswordChar = '*';
+            ChangePasswordTextBox.PasswordChar = '*';
+            RepeatNewPasswordTextBox.PasswordChar = '*';
+        }
+
+        private void SetTextBoxMaxLengths()
+        {
+            PasswordTextBox.MaxLength = FormSettings.TextBoxLengths.Password;
+            ChangePasswordTextBox.MaxLength = FormSettings.TextBoxLengths.Password;
+            RepeatNewPasswordTextBox.MaxLength = FormSettings.TextBoxLengths.Password;
         }
     }
 }
