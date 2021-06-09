@@ -4,7 +4,7 @@
     {
         public class TextBoxLengths
         {
-            public static int SerialNumber => 10;
+            public static int SerialNumber => 25;
 
             public static int SellerName => 40;
             public static int SellerFirmCode => 40;
