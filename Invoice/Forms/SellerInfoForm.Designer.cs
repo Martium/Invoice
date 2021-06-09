@@ -139,7 +139,7 @@ namespace Invoice.Forms
             this.SerialNumberRichTextBox.Location = new System.Drawing.Point(62, 6);
             this.SerialNumberRichTextBox.Multiline = false;
             this.SerialNumberRichTextBox.Name = "SerialNumberRichTextBox";
-            this.SerialNumberRichTextBox.Size = new System.Drawing.Size(83, 19);
+            this.SerialNumberRichTextBox.Size = new System.Drawing.Size(120, 19);
             this.SerialNumberRichTextBox.TabIndex = 33;
             this.SerialNumberRichTextBox.Text = "";
             this.SerialNumberRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBoxes_KeyUp);
