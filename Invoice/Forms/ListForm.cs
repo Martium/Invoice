@@ -25,6 +25,7 @@ namespace Invoice.Forms
         private const int TotalPriceWithPvmIndex = 5;
 
         private bool _searchActive;
+        private bool _isGetAllSelectedYearInfoEmpty;
 
         public ListForm()
         {
@@ -52,6 +53,7 @@ namespace Invoice.Forms
         private void SearchCancelButton_Click(object sender, EventArgs e)
         {
             _searchActive = false;
+            _isGetAllSelectedYearInfoEmpty = false;
 
             SetControlsInitialState();
 
@@ -133,9 +135,20 @@ namespace Invoice.Forms
 
             if (dataGridView.Rows.Count == 0)
             {
-                string emptyListReason = _searchActive
-                    ? $"Paieškos frazė '{SearchTextBox.Text}' neatitiko jokių rezultatų. Ieškokite kitos frazės arba atšaukite paiešką."
-                    : "Paslaugų istorija tuščia. Galite pradėti kurti naujas paslaugas pasinaudojęs mygtuku 'Įvesti naują paslaugą' dešiniame viršutiniame kampe.";
+                string emptyListReason;
+
+                if (_searchActive && !_isGetAllSelectedYearInfoEmpty)
+                {
+                    emptyListReason = $"Paieškos frazė '{SearchTextBox.Text}' neatitiko jokių rezultatų. Ieškokite kitos frazės arba atšaukite paiešką.";
+                }
+                else if (_isGetAllSelectedYearInfoEmpty)
+                {
+                    emptyListReason = "Rezultatų nėra pagal pasirinktus metus ir apmokėjimo tipą";
+                }
+                else
+                {
+                    emptyListReason = "Paslaugų istorija tuščia. Galite pradėti kurti naujas paslaugas pasinaudojęs mygtuku 'Įvesti naują paslaugą' dešiniame viršutiniame kampe.";
+                }
 
                 DisplayEmptyListReason(emptyListReason, e, dataGridView);
             }
@@ -216,11 +229,13 @@ namespace Invoice.Forms
             {
                 EditButton.Enabled = false;
                 CopyButton.Enabled = false;
+                _isGetAllSelectedYearInfoEmpty = true;
             }
             else
             {
                 EditButton.Enabled = true;
                 CopyButton.Enabled = true;
+                _isGetAllSelectedYearInfoEmpty = false;
             }
 
             LoadAllTotalPriceSums();
