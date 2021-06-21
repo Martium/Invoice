@@ -45,12 +45,32 @@ namespace Invoice.Service
 
             bool isNumber = double.TryParse(richTexBox.Text,NumberStyles.Any,CultureInfo.InvariantCulture, out double number);
 
-            if (isNumber && number <= int.MaxValue)
+            if (isNumber && number <= int.MaxValue && number >= int.MinValue)
             {
                 doubleOrNull = number;
             }
 
             return doubleOrNull;
+        }
+
+        public string GiveMessageByRichTextBoxTextValue(RichTextBox richTextBox, double number)
+        {
+            string message;
+
+            if (number > int.MaxValue)
+            {
+                message = $"Skaičius negali būt didesnis nei {int.MaxValue} (Šis langelis nebus išsaugotas)";
+            }
+            else if (number < int.MinValue)
+            {
+                message = $"Skaičius negali būt mažesnis nei {int.MinValue} (Šis langelis nebus išsaugotas)";
+            }
+            else
+            {
+                message = string.Empty;
+            }
+
+            return message;
         }
 
         public double? ParseToDoubleOrZero(RichTextBox richTextBox)
@@ -59,7 +79,7 @@ namespace Invoice.Service
 
             bool isNumber = double.TryParse(richTextBox.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out double number);
 
-            if (isNumber && number <= int.MaxValue)
+            if (isNumber && number <= int.MaxValue && number >= int.MinValue)
             {
                 doubleOrDefault = number;
             }
@@ -390,7 +410,7 @@ namespace Invoice.Service
 
             bool isNumber = double.TryParse(textBox.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out double number);
 
-            if (isNumber && number <= int.MaxValue)
+            if (isNumber && number <= int.MaxValue && number >= int.MinValue)
             {
                 doubleOrNull = number;
             }

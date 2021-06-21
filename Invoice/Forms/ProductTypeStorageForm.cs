@@ -1107,7 +1107,7 @@ namespace Invoice.Forms
 
         private bool ValidateTextIsDouble(TextBox textBox, Button button)
         {
-            bool isNumber = double.TryParse(textBox.Text, out _);
+            bool isNumber = double.TryParse(textBox.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out _);
 
             if (isNumber)
             {
@@ -1135,8 +1135,8 @@ namespace Invoice.Forms
             button.Enabled = false;
             secondButton.Enabled = false;
 
-            bool isNumber = double.TryParse(textBox.Text, out _);
-            bool isSecondNumber = double.TryParse(secondTextBox.Text, out _);
+            bool isNumber = double.TryParse(textBox.Text,NumberStyles.Any, CultureInfo.InvariantCulture, out _);
+            bool isSecondNumber = double.TryParse(secondTextBox.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out _);
 
             if (isNumber && isSecondNumber)
             {
