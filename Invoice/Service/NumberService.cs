@@ -386,14 +386,13 @@ namespace Invoice.Service
 
         public double? ParseToDoubleOrNull(TextBox textBox)
         {
-            double? doubleOrNull;
-            try
+            double? doubleOrNull = null;
+
+            bool isNumber = double.TryParse(textBox.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out double number);
+
+            if (isNumber && number <= int.MaxValue)
             {
-                doubleOrNull = double.Parse(textBox.Text, CultureInfo.InvariantCulture);
-            }
-            catch
-            {
-                doubleOrNull = null;
+                doubleOrNull = number;
             }
 
             return doubleOrNull;
