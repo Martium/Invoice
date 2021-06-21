@@ -873,7 +873,7 @@ namespace Invoice.Forms
             this.FirstProductQuantityRichTextBox.Size = new System.Drawing.Size(61, 19);
             this.FirstProductQuantityRichTextBox.TabIndex = 39;
             this.FirstProductQuantityRichTextBox.Text = "";
-            this.FirstProductQuantityRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
+            this.PriceInWordsRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // FirstProductSeesRichTextBox
             // 
@@ -1350,6 +1350,7 @@ namespace Invoice.Forms
             this.TwelfthProductTypePriceTextBox.Name = "TwelfthProductTypePriceTextBox";
             this.TwelfthProductTypePriceTextBox.Size = new System.Drawing.Size(49, 20);
             this.TwelfthProductTypePriceTextBox.TabIndex = 39;
+            this.TwelfthProductTypePriceTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // TwelfthProductTypeQuantityTextBox
             // 
@@ -1357,6 +1358,7 @@ namespace Invoice.Forms
             this.TwelfthProductTypeQuantityTextBox.Name = "TwelfthProductTypeQuantityTextBox";
             this.TwelfthProductTypeQuantityTextBox.Size = new System.Drawing.Size(49, 20);
             this.TwelfthProductTypeQuantityTextBox.TabIndex = 38;
+            this.TwelfthProductTypeQuantityTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // EleventhProductTypePriceTextBox
             // 
@@ -1364,6 +1366,7 @@ namespace Invoice.Forms
             this.EleventhProductTypePriceTextBox.Name = "EleventhProductTypePriceTextBox";
             this.EleventhProductTypePriceTextBox.Size = new System.Drawing.Size(49, 20);
             this.EleventhProductTypePriceTextBox.TabIndex = 37;
+            this.EleventhProductTypePriceTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // EleventhProductTypeQuantityTextBox
             // 
@@ -1371,6 +1374,7 @@ namespace Invoice.Forms
             this.EleventhProductTypeQuantityTextBox.Name = "EleventhProductTypeQuantityTextBox";
             this.EleventhProductTypeQuantityTextBox.Size = new System.Drawing.Size(49, 20);
             this.EleventhProductTypeQuantityTextBox.TabIndex = 36;
+            this.EleventhProductTypeQuantityTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // TenProductTypePriceTextBox
             // 
@@ -1378,6 +1382,7 @@ namespace Invoice.Forms
             this.TenProductTypePriceTextBox.Name = "TenProductTypePriceTextBox";
             this.TenProductTypePriceTextBox.Size = new System.Drawing.Size(49, 20);
             this.TenProductTypePriceTextBox.TabIndex = 35;
+            this.TenProductTypePriceTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // TenProductTypeQuantityTextBox
             // 
@@ -1385,6 +1390,7 @@ namespace Invoice.Forms
             this.TenProductTypeQuantityTextBox.Name = "TenProductTypeQuantityTextBox";
             this.TenProductTypeQuantityTextBox.Size = new System.Drawing.Size(49, 20);
             this.TenProductTypeQuantityTextBox.TabIndex = 34;
+            this.TenProductTypeQuantityTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // NinthProductTypePriceTextBox
             // 
@@ -1392,6 +1398,7 @@ namespace Invoice.Forms
             this.NinthProductTypePriceTextBox.Name = "NinthProductTypePriceTextBox";
             this.NinthProductTypePriceTextBox.Size = new System.Drawing.Size(49, 20);
             this.NinthProductTypePriceTextBox.TabIndex = 33;
+            this.NinthProductTypePriceTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // NinthProductTypeQuantityTextBox
             // 
@@ -1399,6 +1406,7 @@ namespace Invoice.Forms
             this.NinthProductTypeQuantityTextBox.Name = "NinthProductTypeQuantityTextBox";
             this.NinthProductTypeQuantityTextBox.Size = new System.Drawing.Size(49, 20);
             this.NinthProductTypeQuantityTextBox.TabIndex = 32;
+            this.NinthProductTypeQuantityTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // EighthProductTypePriceTextBox
             // 
@@ -1406,6 +1414,7 @@ namespace Invoice.Forms
             this.EighthProductTypePriceTextBox.Name = "EighthProductTypePriceTextBox";
             this.EighthProductTypePriceTextBox.Size = new System.Drawing.Size(49, 20);
             this.EighthProductTypePriceTextBox.TabIndex = 31;
+            this.EighthProductTypePriceTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // EighthProductTypeQuantityTextBox
             // 
@@ -1413,6 +1422,7 @@ namespace Invoice.Forms
             this.EighthProductTypeQuantityTextBox.Name = "EighthProductTypeQuantityTextBox";
             this.EighthProductTypeQuantityTextBox.Size = new System.Drawing.Size(49, 20);
             this.EighthProductTypeQuantityTextBox.TabIndex = 30;
+            this.EighthProductTypeQuantityTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // SeventhProductTypePriceTextBox
             // 
@@ -1420,6 +1430,7 @@ namespace Invoice.Forms
             this.SeventhProductTypePriceTextBox.Name = "SeventhProductTypePriceTextBox";
             this.SeventhProductTypePriceTextBox.Size = new System.Drawing.Size(49, 20);
             this.SeventhProductTypePriceTextBox.TabIndex = 29;
+            this.SeventhProductTypePriceTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // SeventhProductTypeQuantityTextBox
             // 
@@ -1427,6 +1438,7 @@ namespace Invoice.Forms
             this.SeventhProductTypeQuantityTextBox.Name = "SeventhProductTypeQuantityTextBox";
             this.SeventhProductTypeQuantityTextBox.Size = new System.Drawing.Size(49, 20);
             this.SeventhProductTypeQuantityTextBox.TabIndex = 28;
+            this.SeventhProductTypeQuantityTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // SixthProductTypePriceTextBox
             // 
@@ -1434,6 +1446,7 @@ namespace Invoice.Forms
             this.SixthProductTypePriceTextBox.Name = "SixthProductTypePriceTextBox";
             this.SixthProductTypePriceTextBox.Size = new System.Drawing.Size(49, 20);
             this.SixthProductTypePriceTextBox.TabIndex = 27;
+            this.SixthProductTypePriceTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // SixthProductTypeQuantityTextBox
             // 
@@ -1441,6 +1454,7 @@ namespace Invoice.Forms
             this.SixthProductTypeQuantityTextBox.Name = "SixthProductTypeQuantityTextBox";
             this.SixthProductTypeQuantityTextBox.Size = new System.Drawing.Size(49, 20);
             this.SixthProductTypeQuantityTextBox.TabIndex = 26;
+            this.SixthProductTypeQuantityTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // TwelfthProductTypeTextBox
             // 
@@ -1448,6 +1462,7 @@ namespace Invoice.Forms
             this.TwelfthProductTypeTextBox.Name = "TwelfthProductTypeTextBox";
             this.TwelfthProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
             this.TwelfthProductTypeTextBox.TabIndex = 25;
+            this.TwelfthProductTypeTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // EleventhProductTypeTextBox
             // 
@@ -1455,6 +1470,7 @@ namespace Invoice.Forms
             this.EleventhProductTypeTextBox.Name = "EleventhProductTypeTextBox";
             this.EleventhProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
             this.EleventhProductTypeTextBox.TabIndex = 24;
+            this.EleventhProductTypeTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // TenProductTypeTextBox
             // 
@@ -1462,6 +1478,7 @@ namespace Invoice.Forms
             this.TenProductTypeTextBox.Name = "TenProductTypeTextBox";
             this.TenProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
             this.TenProductTypeTextBox.TabIndex = 23;
+            this.TenProductTypeTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // NinthProductTypeTextBox
             // 
@@ -1469,6 +1486,7 @@ namespace Invoice.Forms
             this.NinthProductTypeTextBox.Name = "NinthProductTypeTextBox";
             this.NinthProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
             this.NinthProductTypeTextBox.TabIndex = 22;
+            this.NinthProductTypeTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // EighthProductTypeTextBox
             // 
@@ -1476,6 +1494,7 @@ namespace Invoice.Forms
             this.EighthProductTypeTextBox.Name = "EighthProductTypeTextBox";
             this.EighthProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
             this.EighthProductTypeTextBox.TabIndex = 21;
+            this.EighthProductTypeTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // SeventhProductTypeTextBox
             // 
@@ -1483,6 +1502,7 @@ namespace Invoice.Forms
             this.SeventhProductTypeTextBox.Name = "SeventhProductTypeTextBox";
             this.SeventhProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
             this.SeventhProductTypeTextBox.TabIndex = 20;
+            this.SeventhProductTypeTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // SixthProductTypeTextBox
             // 
@@ -1490,6 +1510,7 @@ namespace Invoice.Forms
             this.SixthProductTypeTextBox.Name = "SixthProductTypeTextBox";
             this.SixthProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
             this.SixthProductTypeTextBox.TabIndex = 19;
+            this.SixthProductTypeTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // AdditionalInfoLabel
             // 
@@ -1507,6 +1528,7 @@ namespace Invoice.Forms
             this.FifthProductTypePriceTextBox.Name = "FifthProductTypePriceTextBox";
             this.FifthProductTypePriceTextBox.Size = new System.Drawing.Size(49, 20);
             this.FifthProductTypePriceTextBox.TabIndex = 17;
+            this.FifthProductTypePriceTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // FourthProductTypePriceTextBox
             // 
@@ -1514,6 +1536,7 @@ namespace Invoice.Forms
             this.FourthProductTypePriceTextBox.Name = "FourthProductTypePriceTextBox";
             this.FourthProductTypePriceTextBox.Size = new System.Drawing.Size(49, 20);
             this.FourthProductTypePriceTextBox.TabIndex = 16;
+            this.FourthProductTypePriceTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // FifthProductTypeQuantityTextBox
             // 
@@ -1521,6 +1544,7 @@ namespace Invoice.Forms
             this.FifthProductTypeQuantityTextBox.Name = "FifthProductTypeQuantityTextBox";
             this.FifthProductTypeQuantityTextBox.Size = new System.Drawing.Size(49, 20);
             this.FifthProductTypeQuantityTextBox.TabIndex = 15;
+            this.FifthProductTypeQuantityTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // FourthProductTypeQuantityTextBox
             // 
@@ -1528,6 +1552,7 @@ namespace Invoice.Forms
             this.FourthProductTypeQuantityTextBox.Name = "FourthProductTypeQuantityTextBox";
             this.FourthProductTypeQuantityTextBox.Size = new System.Drawing.Size(49, 20);
             this.FourthProductTypeQuantityTextBox.TabIndex = 14;
+            this.FourthProductTypeQuantityTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // FifthProductTypeTextBox
             // 
@@ -1535,6 +1560,7 @@ namespace Invoice.Forms
             this.FifthProductTypeTextBox.Name = "FifthProductTypeTextBox";
             this.FifthProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
             this.FifthProductTypeTextBox.TabIndex = 13;
+            this.FifthProductTypeTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // FourthProductTypeTextBox
             // 
@@ -1542,6 +1568,7 @@ namespace Invoice.Forms
             this.FourthProductTypeTextBox.Name = "FourthProductTypeTextBox";
             this.FourthProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
             this.FourthProductTypeTextBox.TabIndex = 12;
+            this.FourthProductTypeTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // ThirdProductTypePriceTextBox
             // 
@@ -1549,6 +1576,7 @@ namespace Invoice.Forms
             this.ThirdProductTypePriceTextBox.Name = "ThirdProductTypePriceTextBox";
             this.ThirdProductTypePriceTextBox.Size = new System.Drawing.Size(49, 20);
             this.ThirdProductTypePriceTextBox.TabIndex = 11;
+            this.ThirdProductTypePriceTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // ThirdProductTypeQuantityTextBox
             // 
@@ -1556,6 +1584,7 @@ namespace Invoice.Forms
             this.ThirdProductTypeQuantityTextBox.Name = "ThirdProductTypeQuantityTextBox";
             this.ThirdProductTypeQuantityTextBox.Size = new System.Drawing.Size(49, 20);
             this.ThirdProductTypeQuantityTextBox.TabIndex = 10;
+            this.ThirdProductTypeQuantityTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // ThirdProductTypeTextBox
             // 
@@ -1563,6 +1592,7 @@ namespace Invoice.Forms
             this.ThirdProductTypeTextBox.Name = "ThirdProductTypeTextBox";
             this.ThirdProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
             this.ThirdProductTypeTextBox.TabIndex = 9;
+            this.ThirdProductTypeTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // SecondProductTypePriceTextBox
             // 
@@ -1570,6 +1600,7 @@ namespace Invoice.Forms
             this.SecondProductTypePriceTextBox.Name = "SecondProductTypePriceTextBox";
             this.SecondProductTypePriceTextBox.Size = new System.Drawing.Size(49, 20);
             this.SecondProductTypePriceTextBox.TabIndex = 8;
+            this.SecondProductTypePriceTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // SecondProductTypeQuantityTextBox
             // 
@@ -1577,6 +1608,7 @@ namespace Invoice.Forms
             this.SecondProductTypeQuantityTextBox.Name = "SecondProductTypeQuantityTextBox";
             this.SecondProductTypeQuantityTextBox.Size = new System.Drawing.Size(49, 20);
             this.SecondProductTypeQuantityTextBox.TabIndex = 7;
+            this.SecondProductTypeQuantityTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // SecondProductTypeTextBox
             // 
@@ -1584,6 +1616,7 @@ namespace Invoice.Forms
             this.SecondProductTypeTextBox.Name = "SecondProductTypeTextBox";
             this.SecondProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
             this.SecondProductTypeTextBox.TabIndex = 6;
+            this.SecondProductTypeTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // ProductOfTypePriceLabel
             // 
@@ -1609,6 +1642,7 @@ namespace Invoice.Forms
             this.FirstProductTypePriceTextBox.Name = "FirstProductTypePriceTextBox";
             this.FirstProductTypePriceTextBox.Size = new System.Drawing.Size(49, 20);
             this.FirstProductTypePriceTextBox.TabIndex = 3;
+            this.FirstProductTypePriceTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // FirstProductTypeQuantityTextBox
             // 
@@ -1616,6 +1650,7 @@ namespace Invoice.Forms
             this.FirstProductTypeQuantityTextBox.Name = "FirstProductTypeQuantityTextBox";
             this.FirstProductTypeQuantityTextBox.Size = new System.Drawing.Size(49, 20);
             this.FirstProductTypeQuantityTextBox.TabIndex = 2;
+            this.FirstProductTypeQuantityTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // FirstProductTypeTextBox
             // 
@@ -1623,6 +1658,7 @@ namespace Invoice.Forms
             this.FirstProductTypeTextBox.Name = "FirstProductTypeTextBox";
             this.FirstProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
             this.FirstProductTypeTextBox.TabIndex = 1;
+            this.FirstProductTypeTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // TypeOfProductLabel
             // 

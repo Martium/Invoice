@@ -201,6 +201,15 @@ namespace Invoice.Forms
             }
         }
 
+        private void ProductTypeTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                SetCursorAtProductTypeStringEnd();
+            }
+        }
+
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == (Keys.Escape))
@@ -702,8 +711,7 @@ namespace Invoice.Forms
             EighthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(EighthProductQuantityRichTextBox);
             NinthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(NinthProductQuantityRichTextBox);
             TenProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(TenProductQuantityRichTextBox);
-            EleventhProductQuantityRichTextBox.Text =
-                _numberService.ChangeCommaToDot(EleventhProductQuantityRichTextBox);
+            EleventhProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(EleventhProductQuantityRichTextBox);
             TwelfthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(TwelfthProductQuantityRichTextBox);
 
             FirstProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(FirstProductPriceRichTextBox);
@@ -718,7 +726,6 @@ namespace Invoice.Forms
             TenProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(TenProductPriceRichTextBox);
             EleventhProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(EleventhProductPriceRichTextBox);
             TwelfthProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(TwelfthProductPriceRichTextBox);
-
         }
 
         private void SetTextBoxLengths()
@@ -926,6 +933,48 @@ namespace Invoice.Forms
             InvoiceAcceptedRichTextBox.SelectionStart = InvoiceAcceptedRichTextBox.Text.Length;
         }
 
+        private void SetCursorAtProductTypeStringEnd()
+        {
+            FirstProductTypeTextBox.SelectionStart = FirstProductTypeTextBox.Text.Length;
+            SecondProductTypeTextBox.SelectionStart = SecondProductTypeTextBox.Text.Length;
+            ThirdProductTypeTextBox.SelectionStart = ThirdProductTypeTextBox.Text.Length;
+            FourthProductTypeTextBox.SelectionStart = FourthProductTypeTextBox.Text.Length;
+            FifthProductTypeTextBox.SelectionStart = FifthProductTypeTextBox.Text.Length;
+            SixthProductTypeTextBox.SelectionStart = SixthProductTypeTextBox.Text.Length;
+            SeventhProductTypeTextBox.SelectionStart = SeventhProductTypeTextBox.Text.Length;
+            EighthProductTypeTextBox.SelectionStart = EighthProductTypeTextBox.Text.Length;
+            NinthProductTypeTextBox.SelectionStart = NinthProductTypeTextBox.Text.Length;
+            TenProductTypeTextBox.SelectionStart = TenProductTypeTextBox.Text.Length;
+            EleventhProductTypeTextBox.SelectionStart = EleventhProductTypeTextBox.Text.Length;
+            TwelfthProductTypeTextBox.SelectionStart = TwelfthProductTypeTextBox.Text.Length;
+
+            FirstProductTypeQuantityTextBox.SelectionStart = FirstProductTypeQuantityTextBox.Text.Length;
+            SecondProductTypeQuantityTextBox.SelectionStart = SecondProductTypeQuantityTextBox.Text.Length;
+            ThirdProductTypeQuantityTextBox.SelectionStart = ThirdProductTypeQuantityTextBox.Text.Length;
+            FourthProductTypeQuantityTextBox.SelectionStart = FourthProductTypeQuantityTextBox.Text.Length;
+            FifthProductTypeQuantityTextBox.SelectionStart = FifthProductTypeQuantityTextBox.Text.Length;
+            SixthProductTypeQuantityTextBox.SelectionStart = SixthProductTypeQuantityTextBox.Text.Length;
+            SeventhProductTypeQuantityTextBox.SelectionStart = SeventhProductTypeQuantityTextBox.Text.Length;
+            EighthProductTypeQuantityTextBox.SelectionStart = EighthProductTypeQuantityTextBox.Text.Length;
+            NinthProductTypeQuantityTextBox.SelectionStart = NinthProductTypeQuantityTextBox.Text.Length;
+            TenProductTypeQuantityTextBox.SelectionStart = TenProductTypeQuantityTextBox.Text.Length;
+            EleventhProductTypeQuantityTextBox.SelectionStart = EleventhProductTypeQuantityTextBox.Text.Length;
+            TwelfthProductTypeQuantityTextBox.SelectionStart = TwelfthProductTypeQuantityTextBox.Text.Length;
+
+            FirstProductTypePriceTextBox.SelectionStart = FirstProductTypePriceTextBox.Text.Length;
+            SecondProductTypePriceTextBox.SelectionStart = SecondProductTypePriceTextBox.Text.Length;
+            ThirdProductTypePriceTextBox.SelectionStart = ThirdProductTypePriceTextBox.Text.Length;
+            FourthProductTypePriceTextBox.SelectionStart = FourthProductTypePriceTextBox.Text.Length;
+            FifthProductTypePriceTextBox.SelectionStart = FifthProductTypePriceTextBox.Text.Length;
+            SixthProductTypePriceTextBox.SelectionStart = SixthProductTypePriceTextBox.Text.Length;
+            SeventhProductTypePriceTextBox.SelectionStart = SeventhProductTypePriceTextBox.Text.Length;
+            EighthProductTypePriceTextBox.SelectionStart = EighthProductTypePriceTextBox.Text.Length;
+            NinthProductTypePriceTextBox.SelectionStart = NinthProductTypePriceTextBox.Text.Length;
+            TenProductTypePriceTextBox.SelectionStart = TenProductTypePriceTextBox.Text.Length;
+            EleventhProductTypePriceTextBox.SelectionStart = EleventhProductTypePriceTextBox.Text.Length;
+            TwelfthProductTypePriceTextBox.SelectionStart = TwelfthProductTypePriceTextBox.Text.Length;
+        }
+
         private void SetCursorAtDateTextBoxEnd()
         {
             InvoiceDateRichTextBox.SelectionStart = InvoiceDateRichTextBox.Text.Length;
@@ -1053,7 +1102,7 @@ namespace Invoice.Forms
             FirstProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(FirstProductTypeQuantityTextBox);
             SecondProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(SecondProductTypeQuantityTextBox);
             ThirdProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(ThirdProductTypeQuantityTextBox);
-            FourthProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(ThirdProductTypeQuantityTextBox);
+            FourthProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(FourthProductTypeQuantityTextBox);
             FifthProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(FifthProductTypeQuantityTextBox);
             SixthProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(SixthProductTypeQuantityTextBox);
             SeventhProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(SeventhProductTypeQuantityTextBox);
@@ -1075,8 +1124,6 @@ namespace Invoice.Forms
             TenProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(TenProductTypePriceTextBox);
             EleventhProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(EleventhProductTypePriceTextBox);
             TwelfthProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(TwelfthProductTypePriceTextBox);
-
-
         }
 
         private ProductTypeModel GetAllInfoFromProductTypeTextBox()
@@ -1127,6 +1174,6 @@ namespace Invoice.Forms
         }
 
         #endregion
-
+        
     }
 }
