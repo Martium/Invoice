@@ -873,7 +873,6 @@ namespace Invoice.Forms
             this.FirstProductQuantityRichTextBox.Size = new System.Drawing.Size(61, 19);
             this.FirstProductQuantityRichTextBox.TabIndex = 39;
             this.FirstProductQuantityRichTextBox.Text = "";
-            this.PriceInWordsRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // FirstProductSeesRichTextBox
             // 
@@ -1339,7 +1338,7 @@ namespace Invoice.Forms
             this.ProductsTypesPanel.Controls.Add(this.FirstProductTypeQuantityTextBox);
             this.ProductsTypesPanel.Controls.Add(this.FirstProductTypeTextBox);
             this.ProductsTypesPanel.Controls.Add(this.TypeOfProductLabel);
-            this.ProductsTypesPanel.Location = new System.Drawing.Point(966, 31);
+            this.ProductsTypesPanel.Location = new System.Drawing.Point(944, 31);
             this.ProductsTypesPanel.Name = "ProductsTypesPanel";
             this.ProductsTypesPanel.Size = new System.Drawing.Size(290, 510);
             this.ProductsTypesPanel.TabIndex = 5;
