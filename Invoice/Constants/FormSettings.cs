@@ -60,7 +60,7 @@
             public static int Password => 45;
             public static int IsPasswordCorrect => 5;
 
-            public static int MaxNumberLength => 12;
+            public static int MaxNumberLength => 10;
 
         }
     }
