@@ -53,26 +53,6 @@ namespace Invoice.Service
             return doubleOrNull;
         }
 
-        public string GiveMessageByRichTextBoxTextValue(RichTextBox richTextBox, double number)
-        {
-            string message;
-
-            if (number > int.MaxValue)
-            {
-                message = $"Skaičius negali būt didesnis nei {int.MaxValue} (Šis langelis nebus išsaugotas)";
-            }
-            else if (number < int.MinValue)
-            {
-                message = $"Skaičius negali būt mažesnis nei {int.MinValue} (Šis langelis nebus išsaugotas)";
-            }
-            else
-            {
-                message = string.Empty;
-            }
-
-            return message;
-        }
-
         public double? ParseToDoubleOrZero(RichTextBox richTextBox)
         {
             double? doubleOrDefault = 0;
@@ -85,7 +65,6 @@ namespace Invoice.Service
             }
 
             return doubleOrDefault;
-           
         }
 
         public string ToStringDoubleOrEmpty(InvoiceModel invoiceModel, string invoiceModelProp)
