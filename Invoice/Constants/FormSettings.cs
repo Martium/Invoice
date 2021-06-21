@@ -59,6 +59,9 @@
 
             public static int Password => 45;
             public static int IsPasswordCorrect => 5;
+
+            public static int maxNumberLength => 10;
+
         }
     }
 }

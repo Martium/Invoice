@@ -41,14 +41,13 @@ namespace Invoice.Service
 
         public double? ParseToDoubleOrNull(RichTextBox richTexBox)
         {
-            double? doubleOrNull;
-            try
+            double? doubleOrNull = null;
+
+            bool isNumber = double.TryParse(richTexBox.Text,NumberStyles.Any,CultureInfo.InvariantCulture, out double number);
+
+            if (isNumber && number <= int.MaxValue)
             {
-                doubleOrNull = double.Parse(richTexBox.Text, CultureInfo.InvariantCulture);
-            }
-            catch
-            {
-                doubleOrNull = null;
+                doubleOrNull = number;
             }
 
             return doubleOrNull;
@@ -56,17 +55,17 @@ namespace Invoice.Service
 
         public double? ParseToDoubleOrZero(RichTextBox richTextBox)
         {
-            double? doubleOrDefault;
-            try
+            double? doubleOrDefault = 0;
+
+            bool isNumber = double.TryParse(richTextBox.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out double number);
+
+            if (isNumber && number <= int.MaxValue)
             {
-                doubleOrDefault = double.Parse(richTextBox.Text, CultureInfo.InvariantCulture);
-            }
-            catch
-            {
-                doubleOrDefault = 0;
+                doubleOrDefault = number;
             }
 
             return doubleOrDefault;
+           
         }
 
         public string ToStringDoubleOrEmpty(InvoiceModel invoiceModel, string invoiceModelProp)
@@ -439,5 +438,7 @@ namespace Invoice.Service
 
             return multiplication;
         }
+
+       
     }
 }
