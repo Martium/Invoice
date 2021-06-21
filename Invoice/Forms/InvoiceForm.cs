@@ -210,6 +210,18 @@ namespace Invoice.Forms
             }
         }
 
+        private void InvoiceRichTextBoxString_TextChanged(object sender, EventArgs e)
+        {
+            RichTextBox richTextBox = sender as RichTextBox;
+
+            if (richTextBox == null) return;
+
+            if (richTextBox.SelectionStart == richTextBox.MaxLength)
+            {
+                _messageDialogService.ShowInfoMessage($"Pasiektas maksimalus žodžių ilgis bus išsaugota tik toks tekstas ({richTextBox.Text}) ");
+            }
+        }
+
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == (Keys.Escape))
@@ -772,31 +784,31 @@ namespace Invoice.Forms
             EleventhProductSeesRichTextBox.MaxLength = FormSettings.TextBoxLengths.EleventhProductSees;
             TwelfthProductSeesRichTextBox.MaxLength = FormSettings.TextBoxLengths.TwelfthProductSees;
 
-            FirstProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            SecondProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            ThirdProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            FourthProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            FifthProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            SixthProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            SeventhProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            EighthProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            NinthProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            TenProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            EleventhProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            TwelfthProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
+            FirstProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            SecondProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            ThirdProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            FourthProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            FifthProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            SixthProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            SeventhProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            EighthProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            NinthProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            TenProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            EleventhProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            TwelfthProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
 
-            FirstProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            SecondProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            ThirdProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            FourthProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            FifthProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            SixthProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            SeventhProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            EighthProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            NinthProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            TenProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            EleventhProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            TwelfthProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
+            FirstProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            SecondProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            ThirdProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            FourthProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            FifthProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            SixthProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            SeventhProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            EighthProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            NinthProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            TenProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            EleventhProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            TwelfthProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
 
             PriceInWordsRichTextBox.MaxLength = FormSettings.TextBoxLengths.PriceInWords;
             InvoiceMakerRichTextBox.MaxLength = FormSettings.TextBoxLengths.InvoiceMaker;
@@ -815,31 +827,31 @@ namespace Invoice.Forms
             EleventhProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
             TwelfthProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
 
-            FirstProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            SecondProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            ThirdProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            FourthProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            FifthProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            SixthProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            SeventhProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            EighthProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            NinthProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            TenProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            EleventhProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            TwelfthProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
+            FirstProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            SecondProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            ThirdProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            FourthProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            FifthProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            SixthProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            SeventhProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            EighthProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            NinthProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            TenProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            EleventhProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            TwelfthProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
 
-            FirstProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            SecondProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            ThirdProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            FourthProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            FifthProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            SixthProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            SeventhProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            EighthProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            NinthProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            TenProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            EleventhProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
-            TwelfthProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.maxNumberLength;
+            FirstProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            SecondProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            ThirdProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            FourthProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            FifthProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            SixthProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            SeventhProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            EighthProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            NinthProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            TenProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            EleventhProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            TwelfthProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
         }
 
         private void CaptureInvoiceFormScreen()

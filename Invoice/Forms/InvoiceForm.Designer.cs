@@ -586,6 +586,7 @@ namespace Invoice.Forms
             this.TwelfthProductSeesRichTextBox.Size = new System.Drawing.Size(72, 19);
             this.TwelfthProductSeesRichTextBox.TabIndex = 68;
             this.TwelfthProductSeesRichTextBox.Text = "";
+            this.TwelfthProductSeesRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.TwelfthProductSeesRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // EleventhProductSeesRichTextBox
@@ -596,6 +597,7 @@ namespace Invoice.Forms
             this.EleventhProductSeesRichTextBox.Size = new System.Drawing.Size(72, 19);
             this.EleventhProductSeesRichTextBox.TabIndex = 67;
             this.EleventhProductSeesRichTextBox.Text = "";
+            this.EleventhProductSeesRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.EleventhProductSeesRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // TenProductSeesRichTextBox
@@ -606,6 +608,7 @@ namespace Invoice.Forms
             this.TenProductSeesRichTextBox.Size = new System.Drawing.Size(72, 19);
             this.TenProductSeesRichTextBox.TabIndex = 66;
             this.TenProductSeesRichTextBox.Text = "";
+            this.TenProductSeesRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.TenProductSeesRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // NinthProductSeesRichTextBox
@@ -616,6 +619,7 @@ namespace Invoice.Forms
             this.NinthProductSeesRichTextBox.Size = new System.Drawing.Size(72, 19);
             this.NinthProductSeesRichTextBox.TabIndex = 65;
             this.NinthProductSeesRichTextBox.Text = "";
+            this.NinthProductSeesRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.NinthProductSeesRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // EighthProductSeesRichTextBox
@@ -626,6 +630,7 @@ namespace Invoice.Forms
             this.EighthProductSeesRichTextBox.Size = new System.Drawing.Size(72, 19);
             this.EighthProductSeesRichTextBox.TabIndex = 64;
             this.EighthProductSeesRichTextBox.Text = "";
+            this.EighthProductSeesRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.EighthProductSeesRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // SeventhProductSeesRichTextBox
@@ -636,6 +641,7 @@ namespace Invoice.Forms
             this.SeventhProductSeesRichTextBox.Size = new System.Drawing.Size(72, 19);
             this.SeventhProductSeesRichTextBox.TabIndex = 63;
             this.SeventhProductSeesRichTextBox.Text = "";
+            this.SeventhProductSeesRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.SeventhProductSeesRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // SixthProductSeesRichTextBox
@@ -646,6 +652,7 @@ namespace Invoice.Forms
             this.SixthProductSeesRichTextBox.Size = new System.Drawing.Size(72, 19);
             this.SixthProductSeesRichTextBox.TabIndex = 62;
             this.SixthProductSeesRichTextBox.Text = "";
+            this.SixthProductSeesRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.SixthProductSeesRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // FifthProductSeesRichTextBox
@@ -656,6 +663,7 @@ namespace Invoice.Forms
             this.FifthProductSeesRichTextBox.Size = new System.Drawing.Size(72, 19);
             this.FifthProductSeesRichTextBox.TabIndex = 61;
             this.FifthProductSeesRichTextBox.Text = "";
+            this.FifthProductSeesRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.FifthProductSeesRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // FourthProductSeesRichTextBox
@@ -666,6 +674,7 @@ namespace Invoice.Forms
             this.FourthProductSeesRichTextBox.Size = new System.Drawing.Size(72, 19);
             this.FourthProductSeesRichTextBox.TabIndex = 60;
             this.FourthProductSeesRichTextBox.Text = "";
+            this.FourthProductSeesRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.FourthProductSeesRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // ThirdProductSeesRichTextBox
@@ -676,6 +685,7 @@ namespace Invoice.Forms
             this.ThirdProductSeesRichTextBox.Size = new System.Drawing.Size(72, 19);
             this.ThirdProductSeesRichTextBox.TabIndex = 59;
             this.ThirdProductSeesRichTextBox.Text = "";
+            this.ThirdProductSeesRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.ThirdProductSeesRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // SecondProductSeesRichTextBox
@@ -686,6 +696,7 @@ namespace Invoice.Forms
             this.SecondProductSeesRichTextBox.Size = new System.Drawing.Size(72, 19);
             this.SecondProductSeesRichTextBox.TabIndex = 58;
             this.SecondProductSeesRichTextBox.Text = "";
+            this.SecondProductSeesRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.SecondProductSeesRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // TwelfthProductNameRichTextBox
@@ -696,6 +707,7 @@ namespace Invoice.Forms
             this.TwelfthProductNameRichTextBox.Size = new System.Drawing.Size(295, 19);
             this.TwelfthProductNameRichTextBox.TabIndex = 57;
             this.TwelfthProductNameRichTextBox.Text = "";
+            this.TwelfthProductNameRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.TwelfthProductNameRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // EleventhProductNameRichTextBox
@@ -706,6 +718,7 @@ namespace Invoice.Forms
             this.EleventhProductNameRichTextBox.Size = new System.Drawing.Size(295, 19);
             this.EleventhProductNameRichTextBox.TabIndex = 56;
             this.EleventhProductNameRichTextBox.Text = "";
+            this.EleventhProductNameRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.EleventhProductNameRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // TenProductNameRichTextBox
@@ -716,6 +729,7 @@ namespace Invoice.Forms
             this.TenProductNameRichTextBox.Size = new System.Drawing.Size(295, 19);
             this.TenProductNameRichTextBox.TabIndex = 55;
             this.TenProductNameRichTextBox.Text = "";
+            this.TenProductNameRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.TenProductNameRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // NinthProductNameRichTextBox
@@ -726,6 +740,7 @@ namespace Invoice.Forms
             this.NinthProductNameRichTextBox.Size = new System.Drawing.Size(295, 19);
             this.NinthProductNameRichTextBox.TabIndex = 54;
             this.NinthProductNameRichTextBox.Text = "";
+            this.NinthProductNameRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.NinthProductNameRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // EighthProductNameRichTextBox
@@ -736,6 +751,7 @@ namespace Invoice.Forms
             this.EighthProductNameRichTextBox.Size = new System.Drawing.Size(295, 19);
             this.EighthProductNameRichTextBox.TabIndex = 53;
             this.EighthProductNameRichTextBox.Text = "";
+            this.EighthProductNameRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.EighthProductNameRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // SeventhProductNameRichTextBox
@@ -746,6 +762,7 @@ namespace Invoice.Forms
             this.SeventhProductNameRichTextBox.Size = new System.Drawing.Size(295, 19);
             this.SeventhProductNameRichTextBox.TabIndex = 52;
             this.SeventhProductNameRichTextBox.Text = "";
+            this.SeventhProductNameRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.SeventhProductNameRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // SixthProductNameRichTextBox
@@ -756,6 +773,7 @@ namespace Invoice.Forms
             this.SixthProductNameRichTextBox.Size = new System.Drawing.Size(295, 19);
             this.SixthProductNameRichTextBox.TabIndex = 51;
             this.SixthProductNameRichTextBox.Text = "";
+            this.SixthProductNameRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.SixthProductNameRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // FifthProductNameRichTextBox
@@ -766,6 +784,7 @@ namespace Invoice.Forms
             this.FifthProductNameRichTextBox.Size = new System.Drawing.Size(295, 19);
             this.FifthProductNameRichTextBox.TabIndex = 50;
             this.FifthProductNameRichTextBox.Text = "";
+            this.FifthProductNameRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.FifthProductNameRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // FourthProductNameRichTextBox
@@ -776,6 +795,7 @@ namespace Invoice.Forms
             this.FourthProductNameRichTextBox.Size = new System.Drawing.Size(295, 19);
             this.FourthProductNameRichTextBox.TabIndex = 49;
             this.FourthProductNameRichTextBox.Text = "";
+            this.FourthProductNameRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.FourthProductNameRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // ThirdProductNameRichTextBox
@@ -786,6 +806,7 @@ namespace Invoice.Forms
             this.ThirdProductNameRichTextBox.Size = new System.Drawing.Size(295, 19);
             this.ThirdProductNameRichTextBox.TabIndex = 48;
             this.ThirdProductNameRichTextBox.Text = "";
+            this.ThirdProductNameRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.ThirdProductNameRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // SecondProductNameRichTextBox
@@ -796,6 +817,7 @@ namespace Invoice.Forms
             this.SecondProductNameRichTextBox.Size = new System.Drawing.Size(295, 19);
             this.SecondProductNameRichTextBox.TabIndex = 47;
             this.SecondProductNameRichTextBox.Text = "";
+            this.SecondProductNameRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.SecondProductNameRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // InvoiceAcceptedRichTextBox
@@ -806,6 +828,7 @@ namespace Invoice.Forms
             this.InvoiceAcceptedRichTextBox.Size = new System.Drawing.Size(374, 19);
             this.InvoiceAcceptedRichTextBox.TabIndex = 46;
             this.InvoiceAcceptedRichTextBox.Text = "";
+            this.InvoiceAcceptedRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.InvoiceAcceptedRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // InvoiceAcceptedLabel
@@ -825,6 +848,7 @@ namespace Invoice.Forms
             this.InvoiceMakerRichTextBox.Size = new System.Drawing.Size(374, 19);
             this.InvoiceMakerRichTextBox.TabIndex = 44;
             this.InvoiceMakerRichTextBox.Text = "";
+            this.InvoiceMakerRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.InvoiceMakerRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // InvoiceMakerLabel
@@ -844,6 +868,7 @@ namespace Invoice.Forms
             this.PriceInWordsRichTextBox.Size = new System.Drawing.Size(374, 19);
             this.PriceInWordsRichTextBox.TabIndex = 42;
             this.PriceInWordsRichTextBox.Text = "";
+            this.PriceInWordsRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.PriceInWordsRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // PriceInWordsLabel
@@ -882,6 +907,7 @@ namespace Invoice.Forms
             this.FirstProductSeesRichTextBox.Size = new System.Drawing.Size(72, 19);
             this.FirstProductSeesRichTextBox.TabIndex = 38;
             this.FirstProductSeesRichTextBox.Text = "";
+            this.FirstProductSeesRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.FirstProductSeesRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // FirstProductNameRichTextBox
@@ -892,6 +918,7 @@ namespace Invoice.Forms
             this.FirstProductNameRichTextBox.Size = new System.Drawing.Size(295, 19);
             this.FirstProductNameRichTextBox.TabIndex = 37;
             this.FirstProductNameRichTextBox.Text = "";
+            this.FirstProductNameRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.FirstProductNameRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // ProductPriceLabel
@@ -942,6 +969,7 @@ namespace Invoice.Forms
             this.SellerEmailAddressRichTextBox.Size = new System.Drawing.Size(205, 19);
             this.SellerEmailAddressRichTextBox.TabIndex = 32;
             this.SellerEmailAddressRichTextBox.Text = "";
+            this.SellerEmailAddressRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.SellerEmailAddressRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // SellerEmailAddressLabel
@@ -961,6 +989,7 @@ namespace Invoice.Forms
             this.SellerBankAccountNumberRichTextBox.Size = new System.Drawing.Size(205, 19);
             this.SellerBankAccountNumberRichTextBox.TabIndex = 30;
             this.SellerBankAccountNumberRichTextBox.Text = "";
+            this.SellerBankAccountNumberRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.SellerBankAccountNumberRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // SellerBankAccountNumberLabel
@@ -980,6 +1009,7 @@ namespace Invoice.Forms
             this.SellerBankRichTextBox.Size = new System.Drawing.Size(205, 19);
             this.SellerBankRichTextBox.TabIndex = 28;
             this.SellerBankRichTextBox.Text = "";
+            this.SellerBankRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.SellerBankRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // SellerBankLabel
@@ -999,6 +1029,7 @@ namespace Invoice.Forms
             this.SellerPhoneNumberRichTextBox.Size = new System.Drawing.Size(205, 19);
             this.SellerPhoneNumberRichTextBox.TabIndex = 26;
             this.SellerPhoneNumberRichTextBox.Text = "";
+            this.SellerPhoneNumberRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.SellerPhoneNumberRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // BuyerPhoneNumberLabel
@@ -1018,6 +1049,7 @@ namespace Invoice.Forms
             this.BuyerAddressRichTextBox.Size = new System.Drawing.Size(221, 19);
             this.BuyerAddressRichTextBox.TabIndex = 24;
             this.BuyerAddressRichTextBox.Text = "";
+            this.BuyerAddressRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.BuyerAddressRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // BuyerAddressLabel
@@ -1037,6 +1069,7 @@ namespace Invoice.Forms
             this.SellerAddressRichTextBox.Size = new System.Drawing.Size(205, 19);
             this.SellerAddressRichTextBox.TabIndex = 22;
             this.SellerAddressRichTextBox.Text = "";
+            this.SellerAddressRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.SellerAddressRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // SellerAddressLabel
@@ -1056,6 +1089,7 @@ namespace Invoice.Forms
             this.BuyerPvmCodeRichTextBox.Size = new System.Drawing.Size(221, 19);
             this.BuyerPvmCodeRichTextBox.TabIndex = 20;
             this.BuyerPvmCodeRichTextBox.Text = "";
+            this.BuyerPvmCodeRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.BuyerPvmCodeRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // BuyerPvmCodeLabel
@@ -1075,6 +1109,7 @@ namespace Invoice.Forms
             this.SellerPvmCodeRichTextBox.Size = new System.Drawing.Size(205, 19);
             this.SellerPvmCodeRichTextBox.TabIndex = 18;
             this.SellerPvmCodeRichTextBox.Text = "";
+            this.SellerPvmCodeRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.SellerPvmCodeRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // SellerPvmCodeLabel
@@ -1094,6 +1129,7 @@ namespace Invoice.Forms
             this.BuyerFirmCodeRichTextBox.Size = new System.Drawing.Size(221, 19);
             this.BuyerFirmCodeRichTextBox.TabIndex = 16;
             this.BuyerFirmCodeRichTextBox.Text = "";
+            this.BuyerFirmCodeRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.BuyerFirmCodeRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // BuyerFirmCodeLabel
@@ -1113,6 +1149,7 @@ namespace Invoice.Forms
             this.SellerFirmCodeRichTextBox.Size = new System.Drawing.Size(205, 19);
             this.SellerFirmCodeRichTextBox.TabIndex = 14;
             this.SellerFirmCodeRichTextBox.Text = "";
+            this.SellerFirmCodeRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.SellerFirmCodeRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // SellerFirmCodeLabel
@@ -1132,6 +1169,7 @@ namespace Invoice.Forms
             this.BuyerNameRichTextBox.Size = new System.Drawing.Size(221, 19);
             this.BuyerNameRichTextBox.TabIndex = 12;
             this.BuyerNameRichTextBox.Text = "";
+            this.BuyerNameRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.BuyerNameRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // BuyerNameLabel
@@ -1151,6 +1189,7 @@ namespace Invoice.Forms
             this.SellerNameRichTextBox.Size = new System.Drawing.Size(205, 19);
             this.SellerNameRichTextBox.TabIndex = 10;
             this.SellerNameRichTextBox.Text = "";
+            this.SellerNameRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.SellerNameRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // SellerNameLabel
@@ -1171,6 +1210,7 @@ namespace Invoice.Forms
             this.SerialNumberRichTextBox.Size = new System.Drawing.Size(112, 19);
             this.SerialNumberRichTextBox.TabIndex = 8;
             this.SerialNumberRichTextBox.Text = "";
+            this.SerialNumberRichTextBox.TextChanged += new System.EventHandler(this.InvoiceRichTextBoxString_TextChanged);
             this.SerialNumberRichTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyUp);
             // 
             // InvoiceNumberRichTextBox
