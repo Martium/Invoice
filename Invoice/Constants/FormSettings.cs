@@ -61,6 +61,7 @@
             public static int IsPasswordCorrect => 5;
 
             public static int MaxNumberLength => 10;
+            public static int DateFormatLength => 10;
 
         }
     }

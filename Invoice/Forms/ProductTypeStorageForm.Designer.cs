@@ -483,7 +483,7 @@ namespace Invoice.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1024, 786);
+            this.ClientSize = new System.Drawing.Size(1119, 786);
             this.Controls.Add(this.StorageMonthsLeftInfoLabel);
             this.Controls.Add(this.StorageProductMonthsLeftTextBox);
             this.Controls.Add(this.InformationOfDataGridViewTypeLabel);

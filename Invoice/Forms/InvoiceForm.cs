@@ -742,6 +742,7 @@ namespace Invoice.Forms
 
         private void SetTextBoxLengths()
         {
+            InvoiceDateRichTextBox.MaxLength = FormSettings.TextBoxLengths.DateFormatLength;
             SerialNumberRichTextBox.MaxLength = FormSettings.TextBoxLengths.SerialNumber;
 
             SellerNameRichTextBox.MaxLength = FormSettings.TextBoxLengths.SellerName;
