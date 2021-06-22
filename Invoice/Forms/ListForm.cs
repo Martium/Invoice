@@ -21,6 +21,7 @@ namespace Invoice.Forms
 
         private static readonly string SearchTextBoxPlaceholderText = "Įveskite paieškos frazę...";
 
+        private const int InvoiceDateIndex = 2;
         private const int InvoiceIsPaidIndex = 4;
         private const int TotalPriceWithPvmIndex = 5;
 
@@ -32,6 +33,8 @@ namespace Invoice.Forms
             _invoiceRepository = new InvoiceRepository();
 
             InitializeComponent();
+
+            ListOfInvoiceDataGridView.Columns[InvoiceDateIndex].DefaultCellStyle.Format = "yyyy/MM/dd";
 
             SetControlsInitialState();
         }
