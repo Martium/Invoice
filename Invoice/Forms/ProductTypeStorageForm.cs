@@ -526,6 +526,10 @@ namespace Invoice.Forms
                 ProductTypeOrStorageDataGridView.Columns[2].HeaderText = @"Tipas";
                 ProductTypeOrStorageDataGridView.Columns[ProductTypeQuantityIndex].HeaderText = @"Kiekis";
                 ProductTypeOrStorageDataGridView.Columns[ProductTypePriceIndex].HeaderText = @"Vnt. Kaina";
+
+                ProductTypeOrStorageDataGridView.Columns[StorageMadeDateIndex].DefaultCellStyle.Format = default;
+                ProductTypeOrStorageDataGridView.Columns[StorageExpireDateIndex].DefaultCellStyle.Format = default;
+
             }
             else
             {
@@ -535,6 +539,9 @@ namespace Invoice.Forms
                 ProductTypeOrStorageDataGridView.Columns[StorageExpireDateIndex].HeaderText = @"Galiojimo Data";
                 ProductTypeOrStorageDataGridView.Columns[StorageQuantityIndex].HeaderText = @"Kiekis";
                 ProductTypeOrStorageDataGridView.Columns[StoragePriceIndex].HeaderText = @"Kaina";
+
+                ProductTypeOrStorageDataGridView.Columns[StorageMadeDateIndex].DefaultCellStyle.Format = "yyyy/MM/dd";
+                ProductTypeOrStorageDataGridView.Columns[StorageExpireDateIndex].DefaultCellStyle.Format = "yyyy/MM/dd";
             }
         }
 
