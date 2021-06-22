@@ -526,10 +526,6 @@ namespace Invoice.Forms
                 ProductTypeOrStorageDataGridView.Columns[2].HeaderText = @"Tipas";
                 ProductTypeOrStorageDataGridView.Columns[ProductTypeQuantityIndex].HeaderText = @"Kiekis";
                 ProductTypeOrStorageDataGridView.Columns[ProductTypePriceIndex].HeaderText = @"Vnt. Kaina";
-
-                ProductTypeOrStorageDataGridView.Columns[StorageMadeDateIndex].DefaultCellStyle.Format = default;
-                ProductTypeOrStorageDataGridView.Columns[StorageExpireDateIndex].DefaultCellStyle.Format = default;
-
             }
             else
             {
