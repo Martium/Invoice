@@ -201,6 +201,27 @@ namespace Invoice.Forms
             }
         }
 
+        private void ProductTypeTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                SetCursorAtProductTypeStringEnd();
+            }
+        }
+
+        private void InvoiceRichTextBoxString_TextChanged(object sender, EventArgs e)
+        {
+            RichTextBox richTextBox = sender as RichTextBox;
+
+            if (richTextBox == null) return;
+
+            if (richTextBox.SelectionStart == richTextBox.MaxLength)
+            {
+                _messageDialogService.ShowInfoMessage($"Pasiektas maksimalus žodžių ilgis bus išsaugota tik toks tekstas ({richTextBox.Text}) ");
+            }
+        }
+
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == (Keys.Escape))
@@ -702,8 +723,7 @@ namespace Invoice.Forms
             EighthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(EighthProductQuantityRichTextBox);
             NinthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(NinthProductQuantityRichTextBox);
             TenProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(TenProductQuantityRichTextBox);
-            EleventhProductQuantityRichTextBox.Text =
-                _numberService.ChangeCommaToDot(EleventhProductQuantityRichTextBox);
+            EleventhProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(EleventhProductQuantityRichTextBox);
             TwelfthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(TwelfthProductQuantityRichTextBox);
 
             FirstProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(FirstProductPriceRichTextBox);
@@ -718,11 +738,11 @@ namespace Invoice.Forms
             TenProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(TenProductPriceRichTextBox);
             EleventhProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(EleventhProductPriceRichTextBox);
             TwelfthProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(TwelfthProductPriceRichTextBox);
-
         }
 
         private void SetTextBoxLengths()
         {
+            InvoiceDateRichTextBox.MaxLength = FormSettings.TextBoxLengths.DateFormatLength;
             SerialNumberRichTextBox.MaxLength = FormSettings.TextBoxLengths.SerialNumber;
 
             SellerNameRichTextBox.MaxLength = FormSettings.TextBoxLengths.SellerName;
@@ -765,6 +785,32 @@ namespace Invoice.Forms
             EleventhProductSeesRichTextBox.MaxLength = FormSettings.TextBoxLengths.EleventhProductSees;
             TwelfthProductSeesRichTextBox.MaxLength = FormSettings.TextBoxLengths.TwelfthProductSees;
 
+            FirstProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            SecondProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            ThirdProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            FourthProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            FifthProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            SixthProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            SeventhProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            EighthProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            NinthProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            TenProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            EleventhProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            TwelfthProductQuantityRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+
+            FirstProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            SecondProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            ThirdProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            FourthProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            FifthProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            SixthProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            SeventhProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            EighthProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            NinthProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            TenProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            EleventhProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            TwelfthProductPriceRichTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+
             PriceInWordsRichTextBox.MaxLength = FormSettings.TextBoxLengths.PriceInWords;
             InvoiceMakerRichTextBox.MaxLength = FormSettings.TextBoxLengths.InvoiceMaker;
             InvoiceAcceptedRichTextBox.MaxLength = FormSettings.TextBoxLengths.InvoiceAccepted;
@@ -781,6 +827,32 @@ namespace Invoice.Forms
             TenProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
             EleventhProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
             TwelfthProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
+
+            FirstProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            SecondProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            ThirdProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            FourthProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            FifthProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            SixthProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            SeventhProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            EighthProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            NinthProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            TenProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            EleventhProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            TwelfthProductTypeQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+
+            FirstProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            SecondProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            ThirdProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            FourthProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            FifthProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            SixthProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            SeventhProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            EighthProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            NinthProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            TenProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            EleventhProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            TwelfthProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
         }
 
         private void CaptureInvoiceFormScreen()
@@ -872,6 +944,48 @@ namespace Invoice.Forms
             PriceInWordsRichTextBox.SelectionStart = PriceInWordsRichTextBox.Text.Length;
             InvoiceMakerRichTextBox.SelectionStart = InvoiceMakerRichTextBox.Text.Length;
             InvoiceAcceptedRichTextBox.SelectionStart = InvoiceAcceptedRichTextBox.Text.Length;
+        }
+
+        private void SetCursorAtProductTypeStringEnd()
+        {
+            FirstProductTypeTextBox.SelectionStart = FirstProductTypeTextBox.Text.Length;
+            SecondProductTypeTextBox.SelectionStart = SecondProductTypeTextBox.Text.Length;
+            ThirdProductTypeTextBox.SelectionStart = ThirdProductTypeTextBox.Text.Length;
+            FourthProductTypeTextBox.SelectionStart = FourthProductTypeTextBox.Text.Length;
+            FifthProductTypeTextBox.SelectionStart = FifthProductTypeTextBox.Text.Length;
+            SixthProductTypeTextBox.SelectionStart = SixthProductTypeTextBox.Text.Length;
+            SeventhProductTypeTextBox.SelectionStart = SeventhProductTypeTextBox.Text.Length;
+            EighthProductTypeTextBox.SelectionStart = EighthProductTypeTextBox.Text.Length;
+            NinthProductTypeTextBox.SelectionStart = NinthProductTypeTextBox.Text.Length;
+            TenProductTypeTextBox.SelectionStart = TenProductTypeTextBox.Text.Length;
+            EleventhProductTypeTextBox.SelectionStart = EleventhProductTypeTextBox.Text.Length;
+            TwelfthProductTypeTextBox.SelectionStart = TwelfthProductTypeTextBox.Text.Length;
+
+            FirstProductTypeQuantityTextBox.SelectionStart = FirstProductTypeQuantityTextBox.Text.Length;
+            SecondProductTypeQuantityTextBox.SelectionStart = SecondProductTypeQuantityTextBox.Text.Length;
+            ThirdProductTypeQuantityTextBox.SelectionStart = ThirdProductTypeQuantityTextBox.Text.Length;
+            FourthProductTypeQuantityTextBox.SelectionStart = FourthProductTypeQuantityTextBox.Text.Length;
+            FifthProductTypeQuantityTextBox.SelectionStart = FifthProductTypeQuantityTextBox.Text.Length;
+            SixthProductTypeQuantityTextBox.SelectionStart = SixthProductTypeQuantityTextBox.Text.Length;
+            SeventhProductTypeQuantityTextBox.SelectionStart = SeventhProductTypeQuantityTextBox.Text.Length;
+            EighthProductTypeQuantityTextBox.SelectionStart = EighthProductTypeQuantityTextBox.Text.Length;
+            NinthProductTypeQuantityTextBox.SelectionStart = NinthProductTypeQuantityTextBox.Text.Length;
+            TenProductTypeQuantityTextBox.SelectionStart = TenProductTypeQuantityTextBox.Text.Length;
+            EleventhProductTypeQuantityTextBox.SelectionStart = EleventhProductTypeQuantityTextBox.Text.Length;
+            TwelfthProductTypeQuantityTextBox.SelectionStart = TwelfthProductTypeQuantityTextBox.Text.Length;
+
+            FirstProductTypePriceTextBox.SelectionStart = FirstProductTypePriceTextBox.Text.Length;
+            SecondProductTypePriceTextBox.SelectionStart = SecondProductTypePriceTextBox.Text.Length;
+            ThirdProductTypePriceTextBox.SelectionStart = ThirdProductTypePriceTextBox.Text.Length;
+            FourthProductTypePriceTextBox.SelectionStart = FourthProductTypePriceTextBox.Text.Length;
+            FifthProductTypePriceTextBox.SelectionStart = FifthProductTypePriceTextBox.Text.Length;
+            SixthProductTypePriceTextBox.SelectionStart = SixthProductTypePriceTextBox.Text.Length;
+            SeventhProductTypePriceTextBox.SelectionStart = SeventhProductTypePriceTextBox.Text.Length;
+            EighthProductTypePriceTextBox.SelectionStart = EighthProductTypePriceTextBox.Text.Length;
+            NinthProductTypePriceTextBox.SelectionStart = NinthProductTypePriceTextBox.Text.Length;
+            TenProductTypePriceTextBox.SelectionStart = TenProductTypePriceTextBox.Text.Length;
+            EleventhProductTypePriceTextBox.SelectionStart = EleventhProductTypePriceTextBox.Text.Length;
+            TwelfthProductTypePriceTextBox.SelectionStart = TwelfthProductTypePriceTextBox.Text.Length;
         }
 
         private void SetCursorAtDateTextBoxEnd()
@@ -1001,7 +1115,7 @@ namespace Invoice.Forms
             FirstProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(FirstProductTypeQuantityTextBox);
             SecondProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(SecondProductTypeQuantityTextBox);
             ThirdProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(ThirdProductTypeQuantityTextBox);
-            FourthProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(ThirdProductTypeQuantityTextBox);
+            FourthProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(FourthProductTypeQuantityTextBox);
             FifthProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(FifthProductTypeQuantityTextBox);
             SixthProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(SixthProductTypeQuantityTextBox);
             SeventhProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(SeventhProductTypeQuantityTextBox);
@@ -1023,8 +1137,6 @@ namespace Invoice.Forms
             TenProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(TenProductTypePriceTextBox);
             EleventhProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(EleventhProductTypePriceTextBox);
             TwelfthProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(TwelfthProductTypePriceTextBox);
-
-
         }
 
         private ProductTypeModel GetAllInfoFromProductTypeTextBox()

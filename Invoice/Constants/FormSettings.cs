@@ -10,7 +10,7 @@
             public static int SellerFirmCode => 40;
             public static int SellerPvmCode => 40;
             public static int SellerAddress => 40;
-            public static int SellerPhoneNumber => 40;
+            public static int SellerPhoneNumber => 30;
             public static int SellerBank => 40;
             public static int SellerBankAccountNumber => 40;
             public static int SellerEmailAddress => 40;
@@ -59,6 +59,10 @@
 
             public static int Password => 45;
             public static int IsPasswordCorrect => 5;
+
+            public static int MaxNumberLength => 10;
+            public static int DateFormatLength => 10;
+
         }
     }
 }

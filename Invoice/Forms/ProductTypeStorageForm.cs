@@ -535,6 +535,9 @@ namespace Invoice.Forms
                 ProductTypeOrStorageDataGridView.Columns[StorageExpireDateIndex].HeaderText = @"Galiojimo Data";
                 ProductTypeOrStorageDataGridView.Columns[StorageQuantityIndex].HeaderText = @"Kiekis";
                 ProductTypeOrStorageDataGridView.Columns[StoragePriceIndex].HeaderText = @"Kaina";
+
+                ProductTypeOrStorageDataGridView.Columns[StorageMadeDateIndex].DefaultCellStyle.Format = "yyyy/MM/dd";
+                ProductTypeOrStorageDataGridView.Columns[StorageExpireDateIndex].DefaultCellStyle.Format = "yyyy/MM/dd";
             }
         }
 
@@ -1078,6 +1081,12 @@ namespace Invoice.Forms
         {
             StorageSerialNumberTextBox.MaxLength = FormSettings.TextBoxLengths.StorageSerialNumber;
             StorageProductNameTextBox.MaxLength = FormSettings.TextBoxLengths.StorageProductName;
+            StorageProductMadeDateTextBox.MaxLength = FormSettings.TextBoxLengths.DateFormatLength;
+            StorageProductExpireDateTextBox.MaxLength = FormSettings.TextBoxLengths.DateFormatLength;
+            StorageProductQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            StorageProductPriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+
+            AddStorageQuantityTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
         }
 
         private void ValidateDateFormat(TextBox textBox, CancelEventArgs e)
@@ -1107,12 +1116,22 @@ namespace Invoice.Forms
 
         private bool ValidateTextIsDouble(TextBox textBox, Button button)
         {
-            bool isNumber = double.TryParse(textBox.Text, out _);
+            bool isNumber = double.TryParse(textBox.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out double numberResult);
 
-            if (isNumber)
+            if (isNumber && numberResult <= int.MaxValue && numberResult >= int.MinValue)
             {
                 button.Enabled = true;
                 _messageDialogService.HideLabelAndTextBoxError(ErrorLabel, textBox);
+            }
+            else if (isNumber && numberResult > int.MaxValue)
+            {
+                button.Enabled = false;
+                _messageDialogService.DisplayLabelAndTextBoxError($"Skaičius raudonam langelyje negali būti didesnis nei {int.MaxValue}", textBox, ErrorLabel);
+            }
+            else if (isNumber && numberResult < int.MinValue)
+            {
+                button.Enabled = false;
+                _messageDialogService.DisplayLabelAndTextBoxError($"Skaičius raudonam langelyje negali būti mažesnis nei {int.MinValue}", textBox, ErrorLabel);
             }
             else if (string.IsNullOrWhiteSpace(textBox.Text))
             {
@@ -1135,10 +1154,13 @@ namespace Invoice.Forms
             button.Enabled = false;
             secondButton.Enabled = false;
 
-            bool isNumber = double.TryParse(textBox.Text, out _);
-            bool isSecondNumber = double.TryParse(secondTextBox.Text, out _);
+            bool isNumber = double.TryParse(textBox.Text,NumberStyles.Any, CultureInfo.InvariantCulture, out double numberResult);
+            bool isSecondNumber = double.TryParse(secondTextBox.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out double secondNumberResult);
 
-            if (isNumber && isSecondNumber)
+            bool isFirstNumberInRange = numberResult <= int.MaxValue && numberResult >= int.MinValue;
+            bool isSecondNumberInRange = secondNumberResult <= int.MaxValue && secondNumberResult >= int.MinValue;
+
+            if (isNumber && isSecondNumber && isFirstNumberInRange && isSecondNumberInRange)
             {
                 button.Enabled = true;
                 secondButton.Enabled = true;
@@ -1167,6 +1189,18 @@ namespace Invoice.Forms
             else if (isNumber && string.IsNullOrWhiteSpace(secondTextBox.Text))
             {
                 _messageDialogService.DisplayLabelAndTextBoxError("Raudonas langelis negali būti tuščias",
+                    secondTextBox, ErrorLabel);
+            }
+
+            if (!isFirstNumberInRange)
+            {
+                _messageDialogService.DisplayLabelAndTextBoxError($"Raudonas langelis negali būt didesnis nei {int.MaxValue} arba mažesnis nei {int.MinValue}",
+                    textBox, ErrorLabel);
+            }
+
+            if (!isSecondNumberInRange)
+            {
+                _messageDialogService.DisplayLabelAndTextBoxError($"Raudonas langelis negali būt didesnis nei {int.MaxValue} arba mažesnis nei {int.MinValue}",
                     secondTextBox, ErrorLabel);
             }
         }
