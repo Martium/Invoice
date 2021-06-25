@@ -42,6 +42,7 @@ namespace Invoice.Forms
         private const int PriceIndex = 6;
 
         private const string DateFormat = "yyyy-MM-dd";
+        private const string DateForDataGridViewFormat = "yyyy/MM/dd";
 
         public ProductTypeStorageForm()
         {
@@ -435,7 +436,6 @@ namespace Invoice.Forms
             }
         }
 
-
         private bool CheckIsStorageTextBoxAllFilled()
         {
             bool isAllTextBoxFilled = true;
@@ -550,8 +550,8 @@ namespace Invoice.Forms
                 ProductTypeOrStorageDataGridView.Columns[QuantityIndex].HeaderText = @"Kiekis";
                 ProductTypeOrStorageDataGridView.Columns[PriceIndex].HeaderText = @"Kaina";
 
-                ProductTypeOrStorageDataGridView.Columns[MadeDateIndex].DefaultCellStyle.Format = "yyyy/MM/dd";
-                ProductTypeOrStorageDataGridView.Columns[ExpireDateIndex].DefaultCellStyle.Format = "yyyy/MM/dd";
+                ProductTypeOrStorageDataGridView.Columns[MadeDateIndex].DefaultCellStyle.Format = DateForDataGridViewFormat;
+                ProductTypeOrStorageDataGridView.Columns[ExpireDateIndex].DefaultCellStyle.Format = DateForDataGridViewFormat;
             }
         }
 
@@ -1278,7 +1278,6 @@ namespace Invoice.Forms
 
             return isBothNumbers;
         }
-
 
         private void SetTextBoxBackColorToDefault(TextBox textBox)
         {
