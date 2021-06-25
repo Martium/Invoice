@@ -1274,9 +1274,9 @@ namespace Invoice.Forms
                     secondTextBox, ErrorLabel);
             }
 
-            bool IsBothNumbers = isNumber && isSecondNumber;
+            bool isBothNumbers = isNumber && isSecondNumber;
 
-            return IsBothNumbers;
+            return isBothNumbers;
         }
 
 
