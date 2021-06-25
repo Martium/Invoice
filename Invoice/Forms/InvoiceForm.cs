@@ -364,8 +364,6 @@ namespace Invoice.Forms
 
         private string FillProductsToMoneyReceiptForm()
         {
-            string allProducts;
-
             string firstProductInfo = CheckProductsRichTextBox(FirstProductNameRichTextBox, FirstProductQuantityRichTextBox,
                 FirstProductSeesRichTextBox, FirstProductPriceRichTextBox);
             string secondProductInfo = CheckProductsRichTextBox(SecondProductNameRichTextBox,
@@ -395,7 +393,7 @@ namespace Invoice.Forms
 
 
 
-            allProducts = $@"{firstProductInfo} {secondProductInfo} {thirdProductInfo} 
+            string allProducts = $@"{firstProductInfo} {secondProductInfo} {thirdProductInfo} 
 {forthProductInfo}{fifthProductInfo} {sixthProductInfo} 
 {seventhProductInfo} {eighthProductInfo} {ninthProductInfo} 
 {tenProductInfo} {eleventhProductInfo} {twelfthProductName}";

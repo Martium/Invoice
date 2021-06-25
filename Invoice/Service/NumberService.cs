@@ -405,11 +405,11 @@ namespace Invoice.Service
             {
                 try
                 {
-                    sum = sum + double.Parse(dataGridView.Rows[i].Cells[cellIndex].Value.ToString());
+                    sum += double.Parse(dataGridView.Rows[i].Cells[cellIndex].Value.ToString(), CultureInfo.InvariantCulture);
                 }
                 catch
                 {
-                    sum = sum + 0;
+                    sum += 0;
                 }
             }
 
@@ -424,13 +424,12 @@ namespace Invoice.Service
             {
                 try
                 {
-                    multiplication = multiplication +
-                                     (double.Parse(dataGridView.Rows[i].Cells[cellIndex].Value.ToString()) *
-                                      double.Parse(dataGridView.Rows[i].Cells[secondCellIndex].Value.ToString()));
+                    multiplication += (double.Parse(dataGridView.Rows[i].Cells[cellIndex].Value.ToString(), CultureInfo.InvariantCulture) *
+                                       double.Parse(dataGridView.Rows[i].Cells[secondCellIndex].Value.ToString(), CultureInfo.InvariantCulture));
                 }
                 catch
                 {
-                    multiplication = multiplication + 0;
+                    multiplication += 0;
                 }
             }
 
