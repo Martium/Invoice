@@ -633,40 +633,40 @@ namespace Invoice.Forms
 
             foreach (var info in getInfo)
             {
-                if (info.FirstProductType != string.Empty)
+                if (info.FirstProductType != string.Empty && !ProductTypeSpecificNameComboBox.Items.Contains(info.FirstProductType))
                     ProductTypeSpecificNameComboBox.Items.Add(info.FirstProductType);
 
-                if (info.SecondProductType != string.Empty)
+                if (info.SecondProductType != string.Empty && !ProductTypeSpecificNameComboBox.Items.Contains(info.SecondProductType))
                     ProductTypeSpecificNameComboBox.Items.Add(info.SecondProductType);
 
-                if (info.ThirdProductType != string.Empty)
+                if (info.ThirdProductType != string.Empty && !ProductTypeSpecificNameComboBox.Items.Contains(info.ThirdProductType))
                     ProductTypeSpecificNameComboBox.Items.Add(info.ThirdProductType);
 
-                if (info.FourthProductType != string.Empty)
+                if (info.FourthProductType != string.Empty && !ProductTypeSpecificNameComboBox.Items.Contains(info.FourthProductType))
                     ProductTypeSpecificNameComboBox.Items.Add(info.FourthProductType);
 
-                if (info.FifthProductType != string.Empty)
+                if (info.FifthProductType != string.Empty && !ProductTypeSpecificNameComboBox.Items.Contains(info.FifthProductType))
                     ProductTypeSpecificNameComboBox.Items.Add(info.FifthProductType);
 
-                if (info.SixthProductType != string.Empty)
+                if (info.SixthProductType != string.Empty && !ProductTypeSpecificNameComboBox.Items.Contains(info.SixthProductType))
                     ProductTypeSpecificNameComboBox.Items.Add(info.SixthProductType);
 
-                if (info.SeventhProductType != string.Empty)
+                if (info.SeventhProductType != string.Empty && !ProductTypeSpecificNameComboBox.Items.Contains(info.SeventhProductType))
                     ProductTypeSpecificNameComboBox.Items.Add(info.SeventhProductType);
 
-                if (info.EighthProductType != string.Empty)
+                if (info.EighthProductType != string.Empty && !ProductTypeSpecificNameComboBox.Items.Contains(info.EighthProductType))
                     ProductTypeSpecificNameComboBox.Items.Add(info.EighthProductType);
 
-                if (info.NinthProductType != string.Empty)
+                if (info.NinthProductType != string.Empty && !ProductTypeSpecificNameComboBox.Items.Contains(info.NinthProductType))
                     ProductTypeSpecificNameComboBox.Items.Add(info.NinthProductType);
 
-                if (info.TenProductType != string.Empty)
+                if (info.TenProductType != string.Empty && !ProductTypeSpecificNameComboBox.Items.Contains(info.TenProductType))
                     ProductTypeSpecificNameComboBox.Items.Add(info.TenProductType);
 
-                if (info.EleventhProductType != string.Empty)
+                if (info.EleventhProductType != string.Empty && !ProductTypeSpecificNameComboBox.Items.Contains(info.EleventhProductType))
                     ProductTypeSpecificNameComboBox.Items.Add(info.EleventhProductType);
 
-                if (info.TwelfthProductType != string.Empty)
+                if (info.TwelfthProductType != string.Empty && !ProductTypeSpecificNameComboBox.Items.Contains(info.TwelfthProductType))
                     ProductTypeSpecificNameComboBox.Items.Add(info.TwelfthProductType);
 
             }
