@@ -38,6 +38,7 @@ namespace Invoice.Repositories
                 CreateProductTypeTable(dbConnection);
                 CreateStorageTable(dbConnection);
                 CreatePasswordTable(dbConnection);
+                CreateBuyersInfoTable(dbConnection);
 
                 SetDefaultPassword(dbConnection);
 
@@ -45,6 +46,7 @@ namespace Invoice.Repositories
                 FillInvoiceTestingInfo(dbConnection);
                 FillProductTypeTestingInfo(dbConnection);
                 FillStorageTestingInfo(dbConnection);
+                FillBuyersInfoTestingInfo(dbConnection);
 #endif
 
             }
@@ -293,6 +295,29 @@ namespace Invoice.Repositories
             createPasswordCommand.ExecuteNonQuery();
         }
 
+        private void CreateBuyersInfoTable(SQLiteConnection dbConnection)
+        {
+            string dropBuyersInfoTable = GetDropTableQuery("BuyersInfo");
+            SQLiteCommand dropABuyersInfoTable = new SQLiteCommand(dropBuyersInfoTable, dbConnection);
+            dropABuyersInfoTable.ExecuteNonQuery();
+
+            string createBuyersInfoTableQuery =
+                $@"
+                    CREATE TABLE [BuyersInfo] (
+                        [Id] [INTEGER] PRIMARY KEY AUTOINCREMENT NOT NULL,
+                        [BuyerName] [nvarchar]({FormSettings.TextBoxLengths.BuyerName}) NULL,
+                        [BuyerFirmCode] [nvarchar]({FormSettings.TextBoxLengths.BuyerFirmCode}) NULL,
+                        [BuyerPvmCode] [nvarchar]({FormSettings.TextBoxLengths.BuyerPvmCode}) NULL,
+                        [BuyerAddress] [nvarchar]({FormSettings.TextBoxLengths.BuyerAddress}) NULL,
+
+                        UNIQUE (Id)
+                    );
+                ";
+
+            SQLiteCommand createBuyersInfoCommand = new SQLiteCommand(createBuyersInfoTableQuery, dbConnection);
+            createBuyersInfoCommand.ExecuteNonQuery();
+        }
+
         private void SetDefaultPassword(SQLiteConnection dbConnection)
         {
             string setDefaultPassword =
@@ -362,6 +387,23 @@ namespace Invoice.Repositories
 
             SQLiteCommand fillStorageTestingInfoCommand = new SQLiteCommand(fillStorageTestingInfoQuery, dbConnection);
             fillStorageTestingInfoCommand.ExecuteNonQuery();
+        }
+
+        private void FillBuyersInfoTestingInfo(SQLiteConnection dbConnection)
+        {
+            string fillBuyersInfoTestingInfo =
+                @"BEGIN TRANSACTION;
+                    INSERT INTO 'BuyersInfo'
+                        Values (NULL, 'Litbana', '1', '2', '3');
+                    INSERT INTO 'BuyersInfo'
+                        Values (NULL, 'Bazinga', '1', '2', '3');
+                    INSERT INTO 'BuyersInfo'
+                        Values (NULL, 'Bazinge', '1', '2', '3');
+                   COMMIT;
+                ";
+
+            SQLiteCommand fillTestingBuyersInfoCommand = new SQLiteCommand(fillBuyersInfoTestingInfo, dbConnection);
+            fillTestingBuyersInfoCommand.ExecuteNonQuery();
         }
 
         private string GetDropTableQuery(string tableName)
