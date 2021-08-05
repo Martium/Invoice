@@ -13,6 +13,8 @@ namespace Invoice.Forms
 
         private readonly MessageDialogService _messageDialogService;
 
+        private string[] _lastBuyerInfo = new string[4];
+
         public BuyersInfoForm()
         {
             _buyersInfoRepository = new BuyersInfoRepository();
@@ -39,8 +41,6 @@ namespace Invoice.Forms
 
             bool isBuyerExists = _buyersInfoRepository.CheckIsBuyerExists(BuyerNameRichTextBox.Text);
 
-
-
             if (!isBuyerExists && isBuyerNameFilled && isAllInfoFilled)
             {
                CreateNewBuyerInfo();
@@ -66,7 +66,32 @@ namespace Invoice.Forms
             {
                 _messageDialogService.ShowErrorMassage("Toks pirkėjas egzistuoja jei norite pakeisti jo informaciją spauskite atnaujinti pirkėjo informaciją mygtuką");
             }
+        }
 
+        private void UpdateBuyerButton_Click(object sender, System.EventArgs e)
+        {
+            bool isBuyerNameFilled = !string.IsNullOrWhiteSpace(BuyerNameRichTextBox.Text);
+
+            bool isBuyerExists = _buyersInfoRepository.CheckIsBuyerExists(BuyerNameRichTextBox.Text);
+
+            bool isAllValuesSame = CheckIsBuyerAllValuesSameAsInDataBase();
+
+            if (isBuyerExists && isBuyerNameFilled && !isAllValuesSame)
+            {
+                UpdateBuyerInfo();
+            }
+            else if (isBuyerExists && isBuyerNameFilled && isAllValuesSame)
+            {
+                _messageDialogService.ShowErrorMassage("Jūs nieko nepakeitėte todėl nebus atnaujinta");
+            }
+            else if (!isBuyerNameFilled)
+            {
+                _messageDialogService.ShowErrorMassage("Kad atnaujintumėte pirkėją būtina supildyti pirkėjo pavadinimas langelį");
+            }
+            else
+            {
+                _messageDialogService.ShowErrorMassage("Pirkėjas nerastas atnaujinimas negalimas");
+            }
         }
 
         #region Helpers
@@ -101,6 +126,12 @@ namespace Invoice.Forms
                 BuyerFirmCodeRichTextBox.Text = buyerFullInfo.BuyerFirmCode;
                 BuyerPvmCodeRichTextBox.Text = buyerFullInfo.BuyerPvmCode;
                 BuyerAddressRichTextBox.Text = buyerFullInfo.BuyerAddress;
+
+                _lastBuyerInfo[0] = BuyerNameRichTextBox.Text;
+                _lastBuyerInfo[1] = BuyerFirmCodeRichTextBox.Text;
+                _lastBuyerInfo[2] = BuyerPvmCodeRichTextBox.Text;
+                _lastBuyerInfo[3] = BuyerAddressRichTextBox.Text;
+
             }
             else
             {
@@ -126,7 +157,7 @@ namespace Invoice.Forms
             }
             else
             {
-                _messageDialogService.ShowErrorMassage("kažkas nepavyko kreiptis į administratorių ar bandyti dar kartą");
+                _messageDialogService.ShowErrorMassage("kažkas nepavyko kreiptis į administratorių ar bandykit dar kartą");
             }
 
         }
@@ -140,8 +171,40 @@ namespace Invoice.Forms
             return isAllBuyerInfoFilled;
         }
 
-        #endregion
+        private void UpdateBuyerInfo()
+        {
+            BuyerFullInfoModel updateBuyer = new BuyerFullInfoModel
+            {
+                BuyerName = BuyerNameRichTextBox.Text,
+                BuyerFirmCode = BuyerFirmCodeRichTextBox.Text,
+                BuyerPvmCode = BuyerAddressRichTextBox.Text,
+                BuyerAddress = BuyerAddressRichTextBox.Text
+            };
 
+            bool isBuyerUpdated = _buyersInfoRepository.UpdateBuyerInfo(updateBuyer);
+
+            if (isBuyerUpdated)
+            {
+                _messageDialogService.ShowInfoMessage(" Pirkėjas atnaujintas sekmingai");
+            }
+            else
+            {
+                _messageDialogService.ShowErrorMassage("kažkas nepavyko kreiptis į administratorių ar bandykit dar kartą");
+            }
+
+        }
+
+        private bool CheckIsBuyerAllValuesSameAsInDataBase()
+        {
+            bool isAllValuesSame = _lastBuyerInfo[0] == BuyerNameRichTextBox.Text &&
+                                   _lastBuyerInfo[1] == BuyerFirmCodeRichTextBox.Text &&
+                                   _lastBuyerInfo[2] == BuyerPvmCodeRichTextBox.Text &&
+                                   _lastBuyerInfo[3] == BuyerAddressRichTextBox.Text;
+
+            return isAllValuesSame;
+        }
+
+        #endregion
         
     }
 }

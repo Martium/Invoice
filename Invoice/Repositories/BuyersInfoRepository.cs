@@ -92,5 +92,32 @@ namespace Invoice.Repositories
                 return affectedRows == 1;
             }
         }
+
+        public bool UpdateBuyerInfo(BuyerFullInfoModel updateBuyer)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string updateBuyerInfoQuery =
+                    $@"
+                        UPDATE '{BuyersInfoTable}'
+                          SET BuyerFirmCode = @BuyerFirmCode, BuyerPvmCode = @BuyerPvmCode, BuyerAddress = @BuyerAddress
+                        WHERE BuyerName = @BuyerName
+                    ";
+
+                object queryParameters = new
+                {
+                    updateBuyer.BuyerName,
+                    updateBuyer.BuyerFirmCode,
+                    updateBuyer.BuyerPvmCode,
+                    updateBuyer.BuyerAddress
+                };
+
+                int affectedRows = dbConnection.Execute(updateBuyerInfoQuery, queryParameters);
+
+                return affectedRows == 1;
+            }
+        }
     }
 }

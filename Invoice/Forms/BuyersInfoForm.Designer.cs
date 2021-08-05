@@ -134,6 +134,7 @@ namespace Invoice.Forms
             this.UpdateBuyerButton.TabIndex = 31;
             this.UpdateBuyerButton.Text = "Atnaujinti pirkėjo informaciją";
             this.UpdateBuyerButton.UseVisualStyleBackColor = true;
+            this.UpdateBuyerButton.Click += new System.EventHandler(this.UpdateBuyerButton_Click);
             // 
             // ExistsBuyerListComboBox
             // 
