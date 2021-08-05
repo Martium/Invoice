@@ -354,9 +354,9 @@ namespace Invoice.Forms
             this.ProductTotalPriceLabel.AutoSize = true;
             this.ProductTotalPriceLabel.Location = new System.Drawing.Point(604, 462);
             this.ProductTotalPriceLabel.Name = "ProductTotalPriceLabel";
-            this.ProductTotalPriceLabel.Size = new System.Drawing.Size(70, 13);
+            this.ProductTotalPriceLabel.Size = new System.Drawing.Size(34, 13);
             this.ProductTotalPriceLabel.TabIndex = 91;
-            this.ProductTotalPriceLabel.Text = "Bendra kaina";
+            this.ProductTotalPriceLabel.Text = "Suma";
             // 
             // TwelfthProductPriceRichTextBox
             // 

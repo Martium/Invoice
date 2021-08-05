@@ -18,7 +18,7 @@ namespace Invoice.Forms
             SellerInfoLabel.Text = moneyReceiptInfo.SellerInfo;
             SellerFirmCodeLabel.Text = moneyReceiptInfo.SellerFirmCode;
             SerialNumberLabel.Text = moneyReceiptInfo.SerialNumber;
-            InvoiceNumberLabel.Text = moneyReceiptInfo.InvoiceNumber;
+            InvoiceNumberLabel.Text = moneyReceiptInfo.InvoiceNumber; // new logic need
             InvoiceDateLabel.Text = moneyReceiptInfo.InvoiceDate;
             AllProductsLabel.Text = moneyReceiptInfo.AllProducts;
             PriceInWordsLabel.Text = moneyReceiptInfo.PriceInWords;

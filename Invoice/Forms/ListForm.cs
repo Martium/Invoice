@@ -253,6 +253,15 @@ namespace Invoice.Forms
             HideListAndOpenAnotherForm(productTypeStorageForm);
         }
 
+        private void BuyersInfoFormButton_Click(object sender, EventArgs e)
+        {
+            var buyersInfoForm = new BuyersInfoForm();
+
+            buyersInfoForm.Closed += ShowAndRefreshListForm;
+
+            HideListAndOpenAnotherForm(buyersInfoForm);
+        }
+
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == (Keys.Escape))
@@ -448,5 +457,7 @@ namespace Invoice.Forms
         }
 
         #endregion
+
+        
     }
 }
