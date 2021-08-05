@@ -124,6 +124,7 @@ namespace Invoice.Forms
             this.AddNewBuyerButton.TabIndex = 30;
             this.AddNewBuyerButton.Text = "Pridėti Naują pirkėją";
             this.AddNewBuyerButton.UseVisualStyleBackColor = true;
+            this.AddNewBuyerButton.Click += new System.EventHandler(this.AddNewBuyerButton_Click);
             // 
             // UpdateBuyerButton
             // 

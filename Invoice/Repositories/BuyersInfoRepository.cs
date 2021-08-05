@@ -19,6 +19,7 @@ namespace Invoice.Repositories
                         SELECT DISTINCT
                           BI.BuyerName 
                         FROM {BuyersInfoTable} BI
+                        ORDER BY BI.BuyerName ASC
                     ";
 
                 IEnumerable<BuyersNamesModel> getExistingBuyersNames =
@@ -46,6 +47,49 @@ namespace Invoice.Repositories
                 BuyerFullInfoModel getBuyerFullInfo = dbConnection.QuerySingleOrDefault<BuyerFullInfoModel>(getExistingBuyerQuery);
 
                 return getBuyerFullInfo;
+            }
+        }
+
+        public bool CheckIsBuyerExists(string buyerName)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string checkBuyerExists =
+                    $@"
+                        SELECT EXISTS(SELECT 1 FROM {BuyersInfoTable} WHERE BuyerName = '{buyerName}');
+                    ";
+
+                bool isBuyerExists = dbConnection.QuerySingleOrDefault<bool>(checkBuyerExists);
+
+                return isBuyerExists;
+            }
+        }
+
+        public bool CreateNewBuyerInfo(BuyerFullInfoModel newBuyer)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string createNewBuyerInfoQuery =
+                    $@"
+                        INSERT INTO '{BuyersInfoTable}'
+                            VALUES (NULL, @BuyerName, @BuyerFirmCode, @BuyerPvmCode, @BuyerAddress )
+                    ";
+
+                object queryParameters = new
+                {
+                    newBuyer.BuyerName,
+                    newBuyer.BuyerFirmCode,
+                    newBuyer.BuyerPvmCode,
+                    newBuyer.BuyerAddress
+                };
+
+                int affectedRows = dbConnection.Execute(createNewBuyerInfoQuery, queryParameters);
+
+                return affectedRows == 1;
             }
         }
     }

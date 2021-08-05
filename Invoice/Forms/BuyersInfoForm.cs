@@ -30,6 +30,45 @@ namespace Invoice.Forms
             LoadInfoToRichTextBoxes();
         }
 
+        private void AddNewBuyerButton_Click(object sender, System.EventArgs e)
+        {
+
+            bool isBuyerNameFilled = !string.IsNullOrWhiteSpace(BuyerNameRichTextBox.Text);
+
+            bool isAllInfoFilled = CheckAllBuyerInfoIsFilled();
+
+            bool isBuyerExists = _buyersInfoRepository.CheckIsBuyerExists(BuyerNameRichTextBox.Text);
+
+
+
+            if (!isBuyerExists && isBuyerNameFilled && isAllInfoFilled)
+            {
+               CreateNewBuyerInfo();
+               FillExistsBuyerListComboBox();
+
+            }
+            else if (!isBuyerExists && isBuyerNameFilled && !isAllInfoFilled)
+            {
+                DialogResult dialogResult = _messageDialogService.ShowChoiceMessage(
+                    "Kai kurie langeliai nesupildyti ar norite išsaugoti nepilną informaciją apie pirkėją ?");
+
+                if (dialogResult == DialogResult.OK)
+                {
+                    CreateNewBuyerInfo();
+                    FillExistsBuyerListComboBox();
+                }
+            }
+            else if (!isBuyerExists && !isBuyerNameFilled)
+            {
+                _messageDialogService.ShowErrorMassage("Kad išsaugotumėte naują pirkėją būtina supildyti pirkėjo pavadinimas langelį");
+            }
+            else
+            {
+                _messageDialogService.ShowErrorMassage("Toks pirkėjas egzistuoja jei norite pakeisti jo informaciją spauskite atnaujinti pirkėjo informaciją mygtuką");
+            }
+
+        }
+
         #region Helpers
 
         private void SetControlsInitialState()
@@ -41,6 +80,8 @@ namespace Invoice.Forms
 
         private void FillExistsBuyerListComboBox()
         {
+            ExistsBuyerListComboBox.DataSource = null;
+
             ExistsBuyerListComboBox.Items.Clear();
 
             List<BuyersNamesModel> allBuyersNames = _buyersInfoRepository.GetExistsBuyersNames().ToList();
@@ -65,6 +106,38 @@ namespace Invoice.Forms
             {
                 _messageDialogService.ShowErrorMassage("Nėra informacijos kurią būtų galima sukelti supildykite bent vieno pirkėjo informaciją ");
             }
+        }
+
+        private void CreateNewBuyerInfo()
+        {
+            BuyerFullInfoModel newBuyer = new BuyerFullInfoModel
+            {
+                BuyerName = BuyerNameRichTextBox.Text,
+                BuyerFirmCode = BuyerFirmCodeRichTextBox.Text,
+                BuyerPvmCode = BuyerAddressRichTextBox.Text,
+                BuyerAddress = BuyerAddressRichTextBox.Text
+            };
+
+            bool isBuyerCreated = _buyersInfoRepository.CreateNewBuyerInfo(newBuyer);
+
+            if (isBuyerCreated)
+            {
+                _messageDialogService.ShowInfoMessage("Naujas pirkėjas pridėtas į duomenų bazę");
+            }
+            else
+            {
+                _messageDialogService.ShowErrorMassage("kažkas nepavyko kreiptis į administratorių ar bandyti dar kartą");
+            }
+
+        }
+
+        private bool CheckAllBuyerInfoIsFilled()
+        {
+            bool isAllBuyerInfoFilled = !string.IsNullOrWhiteSpace(BuyerFirmCodeRichTextBox.Text) &&
+                                        !string.IsNullOrWhiteSpace(BuyerFirmCodeRichTextBox.Text) &&
+                                        !string.IsNullOrWhiteSpace(BuyerAddressRichTextBox.Text);
+
+            return isAllBuyerInfoFilled;
         }
 
         #endregion
