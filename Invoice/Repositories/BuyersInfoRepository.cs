@@ -27,5 +27,25 @@ namespace Invoice.Repositories
                 return getExistingBuyersNames;
             }
         }
+
+        public BuyerFullInfoModel BuyerFullInfo(string buyerName)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string getExistingBuyerQuery =
+                    $@"SELECT 
+                            BI.BuyerName, BI.BuyerFirmCode, BI.BuyerPvmCode, BI.BuyerAddress
+                        FROM {BuyersInfoTable} BI
+                        WHERE BI.BuyerName = '{buyerName}'
+                    ";
+
+                
+                BuyerFullInfoModel getBuyerFullInfo = dbConnection.QuerySingle<BuyerFullInfoModel>(getExistingBuyerQuery);
+
+                return getBuyerFullInfo;
+            }
+        }
     }
 }

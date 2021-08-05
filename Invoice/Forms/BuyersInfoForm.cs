@@ -21,6 +21,11 @@ namespace Invoice.Forms
             FillExistsBuyerListComboBox();
         }
 
+        private void LoadBuyerBySelectedNameButton_Click(object sender, System.EventArgs e)
+        {
+            LoadInfoToRichTextBoxes();
+        }
+
         #region Helpers
 
         private void SetControlsInitialState()
@@ -41,6 +46,18 @@ namespace Invoice.Forms
             ExistsBuyerListComboBox.DisplayMember = "BuyerName";
         }
 
+        private void LoadInfoToRichTextBoxes()
+        {
+            BuyerFullInfoModel buyerFullInfo = _buyersInfoRepository.BuyerFullInfo(ExistsBuyerListComboBox.Text);
+
+            BuyerNameRichTextBox.Text = buyerFullInfo.BuyerName;
+            BuyerFirmCodeRichTextBox.Text = buyerFullInfo.BuyerFirmCode;
+            BuyerPvmCodeRichTextBox.Text = buyerFullInfo.BuyerPvmCode;
+            BuyerAddressRichTextBox.Text = buyerFullInfo.BuyerAddress;
+        }
+
         #endregion
+
+        
     }
 }

@@ -396,9 +396,9 @@ namespace Invoice.Repositories
                     INSERT INTO 'BuyersInfo'
                         Values (NULL, 'Litbana', '1', '2', '3');
                     INSERT INTO 'BuyersInfo'
-                        Values (NULL, 'Bazinga', '1', '2', '3');
+                        Values (NULL, 'Bazinga', '11', '22', '33');
                     INSERT INTO 'BuyersInfo'
-                        Values (NULL, 'Bazinge', '1', '2', '3');
+                        Values (NULL, 'Bazinge', '111', '222', '333');
                    COMMIT;
                 ";
 

@@ -42,6 +42,7 @@ namespace Invoice.Forms
             this.ExistsBuyerListComboBox = new System.Windows.Forms.ComboBox();
             this.ExistsBuyersListInfoLabel = new System.Windows.Forms.Label();
             this.LoadBuyerBySelectedNameButton = new System.Windows.Forms.Button();
+            this.BuyerIdRichTextBox = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // BuyerNameRichTextBox
@@ -159,12 +160,23 @@ namespace Invoice.Forms
             this.LoadBuyerBySelectedNameButton.TabIndex = 34;
             this.LoadBuyerBySelectedNameButton.Text = "Pateikti Pirkėjo Informaciją";
             this.LoadBuyerBySelectedNameButton.UseVisualStyleBackColor = true;
+            this.LoadBuyerBySelectedNameButton.Click += new System.EventHandler(this.LoadBuyerBySelectedNameButton_Click);
+            // 
+            // BuyerIdRichTextBox
+            // 
+            this.BuyerIdRichTextBox.Location = new System.Drawing.Point(533, 382);
+            this.BuyerIdRichTextBox.Multiline = false;
+            this.BuyerIdRichTextBox.Name = "BuyerIdRichTextBox";
+            this.BuyerIdRichTextBox.Size = new System.Drawing.Size(54, 19);
+            this.BuyerIdRichTextBox.TabIndex = 35;
+            this.BuyerIdRichTextBox.Text = "";
             // 
             // BuyersInfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(599, 423);
+            this.Controls.Add(this.BuyerIdRichTextBox);
             this.Controls.Add(this.LoadBuyerBySelectedNameButton);
             this.Controls.Add(this.ExistsBuyersListInfoLabel);
             this.Controls.Add(this.ExistsBuyerListComboBox);
@@ -201,5 +213,6 @@ namespace Invoice.Forms
         private System.Windows.Forms.ComboBox ExistsBuyerListComboBox;
         private System.Windows.Forms.Label ExistsBuyersListInfoLabel;
         private System.Windows.Forms.Button LoadBuyerBySelectedNameButton;
+        private System.Windows.Forms.RichTextBox BuyerIdRichTextBox;
     }
 }
