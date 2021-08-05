@@ -97,6 +97,12 @@
     <Compile Include="Enums\ProductTypeOrStorageListOperation.cs" />
     <Compile Include="Enums\ProductTypePriceOperations.cs" />
     <Compile Include="Enums\ProductTypeQuantityOperations.cs" />
+    <Compile Include="Forms\BuyersInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BuyersInfoForm.Designer.cs">
+      <DependentUpon>BuyersInfoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\InvoiceForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -169,6 +175,9 @@
     <Compile Include="Service\MessageDialogService.cs" />
     <Compile Include="Service\NumberService.cs" />
     <Compile Include="Service\ProductTypeStringService.cs" />
+    <EmbeddedResource Include="Forms\BuyersInfoForm.resx">
+      <DependentUpon>BuyersInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\InvoiceForm.resx">
       <DependentUpon>InvoiceForm.cs</DependentUpon>
     </EmbeddedResource>
