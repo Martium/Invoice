@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Invoice.Models.BuyersInfo;
 using Invoice.Repositories;
+using Invoice.Service;
 
 namespace Invoice.Forms
 {
@@ -10,9 +11,12 @@ namespace Invoice.Forms
     {
         private readonly BuyersInfoRepository _buyersInfoRepository;
 
+        private readonly MessageDialogService _messageDialogService;
+
         public BuyersInfoForm()
         {
             _buyersInfoRepository = new BuyersInfoRepository();
+            _messageDialogService = new MessageDialogService();
 
             InitializeComponent();
 
@@ -50,10 +54,17 @@ namespace Invoice.Forms
         {
             BuyerFullInfoModel buyerFullInfo = _buyersInfoRepository.BuyerFullInfo(ExistsBuyerListComboBox.Text);
 
-            BuyerNameRichTextBox.Text = buyerFullInfo.BuyerName;
-            BuyerFirmCodeRichTextBox.Text = buyerFullInfo.BuyerFirmCode;
-            BuyerPvmCodeRichTextBox.Text = buyerFullInfo.BuyerPvmCode;
-            BuyerAddressRichTextBox.Text = buyerFullInfo.BuyerAddress;
+            if (buyerFullInfo != null)
+            {
+                BuyerNameRichTextBox.Text = buyerFullInfo.BuyerName;
+                BuyerFirmCodeRichTextBox.Text = buyerFullInfo.BuyerFirmCode;
+                BuyerPvmCodeRichTextBox.Text = buyerFullInfo.BuyerPvmCode;
+                BuyerAddressRichTextBox.Text = buyerFullInfo.BuyerAddress;
+            }
+            else
+            {
+                _messageDialogService.ShowErrorMassage("Nėra informacijos kurią būtų galima sukelti supildykite bent vieno pirkėjo informaciją ");
+            }
         }
 
         #endregion

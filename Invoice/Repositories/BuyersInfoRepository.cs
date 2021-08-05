@@ -35,14 +35,15 @@ namespace Invoice.Repositories
                 dbConnection.Open();
 
                 string getExistingBuyerQuery =
-                    $@"SELECT 
+                    $@"
+                        SELECT 
                             BI.BuyerName, BI.BuyerFirmCode, BI.BuyerPvmCode, BI.BuyerAddress
                         FROM {BuyersInfoTable} BI
                         WHERE BI.BuyerName = '{buyerName}'
                     ";
 
                 
-                BuyerFullInfoModel getBuyerFullInfo = dbConnection.QuerySingle<BuyerFullInfoModel>(getExistingBuyerQuery);
+                BuyerFullInfoModel getBuyerFullInfo = dbConnection.QuerySingleOrDefault<BuyerFullInfoModel>(getExistingBuyerQuery);
 
                 return getBuyerFullInfo;
             }
