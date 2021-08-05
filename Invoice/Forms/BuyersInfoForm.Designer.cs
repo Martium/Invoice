@@ -52,6 +52,8 @@ namespace Invoice.Forms
             this.BuyerNameRichTextBox.Size = new System.Drawing.Size(221, 19);
             this.BuyerNameRichTextBox.TabIndex = 13;
             this.BuyerNameRichTextBox.Text = "";
+            this.BuyerNameRichTextBox.TextChanged += new System.EventHandler(this.RichTextBox_TextChanged);
+            this.BuyerNameRichTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RichBox_KeyDown);
             // 
             // BuyerFirmCodeRichTextBox
             // 
@@ -61,6 +63,8 @@ namespace Invoice.Forms
             this.BuyerFirmCodeRichTextBox.Size = new System.Drawing.Size(221, 19);
             this.BuyerFirmCodeRichTextBox.TabIndex = 17;
             this.BuyerFirmCodeRichTextBox.Text = "";
+            this.BuyerFirmCodeRichTextBox.TextChanged += new System.EventHandler(this.RichTextBox_TextChanged);
+            this.BuyerFirmCodeRichTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RichBox_KeyDown);
             // 
             // BuyerPvmCodeRichTextBox
             // 
@@ -70,6 +74,8 @@ namespace Invoice.Forms
             this.BuyerPvmCodeRichTextBox.Size = new System.Drawing.Size(221, 19);
             this.BuyerPvmCodeRichTextBox.TabIndex = 21;
             this.BuyerPvmCodeRichTextBox.Text = "";
+            this.BuyerPvmCodeRichTextBox.TextChanged += new System.EventHandler(this.RichTextBox_TextChanged);
+            this.BuyerPvmCodeRichTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RichBox_KeyDown);
             // 
             // BuyerAddressRichTextBox
             // 
@@ -79,6 +85,8 @@ namespace Invoice.Forms
             this.BuyerAddressRichTextBox.Size = new System.Drawing.Size(221, 19);
             this.BuyerAddressRichTextBox.TabIndex = 25;
             this.BuyerAddressRichTextBox.Text = "";
+            this.BuyerAddressRichTextBox.TextChanged += new System.EventHandler(this.RichTextBox_TextChanged);
+            this.BuyerAddressRichTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RichBox_KeyDown);
             // 
             // BuyerNameLabel
             // 
@@ -122,6 +130,7 @@ namespace Invoice.Forms
             this.AddNewBuyerButton.Name = "AddNewBuyerButton";
             this.AddNewBuyerButton.Size = new System.Drawing.Size(141, 30);
             this.AddNewBuyerButton.TabIndex = 30;
+            this.AddNewBuyerButton.TabStop = false;
             this.AddNewBuyerButton.Text = "Pridėti Naują pirkėją";
             this.AddNewBuyerButton.UseVisualStyleBackColor = true;
             this.AddNewBuyerButton.Click += new System.EventHandler(this.AddNewBuyerButton_Click);
@@ -132,6 +141,7 @@ namespace Invoice.Forms
             this.UpdateBuyerButton.Name = "UpdateBuyerButton";
             this.UpdateBuyerButton.Size = new System.Drawing.Size(176, 30);
             this.UpdateBuyerButton.TabIndex = 31;
+            this.UpdateBuyerButton.TabStop = false;
             this.UpdateBuyerButton.Text = "Atnaujinti pirkėjo informaciją";
             this.UpdateBuyerButton.UseVisualStyleBackColor = true;
             this.UpdateBuyerButton.Click += new System.EventHandler(this.UpdateBuyerButton_Click);
@@ -143,6 +153,7 @@ namespace Invoice.Forms
             this.ExistsBuyerListComboBox.Name = "ExistsBuyerListComboBox";
             this.ExistsBuyerListComboBox.Size = new System.Drawing.Size(221, 21);
             this.ExistsBuyerListComboBox.TabIndex = 32;
+            this.ExistsBuyerListComboBox.TabStop = false;
             // 
             // ExistsBuyersListInfoLabel
             // 
@@ -159,6 +170,7 @@ namespace Invoice.Forms
             this.LoadBuyerBySelectedNameButton.Name = "LoadBuyerBySelectedNameButton";
             this.LoadBuyerBySelectedNameButton.Size = new System.Drawing.Size(154, 30);
             this.LoadBuyerBySelectedNameButton.TabIndex = 34;
+            this.LoadBuyerBySelectedNameButton.TabStop = false;
             this.LoadBuyerBySelectedNameButton.Text = "Pateikti Pirkėjo Informaciją";
             this.LoadBuyerBySelectedNameButton.UseVisualStyleBackColor = true;
             this.LoadBuyerBySelectedNameButton.Click += new System.EventHandler(this.LoadBuyerBySelectedNameButton_Click);
