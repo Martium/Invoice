@@ -1557,9 +1557,9 @@ namespace Invoice.Forms
             this.AdditionalInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AdditionalInfoLabel.Location = new System.Drawing.Point(67, 11);
             this.AdditionalInfoLabel.Name = "AdditionalInfoLabel";
-            this.AdditionalInfoLabel.Size = new System.Drawing.Size(167, 16);
+            this.AdditionalInfoLabel.Size = new System.Drawing.Size(153, 16);
             this.AdditionalInfoLabel.TabIndex = 18;
-            this.AdditionalInfoLabel.Text = "Papildoma informacija ";
+            this.AdditionalInfoLabel.Text = "Sąnaudų informacija ";
             // 
             // FifthProductTypePriceTextBox
             // 
