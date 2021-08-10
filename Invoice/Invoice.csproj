@@ -155,6 +155,7 @@
     <Compile Include="Models\MoneyReceiptModel.cs" />
     <Compile Include="Models\NewProductStorageModel.cs" />
     <Compile Include="Models\PasswordModel.cs" />
+    <Compile Include="Models\ProductInfo\FullProductInfoModel.cs" />
     <Compile Include="Models\ProductInfo\ProductInfoNameModel.cs" />
     <Compile Include="Models\ProductType\ProductTypeModel.cs" />
     <Compile Include="Models\ProductType\EighthSpecificProductTypeModel.cs" />

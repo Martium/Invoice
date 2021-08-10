@@ -8,6 +8,7 @@ namespace Invoice.Repositories
     public class ProductInfoRepository
     {
         private const string ProductInfoTable = "ProductInfo";
+
         public IEnumerable<ProductInfoNameModel> GetAllProductsNames()
         {
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
@@ -26,6 +27,26 @@ namespace Invoice.Repositories
                     dbConnection.Query<ProductInfoNameModel>(getProductsNamesQuery);
 
                 return getExistingProductNames;
+            }
+        }
+
+        public FullProductInfoModel GetFullProductInfo(string productName)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string getExistingBuyerQuery =
+                    $@"
+                        SELECT 
+                            PI.ProductName, PI.BarCode, PI.ProductSees, PI.ProductPrice, PI.ProductType, PI.ProductTypePrice
+                        FROM {ProductInfoTable} PI
+                        WHERE PI.ProductName = '{productName}'
+                    ";
+
+                FullProductInfoModel getFullProductInfo = dbConnection.QuerySingleOrDefault<FullProductInfoModel>(getExistingBuyerQuery);
+
+                return getFullProductInfo;
             }
         }
     }

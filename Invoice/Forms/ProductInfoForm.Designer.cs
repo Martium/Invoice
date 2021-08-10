@@ -234,6 +234,7 @@ namespace Invoice.Forms
             this.ChooseProductButton.TabStop = false;
             this.ChooseProductButton.Text = "Pateikti produkto informaciją";
             this.ChooseProductButton.UseVisualStyleBackColor = true;
+            this.ChooseProductButton.Click += new System.EventHandler(this.ChooseProductButton_Click);
             // 
             // ProductInfoForm
             // 

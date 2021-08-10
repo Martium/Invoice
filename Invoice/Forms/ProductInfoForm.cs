@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using Invoice.Constants;
@@ -12,6 +13,8 @@ namespace Invoice.Forms
     {
         private readonly ProductInfoRepository _productInfoRepository;
         private readonly MessageDialogService _messageDialogService;
+
+        private string[] _lastProductInfo = new string[6];
 
         public ProductInfoForm()
         {
@@ -79,6 +82,13 @@ namespace Invoice.Forms
             }
         }
 
+        private void ChooseProductButton_Click(object sender, System.EventArgs e)
+        {
+            LoadProductInfoToTextBoxes();
+
+            ProductBarCodeRichTextBox.Focus();
+            ProductBarCodeRichTextBox.SelectionStart = ProductBarCodeRichTextBox.Text.Length;
+        }
 
         #region Helpers
 
@@ -127,10 +137,38 @@ namespace Invoice.Forms
             ExistsProductListComboBox.DisplayMember = "ProductName";
         }
 
+        private void LoadProductInfoToTextBoxes()
+        {
+            FullProductInfoModel getFullProductInfo = _productInfoRepository.GetFullProductInfo(ExistsProductListComboBox.Text);
+
+            if (getFullProductInfo != null)
+            {
+                ProductNameRichTextBox.Text = getFullProductInfo.ProductName;
+                ProductBarCodeRichTextBox.Text = getFullProductInfo.BarCode;
+                ProductSeesRichTextBox.Text = getFullProductInfo.ProductSees;
+                ProductPriceRichTextBox.Text = getFullProductInfo.ProductPrice.ToString(CultureInfo.InvariantCulture);
+
+                ProductTypeTextBox.Text = getFullProductInfo.ProductType;
+                ProductTypePriceTextBox.Text = getFullProductInfo.ProductTypePrice.ToString(CultureInfo.InvariantCulture);
+
+                _lastProductInfo[0] = ProductNameRichTextBox.Text;
+                _lastProductInfo[1] = ProductBarCodeRichTextBox.Text;
+                _lastProductInfo[2] = ProductSeesRichTextBox.Text;
+                _lastProductInfo[3] = ProductPriceRichTextBox.Text;
+
+                _lastProductInfo[4] = ProductTypeTextBox.Text;
+                _lastProductInfo[5] = ProductTypePriceTextBox.Text;
+            }
+            else
+            {
+                _messageDialogService.ShowErrorMassage("Nėra informacijos kurią būtų galima sukelti supildykite bent vieną produkto informaciją ");
+            }
+        }
+
 
 
         #endregion
 
-       
+        
     }
 }
