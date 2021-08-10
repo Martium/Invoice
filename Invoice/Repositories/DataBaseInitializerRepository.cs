@@ -39,6 +39,7 @@ namespace Invoice.Repositories
                 CreateStorageTable(dbConnection);
                 CreatePasswordTable(dbConnection);
                 CreateBuyersInfoTable(dbConnection);
+                CreateProductInfoTable(dbConnection);
 
                 SetDefaultPassword(dbConnection);
 
@@ -47,6 +48,7 @@ namespace Invoice.Repositories
                 FillProductTypeTestingInfo(dbConnection);
                 FillStorageTestingInfo(dbConnection);
                 FillBuyersInfoTestingInfo(dbConnection);
+                FillProductInfoTestingInfo(dbConnection);
 #endif
 
             }
@@ -217,8 +219,8 @@ namespace Invoice.Repositories
         private void CreateProductTypeTable(SQLiteConnection dbConnection)
         {
             string dropProductTypeTable = GetDropTableQuery("ProductType");
-            SQLiteCommand dropaProductTypeTableCommand = new SQLiteCommand(dropProductTypeTable, dbConnection);
-            dropaProductTypeTableCommand.ExecuteNonQuery();
+            SQLiteCommand dropAProductTypeTableCommand = new SQLiteCommand(dropProductTypeTable, dbConnection);
+            dropAProductTypeTableCommand.ExecuteNonQuery();
 
             string createProductTypeTableQuery =
                 $@"
@@ -318,6 +320,32 @@ namespace Invoice.Repositories
             createBuyersInfoCommand.ExecuteNonQuery();
         }
 
+        private void CreateProductInfoTable(SQLiteConnection dbConnection)
+        {
+            string dropProductInfoTable = GetDropTableQuery("ProductInfo");
+            SQLiteCommand dropAProductInfoTable = new SQLiteCommand(dropProductInfoTable, dbConnection);
+            dropAProductInfoTable.ExecuteNonQuery();
+
+            string createProductInfoTableQuery =
+                $@"
+                    CREATE TABLE [ProductInfo] (
+                        [Id] [INTEGER] PRIMARY KEY AUTOINCREMENT NOT NULL,
+                        [ProductName] [nvarchar]({FormSettings.TextBoxLengths.ProductName}) NULL,
+                        [BarCode] [nvarchar]({FormSettings.TextBoxLengths.BarCode}) NULL,
+                        [ProductSees] [nvarchar]({FormSettings.TextBoxLengths.FirstProductSees}) NULL,
+                        [ProductPrice] [NUMERIC] NULL,
+
+                        [ProductType] [nvarchar]({FormSettings.TextBoxLengths.ProductType}) NULL,
+                        [ProductTypePrice] [NUMERIC] NULL,
+
+                        UNIQUE (Id)
+                    );
+                ";
+
+            SQLiteCommand createProductInfoCommand = new SQLiteCommand(createProductInfoTableQuery, dbConnection);
+            createProductInfoCommand.ExecuteNonQuery();
+        }
+
         private void SetDefaultPassword(SQLiteConnection dbConnection)
         {
             string setDefaultPassword =
@@ -404,6 +432,22 @@ namespace Invoice.Repositories
 
             SQLiteCommand fillTestingBuyersInfoCommand = new SQLiteCommand(fillBuyersInfoTestingInfo, dbConnection);
             fillTestingBuyersInfoCommand.ExecuteNonQuery();
+        }
+
+        private void FillProductInfoTestingInfo(SQLiteConnection dbConnection)
+        {
+            string fillProductTestingInfo =
+                @"BEGIN TRANSACTION;
+                    INSERT INTO 'ProductInfo'
+                        Values (NULL, '1 LITRAS', '1 23456 7891123', 'vnt', 1, '1l', 0.2);
+                    INSERT INTO 'ProductInfo'
+                        Values (NULL, '2 LITRAI', '2 23456 7592123', 'vnt', 1, '2l', 0.2);
+                    INSERT INTO 'ProductInfo'
+                        Values (NULL, '3 LITRAI', '3 23456 7891143', 'vnt', 1, '3l', 0.2);
+                ";
+
+            SQLiteCommand fillTestingProductinfoCommand = new SQLiteCommand(fillProductTestingInfo, dbConnection);
+            fillTestingProductinfoCommand.ExecuteNonQuery();
         }
 
         private string GetDropTableQuery(string tableName)

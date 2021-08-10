@@ -43,6 +43,11 @@ namespace Invoice.Forms
             this.ProductExpenditureInfoLabel = new System.Windows.Forms.Label();
             this.ProductTypeInfoLabel = new System.Windows.Forms.Label();
             this.ProductTypePriceInfoLabel = new System.Windows.Forms.Label();
+            this.NewProductButton = new System.Windows.Forms.Button();
+            this.UpdateProductButton = new System.Windows.Forms.Button();
+            this.ExistsProductListComboBox = new System.Windows.Forms.ComboBox();
+            this.ProductListInfoLabel = new System.Windows.Forms.Label();
+            this.ChooseProductButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ProductNameRichTextBox
@@ -169,11 +174,62 @@ namespace Invoice.Forms
             this.ProductTypePriceInfoLabel.TabIndex = 51;
             this.ProductTypePriceInfoLabel.Text = "Kaina";
             // 
+            // NewProductButton
+            // 
+            this.NewProductButton.Location = new System.Drawing.Point(41, 397);
+            this.NewProductButton.Name = "NewProductButton";
+            this.NewProductButton.Size = new System.Drawing.Size(144, 28);
+            this.NewProductButton.TabIndex = 52;
+            this.NewProductButton.Text = "Pridėti naują produktą";
+            this.NewProductButton.UseVisualStyleBackColor = true;
+            // 
+            // UpdateProductButton
+            // 
+            this.UpdateProductButton.Location = new System.Drawing.Point(191, 397);
+            this.UpdateProductButton.Name = "UpdateProductButton";
+            this.UpdateProductButton.Size = new System.Drawing.Size(118, 28);
+            this.UpdateProductButton.TabIndex = 53;
+            this.UpdateProductButton.Text = "Atnaujinti produktą";
+            this.UpdateProductButton.UseVisualStyleBackColor = true;
+            // 
+            // ExistsProductListComboBox
+            // 
+            this.ExistsProductListComboBox.FormattingEnabled = true;
+            this.ExistsProductListComboBox.Location = new System.Drawing.Point(550, 108);
+            this.ExistsProductListComboBox.Name = "ExistsProductListComboBox";
+            this.ExistsProductListComboBox.Size = new System.Drawing.Size(221, 21);
+            this.ExistsProductListComboBox.TabIndex = 54;
+            this.ExistsProductListComboBox.TabStop = false;
+            // 
+            // ProductListInfoLabel
+            // 
+            this.ProductListInfoLabel.AutoSize = true;
+            this.ProductListInfoLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProductListInfoLabel.Location = new System.Drawing.Point(546, 82);
+            this.ProductListInfoLabel.Name = "ProductListInfoLabel";
+            this.ProductListInfoLabel.Size = new System.Drawing.Size(173, 19);
+            this.ProductListInfoLabel.TabIndex = 55;
+            this.ProductListInfoLabel.Text = " Esamų Produktų sąrašas";
+            // 
+            // ChooseProductButton
+            // 
+            this.ChooseProductButton.Location = new System.Drawing.Point(777, 103);
+            this.ChooseProductButton.Name = "ChooseProductButton";
+            this.ChooseProductButton.Size = new System.Drawing.Size(162, 28);
+            this.ChooseProductButton.TabIndex = 56;
+            this.ChooseProductButton.Text = "Pateikti produkto informaciją";
+            this.ChooseProductButton.UseVisualStyleBackColor = true;
+            // 
             // ProductInfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(964, 450);
+            this.Controls.Add(this.ChooseProductButton);
+            this.Controls.Add(this.ProductListInfoLabel);
+            this.Controls.Add(this.ExistsProductListComboBox);
+            this.Controls.Add(this.UpdateProductButton);
+            this.Controls.Add(this.NewProductButton);
             this.Controls.Add(this.ProductTypePriceInfoLabel);
             this.Controls.Add(this.ProductTypeInfoLabel);
             this.Controls.Add(this.ProductExpenditureInfoLabel);
@@ -213,5 +269,10 @@ namespace Invoice.Forms
         private System.Windows.Forms.Label ProductExpenditureInfoLabel;
         private System.Windows.Forms.Label ProductTypeInfoLabel;
         private System.Windows.Forms.Label ProductTypePriceInfoLabel;
+        private System.Windows.Forms.Button NewProductButton;
+        private System.Windows.Forms.Button UpdateProductButton;
+        private System.Windows.Forms.ComboBox ExistsProductListComboBox;
+        private System.Windows.Forms.Label ProductListInfoLabel;
+        private System.Windows.Forms.Button ChooseProductButton;
     }
 }
