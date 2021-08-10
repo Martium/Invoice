@@ -273,6 +273,15 @@ namespace Invoice.Forms
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
+        private void ProductsInfoFormButton_Click(object sender, EventArgs e)
+        {
+            var productInfoForm = new ProductInfoForm();
+
+            productInfoForm.Closed += ShowAndRefreshListForm;
+
+            HideListAndOpenAnotherForm(productInfoForm);
+        }
+
         #region Helpers
 
         private void HideListAndOpenAnotherForm(Form form)
@@ -456,8 +465,7 @@ namespace Invoice.Forms
             ProductTotalPriceTextBox.Text = _numberService.CalculateFullPriceFromTotalPriceWithPvm(totalPriceWithPvm);
         }
 
-        #endregion
 
-        
+        #endregion
     }
 }

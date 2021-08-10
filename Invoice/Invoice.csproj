@@ -127,6 +127,12 @@
     <Compile Include="Forms\MoneyReceiptForm.Designer.cs">
       <DependentUpon>MoneyReceiptForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ProductInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProductInfoForm.Designer.cs">
+      <DependentUpon>ProductInfoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ProductTypeStorageForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -192,6 +198,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MoneyReceiptForm.resx">
       <DependentUpon>MoneyReceiptForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProductInfoForm.resx">
+      <DependentUpon>ProductInfoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ProductTypeStorageForm.resx">
       <DependentUpon>ProductTypeStorageForm.cs</DependentUpon>

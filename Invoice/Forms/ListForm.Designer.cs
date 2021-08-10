@@ -359,6 +359,7 @@ namespace Invoice.Forms
             this.ProductsInfoFormButton.TabStop = false;
             this.ProductsInfoFormButton.Text = "Produktų informaciją";
             this.ProductsInfoFormButton.UseVisualStyleBackColor = false;
+            this.ProductsInfoFormButton.Click += new System.EventHandler(this.ProductsInfoFormButton_Click);
             // 
             // ListForm
             // 
