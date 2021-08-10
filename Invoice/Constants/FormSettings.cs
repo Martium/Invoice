@@ -60,7 +60,7 @@
             public static int Password => 45;
             public static int IsPasswordCorrect => 5;
 
-            public static int MaxNumberLength => 10;
+            public static int MaxNumberLength => 8;
             public static int DateFormatLength => 10;
 
             public static int BarCode => 20;

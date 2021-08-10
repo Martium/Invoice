@@ -30,7 +30,7 @@ namespace Invoice.Forms
         private void InitializeComponent()
         {
             this.ProductNameRichTextBox = new System.Windows.Forms.RichTextBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.ProductBarCodeRichTextBox = new System.Windows.Forms.RichTextBox();
             this.ProductSeesRichTextBox = new System.Windows.Forms.RichTextBox();
             this.ProductPriceRichTextBox = new System.Windows.Forms.RichTextBox();
             this.ProductTypeTextBox = new System.Windows.Forms.TextBox();
@@ -58,15 +58,17 @@ namespace Invoice.Forms
             this.ProductNameRichTextBox.Size = new System.Drawing.Size(295, 19);
             this.ProductNameRichTextBox.TabIndex = 38;
             this.ProductNameRichTextBox.Text = "";
+            this.ProductNameRichTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyDown);
             // 
-            // richTextBox1
+            // ProductBarCodeRichTextBox
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(156, 110);
-            this.richTextBox1.Multiline = false;
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(295, 19);
-            this.richTextBox1.TabIndex = 39;
-            this.richTextBox1.Text = "";
+            this.ProductBarCodeRichTextBox.Location = new System.Drawing.Point(156, 110);
+            this.ProductBarCodeRichTextBox.Multiline = false;
+            this.ProductBarCodeRichTextBox.Name = "ProductBarCodeRichTextBox";
+            this.ProductBarCodeRichTextBox.Size = new System.Drawing.Size(295, 19);
+            this.ProductBarCodeRichTextBox.TabIndex = 39;
+            this.ProductBarCodeRichTextBox.Text = "";
+            this.ProductBarCodeRichTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyDown);
             // 
             // ProductSeesRichTextBox
             // 
@@ -76,6 +78,7 @@ namespace Invoice.Forms
             this.ProductSeesRichTextBox.Size = new System.Drawing.Size(72, 19);
             this.ProductSeesRichTextBox.TabIndex = 40;
             this.ProductSeesRichTextBox.Text = "";
+            this.ProductSeesRichTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyDown);
             // 
             // ProductPriceRichTextBox
             // 
@@ -85,6 +88,7 @@ namespace Invoice.Forms
             this.ProductPriceRichTextBox.Size = new System.Drawing.Size(56, 19);
             this.ProductPriceRichTextBox.TabIndex = 41;
             this.ProductPriceRichTextBox.Text = "";
+            this.ProductPriceRichTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RichTextBox_KeyDown);
             // 
             // ProductTypeTextBox
             // 
@@ -92,6 +96,7 @@ namespace Invoice.Forms
             this.ProductTypeTextBox.Name = "ProductTypeTextBox";
             this.ProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
             this.ProductTypeTextBox.TabIndex = 42;
+            this.ProductTypeTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
             // 
             // ProductTypePriceTextBox
             // 
@@ -99,6 +104,7 @@ namespace Invoice.Forms
             this.ProductTypePriceTextBox.Name = "ProductTypePriceTextBox";
             this.ProductTypePriceTextBox.Size = new System.Drawing.Size(49, 20);
             this.ProductTypePriceTextBox.TabIndex = 43;
+            this.ProductTypePriceTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
             // 
             // ProductNameInfoLabel
             // 
@@ -180,6 +186,7 @@ namespace Invoice.Forms
             this.NewProductButton.Name = "NewProductButton";
             this.NewProductButton.Size = new System.Drawing.Size(144, 28);
             this.NewProductButton.TabIndex = 52;
+            this.NewProductButton.TabStop = false;
             this.NewProductButton.Text = "Pridėti naują produktą";
             this.NewProductButton.UseVisualStyleBackColor = true;
             // 
@@ -189,6 +196,7 @@ namespace Invoice.Forms
             this.UpdateProductButton.Name = "UpdateProductButton";
             this.UpdateProductButton.Size = new System.Drawing.Size(118, 28);
             this.UpdateProductButton.TabIndex = 53;
+            this.UpdateProductButton.TabStop = false;
             this.UpdateProductButton.Text = "Atnaujinti produktą";
             this.UpdateProductButton.UseVisualStyleBackColor = true;
             // 
@@ -217,6 +225,7 @@ namespace Invoice.Forms
             this.ChooseProductButton.Name = "ChooseProductButton";
             this.ChooseProductButton.Size = new System.Drawing.Size(162, 28);
             this.ChooseProductButton.TabIndex = 56;
+            this.ChooseProductButton.TabStop = false;
             this.ChooseProductButton.Text = "Pateikti produkto informaciją";
             this.ChooseProductButton.UseVisualStyleBackColor = true;
             // 
@@ -242,7 +251,7 @@ namespace Invoice.Forms
             this.Controls.Add(this.ProductTypeTextBox);
             this.Controls.Add(this.ProductPriceRichTextBox);
             this.Controls.Add(this.ProductSeesRichTextBox);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.ProductBarCodeRichTextBox);
             this.Controls.Add(this.ProductNameRichTextBox);
             this.MaximizeBox = false;
             this.Name = "ProductInfoForm";
@@ -256,7 +265,7 @@ namespace Invoice.Forms
         #endregion
 
         private System.Windows.Forms.RichTextBox ProductNameRichTextBox;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox ProductBarCodeRichTextBox;
         private System.Windows.Forms.RichTextBox ProductSeesRichTextBox;
         private System.Windows.Forms.RichTextBox ProductPriceRichTextBox;
         private System.Windows.Forms.TextBox ProductTypeTextBox;
