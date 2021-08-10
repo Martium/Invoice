@@ -49,6 +49,7 @@ namespace Invoice.Repositories
                 FillStorageTestingInfo(dbConnection);
                 FillBuyersInfoTestingInfo(dbConnection);
                 FillProductInfoTestingInfo(dbConnection);
+
 #endif
 
             }
@@ -444,6 +445,7 @@ namespace Invoice.Repositories
                         Values (NULL, '2 LITRAI', '2 23456 7592123', 'vnt', 1, '2l', 0.2);
                     INSERT INTO 'ProductInfo'
                         Values (NULL, '3 LITRAI', '3 23456 7891143', 'vnt', 1, '3l', 0.2);
+                    COMMIT;
                 ";
 
             SQLiteCommand fillTestingProductinfoCommand = new SQLiteCommand(fillProductTestingInfo, dbConnection);
