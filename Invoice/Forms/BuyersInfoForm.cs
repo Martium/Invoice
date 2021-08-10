@@ -121,7 +121,7 @@ namespace Invoice.Forms
             }
             else if (isBuyerExists && isBuyerNameFilled && isAllValuesSame)
             {
-                _messageDialogService.ShowErrorMassage("Jūs nieko nepakeitėte todėl nebus atnaujinta");
+                _messageDialogService.ShowErrorMassage("Jūs nieko nepakeitėte todėl nebus atnaujinta informacija liks tokia pati ");
             }
             else if (!isBuyerNameFilled)
             {
