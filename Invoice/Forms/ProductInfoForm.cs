@@ -55,8 +55,29 @@ namespace Invoice.Forms
             }
         }
 
+        private void RichTextBox_TextChanged(object sender, System.EventArgs e)
+        {
+            RichTextBox richTextBox = sender as RichTextBox;
 
+            if (richTextBox == null) return;
 
+            if (richTextBox.SelectionStart == richTextBox.MaxLength)
+            {
+                _messageDialogService.ShowInfoMessage($"Pasiektas maksimalus žodžių ilgis bus išsaugota tik toks tekstas ({richTextBox.Text}) ");
+            }
+        }
+
+        private void TextBox_TextChanged(object sender, System.EventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            if (textBox == null) return;
+
+            if (textBox.SelectionStart == textBox.MaxLength)
+            {
+                _messageDialogService.ShowInfoMessage($"Pasiektas maksimalus žodžių ilgis bus išsaugota tik toks tekstas ({textBox.Text}) ");
+            }
+        }
 
 
         #region Helpers
@@ -106,7 +127,10 @@ namespace Invoice.Forms
             ExistsProductListComboBox.DisplayMember = "ProductName";
         }
 
+
+
         #endregion
+
        
     }
 }
