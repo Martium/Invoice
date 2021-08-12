@@ -135,7 +135,7 @@ namespace Invoice.Forms
 
             if (isProductExists && isProductNameFilled && !isAllValuesSameAsinDatabase)
             {
-                
+                UpdateProductInfo();
             }
             else if (isProductExists && isProductNameFilled && isAllValuesSameAsinDatabase)
             {
@@ -251,6 +251,8 @@ namespace Invoice.Forms
 
         private void CreateNewBuyer()
         {
+            ChangeCommaToDot();
+
             double? productPrice = _numberService.ParseToDoubleOrNull(ProductPriceRichTextBox);
             double? productTypePrice = _numberService.ParseToDoubleOrNull(ProductTypePriceTextBox);
 
@@ -279,6 +281,8 @@ namespace Invoice.Forms
 
         private void UpdateProductInfo()
         {
+            ChangeCommaToDot();
+
             double? productPrice = _numberService.ParseToDoubleOrNull(ProductPriceRichTextBox);
             double? productTypePrice = _numberService.ParseToDoubleOrNull(ProductTypePriceTextBox);
 
@@ -293,11 +297,22 @@ namespace Invoice.Forms
                 ProductTypePrice = productTypePrice
             };
 
+            bool isProductUpdated = _productInfoRepository.UpdateProduct(updateProduct);
 
+            if (isProductUpdated)
+            {
+                _messageDialogService.ShowInfoMessage(" Produktas atnaujintas sekmingai");
+            }
+            else
+            {
+                _messageDialogService.ShowErrorMassage("kažkas nepavyko kreiptis į administratorių ar bandykit dar kartą");
+            }
         }
 
         private bool CheckIsProductAllValuesSameAsInDataBase()
         {
+            ChangeCommaToDot();
+
             bool isAllValuesSameAsinDatabase = _lastProductInfo[0] == ProductNameRichTextBox.Text &&
                                                _lastProductInfo[1] == ProductBarCodeRichTextBox.Text &&
                                                _lastProductInfo[2] == ProductSeesRichTextBox.Text &&
@@ -306,6 +321,12 @@ namespace Invoice.Forms
                                                _lastProductInfo[5] == ProductTypePriceTextBox.Text;
 
             return isAllValuesSameAsinDatabase;
+        }
+
+        private void ChangeCommaToDot()
+        {
+            ProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(ProductPriceRichTextBox);
+            ProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(ProductTypePriceTextBox);
         }
 
         #endregion
