@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 using Invoice.Constants;
 using Invoice.Enums;
@@ -197,12 +198,12 @@ namespace Invoice.Forms
             if (e.KeyCode == Keys.Enter)
             {
                 RichTextBox richTextBox = sender as RichTextBox;
-                
+
                 SetCursorAtTextBoxStringEnd();
 
                 if (richTextBox == null) return;
-               
-                if (richTextBox.Lines.Length == 1)
+
+                if (richTextBox.Multiline == false)
                 {
                     this.SelectNextControl((Control)sender, true, true, true, true);
                 }
@@ -231,9 +232,10 @@ namespace Invoice.Forms
                 _messageDialogService.ShowInfoMessage($"Pasiektas maksimalus žodžių ilgis bus išsaugota tik toks tekstas ({richTextBox.Text}) ");
             }
 
-            if (richTextBox.Lines.Length > 2)
+            if (richTextBox.Lines.Length > 3)
             {
-                richTextBox.SelectionStart = richTextBox.Lines[1].Length;
+                richTextBox.Undo();
+                richTextBox.Lines = richTextBox.Lines.Take(richTextBox.Lines.Length - 1).ToArray();
                 this.SelectNextControl((Control) sender, true, true, true, true);
                 richTextBox.SelectionStart = richTextBox.Text.Length;
             }
@@ -562,7 +564,6 @@ namespace Invoice.Forms
             (printPreviewDialog as Form).WindowState = FormWindowState.Maximized;
 
             DisableScrollBarRichTextBoxWithMultiLine();
-            SetRichTextBoxMultiLineLimit();
         }
 
         private void FillDefaultSellerInfoForNewInvoice()
@@ -967,12 +968,17 @@ namespace Invoice.Forms
         private void DisableScrollBarRichTextBoxWithMultiLine()
         {
             FirstProductNameRichTextBox.ScrollBars = RichTextBoxScrollBars.None;
-        }
-
-        private void SetRichTextBoxMultiLineLimit()
-        {
-            string[] multiLineLimit = new string[1];
-            FirstProductNameRichTextBox.Lines = multiLineLimit;
+            SecondProductNameRichTextBox.ScrollBars = RichTextBoxScrollBars.None;
+            ThirdProductNameRichTextBox.ScrollBars = RichTextBoxScrollBars.None;
+            FourthProductNameRichTextBox.ScrollBars = RichTextBoxScrollBars.None;
+            FifthProductNameRichTextBox.ScrollBars = RichTextBoxScrollBars.None;
+            SixthProductNameRichTextBox.ScrollBars = RichTextBoxScrollBars.None;
+            SeventhProductNameRichTextBox.ScrollBars = RichTextBoxScrollBars.None;
+            EighthProductNameRichTextBox.ScrollBars = RichTextBoxScrollBars.None;
+            NinthProductNameRichTextBox.ScrollBars = RichTextBoxScrollBars.None;
+            TenProductNameRichTextBox.ScrollBars = RichTextBoxScrollBars.None;
+            EleventhProductNameRichTextBox.ScrollBars = RichTextBoxScrollBars.None;
+            TwelfthProductNameRichTextBox.ScrollBars = RichTextBoxScrollBars.None;
         }
 
         private void SetCursorAtProductTypeStringEnd()
