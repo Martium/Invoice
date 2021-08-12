@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
@@ -62,7 +61,7 @@ namespace Invoice.Forms
             }
         }
 
-        private void RichTextBox_TextChanged(object sender, System.EventArgs e)
+        private void RichTextBox_TextChanged(object sender, EventArgs e)
         {
             RichTextBox richTextBox = sender as RichTextBox;
 
@@ -74,7 +73,7 @@ namespace Invoice.Forms
             }
         }
 
-        private void TextBox_TextChanged(object sender, System.EventArgs e)
+        private void TextBox_TextChanged(object sender, EventArgs e)
         {
             TextBox textBox = sender as TextBox;
 
@@ -86,7 +85,7 @@ namespace Invoice.Forms
             }
         }
 
-        private void ChooseProductButton_Click(object sender, System.EventArgs e)
+        private void ChooseProductButton_Click(object sender, EventArgs e)
         {
             LoadProductInfoToTextBoxes();
 
@@ -94,7 +93,7 @@ namespace Invoice.Forms
             ProductBarCodeRichTextBox.SelectionStart = ProductBarCodeRichTextBox.Text.Length;
         }
 
-        private void NewProductButton_Click(object sender, System.EventArgs e)
+        private void NewProductButton_Click(object sender, EventArgs e)
         {
             bool isProductNameFilled = !string.IsNullOrWhiteSpace(ProductNameRichTextBox.Text);
             bool isProductExists = _productInfoRepository.CheckIsProductNameExists(ProductNameRichTextBox.Text);
