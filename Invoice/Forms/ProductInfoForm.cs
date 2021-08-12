@@ -251,7 +251,7 @@ namespace Invoice.Forms
 
         private void CreateNewBuyer()
         {
-            ChangeCommaToDot();
+            ChangeCommaToDotForNumbersTextBox();
 
             double? productPrice = _numberService.ParseToDoubleOrNull(ProductPriceRichTextBox);
             double? productTypePrice = _numberService.ParseToDoubleOrNull(ProductTypePriceTextBox);
@@ -281,7 +281,7 @@ namespace Invoice.Forms
 
         private void UpdateProductInfo()
         {
-            ChangeCommaToDot();
+            ChangeCommaToDotForNumbersTextBox();
 
             double? productPrice = _numberService.ParseToDoubleOrNull(ProductPriceRichTextBox);
             double? productTypePrice = _numberService.ParseToDoubleOrNull(ProductTypePriceTextBox);
@@ -311,7 +311,7 @@ namespace Invoice.Forms
 
         private bool CheckIsProductAllValuesSameAsInDataBase()
         {
-            ChangeCommaToDot();
+            ChangeCommaToDotForNumbersTextBox();
 
             bool isAllValuesSameAsinDatabase = _lastProductInfo[0] == ProductNameRichTextBox.Text &&
                                                _lastProductInfo[1] == ProductBarCodeRichTextBox.Text &&
@@ -323,7 +323,7 @@ namespace Invoice.Forms
             return isAllValuesSameAsinDatabase;
         }
 
-        private void ChangeCommaToDot()
+        private void ChangeCommaToDotForNumbersTextBox()
         {
             ProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(ProductPriceRichTextBox);
             ProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(ProductTypePriceTextBox);
