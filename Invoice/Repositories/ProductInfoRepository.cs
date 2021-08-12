@@ -49,5 +49,83 @@ namespace Invoice.Repositories
                 return getFullProductInfo;
             }
         }
+
+        public bool CheckIsProductNameExists(string productName)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string checkIsProductExists =
+                    $@"
+                        SELECT EXISTS(SELECT 1 FROM {ProductInfoTable} WHERE ProductName = '{productName}');
+                    ";
+
+                bool isProductExists = dbConnection.QuerySingleOrDefault<bool>(checkIsProductExists);
+
+                return isProductExists;
+            }
+        }
+
+        public bool CreateNewBuyerInfo(FullProductInfoModel newProduct)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string createNewProductInfoQuery =
+                    $@"
+                        INSERT INTO '{ProductInfoTable}'
+                            VALUES (NULL, @ProductName, @BarCode, @ProductSees, @ProductPrice, @ProductType, @ProductTypePrice)
+                    ";
+
+                object queryParameters = new
+                {
+                    newProduct.ProductName,
+                    newProduct.BarCode,
+                    newProduct.ProductSees,
+                    newProduct.ProductPrice,
+
+                    newProduct.ProductType,
+                    newProduct.ProductTypePrice
+                };
+
+                int affectedRows = dbConnection.Execute(createNewProductInfoQuery, queryParameters);
+
+                return affectedRows == 1;
+            }
+        }
+
+        public bool UpdateProduct(FullProductInfoModel updateProduct)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string updateProductInfoQuery =
+                    $@"
+                        UPDATE '{ProductInfoTable}'
+                          SET BarCode = @BarCode, ProductSees = @ProductSees, ProductPrice = @ProductPrice, ProductType = @ProductType, ProductTypePrice = @ProductTypePrice
+                        WHERE ProductName = @ProductName
+                    ";
+
+                object queryParameters = new
+                {
+                    updateProduct.ProductName,
+                    updateProduct.BarCode,
+                    updateProduct.ProductSees,
+                    updateProduct.ProductPrice,
+
+                    updateProduct.ProductType,
+                    updateProduct.ProductTypePrice
+                };
+
+
+
+                int affectedRows = dbConnection.Execute(updateProductInfoQuery, queryParameters);
+
+                return affectedRows == 1;
+            }
+        }
     }
 }

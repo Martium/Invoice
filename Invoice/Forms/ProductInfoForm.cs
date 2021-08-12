@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
@@ -13,6 +15,7 @@ namespace Invoice.Forms
     {
         private readonly ProductInfoRepository _productInfoRepository;
         private readonly MessageDialogService _messageDialogService;
+        private readonly NumberService _numberService;
 
         private string[] _lastProductInfo = new string[6];
 
@@ -20,6 +23,7 @@ namespace Invoice.Forms
         {
             _productInfoRepository = new ProductInfoRepository();
             _messageDialogService = new MessageDialogService();
+            _numberService = new NumberService();
 
             InitializeComponent();
 
@@ -90,6 +94,65 @@ namespace Invoice.Forms
             ProductBarCodeRichTextBox.SelectionStart = ProductBarCodeRichTextBox.Text.Length;
         }
 
+        private void NewProductButton_Click(object sender, System.EventArgs e)
+        {
+            bool isProductNameFilled = !string.IsNullOrWhiteSpace(ProductNameRichTextBox.Text);
+            bool isProductExists = _productInfoRepository.CheckIsProductNameExists(ProductNameRichTextBox.Text);
+            bool isAllTextBoxFilled = CheckIsAllInfoFilled();
+
+            if (!isProductExists && isProductNameFilled && isAllTextBoxFilled)
+            {
+                CreateNewBuyer();
+                LoadAllProductsNamesToComboBox();
+            }
+            else if (!isProductExists && isProductNameFilled && !isAllTextBoxFilled)
+            {
+                DialogResult dialogResult = _messageDialogService.ShowChoiceMessage("Kai kurie langeliai nesupildyti ar norite išsaugoti nepilną informaciją apie produktą ?");
+
+                if (dialogResult == DialogResult.OK)
+                {
+                    CreateNewBuyer();
+                    LoadAllProductsNamesToComboBox();
+                }
+            }
+            else if (!isProductExists && !isProductNameFilled)
+            {
+                _messageDialogService.ShowErrorMassage("Kad išsaugotumėte naują produktą būtina supildyti produkto pavadinimas langelį");
+            }
+            else
+            {
+                _messageDialogService.ShowErrorMassage("Toks produktas egzistuoja jei norite pakeisti jo informaciją spauskite atnaujinti produktą mygtuką");
+            }
+
+            SetCursorAtProductNameStringEnd();
+        }
+
+        private void UpdateProductButton_Click(object sender, EventArgs e)
+        {
+            bool isProductNameFilled = !string.IsNullOrWhiteSpace(ProductNameRichTextBox.Text);
+            bool isProductExists = _productInfoRepository.CheckIsProductNameExists(ProductNameRichTextBox.Text);
+            bool isAllValuesSameAsinDatabase = CheckIsProductAllValuesSameAsInDataBase();
+
+            if (isProductExists && isProductNameFilled && !isAllValuesSameAsinDatabase)
+            {
+                
+            }
+            else if (isProductExists && isProductNameFilled && isAllValuesSameAsinDatabase)
+            {
+                _messageDialogService.ShowErrorMassage("Jūs nieko nepakeitėte todėl nebus atnaujinta informacija liks tokia pati ");
+            }
+            else if (isProductNameFilled)
+            {
+                _messageDialogService.ShowErrorMassage("Kad atnaujintumėte produktą būtina supildyti produkto pavadinimas langelį");
+            }
+            else
+            {
+                _messageDialogService.ShowErrorMassage("Produktas nerastas atnaujinimas negalimas");
+            }
+
+            SetCursorAtProductNameStringEnd();
+        }
+
         #region Helpers
 
         private void SetControlsInitialState()
@@ -124,6 +187,12 @@ namespace Invoice.Forms
             ProductTypePriceTextBox.SelectionStart = ProductTypeTextBox.Text.Length;
         }
 
+        private void SetCursorAtProductNameStringEnd()
+        {
+            ProductNameRichTextBox.Focus();
+            ProductNameRichTextBox.SelectionStart = ProductNameRichTextBox.Text.Length;
+        }
+
         private void LoadAllProductsNamesToComboBox()
         {
             ExistsProductListComboBox.DataSource = null;
@@ -146,10 +215,14 @@ namespace Invoice.Forms
                 ProductNameRichTextBox.Text = getFullProductInfo.ProductName;
                 ProductBarCodeRichTextBox.Text = getFullProductInfo.BarCode;
                 ProductSeesRichTextBox.Text = getFullProductInfo.ProductSees;
-                ProductPriceRichTextBox.Text = getFullProductInfo.ProductPrice.ToString(CultureInfo.InvariantCulture);
+                ProductPriceRichTextBox.Text = getFullProductInfo.ProductPrice.HasValue
+                    ? getFullProductInfo.ProductPrice.Value.ToString(CultureInfo.InvariantCulture)
+                    : string.Empty;
 
                 ProductTypeTextBox.Text = getFullProductInfo.ProductType;
-                ProductTypePriceTextBox.Text = getFullProductInfo.ProductTypePrice.ToString(CultureInfo.InvariantCulture);
+                ProductTypePriceTextBox.Text = getFullProductInfo.ProductTypePrice.HasValue
+                    ? getFullProductInfo.ProductTypePrice.Value.ToString(CultureInfo.InvariantCulture)
+                    : string.Empty;
 
                 _lastProductInfo[0] = ProductNameRichTextBox.Text;
                 _lastProductInfo[1] = ProductBarCodeRichTextBox.Text;
@@ -165,10 +238,77 @@ namespace Invoice.Forms
             }
         }
 
+        private bool CheckIsAllInfoFilled()
+        {
+            bool isAllInfoFilled = !(string.IsNullOrWhiteSpace(ProductBarCodeRichTextBox.Text) &&
+                                     string.IsNullOrWhiteSpace(ProductSeesRichTextBox.Text) &&
+                                     string.IsNullOrWhiteSpace(ProductPriceRichTextBox.Text) &&
+                                     string.IsNullOrWhiteSpace(ProductTypeTextBox.Text) &&
+                                     string.IsNullOrWhiteSpace(ProductTypePriceTextBox.Text));
 
+            return isAllInfoFilled;
+        }
+
+        private void CreateNewBuyer()
+        {
+            double? productPrice = _numberService.ParseToDoubleOrNull(ProductPriceRichTextBox);
+            double? productTypePrice = _numberService.ParseToDoubleOrNull(ProductTypePriceTextBox);
+
+            FullProductInfoModel newProduct = new FullProductInfoModel
+            {
+                ProductName = ProductNameRichTextBox.Text,
+                BarCode = ProductBarCodeRichTextBox.Text,
+                ProductSees = ProductSeesRichTextBox.Text,
+                ProductPrice = productPrice,
+
+                ProductType = ProductTypeTextBox.Text,
+                ProductTypePrice = productTypePrice
+            };
+
+            bool isProductCreated = _productInfoRepository.CreateNewBuyerInfo(newProduct);
+
+            if (isProductCreated)
+            {
+                _messageDialogService.ShowInfoMessage("Naujas produktas pridėtas į duomenų bazę");
+            }
+            else
+            {
+                _messageDialogService.ShowErrorMassage("kažkas nepavyko kreiptis į administratorių ar bandykit dar kartą");
+            }
+        }
+
+        private void UpdateProductInfo()
+        {
+            double? productPrice = _numberService.ParseToDoubleOrNull(ProductPriceRichTextBox);
+            double? productTypePrice = _numberService.ParseToDoubleOrNull(ProductTypePriceTextBox);
+
+            FullProductInfoModel updateProduct = new FullProductInfoModel
+            {
+                ProductName = ProductNameRichTextBox.Text,
+                BarCode = ProductBarCodeRichTextBox.Text,
+                ProductSees = ProductSeesRichTextBox.Text,
+                ProductPrice = productPrice,
+
+                ProductType = ProductTypeTextBox.Text,
+                ProductTypePrice = productTypePrice
+            };
+
+
+        }
+
+        private bool CheckIsProductAllValuesSameAsInDataBase()
+        {
+            bool isAllValuesSameAsinDatabase = _lastProductInfo[0] == ProductNameRichTextBox.Text &&
+                                               _lastProductInfo[1] == ProductBarCodeRichTextBox.Text &&
+                                               _lastProductInfo[2] == ProductSeesRichTextBox.Text &&
+                                               _lastProductInfo[3] == ProductPriceRichTextBox.Text &&
+                                               _lastProductInfo[4] == ProductTypeTextBox.Text &&
+                                               _lastProductInfo[5] == ProductTypePriceTextBox.Text;
+
+            return isAllValuesSameAsinDatabase;
+        }
 
         #endregion
 
-        
     }
 }

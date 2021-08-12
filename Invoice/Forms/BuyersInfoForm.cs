@@ -74,9 +74,10 @@ namespace Invoice.Forms
         {
             bool isBuyerNameFilled = !string.IsNullOrWhiteSpace(BuyerNameRichTextBox.Text);
 
+            bool isBuyerExists = _buyersInfoRepository.CheckIsBuyerExists(BuyerNameRichTextBox.Text);
+
             bool isAllInfoFilled = CheckAllBuyerInfoIsFilled();
 
-            bool isBuyerExists = _buyersInfoRepository.CheckIsBuyerExists(BuyerNameRichTextBox.Text);
 
             if (!isBuyerExists && isBuyerNameFilled && isAllInfoFilled)
             {
