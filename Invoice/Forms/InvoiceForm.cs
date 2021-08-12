@@ -196,7 +196,17 @@ namespace Invoice.Forms
         {
             if (e.KeyCode == Keys.Enter)
             {
-                this.SelectNextControl((Control)sender, true, true, true, true);
+                RichTextBox richTextBox = sender as RichTextBox;
+                
+                SetCursorAtTextBoxStringEnd();
+
+                if (richTextBox == null) return;
+               
+                if (richTextBox.Lines.Length == 1)
+                {
+                    this.SelectNextControl((Control)sender, true, true, true, true);
+                }
+
                 SetCursorAtTextBoxStringEnd();
             }
         }
@@ -219,6 +229,13 @@ namespace Invoice.Forms
             if (richTextBox.SelectionStart == richTextBox.MaxLength)
             {
                 _messageDialogService.ShowInfoMessage($"Pasiektas maksimalus žodžių ilgis bus išsaugota tik toks tekstas ({richTextBox.Text}) ");
+            }
+
+            if (richTextBox.Lines.Length > 2)
+            {
+                richTextBox.SelectionStart = richTextBox.Lines[1].Length;
+                this.SelectNextControl((Control) sender, true, true, true, true);
+                richTextBox.SelectionStart = richTextBox.Text.Length;
             }
         }
 
@@ -543,6 +560,9 @@ namespace Invoice.Forms
             this.StartPosition = FormStartPosition.CenterScreen;
             InvoiceNumberRichTextBox.ReadOnly = true;
             (printPreviewDialog as Form).WindowState = FormWindowState.Maximized;
+
+            DisableScrollBarRichTextBoxWithMultiLine();
+            SetRichTextBoxMultiLineLimit();
         }
 
         private void FillDefaultSellerInfoForNewInvoice()
@@ -942,6 +962,17 @@ namespace Invoice.Forms
             PriceInWordsRichTextBox.SelectionStart = PriceInWordsRichTextBox.Text.Length;
             InvoiceMakerRichTextBox.SelectionStart = InvoiceMakerRichTextBox.Text.Length;
             InvoiceAcceptedRichTextBox.SelectionStart = InvoiceAcceptedRichTextBox.Text.Length;
+        }
+
+        private void DisableScrollBarRichTextBoxWithMultiLine()
+        {
+            FirstProductNameRichTextBox.ScrollBars = RichTextBoxScrollBars.None;
+        }
+
+        private void SetRichTextBoxMultiLineLimit()
+        {
+            string[] multiLineLimit = new string[1];
+            FirstProductNameRichTextBox.Lines = multiLineLimit;
         }
 
         private void SetCursorAtProductTypeStringEnd()
