@@ -195,6 +195,7 @@ namespace Invoice.Forms
             this.NewProductButton.TabStop = false;
             this.NewProductButton.Text = "Pridėti naują produktą";
             this.NewProductButton.UseVisualStyleBackColor = true;
+            this.NewProductButton.Click += new System.EventHandler(this.NewProductButton_Click);
             // 
             // UpdateProductButton
             // 
@@ -205,6 +206,7 @@ namespace Invoice.Forms
             this.UpdateProductButton.TabStop = false;
             this.UpdateProductButton.Text = "Atnaujinti produktą";
             this.UpdateProductButton.UseVisualStyleBackColor = true;
+            this.UpdateProductButton.Click += new System.EventHandler(this.UpdateProductButton_Click);
             // 
             // ExistsProductListComboBox
             // 
