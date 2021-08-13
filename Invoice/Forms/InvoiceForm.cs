@@ -560,6 +560,23 @@ namespace Invoice.Forms
             (printPreviewDialog as Form).WindowState = FormWindowState.Maximized;
 
             DisableScrollBarRichTextBoxWithMultiLine();
+            SetComboBoxesDropDown();
+        }
+
+        private void SetComboBoxesDropDown()
+        {
+            FirstProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            SecondProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            ThirdProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            FourthProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            FifthProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            SixsthProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            SeventhProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            EighthProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            NinthProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            TenProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            EleventhProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            TwelfthProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void FillDefaultSellerInfoForNewInvoice()

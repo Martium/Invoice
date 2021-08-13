@@ -176,8 +176,61 @@ namespace Invoice.Forms
             this.FirstProductTypeQuantityTextBox = new System.Windows.Forms.TextBox();
             this.FirstProductTypeTextBox = new System.Windows.Forms.TextBox();
             this.TypeOfProductLabel = new System.Windows.Forms.Label();
+            this.FirstNumberInfoLabel = new System.Windows.Forms.Label();
+            this.SecondNumberInfoLabel = new System.Windows.Forms.Label();
+            this.ThirdNumberInfoLabel = new System.Windows.Forms.Label();
+            this.FourthNumberInfoLabel = new System.Windows.Forms.Label();
+            this.FifthNumberInfoLabel = new System.Windows.Forms.Label();
+            this.SixsthNumberInfoLabel = new System.Windows.Forms.Label();
+            this.SeventhNumberInfoLabel = new System.Windows.Forms.Label();
+            this.EighthNumberInfoLabel = new System.Windows.Forms.Label();
+            this.NinthNumberInfoLabel = new System.Windows.Forms.Label();
+            this.TenNumberInfoLabel = new System.Windows.Forms.Label();
+            this.EleventhNumberInfoLabel = new System.Windows.Forms.Label();
+            this.TwelfthNumberInfoLabel = new System.Windows.Forms.Label();
+            this.FirstProductNameComboBox = new System.Windows.Forms.ComboBox();
+            this.SecondProductNameComboBox = new System.Windows.Forms.ComboBox();
+            this.ThirdProductNameComboBox = new System.Windows.Forms.ComboBox();
+            this.FourthProductNameComboBox = new System.Windows.Forms.ComboBox();
+            this.FifthProductNameComboBox = new System.Windows.Forms.ComboBox();
+            this.SixsthProductNameComboBox = new System.Windows.Forms.ComboBox();
+            this.SeventhProductNameComboBox = new System.Windows.Forms.ComboBox();
+            this.EighthProductNameComboBox = new System.Windows.Forms.ComboBox();
+            this.NinthProductNameComboBox = new System.Windows.Forms.ComboBox();
+            this.TenProductNameComboBox = new System.Windows.Forms.ComboBox();
+            this.EleventhProductNameComboBox = new System.Windows.Forms.ComboBox();
+            this.TwelfthProductNameComboBox = new System.Windows.Forms.ComboBox();
+            this.FirsProductIdTextBox = new System.Windows.Forms.TextBox();
+            this.SecondProductIdTextBox = new System.Windows.Forms.TextBox();
+            this.ThirdProductIdTextBox = new System.Windows.Forms.TextBox();
+            this.FourthProductIdTextBox = new System.Windows.Forms.TextBox();
+            this.FifthProductIdTextBox = new System.Windows.Forms.TextBox();
+            this.SixthProductIdTextBox = new System.Windows.Forms.TextBox();
+            this.SeventhProductIdTextBox = new System.Windows.Forms.TextBox();
+            this.EighthProductIdTextBox = new System.Windows.Forms.TextBox();
+            this.NinthProductIdTextBox = new System.Windows.Forms.TextBox();
+            this.TenProductIdTextBox = new System.Windows.Forms.TextBox();
+            this.EleventhProductIdTextBox = new System.Windows.Forms.TextBox();
+            this.TwelfthProductIdTextBox = new System.Windows.Forms.TextBox();
+            this.AddToFirstProductInfoButton = new System.Windows.Forms.Button();
+            this.AddToSecondProductInfoButton = new System.Windows.Forms.Button();
+            this.AddToThirdProductInfoButton = new System.Windows.Forms.Button();
+            this.AddToFourthProductInfoButton = new System.Windows.Forms.Button();
+            this.AddToFifthProductInfoButton = new System.Windows.Forms.Button();
+            this.AddToSixthProductInfobutton = new System.Windows.Forms.Button();
+            this.AddToSeventhProductInfoButton = new System.Windows.Forms.Button();
+            this.AddToEighthProductInfoButton = new System.Windows.Forms.Button();
+            this.AddToNinthProductInfoButton = new System.Windows.Forms.Button();
+            this.AddToTenProductInfoButton = new System.Windows.Forms.Button();
+            this.AddToEleventhProductInfoButton = new System.Windows.Forms.Button();
+            this.AddToTwelfthProductInfoButton = new System.Windows.Forms.Button();
+            this.ProductInfoPanel = new System.Windows.Forms.Panel();
+            this.ProductNameInfoLabel = new System.Windows.Forms.Label();
+            this.ProductIdInfoLabel = new System.Windows.Forms.Label();
+            this.ProductControlCenterLabel = new System.Windows.Forms.Label();
             this.PrintInvoicePanel.SuspendLayout();
             this.ProductsTypesPanel.SuspendLayout();
+            this.ProductInfoPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // PrintInvoicePanel
@@ -1302,7 +1355,7 @@ namespace Invoice.Forms
             // 
             this.PrintButton.Location = new System.Drawing.Point(1140, 562);
             this.PrintButton.Name = "PrintButton";
-            this.PrintButton.Size = new System.Drawing.Size(111, 29);
+            this.PrintButton.Size = new System.Drawing.Size(107, 29);
             this.PrintButton.TabIndex = 4;
             this.PrintButton.TabStop = false;
             this.PrintButton.Text = "Spausdinti Formą";
@@ -1697,11 +1750,543 @@ namespace Invoice.Forms
             this.TypeOfProductLabel.TabIndex = 0;
             this.TypeOfProductLabel.Text = "Produkto tipas";
             // 
+            // FirstNumberInfoLabel
+            // 
+            this.FirstNumberInfoLabel.AutoSize = true;
+            this.FirstNumberInfoLabel.Location = new System.Drawing.Point(18, 66);
+            this.FirstNumberInfoLabel.Name = "FirstNumberInfoLabel";
+            this.FirstNumberInfoLabel.Size = new System.Drawing.Size(16, 13);
+            this.FirstNumberInfoLabel.TabIndex = 6;
+            this.FirstNumberInfoLabel.Text = "1)";
+            // 
+            // SecondNumberInfoLabel
+            // 
+            this.SecondNumberInfoLabel.AutoSize = true;
+            this.SecondNumberInfoLabel.Location = new System.Drawing.Point(18, 102);
+            this.SecondNumberInfoLabel.Name = "SecondNumberInfoLabel";
+            this.SecondNumberInfoLabel.Size = new System.Drawing.Size(16, 13);
+            this.SecondNumberInfoLabel.TabIndex = 7;
+            this.SecondNumberInfoLabel.Text = "2)";
+            // 
+            // ThirdNumberInfoLabel
+            // 
+            this.ThirdNumberInfoLabel.AutoSize = true;
+            this.ThirdNumberInfoLabel.Location = new System.Drawing.Point(18, 141);
+            this.ThirdNumberInfoLabel.Name = "ThirdNumberInfoLabel";
+            this.ThirdNumberInfoLabel.Size = new System.Drawing.Size(16, 13);
+            this.ThirdNumberInfoLabel.TabIndex = 8;
+            this.ThirdNumberInfoLabel.Text = "3)";
+            // 
+            // FourthNumberInfoLabel
+            // 
+            this.FourthNumberInfoLabel.AutoSize = true;
+            this.FourthNumberInfoLabel.Location = new System.Drawing.Point(18, 176);
+            this.FourthNumberInfoLabel.Name = "FourthNumberInfoLabel";
+            this.FourthNumberInfoLabel.Size = new System.Drawing.Size(16, 13);
+            this.FourthNumberInfoLabel.TabIndex = 9;
+            this.FourthNumberInfoLabel.Text = "4)";
+            // 
+            // FifthNumberInfoLabel
+            // 
+            this.FifthNumberInfoLabel.AutoSize = true;
+            this.FifthNumberInfoLabel.Location = new System.Drawing.Point(18, 207);
+            this.FifthNumberInfoLabel.Name = "FifthNumberInfoLabel";
+            this.FifthNumberInfoLabel.Size = new System.Drawing.Size(16, 13);
+            this.FifthNumberInfoLabel.TabIndex = 10;
+            this.FifthNumberInfoLabel.Text = "5)";
+            // 
+            // SixsthNumberInfoLabel
+            // 
+            this.SixsthNumberInfoLabel.AutoSize = true;
+            this.SixsthNumberInfoLabel.Location = new System.Drawing.Point(18, 241);
+            this.SixsthNumberInfoLabel.Name = "SixsthNumberInfoLabel";
+            this.SixsthNumberInfoLabel.Size = new System.Drawing.Size(16, 13);
+            this.SixsthNumberInfoLabel.TabIndex = 11;
+            this.SixsthNumberInfoLabel.Text = "6)";
+            // 
+            // SeventhNumberInfoLabel
+            // 
+            this.SeventhNumberInfoLabel.AutoSize = true;
+            this.SeventhNumberInfoLabel.Location = new System.Drawing.Point(18, 276);
+            this.SeventhNumberInfoLabel.Name = "SeventhNumberInfoLabel";
+            this.SeventhNumberInfoLabel.Size = new System.Drawing.Size(16, 13);
+            this.SeventhNumberInfoLabel.TabIndex = 12;
+            this.SeventhNumberInfoLabel.Text = "7)";
+            // 
+            // EighthNumberInfoLabel
+            // 
+            this.EighthNumberInfoLabel.AutoSize = true;
+            this.EighthNumberInfoLabel.Location = new System.Drawing.Point(18, 308);
+            this.EighthNumberInfoLabel.Name = "EighthNumberInfoLabel";
+            this.EighthNumberInfoLabel.Size = new System.Drawing.Size(16, 13);
+            this.EighthNumberInfoLabel.TabIndex = 13;
+            this.EighthNumberInfoLabel.Text = "8)";
+            // 
+            // NinthNumberInfoLabel
+            // 
+            this.NinthNumberInfoLabel.AutoSize = true;
+            this.NinthNumberInfoLabel.Location = new System.Drawing.Point(18, 343);
+            this.NinthNumberInfoLabel.Name = "NinthNumberInfoLabel";
+            this.NinthNumberInfoLabel.Size = new System.Drawing.Size(16, 13);
+            this.NinthNumberInfoLabel.TabIndex = 14;
+            this.NinthNumberInfoLabel.Text = "9)";
+            // 
+            // TenNumberInfoLabel
+            // 
+            this.TenNumberInfoLabel.AutoSize = true;
+            this.TenNumberInfoLabel.Location = new System.Drawing.Point(12, 377);
+            this.TenNumberInfoLabel.Name = "TenNumberInfoLabel";
+            this.TenNumberInfoLabel.Size = new System.Drawing.Size(22, 13);
+            this.TenNumberInfoLabel.TabIndex = 15;
+            this.TenNumberInfoLabel.Text = "10)";
+            // 
+            // EleventhNumberInfoLabel
+            // 
+            this.EleventhNumberInfoLabel.AutoSize = true;
+            this.EleventhNumberInfoLabel.Location = new System.Drawing.Point(12, 412);
+            this.EleventhNumberInfoLabel.Name = "EleventhNumberInfoLabel";
+            this.EleventhNumberInfoLabel.Size = new System.Drawing.Size(22, 13);
+            this.EleventhNumberInfoLabel.TabIndex = 16;
+            this.EleventhNumberInfoLabel.Text = "11)";
+            // 
+            // TwelfthNumberInfoLabel
+            // 
+            this.TwelfthNumberInfoLabel.AutoSize = true;
+            this.TwelfthNumberInfoLabel.Location = new System.Drawing.Point(12, 448);
+            this.TwelfthNumberInfoLabel.Name = "TwelfthNumberInfoLabel";
+            this.TwelfthNumberInfoLabel.Size = new System.Drawing.Size(22, 13);
+            this.TwelfthNumberInfoLabel.TabIndex = 17;
+            this.TwelfthNumberInfoLabel.Text = "12)";
+            // 
+            // FirstProductNameComboBox
+            // 
+            this.FirstProductNameComboBox.FormattingEnabled = true;
+            this.FirstProductNameComboBox.Location = new System.Drawing.Point(40, 63);
+            this.FirstProductNameComboBox.Name = "FirstProductNameComboBox";
+            this.FirstProductNameComboBox.Size = new System.Drawing.Size(288, 21);
+            this.FirstProductNameComboBox.TabIndex = 18;
+            this.FirstProductNameComboBox.TabStop = false;
+            // 
+            // SecondProductNameComboBox
+            // 
+            this.SecondProductNameComboBox.FormattingEnabled = true;
+            this.SecondProductNameComboBox.Location = new System.Drawing.Point(40, 99);
+            this.SecondProductNameComboBox.Name = "SecondProductNameComboBox";
+            this.SecondProductNameComboBox.Size = new System.Drawing.Size(288, 21);
+            this.SecondProductNameComboBox.TabIndex = 19;
+            this.SecondProductNameComboBox.TabStop = false;
+            // 
+            // ThirdProductNameComboBox
+            // 
+            this.ThirdProductNameComboBox.FormattingEnabled = true;
+            this.ThirdProductNameComboBox.Location = new System.Drawing.Point(40, 138);
+            this.ThirdProductNameComboBox.Name = "ThirdProductNameComboBox";
+            this.ThirdProductNameComboBox.Size = new System.Drawing.Size(288, 21);
+            this.ThirdProductNameComboBox.TabIndex = 20;
+            this.ThirdProductNameComboBox.TabStop = false;
+            // 
+            // FourthProductNameComboBox
+            // 
+            this.FourthProductNameComboBox.FormattingEnabled = true;
+            this.FourthProductNameComboBox.Location = new System.Drawing.Point(40, 173);
+            this.FourthProductNameComboBox.Name = "FourthProductNameComboBox";
+            this.FourthProductNameComboBox.Size = new System.Drawing.Size(288, 21);
+            this.FourthProductNameComboBox.TabIndex = 21;
+            this.FourthProductNameComboBox.TabStop = false;
+            // 
+            // FifthProductNameComboBox
+            // 
+            this.FifthProductNameComboBox.FormattingEnabled = true;
+            this.FifthProductNameComboBox.Location = new System.Drawing.Point(40, 204);
+            this.FifthProductNameComboBox.Name = "FifthProductNameComboBox";
+            this.FifthProductNameComboBox.Size = new System.Drawing.Size(288, 21);
+            this.FifthProductNameComboBox.TabIndex = 22;
+            this.FifthProductNameComboBox.TabStop = false;
+            // 
+            // SixsthProductNameComboBox
+            // 
+            this.SixsthProductNameComboBox.FormattingEnabled = true;
+            this.SixsthProductNameComboBox.Location = new System.Drawing.Point(40, 238);
+            this.SixsthProductNameComboBox.Name = "SixsthProductNameComboBox";
+            this.SixsthProductNameComboBox.Size = new System.Drawing.Size(288, 21);
+            this.SixsthProductNameComboBox.TabIndex = 23;
+            this.SixsthProductNameComboBox.TabStop = false;
+            // 
+            // SeventhProductNameComboBox
+            // 
+            this.SeventhProductNameComboBox.FormattingEnabled = true;
+            this.SeventhProductNameComboBox.Location = new System.Drawing.Point(40, 273);
+            this.SeventhProductNameComboBox.Name = "SeventhProductNameComboBox";
+            this.SeventhProductNameComboBox.Size = new System.Drawing.Size(288, 21);
+            this.SeventhProductNameComboBox.TabIndex = 24;
+            this.SeventhProductNameComboBox.TabStop = false;
+            // 
+            // EighthProductNameComboBox
+            // 
+            this.EighthProductNameComboBox.FormattingEnabled = true;
+            this.EighthProductNameComboBox.Location = new System.Drawing.Point(40, 305);
+            this.EighthProductNameComboBox.Name = "EighthProductNameComboBox";
+            this.EighthProductNameComboBox.Size = new System.Drawing.Size(288, 21);
+            this.EighthProductNameComboBox.TabIndex = 25;
+            this.EighthProductNameComboBox.TabStop = false;
+            // 
+            // NinthProductNameComboBox
+            // 
+            this.NinthProductNameComboBox.FormattingEnabled = true;
+            this.NinthProductNameComboBox.Location = new System.Drawing.Point(40, 340);
+            this.NinthProductNameComboBox.Name = "NinthProductNameComboBox";
+            this.NinthProductNameComboBox.Size = new System.Drawing.Size(288, 21);
+            this.NinthProductNameComboBox.TabIndex = 26;
+            this.NinthProductNameComboBox.TabStop = false;
+            // 
+            // TenProductNameComboBox
+            // 
+            this.TenProductNameComboBox.FormattingEnabled = true;
+            this.TenProductNameComboBox.Location = new System.Drawing.Point(40, 374);
+            this.TenProductNameComboBox.Name = "TenProductNameComboBox";
+            this.TenProductNameComboBox.Size = new System.Drawing.Size(288, 21);
+            this.TenProductNameComboBox.TabIndex = 27;
+            this.TenProductNameComboBox.TabStop = false;
+            // 
+            // EleventhProductNameComboBox
+            // 
+            this.EleventhProductNameComboBox.FormattingEnabled = true;
+            this.EleventhProductNameComboBox.Location = new System.Drawing.Point(40, 409);
+            this.EleventhProductNameComboBox.Name = "EleventhProductNameComboBox";
+            this.EleventhProductNameComboBox.Size = new System.Drawing.Size(288, 21);
+            this.EleventhProductNameComboBox.TabIndex = 28;
+            this.EleventhProductNameComboBox.TabStop = false;
+            // 
+            // TwelfthProductNameComboBox
+            // 
+            this.TwelfthProductNameComboBox.FormattingEnabled = true;
+            this.TwelfthProductNameComboBox.Location = new System.Drawing.Point(40, 444);
+            this.TwelfthProductNameComboBox.Name = "TwelfthProductNameComboBox";
+            this.TwelfthProductNameComboBox.Size = new System.Drawing.Size(288, 21);
+            this.TwelfthProductNameComboBox.TabIndex = 29;
+            this.TwelfthProductNameComboBox.TabStop = false;
+            // 
+            // FirsProductIdTextBox
+            // 
+            this.FirsProductIdTextBox.Location = new System.Drawing.Point(334, 63);
+            this.FirsProductIdTextBox.Name = "FirsProductIdTextBox";
+            this.FirsProductIdTextBox.ReadOnly = true;
+            this.FirsProductIdTextBox.Size = new System.Drawing.Size(54, 20);
+            this.FirsProductIdTextBox.TabIndex = 30;
+            this.FirsProductIdTextBox.TabStop = false;
+            // 
+            // SecondProductIdTextBox
+            // 
+            this.SecondProductIdTextBox.Location = new System.Drawing.Point(334, 99);
+            this.SecondProductIdTextBox.Name = "SecondProductIdTextBox";
+            this.SecondProductIdTextBox.ReadOnly = true;
+            this.SecondProductIdTextBox.Size = new System.Drawing.Size(54, 20);
+            this.SecondProductIdTextBox.TabIndex = 31;
+            this.SecondProductIdTextBox.TabStop = false;
+            // 
+            // ThirdProductIdTextBox
+            // 
+            this.ThirdProductIdTextBox.Location = new System.Drawing.Point(334, 138);
+            this.ThirdProductIdTextBox.Name = "ThirdProductIdTextBox";
+            this.ThirdProductIdTextBox.ReadOnly = true;
+            this.ThirdProductIdTextBox.Size = new System.Drawing.Size(54, 20);
+            this.ThirdProductIdTextBox.TabIndex = 32;
+            this.ThirdProductIdTextBox.TabStop = false;
+            // 
+            // FourthProductIdTextBox
+            // 
+            this.FourthProductIdTextBox.Location = new System.Drawing.Point(334, 173);
+            this.FourthProductIdTextBox.Name = "FourthProductIdTextBox";
+            this.FourthProductIdTextBox.ReadOnly = true;
+            this.FourthProductIdTextBox.Size = new System.Drawing.Size(54, 20);
+            this.FourthProductIdTextBox.TabIndex = 33;
+            this.FourthProductIdTextBox.TabStop = false;
+            // 
+            // FifthProductIdTextBox
+            // 
+            this.FifthProductIdTextBox.Location = new System.Drawing.Point(334, 204);
+            this.FifthProductIdTextBox.Name = "FifthProductIdTextBox";
+            this.FifthProductIdTextBox.ReadOnly = true;
+            this.FifthProductIdTextBox.Size = new System.Drawing.Size(54, 20);
+            this.FifthProductIdTextBox.TabIndex = 34;
+            this.FifthProductIdTextBox.TabStop = false;
+            // 
+            // SixthProductIdTextBox
+            // 
+            this.SixthProductIdTextBox.Location = new System.Drawing.Point(334, 238);
+            this.SixthProductIdTextBox.Name = "SixthProductIdTextBox";
+            this.SixthProductIdTextBox.ReadOnly = true;
+            this.SixthProductIdTextBox.Size = new System.Drawing.Size(54, 20);
+            this.SixthProductIdTextBox.TabIndex = 35;
+            this.SixthProductIdTextBox.TabStop = false;
+            // 
+            // SeventhProductIdTextBox
+            // 
+            this.SeventhProductIdTextBox.Location = new System.Drawing.Point(334, 273);
+            this.SeventhProductIdTextBox.Name = "SeventhProductIdTextBox";
+            this.SeventhProductIdTextBox.ReadOnly = true;
+            this.SeventhProductIdTextBox.Size = new System.Drawing.Size(54, 20);
+            this.SeventhProductIdTextBox.TabIndex = 36;
+            this.SeventhProductIdTextBox.TabStop = false;
+            // 
+            // EighthProductIdTextBox
+            // 
+            this.EighthProductIdTextBox.Location = new System.Drawing.Point(334, 306);
+            this.EighthProductIdTextBox.Name = "EighthProductIdTextBox";
+            this.EighthProductIdTextBox.ReadOnly = true;
+            this.EighthProductIdTextBox.Size = new System.Drawing.Size(54, 20);
+            this.EighthProductIdTextBox.TabIndex = 37;
+            this.EighthProductIdTextBox.TabStop = false;
+            // 
+            // NinthProductIdTextBox
+            // 
+            this.NinthProductIdTextBox.Location = new System.Drawing.Point(334, 340);
+            this.NinthProductIdTextBox.Name = "NinthProductIdTextBox";
+            this.NinthProductIdTextBox.ReadOnly = true;
+            this.NinthProductIdTextBox.Size = new System.Drawing.Size(54, 20);
+            this.NinthProductIdTextBox.TabIndex = 38;
+            this.NinthProductIdTextBox.TabStop = false;
+            // 
+            // TenProductIdTextBox
+            // 
+            this.TenProductIdTextBox.Location = new System.Drawing.Point(334, 375);
+            this.TenProductIdTextBox.Name = "TenProductIdTextBox";
+            this.TenProductIdTextBox.ReadOnly = true;
+            this.TenProductIdTextBox.Size = new System.Drawing.Size(54, 20);
+            this.TenProductIdTextBox.TabIndex = 39;
+            this.TenProductIdTextBox.TabStop = false;
+            // 
+            // EleventhProductIdTextBox
+            // 
+            this.EleventhProductIdTextBox.Location = new System.Drawing.Point(334, 409);
+            this.EleventhProductIdTextBox.Name = "EleventhProductIdTextBox";
+            this.EleventhProductIdTextBox.ReadOnly = true;
+            this.EleventhProductIdTextBox.Size = new System.Drawing.Size(54, 20);
+            this.EleventhProductIdTextBox.TabIndex = 40;
+            this.EleventhProductIdTextBox.TabStop = false;
+            // 
+            // TwelfthProductIdTextBox
+            // 
+            this.TwelfthProductIdTextBox.Location = new System.Drawing.Point(334, 444);
+            this.TwelfthProductIdTextBox.Name = "TwelfthProductIdTextBox";
+            this.TwelfthProductIdTextBox.ReadOnly = true;
+            this.TwelfthProductIdTextBox.Size = new System.Drawing.Size(54, 20);
+            this.TwelfthProductIdTextBox.TabIndex = 41;
+            this.TwelfthProductIdTextBox.TabStop = false;
+            // 
+            // AddToFirstProductInfoButton
+            // 
+            this.AddToFirstProductInfoButton.Location = new System.Drawing.Point(394, 63);
+            this.AddToFirstProductInfoButton.Name = "AddToFirstProductInfoButton";
+            this.AddToFirstProductInfoButton.Size = new System.Drawing.Size(83, 20);
+            this.AddToFirstProductInfoButton.TabIndex = 42;
+            this.AddToFirstProductInfoButton.TabStop = false;
+            this.AddToFirstProductInfoButton.Text = "Pridėti";
+            this.AddToFirstProductInfoButton.UseVisualStyleBackColor = true;
+            // 
+            // AddToSecondProductInfoButton
+            // 
+            this.AddToSecondProductInfoButton.Location = new System.Drawing.Point(394, 99);
+            this.AddToSecondProductInfoButton.Name = "AddToSecondProductInfoButton";
+            this.AddToSecondProductInfoButton.Size = new System.Drawing.Size(83, 20);
+            this.AddToSecondProductInfoButton.TabIndex = 43;
+            this.AddToSecondProductInfoButton.TabStop = false;
+            this.AddToSecondProductInfoButton.Text = "Pridėti";
+            this.AddToSecondProductInfoButton.UseVisualStyleBackColor = true;
+            // 
+            // AddToThirdProductInfoButton
+            // 
+            this.AddToThirdProductInfoButton.Location = new System.Drawing.Point(394, 138);
+            this.AddToThirdProductInfoButton.Name = "AddToThirdProductInfoButton";
+            this.AddToThirdProductInfoButton.Size = new System.Drawing.Size(83, 20);
+            this.AddToThirdProductInfoButton.TabIndex = 44;
+            this.AddToThirdProductInfoButton.TabStop = false;
+            this.AddToThirdProductInfoButton.Text = "Pridėti";
+            this.AddToThirdProductInfoButton.UseVisualStyleBackColor = true;
+            // 
+            // AddToFourthProductInfoButton
+            // 
+            this.AddToFourthProductInfoButton.Location = new System.Drawing.Point(394, 173);
+            this.AddToFourthProductInfoButton.Name = "AddToFourthProductInfoButton";
+            this.AddToFourthProductInfoButton.Size = new System.Drawing.Size(83, 20);
+            this.AddToFourthProductInfoButton.TabIndex = 45;
+            this.AddToFourthProductInfoButton.TabStop = false;
+            this.AddToFourthProductInfoButton.Text = "Pridėti";
+            this.AddToFourthProductInfoButton.UseVisualStyleBackColor = true;
+            // 
+            // AddToFifthProductInfoButton
+            // 
+            this.AddToFifthProductInfoButton.Location = new System.Drawing.Point(394, 204);
+            this.AddToFifthProductInfoButton.Name = "AddToFifthProductInfoButton";
+            this.AddToFifthProductInfoButton.Size = new System.Drawing.Size(83, 20);
+            this.AddToFifthProductInfoButton.TabIndex = 46;
+            this.AddToFifthProductInfoButton.TabStop = false;
+            this.AddToFifthProductInfoButton.Text = "Pridėti";
+            this.AddToFifthProductInfoButton.UseVisualStyleBackColor = true;
+            // 
+            // AddToSixthProductInfobutton
+            // 
+            this.AddToSixthProductInfobutton.Location = new System.Drawing.Point(394, 238);
+            this.AddToSixthProductInfobutton.Name = "AddToSixthProductInfobutton";
+            this.AddToSixthProductInfobutton.Size = new System.Drawing.Size(83, 20);
+            this.AddToSixthProductInfobutton.TabIndex = 47;
+            this.AddToSixthProductInfobutton.TabStop = false;
+            this.AddToSixthProductInfobutton.Text = "Pridėti";
+            this.AddToSixthProductInfobutton.UseVisualStyleBackColor = true;
+            // 
+            // AddToSeventhProductInfoButton
+            // 
+            this.AddToSeventhProductInfoButton.Location = new System.Drawing.Point(394, 273);
+            this.AddToSeventhProductInfoButton.Name = "AddToSeventhProductInfoButton";
+            this.AddToSeventhProductInfoButton.Size = new System.Drawing.Size(83, 20);
+            this.AddToSeventhProductInfoButton.TabIndex = 48;
+            this.AddToSeventhProductInfoButton.TabStop = false;
+            this.AddToSeventhProductInfoButton.Text = "Pridėti";
+            this.AddToSeventhProductInfoButton.UseVisualStyleBackColor = true;
+            // 
+            // AddToEighthProductInfoButton
+            // 
+            this.AddToEighthProductInfoButton.Location = new System.Drawing.Point(394, 306);
+            this.AddToEighthProductInfoButton.Name = "AddToEighthProductInfoButton";
+            this.AddToEighthProductInfoButton.Size = new System.Drawing.Size(83, 20);
+            this.AddToEighthProductInfoButton.TabIndex = 49;
+            this.AddToEighthProductInfoButton.TabStop = false;
+            this.AddToEighthProductInfoButton.Text = "Pridėti";
+            this.AddToEighthProductInfoButton.UseVisualStyleBackColor = true;
+            // 
+            // AddToNinthProductInfoButton
+            // 
+            this.AddToNinthProductInfoButton.Location = new System.Drawing.Point(394, 340);
+            this.AddToNinthProductInfoButton.Name = "AddToNinthProductInfoButton";
+            this.AddToNinthProductInfoButton.Size = new System.Drawing.Size(83, 20);
+            this.AddToNinthProductInfoButton.TabIndex = 50;
+            this.AddToNinthProductInfoButton.TabStop = false;
+            this.AddToNinthProductInfoButton.Text = "Pridėti";
+            this.AddToNinthProductInfoButton.UseVisualStyleBackColor = true;
+            // 
+            // AddToTenProductInfoButton
+            // 
+            this.AddToTenProductInfoButton.Location = new System.Drawing.Point(394, 375);
+            this.AddToTenProductInfoButton.Name = "AddToTenProductInfoButton";
+            this.AddToTenProductInfoButton.Size = new System.Drawing.Size(83, 20);
+            this.AddToTenProductInfoButton.TabIndex = 51;
+            this.AddToTenProductInfoButton.TabStop = false;
+            this.AddToTenProductInfoButton.Text = "Pridėti";
+            this.AddToTenProductInfoButton.UseVisualStyleBackColor = true;
+            // 
+            // AddToEleventhProductInfoButton
+            // 
+            this.AddToEleventhProductInfoButton.Location = new System.Drawing.Point(394, 409);
+            this.AddToEleventhProductInfoButton.Name = "AddToEleventhProductInfoButton";
+            this.AddToEleventhProductInfoButton.Size = new System.Drawing.Size(83, 20);
+            this.AddToEleventhProductInfoButton.TabIndex = 52;
+            this.AddToEleventhProductInfoButton.TabStop = false;
+            this.AddToEleventhProductInfoButton.Text = "Pridėti";
+            this.AddToEleventhProductInfoButton.UseVisualStyleBackColor = true;
+            // 
+            // AddToTwelfthProductInfoButton
+            // 
+            this.AddToTwelfthProductInfoButton.Location = new System.Drawing.Point(394, 444);
+            this.AddToTwelfthProductInfoButton.Name = "AddToTwelfthProductInfoButton";
+            this.AddToTwelfthProductInfoButton.Size = new System.Drawing.Size(83, 20);
+            this.AddToTwelfthProductInfoButton.TabIndex = 53;
+            this.AddToTwelfthProductInfoButton.TabStop = false;
+            this.AddToTwelfthProductInfoButton.Text = "Pridėti";
+            this.AddToTwelfthProductInfoButton.UseVisualStyleBackColor = true;
+            // 
+            // ProductInfoPanel
+            // 
+            this.ProductInfoPanel.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.ProductInfoPanel.Controls.Add(this.ProductControlCenterLabel);
+            this.ProductInfoPanel.Controls.Add(this.ProductIdInfoLabel);
+            this.ProductInfoPanel.Controls.Add(this.ProductNameInfoLabel);
+            this.ProductInfoPanel.Controls.Add(this.FirstNumberInfoLabel);
+            this.ProductInfoPanel.Controls.Add(this.AddToTwelfthProductInfoButton);
+            this.ProductInfoPanel.Controls.Add(this.FirstProductNameComboBox);
+            this.ProductInfoPanel.Controls.Add(this.TwelfthProductIdTextBox);
+            this.ProductInfoPanel.Controls.Add(this.AddToEleventhProductInfoButton);
+            this.ProductInfoPanel.Controls.Add(this.TwelfthProductNameComboBox);
+            this.ProductInfoPanel.Controls.Add(this.FirsProductIdTextBox);
+            this.ProductInfoPanel.Controls.Add(this.TwelfthNumberInfoLabel);
+            this.ProductInfoPanel.Controls.Add(this.AddToTenProductInfoButton);
+            this.ProductInfoPanel.Controls.Add(this.EleventhProductIdTextBox);
+            this.ProductInfoPanel.Controls.Add(this.AddToFirstProductInfoButton);
+            this.ProductInfoPanel.Controls.Add(this.AddToNinthProductInfoButton);
+            this.ProductInfoPanel.Controls.Add(this.EleventhProductNameComboBox);
+            this.ProductInfoPanel.Controls.Add(this.SecondNumberInfoLabel);
+            this.ProductInfoPanel.Controls.Add(this.TenProductIdTextBox);
+            this.ProductInfoPanel.Controls.Add(this.EleventhNumberInfoLabel);
+            this.ProductInfoPanel.Controls.Add(this.AddToEighthProductInfoButton);
+            this.ProductInfoPanel.Controls.Add(this.SecondProductNameComboBox);
+            this.ProductInfoPanel.Controls.Add(this.AddToSeventhProductInfoButton);
+            this.ProductInfoPanel.Controls.Add(this.TenProductNameComboBox);
+            this.ProductInfoPanel.Controls.Add(this.NinthProductIdTextBox);
+            this.ProductInfoPanel.Controls.Add(this.SecondProductIdTextBox);
+            this.ProductInfoPanel.Controls.Add(this.AddToSixthProductInfobutton);
+            this.ProductInfoPanel.Controls.Add(this.TenNumberInfoLabel);
+            this.ProductInfoPanel.Controls.Add(this.AddToSecondProductInfoButton);
+            this.ProductInfoPanel.Controls.Add(this.EighthProductIdTextBox);
+            this.ProductInfoPanel.Controls.Add(this.NinthProductNameComboBox);
+            this.ProductInfoPanel.Controls.Add(this.AddToFifthProductInfoButton);
+            this.ProductInfoPanel.Controls.Add(this.ThirdNumberInfoLabel);
+            this.ProductInfoPanel.Controls.Add(this.AddToFourthProductInfoButton);
+            this.ProductInfoPanel.Controls.Add(this.SeventhProductIdTextBox);
+            this.ProductInfoPanel.Controls.Add(this.NinthNumberInfoLabel);
+            this.ProductInfoPanel.Controls.Add(this.ThirdProductNameComboBox);
+            this.ProductInfoPanel.Controls.Add(this.EighthProductNameComboBox);
+            this.ProductInfoPanel.Controls.Add(this.AddToThirdProductInfoButton);
+            this.ProductInfoPanel.Controls.Add(this.ThirdProductIdTextBox);
+            this.ProductInfoPanel.Controls.Add(this.SixthProductIdTextBox);
+            this.ProductInfoPanel.Controls.Add(this.FourthProductNameComboBox);
+            this.ProductInfoPanel.Controls.Add(this.FourthNumberInfoLabel);
+            this.ProductInfoPanel.Controls.Add(this.EighthNumberInfoLabel);
+            this.ProductInfoPanel.Controls.Add(this.SeventhProductNameComboBox);
+            this.ProductInfoPanel.Controls.Add(this.FourthProductIdTextBox);
+            this.ProductInfoPanel.Controls.Add(this.FifthProductIdTextBox);
+            this.ProductInfoPanel.Controls.Add(this.FifthNumberInfoLabel);
+            this.ProductInfoPanel.Controls.Add(this.FifthProductNameComboBox);
+            this.ProductInfoPanel.Controls.Add(this.SixsthNumberInfoLabel);
+            this.ProductInfoPanel.Controls.Add(this.SixsthProductNameComboBox);
+            this.ProductInfoPanel.Controls.Add(this.SeventhNumberInfoLabel);
+            this.ProductInfoPanel.Location = new System.Drawing.Point(1261, 31);
+            this.ProductInfoPanel.Name = "ProductInfoPanel";
+            this.ProductInfoPanel.Size = new System.Drawing.Size(508, 510);
+            this.ProductInfoPanel.TabIndex = 54;
+            // 
+            // ProductNameInfoLabel
+            // 
+            this.ProductNameInfoLabel.AutoSize = true;
+            this.ProductNameInfoLabel.Location = new System.Drawing.Point(46, 43);
+            this.ProductNameInfoLabel.Name = "ProductNameInfoLabel";
+            this.ProductNameInfoLabel.Size = new System.Drawing.Size(112, 13);
+            this.ProductNameInfoLabel.TabIndex = 54;
+            this.ProductNameInfoLabel.Text = "Produkto pavadinimas";
+            // 
+            // ProductIdInfoLabel
+            // 
+            this.ProductIdInfoLabel.AutoSize = true;
+            this.ProductIdInfoLabel.Location = new System.Drawing.Point(343, 43);
+            this.ProductIdInfoLabel.Name = "ProductIdInfoLabel";
+            this.ProductIdInfoLabel.Size = new System.Drawing.Size(16, 13);
+            this.ProductIdInfoLabel.TabIndex = 55;
+            this.ProductIdInfoLabel.Text = "Id";
+            // 
+            // ProductControlCenterLabel
+            // 
+            this.ProductControlCenterLabel.AutoSize = true;
+            this.ProductControlCenterLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProductControlCenterLabel.Location = new System.Drawing.Point(177, 11);
+            this.ProductControlCenterLabel.Name = "ProductControlCenterLabel";
+            this.ProductControlCenterLabel.Size = new System.Drawing.Size(140, 16);
+            this.ProductControlCenterLabel.TabIndex = 56;
+            this.ProductControlCenterLabel.Text = "Produktų valdymas";
+            // 
             // InvoiceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1268, 1017);
+            this.ClientSize = new System.Drawing.Size(1791, 1017);
+            this.Controls.Add(this.ProductInfoPanel);
             this.Controls.Add(this.ProductsTypesPanel);
             this.Controls.Add(this.PrintButton);
             this.Controls.Add(this.CalculateButton);
@@ -1716,6 +2301,8 @@ namespace Invoice.Forms
             this.PrintInvoicePanel.PerformLayout();
             this.ProductsTypesPanel.ResumeLayout(false);
             this.ProductsTypesPanel.PerformLayout();
+            this.ProductInfoPanel.ResumeLayout(false);
+            this.ProductInfoPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1866,5 +2453,57 @@ namespace Invoice.Forms
         private System.Windows.Forms.TextBox EighthProductTypeTextBox;
         private System.Windows.Forms.TextBox SeventhProductTypeTextBox;
         private System.Windows.Forms.TextBox SixthProductTypeTextBox;
+        private System.Windows.Forms.Label FirstNumberInfoLabel;
+        private System.Windows.Forms.Label SecondNumberInfoLabel;
+        private System.Windows.Forms.Label ThirdNumberInfoLabel;
+        private System.Windows.Forms.Label FourthNumberInfoLabel;
+        private System.Windows.Forms.Label FifthNumberInfoLabel;
+        private System.Windows.Forms.Label SixsthNumberInfoLabel;
+        private System.Windows.Forms.Label SeventhNumberInfoLabel;
+        private System.Windows.Forms.Label EighthNumberInfoLabel;
+        private System.Windows.Forms.Label NinthNumberInfoLabel;
+        private System.Windows.Forms.Label TenNumberInfoLabel;
+        private System.Windows.Forms.Label EleventhNumberInfoLabel;
+        private System.Windows.Forms.Label TwelfthNumberInfoLabel;
+        private System.Windows.Forms.ComboBox FirstProductNameComboBox;
+        private System.Windows.Forms.ComboBox SecondProductNameComboBox;
+        private System.Windows.Forms.ComboBox ThirdProductNameComboBox;
+        private System.Windows.Forms.ComboBox FourthProductNameComboBox;
+        private System.Windows.Forms.ComboBox FifthProductNameComboBox;
+        private System.Windows.Forms.ComboBox SixsthProductNameComboBox;
+        private System.Windows.Forms.ComboBox SeventhProductNameComboBox;
+        private System.Windows.Forms.ComboBox EighthProductNameComboBox;
+        private System.Windows.Forms.ComboBox NinthProductNameComboBox;
+        private System.Windows.Forms.ComboBox TenProductNameComboBox;
+        private System.Windows.Forms.ComboBox EleventhProductNameComboBox;
+        private System.Windows.Forms.ComboBox TwelfthProductNameComboBox;
+        private System.Windows.Forms.TextBox FirsProductIdTextBox;
+        private System.Windows.Forms.TextBox SecondProductIdTextBox;
+        private System.Windows.Forms.TextBox ThirdProductIdTextBox;
+        private System.Windows.Forms.TextBox FourthProductIdTextBox;
+        private System.Windows.Forms.TextBox FifthProductIdTextBox;
+        private System.Windows.Forms.TextBox SixthProductIdTextBox;
+        private System.Windows.Forms.TextBox SeventhProductIdTextBox;
+        private System.Windows.Forms.TextBox EighthProductIdTextBox;
+        private System.Windows.Forms.TextBox NinthProductIdTextBox;
+        private System.Windows.Forms.TextBox TenProductIdTextBox;
+        private System.Windows.Forms.TextBox EleventhProductIdTextBox;
+        private System.Windows.Forms.TextBox TwelfthProductIdTextBox;
+        private System.Windows.Forms.Button AddToFirstProductInfoButton;
+        private System.Windows.Forms.Button AddToSecondProductInfoButton;
+        private System.Windows.Forms.Button AddToThirdProductInfoButton;
+        private System.Windows.Forms.Button AddToFourthProductInfoButton;
+        private System.Windows.Forms.Button AddToFifthProductInfoButton;
+        private System.Windows.Forms.Button AddToSixthProductInfobutton;
+        private System.Windows.Forms.Button AddToSeventhProductInfoButton;
+        private System.Windows.Forms.Button AddToEighthProductInfoButton;
+        private System.Windows.Forms.Button AddToNinthProductInfoButton;
+        private System.Windows.Forms.Button AddToTenProductInfoButton;
+        private System.Windows.Forms.Button AddToEleventhProductInfoButton;
+        private System.Windows.Forms.Button AddToTwelfthProductInfoButton;
+        private System.Windows.Forms.Panel ProductInfoPanel;
+        private System.Windows.Forms.Label ProductControlCenterLabel;
+        private System.Windows.Forms.Label ProductIdInfoLabel;
+        private System.Windows.Forms.Label ProductNameInfoLabel;
     }
 }
