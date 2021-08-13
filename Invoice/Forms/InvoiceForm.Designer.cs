@@ -2265,11 +2265,11 @@ namespace Invoice.Forms
             // ProductIdInfoLabel
             // 
             this.ProductIdInfoLabel.AutoSize = true;
-            this.ProductIdInfoLabel.Location = new System.Drawing.Point(343, 43);
+            this.ProductIdInfoLabel.Location = new System.Drawing.Point(331, 43);
             this.ProductIdInfoLabel.Name = "ProductIdInfoLabel";
-            this.ProductIdInfoLabel.Size = new System.Drawing.Size(16, 13);
+            this.ProductIdInfoLabel.Size = new System.Drawing.Size(62, 13);
             this.ProductIdInfoLabel.TabIndex = 55;
-            this.ProductIdInfoLabel.Text = "Id";
+            this.ProductIdInfoLabel.Text = "Produkto Id";
             // 
             // ProductControlCenterLabel
             // 
