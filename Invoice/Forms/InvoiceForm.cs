@@ -199,8 +199,6 @@ namespace Invoice.Forms
             {
                 RichTextBox richTextBox = sender as RichTextBox;
 
-                SetCursorAtTextBoxStringEnd();
-
                 if (richTextBox == null) return;
 
                 if (richTextBox.Multiline == false)
@@ -232,12 +230,10 @@ namespace Invoice.Forms
                 _messageDialogService.ShowInfoMessage($"Pasiektas maksimalus žodžių ilgis bus išsaugota tik toks tekstas ({richTextBox.Text}) ");
             }
 
-            if (richTextBox.Lines.Length > 3)
+            if (richTextBox.Lines.Length == 3)
             {
-                richTextBox.Undo();
                 richTextBox.Lines = richTextBox.Lines.Take(richTextBox.Lines.Length - 1).ToArray();
                 this.SelectNextControl((Control) sender, true, true, true, true);
-                richTextBox.SelectionStart = richTextBox.Text.Length;
             }
         }
 
