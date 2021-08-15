@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
@@ -7,6 +8,7 @@ using System.Windows.Forms;
 using Invoice.Constants;
 using Invoice.Enums;
 using Invoice.Models;
+using Invoice.Models.ProductInfo;
 using Invoice.Models.ProductType;
 using Invoice.Repositories;
 using Invoice.Service;
@@ -20,8 +22,8 @@ namespace Invoice.Forms
     public partial class InvoiceForm : Form
     {
         private readonly InvoiceRepository _invoiceRepository;
-
         private readonly ProductTypeRepository _productTypeRepository;
+        private readonly ProductInfoRepository _productInfoRepository;
 
         private readonly MessageDialogService _messageDialogService = new MessageDialogService();
 
@@ -41,6 +43,7 @@ namespace Invoice.Forms
         {
             _invoiceRepository = new InvoiceRepository();
             _productTypeRepository = new ProductTypeRepository();
+            _productInfoRepository = new ProductInfoRepository();
 
             _invoiceOperations = invoiceOperations;
             _invoiceNumber = invoiceNumber;
@@ -62,6 +65,7 @@ namespace Invoice.Forms
             ResolveInvoiceNumberText();
             LoadFormDataForEditOrCopy();
             SetCursorAtDateTextBoxEnd();
+            FillAllProductComboBoxes();
         }
 
         private void InvoiceDateRichTextBox_TextChanged(object sender, EventArgs e)
@@ -570,7 +574,7 @@ namespace Invoice.Forms
             ThirdProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             FourthProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             FifthProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            SixsthProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            SixthProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             SeventhProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             EighthProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             NinthProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -1234,6 +1238,30 @@ namespace Invoice.Forms
             return getAllInfo;
         }
 
+        private void FillAllProductComboBoxes()
+        {
+            List<ProductInfoNameModel> getAllProductInfoNames = _productInfoRepository.GetAllProductsNames().ToList();
+
+            SetComboBoxDataSource(FirstProductNameComboBox, getAllProductInfoNames);
+            SetComboBoxDataSource(SecondProductNameComboBox, getAllProductInfoNames);
+            SetComboBoxDataSource(ThirdProductNameComboBox, getAllProductInfoNames);
+            SetComboBoxDataSource(FourthProductNameComboBox, getAllProductInfoNames);
+            SetComboBoxDataSource(FifthProductNameComboBox, getAllProductInfoNames);
+            SetComboBoxDataSource(SixthProductNameComboBox, getAllProductInfoNames);
+            SetComboBoxDataSource(SeventhProductNameComboBox, getAllProductInfoNames);
+            SetComboBoxDataSource(EighthProductNameComboBox, getAllProductInfoNames);
+            SetComboBoxDataSource(NinthProductNameComboBox, getAllProductInfoNames);
+            SetComboBoxDataSource(TenProductNameComboBox, getAllProductInfoNames);
+            SetComboBoxDataSource(EleventhProductNameComboBox, getAllProductInfoNames);
+            SetComboBoxDataSource(TwelfthProductNameComboBox, getAllProductInfoNames);
+        }
+
+        private void SetComboBoxDataSource(ComboBox comboBox, List<ProductInfoNameModel> getAllProductInfoNames)
+        {
+            comboBox.BindingContext = new BindingContext();
+            comboBox.DataSource = getAllProductInfoNames;
+            comboBox.DisplayMember = "ProductName";
+        }
         #endregion
 
     }

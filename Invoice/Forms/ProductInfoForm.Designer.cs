@@ -53,9 +53,8 @@ namespace Invoice.Forms
             // ProductNameRichTextBox
             // 
             this.ProductNameRichTextBox.Location = new System.Drawing.Point(156, 85);
-            this.ProductNameRichTextBox.Multiline = false;
             this.ProductNameRichTextBox.Name = "ProductNameRichTextBox";
-            this.ProductNameRichTextBox.Size = new System.Drawing.Size(295, 19);
+            this.ProductNameRichTextBox.Size = new System.Drawing.Size(295, 37);
             this.ProductNameRichTextBox.TabIndex = 38;
             this.ProductNameRichTextBox.Text = "";
             this.ProductNameRichTextBox.TextChanged += new System.EventHandler(this.RichTextBox_TextChanged);
@@ -63,7 +62,7 @@ namespace Invoice.Forms
             // 
             // ProductBarCodeRichTextBox
             // 
-            this.ProductBarCodeRichTextBox.Location = new System.Drawing.Point(156, 110);
+            this.ProductBarCodeRichTextBox.Location = new System.Drawing.Point(156, 129);
             this.ProductBarCodeRichTextBox.Multiline = false;
             this.ProductBarCodeRichTextBox.Name = "ProductBarCodeRichTextBox";
             this.ProductBarCodeRichTextBox.Size = new System.Drawing.Size(295, 19);
@@ -74,7 +73,7 @@ namespace Invoice.Forms
             // 
             // ProductSeesRichTextBox
             // 
-            this.ProductSeesRichTextBox.Location = new System.Drawing.Point(156, 135);
+            this.ProductSeesRichTextBox.Location = new System.Drawing.Point(156, 154);
             this.ProductSeesRichTextBox.Multiline = false;
             this.ProductSeesRichTextBox.Name = "ProductSeesRichTextBox";
             this.ProductSeesRichTextBox.Size = new System.Drawing.Size(72, 19);
@@ -85,7 +84,7 @@ namespace Invoice.Forms
             // 
             // ProductPriceRichTextBox
             // 
-            this.ProductPriceRichTextBox.Location = new System.Drawing.Point(156, 160);
+            this.ProductPriceRichTextBox.Location = new System.Drawing.Point(156, 179);
             this.ProductPriceRichTextBox.Multiline = false;
             this.ProductPriceRichTextBox.Name = "ProductPriceRichTextBox";
             this.ProductPriceRichTextBox.Size = new System.Drawing.Size(56, 19);
@@ -124,7 +123,7 @@ namespace Invoice.Forms
             // ProductBarCodeLabel
             // 
             this.ProductBarCodeLabel.AutoSize = true;
-            this.ProductBarCodeLabel.Location = new System.Drawing.Point(43, 113);
+            this.ProductBarCodeLabel.Location = new System.Drawing.Point(43, 132);
             this.ProductBarCodeLabel.Name = "ProductBarCodeLabel";
             this.ProductBarCodeLabel.Size = new System.Drawing.Size(107, 13);
             this.ProductBarCodeLabel.TabIndex = 45;
@@ -133,7 +132,7 @@ namespace Invoice.Forms
             // ProductSeesInfoLabel
             // 
             this.ProductSeesInfoLabel.AutoSize = true;
-            this.ProductSeesInfoLabel.Location = new System.Drawing.Point(94, 138);
+            this.ProductSeesInfoLabel.Location = new System.Drawing.Point(94, 157);
             this.ProductSeesInfoLabel.Name = "ProductSeesInfoLabel";
             this.ProductSeesInfoLabel.Size = new System.Drawing.Size(56, 13);
             this.ProductSeesInfoLabel.TabIndex = 46;
@@ -142,7 +141,7 @@ namespace Invoice.Forms
             // ProductPriceInfoLabel
             // 
             this.ProductPriceInfoLabel.AutoSize = true;
-            this.ProductPriceInfoLabel.Location = new System.Drawing.Point(116, 163);
+            this.ProductPriceInfoLabel.Location = new System.Drawing.Point(116, 182);
             this.ProductPriceInfoLabel.Name = "ProductPriceInfoLabel";
             this.ProductPriceInfoLabel.Size = new System.Drawing.Size(34, 13);
             this.ProductPriceInfoLabel.TabIndex = 47;

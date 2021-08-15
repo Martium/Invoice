@@ -193,7 +193,7 @@ namespace Invoice.Forms
             this.ThirdProductNameComboBox = new System.Windows.Forms.ComboBox();
             this.FourthProductNameComboBox = new System.Windows.Forms.ComboBox();
             this.FifthProductNameComboBox = new System.Windows.Forms.ComboBox();
-            this.SixsthProductNameComboBox = new System.Windows.Forms.ComboBox();
+            this.SixthProductNameComboBox = new System.Windows.Forms.ComboBox();
             this.SeventhProductNameComboBox = new System.Windows.Forms.ComboBox();
             this.EighthProductNameComboBox = new System.Windows.Forms.ComboBox();
             this.NinthProductNameComboBox = new System.Windows.Forms.ComboBox();
@@ -225,9 +225,9 @@ namespace Invoice.Forms
             this.AddToEleventhProductInfoButton = new System.Windows.Forms.Button();
             this.AddToTwelfthProductInfoButton = new System.Windows.Forms.Button();
             this.ProductInfoPanel = new System.Windows.Forms.Panel();
-            this.ProductNameInfoLabel = new System.Windows.Forms.Label();
-            this.ProductIdInfoLabel = new System.Windows.Forms.Label();
             this.ProductControlCenterLabel = new System.Windows.Forms.Label();
+            this.ProductIdInfoLabel = new System.Windows.Forms.Label();
+            this.ProductNameInfoLabel = new System.Windows.Forms.Label();
             this.PrintInvoicePanel.SuspendLayout();
             this.ProductsTypesPanel.SuspendLayout();
             this.ProductInfoPanel.SuspendLayout();
@@ -332,7 +332,7 @@ namespace Invoice.Forms
             this.PrintInvoicePanel.Controls.Add(this.InvoiceNumberLabel);
             this.PrintInvoicePanel.Controls.Add(this.SerialNumberLabel);
             this.PrintInvoicePanel.Controls.Add(this.InvoiceNameLabel);
-            this.PrintInvoicePanel.Location = new System.Drawing.Point(72, 31);
+            this.PrintInvoicePanel.Location = new System.Drawing.Point(370, 34);
             this.PrintInvoicePanel.Name = "PrintInvoicePanel";
             this.PrintInvoicePanel.Size = new System.Drawing.Size(820, 974);
             this.PrintInvoicePanel.TabIndex = 0;
@@ -1319,7 +1319,7 @@ namespace Invoice.Forms
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(944, 562);
+            this.SaveButton.Location = new System.Drawing.Point(12, 558);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(92, 29);
             this.SaveButton.TabIndex = 1;
@@ -1330,7 +1330,7 @@ namespace Invoice.Forms
             // 
             // SaveToPdf
             // 
-            this.SaveToPdf.Location = new System.Drawing.Point(1042, 562);
+            this.SaveToPdf.Location = new System.Drawing.Point(110, 558);
             this.SaveToPdf.Name = "SaveToPdf";
             this.SaveToPdf.Size = new System.Drawing.Size(92, 29);
             this.SaveToPdf.TabIndex = 2;
@@ -1341,7 +1341,7 @@ namespace Invoice.Forms
             // 
             // CalculateButton
             // 
-            this.CalculateButton.Location = new System.Drawing.Point(944, 602);
+            this.CalculateButton.Location = new System.Drawing.Point(12, 605);
             this.CalculateButton.Name = "CalculateButton";
             this.CalculateButton.Size = new System.Drawing.Size(92, 29);
             this.CalculateButton.TabIndex = 3;
@@ -1353,7 +1353,7 @@ namespace Invoice.Forms
             // 
             // PrintButton
             // 
-            this.PrintButton.Location = new System.Drawing.Point(1140, 562);
+            this.PrintButton.Location = new System.Drawing.Point(208, 558);
             this.PrintButton.Name = "PrintButton";
             this.PrintButton.Size = new System.Drawing.Size(107, 29);
             this.PrintButton.TabIndex = 4;
@@ -1420,9 +1420,9 @@ namespace Invoice.Forms
             this.ProductsTypesPanel.Controls.Add(this.FirstProductTypeQuantityTextBox);
             this.ProductsTypesPanel.Controls.Add(this.FirstProductTypeTextBox);
             this.ProductsTypesPanel.Controls.Add(this.TypeOfProductLabel);
-            this.ProductsTypesPanel.Location = new System.Drawing.Point(944, 31);
+            this.ProductsTypesPanel.Location = new System.Drawing.Point(12, 34);
             this.ProductsTypesPanel.Name = "ProductsTypesPanel";
-            this.ProductsTypesPanel.Size = new System.Drawing.Size(290, 510);
+            this.ProductsTypesPanel.Size = new System.Drawing.Size(303, 510);
             this.ProductsTypesPanel.TabIndex = 5;
             // 
             // TwelfthProductTypePriceTextBox
@@ -1903,14 +1903,14 @@ namespace Invoice.Forms
             this.FifthProductNameComboBox.TabIndex = 22;
             this.FifthProductNameComboBox.TabStop = false;
             // 
-            // SixsthProductNameComboBox
+            // SixthProductNameComboBox
             // 
-            this.SixsthProductNameComboBox.FormattingEnabled = true;
-            this.SixsthProductNameComboBox.Location = new System.Drawing.Point(40, 238);
-            this.SixsthProductNameComboBox.Name = "SixsthProductNameComboBox";
-            this.SixsthProductNameComboBox.Size = new System.Drawing.Size(288, 21);
-            this.SixsthProductNameComboBox.TabIndex = 23;
-            this.SixsthProductNameComboBox.TabStop = false;
+            this.SixthProductNameComboBox.FormattingEnabled = true;
+            this.SixthProductNameComboBox.Location = new System.Drawing.Point(40, 238);
+            this.SixthProductNameComboBox.Name = "SixthProductNameComboBox";
+            this.SixthProductNameComboBox.Size = new System.Drawing.Size(288, 21);
+            this.SixthProductNameComboBox.TabIndex = 23;
+            this.SixthProductNameComboBox.TabStop = false;
             // 
             // SeventhProductNameComboBox
             // 
@@ -2246,30 +2246,12 @@ namespace Invoice.Forms
             this.ProductInfoPanel.Controls.Add(this.FifthNumberInfoLabel);
             this.ProductInfoPanel.Controls.Add(this.FifthProductNameComboBox);
             this.ProductInfoPanel.Controls.Add(this.SixsthNumberInfoLabel);
-            this.ProductInfoPanel.Controls.Add(this.SixsthProductNameComboBox);
+            this.ProductInfoPanel.Controls.Add(this.SixthProductNameComboBox);
             this.ProductInfoPanel.Controls.Add(this.SeventhNumberInfoLabel);
-            this.ProductInfoPanel.Location = new System.Drawing.Point(1261, 31);
+            this.ProductInfoPanel.Location = new System.Drawing.Point(1249, 34);
             this.ProductInfoPanel.Name = "ProductInfoPanel";
             this.ProductInfoPanel.Size = new System.Drawing.Size(508, 510);
             this.ProductInfoPanel.TabIndex = 54;
-            // 
-            // ProductNameInfoLabel
-            // 
-            this.ProductNameInfoLabel.AutoSize = true;
-            this.ProductNameInfoLabel.Location = new System.Drawing.Point(46, 43);
-            this.ProductNameInfoLabel.Name = "ProductNameInfoLabel";
-            this.ProductNameInfoLabel.Size = new System.Drawing.Size(112, 13);
-            this.ProductNameInfoLabel.TabIndex = 54;
-            this.ProductNameInfoLabel.Text = "Produkto pavadinimas";
-            // 
-            // ProductIdInfoLabel
-            // 
-            this.ProductIdInfoLabel.AutoSize = true;
-            this.ProductIdInfoLabel.Location = new System.Drawing.Point(331, 43);
-            this.ProductIdInfoLabel.Name = "ProductIdInfoLabel";
-            this.ProductIdInfoLabel.Size = new System.Drawing.Size(62, 13);
-            this.ProductIdInfoLabel.TabIndex = 55;
-            this.ProductIdInfoLabel.Text = "Produkto Id";
             // 
             // ProductControlCenterLabel
             // 
@@ -2280,6 +2262,24 @@ namespace Invoice.Forms
             this.ProductControlCenterLabel.Size = new System.Drawing.Size(140, 16);
             this.ProductControlCenterLabel.TabIndex = 56;
             this.ProductControlCenterLabel.Text = "Produktų valdymas";
+            // 
+            // ProductIdInfoLabel
+            // 
+            this.ProductIdInfoLabel.AutoSize = true;
+            this.ProductIdInfoLabel.Location = new System.Drawing.Point(331, 43);
+            this.ProductIdInfoLabel.Name = "ProductIdInfoLabel";
+            this.ProductIdInfoLabel.Size = new System.Drawing.Size(62, 13);
+            this.ProductIdInfoLabel.TabIndex = 55;
+            this.ProductIdInfoLabel.Text = "Produkto Id";
+            // 
+            // ProductNameInfoLabel
+            // 
+            this.ProductNameInfoLabel.AutoSize = true;
+            this.ProductNameInfoLabel.Location = new System.Drawing.Point(46, 43);
+            this.ProductNameInfoLabel.Name = "ProductNameInfoLabel";
+            this.ProductNameInfoLabel.Size = new System.Drawing.Size(112, 13);
+            this.ProductNameInfoLabel.TabIndex = 54;
+            this.ProductNameInfoLabel.Text = "Produkto pavadinimas";
             // 
             // InvoiceForm
             // 
@@ -2470,7 +2470,7 @@ namespace Invoice.Forms
         private System.Windows.Forms.ComboBox ThirdProductNameComboBox;
         private System.Windows.Forms.ComboBox FourthProductNameComboBox;
         private System.Windows.Forms.ComboBox FifthProductNameComboBox;
-        private System.Windows.Forms.ComboBox SixsthProductNameComboBox;
+        private System.Windows.Forms.ComboBox SixthProductNameComboBox;
         private System.Windows.Forms.ComboBox SeventhProductNameComboBox;
         private System.Windows.Forms.ComboBox EighthProductNameComboBox;
         private System.Windows.Forms.ComboBox NinthProductNameComboBox;

@@ -47,7 +47,15 @@ namespace Invoice.Forms
         {
             if (e.KeyCode == Keys.Enter)
             {
-                this.SelectNextControl((Control)sender, true, true, true, true);
+                RichTextBox richTextBox = sender as RichTextBox;
+
+                if (richTextBox == null) return;
+
+                if (richTextBox.Multiline == false)
+                {
+                    this.SelectNextControl((Control)sender, true, true, true, true);
+                }
+
                 SetCursorsAtRichTextBoxStringEnd();
             }
         }
@@ -70,6 +78,12 @@ namespace Invoice.Forms
             if (richTextBox.SelectionStart == richTextBox.MaxLength)
             {
                 _messageDialogService.ShowInfoMessage($"Pasiektas maksimalus žodžių ilgis bus išsaugota tik toks tekstas ({richTextBox.Text}) ");
+            }
+
+            if (richTextBox.Lines.Length == 3)
+            {
+                richTextBox.Lines = richTextBox.Lines.Take(richTextBox.Lines.Length - 1).ToArray();
+                this.SelectNextControl((Control)sender, true, true, true, true);
             }
         }
 
