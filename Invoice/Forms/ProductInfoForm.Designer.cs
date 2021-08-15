@@ -95,7 +95,7 @@ namespace Invoice.Forms
             // 
             // ProductTypeTextBox
             // 
-            this.ProductTypeTextBox.Location = new System.Drawing.Point(156, 241);
+            this.ProductTypeTextBox.Location = new System.Drawing.Point(156, 268);
             this.ProductTypeTextBox.Name = "ProductTypeTextBox";
             this.ProductTypeTextBox.Size = new System.Drawing.Size(122, 20);
             this.ProductTypeTextBox.TabIndex = 42;
@@ -104,7 +104,7 @@ namespace Invoice.Forms
             // 
             // ProductTypePriceTextBox
             // 
-            this.ProductTypePriceTextBox.Location = new System.Drawing.Point(156, 267);
+            this.ProductTypePriceTextBox.Location = new System.Drawing.Point(156, 294);
             this.ProductTypePriceTextBox.Name = "ProductTypePriceTextBox";
             this.ProductTypePriceTextBox.Size = new System.Drawing.Size(49, 20);
             this.ProductTypePriceTextBox.TabIndex = 43;
@@ -161,7 +161,7 @@ namespace Invoice.Forms
             // 
             this.ProductExpenditureInfoLabel.AutoSize = true;
             this.ProductExpenditureInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ProductExpenditureInfoLabel.Location = new System.Drawing.Point(152, 201);
+            this.ProductExpenditureInfoLabel.Location = new System.Drawing.Point(152, 232);
             this.ProductExpenditureInfoLabel.Name = "ProductExpenditureInfoLabel";
             this.ProductExpenditureInfoLabel.Size = new System.Drawing.Size(286, 24);
             this.ProductExpenditureInfoLabel.TabIndex = 49;
@@ -170,7 +170,7 @@ namespace Invoice.Forms
             // ProductTypeInfoLabel
             // 
             this.ProductTypeInfoLabel.AutoSize = true;
-            this.ProductTypeInfoLabel.Location = new System.Drawing.Point(75, 244);
+            this.ProductTypeInfoLabel.Location = new System.Drawing.Point(75, 271);
             this.ProductTypeInfoLabel.Name = "ProductTypeInfoLabel";
             this.ProductTypeInfoLabel.Size = new System.Drawing.Size(75, 13);
             this.ProductTypeInfoLabel.TabIndex = 50;
@@ -179,7 +179,7 @@ namespace Invoice.Forms
             // ProductTypePriceInfoLabel
             // 
             this.ProductTypePriceInfoLabel.AutoSize = true;
-            this.ProductTypePriceInfoLabel.Location = new System.Drawing.Point(116, 270);
+            this.ProductTypePriceInfoLabel.Location = new System.Drawing.Point(116, 297);
             this.ProductTypePriceInfoLabel.Name = "ProductTypePriceInfoLabel";
             this.ProductTypePriceInfoLabel.Size = new System.Drawing.Size(34, 13);
             this.ProductTypePriceInfoLabel.TabIndex = 51;
@@ -210,9 +210,9 @@ namespace Invoice.Forms
             // ExistsProductListComboBox
             // 
             this.ExistsProductListComboBox.FormattingEnabled = true;
-            this.ExistsProductListComboBox.Location = new System.Drawing.Point(550, 108);
+            this.ExistsProductListComboBox.Location = new System.Drawing.Point(493, 108);
             this.ExistsProductListComboBox.Name = "ExistsProductListComboBox";
-            this.ExistsProductListComboBox.Size = new System.Drawing.Size(221, 21);
+            this.ExistsProductListComboBox.Size = new System.Drawing.Size(392, 21);
             this.ExistsProductListComboBox.TabIndex = 54;
             this.ExistsProductListComboBox.TabStop = false;
             // 
@@ -228,7 +228,7 @@ namespace Invoice.Forms
             // 
             // ChooseProductButton
             // 
-            this.ChooseProductButton.Location = new System.Drawing.Point(777, 103);
+            this.ChooseProductButton.Location = new System.Drawing.Point(896, 103);
             this.ChooseProductButton.Name = "ChooseProductButton";
             this.ChooseProductButton.Size = new System.Drawing.Size(162, 28);
             this.ChooseProductButton.TabIndex = 56;
@@ -241,7 +241,7 @@ namespace Invoice.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(964, 450);
+            this.ClientSize = new System.Drawing.Size(1070, 450);
             this.Controls.Add(this.ChooseProductButton);
             this.Controls.Add(this.ProductListInfoLabel);
             this.Controls.Add(this.ExistsProductListComboBox);

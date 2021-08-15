@@ -36,7 +36,7 @@ namespace Invoice.Repositories
             {
                 dbConnection.Open();
 
-                string getExistingBuyerQuery =
+                string getExistingProductQuery =
                     $@"
                         SELECT 
                             PI.ProductName, PI.BarCode, PI.ProductSees, PI.ProductPrice, PI.ProductType, PI.ProductTypePrice
@@ -44,9 +44,29 @@ namespace Invoice.Repositories
                         WHERE PI.ProductName = '{productName}'
                     ";
 
-                FullProductInfoModel getFullProductInfo = dbConnection.QuerySingleOrDefault<FullProductInfoModel>(getExistingBuyerQuery);
+                FullProductInfoModel getFullProductInfo = dbConnection.QuerySingleOrDefault<FullProductInfoModel>(getExistingProductQuery);
 
                 return getFullProductInfo;
+            }
+        }
+
+        public FullProductInfoWithId GetFullProductInfoWithId(string productName)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string getExistingProductQuery =
+                    $@"
+                        SELECT *
+                        FROM {ProductInfoTable} PI
+                        WHERE PI.ProductName = '{productName}'
+                    ";
+
+                FullProductInfoWithId getFullProductInfoWithId =
+                    dbConnection.QuerySingleOrDefault<FullProductInfoWithId>(getExistingProductQuery);
+
+                return getFullProductInfoWithId;
             }
         }
 

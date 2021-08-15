@@ -93,6 +93,7 @@
     <Compile Include="AppConfiguration.cs" />
     <Compile Include="Constants\FormSettings.cs" />
     <Compile Include="Enums\InvoiceOperations.cs" />
+    <Compile Include="Enums\InvoiceProductLine.cs" />
     <Compile Include="Enums\ProductTypeOperations.cs" />
     <Compile Include="Enums\ProductTypeOrStorageListOperation.cs" />
     <Compile Include="Enums\ProductTypePriceOperations.cs" />

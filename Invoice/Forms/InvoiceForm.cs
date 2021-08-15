@@ -252,6 +252,12 @@ namespace Invoice.Forms
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
+        private void AddToFirstProductInfoButton_Click(object sender, EventArgs e)
+        {
+            // do not call database is same request called introduce string in field and one in here write if then
+            FillSpecificProductLineTextBox(InvoiceProductLine.First, FirstProductNameComboBox.Text);
+        }
+
         #region Helpers
 
         private void SaveInvoiceToPdf()
@@ -1262,7 +1268,161 @@ namespace Invoice.Forms
             comboBox.DataSource = getAllProductInfoNames;
             comboBox.DisplayMember = "ProductName";
         }
-        #endregion
 
+        private void FillSpecificProductLineTextBox(InvoiceProductLine productLine, string productName)
+        {
+            FullProductInfoWithId productInfo = _productInfoRepository.GetFullProductInfoWithId(productName);
+
+            if (productInfo != null)
+            {
+                FillProductLine(productLine, productInfo);
+            }
+            else
+            {
+                _messageDialogService.ShowErrorMassage("Nėra jokios informacijos duomenų bazėje apie galimus produktus");
+            }
+        }
+
+        private void FillProductLine(InvoiceProductLine productLine, FullProductInfoWithId productInfo)
+        {
+
+            switch (productLine)
+            {
+                //bar code implementation in every case
+                case InvoiceProductLine.First:
+                    FirsProductIdTextBox.Text = productInfo.Id.ToString();
+
+                    FirstProductNameRichTextBox.Text = productInfo.ProductName;
+                    FirstProductSeesRichTextBox.Text = productInfo.ProductSees;
+                    FirstProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
+
+                    FirstProductTypeTextBox.Text = productInfo.ProductType;
+                    FirstProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    break;
+
+                case InvoiceProductLine.Second:
+                    SecondProductIdTextBox.Text = productInfo.Id.ToString();
+
+                    SecondProductNameRichTextBox.Text = productInfo.ProductName;
+                    SecondProductSeesRichTextBox.Text = productInfo.ProductSees;
+                    SecondProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
+
+                    SecondProductTypeTextBox.Text = productInfo.ProductType;
+                    SecondProductTypePriceTextBox.Text = productInfo.ProductPrice.ToString();
+                    break;
+
+                case InvoiceProductLine.Third:
+                    ThirdProductIdTextBox.Text = productInfo.Id.ToString();
+
+                    ThirdProductNameRichTextBox.Text = productInfo.ProductName;
+                    ThirdProductSeesRichTextBox.Text = productInfo.ProductSees;
+                    ThirdProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
+
+                    ThirdProductTypeTextBox.Text = productInfo.ProductType;
+                    ThirdProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    break;
+
+                case InvoiceProductLine.Fourth:
+                    FourthProductIdTextBox.Text = productInfo.Id.ToString();
+
+                    FourthProductNameRichTextBox.Text = productInfo.ProductName;
+                    FourthProductSeesRichTextBox.Text = productInfo.ProductSees;
+                    FourthProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
+
+                    FourthProductTypeTextBox.Text = productInfo.ProductType;
+                    FourthProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    break;
+
+                case InvoiceProductLine.Fifth:
+                    FifthProductIdTextBox.Text = productInfo.Id.ToString();
+
+                    FifthProductNameRichTextBox.Text = productInfo.ProductName;
+                    FifthProductSeesRichTextBox.Text = productInfo.ProductSees;
+                    FifthProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
+
+                    FifthProductTypeTextBox.Text = productInfo.ProductType;
+                    FifthProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    break;
+
+                case InvoiceProductLine.Sixth:
+                    SixthProductIdTextBox.Text = productInfo.Id.ToString();
+
+                    SixthProductNameRichTextBox.Text = productInfo.ProductName;
+                    SixthProductSeesRichTextBox.Text = productInfo.ProductSees;
+                    SixthProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
+
+                    SixthProductTypeTextBox.Text = productInfo.ProductType;
+                    SixthProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    break;
+
+                case InvoiceProductLine.Seventh:
+                    SeventhProductIdTextBox.Text = productInfo.Id.ToString();
+
+                    SeventhProductNameRichTextBox.Text = productInfo.ProductName;
+                    SeventhProductSeesRichTextBox.Text = productInfo.ProductSees;
+                    SeventhProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
+
+                    SeventhProductTypeTextBox.Text = productInfo.ProductType;
+                    SeventhProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    break;
+
+                case InvoiceProductLine.Eighth:
+                    EighthProductIdTextBox.Text = productInfo.Id.ToString();
+
+                    EighthProductNameRichTextBox.Text = productInfo.ProductName;
+                    EighthProductSeesRichTextBox.Text = productInfo.ProductSees;
+                    EighthProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
+
+                    EighthProductTypeTextBox.Text = productInfo.ProductType;
+                    EighthProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    break;
+
+                case InvoiceProductLine.Ninth:
+                    NinthProductIdTextBox.Text = productInfo.Id.ToString();
+
+                    NinthProductNameRichTextBox.Text = productInfo.ProductName;
+                    NinthProductSeesRichTextBox.Text = productInfo.ProductSees;
+                    NinthProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
+
+                    NinthProductTypeTextBox.Text = productInfo.ProductType;
+                    NinthProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    break;
+
+                case InvoiceProductLine.Ten:
+                    TenProductIdTextBox.Text = productInfo.Id.ToString();
+
+                    TenProductNameRichTextBox.Text = productInfo.ProductName;
+                    TenProductSeesRichTextBox.Text = productInfo.ProductSees;
+                    TenProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
+
+                    TenProductTypeTextBox.Text = productInfo.ProductType;
+                    TenProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    break;
+
+                case InvoiceProductLine.Eleventh:
+                    EleventhProductIdTextBox.Text = productInfo.Id.ToString();
+
+                    EleventhProductNameRichTextBox.Text = productInfo.ProductName;
+                    EleventhProductSeesRichTextBox.Text = productInfo.ProductSees;
+                    EleventhProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
+
+                    EleventhProductTypeTextBox.Text = productInfo.ProductType;
+                    EleventhProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    break;
+
+                case InvoiceProductLine.Twelfth:
+                    TwelfthProductIdTextBox.Text = productInfo.Id.ToString();
+
+                    TwelfthProductNameRichTextBox.Text = productInfo.ProductName;
+                    TwelfthProductSeesRichTextBox.Text = productInfo.ProductSees;
+                    TwelfthProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
+
+                    TwelfthProductTypeTextBox.Text = productInfo.ProductType;
+                    TwelfthProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    break;
+
+            }
+        }
+        #endregion
     }
 }
