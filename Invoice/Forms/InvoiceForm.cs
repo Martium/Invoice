@@ -1389,7 +1389,7 @@ namespace Invoice.Forms
                 case InvoiceProductLine.First:
                     FirsProductIdTextBox.Text = productInfo.Id.ToString();
 
-                    FirstProductNameRichTextBox.Text = productInfo.ProductName;
+                    FillProductNameTextBoxWithBarCode(productInfo, FirstProductNameRichTextBox);
                     FirstProductSeesRichTextBox.Text = productInfo.ProductSees;
                     FirstProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
 
@@ -1400,7 +1400,7 @@ namespace Invoice.Forms
                 case InvoiceProductLine.Second:
                     SecondProductIdTextBox.Text = productInfo.Id.ToString();
 
-                    SecondProductNameRichTextBox.Text = productInfo.ProductName;
+                    FillProductNameTextBoxWithBarCode(productInfo, SecondProductNameRichTextBox);
                     SecondProductSeesRichTextBox.Text = productInfo.ProductSees;
                     SecondProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
 
@@ -1411,7 +1411,7 @@ namespace Invoice.Forms
                 case InvoiceProductLine.Third:
                     ThirdProductIdTextBox.Text = productInfo.Id.ToString();
 
-                    ThirdProductNameRichTextBox.Text = productInfo.ProductName;
+                    FillProductNameTextBoxWithBarCode(productInfo, ThirdProductNameRichTextBox);
                     ThirdProductSeesRichTextBox.Text = productInfo.ProductSees;
                     ThirdProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
 
@@ -1422,7 +1422,7 @@ namespace Invoice.Forms
                 case InvoiceProductLine.Fourth:
                     FourthProductIdTextBox.Text = productInfo.Id.ToString();
 
-                    FourthProductNameRichTextBox.Text = productInfo.ProductName;
+                    FillProductNameTextBoxWithBarCode(productInfo, FourthProductNameRichTextBox);
                     FourthProductSeesRichTextBox.Text = productInfo.ProductSees;
                     FourthProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
 
@@ -1433,7 +1433,7 @@ namespace Invoice.Forms
                 case InvoiceProductLine.Fifth:
                     FifthProductIdTextBox.Text = productInfo.Id.ToString();
 
-                    FifthProductNameRichTextBox.Text = productInfo.ProductName;
+                    FillProductNameTextBoxWithBarCode(productInfo, FifthProductNameRichTextBox);
                     FifthProductSeesRichTextBox.Text = productInfo.ProductSees;
                     FifthProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
 
@@ -1444,7 +1444,7 @@ namespace Invoice.Forms
                 case InvoiceProductLine.Sixth:
                     SixthProductIdTextBox.Text = productInfo.Id.ToString();
 
-                    SixthProductNameRichTextBox.Text = productInfo.ProductName;
+                    FillProductNameTextBoxWithBarCode(productInfo, SixthProductNameRichTextBox);
                     SixthProductSeesRichTextBox.Text = productInfo.ProductSees;
                     SixthProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
 
@@ -1455,7 +1455,7 @@ namespace Invoice.Forms
                 case InvoiceProductLine.Seventh:
                     SeventhProductIdTextBox.Text = productInfo.Id.ToString();
 
-                    SeventhProductNameRichTextBox.Text = productInfo.ProductName;
+                    FillProductNameTextBoxWithBarCode(productInfo, SeventhProductNameRichTextBox);
                     SeventhProductSeesRichTextBox.Text = productInfo.ProductSees;
                     SeventhProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
 
@@ -1466,7 +1466,7 @@ namespace Invoice.Forms
                 case InvoiceProductLine.Eighth:
                     EighthProductIdTextBox.Text = productInfo.Id.ToString();
 
-                    EighthProductNameRichTextBox.Text = productInfo.ProductName;
+                    FillProductNameTextBoxWithBarCode(productInfo, EighthProductNameRichTextBox);
                     EighthProductSeesRichTextBox.Text = productInfo.ProductSees;
                     EighthProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
 
@@ -1477,7 +1477,7 @@ namespace Invoice.Forms
                 case InvoiceProductLine.Ninth:
                     NinthProductIdTextBox.Text = productInfo.Id.ToString();
 
-                    NinthProductNameRichTextBox.Text = productInfo.ProductName;
+                    FillProductNameTextBoxWithBarCode(productInfo, NinthProductNameRichTextBox);
                     NinthProductSeesRichTextBox.Text = productInfo.ProductSees;
                     NinthProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
 
@@ -1488,7 +1488,7 @@ namespace Invoice.Forms
                 case InvoiceProductLine.Ten:
                     TenProductIdTextBox.Text = productInfo.Id.ToString();
 
-                    TenProductNameRichTextBox.Text = productInfo.ProductName;
+                    FillProductNameTextBoxWithBarCode(productInfo, TenProductNameRichTextBox);
                     TenProductSeesRichTextBox.Text = productInfo.ProductSees;
                     TenProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
 
@@ -1499,7 +1499,7 @@ namespace Invoice.Forms
                 case InvoiceProductLine.Eleventh:
                     EleventhProductIdTextBox.Text = productInfo.Id.ToString();
 
-                    EleventhProductNameRichTextBox.Text = productInfo.ProductName;
+                    FillProductNameTextBoxWithBarCode(productInfo, EleventhProductNameRichTextBox);
                     EleventhProductSeesRichTextBox.Text = productInfo.ProductSees;
                     EleventhProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
 
@@ -1510,22 +1510,29 @@ namespace Invoice.Forms
                 case InvoiceProductLine.Twelfth:
                     TwelfthProductIdTextBox.Text = productInfo.Id.ToString();
 
-                    TwelfthProductNameRichTextBox.Text = productInfo.ProductName;
+                    FillProductNameTextBoxWithBarCode(productInfo, TwelfthProductNameRichTextBox);
                     TwelfthProductSeesRichTextBox.Text = productInfo.ProductSees;
                     TwelfthProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
 
                     TwelfthProductTypeTextBox.Text = productInfo.ProductType;
                     TwelfthProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
                     break;
-
             }
         }
 
+        private void FillProductNameTextBoxWithBarCode(FullProductInfoWithId productInfo, RichTextBox richTextBox)
+        {
+            int numLines = productInfo.ProductName.Split('\n').Length;
 
-
-
-
-
+            if (numLines == 1)
+            {
+                richTextBox.Text = string.Format(@"{0} {1}{2}", productInfo.ProductName, Environment.NewLine, productInfo.BarCode);
+            }
+            else
+            {
+                richTextBox.Text = string.Format(@"{0} {1}", productInfo.ProductName, productInfo.BarCode);
+            }
+        }
 
         #endregion
        
