@@ -38,6 +38,11 @@ namespace Invoice.Forms
 
         private const string DateFormat = "yyyy-MM-dd";
 
+        private string[] _lastProductLineFilled = new string[12];
+
+        private static readonly int[] ProductLineIndex = {0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
+
+
         public InvoiceForm(InvoiceOperations invoiceOperations, int? invoiceNumber = null,
             int? invoiceNumberYearCreation = null)
         {
@@ -254,8 +259,100 @@ namespace Invoice.Forms
 
         private void AddToFirstProductInfoButton_Click(object sender, EventArgs e)
         {
-            // do not call database is same request called introduce string in field and one in here write if then
+
+            if (FirstProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[1]]) return;
+
+            _lastProductLineFilled[ProductLineIndex[1]] = FirstProductNameComboBox.Text;
             FillSpecificProductLineTextBox(InvoiceProductLine.First, FirstProductNameComboBox.Text);
+        }
+
+        private void AddToSecondProductInfoButton_Click(object sender, EventArgs e)
+        {
+            if (SecondProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[2]]) return;
+
+            _lastProductLineFilled[ProductLineIndex[2]] = SecondProductNameComboBox.Text;
+            FillSpecificProductLineTextBox(InvoiceProductLine.Second, SecondProductNameComboBox.Text);
+        }
+
+        private void AddToThirdProductInfoButton_Click(object sender, EventArgs e)
+        {
+            if (ThirdProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[3]]) return;
+
+            _lastProductLineFilled[ProductLineIndex[3]] = ThirdProductNameComboBox.Text;
+            FillSpecificProductLineTextBox(InvoiceProductLine.Third, ThirdProductNameComboBox.Text);
+        }
+
+        private void AddToFourthProductInfoButton_Click(object sender, EventArgs e)
+        {
+            if (FourthProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[4]]) return;
+
+            _lastProductLineFilled[ProductLineIndex[4]] = FourthProductNameComboBox.Text;
+            FillSpecificProductLineTextBox(InvoiceProductLine.Fourth, FourthProductNameComboBox.Text);
+        }
+
+        private void AddToFifthProductInfoButton_Click(object sender, EventArgs e)
+        {
+
+            if (FifthProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[5]]) return;
+
+            _lastProductLineFilled[ProductLineIndex[5]] = FifthProductNameComboBox.Text;
+            FillSpecificProductLineTextBox(InvoiceProductLine.Fifth, FifthProductNameComboBox.Text);
+        }
+
+        private void AddToSixthProductInfoButton_Click(object sender, EventArgs e)
+        {
+            if (SixthProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[6]]) return;
+
+            _lastProductLineFilled[ProductLineIndex[6]] = SixthProductNameComboBox.Text;
+            FillSpecificProductLineTextBox(InvoiceProductLine.Sixth, SixthProductNameComboBox.Text);
+        }
+
+        private void AddToSeventhProductInfoButton_Click(object sender, EventArgs e)
+        {
+            if (SeventhProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[7]]) return;
+
+            _lastProductLineFilled[ProductLineIndex[7]] = SeventhProductNameComboBox.Text;
+            FillSpecificProductLineTextBox(InvoiceProductLine.Seventh, SeventhProductNameComboBox.Text);
+        }
+
+        private void AddToEighthProductInfoButton_Click(object sender, EventArgs e)
+        {
+            if (EighthProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[8]]) return;
+
+            _lastProductLineFilled[ProductLineIndex[8]] = EighthProductNameComboBox.Text;
+            FillSpecificProductLineTextBox(InvoiceProductLine.Eighth, EighthProductNameComboBox.Text);
+        }
+
+        private void AddToNinthProductInfoButton_Click(object sender, EventArgs e)
+        {
+            if (NinthProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[9]]) return;
+
+            _lastProductLineFilled[ProductLineIndex[9]] = NinthProductNameComboBox.Text;
+            FillSpecificProductLineTextBox(InvoiceProductLine.Ninth, NinthProductNameComboBox.Text);
+        }
+
+        private void AddToTenProductInfoButton_Click(object sender, EventArgs e)
+        {
+            if (TenProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[10]]) return;
+
+            _lastProductLineFilled[ProductLineIndex[10]] = TenProductNameComboBox.Text;
+            FillSpecificProductLineTextBox(InvoiceProductLine.Ten, TenProductNameComboBox.Text);
+        }
+
+        private void AddToEleventhProductInfoButton_Click(object sender, EventArgs e)
+        {
+            if (EleventhProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[11]]) return;
+
+            _lastProductLineFilled[ProductLineIndex[11]] = EleventhProductNameComboBox.Text;
+            FillSpecificProductLineTextBox(InvoiceProductLine.Eleventh, EleventhProductNameComboBox.Text);
+        }
+
+        private void AddToTwelfthProductInfoButton_Click(object sender, EventArgs e)
+        {
+            if (TwelfthProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[12]]) return;
+
+            _lastProductLineFilled[ProductLineIndex[12]] = TwelfthProductNameComboBox.Text;
+            FillSpecificProductLineTextBox(InvoiceProductLine.Twelfth, TwelfthProductNameComboBox.Text);
         }
 
         #region Helpers
@@ -1423,6 +1520,14 @@ namespace Invoice.Forms
 
             }
         }
+
+
+
+
+
+
+
         #endregion
+       
     }
 }

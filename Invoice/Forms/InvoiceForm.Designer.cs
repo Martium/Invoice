@@ -217,7 +217,7 @@ namespace Invoice.Forms
             this.AddToThirdProductInfoButton = new System.Windows.Forms.Button();
             this.AddToFourthProductInfoButton = new System.Windows.Forms.Button();
             this.AddToFifthProductInfoButton = new System.Windows.Forms.Button();
-            this.AddToSixthProductInfobutton = new System.Windows.Forms.Button();
+            this.AddToSixthProductInfoButton = new System.Windows.Forms.Button();
             this.AddToSeventhProductInfoButton = new System.Windows.Forms.Button();
             this.AddToEighthProductInfoButton = new System.Windows.Forms.Button();
             this.AddToNinthProductInfoButton = new System.Windows.Forms.Button();
@@ -2094,6 +2094,7 @@ namespace Invoice.Forms
             this.AddToSecondProductInfoButton.TabStop = false;
             this.AddToSecondProductInfoButton.Text = "Pridėti";
             this.AddToSecondProductInfoButton.UseVisualStyleBackColor = true;
+            this.AddToSecondProductInfoButton.Click += new System.EventHandler(this.AddToSecondProductInfoButton_Click);
             // 
             // AddToThirdProductInfoButton
             // 
@@ -2104,6 +2105,7 @@ namespace Invoice.Forms
             this.AddToThirdProductInfoButton.TabStop = false;
             this.AddToThirdProductInfoButton.Text = "Pridėti";
             this.AddToThirdProductInfoButton.UseVisualStyleBackColor = true;
+            this.AddToThirdProductInfoButton.Click += new System.EventHandler(this.AddToThirdProductInfoButton_Click);
             // 
             // AddToFourthProductInfoButton
             // 
@@ -2114,6 +2116,7 @@ namespace Invoice.Forms
             this.AddToFourthProductInfoButton.TabStop = false;
             this.AddToFourthProductInfoButton.Text = "Pridėti";
             this.AddToFourthProductInfoButton.UseVisualStyleBackColor = true;
+            this.AddToFourthProductInfoButton.Click += new System.EventHandler(this.AddToFourthProductInfoButton_Click);
             // 
             // AddToFifthProductInfoButton
             // 
@@ -2124,16 +2127,18 @@ namespace Invoice.Forms
             this.AddToFifthProductInfoButton.TabStop = false;
             this.AddToFifthProductInfoButton.Text = "Pridėti";
             this.AddToFifthProductInfoButton.UseVisualStyleBackColor = true;
+            this.AddToFifthProductInfoButton.Click += new System.EventHandler(this.AddToFifthProductInfoButton_Click);
             // 
-            // AddToSixthProductInfobutton
+            // AddToSixthProductInfoButton
             // 
-            this.AddToSixthProductInfobutton.Location = new System.Drawing.Point(465, 238);
-            this.AddToSixthProductInfobutton.Name = "AddToSixthProductInfobutton";
-            this.AddToSixthProductInfobutton.Size = new System.Drawing.Size(83, 20);
-            this.AddToSixthProductInfobutton.TabIndex = 47;
-            this.AddToSixthProductInfobutton.TabStop = false;
-            this.AddToSixthProductInfobutton.Text = "Pridėti";
-            this.AddToSixthProductInfobutton.UseVisualStyleBackColor = true;
+            this.AddToSixthProductInfoButton.Location = new System.Drawing.Point(465, 238);
+            this.AddToSixthProductInfoButton.Name = "AddToSixthProductInfoButton";
+            this.AddToSixthProductInfoButton.Size = new System.Drawing.Size(83, 20);
+            this.AddToSixthProductInfoButton.TabIndex = 47;
+            this.AddToSixthProductInfoButton.TabStop = false;
+            this.AddToSixthProductInfoButton.Text = "Pridėti";
+            this.AddToSixthProductInfoButton.UseVisualStyleBackColor = true;
+            this.AddToSixthProductInfoButton.Click += new System.EventHandler(this.AddToSixthProductInfoButton_Click);
             // 
             // AddToSeventhProductInfoButton
             // 
@@ -2144,6 +2149,7 @@ namespace Invoice.Forms
             this.AddToSeventhProductInfoButton.TabStop = false;
             this.AddToSeventhProductInfoButton.Text = "Pridėti";
             this.AddToSeventhProductInfoButton.UseVisualStyleBackColor = true;
+            this.AddToSeventhProductInfoButton.Click += new System.EventHandler(this.AddToSeventhProductInfoButton_Click);
             // 
             // AddToEighthProductInfoButton
             // 
@@ -2154,6 +2160,7 @@ namespace Invoice.Forms
             this.AddToEighthProductInfoButton.TabStop = false;
             this.AddToEighthProductInfoButton.Text = "Pridėti";
             this.AddToEighthProductInfoButton.UseVisualStyleBackColor = true;
+            this.AddToEighthProductInfoButton.Click += new System.EventHandler(this.AddToEighthProductInfoButton_Click);
             // 
             // AddToNinthProductInfoButton
             // 
@@ -2164,6 +2171,7 @@ namespace Invoice.Forms
             this.AddToNinthProductInfoButton.TabStop = false;
             this.AddToNinthProductInfoButton.Text = "Pridėti";
             this.AddToNinthProductInfoButton.UseVisualStyleBackColor = true;
+            this.AddToNinthProductInfoButton.Click += new System.EventHandler(this.AddToNinthProductInfoButton_Click);
             // 
             // AddToTenProductInfoButton
             // 
@@ -2174,6 +2182,7 @@ namespace Invoice.Forms
             this.AddToTenProductInfoButton.TabStop = false;
             this.AddToTenProductInfoButton.Text = "Pridėti";
             this.AddToTenProductInfoButton.UseVisualStyleBackColor = true;
+            this.AddToTenProductInfoButton.Click += new System.EventHandler(this.AddToTenProductInfoButton_Click);
             // 
             // AddToEleventhProductInfoButton
             // 
@@ -2184,6 +2193,7 @@ namespace Invoice.Forms
             this.AddToEleventhProductInfoButton.TabStop = false;
             this.AddToEleventhProductInfoButton.Text = "Pridėti";
             this.AddToEleventhProductInfoButton.UseVisualStyleBackColor = true;
+            this.AddToEleventhProductInfoButton.Click += new System.EventHandler(this.AddToEleventhProductInfoButton_Click);
             // 
             // AddToTwelfthProductInfoButton
             // 
@@ -2194,6 +2204,7 @@ namespace Invoice.Forms
             this.AddToTwelfthProductInfoButton.TabStop = false;
             this.AddToTwelfthProductInfoButton.Text = "Pridėti";
             this.AddToTwelfthProductInfoButton.UseVisualStyleBackColor = true;
+            this.AddToTwelfthProductInfoButton.Click += new System.EventHandler(this.AddToTwelfthProductInfoButton_Click);
             // 
             // ProductInfoPanel
             // 
@@ -2223,7 +2234,7 @@ namespace Invoice.Forms
             this.ProductInfoPanel.Controls.Add(this.TenProductNameComboBox);
             this.ProductInfoPanel.Controls.Add(this.NinthProductIdTextBox);
             this.ProductInfoPanel.Controls.Add(this.SecondProductIdTextBox);
-            this.ProductInfoPanel.Controls.Add(this.AddToSixthProductInfobutton);
+            this.ProductInfoPanel.Controls.Add(this.AddToSixthProductInfoButton);
             this.ProductInfoPanel.Controls.Add(this.TenNumberInfoLabel);
             this.ProductInfoPanel.Controls.Add(this.AddToSecondProductInfoButton);
             this.ProductInfoPanel.Controls.Add(this.EighthProductIdTextBox);
@@ -2495,7 +2506,7 @@ namespace Invoice.Forms
         private System.Windows.Forms.Button AddToThirdProductInfoButton;
         private System.Windows.Forms.Button AddToFourthProductInfoButton;
         private System.Windows.Forms.Button AddToFifthProductInfoButton;
-        private System.Windows.Forms.Button AddToSixthProductInfobutton;
+        private System.Windows.Forms.Button AddToSixthProductInfoButton;
         private System.Windows.Forms.Button AddToSeventhProductInfoButton;
         private System.Windows.Forms.Button AddToEighthProductInfoButton;
         private System.Windows.Forms.Button AddToNinthProductInfoButton;
