@@ -1385,7 +1385,6 @@ namespace Invoice.Forms
 
             switch (productLine)
             {
-                //bar code implementation in every case
                 case InvoiceProductLine.First:
                     FirsProductIdTextBox.Text = productInfo.Id.ToString();
 
