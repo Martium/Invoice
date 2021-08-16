@@ -142,6 +142,8 @@ namespace Invoice.Forms
 
             if (isSuccess)
             {
+                bool isAllQuantityFilled = CheckIsAllProductTypeQuantityFilledByInvoiceProductQuantity();
+                FillProductTypeQuantityIfEmpty(isAllQuantityFilled);
                 _messageDialogService.ShowInfoMessage(successMessage);
                 GetAllProductTypeForNewInvoice();
                 this.Close();
@@ -1578,7 +1580,88 @@ namespace Invoice.Forms
             BuyerInfoNameComboBox.DisplayMember = "BuyerName";
         }
 
+        private void FillProductTypeQuantityIfEmpty(bool isAllQuantityFilled)
+        {
+            if (isAllQuantityFilled)return;
+           
+            DialogResult dialogResult = _messageDialogService.ShowChoiceMessage(
+                "Kai kurie kiekio langeliai valdymo centre produkto tipai nėra supildyti arba supildyti ne pagal sąskaitos faktūros duomenis ar norite juos kad automatiškai supildytų pagal sąskaitos faktūros duomenis ?");
+
+            if (dialogResult == DialogResult.OK)
+            {
+                FirstProductTypeQuantityTextBox.Text = FirstProductQuantityRichTextBox.Text;
+                SecondProductTypeQuantityTextBox.Text = SecondProductQuantityRichTextBox.Text;
+                ThirdProductTypeQuantityTextBox.Text = ThirdProductQuantityRichTextBox.Text;
+                FourthProductTypeQuantityTextBox.Text = FourthProductQuantityRichTextBox.Text;
+                FifthProductTypeQuantityTextBox.Text = FifthProductQuantityRichTextBox.Text;
+                SixthProductTypeQuantityTextBox.Text = SixthProductQuantityRichTextBox.Text;
+                SeventhProductTypeQuantityTextBox.Text = SeventhProductQuantityRichTextBox.Text;
+                EighthProductTypeQuantityTextBox.Text = EighthProductQuantityRichTextBox.Text;
+                NinthProductTypeQuantityTextBox.Text = NinthProductQuantityRichTextBox.Text;
+                TenProductTypeQuantityTextBox.Text = TenProductQuantityRichTextBox.Text;
+                EleventhProductTypeQuantityTextBox.Text = EleventhProductQuantityRichTextBox.Text;
+                TwelfthProductTypeQuantityTextBox.Text = TwelfthProductQuantityRichTextBox.Text;
+            }
+        }
+
+        private bool CheckIsProductTypeQuantityFilledByInvoiceProductQuantity(RichTextBox richTextBox, TextBox textBox)
+        {
+            bool isFilled;
+            bool isQuantityFilled = richTextBox.Text != string.Empty;
+            bool isTypeQuantityFilled = textBox.Text != string.Empty;
+
+            if (isQuantityFilled && !isTypeQuantityFilled)
+            {
+                isFilled = false;
+            }
+            else if (!isQuantityFilled && isTypeQuantityFilled)
+            {
+                isFilled = false;
+            }
+            else if (isQuantityFilled && richTextBox.Text != textBox.Text)
+            {
+                isFilled = false;
+            }
+            else
+            {
+                isFilled = true;
+            }
+
+            return isFilled;
+        }
+
+        private bool CheckIsAllProductTypeQuantityFilledByInvoiceProductQuantity()
+        {
+            bool isAllFilled =
+                CheckIsProductTypeQuantityFilledByInvoiceProductQuantity(FirstProductQuantityRichTextBox,
+                    FirstProductTypeQuantityTextBox) &&
+                CheckIsProductTypeQuantityFilledByInvoiceProductQuantity(SecondProductQuantityRichTextBox,
+                    SecondProductTypeQuantityTextBox) &&
+                CheckIsProductTypeQuantityFilledByInvoiceProductQuantity(ThirdProductQuantityRichTextBox,
+                    ThirdProductTypeQuantityTextBox) &&
+                CheckIsProductTypeQuantityFilledByInvoiceProductQuantity(FourthProductQuantityRichTextBox,
+                    FourthProductTypeQuantityTextBox) &&
+                CheckIsProductTypeQuantityFilledByInvoiceProductQuantity(FifthProductQuantityRichTextBox,
+                    FifthProductTypeQuantityTextBox) &&
+                CheckIsProductTypeQuantityFilledByInvoiceProductQuantity(SixthProductQuantityRichTextBox,
+                    SixthProductTypeQuantityTextBox) &&
+                CheckIsProductTypeQuantityFilledByInvoiceProductQuantity(SeventhProductQuantityRichTextBox,
+                    SeventhProductTypeQuantityTextBox) &&
+                CheckIsProductTypeQuantityFilledByInvoiceProductQuantity(EighthProductQuantityRichTextBox,
+                    EighthProductTypeQuantityTextBox) &&
+                CheckIsProductTypeQuantityFilledByInvoiceProductQuantity(NinthProductQuantityRichTextBox,
+                    NinthProductTypeQuantityTextBox) &&
+                CheckIsProductTypeQuantityFilledByInvoiceProductQuantity(TenProductQuantityRichTextBox,
+                    TenProductTypeQuantityTextBox) &&
+                CheckIsProductTypeQuantityFilledByInvoiceProductQuantity(EleventhProductQuantityRichTextBox,
+                    EleventhProductTypeQuantityTextBox) &&
+                CheckIsProductTypeQuantityFilledByInvoiceProductQuantity(TwelfthProductQuantityRichTextBox,
+                    TwelfthProductTypeQuantityTextBox);
+
+            return isAllFilled;
+        }
+
         #endregion
-        
+
     }
 }
