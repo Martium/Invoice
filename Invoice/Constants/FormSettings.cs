@@ -64,7 +64,7 @@
             public static int DateFormatLength => 10;
 
             public static int BarCode => 25;
-            public static int ProductName => 73;
+            public static int ProductName => 70;
 
         }
     }
