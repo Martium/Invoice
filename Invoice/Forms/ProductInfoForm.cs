@@ -118,7 +118,7 @@ namespace Invoice.Forms
                 CreateNewBuyer();
                 LoadAllProductsNamesToComboBox();
             }
-            else if (!isProductExists && isProductNameFilled && !isAllTextBoxFilled)
+            else if (!isProductExists && isProductNameFilled)
             {
                 DialogResult dialogResult = _messageDialogService.ShowChoiceMessage("Kai kurie langeliai nesupildyti ar norite išsaugoti nepilną informaciją apie produktą ?");
 
@@ -128,7 +128,7 @@ namespace Invoice.Forms
                     LoadAllProductsNamesToComboBox();
                 }
             }
-            else if (!isProductExists && !isProductNameFilled)
+            else if (!isProductExists)
             {
                 _messageDialogService.ShowErrorMassage("Kad išsaugotumėte naują produktą būtina supildyti produkto pavadinimas langelį");
             }
@@ -150,7 +150,7 @@ namespace Invoice.Forms
             {
                 UpdateProductInfo();
             }
-            else if (isProductExists && isProductNameFilled && isAllValuesSameAsinDatabase)
+            else if (isProductExists && isProductNameFilled)
             {
                 _messageDialogService.ShowErrorMassage("Jūs nieko nepakeitėte todėl nebus atnaujinta informacija liks tokia pati ");
             }
