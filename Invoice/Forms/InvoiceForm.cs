@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using Invoice.Constants;
 using Invoice.Enums;
 using Invoice.Models;
+using Invoice.Models.BuyersInfo;
 using Invoice.Models.ProductInfo;
 using Invoice.Models.ProductType;
 using Invoice.Repositories;
@@ -24,6 +25,7 @@ namespace Invoice.Forms
         private readonly InvoiceRepository _invoiceRepository;
         private readonly ProductTypeRepository _productTypeRepository;
         private readonly ProductInfoRepository _productInfoRepository;
+        private readonly BuyersInfoRepository _buyersInfoRepository;
 
         private readonly MessageDialogService _messageDialogService = new MessageDialogService();
 
@@ -42,6 +44,8 @@ namespace Invoice.Forms
 
         private static readonly int[] ProductLineIndex = {0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
 
+        private string _lastBuyerFilled;
+
 
         public InvoiceForm(InvoiceOperations invoiceOperations, int? invoiceNumber = null,
             int? invoiceNumberYearCreation = null)
@@ -49,6 +53,7 @@ namespace Invoice.Forms
             _invoiceRepository = new InvoiceRepository();
             _productTypeRepository = new ProductTypeRepository();
             _productInfoRepository = new ProductInfoRepository();
+            _buyersInfoRepository = new BuyersInfoRepository();
 
             _invoiceOperations = invoiceOperations;
             _invoiceNumber = invoiceNumber;
@@ -71,6 +76,7 @@ namespace Invoice.Forms
             LoadFormDataForEditOrCopy();
             SetCursorAtDateTextBoxEnd();
             FillAllProductComboBoxes();
+            FillBuyerComboBox();
         }
 
         private void InvoiceDateRichTextBox_TextChanged(object sender, EventArgs e)
@@ -353,6 +359,11 @@ namespace Invoice.Forms
 
             _lastProductLineFilled[ProductLineIndex[12]] = TwelfthProductNameComboBox.Text;
             FillSpecificProductLineTextBox(InvoiceProductLine.Twelfth, TwelfthProductNameComboBox.Text);
+        }
+
+        private void AddBuyerInfoButton_Click(object sender, EventArgs e)
+        {
+            FillBuyerInfo();
         }
 
         #region Helpers
@@ -684,6 +695,8 @@ namespace Invoice.Forms
             TenProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             EleventhProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             TwelfthProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            BuyerInfoNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void FillDefaultSellerInfoForNewInvoice()
@@ -1533,7 +1546,39 @@ namespace Invoice.Forms
             }
         }
 
+        private void FillBuyerInfo()
+        {
+            if (BuyerInfoNameComboBox.Text == _lastBuyerFilled)return;
+
+            BuyerFullInfoWithIdModel buyerFullInfo = _buyersInfoRepository.GetBuyerFullInfoWithId(BuyerInfoNameComboBox.Text);
+
+            if (buyerFullInfo != null)
+            {
+                _lastBuyerFilled = BuyerInfoNameComboBox.Text;
+
+                BuyerInfoIdTextBox.Text = buyerFullInfo.Id.ToString();
+
+                BuyerNameRichTextBox.Text = buyerFullInfo.BuyerName;
+                BuyerFirmCodeRichTextBox.Text = buyerFullInfo.BuyerFirmCode;
+                BuyerPvmCodeRichTextBox.Text = buyerFullInfo.BuyerPvmCode;
+                BuyerAddressRichTextBox.Text = buyerFullInfo.BuyerAddress;
+            }
+            else
+            {
+                _messageDialogService.ShowErrorMassage("Nėra informacijos kurią galima sukelti");
+            }
+        }
+
+        private void FillBuyerComboBox()
+        {
+            List<BuyersNamesModel> getBuyerFullInfoWithId = _buyersInfoRepository.GetExistsBuyersNames().ToList();
+
+            BuyerInfoNameComboBox.BindingContext = new BindingContext();
+            BuyerInfoNameComboBox.DataSource = getBuyerFullInfoWithId;
+            BuyerInfoNameComboBox.DisplayMember = "BuyerName";
+        }
+
         #endregion
-       
+        
     }
 }

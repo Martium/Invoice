@@ -29,7 +29,7 @@ namespace Invoice.Repositories
             }
         }
 
-        public BuyerFullInfoModel BuyerFullInfo(string buyerName)
+        public BuyerFullInfoModel GetBuyerFullInfo(string buyerName)
         {
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
             {
@@ -42,9 +42,28 @@ namespace Invoice.Repositories
                         FROM {BuyersInfoTable} BI
                         WHERE BI.BuyerName = '{buyerName}'
                     ";
-
                 
                 BuyerFullInfoModel getBuyerFullInfo = dbConnection.QuerySingleOrDefault<BuyerFullInfoModel>(getExistingBuyerQuery);
+
+                return getBuyerFullInfo;
+            }
+        }
+
+        public BuyerFullInfoWithIdModel GetBuyerFullInfoWithId(string buyerName)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string getExistingBuyerQuery =
+                    $@"
+                        SELECT 
+                            BI.Id, BI.BuyerName, BI.BuyerFirmCode, BI.BuyerPvmCode, BI.BuyerAddress
+                        FROM {BuyersInfoTable} BI
+                        WHERE BI.BuyerName = '{buyerName}'
+                    ";
+
+                BuyerFullInfoWithIdModel getBuyerFullInfo = dbConnection.QuerySingleOrDefault<BuyerFullInfoWithIdModel>(getExistingBuyerQuery);
 
                 return getBuyerFullInfo;
             }

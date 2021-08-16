@@ -176,7 +176,7 @@ namespace Invoice.Forms
 
         private void LoadInfoToRichTextBoxes()
         {
-            BuyerFullInfoModel buyerFullInfo = _buyersInfoRepository.BuyerFullInfo(ExistsBuyerListComboBox.Text);
+            BuyerFullInfoModel buyerFullInfo = _buyersInfoRepository.GetBuyerFullInfo(ExistsBuyerListComboBox.Text);
 
             if (buyerFullInfo != null)
             {

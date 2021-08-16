@@ -148,6 +148,7 @@
     </Compile>
     <Compile Include="Models\AllYearsTotalPriceModel.cs" />
     <Compile Include="Models\BuyersInfo\BuyerFullInfoModel.cs" />
+    <Compile Include="Models\BuyersInfo\BuyerFullInfoWithIdModel.cs" />
     <Compile Include="Models\BuyersInfo\BuyersNamesModel.cs" />
     <Compile Include="Models\InvoiceListModel.cs" />
     <Compile Include="Models\InvoiceModel.cs" />

@@ -228,9 +228,17 @@ namespace Invoice.Forms
             this.ProductControlCenterLabel = new System.Windows.Forms.Label();
             this.ProductIdInfoLabel = new System.Windows.Forms.Label();
             this.ProductNameInfoLabel = new System.Windows.Forms.Label();
+            this.BuyerInfoPanel = new System.Windows.Forms.Panel();
+            this.BuyerInfoLabel = new System.Windows.Forms.Label();
+            this.BuyerInformationLabel = new System.Windows.Forms.Label();
+            this.BuyerInfoNameComboBox = new System.Windows.Forms.ComboBox();
+            this.BuyerInfoIdTextBox = new System.Windows.Forms.TextBox();
+            this.AddBuyerInfoButton = new System.Windows.Forms.Button();
+            this.BuyerIdInfoLabel = new System.Windows.Forms.Label();
             this.PrintInvoicePanel.SuspendLayout();
             this.ProductsTypesPanel.SuspendLayout();
             this.ProductInfoPanel.SuspendLayout();
+            this.BuyerInfoPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // PrintInvoicePanel
@@ -2293,11 +2301,83 @@ namespace Invoice.Forms
             this.ProductNameInfoLabel.TabIndex = 54;
             this.ProductNameInfoLabel.Text = "Produkto pavadinimas";
             // 
+            // BuyerInfoPanel
+            // 
+            this.BuyerInfoPanel.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.BuyerInfoPanel.Controls.Add(this.BuyerIdInfoLabel);
+            this.BuyerInfoPanel.Controls.Add(this.AddBuyerInfoButton);
+            this.BuyerInfoPanel.Controls.Add(this.BuyerInfoIdTextBox);
+            this.BuyerInfoPanel.Controls.Add(this.BuyerInfoNameComboBox);
+            this.BuyerInfoPanel.Controls.Add(this.BuyerInformationLabel);
+            this.BuyerInfoPanel.Controls.Add(this.BuyerInfoLabel);
+            this.BuyerInfoPanel.Location = new System.Drawing.Point(1249, 604);
+            this.BuyerInfoPanel.Name = "BuyerInfoPanel";
+            this.BuyerInfoPanel.Size = new System.Drawing.Size(567, 149);
+            this.BuyerInfoPanel.TabIndex = 55;
+            // 
+            // BuyerInfoLabel
+            // 
+            this.BuyerInfoLabel.AutoSize = true;
+            this.BuyerInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BuyerInfoLabel.Location = new System.Drawing.Point(177, 14);
+            this.BuyerInfoLabel.Name = "BuyerInfoLabel";
+            this.BuyerInfoLabel.Size = new System.Drawing.Size(127, 16);
+            this.BuyerInfoLabel.TabIndex = 57;
+            this.BuyerInfoLabel.Text = "Pirkėjų valdymas";
+            // 
+            // BuyerInformationLabel
+            // 
+            this.BuyerInformationLabel.AutoSize = true;
+            this.BuyerInformationLabel.Location = new System.Drawing.Point(46, 44);
+            this.BuyerInformationLabel.Name = "BuyerInformationLabel";
+            this.BuyerInformationLabel.Size = new System.Drawing.Size(101, 13);
+            this.BuyerInformationLabel.TabIndex = 57;
+            this.BuyerInformationLabel.Text = "Pirkėjo pavadinimas";
+            // 
+            // BuyerInfoNameComboBox
+            // 
+            this.BuyerInfoNameComboBox.FormattingEnabled = true;
+            this.BuyerInfoNameComboBox.Location = new System.Drawing.Point(40, 70);
+            this.BuyerInfoNameComboBox.Name = "BuyerInfoNameComboBox";
+            this.BuyerInfoNameComboBox.Size = new System.Drawing.Size(359, 21);
+            this.BuyerInfoNameComboBox.TabIndex = 57;
+            this.BuyerInfoNameComboBox.TabStop = false;
+            // 
+            // BuyerInfoIdTextBox
+            // 
+            this.BuyerInfoIdTextBox.Location = new System.Drawing.Point(405, 70);
+            this.BuyerInfoIdTextBox.Name = "BuyerInfoIdTextBox";
+            this.BuyerInfoIdTextBox.ReadOnly = true;
+            this.BuyerInfoIdTextBox.Size = new System.Drawing.Size(54, 20);
+            this.BuyerInfoIdTextBox.TabIndex = 57;
+            this.BuyerInfoIdTextBox.TabStop = false;
+            // 
+            // AddBuyerInfoButton
+            // 
+            this.AddBuyerInfoButton.Location = new System.Drawing.Point(465, 70);
+            this.AddBuyerInfoButton.Name = "AddBuyerInfoButton";
+            this.AddBuyerInfoButton.Size = new System.Drawing.Size(83, 20);
+            this.AddBuyerInfoButton.TabIndex = 57;
+            this.AddBuyerInfoButton.TabStop = false;
+            this.AddBuyerInfoButton.Text = "Pridėti";
+            this.AddBuyerInfoButton.UseVisualStyleBackColor = true;
+            this.AddBuyerInfoButton.Click += new System.EventHandler(this.AddBuyerInfoButton_Click);
+            // 
+            // BuyerIdInfoLabel
+            // 
+            this.BuyerIdInfoLabel.AutoSize = true;
+            this.BuyerIdInfoLabel.Location = new System.Drawing.Point(402, 44);
+            this.BuyerIdInfoLabel.Name = "BuyerIdInfoLabel";
+            this.BuyerIdInfoLabel.Size = new System.Drawing.Size(51, 13);
+            this.BuyerIdInfoLabel.TabIndex = 57;
+            this.BuyerIdInfoLabel.Text = "Pirkėjo Id";
+            // 
             // InvoiceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1871, 1017);
+            this.Controls.Add(this.BuyerInfoPanel);
             this.Controls.Add(this.ProductInfoPanel);
             this.Controls.Add(this.ProductsTypesPanel);
             this.Controls.Add(this.PrintButton);
@@ -2315,6 +2395,8 @@ namespace Invoice.Forms
             this.ProductsTypesPanel.PerformLayout();
             this.ProductInfoPanel.ResumeLayout(false);
             this.ProductInfoPanel.PerformLayout();
+            this.BuyerInfoPanel.ResumeLayout(false);
+            this.BuyerInfoPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2517,5 +2599,12 @@ namespace Invoice.Forms
         private System.Windows.Forms.Label ProductControlCenterLabel;
         private System.Windows.Forms.Label ProductIdInfoLabel;
         private System.Windows.Forms.Label ProductNameInfoLabel;
+        private System.Windows.Forms.Panel BuyerInfoPanel;
+        private System.Windows.Forms.ComboBox BuyerInfoNameComboBox;
+        private System.Windows.Forms.Label BuyerInformationLabel;
+        private System.Windows.Forms.Label BuyerInfoLabel;
+        private System.Windows.Forms.Label BuyerIdInfoLabel;
+        private System.Windows.Forms.Button AddBuyerInfoButton;
+        private System.Windows.Forms.TextBox BuyerInfoIdTextBox;
     }
 }
