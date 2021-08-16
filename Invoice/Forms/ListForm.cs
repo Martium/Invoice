@@ -253,6 +253,15 @@ namespace Invoice.Forms
             HideListAndOpenAnotherForm(productTypeStorageForm);
         }
 
+        private void BuyersInfoFormButton_Click(object sender, EventArgs e)
+        {
+            var buyersInfoForm = new BuyersInfoForm();
+
+            buyersInfoForm.Closed += ShowAndRefreshListForm;
+
+            HideListAndOpenAnotherForm(buyersInfoForm);
+        }
+
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == (Keys.Escape))
@@ -262,6 +271,15 @@ namespace Invoice.Forms
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void ProductsInfoFormButton_Click(object sender, EventArgs e)
+        {
+            var productInfoForm = new ProductInfoForm();
+
+            productInfoForm.Closed += ShowAndRefreshListForm;
+
+            HideListAndOpenAnotherForm(productInfoForm);
         }
 
         #region Helpers
@@ -446,6 +464,7 @@ namespace Invoice.Forms
 
             ProductTotalPriceTextBox.Text = _numberService.CalculateFullPriceFromTotalPriceWithPvm(totalPriceWithPvm);
         }
+
 
         #endregion
     }

@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 using Invoice.Constants;
 using Invoice.Enums;
 using Invoice.Models;
+using Invoice.Models.BuyersInfo;
+using Invoice.Models.ProductInfo;
 using Invoice.Models.ProductType;
 using Invoice.Repositories;
 using Invoice.Service;
@@ -19,8 +23,9 @@ namespace Invoice.Forms
     public partial class InvoiceForm : Form
     {
         private readonly InvoiceRepository _invoiceRepository;
-
         private readonly ProductTypeRepository _productTypeRepository;
+        private readonly ProductInfoRepository _productInfoRepository;
+        private readonly BuyersInfoRepository _buyersInfoRepository;
 
         private readonly MessageDialogService _messageDialogService = new MessageDialogService();
 
@@ -35,11 +40,20 @@ namespace Invoice.Forms
 
         private const string DateFormat = "yyyy-MM-dd";
 
+        private string[] _lastProductLineFilled = new string[12];
+
+        private static readonly int[] ProductLineIndex = {0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
+
+        private string _lastBuyerFilled;
+
+
         public InvoiceForm(InvoiceOperations invoiceOperations, int? invoiceNumber = null,
             int? invoiceNumberYearCreation = null)
         {
             _invoiceRepository = new InvoiceRepository();
             _productTypeRepository = new ProductTypeRepository();
+            _productInfoRepository = new ProductInfoRepository();
+            _buyersInfoRepository = new BuyersInfoRepository();
 
             _invoiceOperations = invoiceOperations;
             _invoiceNumber = invoiceNumber;
@@ -61,6 +75,8 @@ namespace Invoice.Forms
             ResolveInvoiceNumberText();
             LoadFormDataForEditOrCopy();
             SetCursorAtDateTextBoxEnd();
+            FillAllProductComboBoxes();
+            FillBuyerComboBox();
         }
 
         private void InvoiceDateRichTextBox_TextChanged(object sender, EventArgs e)
@@ -126,6 +142,8 @@ namespace Invoice.Forms
 
             if (isSuccess)
             {
+                bool isAllQuantityFilled = CheckIsAllProductTypeQuantityFilledByInvoiceProductQuantity();
+                FillProductTypeQuantityIfEmpty(isAllQuantityFilled);
                 _messageDialogService.ShowInfoMessage(successMessage);
                 GetAllProductTypeForNewInvoice();
                 this.Close();
@@ -196,7 +214,15 @@ namespace Invoice.Forms
         {
             if (e.KeyCode == Keys.Enter)
             {
-                this.SelectNextControl((Control)sender, true, true, true, true);
+                RichTextBox richTextBox = sender as RichTextBox;
+
+                if (richTextBox == null) return;
+
+                if (richTextBox.Multiline == false)
+                {
+                    this.SelectNextControl((Control)sender, true, true, true, true);
+                }
+
                 SetCursorAtTextBoxStringEnd();
             }
         }
@@ -220,6 +246,12 @@ namespace Invoice.Forms
             {
                 _messageDialogService.ShowInfoMessage($"Pasiektas maksimalus žodžių ilgis bus išsaugota tik toks tekstas ({richTextBox.Text}) ");
             }
+
+            if (richTextBox.Lines.Length == 3)
+            {
+                richTextBox.Lines = richTextBox.Lines.Take(richTextBox.Lines.Length - 1).ToArray();
+                this.SelectNextControl((Control) sender, true, true, true, true);
+            }
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -231,6 +263,109 @@ namespace Invoice.Forms
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void AddToFirstProductInfoButton_Click(object sender, EventArgs e)
+        {
+
+            if (FirstProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[1]]) return;
+
+            _lastProductLineFilled[ProductLineIndex[1]] = FirstProductNameComboBox.Text;
+            FillSpecificProductLineTextBox(InvoiceProductLine.First, FirstProductNameComboBox.Text);
+        }
+
+        private void AddToSecondProductInfoButton_Click(object sender, EventArgs e)
+        {
+            if (SecondProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[2]]) return;
+
+            _lastProductLineFilled[ProductLineIndex[2]] = SecondProductNameComboBox.Text;
+            FillSpecificProductLineTextBox(InvoiceProductLine.Second, SecondProductNameComboBox.Text);
+        }
+
+        private void AddToThirdProductInfoButton_Click(object sender, EventArgs e)
+        {
+            if (ThirdProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[3]]) return;
+
+            _lastProductLineFilled[ProductLineIndex[3]] = ThirdProductNameComboBox.Text;
+            FillSpecificProductLineTextBox(InvoiceProductLine.Third, ThirdProductNameComboBox.Text);
+        }
+
+        private void AddToFourthProductInfoButton_Click(object sender, EventArgs e)
+        {
+            if (FourthProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[4]]) return;
+
+            _lastProductLineFilled[ProductLineIndex[4]] = FourthProductNameComboBox.Text;
+            FillSpecificProductLineTextBox(InvoiceProductLine.Fourth, FourthProductNameComboBox.Text);
+        }
+
+        private void AddToFifthProductInfoButton_Click(object sender, EventArgs e)
+        {
+
+            if (FifthProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[5]]) return;
+
+            _lastProductLineFilled[ProductLineIndex[5]] = FifthProductNameComboBox.Text;
+            FillSpecificProductLineTextBox(InvoiceProductLine.Fifth, FifthProductNameComboBox.Text);
+        }
+
+        private void AddToSixthProductInfoButton_Click(object sender, EventArgs e)
+        {
+            if (SixthProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[6]]) return;
+
+            _lastProductLineFilled[ProductLineIndex[6]] = SixthProductNameComboBox.Text;
+            FillSpecificProductLineTextBox(InvoiceProductLine.Sixth, SixthProductNameComboBox.Text);
+        }
+
+        private void AddToSeventhProductInfoButton_Click(object sender, EventArgs e)
+        {
+            if (SeventhProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[7]]) return;
+
+            _lastProductLineFilled[ProductLineIndex[7]] = SeventhProductNameComboBox.Text;
+            FillSpecificProductLineTextBox(InvoiceProductLine.Seventh, SeventhProductNameComboBox.Text);
+        }
+
+        private void AddToEighthProductInfoButton_Click(object sender, EventArgs e)
+        {
+            if (EighthProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[8]]) return;
+
+            _lastProductLineFilled[ProductLineIndex[8]] = EighthProductNameComboBox.Text;
+            FillSpecificProductLineTextBox(InvoiceProductLine.Eighth, EighthProductNameComboBox.Text);
+        }
+
+        private void AddToNinthProductInfoButton_Click(object sender, EventArgs e)
+        {
+            if (NinthProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[9]]) return;
+
+            _lastProductLineFilled[ProductLineIndex[9]] = NinthProductNameComboBox.Text;
+            FillSpecificProductLineTextBox(InvoiceProductLine.Ninth, NinthProductNameComboBox.Text);
+        }
+
+        private void AddToTenProductInfoButton_Click(object sender, EventArgs e)
+        {
+            if (TenProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[10]]) return;
+
+            _lastProductLineFilled[ProductLineIndex[10]] = TenProductNameComboBox.Text;
+            FillSpecificProductLineTextBox(InvoiceProductLine.Ten, TenProductNameComboBox.Text);
+        }
+
+        private void AddToEleventhProductInfoButton_Click(object sender, EventArgs e)
+        {
+            if (EleventhProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[11]]) return;
+
+            _lastProductLineFilled[ProductLineIndex[11]] = EleventhProductNameComboBox.Text;
+            FillSpecificProductLineTextBox(InvoiceProductLine.Eleventh, EleventhProductNameComboBox.Text);
+        }
+
+        private void AddToTwelfthProductInfoButton_Click(object sender, EventArgs e)
+        {
+            if (TwelfthProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[12]]) return;
+
+            _lastProductLineFilled[ProductLineIndex[12]] = TwelfthProductNameComboBox.Text;
+            FillSpecificProductLineTextBox(InvoiceProductLine.Twelfth, TwelfthProductNameComboBox.Text);
+        }
+
+        private void AddBuyerInfoButton_Click(object sender, EventArgs e)
+        {
+            FillBuyerInfo();
         }
 
         #region Helpers
@@ -543,6 +678,27 @@ namespace Invoice.Forms
             this.StartPosition = FormStartPosition.CenterScreen;
             InvoiceNumberRichTextBox.ReadOnly = true;
             (printPreviewDialog as Form).WindowState = FormWindowState.Maximized;
+
+            DisableScrollBarRichTextBoxWithMultiLine();
+            SetComboBoxesDropDown();
+        }
+
+        private void SetComboBoxesDropDown()
+        {
+            FirstProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            SecondProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            ThirdProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            FourthProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            FifthProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            SixthProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            SeventhProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            EighthProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            NinthProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            TenProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            EleventhProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            TwelfthProductNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            BuyerInfoNameComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void FillDefaultSellerInfoForNewInvoice()
@@ -944,6 +1100,22 @@ namespace Invoice.Forms
             InvoiceAcceptedRichTextBox.SelectionStart = InvoiceAcceptedRichTextBox.Text.Length;
         }
 
+        private void DisableScrollBarRichTextBoxWithMultiLine()
+        {
+            FirstProductNameRichTextBox.ScrollBars = RichTextBoxScrollBars.None;
+            SecondProductNameRichTextBox.ScrollBars = RichTextBoxScrollBars.None;
+            ThirdProductNameRichTextBox.ScrollBars = RichTextBoxScrollBars.None;
+            FourthProductNameRichTextBox.ScrollBars = RichTextBoxScrollBars.None;
+            FifthProductNameRichTextBox.ScrollBars = RichTextBoxScrollBars.None;
+            SixthProductNameRichTextBox.ScrollBars = RichTextBoxScrollBars.None;
+            SeventhProductNameRichTextBox.ScrollBars = RichTextBoxScrollBars.None;
+            EighthProductNameRichTextBox.ScrollBars = RichTextBoxScrollBars.None;
+            NinthProductNameRichTextBox.ScrollBars = RichTextBoxScrollBars.None;
+            TenProductNameRichTextBox.ScrollBars = RichTextBoxScrollBars.None;
+            EleventhProductNameRichTextBox.ScrollBars = RichTextBoxScrollBars.None;
+            TwelfthProductNameRichTextBox.ScrollBars = RichTextBoxScrollBars.None;
+        }
+
         private void SetCursorAtProductTypeStringEnd()
         {
             FirstProductTypeTextBox.SelectionStart = FirstProductTypeTextBox.Text.Length;
@@ -1182,6 +1354,311 @@ namespace Invoice.Forms
             };
 
             return getAllInfo;
+        }
+
+        private void FillAllProductComboBoxes()
+        {
+            List<ProductInfoNameModel> getAllProductInfoNames = _productInfoRepository.GetAllProductsNames().ToList();
+
+            SetComboBoxDataSource(FirstProductNameComboBox, getAllProductInfoNames);
+            SetComboBoxDataSource(SecondProductNameComboBox, getAllProductInfoNames);
+            SetComboBoxDataSource(ThirdProductNameComboBox, getAllProductInfoNames);
+            SetComboBoxDataSource(FourthProductNameComboBox, getAllProductInfoNames);
+            SetComboBoxDataSource(FifthProductNameComboBox, getAllProductInfoNames);
+            SetComboBoxDataSource(SixthProductNameComboBox, getAllProductInfoNames);
+            SetComboBoxDataSource(SeventhProductNameComboBox, getAllProductInfoNames);
+            SetComboBoxDataSource(EighthProductNameComboBox, getAllProductInfoNames);
+            SetComboBoxDataSource(NinthProductNameComboBox, getAllProductInfoNames);
+            SetComboBoxDataSource(TenProductNameComboBox, getAllProductInfoNames);
+            SetComboBoxDataSource(EleventhProductNameComboBox, getAllProductInfoNames);
+            SetComboBoxDataSource(TwelfthProductNameComboBox, getAllProductInfoNames);
+        }
+
+        private void SetComboBoxDataSource(ComboBox comboBox, List<ProductInfoNameModel> getAllProductInfoNames)
+        {
+            comboBox.BindingContext = new BindingContext();
+            comboBox.DataSource = getAllProductInfoNames;
+            comboBox.DisplayMember = "ProductName";
+        }
+
+        private void FillSpecificProductLineTextBox(InvoiceProductLine productLine, string productName)
+        {
+            FullProductInfoWithId productInfo = _productInfoRepository.GetFullProductInfoWithId(productName);
+
+            if (productInfo != null)
+            {
+                FillProductLine(productLine, productInfo);
+            }
+            else
+            {
+                _messageDialogService.ShowErrorMassage("Nėra jokios informacijos duomenų bazėje apie galimus produktus");
+            }
+        }
+
+        private void FillProductLine(InvoiceProductLine productLine, FullProductInfoWithId productInfo)
+        {
+
+            switch (productLine)
+            {
+                case InvoiceProductLine.First:
+                    FirsProductIdTextBox.Text = productInfo.Id.ToString();
+
+                    FillProductNameTextBoxWithBarCode(productInfo, FirstProductNameRichTextBox);
+                    FirstProductSeesRichTextBox.Text = productInfo.ProductSees;
+                    FirstProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
+
+                    FirstProductTypeTextBox.Text = productInfo.ProductType;
+                    FirstProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    break;
+
+                case InvoiceProductLine.Second:
+                    SecondProductIdTextBox.Text = productInfo.Id.ToString();
+
+                    FillProductNameTextBoxWithBarCode(productInfo, SecondProductNameRichTextBox);
+                    SecondProductSeesRichTextBox.Text = productInfo.ProductSees;
+                    SecondProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
+
+                    SecondProductTypeTextBox.Text = productInfo.ProductType;
+                    SecondProductTypePriceTextBox.Text = productInfo.ProductPrice.ToString();
+                    break;
+
+                case InvoiceProductLine.Third:
+                    ThirdProductIdTextBox.Text = productInfo.Id.ToString();
+
+                    FillProductNameTextBoxWithBarCode(productInfo, ThirdProductNameRichTextBox);
+                    ThirdProductSeesRichTextBox.Text = productInfo.ProductSees;
+                    ThirdProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
+
+                    ThirdProductTypeTextBox.Text = productInfo.ProductType;
+                    ThirdProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    break;
+
+                case InvoiceProductLine.Fourth:
+                    FourthProductIdTextBox.Text = productInfo.Id.ToString();
+
+                    FillProductNameTextBoxWithBarCode(productInfo, FourthProductNameRichTextBox);
+                    FourthProductSeesRichTextBox.Text = productInfo.ProductSees;
+                    FourthProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
+
+                    FourthProductTypeTextBox.Text = productInfo.ProductType;
+                    FourthProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    break;
+
+                case InvoiceProductLine.Fifth:
+                    FifthProductIdTextBox.Text = productInfo.Id.ToString();
+
+                    FillProductNameTextBoxWithBarCode(productInfo, FifthProductNameRichTextBox);
+                    FifthProductSeesRichTextBox.Text = productInfo.ProductSees;
+                    FifthProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
+
+                    FifthProductTypeTextBox.Text = productInfo.ProductType;
+                    FifthProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    break;
+
+                case InvoiceProductLine.Sixth:
+                    SixthProductIdTextBox.Text = productInfo.Id.ToString();
+
+                    FillProductNameTextBoxWithBarCode(productInfo, SixthProductNameRichTextBox);
+                    SixthProductSeesRichTextBox.Text = productInfo.ProductSees;
+                    SixthProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
+
+                    SixthProductTypeTextBox.Text = productInfo.ProductType;
+                    SixthProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    break;
+
+                case InvoiceProductLine.Seventh:
+                    SeventhProductIdTextBox.Text = productInfo.Id.ToString();
+
+                    FillProductNameTextBoxWithBarCode(productInfo, SeventhProductNameRichTextBox);
+                    SeventhProductSeesRichTextBox.Text = productInfo.ProductSees;
+                    SeventhProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
+
+                    SeventhProductTypeTextBox.Text = productInfo.ProductType;
+                    SeventhProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    break;
+
+                case InvoiceProductLine.Eighth:
+                    EighthProductIdTextBox.Text = productInfo.Id.ToString();
+
+                    FillProductNameTextBoxWithBarCode(productInfo, EighthProductNameRichTextBox);
+                    EighthProductSeesRichTextBox.Text = productInfo.ProductSees;
+                    EighthProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
+
+                    EighthProductTypeTextBox.Text = productInfo.ProductType;
+                    EighthProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    break;
+
+                case InvoiceProductLine.Ninth:
+                    NinthProductIdTextBox.Text = productInfo.Id.ToString();
+
+                    FillProductNameTextBoxWithBarCode(productInfo, NinthProductNameRichTextBox);
+                    NinthProductSeesRichTextBox.Text = productInfo.ProductSees;
+                    NinthProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
+
+                    NinthProductTypeTextBox.Text = productInfo.ProductType;
+                    NinthProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    break;
+
+                case InvoiceProductLine.Ten:
+                    TenProductIdTextBox.Text = productInfo.Id.ToString();
+
+                    FillProductNameTextBoxWithBarCode(productInfo, TenProductNameRichTextBox);
+                    TenProductSeesRichTextBox.Text = productInfo.ProductSees;
+                    TenProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
+
+                    TenProductTypeTextBox.Text = productInfo.ProductType;
+                    TenProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    break;
+
+                case InvoiceProductLine.Eleventh:
+                    EleventhProductIdTextBox.Text = productInfo.Id.ToString();
+
+                    FillProductNameTextBoxWithBarCode(productInfo, EleventhProductNameRichTextBox);
+                    EleventhProductSeesRichTextBox.Text = productInfo.ProductSees;
+                    EleventhProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
+
+                    EleventhProductTypeTextBox.Text = productInfo.ProductType;
+                    EleventhProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    break;
+
+                case InvoiceProductLine.Twelfth:
+                    TwelfthProductIdTextBox.Text = productInfo.Id.ToString();
+
+                    FillProductNameTextBoxWithBarCode(productInfo, TwelfthProductNameRichTextBox);
+                    TwelfthProductSeesRichTextBox.Text = productInfo.ProductSees;
+                    TwelfthProductPriceRichTextBox.Text = productInfo.ProductPrice.ToString();
+
+                    TwelfthProductTypeTextBox.Text = productInfo.ProductType;
+                    TwelfthProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    break;
+            }
+        }
+
+        private void FillProductNameTextBoxWithBarCode(FullProductInfoWithId productInfo, RichTextBox richTextBox)
+        {
+            int numLines = productInfo.ProductName.Split('\n').Length;
+
+            if (numLines == 1)
+            {
+                richTextBox.Text = string.Format(@"{0} {1}{2}", productInfo.ProductName, Environment.NewLine, productInfo.BarCode);
+            }
+            else
+            {
+                richTextBox.Text = string.Format(@"{0} {1}", productInfo.ProductName, productInfo.BarCode);
+            }
+        }
+
+        private void FillBuyerInfo()
+        {
+            if (BuyerInfoNameComboBox.Text == _lastBuyerFilled)return;
+
+            BuyerFullInfoWithIdModel buyerFullInfo = _buyersInfoRepository.GetBuyerFullInfoWithId(BuyerInfoNameComboBox.Text);
+
+            if (buyerFullInfo != null)
+            {
+                _lastBuyerFilled = BuyerInfoNameComboBox.Text;
+
+                BuyerInfoIdTextBox.Text = buyerFullInfo.Id.ToString();
+
+                BuyerNameRichTextBox.Text = buyerFullInfo.BuyerName;
+                BuyerFirmCodeRichTextBox.Text = buyerFullInfo.BuyerFirmCode;
+                BuyerPvmCodeRichTextBox.Text = buyerFullInfo.BuyerPvmCode;
+                BuyerAddressRichTextBox.Text = buyerFullInfo.BuyerAddress;
+            }
+            else
+            {
+                _messageDialogService.ShowErrorMassage("Nėra informacijos kurią galima sukelti");
+            }
+        }
+
+        private void FillBuyerComboBox()
+        {
+            List<BuyersNamesModel> getBuyerFullInfoWithId = _buyersInfoRepository.GetExistsBuyersNames().ToList();
+
+            BuyerInfoNameComboBox.BindingContext = new BindingContext();
+            BuyerInfoNameComboBox.DataSource = getBuyerFullInfoWithId;
+            BuyerInfoNameComboBox.DisplayMember = "BuyerName";
+        }
+
+        private void FillProductTypeQuantityIfEmpty(bool isAllQuantityFilled)
+        {
+            if (isAllQuantityFilled)return;
+           
+            DialogResult dialogResult = _messageDialogService.ShowChoiceMessage(
+                "Kai kurie kiekio langeliai valdymo centre produkto tipai nėra supildyti arba supildyti ne pagal sąskaitos faktūros duomenis ar norite juos kad automatiškai supildytų pagal sąskaitos faktūros duomenis ?");
+
+            if (dialogResult == DialogResult.OK)
+            {
+                FirstProductTypeQuantityTextBox.Text = FirstProductQuantityRichTextBox.Text;
+                SecondProductTypeQuantityTextBox.Text = SecondProductQuantityRichTextBox.Text;
+                ThirdProductTypeQuantityTextBox.Text = ThirdProductQuantityRichTextBox.Text;
+                FourthProductTypeQuantityTextBox.Text = FourthProductQuantityRichTextBox.Text;
+                FifthProductTypeQuantityTextBox.Text = FifthProductQuantityRichTextBox.Text;
+                SixthProductTypeQuantityTextBox.Text = SixthProductQuantityRichTextBox.Text;
+                SeventhProductTypeQuantityTextBox.Text = SeventhProductQuantityRichTextBox.Text;
+                EighthProductTypeQuantityTextBox.Text = EighthProductQuantityRichTextBox.Text;
+                NinthProductTypeQuantityTextBox.Text = NinthProductQuantityRichTextBox.Text;
+                TenProductTypeQuantityTextBox.Text = TenProductQuantityRichTextBox.Text;
+                EleventhProductTypeQuantityTextBox.Text = EleventhProductQuantityRichTextBox.Text;
+                TwelfthProductTypeQuantityTextBox.Text = TwelfthProductQuantityRichTextBox.Text;
+            }
+        }
+
+        private bool CheckIsProductTypeQuantityFilledByInvoiceProductQuantity(RichTextBox richTextBox, TextBox textBox)
+        {
+            bool isFilled;
+            bool isQuantityFilled = richTextBox.Text != string.Empty;
+            bool isTypeQuantityFilled = textBox.Text != string.Empty;
+
+            if (isQuantityFilled && !isTypeQuantityFilled)
+            {
+                isFilled = false;
+            }
+            else if (!isQuantityFilled && isTypeQuantityFilled)
+            {
+                isFilled = false;
+            }
+            else if (isQuantityFilled && richTextBox.Text != textBox.Text)
+            {
+                isFilled = false;
+            }
+            else
+            {
+                isFilled = true;
+            }
+
+            return isFilled;
+        }
+
+        private bool CheckIsAllProductTypeQuantityFilledByInvoiceProductQuantity()
+        {
+            bool isAllFilled =
+                CheckIsProductTypeQuantityFilledByInvoiceProductQuantity(FirstProductQuantityRichTextBox,
+                    FirstProductTypeQuantityTextBox) &&
+                CheckIsProductTypeQuantityFilledByInvoiceProductQuantity(SecondProductQuantityRichTextBox,
+                    SecondProductTypeQuantityTextBox) &&
+                CheckIsProductTypeQuantityFilledByInvoiceProductQuantity(ThirdProductQuantityRichTextBox,
+                    ThirdProductTypeQuantityTextBox) &&
+                CheckIsProductTypeQuantityFilledByInvoiceProductQuantity(FourthProductQuantityRichTextBox,
+                    FourthProductTypeQuantityTextBox) &&
+                CheckIsProductTypeQuantityFilledByInvoiceProductQuantity(FifthProductQuantityRichTextBox,
+                    FifthProductTypeQuantityTextBox) &&
+                CheckIsProductTypeQuantityFilledByInvoiceProductQuantity(SixthProductQuantityRichTextBox,
+                    SixthProductTypeQuantityTextBox) &&
+                CheckIsProductTypeQuantityFilledByInvoiceProductQuantity(SeventhProductQuantityRichTextBox,
+                    SeventhProductTypeQuantityTextBox) &&
+                CheckIsProductTypeQuantityFilledByInvoiceProductQuantity(EighthProductQuantityRichTextBox,
+                    EighthProductTypeQuantityTextBox) &&
+                CheckIsProductTypeQuantityFilledByInvoiceProductQuantity(NinthProductQuantityRichTextBox,
+                    NinthProductTypeQuantityTextBox) &&
+                CheckIsProductTypeQuantityFilledByInvoiceProductQuantity(TenProductQuantityRichTextBox,
+                    TenProductTypeQuantityTextBox) &&
+                CheckIsProductTypeQuantityFilledByInvoiceProductQuantity(EleventhProductQuantityRichTextBox,
+                    EleventhProductTypeQuantityTextBox) &&
+                CheckIsProductTypeQuantityFilledByInvoiceProductQuantity(TwelfthProductQuantityRichTextBox,
+                    TwelfthProductTypeQuantityTextBox);
+
+            return isAllFilled;
         }
 
         #endregion

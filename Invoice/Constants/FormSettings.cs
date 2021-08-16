@@ -20,18 +20,18 @@
             public static int BuyerPvmCode => 40;
             public static int BuyerAddress => 40;
 
-            public static int FirstProductName => 45;
-            public static int SecondProductName => 45;
-            public static int ThirdProductName => 45;
-            public static int FourthProductName => 45;
-            public static int FifthProductName => 45;
-            public static int SixthProductName => 45;
-            public static int SeventhProductName => 45;
-            public static int EighthProductName => 45;
-            public static int NinthProductName => 45;
-            public static int TenProductName => 45;
-            public static int EleventhProductName => 45;
-            public static int TwelfthProductName => 45;
+            public static int FirstProductName => 100;
+            public static int SecondProductName => 100;
+            public static int ThirdProductName => 100;
+            public static int FourthProductName => 100;
+            public static int FifthProductName => 100;
+            public static int SixthProductName => 100;
+            public static int SeventhProductName => 100;
+            public static int EighthProductName => 100;
+            public static int NinthProductName => 100;
+            public static int TenProductName => 100;
+            public static int EleventhProductName => 100;
+            public static int TwelfthProductName => 100;
 
             public static int FirstProductSees => 10;
             public static int SecondProductSees => 10;
@@ -60,8 +60,11 @@
             public static int Password => 45;
             public static int IsPasswordCorrect => 5;
 
-            public static int MaxNumberLength => 10;
+            public static int MaxNumberLength => 8;
             public static int DateFormatLength => 10;
+
+            public static int BarCode => 25;
+            public static int ProductName => 70;
 
         }
     }

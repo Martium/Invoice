@@ -38,6 +38,8 @@ namespace Invoice.Repositories
                 CreateProductTypeTable(dbConnection);
                 CreateStorageTable(dbConnection);
                 CreatePasswordTable(dbConnection);
+                CreateBuyersInfoTable(dbConnection);
+                CreateProductInfoTable(dbConnection);
 
                 SetDefaultPassword(dbConnection);
 
@@ -45,6 +47,9 @@ namespace Invoice.Repositories
                 FillInvoiceTestingInfo(dbConnection);
                 FillProductTypeTestingInfo(dbConnection);
                 FillStorageTestingInfo(dbConnection);
+                FillBuyersInfoTestingInfo(dbConnection);
+                FillProductInfoTestingInfo(dbConnection);
+
 #endif
 
             }
@@ -215,8 +220,8 @@ namespace Invoice.Repositories
         private void CreateProductTypeTable(SQLiteConnection dbConnection)
         {
             string dropProductTypeTable = GetDropTableQuery("ProductType");
-            SQLiteCommand dropaProductTypeTableCommand = new SQLiteCommand(dropProductTypeTable, dbConnection);
-            dropaProductTypeTableCommand.ExecuteNonQuery();
+            SQLiteCommand dropAProductTypeTableCommand = new SQLiteCommand(dropProductTypeTable, dbConnection);
+            dropAProductTypeTableCommand.ExecuteNonQuery();
 
             string createProductTypeTableQuery =
                 $@"
@@ -293,6 +298,55 @@ namespace Invoice.Repositories
             createPasswordCommand.ExecuteNonQuery();
         }
 
+        private void CreateBuyersInfoTable(SQLiteConnection dbConnection)
+        {
+            string dropBuyersInfoTable = GetDropTableQuery("BuyersInfo");
+            SQLiteCommand dropABuyersInfoTable = new SQLiteCommand(dropBuyersInfoTable, dbConnection);
+            dropABuyersInfoTable.ExecuteNonQuery();
+
+            string createBuyersInfoTableQuery =
+                $@"
+                    CREATE TABLE [BuyersInfo] (
+                        [Id] [INTEGER] PRIMARY KEY AUTOINCREMENT NOT NULL,
+                        [BuyerName] [nvarchar]({FormSettings.TextBoxLengths.BuyerName}) NULL,
+                        [BuyerFirmCode] [nvarchar]({FormSettings.TextBoxLengths.BuyerFirmCode}) NULL,
+                        [BuyerPvmCode] [nvarchar]({FormSettings.TextBoxLengths.BuyerPvmCode}) NULL,
+                        [BuyerAddress] [nvarchar]({FormSettings.TextBoxLengths.BuyerAddress}) NULL,
+
+                        UNIQUE (Id)
+                    );
+                ";
+
+            SQLiteCommand createBuyersInfoCommand = new SQLiteCommand(createBuyersInfoTableQuery, dbConnection);
+            createBuyersInfoCommand.ExecuteNonQuery();
+        }
+
+        private void CreateProductInfoTable(SQLiteConnection dbConnection)
+        {
+            string dropProductInfoTable = GetDropTableQuery("ProductInfo");
+            SQLiteCommand dropAProductInfoTable = new SQLiteCommand(dropProductInfoTable, dbConnection);
+            dropAProductInfoTable.ExecuteNonQuery();
+
+            string createProductInfoTableQuery =
+                $@"
+                    CREATE TABLE [ProductInfo] (
+                        [Id] [INTEGER] PRIMARY KEY AUTOINCREMENT NOT NULL,
+                        [ProductName] [nvarchar]({FormSettings.TextBoxLengths.ProductName}) NULL,
+                        [BarCode] [nvarchar]({FormSettings.TextBoxLengths.BarCode}) NULL,
+                        [ProductSees] [nvarchar]({FormSettings.TextBoxLengths.FirstProductSees}) NULL,
+                        [ProductPrice] [NUMERIC] NULL,
+
+                        [ProductType] [nvarchar]({FormSettings.TextBoxLengths.ProductType}) NULL,
+                        [ProductTypePrice] [NUMERIC] NULL,
+
+                        UNIQUE (Id)
+                    );
+                ";
+
+            SQLiteCommand createProductInfoCommand = new SQLiteCommand(createProductInfoTableQuery, dbConnection);
+            createProductInfoCommand.ExecuteNonQuery();
+        }
+
         private void SetDefaultPassword(SQLiteConnection dbConnection)
         {
             string setDefaultPassword =
@@ -312,17 +366,17 @@ namespace Invoice.Repositories
             string fillInvoiceTestingInfo =
                 $@"BEGIN TRANSACTION;
                     INSERT INTO 'Invoice'
-                        Values (1, {DateTime.Now.AddYears(-1).Year}, '2021-04-02', 'ANA', 'Ežio ūkis', '305652600', 'LT 100013527916', 'Europos pr. 34-47, LT 46370 Kaunas', '867538581', 'Swedbank', 'LT857300010165352098', 
+                        Values (1, {DateTime.Now.AddYears(-1).Year}, '2021-04-02', 'ANA', 'Ežio ūkis', '305652600', 'LT 10lkuyt27916', 'Europos pr. 1, LT kazkas Kaunas', '58454587', 'Swedbank', 'LT857304444165354444', 
                         'ezioukis@gmail.com', 'Litbana', '110395066', 'LT100000022014', 'Kirtimų g. 57D, Vilnius', 'obuoliu sultys 3l 1', 'granatu sultys 3l 2', 'apelsinu sultys 3l 3', 'morku obuoliu mandarinu sultys 3l 4', 
-                        'morku obuoliu  sultys 3l 5', 'imbiero obuliu sultys 3l 6', 'obuliu kriausiu 3l 7', 'obuoliu vynuogiu 3l 8', ' obuoliu aronijų 3l 9', ' obuoliu juodujų serbentų sultys 3l 10', 'obuoliai 5l 11', 'obuoliu apelsinu 5l 12', 'vnt1', 'vnt2', 'vnt3', 'vnt4', 'vnt5', 'vnt6', 'vnt7', 'vnt8', 'vnt9', 'vnt10', 'vnt11', 'vnt12', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1.1, 2.2, 2.3, 4.4, 5.5, 2.6, 2.7, 2.8, 2.9, 1, 1.11, 1.12, 'devyniasdešimtdevyni eurai 75ct', 'Direktorius Vitalijus Pranskūnas', 'Bazinga Bazingius is Libanos', 'Nesumokėta', '213.14' );
+                        'morku obuoliu  sultys 3l 5', 'imbiero obuliu sultys 3l 6', 'obuliu kriausiu 3l 7', 'obuoliu vynuogiu 3l 8', ' obuoliu aronijų 3l 9', ' obuoliu juodujų serbentų sultys 3l 10', 'obuoliai 5l 11', 'obuoliu apelsinu 5l 12', 'vnt1', 'vnt2', 'vnt3', 'vnt4', 'vnt5', 'vnt6', 'vnt7', 'vnt8', 'vnt9', 'vnt10', 'vnt11', 'vnt12', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1.1, 2.2, 2.3, 4.4, 5.5, 2.6, 2.7, 2.8, 2.9, 1, 1.11, 1.12, 'devyniasdešimtdevyni eurai 75ct', 'Direktorius Vi4785jus 12a5894nas', 'Bazinga Bazingius is Libanos', 'Nesumokėta', '213.14' );
                     INSERT INTO 'Invoice'
-                        Values (2, {DateTime.Now.Year}, '2021-08-30', 'ANA', 'Ežio ūkis', '305652600', 'LT 100013527916', 'Europos pr. 34-47, LT 46370 Kaunas', '867538581', 'Swedbank', 'LT857300010165352098', 
-                        'ezioukis@gmail.com', 'Kazkas', '110395066', 'LT100000022014', 'Kirtimų g. 57D, Vilnius', 'obuoliu sultys 3l', 'granatu sultys 3l', 'apelsinu sultys 3l', 'morku obuoliu mandarinu sultys 3l', 
-                        'morku obuoliu  sultys 3l', 'imbiero obuliu sultys 3l', 'obuliu kriausiu 3l', 'obuoliu vynuogiu 3l', ' obuoliu aronijų 3l', ' obuoliu juodujų serbentų sultys 3l', 'obuoliai 5l', 'obuoliu apelsinu 5l', 'vnt1', 'vnt2', 'vnt3', 'vnt4', 'vnt5', 'vnt6', 'vnt7', 'vnt8', 'vnt9', 'vnt10', 'vnt11', 'vnt12', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1.1, 2.2, 2.3, 4.4, 5.5, 2.6, 2.7, 2.8, 2.9, 1, 1.11, 1.12, 'devyniasdešimtdevyni eurai 75ct', 'Direktorius Vitalijus Pranskūnas', 'Bazinga Bazingius is Libanos', 'Nesumokėta', '213.14' );
+                        Values (2, {DateTime.Now.Year}, '2021-08-30', 'ANA', 'Ežio ūkis', '305652600', 'LT 10lkiop27916', 'Europos pr. ka, LT 46kk0 Kaunas', '867k3l5l1', 'Swedbank', 'LT85730001lkjh352098', 
+                        'ezioujkis@gmail.com', 'Kazkas', '110395066', 'LT100000022014', 'Kirtimų g. 57D, Vilnius', 'obuoliu sultys 3l', 'granatu sultys 3l', 'apelsinu sultys 3l', 'morku obuoliu mandarinu sultys 3l', 
+                        'morku obuoliu  sultys 3l', 'imbiero obuliu sultys 3l', 'obuliu kriausiu 3l', 'obuoliu vynuogiu 3l', ' obuoliu aronijų 3l', ' obuoliu juodujų serbentų sultys 3l', 'obuoliai 5l', 'obuoliu apelsinu 5l', 'vnt1', 'vnt2', 'vnt3', 'vnt4', 'vnt5', 'vnt6', 'vnt7', 'vnt8', 'vnt9', 'vnt10', 'vnt11', 'vnt12', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1.1, 2.2, 2.3, 4.4, 5.5, 2.6, 2.7, 2.8, 2.9, 1, 1.11, 1.12, 'devyniasdešimtdevyni eurai 75ct', 'Direktorius 124piulus Prlns4k12s', 'Bazinga Bazingius is Libanos', 'Nesumokėta', '213.14' );
                     INSERT INTO 'Invoice'
-                        Values (3, {DateTime.Now.Year}, '2020-04-02', 'ANA', 'Ežio ūkis', '305652600', 'LT 100013527916', 'Europos pr. 34-47, LT 46370 Kaunas', '867538581', 'Swedbank', 'LT857300010165352098', 
+                        Values (3, {DateTime.Now.Year}, '2020-04-02', 'ANA', 'Ežio ūkis', '305652600', 'LT 100kjhgf7916', 'Europos pr. 34-47, LT 46370 Kaunas', '8675lll81', 'Swedbank', 'LT8573000101lkjh2098', 
                         'ezioukis@gmail.com', 'bazinga', '110395066', 'LT100000022014', 'Kirtimų g. 57D, Vilnius', 'obuoliu sultys 3l', 'granatu sultys 3l', 'apelsinu sultys 3l', 'morku obuoliu mandarinu sultys 3l', 
-                        'morku obuoliu  sultys 3l', 'imbiero obuliu sultys 3l', 'obuliu kriausiu 3l', 'obuoliu vynuogiu 3l', ' obuoliu aronijų 3l', ' obuoliu juodujų serbentų sultys 3l', 'obuoliai 5l', 'obuoliu apelsinu 5l', 'vnt1', 'vnt2', 'vnt3', 'vnt4', 'vnt5', 'vnt6', 'vnt7', 'vnt8', 'vnt9', 'vnt10', 'vnt11', 'vnt12', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1.1, 2.2, 2.3, 4.4, 5.5, 2.6, 2.7, 2.8, 2.9, 1, 1.11, 1.12, 'devyniasdešimtdevyni eurai 75ct', 'Direktorius Vitalijus Pranskūnas', 'Bazinga Bazingius is Libanos', 'Atsiskaityta', '213.14' );
+                        'morku obuoliu  sultys 3l', 'imbiero obuliu sultys 3l', 'obuliu kriausiu 3l', 'obuoliu vynuogiu 3l', ' obuoliu aronijų 3l', ' obuoliu juodujų serbentų sultys 3l', 'obuoliai 5l', 'obuoliu apelsinu 5l', 'vnt1', 'vnt2', 'vnt3', 'vnt4', 'vnt5', 'vnt6', 'vnt7', 'vnt8', 'vnt9', 'vnt10', 'vnt11', 'vnt12', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1.1, 2.2, 2.3, 4.4, 5.5, 2.6, 2.7, 2.8, 2.9, 1, 1.11, 1.12, 'devyniasdešimtdevyni eurai 75ct', 'Direktorius Vitalkjh Prkiol14as', 'Bazinga Bazingius is Libanos', 'Atsiskaityta', '213.14' );
                    COMMIT;
                   ";
 
@@ -362,6 +416,43 @@ namespace Invoice.Repositories
 
             SQLiteCommand fillStorageTestingInfoCommand = new SQLiteCommand(fillStorageTestingInfoQuery, dbConnection);
             fillStorageTestingInfoCommand.ExecuteNonQuery();
+        }
+
+        private void FillBuyersInfoTestingInfo(SQLiteConnection dbConnection)
+        {
+            string fillBuyersInfoTestingInfo =
+                @"BEGIN TRANSACTION;
+                    INSERT INTO 'BuyersInfo'
+                        Values (NULL, 'Litbana', '1', '2', '3');
+                    INSERT INTO 'BuyersInfo'
+                        Values (NULL, 'Bazinga', '11', '22', '33');
+                    INSERT INTO 'BuyersInfo'
+                        Values (NULL, 'Bazinge', '111', '222', '333');
+                   COMMIT;
+                ";
+
+            SQLiteCommand fillTestingBuyersInfoCommand = new SQLiteCommand(fillBuyersInfoTestingInfo, dbConnection);
+            fillTestingBuyersInfoCommand.ExecuteNonQuery();
+        }
+
+        private void FillProductInfoTestingInfo(SQLiteConnection dbConnection)
+        {
+            string text = "sjdajsdfnasdfasdfasdcsadcac//dfsdfvsdfvsdfasdasdc";
+            text = text.Replace("//", "" + Environment.NewLine);
+
+            string fillProductTestingInfo =
+                $@"BEGIN TRANSACTION;
+                    INSERT INTO 'ProductInfo'
+                        Values (NULL, '{text}', '1 23456 7891123', 'vnt', 1, '1l', 0.2);
+                    INSERT INTO 'ProductInfo'
+                        Values (NULL, '2 LITRAI', '2 23456 7592123', 'vnt', 2, '2l', 0.2);
+                    INSERT INTO 'ProductInfo'
+                        Values (NULL, '3 LITRAI', '3 23456 7891143', 'vnt', 3, '3l', 0.2);
+                    COMMIT;
+                ";
+
+            SQLiteCommand fillTestingProductinfoCommand = new SQLiteCommand(fillProductTestingInfo, dbConnection);
+            fillTestingProductinfoCommand.ExecuteNonQuery();
         }
 
         private string GetDropTableQuery(string tableName)
