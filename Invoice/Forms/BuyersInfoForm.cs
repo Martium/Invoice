@@ -84,7 +84,7 @@ namespace Invoice.Forms
                CreateNewBuyerInfo();
                FillExistsBuyerListComboBox();
             }
-            else if (!isBuyerExists && isBuyerNameFilled && !isAllInfoFilled)
+            else if (!isBuyerExists && isBuyerNameFilled)
             {
                 DialogResult dialogResult = _messageDialogService.ShowChoiceMessage(
                     "Kai kurie langeliai nesupildyti ar norite išsaugoti nepilną informaciją apie pirkėją ?");
@@ -95,7 +95,7 @@ namespace Invoice.Forms
                     FillExistsBuyerListComboBox();
                 }
             }
-            else if (!isBuyerExists && !isBuyerNameFilled)
+            else if (!isBuyerExists)
             {
                 _messageDialogService.ShowErrorMassage("Kad išsaugotumėte naują pirkėją būtina supildyti pirkėjo pavadinimas langelį");
 
@@ -120,7 +120,7 @@ namespace Invoice.Forms
             {
                 UpdateBuyerInfo();
             }
-            else if (isBuyerExists && isBuyerNameFilled && isAllValuesSame)
+            else if (isBuyerExists && isBuyerNameFilled)
             {
                 _messageDialogService.ShowErrorMassage("Jūs nieko nepakeitėte todėl nebus atnaujinta informacija liks tokia pati ");
             }
