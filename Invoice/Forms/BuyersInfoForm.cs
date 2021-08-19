@@ -203,7 +203,7 @@ namespace Invoice.Forms
             {
                 BuyerName = BuyerNameRichTextBox.Text,
                 BuyerFirmCode = BuyerFirmCodeRichTextBox.Text,
-                BuyerPvmCode = BuyerAddressRichTextBox.Text,
+                BuyerPvmCode = BuyerPvmCodeRichTextBox.Text,
                 BuyerAddress = BuyerAddressRichTextBox.Text
             };
 
@@ -223,7 +223,7 @@ namespace Invoice.Forms
         private bool CheckAllBuyerInfoIsFilled()
         {
             bool isAllBuyerInfoFilled = !string.IsNullOrWhiteSpace(BuyerFirmCodeRichTextBox.Text) &&
-                                        !string.IsNullOrWhiteSpace(BuyerFirmCodeRichTextBox.Text) &&
+                                        !string.IsNullOrWhiteSpace(BuyerPvmCodeRichTextBox.Text) &&
                                         !string.IsNullOrWhiteSpace(BuyerAddressRichTextBox.Text);
 
             return isAllBuyerInfoFilled;
@@ -235,7 +235,7 @@ namespace Invoice.Forms
             {
                 BuyerName = BuyerNameRichTextBox.Text,
                 BuyerFirmCode = BuyerFirmCodeRichTextBox.Text,
-                BuyerPvmCode = BuyerAddressRichTextBox.Text,
+                BuyerPvmCode = BuyerPvmCodeRichTextBox.Text,
                 BuyerAddress = BuyerAddressRichTextBox.Text
             };
 

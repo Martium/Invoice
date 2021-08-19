@@ -29,7 +29,7 @@ namespace Invoice.Forms
 
         private readonly MessageDialogService _messageDialogService = new MessageDialogService();
 
-        private readonly NumberService _numberService = new NumberService();
+        private readonly NumberService _numberService;
 
         private readonly InvoiceOperations _invoiceOperations;
         private readonly int? _invoiceNumber;
@@ -54,6 +54,7 @@ namespace Invoice.Forms
             _productTypeRepository = new ProductTypeRepository();
             _productInfoRepository = new ProductInfoRepository();
             _buyersInfoRepository = new BuyersInfoRepository();
+            _numberService = new NumberService();
 
             _invoiceOperations = invoiceOperations;
             _invoiceNumber = invoiceNumber;
@@ -162,13 +163,13 @@ namespace Invoice.Forms
 
             if (dialogResult == DialogResult.OK)
             {
-                SaveInvoiceToPdf();
-                _messageDialogService.ShowInfoMessage("Sąskaitos faktūra išsaugota į pdf failą");
+                SaveInvoiceAndMoneyReceiptToToPdf();
+                _messageDialogService.ShowInfoMessage("Sąskaitos faktūra ir kvitas išsaugota į pdf failą");
             }
             else
             {
-               SaveInvoiceAndMoneyReceiptToPdf();
-               _messageDialogService.ShowInfoMessage("Sąskaita faktūra ir kvitas išsaugota į pdf failą");
+               SaveInvoiceToPdf();
+               _messageDialogService.ShowInfoMessage("Sąskaita faktūra išsaugota į pdf failą");
             }
 
             SaveButton_Click(this, new EventArgs());
@@ -370,7 +371,7 @@ namespace Invoice.Forms
 
         #region Helpers
 
-        private void SaveInvoiceToPdf()
+        private void SaveInvoiceAndMoneyReceiptToToPdf()
         {
             CaptureInvoiceFormScreen();
 
@@ -392,7 +393,7 @@ namespace Invoice.Forms
             newInvoiceDocument.Close();
         }
 
-        private void SaveInvoiceAndMoneyReceiptToPdf()
+        private void SaveInvoiceToPdf()
         {
             CaptureInvoiceFormScreen();
 
