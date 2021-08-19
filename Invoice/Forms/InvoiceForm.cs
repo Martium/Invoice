@@ -169,6 +169,8 @@ namespace Invoice.Forms
 
             if (dialogResult == DialogResult.OK)
             {
+                AddOneToMoneyReceiptSuggestedNumber();
+
                 SaveInvoiceAndMoneyReceiptToToPdf();
                 _messageDialogService.ShowInfoMessage("Sąskaitos faktūra ir kvitas išsaugota į pdf failą");
             }
@@ -219,27 +221,37 @@ namespace Invoice.Forms
             if (string.IsNullOrWhiteSpace(MoneyReceiptOfferNumberTextBox.Text))
             {
                 SaveMoneyReceiptSuggestionNumberButton.Enabled = false;
+                SaveToPdf.Enabled = false;
                 e.Cancel = true;
 
                 _messageDialogService.DisplayLabelAndTextBoxError($"raudonas langelis negali būt tuščias, turi būt sveikas skaičius, negali būt lygus arba mažesnis nei 0 pvz ", MoneyReceiptOfferNumberTextBox, ErrorMassageLabel);
+
+                MoneyReceiptOfferNumberTextBox.SelectionStart = MoneyReceiptOfferNumberTextBox.Text.Length;
             }
             else if (isNumber && number <= 0)
             {
                 SaveMoneyReceiptSuggestionNumberButton.Enabled = false;
+                SaveToPdf.Enabled = false;
                 e.Cancel = true;
 
                 _messageDialogService.DisplayLabelAndTextBoxError($"raudonas langelis negali būt lygus arba mažesnis nei 0, pvz ", MoneyReceiptOfferNumberTextBox, ErrorMassageLabel);
+
+                MoneyReceiptOfferNumberTextBox.SelectionStart = MoneyReceiptOfferNumberTextBox.Text.Length;
             }
             else if (!isNumber)
             {
                 SaveMoneyReceiptSuggestionNumberButton.Enabled = false;
+                SaveToPdf.Enabled = false;
                 e.Cancel = true;
 
                 _messageDialogService.DisplayLabelAndTextBoxError($"raudonas langelis turi būti sveikas skaičius negali būt lygus arba mažesnis nei 0, pvz ", MoneyReceiptOfferNumberTextBox, ErrorMassageLabel);
+
+                MoneyReceiptOfferNumberTextBox.SelectionStart = MoneyReceiptOfferNumberTextBox.Text.Length;
             }
             else
             {
                 SaveMoneyReceiptSuggestionNumberButton.Enabled = true;
+                SaveToPdf.Enabled = true;
                 e.Cancel = false;
                 _messageDialogService.HideLabelAndTextBoxError(ErrorMassageLabel,MoneyReceiptOfferNumberTextBox);
             }
@@ -1735,7 +1747,21 @@ namespace Invoice.Forms
             _lastMoneyReceiptNumber = suggestedNumber.MoneyReceiptSuggestedNumber;
         }
 
+        private void AddOneToMoneyReceiptSuggestedNumber()
+        {
+            int suggestedNumber = int.Parse(MoneyReceiptOfferNumberTextBox.Text);
+
+            if (_lastMoneyReceiptNumber == suggestedNumber)
+            {
+                _moneyReceiptRepository.AddOneToMoneyReceiptSuggestedNumber();
+            }
+            else
+            {
+                _moneyReceiptRepository.UpdateNewSuggestedNumberAndAddOne(suggestedNumber);
+            }
+        }
+
         #endregion
-       
+
     }
 }

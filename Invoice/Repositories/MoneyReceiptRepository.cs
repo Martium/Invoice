@@ -29,6 +29,7 @@ namespace Invoice.Repositories
                 return getSuggestedNumber;
             }
         }
+
         public bool UpdateMoneyReceiptSuggestedNumber(int newSuggestedNumber)
         {
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
@@ -45,6 +46,40 @@ namespace Invoice.Repositories
                 int affectedRows = dbConnection.Execute(updateMoneyReceiptNumberQuery);
 
                 return affectedRows == 1;
+            }
+        }
+
+        public void AddOneToMoneyReceiptSuggestedNumber()
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string updateMoneyReceiptNumberQuery =
+                    $@"
+                        UPDATE '{MoneyReceiptTable}'
+                         SET {MoneyReceiptSuggestedNumber} = {MoneyReceiptSuggestedNumber} + 1
+                        WHERE Id = {Id}
+                    ";
+
+                 dbConnection.Execute(updateMoneyReceiptNumberQuery);
+            }
+        }
+
+        public void UpdateNewSuggestedNumberAndAddOne(int suggestedNumber)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string updateMoneyReceiptNumberQuery =
+                    $@"
+                        UPDATE '{MoneyReceiptTable}'
+                         SET {MoneyReceiptSuggestedNumber} = {suggestedNumber} + 1
+                        WHERE Id = {Id}
+                    ";
+
+                dbConnection.Execute(updateMoneyReceiptNumberQuery);
             }
         }
     }

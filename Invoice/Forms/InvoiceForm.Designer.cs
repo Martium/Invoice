@@ -2426,8 +2426,8 @@ namespace Invoice.Forms
             this.MoneyReceiptOfferNumberTextBox.Name = "MoneyReceiptOfferNumberTextBox";
             this.MoneyReceiptOfferNumberTextBox.Size = new System.Drawing.Size(54, 20);
             this.MoneyReceiptOfferNumberTextBox.TabIndex = 58;
-            this.MoneyReceiptOfferNumberTextBox.TabStop = false;
             this.MoneyReceiptOfferNumberTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.MoneyReceiptOfferNumberTextBox_Validating);
+            this.MoneyReceiptOfferNumberTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
             // 
             // InvoiceForm
             // 
