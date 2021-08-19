@@ -9,6 +9,7 @@ using Invoice.Constants;
 using Invoice.Enums;
 using Invoice.Models;
 using Invoice.Models.BuyersInfo;
+using Invoice.Models.MoneyReceipt;
 using Invoice.Models.ProductInfo;
 using Invoice.Models.ProductType;
 using Invoice.Repositories;
@@ -26,9 +27,9 @@ namespace Invoice.Forms
         private readonly ProductTypeRepository _productTypeRepository;
         private readonly ProductInfoRepository _productInfoRepository;
         private readonly BuyersInfoRepository _buyersInfoRepository;
+        private readonly MoneyReceiptRepository _moneyReceiptRepository;
 
-        private readonly MessageDialogService _messageDialogService = new MessageDialogService();
-
+        private readonly MessageDialogService _messageDialogService;
         private readonly NumberService _numberService;
 
         private readonly InvoiceOperations _invoiceOperations;
@@ -46,6 +47,8 @@ namespace Invoice.Forms
 
         private string _lastBuyerFilled;
 
+        private int _lastMoneyReceiptNumber;
+
 
         public InvoiceForm(InvoiceOperations invoiceOperations, int? invoiceNumber = null,
             int? invoiceNumberYearCreation = null)
@@ -54,7 +57,10 @@ namespace Invoice.Forms
             _productTypeRepository = new ProductTypeRepository();
             _productInfoRepository = new ProductInfoRepository();
             _buyersInfoRepository = new BuyersInfoRepository();
+            _moneyReceiptRepository = new MoneyReceiptRepository();
+
             _numberService = new NumberService();
+            _messageDialogService = new MessageDialogService();
 
             _invoiceOperations = invoiceOperations;
             _invoiceNumber = invoiceNumber;
@@ -66,8 +72,6 @@ namespace Invoice.Forms
 
             SetTextBoxLengths();
 
-            FillDefaultSellerInfoForNewInvoice();
-
             SetControlInitialState();
         }
 
@@ -78,6 +82,8 @@ namespace Invoice.Forms
             SetCursorAtDateTextBoxEnd();
             FillAllProductComboBoxes();
             FillBuyerComboBox();
+            FillDefaultSellerInfoForNewInvoice();
+            LoadSuggestedMoneyReceiptNumber();
         }
 
         private void InvoiceDateRichTextBox_TextChanged(object sender, EventArgs e)
@@ -400,6 +406,29 @@ namespace Invoice.Forms
         private void AddBuyerInfoButton_Click(object sender, EventArgs e)
         {
             FillBuyerInfo();
+        }
+
+        private void SaveMoneyReceiptSuggestionNumberButton_Click(object sender, EventArgs e)
+        {
+            int moneyReceiptNewNumber = int.Parse(MoneyReceiptOfferNumberTextBox.Text);
+
+            if (_lastMoneyReceiptNumber == moneyReceiptNewNumber)
+            {
+                _messageDialogService.ShowInfoMessage("Siūlomas Kvito skaičius yra vienodas duomenų bazėje todėl nebus išsaugotas");
+                return;
+            }
+
+            bool isUpdated = _moneyReceiptRepository.UpdateMoneyReceiptSuggestedNumber(moneyReceiptNewNumber);
+
+            if (isUpdated)
+            {
+                _lastMoneyReceiptNumber = moneyReceiptNewNumber;
+                _messageDialogService.ShowInfoMessage("Naujas Kvito numeris išsaugotas sekmingai");
+            }
+            else
+            {
+                _messageDialogService.ShowErrorMassage("Neišsisaugojo kreiptis į administratorių");
+            }
         }
 
         #region Helpers
@@ -1041,6 +1070,8 @@ namespace Invoice.Forms
             TenProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
             EleventhProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
             TwelfthProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+
+            MoneyReceiptOfferNumberTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
         }
 
         private void CaptureInvoiceFormScreen()
@@ -1695,9 +1726,16 @@ namespace Invoice.Forms
             return isAllFilled;
         }
 
+        private void LoadSuggestedMoneyReceiptNumber()
+        {
+            MoneyReceiptSuggestedNumberModel suggestedNumber = _moneyReceiptRepository.GetSuggestedMoneyReceiptNumber();
 
+            MoneyReceiptOfferNumberTextBox.Text = suggestedNumber.MoneyReceiptSuggestedNumber.ToString();
+
+            _lastMoneyReceiptNumber = suggestedNumber.MoneyReceiptSuggestedNumber;
+        }
 
         #endregion
-
+       
     }
 }

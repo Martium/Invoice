@@ -40,8 +40,10 @@ namespace Invoice.Repositories
                 CreatePasswordTable(dbConnection);
                 CreateBuyersInfoTable(dbConnection);
                 CreateProductInfoTable(dbConnection);
+                CreateMoneyReceiptTable(dbConnection);
 
                 SetDefaultPassword(dbConnection);
+                SetDefaultMoneyReceiptNumber(dbConnection);
 
 #if DEBUG
                 FillInvoiceTestingInfo(dbConnection);
@@ -188,6 +190,27 @@ namespace Invoice.Repositories
 
             SQLiteCommand createStorageTableCommand = new SQLiteCommand(createStorageTableQuery, dbConnection);
             createStorageTableCommand.ExecuteNonQuery();
+        }
+
+        private void CreateMoneyReceiptTable(SQLiteConnection dbConnection)
+        {
+            string dropAMoneyReceiptTableQuery = GetDropTableQuery("MoneyReceipt");
+            SQLiteCommand dropAMoneyReceiptCommand = new SQLiteCommand(dropAMoneyReceiptTableQuery, dbConnection);
+            dropAMoneyReceiptCommand.ExecuteNonQuery();
+
+            string createMoneyReceiptTableQuery =
+                $@"
+                    CREATE TABLE [MoneyReceipt] (
+                        [Id] [INTEGER] NOT NULL,
+                        [MoneyReceiptSuggestedNumber] [INTEGER] ({FormSettings.TextBoxLengths.MaxNumberLength}) NOT NULL,
+                        
+                        UNIQUE (Id)
+                    );
+                ";
+
+            SQLiteCommand createMoneyReceiptCommand = new SQLiteCommand(createMoneyReceiptTableQuery, dbConnection);
+            createMoneyReceiptCommand.ExecuteNonQuery();
+
         }
 
         private void CreateSellerInfoTable(SQLiteConnection dbConnection)
@@ -358,6 +381,19 @@ namespace Invoice.Repositories
 
             SQLiteCommand setDefaultPasswordCommand = new SQLiteCommand(setDefaultPassword, dbConnection);
             setDefaultPasswordCommand.ExecuteNonQuery();
+        }
+
+        private void SetDefaultMoneyReceiptNumber(SQLiteConnection dbConnection)
+        {
+            string setDefaultMoneyReceiptNumber =
+                @"BEGIN TRANSACTION;
+                    INSERT INTO 'MoneyReceipt'
+                        VALUES (1, 1);
+                  COMMIT;
+                ";
+
+            SQLiteCommand setDefaultMoneyReceiptCommand = new SQLiteCommand(setDefaultMoneyReceiptNumber, dbConnection);
+            setDefaultMoneyReceiptCommand.ExecuteNonQuery();
         }
 
         private void FillInvoiceTestingInfo(SQLiteConnection dbConnection)

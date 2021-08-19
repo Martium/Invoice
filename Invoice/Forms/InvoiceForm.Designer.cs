@@ -2409,6 +2409,7 @@ namespace Invoice.Forms
             this.SaveMoneyReceiptSuggestionNumberButton.TabStop = false;
             this.SaveMoneyReceiptSuggestionNumberButton.Text = "Išsaugoti";
             this.SaveMoneyReceiptSuggestionNumberButton.UseVisualStyleBackColor = true;
+            this.SaveMoneyReceiptSuggestionNumberButton.Click += new System.EventHandler(this.SaveMoneyReceiptSuggestionNumberButton_Click);
             // 
             // MoneyRecepitNumberInfoLabel
             // 
