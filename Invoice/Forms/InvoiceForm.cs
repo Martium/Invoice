@@ -100,7 +100,7 @@ namespace Invoice.Forms
                 SaveButton.Enabled = false;
                 e.Cancel = true;
                 _messageDialogService.DisplayLabelAndTextBoxError(
-                    $"Negali būti tuščias! pvz.: {DateTime.Now.ToString(DateFormat)}", InvoiceDateRichTextBox,
+                    $" Raudonas langelis Negali būti tuščias! pvz.: {DateTime.Now.ToString(DateFormat)}", InvoiceDateRichTextBox,
                     ErrorMassageLabel);
             }
             else if (!DateTime.TryParseExact(InvoiceDateRichTextBox.Text, DateFormat, CultureInfo.InvariantCulture,
@@ -109,7 +109,7 @@ namespace Invoice.Forms
                 SaveButton.Enabled = false;
                 e.Cancel = true;
                 _messageDialogService.DisplayLabelAndTextBoxError(
-                    $"Įveskite teisingą datą! pvz.: {DateTime.Now.ToString(DateFormat)}", InvoiceDateRichTextBox,
+                    $"Raudoname langelyje Įveskite teisingą datą! pvz.: {DateTime.Now.ToString(DateFormat)}", InvoiceDateRichTextBox,
                     ErrorMassageLabel);
             }
             else
@@ -203,6 +203,39 @@ namespace Invoice.Forms
             else
             {
                 PrintInvoiceForm();
+            }
+        }
+
+        private void MoneyReceiptOfferNumberTextBox_Validating(object sender, CancelEventArgs e)
+        {
+            bool isNumber = int.TryParse(MoneyReceiptOfferNumberTextBox.Text, out int number);
+
+            if (string.IsNullOrWhiteSpace(MoneyReceiptOfferNumberTextBox.Text))
+            {
+                SaveMoneyReceiptSuggestionNumberButton.Enabled = false;
+                e.Cancel = true;
+
+                _messageDialogService.DisplayLabelAndTextBoxError($"raudonas langelis negali būt tuščias, turi būt sveikas skaičius, negali būt lygus arba mažesnis nei 0 pvz ", MoneyReceiptOfferNumberTextBox, ErrorMassageLabel);
+            }
+            else if (isNumber && number <= 0)
+            {
+                SaveMoneyReceiptSuggestionNumberButton.Enabled = false;
+                e.Cancel = true;
+
+                _messageDialogService.DisplayLabelAndTextBoxError($"raudonas langelis negali būt lygus arba mažesnis nei 0, pvz ", MoneyReceiptOfferNumberTextBox, ErrorMassageLabel);
+            }
+            else if (!isNumber)
+            {
+                SaveMoneyReceiptSuggestionNumberButton.Enabled = false;
+                e.Cancel = true;
+
+                _messageDialogService.DisplayLabelAndTextBoxError($"raudonas langelis turi būti sveikas skaičius negali būt lygus arba mažesnis nei 0, pvz ", MoneyReceiptOfferNumberTextBox, ErrorMassageLabel);
+            }
+            else
+            {
+                SaveMoneyReceiptSuggestionNumberButton.Enabled = true;
+                e.Cancel = false;
+                _messageDialogService.HideLabelAndTextBoxError(ErrorMassageLabel,MoneyReceiptOfferNumberTextBox);
             }
         }
 
@@ -1661,6 +1694,8 @@ namespace Invoice.Forms
 
             return isAllFilled;
         }
+
+
 
         #endregion
 

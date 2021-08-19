@@ -229,16 +229,22 @@ namespace Invoice.Forms
             this.ProductIdInfoLabel = new System.Windows.Forms.Label();
             this.ProductNameInfoLabel = new System.Windows.Forms.Label();
             this.BuyerInfoPanel = new System.Windows.Forms.Panel();
-            this.BuyerInfoLabel = new System.Windows.Forms.Label();
-            this.BuyerInformationLabel = new System.Windows.Forms.Label();
-            this.BuyerInfoNameComboBox = new System.Windows.Forms.ComboBox();
-            this.BuyerInfoIdTextBox = new System.Windows.Forms.TextBox();
-            this.AddBuyerInfoButton = new System.Windows.Forms.Button();
             this.BuyerIdInfoLabel = new System.Windows.Forms.Label();
+            this.AddBuyerInfoButton = new System.Windows.Forms.Button();
+            this.BuyerInfoIdTextBox = new System.Windows.Forms.TextBox();
+            this.BuyerInfoNameComboBox = new System.Windows.Forms.ComboBox();
+            this.BuyerInformationLabel = new System.Windows.Forms.Label();
+            this.BuyerInfoLabel = new System.Windows.Forms.Label();
+            this.MoneyPrecepitControlPanel = new System.Windows.Forms.Panel();
+            this.MoneyRecepitInfoLabel = new System.Windows.Forms.Label();
+            this.SaveMoneyReceiptSuggestionNumberButton = new System.Windows.Forms.Button();
+            this.MoneyRecepitNumberInfoLabel = new System.Windows.Forms.Label();
+            this.MoneyReceiptOfferNumberTextBox = new System.Windows.Forms.TextBox();
             this.PrintInvoicePanel.SuspendLayout();
             this.ProductsTypesPanel.SuspendLayout();
             this.ProductInfoPanel.SuspendLayout();
             this.BuyerInfoPanel.SuspendLayout();
+            this.MoneyPrecepitControlPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // PrintInvoicePanel
@@ -349,7 +355,7 @@ namespace Invoice.Forms
             // 
             this.ErrorMassageLabel.AutoSize = true;
             this.ErrorMassageLabel.ForeColor = System.Drawing.Color.Red;
-            this.ErrorMassageLabel.Location = new System.Drawing.Point(552, 109);
+            this.ErrorMassageLabel.Location = new System.Drawing.Point(19, 13);
             this.ErrorMassageLabel.Name = "ErrorMassageLabel";
             this.ErrorMassageLabel.Size = new System.Drawing.Size(57, 13);
             this.ErrorMassageLabel.TabIndex = 97;
@@ -2315,42 +2321,14 @@ namespace Invoice.Forms
             this.BuyerInfoPanel.Size = new System.Drawing.Size(567, 149);
             this.BuyerInfoPanel.TabIndex = 55;
             // 
-            // BuyerInfoLabel
+            // BuyerIdInfoLabel
             // 
-            this.BuyerInfoLabel.AutoSize = true;
-            this.BuyerInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BuyerInfoLabel.Location = new System.Drawing.Point(177, 14);
-            this.BuyerInfoLabel.Name = "BuyerInfoLabel";
-            this.BuyerInfoLabel.Size = new System.Drawing.Size(127, 16);
-            this.BuyerInfoLabel.TabIndex = 57;
-            this.BuyerInfoLabel.Text = "Pirkėjų valdymas";
-            // 
-            // BuyerInformationLabel
-            // 
-            this.BuyerInformationLabel.AutoSize = true;
-            this.BuyerInformationLabel.Location = new System.Drawing.Point(46, 44);
-            this.BuyerInformationLabel.Name = "BuyerInformationLabel";
-            this.BuyerInformationLabel.Size = new System.Drawing.Size(101, 13);
-            this.BuyerInformationLabel.TabIndex = 57;
-            this.BuyerInformationLabel.Text = "Pirkėjo pavadinimas";
-            // 
-            // BuyerInfoNameComboBox
-            // 
-            this.BuyerInfoNameComboBox.FormattingEnabled = true;
-            this.BuyerInfoNameComboBox.Location = new System.Drawing.Point(40, 70);
-            this.BuyerInfoNameComboBox.Name = "BuyerInfoNameComboBox";
-            this.BuyerInfoNameComboBox.Size = new System.Drawing.Size(359, 21);
-            this.BuyerInfoNameComboBox.TabIndex = 57;
-            this.BuyerInfoNameComboBox.TabStop = false;
-            // 
-            // BuyerInfoIdTextBox
-            // 
-            this.BuyerInfoIdTextBox.Location = new System.Drawing.Point(405, 70);
-            this.BuyerInfoIdTextBox.Name = "BuyerInfoIdTextBox";
-            this.BuyerInfoIdTextBox.ReadOnly = true;
-            this.BuyerInfoIdTextBox.Size = new System.Drawing.Size(54, 20);
-            this.BuyerInfoIdTextBox.TabIndex = 57;
-            this.BuyerInfoIdTextBox.TabStop = false;
+            this.BuyerIdInfoLabel.AutoSize = true;
+            this.BuyerIdInfoLabel.Location = new System.Drawing.Point(402, 44);
+            this.BuyerIdInfoLabel.Name = "BuyerIdInfoLabel";
+            this.BuyerIdInfoLabel.Size = new System.Drawing.Size(51, 13);
+            this.BuyerIdInfoLabel.TabIndex = 57;
+            this.BuyerIdInfoLabel.Text = "Pirkėjo Id";
             // 
             // AddBuyerInfoButton
             // 
@@ -2363,20 +2341,99 @@ namespace Invoice.Forms
             this.AddBuyerInfoButton.UseVisualStyleBackColor = true;
             this.AddBuyerInfoButton.Click += new System.EventHandler(this.AddBuyerInfoButton_Click);
             // 
-            // BuyerIdInfoLabel
+            // BuyerInfoIdTextBox
             // 
-            this.BuyerIdInfoLabel.AutoSize = true;
-            this.BuyerIdInfoLabel.Location = new System.Drawing.Point(402, 44);
-            this.BuyerIdInfoLabel.Name = "BuyerIdInfoLabel";
-            this.BuyerIdInfoLabel.Size = new System.Drawing.Size(51, 13);
-            this.BuyerIdInfoLabel.TabIndex = 57;
-            this.BuyerIdInfoLabel.Text = "Pirkėjo Id";
+            this.BuyerInfoIdTextBox.Location = new System.Drawing.Point(405, 70);
+            this.BuyerInfoIdTextBox.Name = "BuyerInfoIdTextBox";
+            this.BuyerInfoIdTextBox.ReadOnly = true;
+            this.BuyerInfoIdTextBox.Size = new System.Drawing.Size(54, 20);
+            this.BuyerInfoIdTextBox.TabIndex = 57;
+            this.BuyerInfoIdTextBox.TabStop = false;
+            // 
+            // BuyerInfoNameComboBox
+            // 
+            this.BuyerInfoNameComboBox.FormattingEnabled = true;
+            this.BuyerInfoNameComboBox.Location = new System.Drawing.Point(40, 70);
+            this.BuyerInfoNameComboBox.Name = "BuyerInfoNameComboBox";
+            this.BuyerInfoNameComboBox.Size = new System.Drawing.Size(359, 21);
+            this.BuyerInfoNameComboBox.TabIndex = 57;
+            this.BuyerInfoNameComboBox.TabStop = false;
+            // 
+            // BuyerInformationLabel
+            // 
+            this.BuyerInformationLabel.AutoSize = true;
+            this.BuyerInformationLabel.Location = new System.Drawing.Point(46, 44);
+            this.BuyerInformationLabel.Name = "BuyerInformationLabel";
+            this.BuyerInformationLabel.Size = new System.Drawing.Size(101, 13);
+            this.BuyerInformationLabel.TabIndex = 57;
+            this.BuyerInformationLabel.Text = "Pirkėjo pavadinimas";
+            // 
+            // BuyerInfoLabel
+            // 
+            this.BuyerInfoLabel.AutoSize = true;
+            this.BuyerInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BuyerInfoLabel.Location = new System.Drawing.Point(177, 14);
+            this.BuyerInfoLabel.Name = "BuyerInfoLabel";
+            this.BuyerInfoLabel.Size = new System.Drawing.Size(127, 16);
+            this.BuyerInfoLabel.TabIndex = 57;
+            this.BuyerInfoLabel.Text = "Pirkėjų valdymas";
+            // 
+            // MoneyPrecepitControlPanel
+            // 
+            this.MoneyPrecepitControlPanel.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.MoneyPrecepitControlPanel.Controls.Add(this.MoneyRecepitInfoLabel);
+            this.MoneyPrecepitControlPanel.Controls.Add(this.SaveMoneyReceiptSuggestionNumberButton);
+            this.MoneyPrecepitControlPanel.Controls.Add(this.MoneyRecepitNumberInfoLabel);
+            this.MoneyPrecepitControlPanel.Controls.Add(this.MoneyReceiptOfferNumberTextBox);
+            this.MoneyPrecepitControlPanel.Location = new System.Drawing.Point(1249, 800);
+            this.MoneyPrecepitControlPanel.Name = "MoneyPrecepitControlPanel";
+            this.MoneyPrecepitControlPanel.Size = new System.Drawing.Size(567, 100);
+            this.MoneyPrecepitControlPanel.TabIndex = 56;
+            // 
+            // MoneyRecepitInfoLabel
+            // 
+            this.MoneyRecepitInfoLabel.AutoSize = true;
+            this.MoneyRecepitInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MoneyRecepitInfoLabel.Location = new System.Drawing.Point(177, 11);
+            this.MoneyRecepitInfoLabel.Name = "MoneyRecepitInfoLabel";
+            this.MoneyRecepitInfoLabel.Size = new System.Drawing.Size(115, 16);
+            this.MoneyRecepitInfoLabel.TabIndex = 58;
+            this.MoneyRecepitInfoLabel.Text = "Kvito Valdymas";
+            // 
+            // SaveMoneyReceiptSuggestionNumberButton
+            // 
+            this.SaveMoneyReceiptSuggestionNumberButton.Location = new System.Drawing.Point(184, 45);
+            this.SaveMoneyReceiptSuggestionNumberButton.Name = "SaveMoneyReceiptSuggestionNumberButton";
+            this.SaveMoneyReceiptSuggestionNumberButton.Size = new System.Drawing.Size(89, 22);
+            this.SaveMoneyReceiptSuggestionNumberButton.TabIndex = 58;
+            this.SaveMoneyReceiptSuggestionNumberButton.TabStop = false;
+            this.SaveMoneyReceiptSuggestionNumberButton.Text = "Išsaugoti";
+            this.SaveMoneyReceiptSuggestionNumberButton.UseVisualStyleBackColor = true;
+            // 
+            // MoneyRecepitNumberInfoLabel
+            // 
+            this.MoneyRecepitNumberInfoLabel.AutoSize = true;
+            this.MoneyRecepitNumberInfoLabel.Location = new System.Drawing.Point(27, 50);
+            this.MoneyRecepitNumberInfoLabel.Name = "MoneyRecepitNumberInfoLabel";
+            this.MoneyRecepitNumberInfoLabel.Size = new System.Drawing.Size(91, 13);
+            this.MoneyRecepitNumberInfoLabel.TabIndex = 58;
+            this.MoneyRecepitNumberInfoLabel.Text = "Kvito siūlomas Nr.";
+            // 
+            // MoneyReceiptOfferNumberTextBox
+            // 
+            this.MoneyReceiptOfferNumberTextBox.Location = new System.Drawing.Point(124, 47);
+            this.MoneyReceiptOfferNumberTextBox.Name = "MoneyReceiptOfferNumberTextBox";
+            this.MoneyReceiptOfferNumberTextBox.Size = new System.Drawing.Size(54, 20);
+            this.MoneyReceiptOfferNumberTextBox.TabIndex = 58;
+            this.MoneyReceiptOfferNumberTextBox.TabStop = false;
+            this.MoneyReceiptOfferNumberTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.MoneyReceiptOfferNumberTextBox_Validating);
             // 
             // InvoiceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1871, 1017);
+            this.Controls.Add(this.MoneyPrecepitControlPanel);
             this.Controls.Add(this.BuyerInfoPanel);
             this.Controls.Add(this.ProductInfoPanel);
             this.Controls.Add(this.ProductsTypesPanel);
@@ -2397,6 +2454,8 @@ namespace Invoice.Forms
             this.ProductInfoPanel.PerformLayout();
             this.BuyerInfoPanel.ResumeLayout(false);
             this.BuyerInfoPanel.PerformLayout();
+            this.MoneyPrecepitControlPanel.ResumeLayout(false);
+            this.MoneyPrecepitControlPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2606,5 +2665,10 @@ namespace Invoice.Forms
         private System.Windows.Forms.Label BuyerIdInfoLabel;
         private System.Windows.Forms.Button AddBuyerInfoButton;
         private System.Windows.Forms.TextBox BuyerInfoIdTextBox;
+        private System.Windows.Forms.Panel MoneyPrecepitControlPanel;
+        private System.Windows.Forms.Label MoneyRecepitNumberInfoLabel;
+        private System.Windows.Forms.TextBox MoneyReceiptOfferNumberTextBox;
+        private System.Windows.Forms.Label MoneyRecepitInfoLabel;
+        private System.Windows.Forms.Button SaveMoneyReceiptSuggestionNumberButton;
     }
 }
