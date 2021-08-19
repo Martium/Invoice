@@ -10,6 +10,7 @@ namespace Invoice.Forms
 
         public MoneyReceiptForm()
         {
+            //need logic for position panel by filled products 
             InitializeComponent();
         }
 

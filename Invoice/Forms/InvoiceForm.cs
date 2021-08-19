@@ -499,7 +499,7 @@ namespace Invoice.Forms
         {
             var moneyReceiptForm = new MoneyReceiptForm();
 
-            string allProducts = FillProductsToMoneyReceiptForm();
+            string allProducts = "";
 
             MoneyReceiptModel moneyReceiptInfo = new MoneyReceiptModel()
             {
@@ -528,7 +528,9 @@ namespace Invoice.Forms
         {
             var moneyReceiptForm = new MoneyReceiptForm();
 
-            string allProducts = FillProductsToMoneyReceiptForm();
+            string[] allProducts = FillProductsToArray();
+
+            _countEmptyLinesForMoneyReceipt = _numberService.CountEmptyStrings(allProducts);
 
             MoneyReceiptModel moneyReceiptInfo = new MoneyReceiptModel()
             {
@@ -537,7 +539,7 @@ namespace Invoice.Forms
                 SerialNumber = SerialNumberRichTextBox.Text,
                 InvoiceNumber = InvoiceNumberRichTextBox.Text,
                 InvoiceDate = InvoiceDateRichTextBox.Text,
-                AllProducts = $@"{allProducts}",
+                AllProducts = $@"",
 
                 PriceInWords = PriceInWordsRichTextBox.Text,
                 InvoiceMaker = InvoiceMakerRichTextBox.Text
@@ -573,7 +575,7 @@ namespace Invoice.Forms
             return productInfo;
         }
 
-        private string FillProductsToMoneyReceiptForm()
+        private string[] FillProductsToArray()
         {
             string firstProductInfo = CheckProductsRichTextBox(FirstProductNameRichTextBox, FirstProductQuantityRichTextBox,
                 FirstProductSeesRichTextBox, FirstProductPriceRichTextBox);
@@ -600,7 +602,7 @@ namespace Invoice.Forms
             string twelfthProductInfo = CheckProductsRichTextBox(TwelfthProductNameRichTextBox,
                 TwelfthProductQuantityRichTextBox, TwelfthProductSeesRichTextBox, TwelfthProductPriceRichTextBox);
 
-            string[] productsStrings = new string[12]
+            string[] allProducts = new string[12]
             {
                 firstProductInfo,
                 secondProductInfo,
@@ -615,22 +617,6 @@ namespace Invoice.Forms
                 eleventhProductInfo,
                 twelfthProductInfo
             };
-
-            _countEmptyLinesForMoneyReceipt = _numberService.CountEmptyStrings(productsStrings);
-
-            
-
-
-
-            string allProducts = $@"{firstProductInfo} {secondProductInfo} {thirdProductInfo} 
-{forthProductInfo}{fifthProductInfo} {sixthProductInfo} 
-{seventhProductInfo} {eighthProductInfo} {ninthProductInfo} 
-{tenProductInfo} {eleventhProductInfo} {twelfthProductInfo}";
-
-
-           
-            
-
 
             return allProducts;
         }
