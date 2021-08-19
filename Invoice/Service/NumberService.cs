@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 using Invoice.Enums;
 using Invoice.Models;
@@ -434,6 +436,13 @@ namespace Invoice.Service
             }
 
             return multiplication;
+        }
+
+        public int CountEmptyStrings(string[] stringsArray)
+        {
+            int countFilledStrings = stringsArray.Count(c => c == "");
+
+            return countFilledStrings;
         }
        
     }

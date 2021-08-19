@@ -48,6 +48,7 @@ namespace Invoice.Forms
         private string _lastBuyerFilled;
 
         private int _lastMoneyReceiptNumber;
+        private int _countEmptyLinesForMoneyReceipt;
 
 
         public InvoiceForm(InvoiceOperations invoiceOperations, int? invoiceNumber = null,
@@ -582,7 +583,6 @@ namespace Invoice.Forms
                 ThirdProductQuantityRichTextBox, ThirdProductSeesRichTextBox, ThirdProductPriceRichTextBox);
             string forthProductInfo = CheckProductsRichTextBox(FourthProductNameRichTextBox,
                 FourthProductQuantityRichTextBox, FourthProductSeesRichTextBox, FourthProductPriceRichTextBox);
-
             string fifthProductInfo = CheckProductsRichTextBox(FifthProductNameRichTextBox,
                 FifthProductQuantityRichTextBox, FifthProductSeesRichTextBox, FifthProductPriceRichTextBox);
             string sixthProductInfo = CheckProductsRichTextBox(SixthProductNameRichTextBox,
@@ -591,22 +591,46 @@ namespace Invoice.Forms
                 SeventhProductQuantityRichTextBox, SeventhProductSeesRichTextBox, SeventhProductPriceRichTextBox);
             string eighthProductInfo = CheckProductsRichTextBox(EighthProductNameRichTextBox,
                 EighthProductQuantityRichTextBox, EighthProductSeesRichTextBox, EighthProductPriceRichTextBox);
-
             string ninthProductInfo = CheckProductsRichTextBox(NinthProductNameRichTextBox,
                 NinthProductQuantityRichTextBox, NinthProductSeesRichTextBox, NinthProductPriceRichTextBox);
             string tenProductInfo = CheckProductsRichTextBox(TenProductNameRichTextBox, TenProductQuantityRichTextBox,
                 TenProductSeesRichTextBox, TenProductPriceRichTextBox);
             string eleventhProductInfo = CheckProductsRichTextBox(EleventhProductNameRichTextBox,
                 EleventhProductQuantityRichTextBox, EleventhProductSeesRichTextBox, EleventhProductPriceRichTextBox);
-            string twelfthProductName = CheckProductsRichTextBox(TwelfthProductNameRichTextBox,
+            string twelfthProductInfo = CheckProductsRichTextBox(TwelfthProductNameRichTextBox,
                 TwelfthProductQuantityRichTextBox, TwelfthProductSeesRichTextBox, TwelfthProductPriceRichTextBox);
+
+            string[] productsStrings = new string[12]
+            {
+                firstProductInfo,
+                secondProductInfo,
+                thirdProductInfo,
+                forthProductInfo,
+                fifthProductInfo,
+                sixthProductInfo,
+                seventhProductInfo,
+                eighthProductInfo,
+                ninthProductInfo,
+                tenProductInfo,
+                eleventhProductInfo,
+                twelfthProductInfo
+            };
+
+            _countEmptyLinesForMoneyReceipt = _numberService.CountEmptyStrings(productsStrings);
+
+            
 
 
 
             string allProducts = $@"{firstProductInfo} {secondProductInfo} {thirdProductInfo} 
 {forthProductInfo}{fifthProductInfo} {sixthProductInfo} 
 {seventhProductInfo} {eighthProductInfo} {ninthProductInfo} 
-{tenProductInfo} {eleventhProductInfo} {twelfthProductName}";
+{tenProductInfo} {eleventhProductInfo} {twelfthProductInfo}";
+
+
+           
+            
+
 
             return allProducts;
         }
@@ -1759,6 +1783,12 @@ namespace Invoice.Forms
             {
                 _moneyReceiptRepository.UpdateNewSuggestedNumberAndAddOne(suggestedNumber);
             }
+        }
+
+        private bool CheckIsStringFilled(string product)
+        {
+            bool isFilled = string.IsNullOrEmpty(product);
+            return isFilled;
         }
 
         #endregion
