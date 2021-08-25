@@ -42,7 +42,7 @@ namespace Invoice.Forms
             this.InvoiceMakerLabel = new System.Windows.Forms.Label();
             this.BuyerInfoGuideLabel = new System.Windows.Forms.Label();
             this.SellerAcceptedMoneyInfoLabel = new System.Windows.Forms.Label();
-            this.InvoiceNumberLabel = new System.Windows.Forms.Label();
+            this.MoneyReceiptNumberLabel = new System.Windows.Forms.Label();
             this.SerialNumberLabel = new System.Windows.Forms.Label();
             this.SellerFirmCodeLabel = new System.Windows.Forms.Label();
             this.AllProductsLabel = new System.Windows.Forms.Label();
@@ -61,7 +61,7 @@ namespace Invoice.Forms
             // 
             this.PrintMoneyReceiptPanel.BackColor = System.Drawing.SystemColors.Window;
             this.PrintMoneyReceiptPanel.Controls.Add(this.PositionPanel);
-            this.PrintMoneyReceiptPanel.Controls.Add(this.InvoiceNumberLabel);
+            this.PrintMoneyReceiptPanel.Controls.Add(this.MoneyReceiptNumberLabel);
             this.PrintMoneyReceiptPanel.Controls.Add(this.SerialNumberLabel);
             this.PrintMoneyReceiptPanel.Controls.Add(this.SellerFirmCodeLabel);
             this.PrintMoneyReceiptPanel.Controls.Add(this.AllProductsLabel);
@@ -74,7 +74,7 @@ namespace Invoice.Forms
             this.PrintMoneyReceiptPanel.Controls.Add(this.SellerInfoLabel);
             this.PrintMoneyReceiptPanel.Location = new System.Drawing.Point(133, 86);
             this.PrintMoneyReceiptPanel.Name = "PrintMoneyReceiptPanel";
-            this.PrintMoneyReceiptPanel.Size = new System.Drawing.Size(820, 804);
+            this.PrintMoneyReceiptPanel.Size = new System.Drawing.Size(820, 975);
             this.PrintMoneyReceiptPanel.TabIndex = 0;
             // 
             // PositionPanel
@@ -89,7 +89,7 @@ namespace Invoice.Forms
             this.PositionPanel.Controls.Add(this.InvoiceMakerLabel);
             this.PositionPanel.Controls.Add(this.BuyerInfoGuideLabel);
             this.PositionPanel.Controls.Add(this.SellerAcceptedMoneyInfoLabel);
-            this.PositionPanel.Location = new System.Drawing.Point(30, 485);
+            this.PositionPanel.Location = new System.Drawing.Point(31, 680);
             this.PositionPanel.Name = "PositionPanel";
             this.PositionPanel.Size = new System.Drawing.Size(773, 294);
             this.PositionPanel.TabIndex = 34;
@@ -190,14 +190,14 @@ namespace Invoice.Forms
             this.SellerAcceptedMoneyInfoLabel.TabIndex = 27;
             this.SellerAcceptedMoneyInfoLabel.Text = "Pinigus gavau";
             // 
-            // InvoiceNumberLabel
+            // MoneyReceiptNumberLabel
             // 
-            this.InvoiceNumberLabel.AutoSize = true;
-            this.InvoiceNumberLabel.Location = new System.Drawing.Point(466, 126);
-            this.InvoiceNumberLabel.Name = "InvoiceNumberLabel";
-            this.InvoiceNumberLabel.Size = new System.Drawing.Size(79, 13);
-            this.InvoiceNumberLabel.TabIndex = 33;
-            this.InvoiceNumberLabel.Text = "InvoiceNumber";
+            this.MoneyReceiptNumberLabel.AutoSize = true;
+            this.MoneyReceiptNumberLabel.Location = new System.Drawing.Point(466, 126);
+            this.MoneyReceiptNumberLabel.Name = "MoneyReceiptNumberLabel";
+            this.MoneyReceiptNumberLabel.Size = new System.Drawing.Size(79, 13);
+            this.MoneyReceiptNumberLabel.TabIndex = 33;
+            this.MoneyReceiptNumberLabel.Text = "InvoiceNumber";
             // 
             // SerialNumberLabel
             // 
@@ -230,7 +230,7 @@ namespace Invoice.Forms
             // 
             this.BuyerProductInfoLabel.AutoSize = true;
             this.BuyerProductInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BuyerProductInfoLabel.Location = new System.Drawing.Point(48, 192);
+            this.BuyerProductInfoLabel.Location = new System.Drawing.Point(49, 178);
             this.BuyerProductInfoLabel.Name = "BuyerProductInfoLabel";
             this.BuyerProductInfoLabel.Size = new System.Drawing.Size(80, 13);
             this.BuyerProductInfoLabel.TabIndex = 19;
@@ -297,7 +297,7 @@ namespace Invoice.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1177, 989);
+            this.ClientSize = new System.Drawing.Size(1177, 1061);
             this.Controls.Add(this.PrintMoneyReceiptPanel);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -334,7 +334,7 @@ namespace Invoice.Forms
         private System.Windows.Forms.Label BuyerInfoGuideLabel;
         private System.Windows.Forms.Label SellerFirmCodeLabel;
         private System.Windows.Forms.Label SerialNumberLabel;
-        private System.Windows.Forms.Label InvoiceNumberLabel;
+        private System.Windows.Forms.Label MoneyReceiptNumberLabel;
         private System.Windows.Forms.Panel PositionPanel;
     }
 }

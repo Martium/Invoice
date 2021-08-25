@@ -499,7 +499,6 @@ namespace Invoice.Forms
 
         private void PrintMoneyReceiptForm()
         {
-            var moneyReceiptForm = new MoneyReceiptForm();
 
             string allProducts = "";
 
@@ -508,13 +507,15 @@ namespace Invoice.Forms
                 SellerInfo = SellerNameRichTextBox.Text,
                 SellerFirmCode = SellerFirmCodeRichTextBox.Text,
                 SerialNumber = SerialNumberRichTextBox.Text,
-                InvoiceNumber = InvoiceNumberRichTextBox.Text,
+                MoneyReceiptOfferNumber = MoneyReceiptOfferNumberTextBox.Text,
                 InvoiceDate = InvoiceDateRichTextBox.Text,
                 AllProducts = $@"{allProducts}",
 
                 PriceInWords = PriceInWordsRichTextBox.Text,
                 InvoiceMaker = InvoiceMakerRichTextBox.Text
             };
+
+            var moneyReceiptForm = new MoneyReceiptForm(_countEmptyLinesForMoneyReceipt);
 
             moneyReceiptForm.Show();
             moneyReceiptForm.Hide();
@@ -528,8 +529,6 @@ namespace Invoice.Forms
 
         private void SaveMoneyReceiptFormToPdf(Document newInvoiceDocument)
         {
-            var moneyReceiptForm = new MoneyReceiptForm();
-
             string[] allProducts = FillProductsToArray();
 
             _countEmptyLinesForMoneyReceipt = _numberService.CountEmptyStrings(allProducts);
@@ -543,13 +542,15 @@ namespace Invoice.Forms
                 SellerInfo = SellerNameRichTextBox.Text,
                 SellerFirmCode = SellerFirmCodeRichTextBox.Text,
                 SerialNumber = SerialNumberRichTextBox.Text,
-                InvoiceNumber = InvoiceNumberRichTextBox.Text,
+                MoneyReceiptOfferNumber = MoneyReceiptOfferNumberTextBox.Text,
                 InvoiceDate = InvoiceDateRichTextBox.Text,
                 AllProducts = $@"{filledProducts}",
 
                 PriceInWords = PriceInWordsRichTextBox.Text,
                 InvoiceMaker = InvoiceMakerRichTextBox.Text
             };
+
+            var moneyReceiptForm = new MoneyReceiptForm(_countEmptyLinesForMoneyReceipt);
 
             moneyReceiptForm.Show();
 

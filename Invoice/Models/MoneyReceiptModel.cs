@@ -5,7 +5,7 @@
         public string SellerInfo { get; set; }
         public string SellerFirmCode { get; set; }
         public string SerialNumber { get; set; }
-        public string InvoiceNumber { get; set; }
+        public string MoneyReceiptOfferNumber { get; set; }
         public string InvoiceDate { get; set; }
         public string AllProducts { get; set; }
         public string PriceInWords { get; set; }
