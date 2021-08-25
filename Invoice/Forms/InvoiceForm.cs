@@ -503,7 +503,7 @@ namespace Invoice.Forms
 
             _countEmptyLinesForMoneyReceipt = _numberService.CountEmptyStrings(allProducts);
 
-            FilledCountLinesInteger(allProducts);
+            //FilledCountLinesInteger(allProducts); For more accurate panel position
 
             allProducts = allProducts.Where(p => !string.IsNullOrEmpty(p)).ToArray();
 
@@ -540,7 +540,7 @@ namespace Invoice.Forms
 
             _countEmptyLinesForMoneyReceipt = _numberService.CountEmptyStrings(allProducts);
 
-            FilledCountLinesInteger(allProducts);
+            //FilledCountLinesInteger(allProducts); For more accurate panel position
 
             allProducts = allProducts.Where(p => !string.IsNullOrEmpty(p)).ToArray();
 
