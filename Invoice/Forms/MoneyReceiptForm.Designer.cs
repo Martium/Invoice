@@ -31,19 +31,20 @@ namespace Invoice.Forms
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoneyReceiptForm));
             this.PrintMoneyReceiptPanel = new System.Windows.Forms.Panel();
+            this.PositionPanel = new System.Windows.Forms.Panel();
+            this.PaidPriceInfoLabel = new System.Windows.Forms.Label();
+            this.PriceInWordsLabel = new System.Windows.Forms.Label();
+            this.additionalInfoPriceInWordsLabel = new System.Windows.Forms.Label();
+            this.BuyerPaidInfoLabel = new System.Windows.Forms.Label();
+            this.AdditionalLinksAboutProductLabel = new System.Windows.Forms.Label();
+            this.SellerInfoGuideLabel = new System.Windows.Forms.Label();
+            this.BuyerPaidLabel = new System.Windows.Forms.Label();
+            this.InvoiceMakerLabel = new System.Windows.Forms.Label();
+            this.BuyerInfoGuideLabel = new System.Windows.Forms.Label();
+            this.SellerAcceptedMoneyInfoLabel = new System.Windows.Forms.Label();
             this.InvoiceNumberLabel = new System.Windows.Forms.Label();
             this.SerialNumberLabel = new System.Windows.Forms.Label();
             this.SellerFirmCodeLabel = new System.Windows.Forms.Label();
-            this.SellerInfoGuideLabel = new System.Windows.Forms.Label();
-            this.BuyerInfoGuideLabel = new System.Windows.Forms.Label();
-            this.InvoiceMakerLabel = new System.Windows.Forms.Label();
-            this.SellerAcceptedMoneyInfoLabel = new System.Windows.Forms.Label();
-            this.BuyerPaidLabel = new System.Windows.Forms.Label();
-            this.BuyerPaidInfoLabel = new System.Windows.Forms.Label();
-            this.AdditionalLinksAboutProductLabel = new System.Windows.Forms.Label();
-            this.additionalInfoPriceInWordsLabel = new System.Windows.Forms.Label();
-            this.PriceInWordsLabel = new System.Windows.Forms.Label();
-            this.PaidPriceInfoLabel = new System.Windows.Forms.Label();
             this.AllProductsLabel = new System.Windows.Forms.Label();
             this.BuyerProductInfoLabel = new System.Windows.Forms.Label();
             this.InvoiceDateLabel = new System.Windows.Forms.Label();
@@ -52,7 +53,6 @@ namespace Invoice.Forms
             this.MoneyAcceptedRecepitInfoLabel = new System.Windows.Forms.Label();
             this.SellerLabel = new System.Windows.Forms.Label();
             this.SellerInfoLabel = new System.Windows.Forms.Label();
-            this.PositionPanel = new System.Windows.Forms.Panel();
             this.PrintMoneyReceiptPanel.SuspendLayout();
             this.PositionPanel.SuspendLayout();
             this.SuspendLayout();
@@ -76,6 +76,119 @@ namespace Invoice.Forms
             this.PrintMoneyReceiptPanel.Name = "PrintMoneyReceiptPanel";
             this.PrintMoneyReceiptPanel.Size = new System.Drawing.Size(820, 804);
             this.PrintMoneyReceiptPanel.TabIndex = 0;
+            // 
+            // PositionPanel
+            // 
+            this.PositionPanel.Controls.Add(this.PaidPriceInfoLabel);
+            this.PositionPanel.Controls.Add(this.PriceInWordsLabel);
+            this.PositionPanel.Controls.Add(this.additionalInfoPriceInWordsLabel);
+            this.PositionPanel.Controls.Add(this.BuyerPaidInfoLabel);
+            this.PositionPanel.Controls.Add(this.AdditionalLinksAboutProductLabel);
+            this.PositionPanel.Controls.Add(this.SellerInfoGuideLabel);
+            this.PositionPanel.Controls.Add(this.BuyerPaidLabel);
+            this.PositionPanel.Controls.Add(this.InvoiceMakerLabel);
+            this.PositionPanel.Controls.Add(this.BuyerInfoGuideLabel);
+            this.PositionPanel.Controls.Add(this.SellerAcceptedMoneyInfoLabel);
+            this.PositionPanel.Location = new System.Drawing.Point(30, 485);
+            this.PositionPanel.Name = "PositionPanel";
+            this.PositionPanel.Size = new System.Drawing.Size(773, 294);
+            this.PositionPanel.TabIndex = 34;
+            // 
+            // PaidPriceInfoLabel
+            // 
+            this.PaidPriceInfoLabel.AutoSize = true;
+            this.PaidPriceInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PaidPriceInfoLabel.Location = new System.Drawing.Point(18, 65);
+            this.PaidPriceInfoLabel.Name = "PaidPriceInfoLabel";
+            this.PaidPriceInfoLabel.Size = new System.Drawing.Size(96, 13);
+            this.PaidPriceInfoLabel.TabIndex = 21;
+            this.PaidPriceInfoLabel.Text = "Sumokėta suma";
+            // 
+            // PriceInWordsLabel
+            // 
+            this.PriceInWordsLabel.AutoSize = true;
+            this.PriceInWordsLabel.Location = new System.Drawing.Point(120, 65);
+            this.PriceInWordsLabel.Name = "PriceInWordsLabel";
+            this.PriceInWordsLabel.Size = new System.Drawing.Size(364, 13);
+            this.PriceInWordsLabel.TabIndex = 22;
+            this.PriceInWordsLabel.Text = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _";
+            // 
+            // additionalInfoPriceInWordsLabel
+            // 
+            this.additionalInfoPriceInWordsLabel.AutoSize = true;
+            this.additionalInfoPriceInWordsLabel.Location = new System.Drawing.Point(107, 111);
+            this.additionalInfoPriceInWordsLabel.Name = "additionalInfoPriceInWordsLabel";
+            this.additionalInfoPriceInWordsLabel.Size = new System.Drawing.Size(278, 13);
+            this.additionalInfoPriceInWordsLabel.TabIndex = 23;
+            this.additionalInfoPriceInWordsLabel.Text = "( už prekes ar paslaugas sumokėta suma žodžiu su PVM )";
+            // 
+            // BuyerPaidInfoLabel
+            // 
+            this.BuyerPaidInfoLabel.AutoSize = true;
+            this.BuyerPaidInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BuyerPaidInfoLabel.Location = new System.Drawing.Point(18, 145);
+            this.BuyerPaidInfoLabel.Name = "BuyerPaidInfoLabel";
+            this.BuyerPaidInfoLabel.Size = new System.Drawing.Size(69, 13);
+            this.BuyerPaidInfoLabel.TabIndex = 25;
+            this.BuyerPaidInfoLabel.Text = "Sumokėjau";
+            // 
+            // AdditionalLinksAboutProductLabel
+            // 
+            this.AdditionalLinksAboutProductLabel.AutoSize = true;
+            this.AdditionalLinksAboutProductLabel.Location = new System.Drawing.Point(107, 10);
+            this.AdditionalLinksAboutProductLabel.Name = "AdditionalLinksAboutProductLabel";
+            this.AdditionalLinksAboutProductLabel.Size = new System.Drawing.Size(395, 13);
+            this.AdditionalLinksAboutProductLabel.TabIndex = 24;
+            this.AdditionalLinksAboutProductLabel.Text = "( prekių/paslaugų pavadinimai, kiekiai, matavimo vienetai,  vieneto kaina su PVM " +
+    ")";
+            // 
+            // SellerInfoGuideLabel
+            // 
+            this.SellerInfoGuideLabel.AutoSize = true;
+            this.SellerInfoGuideLabel.Location = new System.Drawing.Point(107, 249);
+            this.SellerInfoGuideLabel.Name = "SellerInfoGuideLabel";
+            this.SellerInfoGuideLabel.Size = new System.Drawing.Size(297, 13);
+            this.SellerInfoGuideLabel.TabIndex = 30;
+            this.SellerInfoGuideLabel.Text = "( pardavėjo pareigų pavadinimas, parašas, vardas ir pavardė )";
+            // 
+            // BuyerPaidLabel
+            // 
+            this.BuyerPaidLabel.AutoSize = true;
+            this.BuyerPaidLabel.Location = new System.Drawing.Point(100, 145);
+            this.BuyerPaidLabel.Name = "BuyerPaidLabel";
+            this.BuyerPaidLabel.Size = new System.Drawing.Size(652, 13);
+            this.BuyerPaidLabel.TabIndex = 26;
+            this.BuyerPaidLabel.Text = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _" +
+    " _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\r\n";
+            // 
+            // InvoiceMakerLabel
+            // 
+            this.InvoiceMakerLabel.AutoSize = true;
+            this.InvoiceMakerLabel.Location = new System.Drawing.Point(120, 216);
+            this.InvoiceMakerLabel.Name = "InvoiceMakerLabel";
+            this.InvoiceMakerLabel.Size = new System.Drawing.Size(574, 13);
+            this.InvoiceMakerLabel.TabIndex = 28;
+            this.InvoiceMakerLabel.Text = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _" +
+    " _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \r\n";
+            // 
+            // BuyerInfoGuideLabel
+            // 
+            this.BuyerInfoGuideLabel.AutoSize = true;
+            this.BuyerInfoGuideLabel.Location = new System.Drawing.Point(107, 178);
+            this.BuyerInfoGuideLabel.Name = "BuyerInfoGuideLabel";
+            this.BuyerInfoGuideLabel.Size = new System.Drawing.Size(178, 13);
+            this.BuyerInfoGuideLabel.TabIndex = 29;
+            this.BuyerInfoGuideLabel.Text = "( pirkėjo parašas, vardas ir pavardė )";
+            // 
+            // SellerAcceptedMoneyInfoLabel
+            // 
+            this.SellerAcceptedMoneyInfoLabel.AutoSize = true;
+            this.SellerAcceptedMoneyInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SellerAcceptedMoneyInfoLabel.Location = new System.Drawing.Point(18, 216);
+            this.SellerAcceptedMoneyInfoLabel.Name = "SellerAcceptedMoneyInfoLabel";
+            this.SellerAcceptedMoneyInfoLabel.Size = new System.Drawing.Size(87, 13);
+            this.SellerAcceptedMoneyInfoLabel.TabIndex = 27;
+            this.SellerAcceptedMoneyInfoLabel.Text = "Pinigus gavau";
             // 
             // InvoiceNumberLabel
             // 
@@ -103,102 +216,6 @@ namespace Invoice.Forms
             this.SellerFirmCodeLabel.Size = new System.Drawing.Size(103, 13);
             this.SellerFirmCodeLabel.TabIndex = 31;
             this.SellerFirmCodeLabel.Text = "SellerFirmCodeLabel";
-            // 
-            // SellerInfoGuideLabel
-            // 
-            this.SellerInfoGuideLabel.AutoSize = true;
-            this.SellerInfoGuideLabel.Location = new System.Drawing.Point(107, 249);
-            this.SellerInfoGuideLabel.Name = "SellerInfoGuideLabel";
-            this.SellerInfoGuideLabel.Size = new System.Drawing.Size(297, 13);
-            this.SellerInfoGuideLabel.TabIndex = 30;
-            this.SellerInfoGuideLabel.Text = "( pardavėjo pareigų pavadinimas, parašas, vardas ir pavardė )";
-            // 
-            // BuyerInfoGuideLabel
-            // 
-            this.BuyerInfoGuideLabel.AutoSize = true;
-            this.BuyerInfoGuideLabel.Location = new System.Drawing.Point(107, 178);
-            this.BuyerInfoGuideLabel.Name = "BuyerInfoGuideLabel";
-            this.BuyerInfoGuideLabel.Size = new System.Drawing.Size(178, 13);
-            this.BuyerInfoGuideLabel.TabIndex = 29;
-            this.BuyerInfoGuideLabel.Text = "( pirkėjo parašas, vardas ir pavardė )";
-            // 
-            // InvoiceMakerLabel
-            // 
-            this.InvoiceMakerLabel.AutoSize = true;
-            this.InvoiceMakerLabel.Location = new System.Drawing.Point(120, 216);
-            this.InvoiceMakerLabel.Name = "InvoiceMakerLabel";
-            this.InvoiceMakerLabel.Size = new System.Drawing.Size(574, 13);
-            this.InvoiceMakerLabel.TabIndex = 28;
-            this.InvoiceMakerLabel.Text = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _" +
-    " _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \r\n";
-            // 
-            // SellerAcceptedMoneyInfoLabel
-            // 
-            this.SellerAcceptedMoneyInfoLabel.AutoSize = true;
-            this.SellerAcceptedMoneyInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SellerAcceptedMoneyInfoLabel.Location = new System.Drawing.Point(18, 216);
-            this.SellerAcceptedMoneyInfoLabel.Name = "SellerAcceptedMoneyInfoLabel";
-            this.SellerAcceptedMoneyInfoLabel.Size = new System.Drawing.Size(87, 13);
-            this.SellerAcceptedMoneyInfoLabel.TabIndex = 27;
-            this.SellerAcceptedMoneyInfoLabel.Text = "Pinigus gavau";
-            // 
-            // BuyerPaidLabel
-            // 
-            this.BuyerPaidLabel.AutoSize = true;
-            this.BuyerPaidLabel.Location = new System.Drawing.Point(100, 145);
-            this.BuyerPaidLabel.Name = "BuyerPaidLabel";
-            this.BuyerPaidLabel.Size = new System.Drawing.Size(652, 13);
-            this.BuyerPaidLabel.TabIndex = 26;
-            this.BuyerPaidLabel.Text = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _" +
-    " _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\r\n";
-            // 
-            // BuyerPaidInfoLabel
-            // 
-            this.BuyerPaidInfoLabel.AutoSize = true;
-            this.BuyerPaidInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BuyerPaidInfoLabel.Location = new System.Drawing.Point(18, 145);
-            this.BuyerPaidInfoLabel.Name = "BuyerPaidInfoLabel";
-            this.BuyerPaidInfoLabel.Size = new System.Drawing.Size(69, 13);
-            this.BuyerPaidInfoLabel.TabIndex = 25;
-            this.BuyerPaidInfoLabel.Text = "Sumokėjau";
-            // 
-            // AdditionalLinksAboutProductLabel
-            // 
-            this.AdditionalLinksAboutProductLabel.AutoSize = true;
-            this.AdditionalLinksAboutProductLabel.Location = new System.Drawing.Point(107, 9);
-            this.AdditionalLinksAboutProductLabel.Name = "AdditionalLinksAboutProductLabel";
-            this.AdditionalLinksAboutProductLabel.Size = new System.Drawing.Size(395, 13);
-            this.AdditionalLinksAboutProductLabel.TabIndex = 24;
-            this.AdditionalLinksAboutProductLabel.Text = "( prekių/paslaugų pavadinimai, kiekiai, matavimo vienetai,  vieneto kaina su PVM " +
-    ")";
-            // 
-            // additionalInfoPriceInWordsLabel
-            // 
-            this.additionalInfoPriceInWordsLabel.AutoSize = true;
-            this.additionalInfoPriceInWordsLabel.Location = new System.Drawing.Point(107, 111);
-            this.additionalInfoPriceInWordsLabel.Name = "additionalInfoPriceInWordsLabel";
-            this.additionalInfoPriceInWordsLabel.Size = new System.Drawing.Size(278, 13);
-            this.additionalInfoPriceInWordsLabel.TabIndex = 23;
-            this.additionalInfoPriceInWordsLabel.Text = "( už prekes ar paslaugas sumokėta suma žodžiu su PVM )";
-            // 
-            // PriceInWordsLabel
-            // 
-            this.PriceInWordsLabel.AutoSize = true;
-            this.PriceInWordsLabel.Location = new System.Drawing.Point(120, 65);
-            this.PriceInWordsLabel.Name = "PriceInWordsLabel";
-            this.PriceInWordsLabel.Size = new System.Drawing.Size(364, 13);
-            this.PriceInWordsLabel.TabIndex = 22;
-            this.PriceInWordsLabel.Text = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _";
-            // 
-            // PaidPriceInfoLabel
-            // 
-            this.PaidPriceInfoLabel.AutoSize = true;
-            this.PaidPriceInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PaidPriceInfoLabel.Location = new System.Drawing.Point(18, 65);
-            this.PaidPriceInfoLabel.Name = "PaidPriceInfoLabel";
-            this.PaidPriceInfoLabel.Size = new System.Drawing.Size(96, 13);
-            this.PaidPriceInfoLabel.TabIndex = 21;
-            this.PaidPriceInfoLabel.Text = "Sumokėta suma";
             // 
             // AllProductsLabel
             // 
@@ -275,23 +292,6 @@ namespace Invoice.Forms
             this.SellerInfoLabel.Size = new System.Drawing.Size(51, 13);
             this.SellerInfoLabel.TabIndex = 0;
             this.SellerInfoLabel.Text = "SellerInfo\r\n";
-            // 
-            // PositionPanel
-            // 
-            this.PositionPanel.Controls.Add(this.PaidPriceInfoLabel);
-            this.PositionPanel.Controls.Add(this.PriceInWordsLabel);
-            this.PositionPanel.Controls.Add(this.additionalInfoPriceInWordsLabel);
-            this.PositionPanel.Controls.Add(this.BuyerPaidInfoLabel);
-            this.PositionPanel.Controls.Add(this.AdditionalLinksAboutProductLabel);
-            this.PositionPanel.Controls.Add(this.SellerInfoGuideLabel);
-            this.PositionPanel.Controls.Add(this.BuyerPaidLabel);
-            this.PositionPanel.Controls.Add(this.InvoiceMakerLabel);
-            this.PositionPanel.Controls.Add(this.BuyerInfoGuideLabel);
-            this.PositionPanel.Controls.Add(this.SellerAcceptedMoneyInfoLabel);
-            this.PositionPanel.Location = new System.Drawing.Point(33, 260);
-            this.PositionPanel.Name = "PositionPanel";
-            this.PositionPanel.Size = new System.Drawing.Size(773, 294);
-            this.PositionPanel.TabIndex = 34;
             // 
             // MoneyReceiptForm
             // 

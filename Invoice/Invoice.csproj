@@ -191,7 +191,7 @@
     <Compile Include="Repositories\StorageRepository.cs" />
     <Compile Include="Service\MessageDialogService.cs" />
     <Compile Include="Service\NumberService.cs" />
-    <Compile Include="Service\ProductTypeStringService.cs" />
+    <Compile Include="Service\StringService.cs" />
     <EmbeddedResource Include="Forms\BuyersInfoForm.resx">
       <DependentUpon>BuyersInfoForm.cs</DependentUpon>
     </EmbeddedResource>

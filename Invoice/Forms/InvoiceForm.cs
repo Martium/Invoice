@@ -31,6 +31,7 @@ namespace Invoice.Forms
 
         private readonly MessageDialogService _messageDialogService;
         private readonly NumberService _numberService;
+        private readonly StringService _stringService;
 
         private readonly InvoiceOperations _invoiceOperations;
         private readonly int? _invoiceNumber;
@@ -62,6 +63,7 @@ namespace Invoice.Forms
 
             _numberService = new NumberService();
             _messageDialogService = new MessageDialogService();
+            _stringService = new StringService();
 
             _invoiceOperations = invoiceOperations;
             _invoiceNumber = invoiceNumber;
@@ -452,7 +454,7 @@ namespace Invoice.Forms
 
             PdfWriter newInvoicePdfWriter =
                 new PdfWriter(
-                    $"{AppConfiguration.PdfFolder}\\Saskaita faktura ir kvitas nr.{InvoiceNumberRichTextBox.Text} {BuyerNameRichTextBox.Text}.pdf");
+                    $"{AppConfiguration.PdfFolder}\\Saskaita faktura  nr.{InvoiceNumberRichTextBox.Text} {BuyerNameRichTextBox.Text} ir kvitas nr.{MoneyReceiptOfferNumberTextBox.Text}.pdf");
             PdfDocument newInvoicePdfDocument = new PdfDocument(newInvoicePdfWriter);
             Document newInvoiceDocument = new Document(newInvoicePdfDocument);
 
@@ -532,6 +534,10 @@ namespace Invoice.Forms
 
             _countEmptyLinesForMoneyReceipt = _numberService.CountEmptyStrings(allProducts);
 
+            allProducts = allProducts.Where(p => !string.IsNullOrEmpty(p)).ToArray();
+
+            string filledProducts = _stringService.MakeFormatFilledProducts(allProducts, _countEmptyLinesForMoneyReceipt);
+
             MoneyReceiptModel moneyReceiptInfo = new MoneyReceiptModel()
             {
                 SellerInfo = SellerNameRichTextBox.Text,
@@ -539,7 +545,7 @@ namespace Invoice.Forms
                 SerialNumber = SerialNumberRichTextBox.Text,
                 InvoiceNumber = InvoiceNumberRichTextBox.Text,
                 InvoiceDate = InvoiceDateRichTextBox.Text,
-                AllProducts = $@"",
+                AllProducts = $@"{filledProducts}",
 
                 PriceInWords = PriceInWordsRichTextBox.Text,
                 InvoiceMaker = InvoiceMakerRichTextBox.Text
@@ -1770,12 +1776,7 @@ namespace Invoice.Forms
                 _moneyReceiptRepository.UpdateNewSuggestedNumberAndAddOne(suggestedNumber);
             }
         }
-
-        private bool CheckIsStringFilled(string product)
-        {
-            bool isFilled = string.IsNullOrEmpty(product);
-            return isFilled;
-        }
+       
 
         #endregion
 

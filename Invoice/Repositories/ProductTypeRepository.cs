@@ -9,11 +9,11 @@ namespace Invoice.Repositories
 {
     public class ProductTypeRepository
     {
-        private readonly ProductTypeStringService _productTypeStringService;
+        private readonly StringService _stringService;
 
         public ProductTypeRepository()
         {
-            _productTypeStringService = new ProductTypeStringService();
+            _stringService = new StringService();
         }
 
         public ProductTypeModel GetExistingProductType(int invoiceNumber, int invoiceNumberYearCreation)
@@ -76,9 +76,9 @@ namespace Invoice.Repositories
 
         public dynamic GetSpecificProductTypeFullInfoBySpecialName(string productTypeName, ProductTypeOperations productTypeOperations)
         {
-            string productType = _productTypeStringService.SetProductType(productTypeOperations);
-            string productTypeQuantity = _productTypeStringService.SetProductTypeQuantity(productTypeOperations);
-            string productTypePrice = _productTypeStringService.SetProductTypePrice(productTypeOperations);
+            string productType = _stringService.SetProductType(productTypeOperations);
+            string productTypeQuantity = _stringService.SetProductTypeQuantity(productTypeOperations);
+            string productTypePrice = _stringService.SetProductTypePrice(productTypeOperations);
 
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
             {
@@ -159,9 +159,9 @@ namespace Invoice.Repositories
 
         public dynamic GetSpecificProductTypeFullInfoBySpecialNameAndYear (string productTypeName, int year, ProductTypeOperations productTypeOperations)
         {
-            string productType = _productTypeStringService.SetProductType(productTypeOperations);
-            string productTypeQuantity = _productTypeStringService.SetProductTypeQuantity(productTypeOperations);
-            string productTypePrice = _productTypeStringService.SetProductTypePrice(productTypeOperations);
+            string productType = _stringService.SetProductType(productTypeOperations);
+            string productTypeQuantity = _stringService.SetProductTypeQuantity(productTypeOperations);
+            string productTypePrice = _stringService.SetProductTypePrice(productTypeOperations);
 
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
             {
