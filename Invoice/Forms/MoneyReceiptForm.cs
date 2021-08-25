@@ -11,7 +11,6 @@ namespace Invoice.Forms
 
         public MoneyReceiptForm(int emptyLines)
         {
-            //need logic for position panel by filled products 
             InitializeComponent();
             SetPositionPanelPlaceByEmptyLines(emptyLines);
         }
@@ -21,7 +20,7 @@ namespace Invoice.Forms
             SellerInfoLabel.Text = moneyReceiptInfo.SellerInfo;
             SellerFirmCodeLabel.Text = moneyReceiptInfo.SellerFirmCode;
             SerialNumberLabel.Text = moneyReceiptInfo.SerialNumber;
-            MoneyReceiptNumberLabel.Text = moneyReceiptInfo.MoneyReceiptOfferNumber; // new logic need
+            MoneyReceiptNumberLabel.Text = moneyReceiptInfo.MoneyReceiptOfferNumber;
             InvoiceDateLabel.Text = moneyReceiptInfo.InvoiceDate;
             AllProductsLabel.Text = moneyReceiptInfo.AllProducts;
             PriceInWordsLabel.Text = moneyReceiptInfo.PriceInWords;
@@ -46,7 +45,7 @@ namespace Invoice.Forms
             switch (emptyLines)
             {
                 case 0:
-                    SetPositionPanel(680);
+                    SetPositionPanel(670);
                     break;
                 case 1:
                     SetPositionPanel(640);
