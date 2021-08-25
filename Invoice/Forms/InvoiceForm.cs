@@ -538,7 +538,6 @@ namespace Invoice.Forms
 
             allProducts = allProducts.Where(p => !string.IsNullOrEmpty(p)).ToArray();
 
-
             string filledProducts = _stringService.MakeFormatFilledProducts(allProducts);
 
             MoneyReceiptModel moneyReceiptInfo = new MoneyReceiptModel()
