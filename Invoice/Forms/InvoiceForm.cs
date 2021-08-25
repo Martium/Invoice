@@ -50,6 +50,7 @@ namespace Invoice.Forms
 
         private int _lastMoneyReceiptNumber;
         private int _countEmptyLinesForMoneyReceipt;
+        private int[] _countLines = new int[12];
 
 
         public InvoiceForm(InvoiceOperations invoiceOperations, int? invoiceNumber = null,
@@ -322,7 +323,6 @@ namespace Invoice.Forms
 
         private void AddToFirstProductInfoButton_Click(object sender, EventArgs e)
         {
-
             if (FirstProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[1]]) return;
 
             _lastProductLineFilled[ProductLineIndex[1]] = FirstProductNameComboBox.Text;
@@ -499,8 +499,15 @@ namespace Invoice.Forms
 
         private void PrintMoneyReceiptForm()
         {
+            string[] allProducts = FillProductsToArray();
 
-            string allProducts = "";
+            _countEmptyLinesForMoneyReceipt = _numberService.CountEmptyStrings(allProducts);
+
+            FilledCountLinesInteger(allProducts);
+
+            allProducts = allProducts.Where(p => !string.IsNullOrEmpty(p)).ToArray();
+
+            string filledProducts = _stringService.MakeFormatFilledProducts(allProducts);
 
             MoneyReceiptModel moneyReceiptInfo = new MoneyReceiptModel()
             {
@@ -509,7 +516,7 @@ namespace Invoice.Forms
                 SerialNumber = SerialNumberRichTextBox.Text,
                 MoneyReceiptOfferNumber = MoneyReceiptOfferNumberTextBox.Text,
                 InvoiceDate = InvoiceDateRichTextBox.Text,
-                AllProducts = $@"{allProducts}",
+                AllProducts = $@"{filledProducts}",
 
                 PriceInWords = PriceInWordsRichTextBox.Text,
                 InvoiceMaker = InvoiceMakerRichTextBox.Text
@@ -533,9 +540,12 @@ namespace Invoice.Forms
 
             _countEmptyLinesForMoneyReceipt = _numberService.CountEmptyStrings(allProducts);
 
+            FilledCountLinesInteger(allProducts);
+
             allProducts = allProducts.Where(p => !string.IsNullOrEmpty(p)).ToArray();
 
-            string filledProducts = _stringService.MakeFormatFilledProducts(allProducts, _countEmptyLinesForMoneyReceipt);
+
+            string filledProducts = _stringService.MakeFormatFilledProducts(allProducts);
 
             MoneyReceiptModel moneyReceiptInfo = new MoneyReceiptModel()
             {
@@ -609,7 +619,7 @@ namespace Invoice.Forms
             string twelfthProductInfo = CheckProductsRichTextBox(TwelfthProductNameRichTextBox,
                 TwelfthProductQuantityRichTextBox, TwelfthProductSeesRichTextBox, TwelfthProductPriceRichTextBox);
 
-            string[] allProducts = new string[12]
+            string[] allProducts = new string[]
             {
                 firstProductInfo,
                 secondProductInfo,
@@ -1777,7 +1787,30 @@ namespace Invoice.Forms
                 _moneyReceiptRepository.UpdateNewSuggestedNumberAndAddOne(suggestedNumber);
             }
         }
-       
+
+        private void FilledCountLinesInteger(string[] allProducts)
+        {
+           CountFilledProductsLines(allProducts, 0, FirstProductNameRichTextBox);
+           CountFilledProductsLines(allProducts, 1, SecondProductNameRichTextBox);
+           CountFilledProductsLines(allProducts, 2, ThirdProductNameRichTextBox);
+           CountFilledProductsLines(allProducts, 3, FourthProductNameRichTextBox);
+           CountFilledProductsLines(allProducts, 4, FifthProductNameRichTextBox);
+           CountFilledProductsLines(allProducts, 5, SixthProductNameRichTextBox);
+           CountFilledProductsLines(allProducts, 6, SeventhProductNameRichTextBox);
+           CountFilledProductsLines(allProducts, 7, EighthProductNameRichTextBox);
+           CountFilledProductsLines(allProducts, 8, NinthProductNameRichTextBox);
+           CountFilledProductsLines(allProducts, 9, TenProductNameRichTextBox);
+           CountFilledProductsLines(allProducts, 10, EleventhProductNameRichTextBox);
+           CountFilledProductsLines(allProducts, 11, TwelfthProductNameRichTextBox);
+        }
+
+        private void CountFilledProductsLines(string[] allProducts, int productIndex, RichTextBox richTextBox)
+        {
+            if (allProducts[productIndex] != string.Empty)
+            {
+                _countLines[productIndex] = richTextBox.Lines.Length;
+            }
+        }
 
         #endregion
 

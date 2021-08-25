@@ -158,7 +158,7 @@ namespace Invoice.Service
             return productTypePrice;
         }
 
-        public string MakeFormatFilledProducts(string[] allProducts, int emptyLines)
+        public string MakeFormatFilledProducts(string[] allProducts)
         {
             string filledProducts = null;
 

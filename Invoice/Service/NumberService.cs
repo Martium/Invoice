@@ -443,6 +443,12 @@ namespace Invoice.Service
 
             return countFilledStrings;
         }
-       
+
+        public int CountMultiLines(int[] countLines)
+        {
+            int countMultiLines = countLines.Count(ml => ml == 2);
+            return countMultiLines;
+        }
+
     }
 }
