@@ -98,6 +98,7 @@
     <Compile Include="Enums\ProductTypeOrStorageListOperation.cs" />
     <Compile Include="Enums\ProductTypePriceOperations.cs" />
     <Compile Include="Enums\ProductTypeQuantityOperations.cs" />
+    <Compile Include="Enums\StorageInfo.cs" />
     <Compile Include="Forms\BuyersInfoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,6 +146,12 @@
     </Compile>
     <Compile Include="Forms\SellerInfoForm.Designer.cs">
       <DependentUpon>SellerInfoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\StorageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StorageForm.Designer.cs">
+      <DependentUpon>StorageForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\AllYearsTotalPriceModel.cs" />
     <Compile Include="Models\BuyersInfo\BuyerFullInfoModel.cs" />
@@ -215,6 +222,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SellerInfoForm.resx">
       <DependentUpon>SellerInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StorageForm.resx">
+      <DependentUpon>StorageForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
