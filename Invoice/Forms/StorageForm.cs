@@ -3,24 +3,32 @@ using System.Drawing;
 using System.Windows.Forms;
 using Invoice.Enums;
 using Invoice.Models.ProductType;
+using Invoice.Repositories;
 
 namespace Invoice.Forms
 {
     public partial class StorageForm : Form
     {
         private List<SpecificNameProductTypeModel> _specificProductTypeAllInfo;
+        private readonly ProductTypeRepository _productTypeRepository;
 
         public StorageForm()
         {
             _specificProductTypeAllInfo = new List<SpecificNameProductTypeModel>();
+            _productTypeRepository = new ProductTypeRepository();
 
             InitializeComponent();
             SetControlInitializeState();
+
+            
         }
 
         private void StorageForm_Load(object sender, System.EventArgs e)
         {
             LoadSpecificInfoToStorageDataGridView(StorageInfo.ProductType);
+            TryFillProductTypeYearComboBox();
+            TryFillProductTypeSpecificNamesToComboBox();
+
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -64,11 +72,11 @@ namespace Invoice.Forms
             switch (storageInfo)
             {
                 case StorageInfo.ProductType:
-                    InformationOfDataGridViewTypeLabel.Text = "Produktai pagal Sąskaitas Faktūras";
+                    InformationOfDataGridViewTypeLabel.Text = @"Produktai pagal Sąskaitas Faktūras";
                     break;
 
                 case StorageInfo.Deposit:
-                    InformationOfDataGridViewTypeLabel.Text = "Depozito Informacija";
+                    InformationOfDataGridViewTypeLabel.Text = @"Depozito Informacija";
                     break;
             }
 
@@ -155,6 +163,77 @@ namespace Invoice.Forms
                 case StorageInfo.Deposit:
                     break;
             }
+        }
+
+        private void TryFillProductTypeYearComboBox()
+        {
+            ProductTypeYearComboBox.Items.Clear();
+
+            IEnumerable<int> allYears = _productTypeRepository.GetAllExistingProductTypeYears();
+
+            foreach (var year in allYears)
+            {
+                ProductTypeYearComboBox.Items.Add(year);
+            }
+
+            if (ProductTypeYearComboBox.Items.Count != 0)
+            {
+                ProductTypeYearComboBox.Text = ProductTypeYearComboBox.Items[0].ToString();
+            }
+        }
+
+        private void TryFillProductTypeSpecificNamesToComboBox()
+        {
+            ProductTypeSpecificNameComboBox.Items.Clear();
+
+            IEnumerable<ProductTypeSpecificNamesModel>
+                getInfo = _productTypeRepository.GetAllExistingProductTypeNames();
+
+            foreach (var info in getInfo)
+            {
+                if (info.FirstProductType != string.Empty && !ProductTypeSpecificNameComboBox.Items.Contains(info.FirstProductType))
+                    ProductTypeSpecificNameComboBox.Items.Add(info.FirstProductType);
+
+                if (info.SecondProductType != string.Empty && !ProductTypeSpecificNameComboBox.Items.Contains(info.SecondProductType))
+                    ProductTypeSpecificNameComboBox.Items.Add(info.SecondProductType);
+
+                if (info.ThirdProductType != string.Empty && !ProductTypeSpecificNameComboBox.Items.Contains(info.ThirdProductType))
+                    ProductTypeSpecificNameComboBox.Items.Add(info.ThirdProductType);
+
+                if (info.FourthProductType != string.Empty && !ProductTypeSpecificNameComboBox.Items.Contains(info.FourthProductType))
+                    ProductTypeSpecificNameComboBox.Items.Add(info.FourthProductType);
+
+                if (info.FifthProductType != string.Empty && !ProductTypeSpecificNameComboBox.Items.Contains(info.FifthProductType))
+                    ProductTypeSpecificNameComboBox.Items.Add(info.FifthProductType);
+
+                if (info.SixthProductType != string.Empty && !ProductTypeSpecificNameComboBox.Items.Contains(info.SixthProductType))
+                    ProductTypeSpecificNameComboBox.Items.Add(info.SixthProductType);
+
+                if (info.SeventhProductType != string.Empty && !ProductTypeSpecificNameComboBox.Items.Contains(info.SeventhProductType))
+                    ProductTypeSpecificNameComboBox.Items.Add(info.SeventhProductType);
+
+                if (info.EighthProductType != string.Empty && !ProductTypeSpecificNameComboBox.Items.Contains(info.EighthProductType))
+                    ProductTypeSpecificNameComboBox.Items.Add(info.EighthProductType);
+
+                if (info.NinthProductType != string.Empty && !ProductTypeSpecificNameComboBox.Items.Contains(info.NinthProductType))
+                    ProductTypeSpecificNameComboBox.Items.Add(info.NinthProductType);
+
+                if (info.TenProductType != string.Empty && !ProductTypeSpecificNameComboBox.Items.Contains(info.TenProductType))
+                    ProductTypeSpecificNameComboBox.Items.Add(info.TenProductType);
+
+                if (info.EleventhProductType != string.Empty && !ProductTypeSpecificNameComboBox.Items.Contains(info.EleventhProductType))
+                    ProductTypeSpecificNameComboBox.Items.Add(info.EleventhProductType);
+
+                if (info.TwelfthProductType != string.Empty && !ProductTypeSpecificNameComboBox.Items.Contains(info.TwelfthProductType))
+                    ProductTypeSpecificNameComboBox.Items.Add(info.TwelfthProductType);
+
+            }
+
+            if (ProductTypeSpecificNameComboBox.Items.Count != 0)
+            {
+                ProductTypeSpecificNameComboBox.Text = ProductTypeSpecificNameComboBox.Items[0].ToString();
+            }
+
         }
 
 
