@@ -99,13 +99,13 @@ namespace Invoice.Forms
             this.ProductTypeControlPanel.Controls.Add(this.ProductTypeInformationLabel);
             this.ProductTypeControlPanel.Location = new System.Drawing.Point(681, 81);
             this.ProductTypeControlPanel.Name = "ProductTypeControlPanel";
-            this.ProductTypeControlPanel.Size = new System.Drawing.Size(437, 282);
+            this.ProductTypeControlPanel.Size = new System.Drawing.Size(437, 233);
             this.ProductTypeControlPanel.TabIndex = 45;
             // 
             // ProductTypeYearInfoLabel
             // 
             this.ProductTypeYearInfoLabel.AutoSize = true;
-            this.ProductTypeYearInfoLabel.Location = new System.Drawing.Point(34, 133);
+            this.ProductTypeYearInfoLabel.Location = new System.Drawing.Point(261, 116);
             this.ProductTypeYearInfoLabel.Name = "ProductTypeYearInfoLabel";
             this.ProductTypeYearInfoLabel.Size = new System.Drawing.Size(33, 13);
             this.ProductTypeYearInfoLabel.TabIndex = 49;
@@ -114,7 +114,7 @@ namespace Invoice.Forms
             // ProductTypeYearComboBox
             // 
             this.ProductTypeYearComboBox.FormattingEnabled = true;
-            this.ProductTypeYearComboBox.Location = new System.Drawing.Point(37, 158);
+            this.ProductTypeYearComboBox.Location = new System.Drawing.Point(300, 113);
             this.ProductTypeYearComboBox.Name = "ProductTypeYearComboBox";
             this.ProductTypeYearComboBox.Size = new System.Drawing.Size(79, 21);
             this.ProductTypeYearComboBox.TabIndex = 46;
@@ -122,7 +122,7 @@ namespace Invoice.Forms
             // 
             // GetAllInfoByYearButton
             // 
-            this.GetAllInfoByYearButton.Location = new System.Drawing.Point(300, 122);
+            this.GetAllInfoByYearButton.Location = new System.Drawing.Point(138, 62);
             this.GetAllInfoByYearButton.Name = "GetAllInfoByYearButton";
             this.GetAllInfoByYearButton.Size = new System.Drawing.Size(109, 35);
             this.GetAllInfoByYearButton.TabIndex = 48;
@@ -132,27 +132,28 @@ namespace Invoice.Forms
             // 
             // GetAllInfoByProductNameButton
             // 
-            this.GetAllInfoByProductNameButton.Location = new System.Drawing.Point(199, 122);
+            this.GetAllInfoByProductNameButton.Location = new System.Drawing.Point(37, 62);
             this.GetAllInfoByProductNameButton.Name = "GetAllInfoByProductNameButton";
             this.GetAllInfoByProductNameButton.Size = new System.Drawing.Size(95, 35);
             this.GetAllInfoByProductNameButton.TabIndex = 47;
             this.GetAllInfoByProductNameButton.TabStop = false;
             this.GetAllInfoByProductNameButton.Text = "Gauti Info";
             this.GetAllInfoByProductNameButton.UseVisualStyleBackColor = true;
+            this.GetAllInfoByProductNameButton.Click += new System.EventHandler(this.GetAllInfoByProductNameButton_Click);
             // 
             // ProductTypeSpecificNameComboBox
             // 
             this.ProductTypeSpecificNameComboBox.FormattingEnabled = true;
-            this.ProductTypeSpecificNameComboBox.Location = new System.Drawing.Point(37, 82);
+            this.ProductTypeSpecificNameComboBox.Location = new System.Drawing.Point(37, 141);
             this.ProductTypeSpecificNameComboBox.Name = "ProductTypeSpecificNameComboBox";
-            this.ProductTypeSpecificNameComboBox.Size = new System.Drawing.Size(147, 21);
+            this.ProductTypeSpecificNameComboBox.Size = new System.Drawing.Size(257, 21);
             this.ProductTypeSpecificNameComboBox.TabIndex = 46;
             this.ProductTypeSpecificNameComboBox.TabStop = false;
             // 
             // ProductTypeInfoLabel
             // 
             this.ProductTypeInfoLabel.AutoSize = true;
-            this.ProductTypeInfoLabel.Location = new System.Drawing.Point(34, 55);
+            this.ProductTypeInfoLabel.Location = new System.Drawing.Point(34, 116);
             this.ProductTypeInfoLabel.Name = "ProductTypeInfoLabel";
             this.ProductTypeInfoLabel.Size = new System.Drawing.Size(75, 13);
             this.ProductTypeInfoLabel.TabIndex = 45;
@@ -167,7 +168,7 @@ namespace Invoice.Forms
             this.DepositControlPanel.Controls.Add(this.DepositProductNameListComboBox);
             this.DepositControlPanel.Controls.Add(this.DepositProductnameInformationLabel);
             this.DepositControlPanel.Controls.Add(this.DepositInformationLabel);
-            this.DepositControlPanel.Location = new System.Drawing.Point(681, 391);
+            this.DepositControlPanel.Location = new System.Drawing.Point(681, 339);
             this.DepositControlPanel.Name = "DepositControlPanel";
             this.DepositControlPanel.Size = new System.Drawing.Size(437, 253);
             this.DepositControlPanel.TabIndex = 46;
@@ -175,7 +176,7 @@ namespace Invoice.Forms
             // DepositYearComboBox
             // 
             this.DepositYearComboBox.FormattingEnabled = true;
-            this.DepositYearComboBox.Location = new System.Drawing.Point(37, 180);
+            this.DepositYearComboBox.Location = new System.Drawing.Point(300, 151);
             this.DepositYearComboBox.Name = "DepositYearComboBox";
             this.DepositYearComboBox.Size = new System.Drawing.Size(79, 21);
             this.DepositYearComboBox.TabIndex = 50;
@@ -184,7 +185,7 @@ namespace Invoice.Forms
             // DepositYearInfoLabel
             // 
             this.DepositYearInfoLabel.AutoSize = true;
-            this.DepositYearInfoLabel.Location = new System.Drawing.Point(34, 151);
+            this.DepositYearInfoLabel.Location = new System.Drawing.Point(261, 154);
             this.DepositYearInfoLabel.Name = "DepositYearInfoLabel";
             this.DepositYearInfoLabel.Size = new System.Drawing.Size(33, 13);
             this.DepositYearInfoLabel.TabIndex = 50;
@@ -192,7 +193,7 @@ namespace Invoice.Forms
             // 
             // GetDepositInfoByNameButton
             // 
-            this.GetDepositInfoByNameButton.Location = new System.Drawing.Point(300, 134);
+            this.GetDepositInfoByNameButton.Location = new System.Drawing.Point(138, 70);
             this.GetDepositInfoByNameButton.Name = "GetDepositInfoByNameButton";
             this.GetDepositInfoByNameButton.Size = new System.Drawing.Size(109, 47);
             this.GetDepositInfoByNameButton.TabIndex = 49;
@@ -202,7 +203,7 @@ namespace Invoice.Forms
             // 
             // GetAllInfoDeposit
             // 
-            this.GetAllInfoDeposit.Location = new System.Drawing.Point(199, 134);
+            this.GetAllInfoDeposit.Location = new System.Drawing.Point(37, 70);
             this.GetAllInfoDeposit.Name = "GetAllInfoDeposit";
             this.GetAllInfoDeposit.Size = new System.Drawing.Size(95, 47);
             this.GetAllInfoDeposit.TabIndex = 47;
@@ -213,16 +214,16 @@ namespace Invoice.Forms
             // DepositProductNameListComboBox
             // 
             this.DepositProductNameListComboBox.FormattingEnabled = true;
-            this.DepositProductNameListComboBox.Location = new System.Drawing.Point(37, 95);
+            this.DepositProductNameListComboBox.Location = new System.Drawing.Point(37, 185);
             this.DepositProductNameListComboBox.Name = "DepositProductNameListComboBox";
-            this.DepositProductNameListComboBox.Size = new System.Drawing.Size(147, 21);
+            this.DepositProductNameListComboBox.Size = new System.Drawing.Size(257, 21);
             this.DepositProductNameListComboBox.TabIndex = 48;
             this.DepositProductNameListComboBox.TabStop = false;
             // 
             // DepositProductnameInformationLabel
             // 
             this.DepositProductnameInformationLabel.AutoSize = true;
-            this.DepositProductnameInformationLabel.Location = new System.Drawing.Point(34, 70);
+            this.DepositProductnameInformationLabel.Location = new System.Drawing.Point(34, 154);
             this.DepositProductnameInformationLabel.Name = "DepositProductnameInformationLabel";
             this.DepositProductnameInformationLabel.Size = new System.Drawing.Size(75, 13);
             this.DepositProductnameInformationLabel.TabIndex = 47;

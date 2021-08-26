@@ -19,7 +19,6 @@ namespace Invoice.Forms
 
             InitializeComponent();
             SetControlInitializeState();
-
             
         }
 
@@ -50,8 +49,11 @@ namespace Invoice.Forms
             {
                 DisplayEmptyListReason("Sukurkite Bent Vieną sąskaitą ir supildykite bent vieną produkto tipą ", e, dataGridView);
             }
+        }
 
-            
+        private void GetAllInfoByProductNameButton_Click(object sender, System.EventArgs e)
+        {
+
         }
 
         #region MyMethods
@@ -237,8 +239,8 @@ namespace Invoice.Forms
         }
 
 
+
         #endregion
-
-
+       
     }
 }

@@ -149,7 +149,7 @@ namespace Invoice.Forms
                 successMessage = "Nauja Sąskaita faktūra sukurta";
             }
 
-            if (isSuccess)
+            if (isSuccess)// product type need new logic if update must not add new number but by new number if number is bigger then last then add if not subtract
             {
                 bool isAllQuantityFilled = CheckIsAllProductTypeQuantityFilledByInvoiceProductQuantity();
                 FillProductTypeQuantityIfEmpty(isAllQuantityFilled);
