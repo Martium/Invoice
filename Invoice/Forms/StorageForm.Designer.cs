@@ -47,6 +47,10 @@ namespace Invoice.Forms
             this.DepositProductNameListComboBox = new System.Windows.Forms.ComboBox();
             this.DepositProductnameInformationLabel = new System.Windows.Forms.Label();
             this.DepositInformationLabel = new System.Windows.Forms.Label();
+            this.FullProductTypeQuantityLabel = new System.Windows.Forms.Label();
+            this.FullProductTypePriceLabel = new System.Windows.Forms.Label();
+            this.FullProductTypeQuantityTextBox = new System.Windows.Forms.TextBox();
+            this.FullProductTypePriceTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.StorageDataGridView)).BeginInit();
             this.ProductTypeControlPanel.SuspendLayout();
             this.DepositControlPanel.SuspendLayout();
@@ -129,6 +133,7 @@ namespace Invoice.Forms
             this.GetAllInfoByYearButton.TabStop = false;
             this.GetAllInfoByYearButton.Text = "  Gauti Info \r\npagal metus ";
             this.GetAllInfoByYearButton.UseVisualStyleBackColor = true;
+            this.GetAllInfoByYearButton.Click += new System.EventHandler(this.GetAllInfoByYearButton_Click);
             // 
             // GetAllInfoByProductNameButton
             // 
@@ -239,11 +244,53 @@ namespace Invoice.Forms
             this.DepositInformationLabel.TabIndex = 47;
             this.DepositInformationLabel.Text = "Depozito valdymas";
             // 
+            // FullProductTypeQuantityLabel
+            // 
+            this.FullProductTypeQuantityLabel.AutoSize = true;
+            this.FullProductTypeQuantityLabel.Location = new System.Drawing.Point(46, 667);
+            this.FullProductTypeQuantityLabel.Name = "FullProductTypeQuantityLabel";
+            this.FullProductTypeQuantityLabel.Size = new System.Drawing.Size(143, 13);
+            this.FullProductTypeQuantityLabel.TabIndex = 47;
+            this.FullProductTypeQuantityLabel.Text = "Visų prodkutų bendras kiekis";
+            // 
+            // FullProductTypePriceLabel
+            // 
+            this.FullProductTypePriceLabel.AutoSize = true;
+            this.FullProductTypePriceLabel.Location = new System.Drawing.Point(199, 667);
+            this.FullProductTypePriceLabel.Name = "FullProductTypePriceLabel";
+            this.FullProductTypePriceLabel.Size = new System.Drawing.Size(137, 13);
+            this.FullProductTypePriceLabel.TabIndex = 48;
+            this.FullProductTypePriceLabel.Text = "Visų prodkutų bendra kaina\r\n";
+            // 
+            // FullProductTypeQuantityTextBox
+            // 
+            this.FullProductTypeQuantityTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.FullProductTypeQuantityTextBox.Location = new System.Drawing.Point(49, 694);
+            this.FullProductTypeQuantityTextBox.Name = "FullProductTypeQuantityTextBox";
+            this.FullProductTypeQuantityTextBox.ReadOnly = true;
+            this.FullProductTypeQuantityTextBox.Size = new System.Drawing.Size(147, 20);
+            this.FullProductTypeQuantityTextBox.TabIndex = 49;
+            this.FullProductTypeQuantityTextBox.TabStop = false;
+            // 
+            // FullProductTypePriceTextBox
+            // 
+            this.FullProductTypePriceTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.FullProductTypePriceTextBox.Location = new System.Drawing.Point(202, 694);
+            this.FullProductTypePriceTextBox.Name = "FullProductTypePriceTextBox";
+            this.FullProductTypePriceTextBox.ReadOnly = true;
+            this.FullProductTypePriceTextBox.Size = new System.Drawing.Size(147, 20);
+            this.FullProductTypePriceTextBox.TabIndex = 50;
+            this.FullProductTypePriceTextBox.TabStop = false;
+            // 
             // StorageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1130, 742);
+            this.Controls.Add(this.FullProductTypePriceTextBox);
+            this.Controls.Add(this.FullProductTypeQuantityTextBox);
+            this.Controls.Add(this.FullProductTypePriceLabel);
+            this.Controls.Add(this.FullProductTypeQuantityLabel);
             this.Controls.Add(this.DepositControlPanel);
             this.Controls.Add(this.ProductTypeControlPanel);
             this.Controls.Add(this.StorageDataGridView);
@@ -283,5 +330,9 @@ namespace Invoice.Forms
         private System.Windows.Forms.Button GetDepositInfoByNameButton;
         private System.Windows.Forms.ComboBox DepositYearComboBox;
         private System.Windows.Forms.Label DepositYearInfoLabel;
+        private System.Windows.Forms.Label FullProductTypeQuantityLabel;
+        private System.Windows.Forms.Label FullProductTypePriceLabel;
+        private System.Windows.Forms.TextBox FullProductTypeQuantityTextBox;
+        private System.Windows.Forms.TextBox FullProductTypePriceTextBox;
     }
 }
