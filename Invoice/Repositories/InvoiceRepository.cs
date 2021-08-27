@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.SQLite;
 using Dapper;
 using Invoice.Models;
@@ -78,7 +77,7 @@ namespace Invoice.Repositories
             }
         }
 
-        public bool CreateNewInvoice(InvoiceModel invoiceModel)
+        public bool CreateNewInvoice(InvoiceModel invoiceModel, int invoiceYear)
         {
             int createNextInvoiceNumber = GetNextInvoiceNumber();
 
@@ -99,7 +98,7 @@ namespace Invoice.Repositories
                 object queryParameters = new
                 {
                     InvoiceNumber = createNextInvoiceNumber,
-                    InvoiceNumberYearCreation = DateTime.Now.Year, // for old invoice new logic must be provided create new prop to invoice model and add year by choice 
+                    InvoiceNumberYearCreation = invoiceYear,
                     invoiceModel.InvoiceDate,
                     invoiceModel.SerialNumber,
 
@@ -190,7 +189,7 @@ namespace Invoice.Repositories
 
                 string updateExistingInvoiceCommand =
                     @"Update 'Invoice'
-                        SET InvoiceDate = @InvoiceDate, SerialNumber = @SerialNumber, SellerName = @SellerName, SellerFirmCode = @SellerFirmCode, SellerPvmCode = @SellerPvmCode, SellerAddress = @SellerAddress, 
+                        SET InvoiceDate = @InvoiceDate, InvoiceNumberYearCreation = @InvoiceNumberYearCreation,  SerialNumber = @SerialNumber, SellerName = @SellerName, SellerFirmCode = @SellerFirmCode, SellerPvmCode = @SellerPvmCode, SellerAddress = @SellerAddress, 
                            SellerPhoneNumber = @SellerPhoneNumber, SellerBank = @SellerBank, SellerBankAccountNumber = @SellerBankAccountNumber, SellerEmailAddress = @SellerEmailAddress, BuyerName = @BuyerName, 
                            BuyerFirmCode = @BuyerFirmCode, BuyerPvmCode = @BuyerPvmCode, BuyerAddress = @BuyerAddress, FirstProductName = @FirstProductName, SecondProductName = @SecondProductName, 
                            ThirdProductName = @ThirdProductName, FourthProductName = @FourthProductName, FifthProductName = @FifthProductName, SixthProductName = @SixthProductName, 
@@ -198,7 +197,7 @@ namespace Invoice.Repositories
                           FifthProductSees = @FifthProductSees, SixthProductSees = @SixthProductSees, SeventhProductSees = @SeventhProductSees, EighthProductSees = @EighthProductSees, NinthProductSees = @NinthProductSees,  TenProductSees = @TenProductSees, EleventhProductSees = @EleventhProductSees, TwelfthProductSees = @TwelfthProductSees, FirstProductQuantity = @FirstProductQuantity, 
                           SecondProductQuantity = @SecondProductQuantity, ThirdProductQuantity = @ThirdProductQuantity, FourthProductQuantity = @FourthProductQuantity, FifthProductQuantity = @FifthProductQuantity,  SixthProductQuantity = @SixthProductQuantity, SeventhProductQuantity = @SeventhProductQuantity, EighthProductQuantity = @EighthProductQuantity, NinthProductQuantity = @NinthProductQuantity, TenProductQuantity = @TenProductQuantity, EleventhProductQuantity = @EleventhProductQuantity, TwelfthProductQuantity = @TwelfthProductQuantity, FirstProductPrice = @FirstProductPrice, 
                           SecondProductPrice = @SecondProductPrice, ThirdProductPrice = @ThirdProductPrice, FourthProductPrice = @FourthProductPrice, FifthProductPrice = @FifthProductPrice, SixthProductPrice = @SixthProductPrice, SeventhProductPrice = @SeventhProductPrice, EighthProductPrice = @EighthProductPrice, NinthProductPrice = @NinthProductPrice,TenProductPrice = @TenProductPrice, EleventhProductPrice = @EleventhProductPrice,  TwelfthProductPrice = @TwelfthProductPrice, PriceInWords = @PriceInWords, InvoiceMaker = @InvoiceMaker, InvoiceAccepted = @InvoiceAccepted, PaymentStatus = @PaymentStatus, TotalPriceWithPvm = @TotalPriceWithPvm
-                      WHERE InvoiceNumber = @InvoiceNumber AND InvoiceNumberYearCreation = @InvoiceNumberYearCreation
+                      WHERE InvoiceNumber = @InvoiceNumber
 
                      ";
 

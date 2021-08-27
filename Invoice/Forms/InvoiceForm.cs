@@ -35,7 +35,7 @@ namespace Invoice.Forms
 
         private readonly InvoiceOperations _invoiceOperations;
         private readonly int? _invoiceNumber;
-        private readonly int? _invoiceNumberYearCreation;
+        private int? _invoiceNumberYearCreation;
         private string _paymentStatus = "Nesumokėta";
 
         private Bitmap _invoiceMemoryImage;
@@ -86,11 +86,11 @@ namespace Invoice.Forms
             FillBuyerComboBox();
             FillDefaultSellerInfoForNewInvoice();
             LoadSuggestedMoneyReceiptNumber();
+            LoadInvoiceControlYearTextBox();
         }
 
         private void InvoiceDateRichTextBox_TextChanged(object sender, EventArgs e)
         {
-
             if (string.IsNullOrWhiteSpace(InvoiceDateRichTextBox.Text))
             {
                 SaveButton.Enabled = false;
@@ -142,24 +142,39 @@ namespace Invoice.Forms
                 isSuccess = _invoiceRepository.UpdateExistingInvoice(_invoiceNumber.Value,
                     _invoiceNumberYearCreation.Value, invoiceModel);
                 successMessage = "Sąskaita faktūra atnaujinta sekmingai";
-            }
-            else
-            {
-                isSuccess = _invoiceRepository.CreateNewInvoice(invoiceModel);
-                successMessage = "Nauja Sąskaita faktūra sukurta";
-            }
 
-            if (isSuccess)// product type need new logic if update must not add new number but by new number if number is bigger then last then add if not subtract
-            {
-                bool isAllQuantityFilled = CheckIsAllProductTypeQuantityFilledByInvoiceProductQuantity();
-                FillProductTypeQuantityIfEmpty(isAllQuantityFilled);
-                _messageDialogService.ShowInfoMessage(successMessage);
-                GetAllProductTypeForNewInvoice();
-                this.Close();
+                if (isSuccess)// product type need new logic if update must not add new number but by new number if number is bigger then last then add if not subtract
+                {
+                    bool isAllQuantityFilled = CheckIsAllProductTypeQuantityFilledByInvoiceProductQuantity();
+                    SuggestToFillProductTypeQuantityIfEmpty(isAllQuantityFilled);
+                    _messageDialogService.ShowInfoMessage(successMessage);
+                    GetAllProductTypeForNewInvoice();
+                    this.Close();
+                }
+                else
+                {
+                    _messageDialogService.ShowErrorMassage("nepavyko išsaugot bandykit dar kartą");
+                }
             }
             else
             {
-                _messageDialogService.ShowErrorMassage("nepavyko išsaugot bandykit dar kartą");
+                if (!_invoiceNumberYearCreation.HasValue) return;
+
+                isSuccess = _invoiceRepository.CreateNewInvoice(invoiceModel, _invoiceNumberYearCreation.Value);
+                successMessage = "Nauja Sąskaita faktūra sukurta";
+
+                if (isSuccess)// product type need new logic if update must not add new number but by new number if number is bigger then last then add if not subtract
+                {
+                    bool isAllQuantityFilled = CheckIsAllProductTypeQuantityFilledByInvoiceProductQuantity();
+                    SuggestToFillProductTypeQuantityIfEmpty(isAllQuantityFilled);
+                    _messageDialogService.ShowInfoMessage(successMessage);
+                    GetAllProductTypeForNewInvoice();
+                    this.Close();
+                }
+                else
+                {
+                    _messageDialogService.ShowErrorMassage("nepavyko išsaugot bandykit dar kartą");
+                }
             }
         }
 
@@ -441,6 +456,60 @@ namespace Invoice.Forms
             else
             {
                 _messageDialogService.ShowErrorMassage("Neišsisaugojo kreiptis į administratorių");
+            }
+        }
+
+        private void InvoiceYearControlTextBox_Validating(object sender, CancelEventArgs e)
+        {
+            bool isNumber = int.TryParse(InvoiceYearControlTextBox.Text, out int number);
+
+            if (string.IsNullOrWhiteSpace(InvoiceYearControlTextBox.Text))
+            {
+                SaveButton.Enabled = false;
+                e.Cancel = true;
+                _messageDialogService.DisplayLabelAndTextBoxError(
+                    $" Raudonas langelis Negali būti tuščias! pvz.: {DateTime.Now.Year}", InvoiceYearControlTextBox,
+                    ErrorMassageLabel);
+            }
+            else if (!isNumber)
+            {
+                SaveButton.Enabled = false;
+                e.Cancel = true;
+                _messageDialogService.DisplayLabelAndTextBoxError(
+                    $" Raudonas langelis turi būti metai pvz.: {DateTime.Now.Year}", InvoiceYearControlTextBox,
+                    ErrorMassageLabel);
+            }
+            else if (number > DateTime.Now.Year)
+            {
+                SaveButton.Enabled = false;
+                e.Cancel = true;
+                _messageDialogService.DisplayLabelAndTextBoxError(
+                    $" Raudonam langelį metai negali būti ateityje pvz.: {DateTime.Now.Year}", InvoiceYearControlTextBox,
+                    ErrorMassageLabel);
+            }
+            else if (number <= 0)
+            {
+                SaveButton.Enabled = false;
+                e.Cancel = true;
+                _messageDialogService.DisplayLabelAndTextBoxError(
+                    $" Raudonam langelyje negali būti būt 0 ar mažiau nei 0   pvz.: {DateTime.Now.Year}", InvoiceYearControlTextBox,
+                    ErrorMassageLabel);
+            }
+            else
+            {
+                SaveButton.Enabled = true;
+                e.Cancel = false;
+                _messageDialogService.HideLabelAndTextBoxError(ErrorMassageLabel, InvoiceYearControlTextBox);
+            }
+        }
+
+        private void InvoiceYearControlTextBox_TextChanged(object sender, EventArgs e)
+        {
+            bool isNumber = int.TryParse(InvoiceYearControlTextBox.Text, out int number);
+
+            if (InvoiceYearControlTextBox.Text.Length == InvoiceYearControlTextBox.MaxLength && isNumber)
+            {
+                _invoiceNumberYearCreation = number;
             }
         }
 
@@ -1104,6 +1173,7 @@ namespace Invoice.Forms
             TwelfthProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
 
             MoneyReceiptOfferNumberTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+            InvoiceYearControlTextBox.MaxLength = FormSettings.TextBoxLengths.InvoiceYearControl;
         }
 
         private void CaptureInvoiceFormScreen()
@@ -1677,7 +1747,7 @@ namespace Invoice.Forms
             BuyerInfoNameComboBox.DisplayMember = "BuyerName";
         }
 
-        private void FillProductTypeQuantityIfEmpty(bool isAllQuantityFilled)
+        private void SuggestToFillProductTypeQuantityIfEmpty(bool isAllQuantityFilled)
         {
             if (isAllQuantityFilled)return;
            
@@ -1781,7 +1851,20 @@ namespace Invoice.Forms
             }
         }
 
-        #endregion
+        private void LoadInvoiceControlYearTextBox()
+        {
+            if (_invoiceOperations == InvoiceOperations.Edit && _invoiceNumberYearCreation.HasValue)
+            {
+                InvoiceYearControlTextBox.Text = _invoiceNumberYearCreation.Value.ToString();
+            }
+            else
+            {
+                InvoiceYearControlTextBox.Text = DateTime.Now.Year.ToString();
+                _invoiceNumberYearCreation = DateTime.Now.Year;
+            }
+        }
 
+
+        #endregion
     }
 }

@@ -241,6 +241,90 @@ namespace Invoice.Repositories
             }
         }
 
+        public dynamic GetAllInfo(ProductTypeOperations productTypeOperations)
+        {
+            string productType = _stringService.SetProductType(productTypeOperations);
+            string productTypeQuantity = _stringService.SetProductTypeQuantity(productTypeOperations);
+            string productTypePrice = _stringService.SetProductTypePrice(productTypeOperations);
+
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string getAllInfo =
+                    $@"
+                        SELECT * FROM ProductType PT
+                        WHERE PT.{productType} IS NOT NULL AND PT.{productTypeQuantity} IS NOT NULL AND PT.{productTypePrice} IS NOT NULL
+                        ORDER BY PT.IdByInvoiceNumber DESC, PT.IdByInvoiceNumberYearCreation DESC
+                    ";
+
+                switch (productTypeOperations)
+                {
+                    case ProductTypeOperations.FirstProductType:
+                        IEnumerable<FirstSpecificProductTypeModel> getAllFirstSpecificProductType =
+                            dbConnection.Query<FirstSpecificProductTypeModel>(getAllInfo);
+                        return getAllFirstSpecificProductType;
+
+                    case ProductTypeOperations.SecondProductType:
+                        IEnumerable<SecondSpecificProductTypeModel> getAllSecondSpecificProductType =
+                            dbConnection.Query<SecondSpecificProductTypeModel>(getAllInfo);
+                        return getAllSecondSpecificProductType;
+
+                    case ProductTypeOperations.ThirdProductType:
+                        IEnumerable<ThirdSpecificProductTypeModel> getAllThirdSpecificProductType =
+                            dbConnection.Query<ThirdSpecificProductTypeModel>(getAllInfo);
+                        return getAllThirdSpecificProductType;
+
+                    case ProductTypeOperations.FourthProductType:
+                        IEnumerable<FourthSpecificProductTypeModel> getAllFourthSpecificProductType =
+                            dbConnection.Query<FourthSpecificProductTypeModel>(getAllInfo);
+                        return getAllFourthSpecificProductType;
+
+                    case ProductTypeOperations.FifthProductType:
+                        IEnumerable<FifthSpecificProductTypeModel> getAllFifthSpecificProductType =
+                            dbConnection.Query<FifthSpecificProductTypeModel>(getAllInfo);
+                        return getAllFifthSpecificProductType;
+
+                    case ProductTypeOperations.SixthProductType:
+                        IEnumerable<SixthSpecificProductTypeModel> getAllSixthSpecificProductType =
+                            dbConnection.Query<SixthSpecificProductTypeModel>(getAllInfo);
+                        return getAllSixthSpecificProductType;
+
+                    case ProductTypeOperations.SeventhProductType:
+                        IEnumerable<SeventhSpecificProductTypeModel> getAllSeventhSpecificProductType =
+                            dbConnection.Query<SeventhSpecificProductTypeModel>(getAllInfo);
+                        return getAllSeventhSpecificProductType;
+
+                    case ProductTypeOperations.EighthProductType:
+                        IEnumerable<EighthSpecificProductTypeModel> getAllEighthSpecificProductType =
+                            dbConnection.Query<EighthSpecificProductTypeModel>(getAllInfo);
+                        return getAllEighthSpecificProductType;
+
+                    case ProductTypeOperations.NinthProductType:
+                        IEnumerable<NinthSpecificProductTypeModel> getAllNinthSpecificProductType =
+                            dbConnection.Query<NinthSpecificProductTypeModel>(getAllInfo);
+                        return getAllNinthSpecificProductType;
+
+                    case ProductTypeOperations.TenProductType:
+                        IEnumerable<TenSpecificProductTypeModel> getAllTenSpecificProductType =
+                            dbConnection.Query<TenSpecificProductTypeModel>(getAllInfo);
+                        return getAllTenSpecificProductType;
+
+                    case ProductTypeOperations.EleventhProductType:
+                        IEnumerable<EleventhSpecificProductTypeModel> getAllEleventhSpecificProductType =
+                            dbConnection.Query<EleventhSpecificProductTypeModel>(getAllInfo);
+                        return getAllEleventhSpecificProductType;
+
+                    case ProductTypeOperations.TwelfthProductType:
+                        IEnumerable<TwelfthSpecificProductTypeModel> getAllTwelfthSpecificProductType =
+                            dbConnection.Query<TwelfthSpecificProductTypeModel>(getAllInfo);
+                        return getAllTwelfthSpecificProductType;
+                    default:
+                        return null;
+                }
+            }
+        }
+
         public bool CreateNewProductType(int invoiceNumber, int invoiceNumberYearCreation, ProductTypeModel productType)
         {
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))

@@ -56,6 +56,49 @@ namespace Invoice.Repositories
             }
         }
 
+        public IEnumerable<FullDepositProductWithoutIdModel> GetAllDepositInfoByYearAndName(int year, string productName)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string getDepositAllInfoQuery =
+                    $@"
+                        SELECT
+                          D.{InvoiceYear}, D.{ProductName}, D.{BarCode}, D.{ProductQuantity}
+                        FROM {DepositTable} D
+                        WHERE D.{InvoiceYear} = {year} AND D.{ProductName} = '{productName}'
+                        ORDER BY D.{ProductName} ASC
+                    ";
+
+                IEnumerable<FullDepositProductWithoutIdModel> getDepositAllInfoCommand =
+                    dbConnection.Query<FullDepositProductWithoutIdModel>(getDepositAllInfoQuery);
+
+                return getDepositAllInfoCommand;
+            }
+        }
+
+        public IEnumerable<FullDepositProductWithoutIdModel> GetAllInfo()
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string getAllInfoQuery =
+                    $@"
+                        SELECT
+                           D.{InvoiceYear}, D.{ProductName}, D.{BarCode}, D.{ProductQuantity}
+                        FROM {DepositTable} D
+                        ORDER BY D.{ProductName} ASC
+                    ";
+
+                IEnumerable<FullDepositProductWithoutIdModel> getAllInfoCommand =
+                    dbConnection.Query<FullDepositProductWithoutIdModel>(getAllInfoQuery);
+
+                return getAllInfoCommand;
+            }
+        }
+
         
 
         
