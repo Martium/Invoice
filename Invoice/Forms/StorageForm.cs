@@ -94,11 +94,22 @@ namespace Invoice.Forms
         private void GetAllInfoByDepositProductsByYearButton_Click(object sender, System.EventArgs e)
         {
             _storageInfo = StorageInfo.Deposit;
+            GetAllDepositInfoByYear();
 
+            LoadSpecificInfoToStorageDataGridView(_storageInfo);
+            CalculateFullProductTypeQuantityAndPrice(_storageInfo);
 
         }
 
+        private void GetAllDepositInfoByYearAndNameButton_Click(object sender, System.EventArgs e)
+        {
+            _storageInfo = StorageInfo.Deposit;
+            //
 
+            LoadSpecificInfoToStorageDataGridView(_storageInfo);
+            CalculateFullProductTypeQuantityAndPrice(_storageInfo);
+
+        }
 
         #region MyMethods
 
@@ -162,6 +173,10 @@ namespace Invoice.Forms
                     break;
 
                 case StorageInfo.Deposit:
+                    StorageDataGridView.Columns[DepositInvoiceYearIndex].HeaderText = @"Metai";
+                    StorageDataGridView.Columns[DepositProductNameIndex].HeaderText = @"Tipas";
+                    StorageDataGridView.Columns[DepositBarCodeIndex].HeaderText = @"Bar kodas";
+                    StorageDataGridView.Columns[DepositProductQuantityIndex].HeaderText = @"Kiekis";
                     break;
             }
         }
@@ -219,7 +234,8 @@ namespace Invoice.Forms
                     StorageDataGridView.DataSource = depositBindingSource;
 
                     ChangeDataGridViewHeadersSize(storageInfo);
-
+                    ChangeDataGridViewHeaderText(storageInfo);
+                    SetInformationOfDataGridViewTypeLabel(storageInfo);
                    
                     break;
             }
@@ -511,6 +527,13 @@ namespace Invoice.Forms
                     break;
 
                 case StorageInfo.Deposit:
+
+                    double calculateFullDepositQuantity =
+                        _numberService.SumAllDataGridViewRowsSpecificColumns(StorageDataGridView, rowsCount,
+                            DepositProductQuantityIndex);
+                    FullProductTypeQuantityTextBox.Text =
+                        calculateFullDepositQuantity.ToString(CultureInfo.InvariantCulture);
+                    FullProductTypePriceTextBox.Text = "N/A";
                     break;
             }
 
@@ -712,11 +735,14 @@ namespace Invoice.Forms
             _depositInfo.Clear();
 
             int year = int.Parse(DepositYearComboBox.Text);
+
+            _depositInfo = _depositRepository.GetAllDepositProductsByYear(year).ToList();
         }
 
 
 
         #endregion
+
         
     }
 }
