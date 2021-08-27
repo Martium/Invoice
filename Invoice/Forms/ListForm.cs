@@ -246,11 +246,17 @@ namespace Invoice.Forms
 
         private void OpenProductTypeStorageFormButton_Click(object sender, EventArgs e)
         {
-            var productTypeStorageForm = new ProductTypeStorageForm();
+           // var productTypeStorageForm = new ProductTypeStorageForm();
 
-            productTypeStorageForm.Closed += ShowAndRefreshListForm;
+           // productTypeStorageForm.Closed += ShowAndRefreshListForm;
 
-            HideListAndOpenAnotherForm(productTypeStorageForm);
+          // HideListAndOpenAnotherForm(productTypeStorageForm);
+
+            var storageForm = new StorageForm();
+
+            storageForm.Closed += ShowAndRefreshListForm;
+
+            HideListAndOpenAnotherForm(storageForm);
         }
 
         private void BuyersInfoFormButton_Click(object sender, EventArgs e)

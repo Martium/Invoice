@@ -1,8 +1,9 @@
-﻿using Invoice.Enums;
+﻿using System;
+using Invoice.Enums;
 
 namespace Invoice.Service
 {
-    public class ProductTypeStringService
+    public class StringService
     {
         public string SetProductType(ProductTypeOperations productTypeOperations)
         {
@@ -155,6 +156,18 @@ namespace Invoice.Service
             }
 
             return productTypePrice;
+        }
+
+        public string MakeFormatFilledProducts(string[] allProducts)
+        {
+            string filledProducts = null;
+
+            foreach (var product in allProducts)
+            {
+                filledProducts += $"{product}{Environment.NewLine}{Environment.NewLine}";
+            }
+
+            return filledProducts;
         }
 
     }

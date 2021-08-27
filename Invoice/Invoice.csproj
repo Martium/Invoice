@@ -98,6 +98,7 @@
     <Compile Include="Enums\ProductTypeOrStorageListOperation.cs" />
     <Compile Include="Enums\ProductTypePriceOperations.cs" />
     <Compile Include="Enums\ProductTypeQuantityOperations.cs" />
+    <Compile Include="Enums\StorageInfo.cs" />
     <Compile Include="Forms\BuyersInfoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,6 +147,12 @@
     <Compile Include="Forms\SellerInfoForm.Designer.cs">
       <DependentUpon>SellerInfoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\StorageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StorageForm.Designer.cs">
+      <DependentUpon>StorageForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\AllYearsTotalPriceModel.cs" />
     <Compile Include="Models\BuyersInfo\BuyerFullInfoModel.cs" />
     <Compile Include="Models\BuyersInfo\BuyerFullInfoWithIdModel.cs" />
@@ -155,6 +162,7 @@
     <Compile Include="Models\InvoiceNumberYearCreationModel.cs" />
     <Compile Include="Models\InvoiceQuantityAndPriceModel.cs" />
     <Compile Include="Models\MoneyReceiptModel.cs" />
+    <Compile Include="Models\MoneyReceipt\MoneyReceiptSuggestedNumberModel.cs" />
     <Compile Include="Models\NewProductStorageModel.cs" />
     <Compile Include="Models\PasswordModel.cs" />
     <Compile Include="Models\ProductInfo\FullProductInfoModel.cs" />
@@ -183,13 +191,14 @@
     <Compile Include="Repositories\DataBaseInitializerRepository.cs" />
     <Compile Include="Repositories\InvoiceRepository.cs" />
     <Compile Include="Repositories\LoginRepository.cs" />
+    <Compile Include="Repositories\MoneyReceiptRepository.cs" />
     <Compile Include="Repositories\PdfFolderInitializer.cs" />
     <Compile Include="Repositories\ProductInfoRepository.cs" />
     <Compile Include="Repositories\ProductTypeRepository.cs" />
     <Compile Include="Repositories\StorageRepository.cs" />
     <Compile Include="Service\MessageDialogService.cs" />
     <Compile Include="Service\NumberService.cs" />
-    <Compile Include="Service\ProductTypeStringService.cs" />
+    <Compile Include="Service\StringService.cs" />
     <EmbeddedResource Include="Forms\BuyersInfoForm.resx">
       <DependentUpon>BuyersInfoForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -213,6 +222,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SellerInfoForm.resx">
       <DependentUpon>SellerInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StorageForm.resx">
+      <DependentUpon>StorageForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

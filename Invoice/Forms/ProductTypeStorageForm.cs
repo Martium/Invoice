@@ -392,7 +392,6 @@ namespace Invoice.Forms
                 {
                     _messageDialogService.ShowErrorMassage("Neatnaujinta bandykit dar kartą (Kreiptis į Administratorių)");
                 }
-
             }
         }
 

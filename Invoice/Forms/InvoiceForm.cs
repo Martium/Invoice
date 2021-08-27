@@ -9,6 +9,7 @@ using Invoice.Constants;
 using Invoice.Enums;
 using Invoice.Models;
 using Invoice.Models.BuyersInfo;
+using Invoice.Models.MoneyReceipt;
 using Invoice.Models.ProductInfo;
 using Invoice.Models.ProductType;
 using Invoice.Repositories;
@@ -26,10 +27,11 @@ namespace Invoice.Forms
         private readonly ProductTypeRepository _productTypeRepository;
         private readonly ProductInfoRepository _productInfoRepository;
         private readonly BuyersInfoRepository _buyersInfoRepository;
+        private readonly MoneyReceiptRepository _moneyReceiptRepository;
 
-        private readonly MessageDialogService _messageDialogService = new MessageDialogService();
-
-        private readonly NumberService _numberService = new NumberService();
+        private readonly MessageDialogService _messageDialogService;
+        private readonly NumberService _numberService;
+        private readonly StringService _stringService;
 
         private readonly InvoiceOperations _invoiceOperations;
         private readonly int? _invoiceNumber;
@@ -46,6 +48,8 @@ namespace Invoice.Forms
 
         private string _lastBuyerFilled;
 
+        private int _lastMoneyReceiptNumber;
+        private int _countEmptyLinesForMoneyReceipt;
 
         public InvoiceForm(InvoiceOperations invoiceOperations, int? invoiceNumber = null,
             int? invoiceNumberYearCreation = null)
@@ -54,6 +58,11 @@ namespace Invoice.Forms
             _productTypeRepository = new ProductTypeRepository();
             _productInfoRepository = new ProductInfoRepository();
             _buyersInfoRepository = new BuyersInfoRepository();
+            _moneyReceiptRepository = new MoneyReceiptRepository();
+
+            _numberService = new NumberService();
+            _messageDialogService = new MessageDialogService();
+            _stringService = new StringService();
 
             _invoiceOperations = invoiceOperations;
             _invoiceNumber = invoiceNumber;
@@ -65,8 +74,6 @@ namespace Invoice.Forms
 
             SetTextBoxLengths();
 
-            FillDefaultSellerInfoForNewInvoice();
-
             SetControlInitialState();
         }
 
@@ -77,6 +84,8 @@ namespace Invoice.Forms
             SetCursorAtDateTextBoxEnd();
             FillAllProductComboBoxes();
             FillBuyerComboBox();
+            FillDefaultSellerInfoForNewInvoice();
+            LoadSuggestedMoneyReceiptNumber();
         }
 
         private void InvoiceDateRichTextBox_TextChanged(object sender, EventArgs e)
@@ -99,7 +108,7 @@ namespace Invoice.Forms
                 SaveButton.Enabled = false;
                 e.Cancel = true;
                 _messageDialogService.DisplayLabelAndTextBoxError(
-                    $"Negali būti tuščias! pvz.: {DateTime.Now.ToString(DateFormat)}", InvoiceDateRichTextBox,
+                    $" Raudonas langelis Negali būti tuščias! pvz.: {DateTime.Now.ToString(DateFormat)}", InvoiceDateRichTextBox,
                     ErrorMassageLabel);
             }
             else if (!DateTime.TryParseExact(InvoiceDateRichTextBox.Text, DateFormat, CultureInfo.InvariantCulture,
@@ -108,7 +117,7 @@ namespace Invoice.Forms
                 SaveButton.Enabled = false;
                 e.Cancel = true;
                 _messageDialogService.DisplayLabelAndTextBoxError(
-                    $"Įveskite teisingą datą! pvz.: {DateTime.Now.ToString(DateFormat)}", InvoiceDateRichTextBox,
+                    $"Raudoname langelyje Įveskite teisingą datą! pvz.: {DateTime.Now.ToString(DateFormat)}", InvoiceDateRichTextBox,
                     ErrorMassageLabel);
             }
             else
@@ -140,7 +149,7 @@ namespace Invoice.Forms
                 successMessage = "Nauja Sąskaita faktūra sukurta";
             }
 
-            if (isSuccess)
+            if (isSuccess)// product type need new logic if update must not add new number but by new number if number is bigger then last then add if not subtract
             {
                 bool isAllQuantityFilled = CheckIsAllProductTypeQuantityFilledByInvoiceProductQuantity();
                 FillProductTypeQuantityIfEmpty(isAllQuantityFilled);
@@ -162,13 +171,15 @@ namespace Invoice.Forms
 
             if (dialogResult == DialogResult.OK)
             {
-                SaveInvoiceToPdf();
-                _messageDialogService.ShowInfoMessage("Sąskaitos faktūra išsaugota į pdf failą");
+                AddOneToMoneyReceiptSuggestedNumber();
+
+                SaveInvoiceAndMoneyReceiptToToPdf();
+                _messageDialogService.ShowInfoMessage("Sąskaitos faktūra ir kvitas išsaugota į pdf failą");
             }
             else
             {
-               SaveInvoiceAndMoneyReceiptToPdf();
-               _messageDialogService.ShowInfoMessage("Sąskaita faktūra ir kvitas išsaugota į pdf failą");
+               SaveInvoiceToPdf();
+               _messageDialogService.ShowInfoMessage("Sąskaita faktūra išsaugota į pdf failą");
             }
 
             SaveButton_Click(this, new EventArgs());
@@ -202,6 +213,49 @@ namespace Invoice.Forms
             else
             {
                 PrintInvoiceForm();
+            }
+        }
+
+        private void MoneyReceiptOfferNumberTextBox_Validating(object sender, CancelEventArgs e)
+        {
+            bool isNumber = int.TryParse(MoneyReceiptOfferNumberTextBox.Text, out int number);
+
+            if (string.IsNullOrWhiteSpace(MoneyReceiptOfferNumberTextBox.Text))
+            {
+                SaveMoneyReceiptSuggestionNumberButton.Enabled = false;
+                SaveToPdf.Enabled = false;
+                e.Cancel = true;
+
+                _messageDialogService.DisplayLabelAndTextBoxError($"raudonas langelis negali būt tuščias, turi būt sveikas skaičius, negali būt lygus arba mažesnis nei 0 pvz ", MoneyReceiptOfferNumberTextBox, ErrorMassageLabel);
+
+                MoneyReceiptOfferNumberTextBox.SelectionStart = MoneyReceiptOfferNumberTextBox.Text.Length;
+            }
+            else if (isNumber && number <= 0)
+            {
+                SaveMoneyReceiptSuggestionNumberButton.Enabled = false;
+                SaveToPdf.Enabled = false;
+                e.Cancel = true;
+
+                _messageDialogService.DisplayLabelAndTextBoxError($"raudonas langelis negali būt lygus arba mažesnis nei 0, pvz ", MoneyReceiptOfferNumberTextBox, ErrorMassageLabel);
+
+                MoneyReceiptOfferNumberTextBox.SelectionStart = MoneyReceiptOfferNumberTextBox.Text.Length;
+            }
+            else if (!isNumber)
+            {
+                SaveMoneyReceiptSuggestionNumberButton.Enabled = false;
+                SaveToPdf.Enabled = false;
+                e.Cancel = true;
+
+                _messageDialogService.DisplayLabelAndTextBoxError($"raudonas langelis turi būti sveikas skaičius negali būt lygus arba mažesnis nei 0, pvz ", MoneyReceiptOfferNumberTextBox, ErrorMassageLabel);
+
+                MoneyReceiptOfferNumberTextBox.SelectionStart = MoneyReceiptOfferNumberTextBox.Text.Length;
+            }
+            else
+            {
+                SaveMoneyReceiptSuggestionNumberButton.Enabled = true;
+                SaveToPdf.Enabled = true;
+                e.Cancel = false;
+                _messageDialogService.HideLabelAndTextBoxError(ErrorMassageLabel,MoneyReceiptOfferNumberTextBox);
             }
         }
 
@@ -267,7 +321,6 @@ namespace Invoice.Forms
 
         private void AddToFirstProductInfoButton_Click(object sender, EventArgs e)
         {
-
             if (FirstProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[1]]) return;
 
             _lastProductLineFilled[ProductLineIndex[1]] = FirstProductNameComboBox.Text;
@@ -368,15 +421,38 @@ namespace Invoice.Forms
             FillBuyerInfo();
         }
 
+        private void SaveMoneyReceiptSuggestionNumberButton_Click(object sender, EventArgs e)
+        {
+            int moneyReceiptNewNumber = int.Parse(MoneyReceiptOfferNumberTextBox.Text);
+
+            if (_lastMoneyReceiptNumber == moneyReceiptNewNumber)
+            {
+                _messageDialogService.ShowInfoMessage("Siūlomas Kvito skaičius yra vienodas duomenų bazėje todėl nebus išsaugotas");
+                return;
+            }
+
+            bool isUpdated = _moneyReceiptRepository.UpdateMoneyReceiptSuggestedNumber(moneyReceiptNewNumber);
+
+            if (isUpdated)
+            {
+                _lastMoneyReceiptNumber = moneyReceiptNewNumber;
+                _messageDialogService.ShowInfoMessage("Naujas Kvito numeris išsaugotas sekmingai");
+            }
+            else
+            {
+                _messageDialogService.ShowErrorMassage("Neišsisaugojo kreiptis į administratorių");
+            }
+        }
+
         #region Helpers
 
-        private void SaveInvoiceToPdf()
+        private void SaveInvoiceAndMoneyReceiptToToPdf()
         {
             CaptureInvoiceFormScreen();
 
             PdfWriter newInvoicePdfWriter =
                 new PdfWriter(
-                    $"{AppConfiguration.PdfFolder}\\Saskaita faktura ir kvitas nr.{InvoiceNumberRichTextBox.Text} {BuyerNameRichTextBox.Text}.pdf");
+                    $"{AppConfiguration.PdfFolder}\\Saskaita faktura  nr.{InvoiceNumberRichTextBox.Text} {BuyerNameRichTextBox.Text} ir kvitas nr.{MoneyReceiptOfferNumberTextBox.Text}.pdf");
             PdfDocument newInvoicePdfDocument = new PdfDocument(newInvoicePdfWriter);
             Document newInvoiceDocument = new Document(newInvoicePdfDocument);
 
@@ -392,7 +468,7 @@ namespace Invoice.Forms
             newInvoiceDocument.Close();
         }
 
-        private void SaveInvoiceAndMoneyReceiptToPdf()
+        private void SaveInvoiceToPdf()
         {
             CaptureInvoiceFormScreen();
 
@@ -421,22 +497,28 @@ namespace Invoice.Forms
 
         private void PrintMoneyReceiptForm()
         {
-            var moneyReceiptForm = new MoneyReceiptForm();
+            string[] allProducts = FillProductsToArray();
 
-            string allProducts = FillProductsToMoneyReceiptForm();
+            _countEmptyLinesForMoneyReceipt = _numberService.CountEmptyStrings(allProducts);
+
+            allProducts = allProducts.Where(p => !string.IsNullOrEmpty(p)).ToArray();
+
+            string filledProducts = _stringService.MakeFormatFilledProducts(allProducts);
 
             MoneyReceiptModel moneyReceiptInfo = new MoneyReceiptModel()
             {
                 SellerInfo = SellerNameRichTextBox.Text,
                 SellerFirmCode = SellerFirmCodeRichTextBox.Text,
                 SerialNumber = SerialNumberRichTextBox.Text,
-                InvoiceNumber = InvoiceNumberRichTextBox.Text,
+                MoneyReceiptOfferNumber = MoneyReceiptOfferNumberTextBox.Text,
                 InvoiceDate = InvoiceDateRichTextBox.Text,
-                AllProducts = $@"{allProducts}",
+                AllProducts = $@"{filledProducts}",
 
                 PriceInWords = PriceInWordsRichTextBox.Text,
                 InvoiceMaker = InvoiceMakerRichTextBox.Text
             };
+
+            var moneyReceiptForm = new MoneyReceiptForm(_countEmptyLinesForMoneyReceipt);
 
             moneyReceiptForm.Show();
             moneyReceiptForm.Hide();
@@ -450,22 +532,28 @@ namespace Invoice.Forms
 
         private void SaveMoneyReceiptFormToPdf(Document newInvoiceDocument)
         {
-            var moneyReceiptForm = new MoneyReceiptForm();
+            string[] allProducts = FillProductsToArray();
 
-            string allProducts = FillProductsToMoneyReceiptForm();
+            _countEmptyLinesForMoneyReceipt = _numberService.CountEmptyStrings(allProducts);
+
+            allProducts = allProducts.Where(p => !string.IsNullOrEmpty(p)).ToArray();
+
+            string filledProducts = _stringService.MakeFormatFilledProducts(allProducts);
 
             MoneyReceiptModel moneyReceiptInfo = new MoneyReceiptModel()
             {
                 SellerInfo = SellerNameRichTextBox.Text,
                 SellerFirmCode = SellerFirmCodeRichTextBox.Text,
                 SerialNumber = SerialNumberRichTextBox.Text,
-                InvoiceNumber = InvoiceNumberRichTextBox.Text,
+                MoneyReceiptOfferNumber = MoneyReceiptOfferNumberTextBox.Text,
                 InvoiceDate = InvoiceDateRichTextBox.Text,
-                AllProducts = $@"{allProducts}",
+                AllProducts = $@"{filledProducts}",
 
                 PriceInWords = PriceInWordsRichTextBox.Text,
                 InvoiceMaker = InvoiceMakerRichTextBox.Text
             };
+
+            var moneyReceiptForm = new MoneyReceiptForm(_countEmptyLinesForMoneyReceipt);
 
             moneyReceiptForm.Show();
 
@@ -497,7 +585,7 @@ namespace Invoice.Forms
             return productInfo;
         }
 
-        private string FillProductsToMoneyReceiptForm()
+        private string[] FillProductsToArray()
         {
             string firstProductInfo = CheckProductsRichTextBox(FirstProductNameRichTextBox, FirstProductQuantityRichTextBox,
                 FirstProductSeesRichTextBox, FirstProductPriceRichTextBox);
@@ -507,7 +595,6 @@ namespace Invoice.Forms
                 ThirdProductQuantityRichTextBox, ThirdProductSeesRichTextBox, ThirdProductPriceRichTextBox);
             string forthProductInfo = CheckProductsRichTextBox(FourthProductNameRichTextBox,
                 FourthProductQuantityRichTextBox, FourthProductSeesRichTextBox, FourthProductPriceRichTextBox);
-
             string fifthProductInfo = CheckProductsRichTextBox(FifthProductNameRichTextBox,
                 FifthProductQuantityRichTextBox, FifthProductSeesRichTextBox, FifthProductPriceRichTextBox);
             string sixthProductInfo = CheckProductsRichTextBox(SixthProductNameRichTextBox,
@@ -516,22 +603,30 @@ namespace Invoice.Forms
                 SeventhProductQuantityRichTextBox, SeventhProductSeesRichTextBox, SeventhProductPriceRichTextBox);
             string eighthProductInfo = CheckProductsRichTextBox(EighthProductNameRichTextBox,
                 EighthProductQuantityRichTextBox, EighthProductSeesRichTextBox, EighthProductPriceRichTextBox);
-
             string ninthProductInfo = CheckProductsRichTextBox(NinthProductNameRichTextBox,
                 NinthProductQuantityRichTextBox, NinthProductSeesRichTextBox, NinthProductPriceRichTextBox);
             string tenProductInfo = CheckProductsRichTextBox(TenProductNameRichTextBox, TenProductQuantityRichTextBox,
                 TenProductSeesRichTextBox, TenProductPriceRichTextBox);
             string eleventhProductInfo = CheckProductsRichTextBox(EleventhProductNameRichTextBox,
                 EleventhProductQuantityRichTextBox, EleventhProductSeesRichTextBox, EleventhProductPriceRichTextBox);
-            string twelfthProductName = CheckProductsRichTextBox(TwelfthProductNameRichTextBox,
+            string twelfthProductInfo = CheckProductsRichTextBox(TwelfthProductNameRichTextBox,
                 TwelfthProductQuantityRichTextBox, TwelfthProductSeesRichTextBox, TwelfthProductPriceRichTextBox);
 
-
-
-            string allProducts = $@"{firstProductInfo} {secondProductInfo} {thirdProductInfo} 
-{forthProductInfo}{fifthProductInfo} {sixthProductInfo} 
-{seventhProductInfo} {eighthProductInfo} {ninthProductInfo} 
-{tenProductInfo} {eleventhProductInfo} {twelfthProductName}";
+            string[] allProducts = new string[]
+            {
+                firstProductInfo,
+                secondProductInfo,
+                thirdProductInfo,
+                forthProductInfo,
+                fifthProductInfo,
+                sixthProductInfo,
+                seventhProductInfo,
+                eighthProductInfo,
+                ninthProductInfo,
+                tenProductInfo,
+                eleventhProductInfo,
+                twelfthProductInfo
+            };
 
             return allProducts;
         }
@@ -1007,6 +1102,8 @@ namespace Invoice.Forms
             TenProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
             EleventhProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
             TwelfthProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+
+            MoneyReceiptOfferNumberTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
         }
 
         private void CaptureInvoiceFormScreen()
@@ -1659,6 +1756,29 @@ namespace Invoice.Forms
                     TwelfthProductTypeQuantityTextBox);
 
             return isAllFilled;
+        }
+
+        private void LoadSuggestedMoneyReceiptNumber()
+        {
+            MoneyReceiptSuggestedNumberModel suggestedNumber = _moneyReceiptRepository.GetSuggestedMoneyReceiptNumber();
+
+            MoneyReceiptOfferNumberTextBox.Text = suggestedNumber.MoneyReceiptSuggestedNumber.ToString();
+
+            _lastMoneyReceiptNumber = suggestedNumber.MoneyReceiptSuggestedNumber;
+        }
+
+        private void AddOneToMoneyReceiptSuggestedNumber()
+        {
+            int suggestedNumber = int.Parse(MoneyReceiptOfferNumberTextBox.Text);
+
+            if (_lastMoneyReceiptNumber == suggestedNumber)
+            {
+                _moneyReceiptRepository.AddOneToMoneyReceiptSuggestedNumber();
+            }
+            else
+            {
+                _moneyReceiptRepository.UpdateNewSuggestedNumberAndAddOne(suggestedNumber);
+            }
         }
 
         #endregion
