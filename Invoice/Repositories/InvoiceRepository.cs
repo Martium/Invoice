@@ -99,7 +99,7 @@ namespace Invoice.Repositories
                 object queryParameters = new
                 {
                     InvoiceNumber = createNextInvoiceNumber,
-                    InvoiceNumberYearCreation = DateTime.Now.Year,
+                    InvoiceNumberYearCreation = DateTime.Now.Year, // for old invoice new logic must be provided create new prop to invoice model and add year by choice 
                     invoiceModel.InvoiceDate,
                     invoiceModel.SerialNumber,
 

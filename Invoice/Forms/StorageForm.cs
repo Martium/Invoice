@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using Invoice.Enums;
+using Invoice.Models.Deposit;
 using Invoice.Models.ProductType;
 using Invoice.Repositories;
 using Invoice.Service;
@@ -13,7 +14,9 @@ namespace Invoice.Forms
     public partial class StorageForm : Form
     {
         private List<SpecificNameProductTypeModel> _specificProductTypeAllInfo;
+        private List<FullDepositProductWithoutIdModel> _depositInfo;
         private readonly ProductTypeRepository _productTypeRepository;
+        private readonly DepositRepository _depositRepository;
         private readonly NumberService _numberService;
 
         private const int ProductTypeInvoiceIdIndex = 0;
@@ -22,24 +25,31 @@ namespace Invoice.Forms
         private const int ProductTypeQuantityIndex = 3;
         private const int ProductTypePriceIndex = 4;
 
+        private const int DepositInvoiceYearIndex = 0;
+        private const int DepositProductNameIndex = 1;
+        private const int DepositBarCodeIndex = 2;
+        private const int DepositProductQuantityIndex = 3;
+
         private StorageInfo _storageInfo;
 
         public StorageForm()
         {
             _specificProductTypeAllInfo = new List<SpecificNameProductTypeModel>();
+            _depositInfo = new List<FullDepositProductWithoutIdModel>();
             _productTypeRepository = new ProductTypeRepository();
+            _depositRepository = new DepositRepository();
             _numberService = new NumberService();
 
             InitializeComponent();
             SetControlInitializeState();
-            
         }
 
         private void StorageForm_Load(object sender, System.EventArgs e)
         {
             LoadSpecificInfoToStorageDataGridView(StorageInfo.ProductType);
-            TryFillProductTypeYearComboBox();
+            TryFillProductTypeAndDepositYearComboBox();
             TryFillProductTypeSpecificNamesToComboBox();
+            TryFillDepositProductNameComboBox();
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -80,6 +90,15 @@ namespace Invoice.Forms
             LoadSpecificInfoToStorageDataGridView(_storageInfo);
             CalculateFullProductTypeQuantityAndPrice(_storageInfo);
         }
+
+        private void GetAllInfoByDepositProductsByYearButton_Click(object sender, System.EventArgs e)
+        {
+            _storageInfo = StorageInfo.Deposit;
+
+
+        }
+
+
 
         #region MyMethods
 
@@ -122,6 +141,10 @@ namespace Invoice.Forms
                     break;
 
                 case StorageInfo.Deposit:
+                    StorageDataGridView.Columns[DepositInvoiceYearIndex].Width = 80;
+                    StorageDataGridView.Columns[DepositProductNameIndex].Width = 240;
+                    StorageDataGridView.Columns[DepositBarCodeIndex].Width = 160;
+                    StorageDataGridView.Columns[DepositProductQuantityIndex].Width = 80;
                     break;
             }
         }
@@ -171,16 +194,16 @@ namespace Invoice.Forms
 
         private void LoadSpecificInfoToStorageDataGridView(StorageInfo storageInfo)
         {
+          
             switch (storageInfo)
             {
                 case StorageInfo.ProductType:
 
-                    var bidingSourceModel = new SpecificNameProductTypeModel();
-                    BindingSource bindingSource = new BindingSource { bidingSourceModel };
+                    var bidingSourceProductModel = new SpecificNameProductTypeModel();
+                    BindingSource productBidingSource = new BindingSource { bidingSourceProductModel };
 
-                    bindingSource.DataSource = _specificProductTypeAllInfo;
-
-                    StorageDataGridView.DataSource = bindingSource;
+                    productBidingSource.DataSource = _specificProductTypeAllInfo;
+                    StorageDataGridView.DataSource = productBidingSource;
 
                     ChangeDataGridViewHeadersSize(storageInfo);
                     ChangeDataGridViewHeaderText(storageInfo);
@@ -188,24 +211,37 @@ namespace Invoice.Forms
                     break;
 
                 case StorageInfo.Deposit:
+
+                    var bidingSourceDepositModel = new FullDepositProductWithoutIdModel();
+                    BindingSource depositBindingSource = new BindingSource() {bidingSourceDepositModel};
+
+                    depositBindingSource.DataSource = _depositInfo;
+                    StorageDataGridView.DataSource = depositBindingSource;
+
+                    ChangeDataGridViewHeadersSize(storageInfo);
+
+                   
                     break;
             }
         }
 
-        private void TryFillProductTypeYearComboBox()
+        private void TryFillProductTypeAndDepositYearComboBox()
         {
             ProductTypeYearComboBox.Items.Clear();
+            DepositYearComboBox.Items.Clear();
 
             IEnumerable<int> allYears = _productTypeRepository.GetAllExistingProductTypeYears();
 
             foreach (var year in allYears)
             {
                 ProductTypeYearComboBox.Items.Add(year);
+                DepositYearComboBox.Items.Add(year);
             }
 
             if (ProductTypeYearComboBox.Items.Count != 0)
             {
                 ProductTypeYearComboBox.Text = ProductTypeYearComboBox.Items[0].ToString();
+                DepositYearComboBox.Text = ProductTypeYearComboBox.Items[0].ToString();
             }
         }
 
@@ -261,6 +297,23 @@ namespace Invoice.Forms
                 ProductTypeSpecificNameComboBox.Text = ProductTypeSpecificNameComboBox.Items[0].ToString();
             }
 
+        }
+
+        private void TryFillDepositProductNameComboBox()
+        {
+            DepositProductNameListComboBox.Items.Clear();
+
+            IEnumerable<string> getAllProductNames = _depositRepository.GetAllProductsNames();
+
+            foreach (var product in getAllProductNames)
+            {
+                DepositProductNameListComboBox.Items.Add(product);
+            }
+
+            if (DepositProductNameListComboBox.Items.Count != 0)
+            {
+                DepositProductNameListComboBox.Text = DepositProductNameListComboBox.Items[0].ToString();
+            }
         }
 
         private void GetAllInfoBySpecialProductTypeName()
@@ -652,6 +705,13 @@ namespace Invoice.Forms
                                                      Quantity = twelfthInfo.TwelfthProductTypeQuantity.Value,
                                                      Price = twelfthInfo.TwelfthProductTypePrice.Value
                                                  });
+        }
+
+        private void GetAllDepositInfoByYear()
+        {
+            _depositInfo.Clear();
+
+            int year = int.Parse(DepositYearComboBox.Text);
         }
 
 

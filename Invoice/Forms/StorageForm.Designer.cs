@@ -42,8 +42,8 @@ namespace Invoice.Forms
             this.DepositControlPanel = new System.Windows.Forms.Panel();
             this.DepositYearComboBox = new System.Windows.Forms.ComboBox();
             this.DepositYearInfoLabel = new System.Windows.Forms.Label();
-            this.GetDepositInfoByNameButton = new System.Windows.Forms.Button();
-            this.GetAllInfoDeposit = new System.Windows.Forms.Button();
+            this.GetAllDepositInfoByYearButton = new System.Windows.Forms.Button();
+            this.GetAllInfoByDepositProductsByYearButton = new System.Windows.Forms.Button();
             this.DepositProductNameListComboBox = new System.Windows.Forms.ComboBox();
             this.DepositProductnameInformationLabel = new System.Windows.Forms.Label();
             this.DepositInformationLabel = new System.Windows.Forms.Label();
@@ -109,7 +109,7 @@ namespace Invoice.Forms
             // ProductTypeYearInfoLabel
             // 
             this.ProductTypeYearInfoLabel.AutoSize = true;
-            this.ProductTypeYearInfoLabel.Location = new System.Drawing.Point(261, 116);
+            this.ProductTypeYearInfoLabel.Location = new System.Drawing.Point(307, 116);
             this.ProductTypeYearInfoLabel.Name = "ProductTypeYearInfoLabel";
             this.ProductTypeYearInfoLabel.Size = new System.Drawing.Size(33, 13);
             this.ProductTypeYearInfoLabel.TabIndex = 49;
@@ -118,7 +118,7 @@ namespace Invoice.Forms
             // ProductTypeYearComboBox
             // 
             this.ProductTypeYearComboBox.FormattingEnabled = true;
-            this.ProductTypeYearComboBox.Location = new System.Drawing.Point(300, 113);
+            this.ProductTypeYearComboBox.Location = new System.Drawing.Point(346, 113);
             this.ProductTypeYearComboBox.Name = "ProductTypeYearComboBox";
             this.ProductTypeYearComboBox.Size = new System.Drawing.Size(79, 21);
             this.ProductTypeYearComboBox.TabIndex = 46;
@@ -151,7 +151,7 @@ namespace Invoice.Forms
             this.ProductTypeSpecificNameComboBox.FormattingEnabled = true;
             this.ProductTypeSpecificNameComboBox.Location = new System.Drawing.Point(37, 141);
             this.ProductTypeSpecificNameComboBox.Name = "ProductTypeSpecificNameComboBox";
-            this.ProductTypeSpecificNameComboBox.Size = new System.Drawing.Size(257, 21);
+            this.ProductTypeSpecificNameComboBox.Size = new System.Drawing.Size(311, 21);
             this.ProductTypeSpecificNameComboBox.TabIndex = 46;
             this.ProductTypeSpecificNameComboBox.TabStop = false;
             // 
@@ -168,12 +168,12 @@ namespace Invoice.Forms
             // 
             this.DepositControlPanel.Controls.Add(this.DepositYearComboBox);
             this.DepositControlPanel.Controls.Add(this.DepositYearInfoLabel);
-            this.DepositControlPanel.Controls.Add(this.GetDepositInfoByNameButton);
-            this.DepositControlPanel.Controls.Add(this.GetAllInfoDeposit);
+            this.DepositControlPanel.Controls.Add(this.GetAllDepositInfoByYearButton);
+            this.DepositControlPanel.Controls.Add(this.GetAllInfoByDepositProductsByYearButton);
             this.DepositControlPanel.Controls.Add(this.DepositProductNameListComboBox);
             this.DepositControlPanel.Controls.Add(this.DepositProductnameInformationLabel);
             this.DepositControlPanel.Controls.Add(this.DepositInformationLabel);
-            this.DepositControlPanel.Location = new System.Drawing.Point(681, 339);
+            this.DepositControlPanel.Location = new System.Drawing.Point(681, 320);
             this.DepositControlPanel.Name = "DepositControlPanel";
             this.DepositControlPanel.Size = new System.Drawing.Size(437, 253);
             this.DepositControlPanel.TabIndex = 46;
@@ -181,7 +181,7 @@ namespace Invoice.Forms
             // DepositYearComboBox
             // 
             this.DepositYearComboBox.FormattingEnabled = true;
-            this.DepositYearComboBox.Location = new System.Drawing.Point(300, 151);
+            this.DepositYearComboBox.Location = new System.Drawing.Point(346, 151);
             this.DepositYearComboBox.Name = "DepositYearComboBox";
             this.DepositYearComboBox.Size = new System.Drawing.Size(79, 21);
             this.DepositYearComboBox.TabIndex = 50;
@@ -190,38 +190,39 @@ namespace Invoice.Forms
             // DepositYearInfoLabel
             // 
             this.DepositYearInfoLabel.AutoSize = true;
-            this.DepositYearInfoLabel.Location = new System.Drawing.Point(261, 154);
+            this.DepositYearInfoLabel.Location = new System.Drawing.Point(307, 154);
             this.DepositYearInfoLabel.Name = "DepositYearInfoLabel";
             this.DepositYearInfoLabel.Size = new System.Drawing.Size(33, 13);
             this.DepositYearInfoLabel.TabIndex = 50;
             this.DepositYearInfoLabel.Text = "Metai";
             // 
-            // GetDepositInfoByNameButton
+            // GetAllDepositInfoByYearButton
             // 
-            this.GetDepositInfoByNameButton.Location = new System.Drawing.Point(138, 70);
-            this.GetDepositInfoByNameButton.Name = "GetDepositInfoByNameButton";
-            this.GetDepositInfoByNameButton.Size = new System.Drawing.Size(109, 47);
-            this.GetDepositInfoByNameButton.TabIndex = 49;
-            this.GetDepositInfoByNameButton.TabStop = false;
-            this.GetDepositInfoByNameButton.Text = "Gauti Depozito info\r\npagal pavadinimą";
-            this.GetDepositInfoByNameButton.UseVisualStyleBackColor = true;
+            this.GetAllDepositInfoByYearButton.Location = new System.Drawing.Point(138, 70);
+            this.GetAllDepositInfoByYearButton.Name = "GetAllDepositInfoByYearButton";
+            this.GetAllDepositInfoByYearButton.Size = new System.Drawing.Size(109, 47);
+            this.GetAllDepositInfoByYearButton.TabIndex = 49;
+            this.GetAllDepositInfoByYearButton.TabStop = false;
+            this.GetAllDepositInfoByYearButton.Text = "Gauti Depozito info\r\npagal pavadinimą";
+            this.GetAllDepositInfoByYearButton.UseVisualStyleBackColor = true;
             // 
-            // GetAllInfoDeposit
+            // GetAllInfoByDepositProductsByYearButton
             // 
-            this.GetAllInfoDeposit.Location = new System.Drawing.Point(37, 70);
-            this.GetAllInfoDeposit.Name = "GetAllInfoDeposit";
-            this.GetAllInfoDeposit.Size = new System.Drawing.Size(95, 47);
-            this.GetAllInfoDeposit.TabIndex = 47;
-            this.GetAllInfoDeposit.TabStop = false;
-            this.GetAllInfoDeposit.Text = "Gauti Depozito \r\nPilną Info";
-            this.GetAllInfoDeposit.UseVisualStyleBackColor = true;
+            this.GetAllInfoByDepositProductsByYearButton.Location = new System.Drawing.Point(37, 70);
+            this.GetAllInfoByDepositProductsByYearButton.Name = "GetAllInfoByDepositProductsByYearButton";
+            this.GetAllInfoByDepositProductsByYearButton.Size = new System.Drawing.Size(95, 47);
+            this.GetAllInfoByDepositProductsByYearButton.TabIndex = 47;
+            this.GetAllInfoByDepositProductsByYearButton.TabStop = false;
+            this.GetAllInfoByDepositProductsByYearButton.Text = "Gauti depozito \r\npilną metų info";
+            this.GetAllInfoByDepositProductsByYearButton.UseVisualStyleBackColor = true;
+            this.GetAllInfoByDepositProductsByYearButton.Click += new System.EventHandler(this.GetAllInfoByDepositProductsByYearButton_Click);
             // 
             // DepositProductNameListComboBox
             // 
             this.DepositProductNameListComboBox.FormattingEnabled = true;
             this.DepositProductNameListComboBox.Location = new System.Drawing.Point(37, 185);
             this.DepositProductNameListComboBox.Name = "DepositProductNameListComboBox";
-            this.DepositProductNameListComboBox.Size = new System.Drawing.Size(257, 21);
+            this.DepositProductNameListComboBox.Size = new System.Drawing.Size(311, 21);
             this.DepositProductNameListComboBox.TabIndex = 48;
             this.DepositProductNameListComboBox.TabStop = false;
             // 
@@ -326,8 +327,8 @@ namespace Invoice.Forms
         private System.Windows.Forms.Label DepositInformationLabel;
         private System.Windows.Forms.Label DepositProductnameInformationLabel;
         private System.Windows.Forms.ComboBox DepositProductNameListComboBox;
-        private System.Windows.Forms.Button GetAllInfoDeposit;
-        private System.Windows.Forms.Button GetDepositInfoByNameButton;
+        private System.Windows.Forms.Button GetAllInfoByDepositProductsByYearButton;
+        private System.Windows.Forms.Button GetAllDepositInfoByYearButton;
         private System.Windows.Forms.ComboBox DepositYearComboBox;
         private System.Windows.Forms.Label DepositYearInfoLabel;
         private System.Windows.Forms.Label FullProductTypeQuantityLabel;
