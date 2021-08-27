@@ -45,6 +45,7 @@ namespace Invoice.Forms
         private const string DateFormat = "yyyy-MM-dd";
 
         private string[] _lastProductLineFilled = new string[12];
+        private double?[] _lastQuantityValues;
 
         private static readonly int[] ProductLineIndex = {0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
 
@@ -90,7 +91,7 @@ namespace Invoice.Forms
             FillDefaultSellerInfoForNewInvoice();
             LoadSuggestedMoneyReceiptNumber();
             LoadInvoiceControlYearTextBox();
-
+            FillProductQuantityForEditInvoiceOperation();
         }
 
         private void InvoiceDateRichTextBox_TextChanged(object sender, EventArgs e)
@@ -174,8 +175,8 @@ namespace Invoice.Forms
                     bool isAllQuantityFilled = CheckIsAllProductTypeQuantityFilledByInvoiceProductQuantity();
                     SuggestToFillProductTypeQuantityIfEmpty(isAllQuantityFilled);
                     GetAllProductTypeForNewInvoice();
-
-                    AddQuantityToDeposit();
+                    //need to save product info id if used 
+                    AddQuantityFromNewInvoiceToDeposit();
                     _messageDialogService.ShowInfoMessage(successMessage);
                     this.Close();
                 }
@@ -1873,33 +1874,33 @@ namespace Invoice.Forms
             }
         }
 
-        private void AddQuantityToDeposit()
+        private void AddQuantityFromNewInvoiceToDeposit()
         {
             bool isFirstHasId = CheckProductInfoId(FirstProductIdTextBox);
-            bool isSecondHasId = CheckProductInfoId(FirstProductIdTextBox);
-            bool isThirdHasId = CheckProductInfoId(FirstProductIdTextBox);
-            bool isFourthHasId = CheckProductInfoId(FirstProductIdTextBox);
-            bool isFifthHasId = CheckProductInfoId(FirstProductIdTextBox);
-            bool isSixthHasId = CheckProductInfoId(FirstProductIdTextBox);
-            bool isSeventhHasId = CheckProductInfoId(FirstProductIdTextBox);
-            bool isEighthHasId = CheckProductInfoId(FirstProductIdTextBox);
-            bool isNinthHasId = CheckProductInfoId(FirstProductIdTextBox);
-            bool isTenHasId = CheckProductInfoId(FirstProductIdTextBox);
-            bool isEleventhHasId = CheckProductInfoId(FirstProductIdTextBox);
-            bool isTwelfthHasId = CheckProductInfoId(FirstProductIdTextBox);
+            bool isSecondHasId = CheckProductInfoId(SecondProductIdTextBox);
+            bool isThirdHasId = CheckProductInfoId(ThirdProductIdTextBox);
+            bool isFourthHasId = CheckProductInfoId(FourthProductIdTextBox);
+            bool isFifthHasId = CheckProductInfoId(FifthProductIdTextBox);
+            bool isSixthHasId = CheckProductInfoId(SixthProductIdTextBox);
+            bool isSeventhHasId = CheckProductInfoId(SeventhProductIdTextBox);
+            bool isEighthHasId = CheckProductInfoId(EighthProductIdTextBox);
+            bool isNinthHasId = CheckProductInfoId(NinthProductIdTextBox);
+            bool isTenHasId = CheckProductInfoId(TenProductIdTextBox);
+            bool isEleventhHasId = CheckProductInfoId(EleventhProductIdTextBox);
+            bool isTwelfthHasId = CheckProductInfoId(TwelfthProductIdTextBox);
 
-            FilledQuantityToDepositDataBaseById(isFirstHasId, FirstProductIdTextBox, FirstProductQuantityRichTextBox);
-            FilledQuantityToDepositDataBaseById(isSecondHasId, SecondProductIdTextBox, SecondProductQuantityRichTextBox);
-            FilledQuantityToDepositDataBaseById(isThirdHasId, ThirdProductIdTextBox, ThirdProductQuantityRichTextBox);
-            FilledQuantityToDepositDataBaseById(isFourthHasId, FourthProductIdTextBox, FourthProductQuantityRichTextBox);
-            FilledQuantityToDepositDataBaseById(isFifthHasId, FifthProductIdTextBox, FifthProductQuantityRichTextBox);
-            FilledQuantityToDepositDataBaseById(isSixthHasId, SixthProductIdTextBox, SixthProductQuantityRichTextBox);
-            FilledQuantityToDepositDataBaseById(isSeventhHasId, SeventhProductIdTextBox, SeventhProductQuantityRichTextBox);
-            FilledQuantityToDepositDataBaseById(isEighthHasId, EighthProductIdTextBox, EighthProductQuantityRichTextBox);
-            FilledQuantityToDepositDataBaseById(isNinthHasId, NinthProductIdTextBox, NinthProductQuantityRichTextBox);
-            FilledQuantityToDepositDataBaseById(isTenHasId, TenProductIdTextBox, TenProductQuantityRichTextBox);
-            FilledQuantityToDepositDataBaseById(isEleventhHasId, EleventhProductIdTextBox, EleventhProductQuantityRichTextBox);
-            FilledQuantityToDepositDataBaseById(isTwelfthHasId, TwelfthProductIdTextBox, TwelfthProductQuantityRichTextBox);
+            FilledQuantityForNewInvoiceToDepositDataBaseById(isFirstHasId, FirstProductIdTextBox, FirstProductQuantityRichTextBox);
+            FilledQuantityForNewInvoiceToDepositDataBaseById(isSecondHasId, SecondProductIdTextBox, SecondProductQuantityRichTextBox);
+            FilledQuantityForNewInvoiceToDepositDataBaseById(isThirdHasId, ThirdProductIdTextBox, ThirdProductQuantityRichTextBox);
+            FilledQuantityForNewInvoiceToDepositDataBaseById(isFourthHasId, FourthProductIdTextBox, FourthProductQuantityRichTextBox);
+            FilledQuantityForNewInvoiceToDepositDataBaseById(isFifthHasId, FifthProductIdTextBox, FifthProductQuantityRichTextBox);
+            FilledQuantityForNewInvoiceToDepositDataBaseById(isSixthHasId, SixthProductIdTextBox, SixthProductQuantityRichTextBox);
+            FilledQuantityForNewInvoiceToDepositDataBaseById(isSeventhHasId, SeventhProductIdTextBox, SeventhProductQuantityRichTextBox);
+            FilledQuantityForNewInvoiceToDepositDataBaseById(isEighthHasId, EighthProductIdTextBox, EighthProductQuantityRichTextBox);
+            FilledQuantityForNewInvoiceToDepositDataBaseById(isNinthHasId, NinthProductIdTextBox, NinthProductQuantityRichTextBox);
+            FilledQuantityForNewInvoiceToDepositDataBaseById(isTenHasId, TenProductIdTextBox, TenProductQuantityRichTextBox);
+            FilledQuantityForNewInvoiceToDepositDataBaseById(isEleventhHasId, EleventhProductIdTextBox, EleventhProductQuantityRichTextBox);
+            FilledQuantityForNewInvoiceToDepositDataBaseById(isTwelfthHasId, TwelfthProductIdTextBox, TwelfthProductQuantityRichTextBox);
         }
 
         private bool CheckProductInfoId(TextBox textBox)
@@ -1908,7 +1909,7 @@ namespace Invoice.Forms
             return isHasId;
         }
 
-        private void FilledQuantityToDepositDataBaseById(bool isHasId, TextBox textBox, RichTextBox richTextBox)
+        private void FilledQuantityForNewInvoiceToDepositDataBaseById(bool isHasId, TextBox textBox, RichTextBox richTextBox)
         {
             bool isNumber = double.TryParse(richTextBox.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out double quantity);
 
@@ -1922,6 +1923,27 @@ namespace Invoice.Forms
             };
 
              _depositRepository.AddQuantityByIdAndYear(depositAddQuantity);
+        }
+
+        private void FillProductQuantityForEditInvoiceOperation()
+        {
+            if (_invoiceOperations != InvoiceOperations.Edit) return;
+
+            _lastQuantityValues = new double?[12];
+            _lastQuantityValues[0] = _numberService.ParseToDoubleOrNull(FirstProductQuantityRichTextBox);
+            _lastQuantityValues[1] = _numberService.ParseToDoubleOrNull(SecondProductQuantityRichTextBox);
+            _lastQuantityValues[2] = _numberService.ParseToDoubleOrNull(ThirdProductQuantityRichTextBox);
+            _lastQuantityValues[3] = _numberService.ParseToDoubleOrNull(FourthProductQuantityRichTextBox);
+            _lastQuantityValues[4] = _numberService.ParseToDoubleOrNull(FifthProductQuantityRichTextBox);
+            _lastQuantityValues[5] = _numberService.ParseToDoubleOrNull(SixthProductQuantityRichTextBox);
+            _lastQuantityValues[6] = _numberService.ParseToDoubleOrNull(SeventhProductQuantityRichTextBox);
+            _lastQuantityValues[7] = _numberService.ParseToDoubleOrNull(EighthProductQuantityRichTextBox);
+            _lastQuantityValues[8] = _numberService.ParseToDoubleOrNull(NinthProductQuantityRichTextBox);
+            _lastQuantityValues[9] = _numberService.ParseToDoubleOrNull(TenProductQuantityRichTextBox);
+            _lastQuantityValues[10] = _numberService.ParseToDoubleOrNull(EleventhProductQuantityRichTextBox);
+            _lastQuantityValues[11] = _numberService.ParseToDoubleOrNull(TwelfthProductQuantityRichTextBox);
+
+            //need logic to load id for product info
         }
 
         #endregion
