@@ -9,6 +9,7 @@ using Invoice.Constants;
 using Invoice.Enums;
 using Invoice.Models;
 using Invoice.Models.BuyersInfo;
+using Invoice.Models.Deposit;
 using Invoice.Models.MoneyReceipt;
 using Invoice.Models.ProductInfo;
 using Invoice.Models.ProductType;
@@ -28,6 +29,7 @@ namespace Invoice.Forms
         private readonly ProductInfoRepository _productInfoRepository;
         private readonly BuyersInfoRepository _buyersInfoRepository;
         private readonly MoneyReceiptRepository _moneyReceiptRepository;
+        private readonly DepositRepository _depositRepository;
 
         private readonly MessageDialogService _messageDialogService;
         private readonly NumberService _numberService;
@@ -59,6 +61,7 @@ namespace Invoice.Forms
             _productInfoRepository = new ProductInfoRepository();
             _buyersInfoRepository = new BuyersInfoRepository();
             _moneyReceiptRepository = new MoneyReceiptRepository();
+            _depositRepository = new DepositRepository();
 
             _numberService = new NumberService();
             _messageDialogService = new MessageDialogService();
@@ -87,6 +90,7 @@ namespace Invoice.Forms
             FillDefaultSellerInfoForNewInvoice();
             LoadSuggestedMoneyReceiptNumber();
             LoadInvoiceControlYearTextBox();
+
         }
 
         private void InvoiceDateRichTextBox_TextChanged(object sender, EventArgs e)
@@ -143,12 +147,14 @@ namespace Invoice.Forms
                     _invoiceNumberYearCreation.Value, invoiceModel);
                 successMessage = "Sąskaita faktūra atnaujinta sekmingai";
 
-                if (isSuccess)// product type need new logic if update must not add new number but by new number if number is bigger then last then add if not subtract
+                if (isSuccess)
                 {
                     bool isAllQuantityFilled = CheckIsAllProductTypeQuantityFilledByInvoiceProductQuantity();
                     SuggestToFillProductTypeQuantityIfEmpty(isAllQuantityFilled);
-                    _messageDialogService.ShowInfoMessage(successMessage);
                     GetAllProductTypeForNewInvoice();
+
+                    // add quantity to deposit if product type has number and check number was bigger then before for each
+                    _messageDialogService.ShowInfoMessage(successMessage);
                     this.Close();
                 }
                 else
@@ -163,12 +169,14 @@ namespace Invoice.Forms
                 isSuccess = _invoiceRepository.CreateNewInvoice(invoiceModel, _invoiceNumberYearCreation.Value);
                 successMessage = "Nauja Sąskaita faktūra sukurta";
 
-                if (isSuccess)// product type need new logic if update must not add new number but by new number if number is bigger then last then add if not subtract
+                if (isSuccess)
                 {
                     bool isAllQuantityFilled = CheckIsAllProductTypeQuantityFilledByInvoiceProductQuantity();
                     SuggestToFillProductTypeQuantityIfEmpty(isAllQuantityFilled);
-                    _messageDialogService.ShowInfoMessage(successMessage);
                     GetAllProductTypeForNewInvoice();
+
+                    AddQuantityToDeposit();
+                    _messageDialogService.ShowInfoMessage(successMessage);
                     this.Close();
                 }
                 else
@@ -340,6 +348,7 @@ namespace Invoice.Forms
 
             _lastProductLineFilled[ProductLineIndex[1]] = FirstProductNameComboBox.Text;
             FillSpecificProductLineTextBox(InvoiceProductLine.First, FirstProductNameComboBox.Text);
+            
         }
 
         private void AddToSecondProductInfoButton_Click(object sender, EventArgs e)
@@ -1568,7 +1577,7 @@ namespace Invoice.Forms
             switch (productLine)
             {
                 case InvoiceProductLine.First:
-                    FirsProductIdTextBox.Text = productInfo.Id.ToString();
+                    FirstProductIdTextBox.Text = productInfo.Id.ToString();
 
                     FillProductNameTextBoxWithBarCode(productInfo, FirstProductNameRichTextBox);
                     FirstProductSeesRichTextBox.Text = productInfo.ProductSees;
@@ -1864,6 +1873,56 @@ namespace Invoice.Forms
             }
         }
 
+        private void AddQuantityToDeposit()
+        {
+            bool isFirstHasId = CheckProductInfoId(FirstProductIdTextBox);
+            bool isSecondHasId = CheckProductInfoId(FirstProductIdTextBox);
+            bool isThirdHasId = CheckProductInfoId(FirstProductIdTextBox);
+            bool isFourthHasId = CheckProductInfoId(FirstProductIdTextBox);
+            bool isFifthHasId = CheckProductInfoId(FirstProductIdTextBox);
+            bool isSixthHasId = CheckProductInfoId(FirstProductIdTextBox);
+            bool isSeventhHasId = CheckProductInfoId(FirstProductIdTextBox);
+            bool isEighthHasId = CheckProductInfoId(FirstProductIdTextBox);
+            bool isNinthHasId = CheckProductInfoId(FirstProductIdTextBox);
+            bool isTenHasId = CheckProductInfoId(FirstProductIdTextBox);
+            bool isEleventhHasId = CheckProductInfoId(FirstProductIdTextBox);
+            bool isTwelfthHasId = CheckProductInfoId(FirstProductIdTextBox);
+
+            FilledQuantityToDepositDataBaseById(isFirstHasId, FirstProductIdTextBox, FirstProductQuantityRichTextBox);
+            FilledQuantityToDepositDataBaseById(isSecondHasId, SecondProductIdTextBox, SecondProductQuantityRichTextBox);
+            FilledQuantityToDepositDataBaseById(isThirdHasId, ThirdProductIdTextBox, ThirdProductQuantityRichTextBox);
+            FilledQuantityToDepositDataBaseById(isFourthHasId, FourthProductIdTextBox, FourthProductQuantityRichTextBox);
+            FilledQuantityToDepositDataBaseById(isFifthHasId, FifthProductIdTextBox, FifthProductQuantityRichTextBox);
+            FilledQuantityToDepositDataBaseById(isSixthHasId, SixthProductIdTextBox, SixthProductQuantityRichTextBox);
+            FilledQuantityToDepositDataBaseById(isSeventhHasId, SeventhProductIdTextBox, SeventhProductQuantityRichTextBox);
+            FilledQuantityToDepositDataBaseById(isEighthHasId, EighthProductIdTextBox, EighthProductQuantityRichTextBox);
+            FilledQuantityToDepositDataBaseById(isNinthHasId, NinthProductIdTextBox, NinthProductQuantityRichTextBox);
+            FilledQuantityToDepositDataBaseById(isTenHasId, TenProductIdTextBox, TenProductQuantityRichTextBox);
+            FilledQuantityToDepositDataBaseById(isEleventhHasId, EleventhProductIdTextBox, EleventhProductQuantityRichTextBox);
+            FilledQuantityToDepositDataBaseById(isTwelfthHasId, TwelfthProductIdTextBox, TwelfthProductQuantityRichTextBox);
+        }
+
+        private bool CheckProductInfoId(TextBox textBox)
+        {
+            bool isHasId = !string.IsNullOrEmpty(textBox.Text);
+            return isHasId;
+        }
+
+        private void FilledQuantityToDepositDataBaseById(bool isHasId, TextBox textBox, RichTextBox richTextBox)
+        {
+            bool isNumber = double.TryParse(richTextBox.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out double quantity);
+
+            if (!isHasId || !isNumber || !_invoiceNumberYearCreation.HasValue) return;
+
+            DepositAddQuantityModel depositAddQuantity = new DepositAddQuantityModel()
+            {
+                Id = int.Parse(textBox.Text),
+                InvoiceYear = _invoiceNumberYearCreation.Value,
+                ProductQuantity = quantity
+            };
+
+             _depositRepository.AddQuantityByIdAndYear(depositAddQuantity);
+        }
 
         #endregion
     }

@@ -200,7 +200,7 @@ namespace Invoice.Forms
             this.TenProductNameComboBox = new System.Windows.Forms.ComboBox();
             this.EleventhProductNameComboBox = new System.Windows.Forms.ComboBox();
             this.TwelfthProductNameComboBox = new System.Windows.Forms.ComboBox();
-            this.FirsProductIdTextBox = new System.Windows.Forms.TextBox();
+            this.FirstProductIdTextBox = new System.Windows.Forms.TextBox();
             this.SecondProductIdTextBox = new System.Windows.Forms.TextBox();
             this.ThirdProductIdTextBox = new System.Windows.Forms.TextBox();
             this.FourthProductIdTextBox = new System.Windows.Forms.TextBox();
@@ -1985,14 +1985,14 @@ namespace Invoice.Forms
             this.TwelfthProductNameComboBox.TabIndex = 29;
             this.TwelfthProductNameComboBox.TabStop = false;
             // 
-            // FirsProductIdTextBox
+            // FirstProductIdTextBox
             // 
-            this.FirsProductIdTextBox.Location = new System.Drawing.Point(405, 64);
-            this.FirsProductIdTextBox.Name = "FirsProductIdTextBox";
-            this.FirsProductIdTextBox.ReadOnly = true;
-            this.FirsProductIdTextBox.Size = new System.Drawing.Size(54, 20);
-            this.FirsProductIdTextBox.TabIndex = 30;
-            this.FirsProductIdTextBox.TabStop = false;
+            this.FirstProductIdTextBox.Location = new System.Drawing.Point(405, 64);
+            this.FirstProductIdTextBox.Name = "FirstProductIdTextBox";
+            this.FirstProductIdTextBox.ReadOnly = true;
+            this.FirstProductIdTextBox.Size = new System.Drawing.Size(54, 20);
+            this.FirstProductIdTextBox.TabIndex = 30;
+            this.FirstProductIdTextBox.TabStop = false;
             // 
             // SecondProductIdTextBox
             // 
@@ -2237,7 +2237,7 @@ namespace Invoice.Forms
             this.ProductInfoPanel.Controls.Add(this.TwelfthProductIdTextBox);
             this.ProductInfoPanel.Controls.Add(this.AddToEleventhProductInfoButton);
             this.ProductInfoPanel.Controls.Add(this.TwelfthProductNameComboBox);
-            this.ProductInfoPanel.Controls.Add(this.FirsProductIdTextBox);
+            this.ProductInfoPanel.Controls.Add(this.FirstProductIdTextBox);
             this.ProductInfoPanel.Controls.Add(this.TwelfthNumberInfoLabel);
             this.ProductInfoPanel.Controls.Add(this.AddToTenProductInfoButton);
             this.ProductInfoPanel.Controls.Add(this.EleventhProductIdTextBox);
@@ -2679,7 +2679,7 @@ namespace Invoice.Forms
         private System.Windows.Forms.ComboBox TenProductNameComboBox;
         private System.Windows.Forms.ComboBox EleventhProductNameComboBox;
         private System.Windows.Forms.ComboBox TwelfthProductNameComboBox;
-        private System.Windows.Forms.TextBox FirsProductIdTextBox;
+        private System.Windows.Forms.TextBox FirstProductIdTextBox;
         private System.Windows.Forms.TextBox SecondProductIdTextBox;
         private System.Windows.Forms.TextBox ThirdProductIdTextBox;
         private System.Windows.Forms.TextBox FourthProductIdTextBox;

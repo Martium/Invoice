@@ -8,6 +8,7 @@ namespace Invoice.Repositories
     public class DepositRepository
     {
         private const string DepositTable = "Deposit";
+        private const string Id = "Id";
         private const string InvoiceYear = "InvoiceYear";
         private const string ProductName = "ProductName";
         private const string BarCode = "BarCode";
@@ -96,6 +97,23 @@ namespace Invoice.Repositories
                     dbConnection.Query<FullDepositProductWithoutIdModel>(getAllInfoQuery);
 
                 return getAllInfoCommand;
+            }
+        }
+
+        public void AddQuantityByIdAndYear(DepositAddQuantityModel updateQuantity)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string updateQuantityQuery =
+                    $@"UPDATE '{DepositTable}'
+                        SET
+                          {ProductQuantity} = {ProductQuantity} + {updateQuantity.ProductQuantity}
+                        WHERE {Id} = {updateQuantity.Id} AND {InvoiceYear} = {updateQuantity.InvoiceYear}
+                    ";
+
+                dbConnection.Execute(updateQuantityQuery);
             }
         }
 
