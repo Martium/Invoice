@@ -92,7 +92,7 @@ namespace Invoice.Forms
             FillDefaultSellerInfoForNewInvoice();
             LoadSuggestedMoneyReceiptNumber();
             LoadInvoiceControlYearTextBox();
-            FillProductQuantityForEditInvoiceOperation();
+            FillDepositInfoToEditInvoiceOperation();
         }
 
         private void InvoiceDateRichTextBox_TextChanged(object sender, EventArgs e)
@@ -1930,7 +1930,7 @@ namespace Invoice.Forms
              _depositRepository.AddQuantityByIdAndYear(depositAddQuantity);
         }
 
-        private void FillProductQuantityForEditInvoiceOperation()
+        private void FillDepositInfoToEditInvoiceOperation()
         {
             if (_invoiceOperations != InvoiceOperations.Edit) return;
 
@@ -1968,7 +1968,7 @@ namespace Invoice.Forms
             FillIdProductLinesValuesSaveModel(EleventhProductIdTextBox, 10);
             FillIdProductLinesValuesSaveModel(TwelfthProductIdTextBox, 11);
 
-            DepositIdSaveModel saveProductInfoId = new DepositIdSaveModel()
+            DepositIdSaveModel saveProductInfoId = new DepositIdSaveModel
             {
                 InvoiceId = int.Parse(InvoiceNumberRichTextBox.Text),
 
@@ -2003,12 +2003,13 @@ namespace Invoice.Forms
 
         private void LoadProductInfoId()
         {
-            if (_invoiceNumber.HasValue)
-            {
-                DepositIdLoadModel getProductId = _depositRepository.LoadDepositIdLinesInfo(_invoiceNumber.Value);
+            if (!_invoiceNumber.HasValue) return;
 
-                LoadProductInfoIdWhenIdNotZero(getProductId);
-            }
+            DepositIdLoadModel getProductId = _depositRepository.LoadDepositIdLinesInfo(_invoiceNumber.Value);
+
+            LoadProductInfoIdWhenIdNotZero(getProductId);
+
+            LoadProductInfoNamesById(getProductId);
         }
 
         private void LoadProductInfoIdWhenIdNotZero(DepositIdLoadModel getProductId)
@@ -2037,6 +2038,36 @@ namespace Invoice.Forms
                 EleventhProductIdTextBox.Text = getProductId.EleventhLineId.ToString();
             if (getProductId.TwelfthLineId != 0)
                 TwelfthProductIdTextBox.Text = getProductId.TwelfthLineId.ToString();
+        }
+
+        private void LoadProductInfoNamesById(DepositIdLoadModel getProductId)
+        {
+            if (FirstProductIdTextBox.Text != string.Empty && getProductId.FirstLineId.HasValue)
+                FirstProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.FirstLineId.Value);
+            if (SecondProductIdTextBox.Text != string.Empty && getProductId.SecondLineId.HasValue)
+                SecondProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.SecondLineId.Value);
+            if (ThirdProductIdTextBox.Text != string.Empty && getProductId.ThirdLineId.HasValue)
+                ThirdProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.ThirdLineId.Value);
+            if (FourthProductIdTextBox.Text != string.Empty && getProductId.FourthLineId.HasValue)
+                FourthProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.FourthLineId.Value);
+            if (FifthProductIdTextBox.Text != string.Empty && getProductId.FifthLineId.HasValue)
+                FifthProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.FifthLineId.Value);
+            if (SixthProductIdTextBox.Text != string.Empty && getProductId.SixthLineId.HasValue)
+                SixthProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.SixthLineId.Value);
+            if (SeventhProductIdTextBox.Text != string.Empty && getProductId.SeventhLineId.HasValue)
+                SeventhProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.SeventhLineId.Value);
+            if (EighthProductIdTextBox.Text != string.Empty && getProductId.EighthLineId.HasValue)
+                EighthProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.EighthLineId.Value);
+            if (NinthProductIdTextBox.Text != string.Empty && getProductId.NinthLineId.HasValue)
+                NinthProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.NinthLineId.Value);
+            if (TenProductIdTextBox.Text != string.Empty && getProductId.TenLineId.HasValue)
+                TenProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.TenLineId.Value);
+            if (EleventhProductIdTextBox.Text != string.Empty && getProductId.EleventhLineId.HasValue)
+                EleventhProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.EleventhLineId.Value);
+            if (TwelfthProductIdTextBox.Text != string.Empty && getProductId.TwelfthLineId.HasValue)
+                TwelfthProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.TwelfthLineId.Value);
+
+            // can create better database call by getting all id and all names then filled values by id number in each combo box 
         }
 
         #endregion

@@ -30,6 +30,25 @@ namespace Invoice.Repositories
             }
         }
 
+        public string GetProductName(int id)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string getProductNameQuery =
+                    $@"
+                        SELECT
+                          PI.ProductName
+                        FROM {ProductInfoTable} PI
+                        WHERE PI.Id = {id}
+                    ";
+
+                string getProductName = dbConnection.QuerySingle<string>(getProductNameQuery);
+                return getProductName;
+            }
+        }
+
         public FullProductInfoModel GetFullProductInfo(string productName)
         {
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))

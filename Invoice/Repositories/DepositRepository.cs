@@ -141,7 +141,7 @@ namespace Invoice.Repositories
 
                 string saveIdQuery =
                     $@"
-                        INSERT INTO '{DepositIdLineTable}'
+                        INSERT OR REPLACE INTO '{DepositIdLineTable}'
                             VALUES ({saveId.InvoiceId}, {saveId.FirstLineId}, {saveId.SecondLineId}, {saveId.ThirdLineId}, {saveId.FourthLineId}, {saveId.FifthLineId},
                                     {saveId.SixthLineId}, {saveId.SeventhLineId}, {saveId.EighthLineId}, {saveId.NinthLineId}, {saveId.TenLineId}, {saveId.EleventhLineId}, {saveId.TwelfthLineId}
                         )
@@ -170,5 +170,6 @@ namespace Invoice.Repositories
                 return getId;
             }
         }
+        
     }
 }
