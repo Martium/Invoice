@@ -14,6 +14,22 @@ namespace Invoice.Repositories
         private const string BarCode = "BarCode";
         private const string ProductQuantity = "ProductQuantity";
 
+        private const string DepositIdLineTable = "DepositIdLine";
+        private const string InvoiceId = "InvoiceId";
+        private const string FirstLineId = "FirstLineId";
+        private const string SecondLineId = "SecondLineId";
+        private const string ThirdLineId = "ThirdLineId";
+        private const string FourthLineId = "FourthLineId";
+        private const string FifthLineId = "FifthLineId";
+        private const string SixthLineId = "SixthLineId";
+        private const string SeventhLineId = "SeventhLineId";
+        private const string EighthLineId = "EighthLineId";
+        private const string NinthLineId = "NinthLineId";
+        private const string TenLineId = "TenLineId";
+        private const string EleventhLineId = "EleventhLineId";
+        private const string TwelfthLineId = "TwelfthLineId";
+
+
         public IEnumerable<string> GetAllProductsNames()
         {
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
@@ -117,13 +133,42 @@ namespace Invoice.Repositories
             }
         }
 
-        
+        public void SaveDepositIdLinesInfo(DepositIdSaveModel saveId)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
 
-        
+                string saveIdQuery =
+                    $@"
+                        INSERT INTO '{DepositIdLineTable}'
+                            VALUES ({saveId.InvoiceId}, {saveId.FirstLineId}, {saveId.SecondLineId}, {saveId.ThirdLineId}, {saveId.FourthLineId}, {saveId.FifthLineId},
+                                    {saveId.SixthLineId}, {saveId.SeventhLineId}, {saveId.EighthLineId}, {saveId.NinthLineId}, {saveId.TenLineId}, {saveId.EleventhLineId}, {saveId.TwelfthLineId}
+                        )
+                    ";
 
+                dbConnection.Execute(saveIdQuery);
+            }
+        }
 
+        public DepositIdLoadModel LoadDepositIdLinesInfo(int invoiceId)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
 
+                string loadIdQuery =
+                    $@"
+                        SELECT
+                          DILT.{FirstLineId}, DILT.{SecondLineId}, DILT.{ThirdLineId}, DILT.{FourthLineId}, DILT.{FifthLineId}, DILT.{SixthLineId},
+                          DILT.{SeventhLineId}, DILT.{EighthLineId}, DILT.{NinthLineId}, DILT.{TenLineId},DILT.{EleventhLineId}, DILT.{TwelfthLineId}
+                        FROM {DepositIdLineTable} DILT
+                        WHERE {InvoiceId} = {invoiceId}
+                    ";
 
-
+                DepositIdLoadModel getId = dbConnection.QuerySingle<DepositIdLoadModel>(loadIdQuery);
+                return getId;
+            }
+        }
     }
 }

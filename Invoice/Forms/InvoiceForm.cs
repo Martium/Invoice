@@ -46,6 +46,7 @@ namespace Invoice.Forms
 
         private string[] _lastProductLineFilled = new string[12];
         private double?[] _lastQuantityValues;
+        private int?[] _idProductLinesValues;
 
         private static readonly int[] ProductLineIndex = {0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
 
@@ -154,6 +155,8 @@ namespace Invoice.Forms
                     SuggestToFillProductTypeQuantityIfEmpty(isAllQuantityFilled);
                     GetAllProductTypeForNewInvoice();
 
+                    SaveProductInfoId();
+
                     // add quantity to deposit if product type has number and check number was bigger then before for each
                     _messageDialogService.ShowInfoMessage(successMessage);
                     this.Close();
@@ -175,8 +178,10 @@ namespace Invoice.Forms
                     bool isAllQuantityFilled = CheckIsAllProductTypeQuantityFilledByInvoiceProductQuantity();
                     SuggestToFillProductTypeQuantityIfEmpty(isAllQuantityFilled);
                     GetAllProductTypeForNewInvoice();
-                    //need to save product info id if used 
+
+                    SaveProductInfoId();
                     AddQuantityFromNewInvoiceToDeposit();
+
                     _messageDialogService.ShowInfoMessage(successMessage);
                     this.Close();
                 }
@@ -1943,7 +1948,95 @@ namespace Invoice.Forms
             _lastQuantityValues[10] = _numberService.ParseToDoubleOrNull(EleventhProductQuantityRichTextBox);
             _lastQuantityValues[11] = _numberService.ParseToDoubleOrNull(TwelfthProductQuantityRichTextBox);
 
-            //need logic to load id for product info
+            LoadProductInfoId();
+        }
+
+        private void SaveProductInfoId()
+        {
+            _idProductLinesValues = new int?[12];
+
+            FillIdProductLinesValuesSaveModel(FirstProductIdTextBox, 0);
+            FillIdProductLinesValuesSaveModel(SecondProductIdTextBox, 1);
+            FillIdProductLinesValuesSaveModel(ThirdProductIdTextBox, 2);
+            FillIdProductLinesValuesSaveModel(FourthProductIdTextBox, 3);
+            FillIdProductLinesValuesSaveModel(FifthProductIdTextBox, 4);
+            FillIdProductLinesValuesSaveModel(SixthProductIdTextBox, 5);
+            FillIdProductLinesValuesSaveModel(SeventhProductIdTextBox, 6);
+            FillIdProductLinesValuesSaveModel(EighthProductIdTextBox, 7);
+            FillIdProductLinesValuesSaveModel(NinthProductIdTextBox, 8);
+            FillIdProductLinesValuesSaveModel(TenProductIdTextBox, 9);
+            FillIdProductLinesValuesSaveModel(EleventhProductIdTextBox, 10);
+            FillIdProductLinesValuesSaveModel(TwelfthProductIdTextBox, 11);
+
+            DepositIdSaveModel saveProductInfoId = new DepositIdSaveModel()
+            {
+                InvoiceId = int.Parse(InvoiceNumberRichTextBox.Text),
+
+                FirstLineId = _idProductLinesValues[0],
+                SecondLineId = _idProductLinesValues[1],
+                ThirdLineId = _idProductLinesValues[2],
+                FourthLineId = _idProductLinesValues[3],
+                FifthLineId = _idProductLinesValues[4],
+                SixthLineId = _idProductLinesValues[5],
+                SeventhLineId = _idProductLinesValues[6],
+                EighthLineId = _idProductLinesValues[7],
+                NinthLineId = _idProductLinesValues[8],
+                TenLineId = _idProductLinesValues[9],
+                EleventhLineId = _idProductLinesValues[10],
+                TwelfthLineId = _idProductLinesValues[11]
+            };
+
+            _depositRepository.SaveDepositIdLinesInfo(saveProductInfoId);
+        }
+
+        private void FillIdProductLinesValuesSaveModel(TextBox textBox, int idLineIndex)
+        {
+            if (textBox.Text != string.Empty)
+            {
+                _idProductLinesValues[idLineIndex] = int.Parse(textBox.Text);
+            }
+            else
+            {
+                _idProductLinesValues[idLineIndex] = 0;
+            }
+        }
+
+        private void LoadProductInfoId()
+        {
+            if (_invoiceNumber.HasValue)
+            {
+                DepositIdLoadModel getProductId = _depositRepository.LoadDepositIdLinesInfo(_invoiceNumber.Value);
+
+                LoadProductInfoIdWhenIdNotZero(getProductId);
+            }
+        }
+
+        private void LoadProductInfoIdWhenIdNotZero(DepositIdLoadModel getProductId)
+        {
+            if (getProductId.FirstLineId != 0)
+                FirstProductIdTextBox.Text = getProductId.FirstLineId.ToString();
+            if (getProductId.SecondLineId != 0)
+                SecondProductIdTextBox.Text = getProductId.SecondLineId.ToString();
+            if (getProductId.ThirdLineId != 0)
+                ThirdProductIdTextBox.Text = getProductId.ThirdLineId.ToString();
+            if (getProductId.FourthLineId != 0)
+                FourthProductIdTextBox.Text = getProductId.FourthLineId.ToString();
+            if (getProductId.FifthLineId != 0)
+                FifthProductIdTextBox.Text = getProductId.FifthLineId.ToString();
+            if (getProductId.SixthLineId != 0)
+                SixthProductIdTextBox.Text = getProductId.SixthLineId.ToString();
+            if (getProductId.SeventhLineId != 0)
+                SeventhProductIdTextBox.Text = getProductId.SeventhLineId.ToString();
+            if (getProductId.EighthLineId != 0)
+                EighthProductIdTextBox.Text = getProductId.EighthLineId.ToString();
+            if (getProductId.NinthLineId != 0)
+                NinthProductIdTextBox.Text = getProductId.NinthLineId.ToString();
+            if (getProductId.TenLineId != 0)
+                TenProductIdTextBox.Text = getProductId.TenLineId.ToString();
+            if (getProductId.EleventhLineId != 0)
+                EleventhProductIdTextBox.Text = getProductId.EleventhLineId.ToString();
+            if (getProductId.TwelfthLineId != 0)
+                TwelfthProductIdTextBox.Text = getProductId.TwelfthLineId.ToString();
         }
 
         #endregion

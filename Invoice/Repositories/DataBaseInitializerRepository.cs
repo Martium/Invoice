@@ -41,6 +41,7 @@ namespace Invoice.Repositories
                 CreateBuyersInfoTable(dbConnection);
                 CreateProductInfoTable(dbConnection);
                 CreateDepositTable(dbConnection);
+                CreateDepositIdLineTable(dbConnection);
                 CreateMoneyReceiptTable(dbConnection);
 
                 SetDefaultPassword(dbConnection);
@@ -53,6 +54,7 @@ namespace Invoice.Repositories
                 FillBuyersInfoTestingInfo(dbConnection);
                 FillProductInfoTestingInfo(dbConnection);
                 FillDepositTestingInfo(dbConnection);
+                FillDepositIdLineTestingInfo(dbConnection);
 #endif
 
             }
@@ -214,6 +216,38 @@ namespace Invoice.Repositories
 
             SQLiteCommand createDepositTableCommand = new SQLiteCommand(createDepositTableQuery, dbConnection);
             createDepositTableCommand.ExecuteNonQuery();
+        }
+
+        private void CreateDepositIdLineTable(SQLiteConnection dbConnection)
+        {
+            string dropADepositIdLineTable = GetDropTableQuery("DepositIdLine");
+            SQLiteCommand dropADepositIdLineTableCommand = new SQLiteCommand(dropADepositIdLineTable, dbConnection);
+            dropADepositIdLineTableCommand.ExecuteNonQuery();
+
+            string createDepositIdLineTableQuery =
+                $@"
+                    CREATE TABLE [DepositIdLine] (
+                        [InvoiceId] [INTEGER] NOT NULL,
+
+                        [FirstLineId] [INTEGER] NOT NULL,
+                        [SecondLineId] [INTEGER] NOT NULL,
+                        [ThirdLineId] [INTEGER] NOT NULL,
+                        [FourthLineId] [INTEGER] NOT NULL,
+                        [FifthLineId] [INTEGER] NOT NULL,
+                        [SixthLineId] [INTEGER] NOT NULL,
+                        [SeventhLineId] [INTEGER] NOT NULL,
+                        [EighthLineId] [INTEGER] NOT NULL,
+                        [NinthLineId] [INTEGER] NOT NULL,
+                        [TenLineId] [INTEGER] NOT NULL,
+                        [EleventhLineId] [INTEGER] NOT NULL,
+                        [TwelfthLineId] [INTEGER] NOT NULL,
+                        
+                        UNIQUE (InvoiceId)
+                    );
+                ";
+
+            SQLiteCommand createDepositIdLineCommand = new SQLiteCommand(createDepositIdLineTableQuery, dbConnection);
+            createDepositIdLineCommand.ExecuteNonQuery();
         }
 
         private void CreateMoneyReceiptTable(SQLiteConnection dbConnection)
@@ -533,6 +567,23 @@ namespace Invoice.Repositories
 
             SQLiteCommand fillTestingDepositInfoCommand = new SQLiteCommand(fillDepositInfo, dbConnection);
             fillTestingDepositInfoCommand.ExecuteNonQuery();
+        }
+
+        private void FillDepositIdLineTestingInfo(SQLiteConnection dbConnection)
+        {
+            string fillDepositIdLineInfo =
+                $@"BEGIN TRANSACTION;
+                    INSERT INTO 'DepositIdLine'
+                        Values (1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                    INSERT INTO 'DepositIdLine'
+                        Values (2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                    INSERT INTO 'DepositIdLine'
+                        Values (3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                    COMMIT;
+                ";
+
+            SQLiteCommand fillTestingInfoCommand = new SQLiteCommand(fillDepositIdLineInfo, dbConnection);
+            fillTestingInfoCommand.ExecuteNonQuery();
         }
 
         private string GetDropTableQuery(string tableName)
