@@ -2153,6 +2153,19 @@ namespace Invoice.Forms
            
         }
 
+        private void AddToDepositNewInfoForEditOperation(int lineIndex)
+        {
+            if (!_idProductLinesValues[lineIndex].HasValue && !_idProductOldLineValues[lineIndex].HasValue)
+                return;
+
+            if (_idProductLinesValues[lineIndex].Value == _idProductOldLineValues[lineIndex].Value)
+            {
+                // do with quantity subtract or add by value
+            }
+
+            // subtract last quantity and add quantity to new
+        }
+
         private void SaveNewQuantityToDeposit(double?[] newQuantityValues, int quantityLineIndex)
         {
             if (_lastQuantityValues[quantityLineIndex] == null && newQuantityValues[quantityLineIndex] == null) return;
