@@ -47,6 +47,7 @@ namespace Invoice.Forms
         private string[] _lastProductLineFilled = new string[12];
         private double?[] _lastQuantityValues;
         private int?[] _idProductLinesValues;
+        private int?[] _idProductOldLineValues;
 
         private static readonly int[] ProductLineIndex = {0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
 
@@ -157,7 +158,7 @@ namespace Invoice.Forms
 
                     SaveProductInfoId();
 
-                    // add quantity to deposit if product type has number and check number was bigger then before for each
+                    // todo add quantity to deposit if product type has number and check number was bigger then before for each
                     _messageDialogService.ShowInfoMessage(successMessage);
                     this.Close();
                 }
@@ -2014,30 +2015,91 @@ namespace Invoice.Forms
 
         private void LoadProductInfoIdWhenIdNotZero(DepositIdLoadModel getProductId)
         {
+            _idProductOldLineValues = new int?[12];
+            _idProductOldLineValues[0] = 0;
+            _idProductOldLineValues[1] = 0;
+            _idProductOldLineValues[2] = 0;
+            _idProductOldLineValues[3] = 0;
+            _idProductOldLineValues[4] = 0;
+            _idProductOldLineValues[5] = 0;
+            _idProductOldLineValues[6] = 0;
+            _idProductOldLineValues[7] = 0;
+            _idProductOldLineValues[8] = 0;
+            _idProductOldLineValues[9] = 0;
+            _idProductOldLineValues[10] = 0;
+            _idProductOldLineValues[11] = 0;
+
             if (getProductId.FirstLineId != 0)
+            {
                 FirstProductIdTextBox.Text = getProductId.FirstLineId.ToString();
+                _idProductOldLineValues[0] = getProductId.FirstLineId;
+            }
+
             if (getProductId.SecondLineId != 0)
+            {
                 SecondProductIdTextBox.Text = getProductId.SecondLineId.ToString();
+                _idProductOldLineValues[1] = getProductId.SecondLineId;
+            }
+
             if (getProductId.ThirdLineId != 0)
+            {
                 ThirdProductIdTextBox.Text = getProductId.ThirdLineId.ToString();
+                _idProductOldLineValues[2] = getProductId.ThirdLineId;
+            }
+
             if (getProductId.FourthLineId != 0)
+            {
                 FourthProductIdTextBox.Text = getProductId.FourthLineId.ToString();
+                _idProductOldLineValues[3] = getProductId.FourthLineId;
+            }
+
             if (getProductId.FifthLineId != 0)
+            {
                 FifthProductIdTextBox.Text = getProductId.FifthLineId.ToString();
+                _idProductOldLineValues[4] = getProductId.FifthLineId;
+            }
+
             if (getProductId.SixthLineId != 0)
+            {
                 SixthProductIdTextBox.Text = getProductId.SixthLineId.ToString();
+                _idProductOldLineValues[5] = getProductId.SixthLineId;
+            }
+
             if (getProductId.SeventhLineId != 0)
+            {
                 SeventhProductIdTextBox.Text = getProductId.SeventhLineId.ToString();
+                _idProductOldLineValues[6] = getProductId.SeventhLineId;
+            }
+
             if (getProductId.EighthLineId != 0)
+            {
                 EighthProductIdTextBox.Text = getProductId.EighthLineId.ToString();
+                _idProductOldLineValues[7] = getProductId.EighthLineId;
+            }
+
             if (getProductId.NinthLineId != 0)
+            {
                 NinthProductIdTextBox.Text = getProductId.NinthLineId.ToString();
+                _idProductOldLineValues[8] = getProductId.NinthLineId;
+            }
+
             if (getProductId.TenLineId != 0)
+            {
                 TenProductIdTextBox.Text = getProductId.TenLineId.ToString();
+                _idProductOldLineValues[9] = getProductId.TenLineId;
+            }
+
             if (getProductId.EleventhLineId != 0)
+            {
                 EleventhProductIdTextBox.Text = getProductId.EleventhLineId.ToString();
+                _idProductOldLineValues[10] = getProductId.EleventhLineId;
+            }
+
             if (getProductId.TwelfthLineId != 0)
+            {
                 TwelfthProductIdTextBox.Text = getProductId.TwelfthLineId.ToString();
+                _idProductOldLineValues[11] = getProductId.TwelfthLineId;
+            }
         }
 
         private void LoadProductInfoNamesById(DepositIdLoadModel getProductId)
@@ -2067,7 +2129,51 @@ namespace Invoice.Forms
             if (TwelfthProductIdTextBox.Text != string.Empty && getProductId.TwelfthLineId.HasValue)
                 TwelfthProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.TwelfthLineId.Value);
 
-            // can create better database call by getting all id and all names then filled values by id number in each combo box 
+            // todo can create better database call by getting all id and all names then filled values by id number in each combo box 
+        }
+
+        private void SaveNewProductsQuantityValuesForEditInvoice()
+        {
+           double?[] newQuantityValues = new double?[12];
+
+           newQuantityValues[0] = _numberService.ParseToDoubleOrNull(FirstProductQuantityRichTextBox);
+           newQuantityValues[1] = _numberService.ParseToDoubleOrNull(SecondProductQuantityRichTextBox);
+           newQuantityValues[2] = _numberService.ParseToDoubleOrNull(ThirdProductQuantityRichTextBox);
+           newQuantityValues[3] = _numberService.ParseToDoubleOrNull(FourthProductQuantityRichTextBox);
+           newQuantityValues[4] = _numberService.ParseToDoubleOrNull(FifthProductQuantityRichTextBox);
+           newQuantityValues[5] = _numberService.ParseToDoubleOrNull(SixthProductQuantityRichTextBox);
+           newQuantityValues[6] = _numberService.ParseToDoubleOrNull(SeventhProductQuantityRichTextBox);
+           newQuantityValues[7] = _numberService.ParseToDoubleOrNull(EighthProductQuantityRichTextBox);
+           newQuantityValues[8] = _numberService.ParseToDoubleOrNull(NinthProductQuantityRichTextBox);
+           newQuantityValues[9] = _numberService.ParseToDoubleOrNull(TenProductQuantityRichTextBox);
+           newQuantityValues[10] = _numberService.ParseToDoubleOrNull(EleventhProductQuantityRichTextBox);
+           newQuantityValues[11] = _numberService.ParseToDoubleOrNull(TwelfthProductQuantityRichTextBox);
+
+           
+           
+        }
+
+        private void SaveNewQuantityToDeposit(double?[] newQuantityValues, int quantityLineIndex)
+        {
+            if (_lastQuantityValues[quantityLineIndex] == null && newQuantityValues[quantityLineIndex] == null) return;
+
+            if (newQuantityValues[quantityLineIndex] == null && _lastQuantityValues[quantityLineIndex] != null)
+            {
+                
+                //subtract number of last quantity number 
+            }
+            else if (newQuantityValues[quantityLineIndex] != null && _lastQuantityValues[quantityLineIndex] == null)
+            {
+                //add quantity to newQuantityValue
+            }
+            else if (newQuantityValues[quantityLineIndex] > _lastQuantityValues[quantityLineIndex])
+            {
+                // new - last  then add that number to quantity
+            }
+            else if (newQuantityValues[quantityLineIndex] < _lastQuantityValues[quantityLineIndex])
+            {
+                // last - new then subtract from quantity in deposit
+            }
         }
 
         #endregion

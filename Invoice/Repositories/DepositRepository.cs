@@ -133,6 +133,23 @@ namespace Invoice.Repositories
             }
         }
 
+        public void SubtractQuantityByIdAndYear(DepositAddQuantityModel updateQuantity)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string updateQuantityQuery =
+                    $@"UPDATE '{DepositTable}'
+                        SET
+                          {ProductQuantity} = {ProductQuantity} - {updateQuantity.ProductQuantity}
+                        WHERE {Id} = {updateQuantity.Id} AND {InvoiceYear} = {updateQuantity.InvoiceYear}
+                    ";
+
+                dbConnection.Execute(updateQuantityQuery);
+            }
+        }
+
         public void SaveDepositIdLinesInfo(DepositIdSaveModel saveId)
         {
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
