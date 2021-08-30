@@ -159,7 +159,7 @@ namespace Invoice.Repositories
                 string saveIdQuery =
                     $@"
                         INSERT OR REPLACE INTO '{DepositIdLineTable}'
-                            VALUES ({saveId.InvoiceId}, {saveId.FirstLineId}, {saveId.SecondLineId}, {saveId.ThirdLineId}, {saveId.FourthLineId}, {saveId.FifthLineId},
+                            VALUES ({saveId.InvoiceId} ,{saveId.FirstLineId}, {saveId.SecondLineId}, {saveId.ThirdLineId}, {saveId.FourthLineId}, {saveId.FifthLineId},
                                     {saveId.SixthLineId}, {saveId.SeventhLineId}, {saveId.EighthLineId}, {saveId.NinthLineId}, {saveId.TenLineId}, {saveId.EleventhLineId}, {saveId.TwelfthLineId}
                         )
                     ";
@@ -185,6 +185,22 @@ namespace Invoice.Repositories
 
                 DepositIdLoadModel getId = dbConnection.QuerySingle<DepositIdLoadModel>(loadIdQuery);
                 return getId;
+            }
+        }
+
+        public bool CheckIsYearExits(int year)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string getYearQuery =
+                    $@"SELECT EXISTS(SELECT 1 FROM {DepositTable} WHERE {InvoiceYear} = {year});
+                    ";
+
+                bool isYearExists = dbConnection.QuerySingleOrDefault<bool>(getYearQuery);
+
+                return isYearExists;
             }
         }
         

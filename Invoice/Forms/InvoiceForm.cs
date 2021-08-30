@@ -535,6 +535,8 @@ namespace Invoice.Forms
                 e.Cancel = false;
                 _messageDialogService.HideLabelAndTextBoxError(ErrorMassageLabel, InvoiceYearControlTextBox);
             }
+
+            // todo make logic to check id number and year check logic to check if invoice number could  be valid by year 
         }
 
         private void InvoiceYearControlTextBox_TextChanged(object sender, EventArgs e)
@@ -1986,7 +1988,7 @@ namespace Invoice.Forms
                 ProductQuantity = quantity
             };
 
-            _depositRepository.AddQuantityByIdAndYear(depositAddQuantity);
+            _depositRepository.AddQuantityByIdAndYear(depositAddQuantity); // wrong method need insert method
         }
 
         private void FillDepositInfoToEditInvoiceOperation()
@@ -2233,12 +2235,24 @@ namespace Invoice.Forms
 
                 // check for new year info exists in deposit 
                 // if not  exist just add new info 
-                // if exists add new quantity by year and id 
+                // if exists update new quantity by year and id 
 
                 // for old year subtract by id and old year lastQuantity
             }
 
 
+        }
+
+        private void AddQuantityToDepositForNewYearEditOperation()
+        {
+            if (!_invoiceNumberYearCreation.HasValue) return;
+
+            bool isYearExists = _depositRepository.CheckIsYearExits(_invoiceNumberYearCreation.Value);
+
+            if (isYearExists)
+            {
+
+            }
         }
 
         private bool CheckInvoiceYearAreNotChanged()
