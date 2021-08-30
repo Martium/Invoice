@@ -115,7 +115,7 @@ namespace Invoice.Repositories
             }
         }
 
-        public bool CheckIsProductNameExists(string productName)
+        public bool CheckIsProductNameExists(string productName, int year)
         {
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
             {
@@ -123,7 +123,7 @@ namespace Invoice.Repositories
 
                 string checkIsProductExists =
                     $@"
-                        SELECT EXISTS(SELECT 1 FROM {ProductInfoTable} WHERE ProductName = '{productName}');
+                        SELECT EXISTS(SELECT 1 FROM {ProductInfoTable} WHERE ProductName = '{productName}' AND Year = {year});
                     ";
 
                 bool isProductExists = dbConnection.QuerySingleOrDefault<bool>(checkIsProductExists);

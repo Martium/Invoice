@@ -113,8 +113,9 @@ namespace Invoice.Forms
 
         private void NewProductButton_Click(object sender, EventArgs e)
         {
+            int year = int.Parse(DepositYearTextBox.Text);
             bool isProductNameFilled = !string.IsNullOrWhiteSpace(ProductNameRichTextBox.Text);
-            bool isProductExists = _productInfoRepository.CheckIsProductNameExists(ProductNameRichTextBox.Text);
+            bool isProductExists = _productInfoRepository.CheckIsProductNameExists(ProductNameRichTextBox.Text, year);
             bool isAllTextBoxFilled = CheckIsAllInfoFilled();
 
             if (!isProductExists && isProductNameFilled && isAllTextBoxFilled)
@@ -146,8 +147,9 @@ namespace Invoice.Forms
 
         private void UpdateProductButton_Click(object sender, EventArgs e)
         {
+            int year = int.Parse(DepositYearTextBox.Text);
             bool isProductNameFilled = !string.IsNullOrWhiteSpace(ProductNameRichTextBox.Text);
-            bool isProductExists = _productInfoRepository.CheckIsProductNameExists(ProductNameRichTextBox.Text);
+            bool isProductExists = _productInfoRepository.CheckIsProductNameExists(ProductNameRichTextBox.Text, year);
             bool isAllValuesSameAsinDatabase = CheckIsProductAllValuesSameAsInDataBase();
 
             if (isProductExists && isProductNameFilled && !isAllValuesSameAsinDatabase)
