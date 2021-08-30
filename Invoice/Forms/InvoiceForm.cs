@@ -2235,8 +2235,7 @@ namespace Invoice.Forms
                 // if not  exist just add new info 
                 // if exists add new quantity by year and id 
 
-                // fo old year subtract by id and old year lastQuantity
-
+                // for old year subtract by id and old year lastQuantity
             }
 
 
