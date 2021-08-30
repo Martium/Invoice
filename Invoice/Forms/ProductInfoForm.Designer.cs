@@ -51,6 +51,7 @@ namespace Invoice.Forms
             this.DepositInfoLabel = new System.Windows.Forms.Label();
             this.YearInfoLabel = new System.Windows.Forms.Label();
             this.DepositYearTextBox = new System.Windows.Forms.TextBox();
+            this.ErrorMassageLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ProductNameRichTextBox
@@ -267,12 +268,25 @@ namespace Invoice.Forms
             this.DepositYearTextBox.TabIndex = 59;
             this.DepositYearTextBox.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
             this.DepositYearTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
+            this.DepositYearTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.DepositYearTextBox_Validating);
+            // 
+            // ErrorMassageLabel
+            // 
+            this.ErrorMassageLabel.AutoSize = true;
+            this.ErrorMassageLabel.ForeColor = System.Drawing.Color.Red;
+            this.ErrorMassageLabel.Location = new System.Drawing.Point(38, 422);
+            this.ErrorMassageLabel.Name = "ErrorMassageLabel";
+            this.ErrorMassageLabel.Size = new System.Drawing.Size(28, 13);
+            this.ErrorMassageLabel.TabIndex = 60;
+            this.ErrorMassageLabel.Text = "error";
+            this.ErrorMassageLabel.Visible = false;
             // 
             // ProductInfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1070, 559);
+            this.Controls.Add(this.ErrorMassageLabel);
             this.Controls.Add(this.DepositYearTextBox);
             this.Controls.Add(this.YearInfoLabel);
             this.Controls.Add(this.DepositInfoLabel);
@@ -329,5 +343,6 @@ namespace Invoice.Forms
         private System.Windows.Forms.Label DepositInfoLabel;
         private System.Windows.Forms.Label YearInfoLabel;
         private System.Windows.Forms.TextBox DepositYearTextBox;
+        private System.Windows.Forms.Label ErrorMassageLabel;
     }
 }

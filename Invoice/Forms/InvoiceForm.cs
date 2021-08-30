@@ -535,7 +535,6 @@ namespace Invoice.Forms
                 e.Cancel = false;
                 _messageDialogService.HideLabelAndTextBoxError(ErrorMassageLabel, InvoiceYearControlTextBox);
             }
-
         }
 
         private void InvoiceYearControlTextBox_TextChanged(object sender, EventArgs e)

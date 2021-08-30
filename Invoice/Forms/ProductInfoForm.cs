@@ -30,6 +30,7 @@ namespace Invoice.Forms
             SetTextBoxMaxLength();
 
             LoadAllProductsNamesToComboBox();
+            DepositYearTextBox.Text = DateTime.Now.Year.ToString();
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -166,6 +167,52 @@ namespace Invoice.Forms
             SetCursorAtProductNameStringEnd();
         }
 
+        private void DepositYearTextBox_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            bool isNumber = int.TryParse(DepositYearTextBox.Text, out int number);
+
+            if (string.IsNullOrWhiteSpace(DepositYearTextBox.Text))
+            {
+                SetButtonControl(false);
+                e.Cancel = true;
+                _messageDialogService.DisplayLabelAndTextBoxError(
+                    $" Raudonas langelis Negali būti tuščias! pvz.: {DateTime.Now.Year}", DepositYearTextBox,
+                    ErrorMassageLabel);
+            }
+            else if (!isNumber)
+            {
+                SetButtonControl(false);
+                e.Cancel = true;
+                _messageDialogService.DisplayLabelAndTextBoxError(
+                    $" Raudonas langelis turi būti metai pvz.: {DateTime.Now.Year}", DepositYearTextBox,
+                    ErrorMassageLabel);
+            }
+            else if (number > DateTime.Now.Year)
+            {
+                SetButtonControl(false);
+                e.Cancel = true;
+                _messageDialogService.DisplayLabelAndTextBoxError(
+                    $" Raudonam langelį metai negali būti ateityje pvz.: {DateTime.Now.Year}",
+                    DepositYearTextBox,
+                    ErrorMassageLabel);
+            }
+            else if (number < 2000)
+            {
+                SetButtonControl(false);
+                e.Cancel = true;
+                _messageDialogService.DisplayLabelAndTextBoxError(
+                    $" Raudonam langelyje negali būti mažiau nei 2000 pvz.: {DateTime.Now.Year}",
+                    DepositYearTextBox,
+                    ErrorMassageLabel);
+            }
+            else
+            {
+                SetButtonControl(true);
+                e.Cancel = false;
+                _messageDialogService.HideLabelAndTextBoxError(ErrorMassageLabel, DepositYearTextBox);
+            }
+        }
+
         #region Helpers
 
         private void SetControlsInitialState()
@@ -288,6 +335,7 @@ namespace Invoice.Forms
             if (isProductCreated)
             {
                 _messageDialogService.ShowInfoMessage("Naujas produktas pridėtas į duomenų bazę");
+                // need logic with year and how to pass id foreign key maybe 
                 //add new deposit info 
             }
             else
@@ -351,7 +399,13 @@ namespace Invoice.Forms
 
         }
 
-        #endregion
+        private void SetButtonControl(bool setButtonControl)
+        {
+            NewProductButton.Enabled = setButtonControl;
+            UpdateProductButton.Enabled = setButtonControl;
+            ChooseProductButton.Enabled = setButtonControl;
+        }
 
+        #endregion
     }
 }
