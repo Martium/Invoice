@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using Invoice.Constants;
+using Invoice.Models.Deposit;
 using Invoice.Models.ProductInfo;
 using Invoice.Repositories;
 using Invoice.Service;
@@ -13,6 +14,7 @@ namespace Invoice.Forms
     public partial class ProductInfoForm : Form
     {
         private readonly ProductInfoRepository _productInfoRepository;
+        private readonly DepositRepository _depositRepository;
         private readonly MessageDialogService _messageDialogService;
         private readonly NumberService _numberService;
 
@@ -21,6 +23,7 @@ namespace Invoice.Forms
         public ProductInfoForm()
         {
             _productInfoRepository = new ProductInfoRepository();
+            _depositRepository = new DepositRepository();
             _messageDialogService = new MessageDialogService();
             _numberService = new NumberService();
 
@@ -325,7 +328,7 @@ namespace Invoice.Forms
                 BarCode = ProductBarCodeRichTextBox.Text,
                 ProductSees = ProductSeesRichTextBox.Text,
                 ProductPrice = productPrice,
-
+                //add year 
                 ProductType = ProductTypeTextBox.Text,
                 ProductTypePrice = productTypePrice
             };
@@ -334,9 +337,8 @@ namespace Invoice.Forms
 
             if (isProductCreated)
             {
+                CreateNewDepositInfo();
                 _messageDialogService.ShowInfoMessage("Naujas produktas pridėtas į duomenų bazę");
-                // need logic with year and how to pass id foreign key maybe 
-                //add new deposit info 
             }
             else
             {
@@ -396,7 +398,18 @@ namespace Invoice.Forms
 
         private void CreateNewDepositInfo()
         {
+            int lastId = _productInfoRepository.GetBiggestProductId();
 
+            var newDepositInfo = new FullDepositProductModel
+            {
+                Id = lastId,
+                InvoiceYear = int.Parse(DepositYearTextBox.Text),
+                ProductName = ProductNameRichTextBox.Text,
+                BarCode = ProductBarCodeRichTextBox.Text,
+                ProductQuantity = 0
+            };
+
+            _depositRepository.CreateNewDepositProduct(newDepositInfo);
         }
 
         private void SetButtonControl(bool setButtonControl)

@@ -116,6 +116,22 @@ namespace Invoice.Repositories
             }
         }
 
+        public void CreateNewDepositProduct(FullDepositProductModel newDeposit)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string createNewDepositQuery =
+                    $@"
+                        INSERT INTO '{DepositTable}'
+                            VALUES ({newDeposit.Id}, {newDeposit.InvoiceYear}, '{newDeposit.ProductName}', '{newDeposit.BarCode}', {newDeposit.ProductQuantity})
+                    ";
+
+                dbConnection.Execute(createNewDepositQuery);
+            }
+        }
+
         public void AddQuantityByIdAndYear(DepositAddQuantityModel updateQuantity)
         {
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))

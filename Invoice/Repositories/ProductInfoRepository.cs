@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.SQLite;
 using Dapper;
 using Invoice.Models.ProductInfo;
@@ -27,6 +28,32 @@ namespace Invoice.Repositories
                     dbConnection.Query<ProductInfoNameModel>(getProductsNamesQuery);
 
                 return getExistingProductNames;
+            }
+        }
+
+        public int GetBiggestProductId()
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                int lastId;
+                string getLastIdQuery =
+                    $@"SELECT  
+                        MAX(PI.Id)
+                      FROM {ProductInfoTable} PI
+                    ";
+
+                try
+                {
+                     lastId = dbConnection.QuerySingle<int>(getLastIdQuery);
+                }
+                catch
+                {
+                     lastId = 1;
+                }
+
+                return lastId;
             }
         }
 
@@ -158,8 +185,6 @@ namespace Invoice.Repositories
                     updateProduct.ProductType,
                     updateProduct.ProductTypePrice
                 };
-
-
 
                 int affectedRows = dbConnection.Execute(updateProductInfoQuery, queryParameters);
 

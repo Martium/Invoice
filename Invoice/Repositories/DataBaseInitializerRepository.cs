@@ -412,6 +412,7 @@ namespace Invoice.Repositories
                 $@"
                     CREATE TABLE [ProductInfo] (
                         [Id] [INTEGER] PRIMARY KEY AUTOINCREMENT NOT NULL,
+                        [Year] [INTEGER] NOT NULL,
                         [ProductName] [nvarchar]({FormSettings.TextBoxLengths.ProductName}) NULL,
                         [BarCode] [nvarchar]({FormSettings.TextBoxLengths.BarCode}) NULL,
                         [ProductSees] [nvarchar]({FormSettings.TextBoxLengths.FirstProductSees}) NULL,
@@ -537,11 +538,11 @@ namespace Invoice.Repositories
             string fillProductTestingInfo =
                 $@"BEGIN TRANSACTION;
                     INSERT INTO 'ProductInfo'
-                        Values (NULL, '{text}', '1 23456 7891123', 'vnt', 1, '1l', 0.2);
+                        Values (NULL, '{text}', {DateTime.Now.AddYears(-1).Year}, '1 23456 7891123', 'vnt', 1, '1l', 0.2);
                     INSERT INTO 'ProductInfo'
-                        Values (NULL, '2 LITRAI', '2 23456 7592123', 'vnt', 2, '2l', 0.2);
+                        Values (NULL, '2 LITRAI', {DateTime.Now.Year},'2 23456 7592123', 'vnt', 2, '2l', 0.2);
                     INSERT INTO 'ProductInfo'
-                        Values (NULL, '3 LITRAI', '3 23456 7891143', 'vnt', 3, '3l', 0.2);
+                        Values (NULL, '3 LITRAI', {DateTime.Now.Year}, '3 23456 7891143', 'vnt', 3, '3l', 0.2);
                     COMMIT;
                 ";
 
