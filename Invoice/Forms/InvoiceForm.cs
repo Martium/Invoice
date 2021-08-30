@@ -536,7 +536,6 @@ namespace Invoice.Forms
                 _messageDialogService.HideLabelAndTextBoxError(ErrorMassageLabel, InvoiceYearControlTextBox);
             }
 
-            // todo make logic to check id number and year check logic to check if invoice number could  be valid by year 
         }
 
         private void InvoiceYearControlTextBox_TextChanged(object sender, EventArgs e)

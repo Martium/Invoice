@@ -106,7 +106,7 @@ namespace Invoice.Repositories
             }
         }
 
-        public bool CreateNewBuyerInfo(FullProductInfoModel newProduct)
+        public bool CreateNewProductInfo(FullProductInfoModel newProduct)
         {
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
             {

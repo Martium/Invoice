@@ -115,7 +115,7 @@ namespace Invoice.Forms
 
             if (!isProductExists && isProductNameFilled && isAllTextBoxFilled)
             {
-                CreateNewBuyer();
+                CreateNewProduct();
                 LoadAllProductsNamesToComboBox();
             }
             else if (!isProductExists && isProductNameFilled)
@@ -124,7 +124,7 @@ namespace Invoice.Forms
 
                 if (dialogResult == DialogResult.OK)
                 {
-                    CreateNewBuyer();
+                    CreateNewProduct();
                     LoadAllProductsNamesToComboBox();
                 }
             }
@@ -184,6 +184,8 @@ namespace Invoice.Forms
 
             ProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
             ProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+
+            DepositYearTextBox.MaxLength = FormSettings.TextBoxLengths.InvoiceYearControl;
         }
 
         private void SetCursorsAtRichTextBoxStringEnd()
@@ -192,6 +194,7 @@ namespace Invoice.Forms
             ProductBarCodeRichTextBox.SelectionStart = ProductBarCodeRichTextBox.Text.Length;
             ProductSeesRichTextBox.SelectionStart = ProductSeesRichTextBox.Text.Length;
             ProductPriceRichTextBox.SelectionStart = ProductPriceRichTextBox.Text.Length;
+            DepositYearTextBox.SelectionStart = DepositYearTextBox.Text.Length;
         }
 
         private void SetCursorsAtTextBoxStringEnd()
@@ -262,7 +265,7 @@ namespace Invoice.Forms
             return isAllInfoFilled;
         }
 
-        private void CreateNewBuyer()
+        private void CreateNewProduct()
         {
             ChangeCommaToDotForNumbersTextBox();
 
@@ -280,11 +283,12 @@ namespace Invoice.Forms
                 ProductTypePrice = productTypePrice
             };
 
-            bool isProductCreated = _productInfoRepository.CreateNewBuyerInfo(newProduct);
+            bool isProductCreated = _productInfoRepository.CreateNewProductInfo(newProduct);
 
             if (isProductCreated)
             {
                 _messageDialogService.ShowInfoMessage("Naujas produktas pridėtas į duomenų bazę");
+                //add new deposit info 
             }
             else
             {
@@ -340,6 +344,11 @@ namespace Invoice.Forms
         {
             ProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(ProductPriceRichTextBox);
             ProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(ProductTypePriceTextBox);
+        }
+
+        private void CreateNewDepositInfo()
+        {
+
         }
 
         #endregion
