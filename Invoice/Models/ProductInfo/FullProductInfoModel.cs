@@ -2,6 +2,7 @@
 {
     public class FullProductInfoModel
     {
+        public int Year { get; set; }
         public string ProductName { get; set; }
         public string BarCode { get; set; }
         public string ProductSees { get; set; }

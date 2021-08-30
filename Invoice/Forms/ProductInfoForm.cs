@@ -18,7 +18,7 @@ namespace Invoice.Forms
         private readonly MessageDialogService _messageDialogService;
         private readonly NumberService _numberService;
 
-        private string[] _lastProductInfo = new string[6];
+        private string[] _lastProductInfo = new string[7];
 
         public ProductInfoForm()
         {
@@ -32,8 +32,8 @@ namespace Invoice.Forms
             SetControlsInitialState();
             SetTextBoxMaxLength();
 
-            LoadAllProductsNamesToComboBox();
             DepositYearTextBox.Text = DateTime.Now.Year.ToString();
+            LoadAllProductsNamesToComboBox();
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -274,7 +274,8 @@ namespace Invoice.Forms
 
         private void LoadProductInfoToTextBoxes()
         {
-            FullProductInfoModel getFullProductInfo = _productInfoRepository.GetFullProductInfo(ExistsProductListComboBox.Text);
+            int year = int.Parse(DepositYearTextBox.Text);
+            FullProductInfoModel getFullProductInfo = _productInfoRepository.GetFullProductInfo(ExistsProductListComboBox.Text, year);
 
             if (getFullProductInfo != null)
             {
@@ -290,6 +291,8 @@ namespace Invoice.Forms
                     ? getFullProductInfo.ProductTypePrice.Value.ToString(CultureInfo.InvariantCulture)
                     : string.Empty;
 
+                DepositYearTextBox.Text = getFullProductInfo.Year.ToString();
+
                 _lastProductInfo[0] = ProductNameRichTextBox.Text;
                 _lastProductInfo[1] = ProductBarCodeRichTextBox.Text;
                 _lastProductInfo[2] = ProductSeesRichTextBox.Text;
@@ -297,10 +300,12 @@ namespace Invoice.Forms
 
                 _lastProductInfo[4] = ProductTypeTextBox.Text;
                 _lastProductInfo[5] = ProductTypePriceTextBox.Text;
+
+                _lastProductInfo[6] = DepositYearTextBox.Text;
             }
             else
             {
-                _messageDialogService.ShowErrorMassage("Nėra informacijos kurią būtų galima sukelti supildykite bent vieną produkto informaciją ");
+                _messageDialogService.ShowErrorMassage("Nėra informacijos kurią būtų galima sukelti supildykite bent vieną produkto informaciją arba nera tokio įrašo dėl blogai pasirinktų metų");
             }
         }
 
@@ -324,11 +329,12 @@ namespace Invoice.Forms
 
             FullProductInfoModel newProduct = new FullProductInfoModel
             {
+                Year = int.Parse(DepositYearTextBox.Text),
                 ProductName = ProductNameRichTextBox.Text,
                 BarCode = ProductBarCodeRichTextBox.Text,
                 ProductSees = ProductSeesRichTextBox.Text,
                 ProductPrice = productPrice,
-                //add year 
+                
                 ProductType = ProductTypeTextBox.Text,
                 ProductTypePrice = productTypePrice
             };

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.SQLite;
 using Dapper;
 using Invoice.Models.ProductInfo;
@@ -76,7 +75,7 @@ namespace Invoice.Repositories
             }
         }
 
-        public FullProductInfoModel GetFullProductInfo(string productName)
+        public FullProductInfoModel GetFullProductInfo(string productName, int year)
         {
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
             {
@@ -85,11 +84,11 @@ namespace Invoice.Repositories
                 string getExistingProductQuery =
                     $@"
                         SELECT 
-                            PI.ProductName, PI.BarCode, PI.ProductSees, PI.ProductPrice, PI.ProductType, PI.ProductTypePrice
+                            PI.Year, PI.ProductName, PI.BarCode, PI.ProductSees, PI.ProductPrice, PI.ProductType, PI.ProductTypePrice
                         FROM {ProductInfoTable} PI
-                        WHERE PI.ProductName = '{productName}'
+                        WHERE PI.ProductName = '{productName}' AND PI.Year = {year}
                     ";
-
+                // year add 
                 FullProductInfoModel getFullProductInfo = dbConnection.QuerySingleOrDefault<FullProductInfoModel>(getExistingProductQuery);
 
                 return getFullProductInfo;
@@ -142,11 +141,12 @@ namespace Invoice.Repositories
                 string createNewProductInfoQuery =
                     $@"
                         INSERT INTO '{ProductInfoTable}'
-                            VALUES (NULL, @ProductName, @BarCode, @ProductSees, @ProductPrice, @ProductType, @ProductTypePrice)
+                            VALUES (NULL, @Year, @ProductName, @BarCode, @ProductSees, @ProductPrice, @ProductType, @ProductTypePrice)
                     ";
 
                 object queryParameters = new
                 {
+                    newProduct.Year,
                     newProduct.ProductName,
                     newProduct.BarCode,
                     newProduct.ProductSees,
