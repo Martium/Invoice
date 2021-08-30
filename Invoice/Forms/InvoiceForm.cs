@@ -48,7 +48,7 @@ namespace Invoice.Forms
         private double?[] _lastQuantityValues;
         private int[] _idProductLinesValues;
         private int[] _idProductOldLineValues;
-        private int _newInvoiceYear;
+        private int _oldInvoiceYear;
 
         private static readonly int[] ProductLineIndex = {0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
 
@@ -520,12 +520,12 @@ namespace Invoice.Forms
                     InvoiceYearControlTextBox,
                     ErrorMassageLabel);
             }
-            else if (number <= 0)
+            else if (number < 2000)
             {
                 SaveButton.Enabled = false;
                 e.Cancel = true;
                 _messageDialogService.DisplayLabelAndTextBoxError(
-                    $" Raudonam langelyje negali būti būt 0 ar mažiau nei 0   pvz.: {DateTime.Now.Year}",
+                    $" Raudonam langelyje negali būti mažiau nei 2000 pvz.: {DateTime.Now.Year}",
                     InvoiceYearControlTextBox,
                     ErrorMassageLabel);
             }
@@ -1991,7 +1991,9 @@ namespace Invoice.Forms
 
         private void FillDepositInfoToEditInvoiceOperation()
         {
-            if (_invoiceOperations != InvoiceOperations.Edit) return;
+            if (_invoiceOperations != InvoiceOperations.Edit || !_invoiceNumberYearCreation.HasValue) return;
+
+            _oldInvoiceYear = _invoiceNumberYearCreation.Value;
 
             _lastQuantityValues = new double?[12];
             _lastQuantityValues[0] = _numberService.ParseToDoubleOrNull(FirstProductQuantityRichTextBox);
@@ -2192,8 +2194,6 @@ namespace Invoice.Forms
 
         private void SaveNewProductsQuantityValuesForEditInvoice()
         {
-            _newInvoiceYear = int.Parse(InvoiceYearControlTextBox.Text);
-
             bool isYearSame = CheckInvoiceYearAreNotChanged();
 
             double?[] newQuantityValues = new double?[12];
@@ -2228,7 +2228,15 @@ namespace Invoice.Forms
             }
             else
             {
+                
                 //  need logic when year not same 
+
+                // check for new year info exists in deposit 
+                // if not  exist just add new info 
+                // if exists add new quantity by year and id 
+
+                // fo old year subtract by id and old year lastQuantity
+
             }
 
 
@@ -2239,7 +2247,7 @@ namespace Invoice.Forms
             bool isYearSame = false;
             if (_invoiceNumberYearCreation.HasValue)
             {
-                isYearSame = _newInvoiceYear == _invoiceNumberYearCreation.Value;
+                isYearSame = _oldInvoiceYear == _invoiceNumberYearCreation.Value;
             }
 
             return isYearSame;
@@ -2342,8 +2350,6 @@ namespace Invoice.Forms
                 _depositRepository.SubtractQuantityByIdAndYear(subtractQuantity);
             }
         }
-
-        
 
         #endregion
     }
