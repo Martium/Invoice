@@ -46,8 +46,9 @@ namespace Invoice.Forms
 
         private string[] _lastProductLineFilled = new string[12];
         private double?[] _lastQuantityValues;
-        private int?[] _idProductLinesValues;
-        private int?[] _idProductOldLineValues;
+        private int[] _idProductLinesValues;
+        private int[] _idProductOldLineValues;
+        private int _newInvoiceYear;
 
         private static readonly int[] ProductLineIndex = {0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
 
@@ -115,7 +116,8 @@ namespace Invoice.Forms
                 SaveButton.Enabled = false;
                 e.Cancel = true;
                 _messageDialogService.DisplayLabelAndTextBoxError(
-                    $" Raudonas langelis Negali būti tuščias! pvz.: {DateTime.Now.ToString(DateFormat)}", InvoiceDateRichTextBox,
+                    $" Raudonas langelis Negali būti tuščias! pvz.: {DateTime.Now.ToString(DateFormat)}",
+                    InvoiceDateRichTextBox,
                     ErrorMassageLabel);
             }
             else if (!DateTime.TryParseExact(InvoiceDateRichTextBox.Text, DateFormat, CultureInfo.InvariantCulture,
@@ -124,7 +126,8 @@ namespace Invoice.Forms
                 SaveButton.Enabled = false;
                 e.Cancel = true;
                 _messageDialogService.DisplayLabelAndTextBoxError(
-                    $"Raudoname langelyje Įveskite teisingą datą! pvz.: {DateTime.Now.ToString(DateFormat)}", InvoiceDateRichTextBox,
+                    $"Raudoname langelyje Įveskite teisingą datą! pvz.: {DateTime.Now.ToString(DateFormat)}",
+                    InvoiceDateRichTextBox,
                     ErrorMassageLabel);
             }
             else
@@ -144,7 +147,8 @@ namespace Invoice.Forms
             bool isSuccess;
             string successMessage;
 
-            if (_invoiceOperations == InvoiceOperations.Edit && _invoiceNumber.HasValue && _invoiceNumberYearCreation.HasValue)
+            if (_invoiceOperations == InvoiceOperations.Edit && _invoiceNumber.HasValue &&
+                _invoiceNumberYearCreation.HasValue)
             {
                 isSuccess = _invoiceRepository.UpdateExistingInvoice(_invoiceNumber.Value,
                     _invoiceNumberYearCreation.Value, invoiceModel);
@@ -157,6 +161,8 @@ namespace Invoice.Forms
                     GetAllProductTypeForNewInvoice();
 
                     SaveProductInfoId();
+
+                    SaveNewProductsQuantityValuesForEditInvoice();
 
                     // todo add quantity to deposit if product type has number and check number was bigger then before for each
                     _messageDialogService.ShowInfoMessage(successMessage);
@@ -197,7 +203,8 @@ namespace Invoice.Forms
         {
             CalculateButton_Click(this, new EventArgs());
 
-            DialogResult dialogResult = _messageDialogService.ShowChoiceMessage("Ar norite suformuoti Sąskaita ir kvitą");
+            DialogResult dialogResult =
+                _messageDialogService.ShowChoiceMessage("Ar norite suformuoti Sąskaita ir kvitą");
 
             if (dialogResult == DialogResult.OK)
             {
@@ -208,8 +215,8 @@ namespace Invoice.Forms
             }
             else
             {
-               SaveInvoiceToPdf();
-               _messageDialogService.ShowInfoMessage("Sąskaita faktūra išsaugota į pdf failą");
+                SaveInvoiceToPdf();
+                _messageDialogService.ShowInfoMessage("Sąskaita faktūra išsaugota į pdf failą");
             }
 
             SaveButton_Click(this, new EventArgs());
@@ -234,7 +241,8 @@ namespace Invoice.Forms
 
         private void PrintButton_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = _messageDialogService.ShowChoiceMessage("Ar norite spausdinti kvitą (jei paspausit 'OK' spausdins kvitą jei 'Cancel' spausdins Sąskaitą faktūrą) ?");
+            DialogResult dialogResult = _messageDialogService.ShowChoiceMessage(
+                "Ar norite spausdinti kvitą (jei paspausit 'OK' spausdins kvitą jei 'Cancel' spausdins Sąskaitą faktūrą) ?");
 
             if (dialogResult == DialogResult.OK)
             {
@@ -256,7 +264,9 @@ namespace Invoice.Forms
                 SaveToPdf.Enabled = false;
                 e.Cancel = true;
 
-                _messageDialogService.DisplayLabelAndTextBoxError($"raudonas langelis negali būt tuščias, turi būt sveikas skaičius, negali būt lygus arba mažesnis nei 0 pvz ", MoneyReceiptOfferNumberTextBox, ErrorMassageLabel);
+                _messageDialogService.DisplayLabelAndTextBoxError(
+                    $"raudonas langelis negali būt tuščias, turi būt sveikas skaičius, negali būt lygus arba mažesnis nei 0 pvz ",
+                    MoneyReceiptOfferNumberTextBox, ErrorMassageLabel);
 
                 MoneyReceiptOfferNumberTextBox.SelectionStart = MoneyReceiptOfferNumberTextBox.Text.Length;
             }
@@ -266,7 +276,9 @@ namespace Invoice.Forms
                 SaveToPdf.Enabled = false;
                 e.Cancel = true;
 
-                _messageDialogService.DisplayLabelAndTextBoxError($"raudonas langelis negali būt lygus arba mažesnis nei 0, pvz ", MoneyReceiptOfferNumberTextBox, ErrorMassageLabel);
+                _messageDialogService.DisplayLabelAndTextBoxError(
+                    $"raudonas langelis negali būt lygus arba mažesnis nei 0, pvz ", MoneyReceiptOfferNumberTextBox,
+                    ErrorMassageLabel);
 
                 MoneyReceiptOfferNumberTextBox.SelectionStart = MoneyReceiptOfferNumberTextBox.Text.Length;
             }
@@ -276,7 +288,9 @@ namespace Invoice.Forms
                 SaveToPdf.Enabled = false;
                 e.Cancel = true;
 
-                _messageDialogService.DisplayLabelAndTextBoxError($"raudonas langelis turi būti sveikas skaičius negali būt lygus arba mažesnis nei 0, pvz ", MoneyReceiptOfferNumberTextBox, ErrorMassageLabel);
+                _messageDialogService.DisplayLabelAndTextBoxError(
+                    $"raudonas langelis turi būti sveikas skaičius negali būt lygus arba mažesnis nei 0, pvz ",
+                    MoneyReceiptOfferNumberTextBox, ErrorMassageLabel);
 
                 MoneyReceiptOfferNumberTextBox.SelectionStart = MoneyReceiptOfferNumberTextBox.Text.Length;
             }
@@ -285,7 +299,7 @@ namespace Invoice.Forms
                 SaveMoneyReceiptSuggestionNumberButton.Enabled = true;
                 SaveToPdf.Enabled = true;
                 e.Cancel = false;
-                _messageDialogService.HideLabelAndTextBoxError(ErrorMassageLabel,MoneyReceiptOfferNumberTextBox);
+                _messageDialogService.HideLabelAndTextBoxError(ErrorMassageLabel, MoneyReceiptOfferNumberTextBox);
             }
         }
 
@@ -304,7 +318,7 @@ namespace Invoice.Forms
 
                 if (richTextBox.Multiline == false)
                 {
-                    this.SelectNextControl((Control)sender, true, true, true, true);
+                    this.SelectNextControl((Control) sender, true, true, true, true);
                 }
 
                 SetCursorAtTextBoxStringEnd();
@@ -315,7 +329,7 @@ namespace Invoice.Forms
         {
             if (e.KeyCode == Keys.Enter)
             {
-                this.SelectNextControl((Control)sender, true, true, true, true);
+                this.SelectNextControl((Control) sender, true, true, true, true);
                 SetCursorAtProductTypeStringEnd();
             }
         }
@@ -328,7 +342,8 @@ namespace Invoice.Forms
 
             if (richTextBox.SelectionStart == richTextBox.MaxLength)
             {
-                _messageDialogService.ShowInfoMessage($"Pasiektas maksimalus žodžių ilgis bus išsaugota tik toks tekstas ({richTextBox.Text}) ");
+                _messageDialogService.ShowInfoMessage(
+                    $"Pasiektas maksimalus žodžių ilgis bus išsaugota tik toks tekstas ({richTextBox.Text}) ");
             }
 
             if (richTextBox.Lines.Length == 3)
@@ -355,7 +370,7 @@ namespace Invoice.Forms
 
             _lastProductLineFilled[ProductLineIndex[1]] = FirstProductNameComboBox.Text;
             FillSpecificProductLineTextBox(InvoiceProductLine.First, FirstProductNameComboBox.Text);
-            
+
         }
 
         private void AddToSecondProductInfoButton_Click(object sender, EventArgs e)
@@ -458,7 +473,8 @@ namespace Invoice.Forms
 
             if (_lastMoneyReceiptNumber == moneyReceiptNewNumber)
             {
-                _messageDialogService.ShowInfoMessage("Siūlomas Kvito skaičius yra vienodas duomenų bazėje todėl nebus išsaugotas");
+                _messageDialogService.ShowInfoMessage(
+                    "Siūlomas Kvito skaičius yra vienodas duomenų bazėje todėl nebus išsaugotas");
                 return;
             }
 
@@ -500,7 +516,8 @@ namespace Invoice.Forms
                 SaveButton.Enabled = false;
                 e.Cancel = true;
                 _messageDialogService.DisplayLabelAndTextBoxError(
-                    $" Raudonam langelį metai negali būti ateityje pvz.: {DateTime.Now.Year}", InvoiceYearControlTextBox,
+                    $" Raudonam langelį metai negali būti ateityje pvz.: {DateTime.Now.Year}",
+                    InvoiceYearControlTextBox,
                     ErrorMassageLabel);
             }
             else if (number <= 0)
@@ -508,7 +525,8 @@ namespace Invoice.Forms
                 SaveButton.Enabled = false;
                 e.Cancel = true;
                 _messageDialogService.DisplayLabelAndTextBoxError(
-                    $" Raudonam langelyje negali būti būt 0 ar mažiau nei 0   pvz.: {DateTime.Now.Year}", InvoiceYearControlTextBox,
+                    $" Raudonam langelyje negali būti būt 0 ar mažiau nei 0   pvz.: {DateTime.Now.Year}",
+                    InvoiceYearControlTextBox,
                     ErrorMassageLabel);
             }
             else
@@ -646,25 +664,32 @@ namespace Invoice.Forms
                 ConvertImageToByteArray(moneyReceiptForm.SaveMoneyReceiptForm(moneyReceiptInfo));
 
             var newMoneyReceiptImage =
-                new iText.Layout.Element.Image(ImageDataFactory.Create(convertMoneyReceiptImageToByteArray)).SetTextAlignment(
-                    TextAlignment.CENTER);
+                new iText.Layout.Element.Image(ImageDataFactory.Create(convertMoneyReceiptImageToByteArray))
+                    .SetTextAlignment(
+                        TextAlignment.CENTER);
 
             newInvoiceDocument.Add(newMoneyReceiptImage);
             moneyReceiptForm.Close();
         }
 
-        private string CheckProductsRichTextBox(RichTextBox productNameRichTextBox, RichTextBox productQuantityRichTextBox, RichTextBox productSeesRichTextBox, RichTextBox productPriceRichTextBox)
+        private string CheckProductsRichTextBox(RichTextBox productNameRichTextBox,
+            RichTextBox productQuantityRichTextBox, RichTextBox productSeesRichTextBox,
+            RichTextBox productPriceRichTextBox)
         {
             string productInfo;
 
-            if (string.IsNullOrWhiteSpace(productNameRichTextBox.Text) || string.IsNullOrWhiteSpace(productQuantityRichTextBox.Text) || string.IsNullOrWhiteSpace(productSeesRichTextBox.Text) || string.IsNullOrWhiteSpace(productPriceRichTextBox.Text))
+            if (string.IsNullOrWhiteSpace(productNameRichTextBox.Text) ||
+                string.IsNullOrWhiteSpace(productQuantityRichTextBox.Text) ||
+                string.IsNullOrWhiteSpace(productSeesRichTextBox.Text) ||
+                string.IsNullOrWhiteSpace(productPriceRichTextBox.Text))
             {
                 productInfo = string.Empty;
             }
             else
             {
                 double priceWithPvm = _numberService.CalculateProductPriceWithPvm(productPriceRichTextBox);
-                productInfo = $"{productNameRichTextBox.Text}, {productQuantityRichTextBox.Text} {productSeesRichTextBox.Text}, {priceWithPvm} EUR. ";
+                productInfo =
+                    $"{productNameRichTextBox.Text}, {productQuantityRichTextBox.Text} {productSeesRichTextBox.Text}, {priceWithPvm} EUR. ";
             }
 
             return productInfo;
@@ -672,7 +697,8 @@ namespace Invoice.Forms
 
         private string[] FillProductsToArray()
         {
-            string firstProductInfo = CheckProductsRichTextBox(FirstProductNameRichTextBox, FirstProductQuantityRichTextBox,
+            string firstProductInfo = CheckProductsRichTextBox(FirstProductNameRichTextBox,
+                FirstProductQuantityRichTextBox,
                 FirstProductSeesRichTextBox, FirstProductPriceRichTextBox);
             string secondProductInfo = CheckProductsRichTextBox(SecondProductNameRichTextBox,
                 SecondProductQuantityRichTextBox, SecondProductSeesRichTextBox, SecondProductPriceRichTextBox);
@@ -1057,7 +1083,8 @@ namespace Invoice.Forms
             EighthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(EighthProductQuantityRichTextBox);
             NinthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(NinthProductQuantityRichTextBox);
             TenProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(TenProductQuantityRichTextBox);
-            EleventhProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(EleventhProductQuantityRichTextBox);
+            EleventhProductQuantityRichTextBox.Text =
+                _numberService.ChangeCommaToDot(EleventhProductQuantityRichTextBox);
             TwelfthProductQuantityRichTextBox.Text = _numberService.ChangeCommaToDot(TwelfthProductQuantityRichTextBox);
 
             FirstProductPriceRichTextBox.Text = _numberService.ChangeCommaToDot(FirstProductPriceRichTextBox);
@@ -1204,7 +1231,7 @@ namespace Invoice.Forms
         private static byte[] ConvertImageToByteArray(Image img)
         {
             ImageConverter converter = new ImageConverter();
-            return (byte[])converter.ConvertTo(img, typeof(byte[]));
+            return (byte[]) converter.ConvertTo(img, typeof(byte[]));
         }
 
         private void SetCursorAtTextBoxStringEnd()
@@ -1216,7 +1243,7 @@ namespace Invoice.Forms
             SellerFirmCodeRichTextBox.SelectionStart = SellerFirmCodeRichTextBox.Text.Length;
             SellerPvmCodeRichTextBox.SelectionStart = SellerPvmCodeRichTextBox.Text.Length;
             SellerAddressRichTextBox.SelectionStart = SellerAddressRichTextBox.Text.Length;
-            SellerPhoneNumberRichTextBox.SelectionStart= SellerPhoneNumberRichTextBox.Text.Length;
+            SellerPhoneNumberRichTextBox.SelectionStart = SellerPhoneNumberRichTextBox.Text.Length;
             SellerBankRichTextBox.SelectionStart = SellerBankRichTextBox.Text.Length;
             SellerBankAccountNumberRichTextBox.SelectionStart = SellerBankAccountNumberRichTextBox.Text.Length;
             SellerEmailAddressRichTextBox.SelectionStart = SellerEmailAddressRichTextBox.Text.Length;
@@ -1351,7 +1378,8 @@ namespace Invoice.Forms
             if (_invoiceNumber.HasValue && _invoiceNumberYearCreation.HasValue)
             {
                 ProductTypeModel getExistingProductTypes =
-                    _productTypeRepository.GetExistingProductType(_invoiceNumber.Value, _invoiceNumberYearCreation.Value);
+                    _productTypeRepository.GetExistingProductType(_invoiceNumber.Value,
+                        _invoiceNumberYearCreation.Value);
 
                 if (getExistingProductTypes != null)
                 {
@@ -1410,36 +1438,47 @@ namespace Invoice.Forms
                         _numberService.ToStringProductTypePriceOrEmpty(ProductTypePriceOperations.FirstProductTypePrice,
                             getExistingProductTypes);
 
-                    SecondProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(ProductTypePriceOperations.SecondProductTypePrice,
+                    SecondProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(
+                        ProductTypePriceOperations.SecondProductTypePrice,
                         getExistingProductTypes);
 
-                    ThirdProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(ProductTypePriceOperations.ThirdProductTypePrice,
+                    ThirdProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(
+                        ProductTypePriceOperations.ThirdProductTypePrice,
                         getExistingProductTypes);
 
-                    FourthProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(ProductTypePriceOperations.FourthProductTypePrice,
+                    FourthProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(
+                        ProductTypePriceOperations.FourthProductTypePrice,
                         getExistingProductTypes);
 
-                    FifthProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(ProductTypePriceOperations.FifthProductTypePrice,
+                    FifthProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(
+                        ProductTypePriceOperations.FifthProductTypePrice,
                         getExistingProductTypes);
 
-                    SixthProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(ProductTypePriceOperations.SixthProductTypePrice,
+                    SixthProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(
+                        ProductTypePriceOperations.SixthProductTypePrice,
                         getExistingProductTypes);
 
-                    SeventhProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(ProductTypePriceOperations.SeventhProductTypePrice,
+                    SeventhProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(
+                        ProductTypePriceOperations.SeventhProductTypePrice,
                         getExistingProductTypes);
 
-                    EighthProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(ProductTypePriceOperations.EighthProductTypePrice,
+                    EighthProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(
+                        ProductTypePriceOperations.EighthProductTypePrice,
                         getExistingProductTypes);
 
-                    NinthProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(ProductTypePriceOperations.NinthProductTypePrice,
+                    NinthProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(
+                        ProductTypePriceOperations.NinthProductTypePrice,
                         getExistingProductTypes);
-                    TenProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(ProductTypePriceOperations.TenProductTypePrice,
+                    TenProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(
+                        ProductTypePriceOperations.TenProductTypePrice,
                         getExistingProductTypes);
 
-                    EleventhProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(ProductTypePriceOperations.EleventhProductTypePrice,
+                    EleventhProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(
+                        ProductTypePriceOperations.EleventhProductTypePrice,
                         getExistingProductTypes);
 
-                    TwelfthProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(ProductTypePriceOperations.TwelfthProductTypePrice,
+                    TwelfthProductTypePriceTextBox.Text = _numberService.ToStringProductTypePriceOrEmpty(
+                        ProductTypePriceOperations.TwelfthProductTypePrice,
                         getExistingProductTypes);
                 }
             }
@@ -1450,9 +1489,10 @@ namespace Invoice.Forms
             ChangeProductTypeQuantityAndPriceFromCommaToDot();
             ProductTypeModel productType = GetAllInfoFromProductTypeTextBox();
 
-            if (_invoiceOperations == InvoiceOperations.Edit && _invoiceNumber.HasValue && _invoiceNumberYearCreation.HasValue)
+            if (_invoiceOperations == InvoiceOperations.Edit && _invoiceNumber.HasValue &&
+                _invoiceNumberYearCreation.HasValue)
             {
-                 _productTypeRepository.CreateNewProductType(_invoiceNumber.Value,
+                _productTypeRepository.CreateNewProductType(_invoiceNumber.Value,
                     _invoiceNumberYearCreation.Value, productType);
             }
             else
@@ -1475,7 +1515,8 @@ namespace Invoice.Forms
             EighthProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(EighthProductTypeQuantityTextBox);
             NinthProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(NinthProductTypeQuantityTextBox);
             TenProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(TenProductTypeQuantityTextBox);
-            EleventhProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(EleventhProductTypeQuantityTextBox);
+            EleventhProductTypeQuantityTextBox.Text =
+                _numberService.ChangeCommaToDot(EleventhProductTypeQuantityTextBox);
             TwelfthProductTypeQuantityTextBox.Text = _numberService.ChangeCommaToDot(TwelfthProductTypeQuantityTextBox);
 
             FirstProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(FirstProductTypePriceTextBox);
@@ -1574,7 +1615,8 @@ namespace Invoice.Forms
             }
             else
             {
-                _messageDialogService.ShowErrorMassage("Nėra jokios informacijos duomenų bazėje apie galimus produktus");
+                _messageDialogService.ShowErrorMassage(
+                    "Nėra jokios informacijos duomenų bazėje apie galimus produktus");
             }
         }
 
@@ -1723,7 +1765,8 @@ namespace Invoice.Forms
 
             if (numLines == 1)
             {
-                richTextBox.Text = string.Format(@"{0} {1}{2}", productInfo.ProductName, Environment.NewLine, productInfo.BarCode);
+                richTextBox.Text = string.Format(@"{0} {1}{2}", productInfo.ProductName, Environment.NewLine,
+                    productInfo.BarCode);
             }
             else
             {
@@ -1733,9 +1776,10 @@ namespace Invoice.Forms
 
         private void FillBuyerInfo()
         {
-            if (BuyerInfoNameComboBox.Text == _lastBuyerFilled)return;
+            if (BuyerInfoNameComboBox.Text == _lastBuyerFilled) return;
 
-            BuyerFullInfoWithIdModel buyerFullInfo = _buyersInfoRepository.GetBuyerFullInfoWithId(BuyerInfoNameComboBox.Text);
+            BuyerFullInfoWithIdModel buyerFullInfo =
+                _buyersInfoRepository.GetBuyerFullInfoWithId(BuyerInfoNameComboBox.Text);
 
             if (buyerFullInfo != null)
             {
@@ -1765,8 +1809,8 @@ namespace Invoice.Forms
 
         private void SuggestToFillProductTypeQuantityIfEmpty(bool isAllQuantityFilled)
         {
-            if (isAllQuantityFilled)return;
-           
+            if (isAllQuantityFilled) return;
+
             DialogResult dialogResult = _messageDialogService.ShowChoiceMessage(
                 "Kai kurie kiekio langeliai valdymo centre produkto tipai nėra supildyti arba supildyti ne pagal sąskaitos faktūros duomenis ar norite juos kad automatiškai supildytų pagal sąskaitos faktūros duomenis ?");
 
@@ -1895,18 +1939,30 @@ namespace Invoice.Forms
             bool isEleventhHasId = CheckProductInfoId(EleventhProductIdTextBox);
             bool isTwelfthHasId = CheckProductInfoId(TwelfthProductIdTextBox);
 
-            FilledQuantityForNewInvoiceToDepositDataBaseById(isFirstHasId, FirstProductIdTextBox, FirstProductQuantityRichTextBox);
-            FilledQuantityForNewInvoiceToDepositDataBaseById(isSecondHasId, SecondProductIdTextBox, SecondProductQuantityRichTextBox);
-            FilledQuantityForNewInvoiceToDepositDataBaseById(isThirdHasId, ThirdProductIdTextBox, ThirdProductQuantityRichTextBox);
-            FilledQuantityForNewInvoiceToDepositDataBaseById(isFourthHasId, FourthProductIdTextBox, FourthProductQuantityRichTextBox);
-            FilledQuantityForNewInvoiceToDepositDataBaseById(isFifthHasId, FifthProductIdTextBox, FifthProductQuantityRichTextBox);
-            FilledQuantityForNewInvoiceToDepositDataBaseById(isSixthHasId, SixthProductIdTextBox, SixthProductQuantityRichTextBox);
-            FilledQuantityForNewInvoiceToDepositDataBaseById(isSeventhHasId, SeventhProductIdTextBox, SeventhProductQuantityRichTextBox);
-            FilledQuantityForNewInvoiceToDepositDataBaseById(isEighthHasId, EighthProductIdTextBox, EighthProductQuantityRichTextBox);
-            FilledQuantityForNewInvoiceToDepositDataBaseById(isNinthHasId, NinthProductIdTextBox, NinthProductQuantityRichTextBox);
-            FilledQuantityForNewInvoiceToDepositDataBaseById(isTenHasId, TenProductIdTextBox, TenProductQuantityRichTextBox);
-            FilledQuantityForNewInvoiceToDepositDataBaseById(isEleventhHasId, EleventhProductIdTextBox, EleventhProductQuantityRichTextBox);
-            FilledQuantityForNewInvoiceToDepositDataBaseById(isTwelfthHasId, TwelfthProductIdTextBox, TwelfthProductQuantityRichTextBox);
+            FilledQuantityForNewInvoiceToDepositDataBaseById(isFirstHasId, FirstProductIdTextBox,
+                FirstProductQuantityRichTextBox);
+            FilledQuantityForNewInvoiceToDepositDataBaseById(isSecondHasId, SecondProductIdTextBox,
+                SecondProductQuantityRichTextBox);
+            FilledQuantityForNewInvoiceToDepositDataBaseById(isThirdHasId, ThirdProductIdTextBox,
+                ThirdProductQuantityRichTextBox);
+            FilledQuantityForNewInvoiceToDepositDataBaseById(isFourthHasId, FourthProductIdTextBox,
+                FourthProductQuantityRichTextBox);
+            FilledQuantityForNewInvoiceToDepositDataBaseById(isFifthHasId, FifthProductIdTextBox,
+                FifthProductQuantityRichTextBox);
+            FilledQuantityForNewInvoiceToDepositDataBaseById(isSixthHasId, SixthProductIdTextBox,
+                SixthProductQuantityRichTextBox);
+            FilledQuantityForNewInvoiceToDepositDataBaseById(isSeventhHasId, SeventhProductIdTextBox,
+                SeventhProductQuantityRichTextBox);
+            FilledQuantityForNewInvoiceToDepositDataBaseById(isEighthHasId, EighthProductIdTextBox,
+                EighthProductQuantityRichTextBox);
+            FilledQuantityForNewInvoiceToDepositDataBaseById(isNinthHasId, NinthProductIdTextBox,
+                NinthProductQuantityRichTextBox);
+            FilledQuantityForNewInvoiceToDepositDataBaseById(isTenHasId, TenProductIdTextBox,
+                TenProductQuantityRichTextBox);
+            FilledQuantityForNewInvoiceToDepositDataBaseById(isEleventhHasId, EleventhProductIdTextBox,
+                EleventhProductQuantityRichTextBox);
+            FilledQuantityForNewInvoiceToDepositDataBaseById(isTwelfthHasId, TwelfthProductIdTextBox,
+                TwelfthProductQuantityRichTextBox);
         }
 
         private bool CheckProductInfoId(TextBox textBox)
@@ -1915,9 +1971,11 @@ namespace Invoice.Forms
             return isHasId;
         }
 
-        private void FilledQuantityForNewInvoiceToDepositDataBaseById(bool isHasId, TextBox textBox, RichTextBox richTextBox)
+        private void FilledQuantityForNewInvoiceToDepositDataBaseById(bool isHasId, TextBox textBox,
+            RichTextBox richTextBox)
         {
-            bool isNumber = double.TryParse(richTextBox.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out double quantity);
+            bool isNumber = double.TryParse(richTextBox.Text, NumberStyles.Any, CultureInfo.InvariantCulture,
+                out double quantity);
 
             if (!isHasId || !isNumber || !_invoiceNumberYearCreation.HasValue) return;
 
@@ -1928,7 +1986,7 @@ namespace Invoice.Forms
                 ProductQuantity = quantity
             };
 
-             _depositRepository.AddQuantityByIdAndYear(depositAddQuantity);
+            _depositRepository.AddQuantityByIdAndYear(depositAddQuantity);
         }
 
         private void FillDepositInfoToEditInvoiceOperation()
@@ -1954,7 +2012,7 @@ namespace Invoice.Forms
 
         private void SaveProductInfoId()
         {
-            _idProductLinesValues = new int?[12];
+            _idProductLinesValues = new int[12];
 
             FillIdProductLinesValuesSaveModel(FirstProductIdTextBox, 0);
             FillIdProductLinesValuesSaveModel(SecondProductIdTextBox, 1);
@@ -2015,7 +2073,7 @@ namespace Invoice.Forms
 
         private void LoadProductInfoIdWhenIdNotZero(DepositIdLoadModel getProductId)
         {
-            _idProductOldLineValues = new int?[12];
+            _idProductOldLineValues = new int[12];
             _idProductOldLineValues[0] = 0;
             _idProductOldLineValues[1] = 0;
             _idProductOldLineValues[2] = 0;
@@ -2104,90 +2162,188 @@ namespace Invoice.Forms
 
         private void LoadProductInfoNamesById(DepositIdLoadModel getProductId)
         {
-            if (FirstProductIdTextBox.Text != string.Empty && getProductId.FirstLineId.HasValue)
-                FirstProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.FirstLineId.Value);
-            if (SecondProductIdTextBox.Text != string.Empty && getProductId.SecondLineId.HasValue)
-                SecondProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.SecondLineId.Value);
-            if (ThirdProductIdTextBox.Text != string.Empty && getProductId.ThirdLineId.HasValue)
-                ThirdProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.ThirdLineId.Value);
-            if (FourthProductIdTextBox.Text != string.Empty && getProductId.FourthLineId.HasValue)
-                FourthProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.FourthLineId.Value);
-            if (FifthProductIdTextBox.Text != string.Empty && getProductId.FifthLineId.HasValue)
-                FifthProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.FifthLineId.Value);
-            if (SixthProductIdTextBox.Text != string.Empty && getProductId.SixthLineId.HasValue)
-                SixthProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.SixthLineId.Value);
-            if (SeventhProductIdTextBox.Text != string.Empty && getProductId.SeventhLineId.HasValue)
-                SeventhProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.SeventhLineId.Value);
-            if (EighthProductIdTextBox.Text != string.Empty && getProductId.EighthLineId.HasValue)
-                EighthProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.EighthLineId.Value);
-            if (NinthProductIdTextBox.Text != string.Empty && getProductId.NinthLineId.HasValue)
-                NinthProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.NinthLineId.Value);
-            if (TenProductIdTextBox.Text != string.Empty && getProductId.TenLineId.HasValue)
-                TenProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.TenLineId.Value);
-            if (EleventhProductIdTextBox.Text != string.Empty && getProductId.EleventhLineId.HasValue)
-                EleventhProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.EleventhLineId.Value);
-            if (TwelfthProductIdTextBox.Text != string.Empty && getProductId.TwelfthLineId.HasValue)
-                TwelfthProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.TwelfthLineId.Value);
+            if (FirstProductIdTextBox.Text != string.Empty)
+                FirstProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.FirstLineId);
+            if (SecondProductIdTextBox.Text != string.Empty)
+                SecondProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.SecondLineId);
+            if (ThirdProductIdTextBox.Text != string.Empty)
+                ThirdProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.ThirdLineId);
+            if (FourthProductIdTextBox.Text != string.Empty)
+                FourthProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.FourthLineId);
+            if (FifthProductIdTextBox.Text != string.Empty)
+                FifthProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.FifthLineId);
+            if (SixthProductIdTextBox.Text != string.Empty)
+                SixthProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.SixthLineId);
+            if (SeventhProductIdTextBox.Text != string.Empty)
+                SeventhProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.SeventhLineId);
+            if (EighthProductIdTextBox.Text != string.Empty)
+                EighthProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.EighthLineId);
+            if (NinthProductIdTextBox.Text != string.Empty)
+                NinthProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.NinthLineId);
+            if (TenProductIdTextBox.Text != string.Empty)
+                TenProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.TenLineId);
+            if (EleventhProductIdTextBox.Text != string.Empty)
+                EleventhProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.EleventhLineId);
+            if (TwelfthProductIdTextBox.Text != string.Empty)
+                TwelfthProductNameComboBox.Text = _productInfoRepository.GetProductName(getProductId.TwelfthLineId);
 
             // todo can create better database call by getting all id and all names then filled values by id number in each combo box 
         }
 
         private void SaveNewProductsQuantityValuesForEditInvoice()
         {
-           double?[] newQuantityValues = new double?[12];
+            _newInvoiceYear = int.Parse(InvoiceYearControlTextBox.Text);
 
-           newQuantityValues[0] = _numberService.ParseToDoubleOrNull(FirstProductQuantityRichTextBox);
-           newQuantityValues[1] = _numberService.ParseToDoubleOrNull(SecondProductQuantityRichTextBox);
-           newQuantityValues[2] = _numberService.ParseToDoubleOrNull(ThirdProductQuantityRichTextBox);
-           newQuantityValues[3] = _numberService.ParseToDoubleOrNull(FourthProductQuantityRichTextBox);
-           newQuantityValues[4] = _numberService.ParseToDoubleOrNull(FifthProductQuantityRichTextBox);
-           newQuantityValues[5] = _numberService.ParseToDoubleOrNull(SixthProductQuantityRichTextBox);
-           newQuantityValues[6] = _numberService.ParseToDoubleOrNull(SeventhProductQuantityRichTextBox);
-           newQuantityValues[7] = _numberService.ParseToDoubleOrNull(EighthProductQuantityRichTextBox);
-           newQuantityValues[8] = _numberService.ParseToDoubleOrNull(NinthProductQuantityRichTextBox);
-           newQuantityValues[9] = _numberService.ParseToDoubleOrNull(TenProductQuantityRichTextBox);
-           newQuantityValues[10] = _numberService.ParseToDoubleOrNull(EleventhProductQuantityRichTextBox);
-           newQuantityValues[11] = _numberService.ParseToDoubleOrNull(TwelfthProductQuantityRichTextBox);
+            bool isYearSame = CheckInvoiceYearAreNotChanged();
 
-           
-           
-        }
+            double?[] newQuantityValues = new double?[12];
 
-        private void AddToDepositNewInfoForEditOperation(int lineIndex)
-        {
-            if (!_idProductLinesValues[lineIndex].HasValue && !_idProductOldLineValues[lineIndex].HasValue)
-                return;
+            newQuantityValues[0] = _numberService.ParseToDoubleOrNull(FirstProductQuantityRichTextBox);
+            newQuantityValues[1] = _numberService.ParseToDoubleOrNull(SecondProductQuantityRichTextBox);
+            newQuantityValues[2] = _numberService.ParseToDoubleOrNull(ThirdProductQuantityRichTextBox);
+            newQuantityValues[3] = _numberService.ParseToDoubleOrNull(FourthProductQuantityRichTextBox);
+            newQuantityValues[4] = _numberService.ParseToDoubleOrNull(FifthProductQuantityRichTextBox);
+            newQuantityValues[5] = _numberService.ParseToDoubleOrNull(SixthProductQuantityRichTextBox);
+            newQuantityValues[6] = _numberService.ParseToDoubleOrNull(SeventhProductQuantityRichTextBox);
+            newQuantityValues[7] = _numberService.ParseToDoubleOrNull(EighthProductQuantityRichTextBox);
+            newQuantityValues[8] = _numberService.ParseToDoubleOrNull(NinthProductQuantityRichTextBox);
+            newQuantityValues[9] = _numberService.ParseToDoubleOrNull(TenProductQuantityRichTextBox);
+            newQuantityValues[10] = _numberService.ParseToDoubleOrNull(EleventhProductQuantityRichTextBox);
+            newQuantityValues[11] = _numberService.ParseToDoubleOrNull(TwelfthProductQuantityRichTextBox);
 
-            if (_idProductLinesValues[lineIndex].Value == _idProductOldLineValues[lineIndex].Value)
+            if (isYearSame)
             {
-                // do with quantity subtract or add by value
+                AddToDepositNewInfoForEditOperationWhenYearSame(0, newQuantityValues);
+                AddToDepositNewInfoForEditOperationWhenYearSame(1, newQuantityValues);
+                AddToDepositNewInfoForEditOperationWhenYearSame(2, newQuantityValues);
+                AddToDepositNewInfoForEditOperationWhenYearSame(3, newQuantityValues);
+                AddToDepositNewInfoForEditOperationWhenYearSame(4, newQuantityValues);
+                AddToDepositNewInfoForEditOperationWhenYearSame(5, newQuantityValues);
+                AddToDepositNewInfoForEditOperationWhenYearSame(6, newQuantityValues);
+                AddToDepositNewInfoForEditOperationWhenYearSame(7, newQuantityValues);
+                AddToDepositNewInfoForEditOperationWhenYearSame(8, newQuantityValues);
+                AddToDepositNewInfoForEditOperationWhenYearSame(9, newQuantityValues);
+                AddToDepositNewInfoForEditOperationWhenYearSame(10, newQuantityValues);
+                AddToDepositNewInfoForEditOperationWhenYearSame(11, newQuantityValues);
+            }
+            else
+            {
+                //  need logic when year not same 
             }
 
-            // subtract last quantity and add quantity to new
+
         }
 
-        private void SaveNewQuantityToDeposit(double?[] newQuantityValues, int quantityLineIndex)
+        private bool CheckInvoiceYearAreNotChanged()
         {
-            if (_lastQuantityValues[quantityLineIndex] == null && newQuantityValues[quantityLineIndex] == null) return;
+            bool isYearSame = false;
+            if (_invoiceNumberYearCreation.HasValue)
+            {
+                isYearSame = _newInvoiceYear == _invoiceNumberYearCreation.Value;
+            }
+
+            return isYearSame;
+        }
+
+        private void AddToDepositNewInfoForEditOperationWhenYearSame(int lineIndex, double?[] newQuantityValues)
+        {
+            if (!_invoiceNumberYearCreation.HasValue) return;
+
+            if (_idProductLinesValues[lineIndex] == _idProductOldLineValues[lineIndex])
+            {
+                SaveNewQuantityToDeposit(newQuantityValues, lineIndex, _idProductLinesValues[lineIndex]);
+            }
+            else if (_idProductLinesValues[lineIndex] != _idProductOldLineValues[lineIndex])
+            {
+                SaveQuantityToDepositWhenProductIdIsNotSame(newQuantityValues, lineIndex);
+            }
+        }
+
+        private void SaveQuantityToDepositWhenProductIdIsNotSame(double?[] newQuantityValues, int quantityLineIndex)
+        {
+            if (_lastQuantityValues[quantityLineIndex] == null && newQuantityValues[quantityLineIndex] == null || !_invoiceNumberYearCreation.HasValue) return;
+
+            if (_lastQuantityValues[quantityLineIndex] != null)
+            {
+                DepositAddQuantityModel subtractQuantity = new DepositAddQuantityModel
+                {
+                    Id = _idProductOldLineValues[quantityLineIndex],
+                    InvoiceYear = _invoiceNumberYearCreation.Value,
+                    ProductQuantity = _lastQuantityValues[quantityLineIndex].Value
+                };
+
+                _depositRepository.SubtractQuantityByIdAndYear(subtractQuantity);
+            }
+
+            if (newQuantityValues[quantityLineIndex] != null)
+            {
+                DepositAddQuantityModel addQuantity = new DepositAddQuantityModel
+                {
+                    Id = _idProductLinesValues[quantityLineIndex],
+                    InvoiceYear = _invoiceNumberYearCreation.Value,
+                    ProductQuantity = newQuantityValues[quantityLineIndex].Value
+                };
+
+                _depositRepository.AddQuantityByIdAndYear(addQuantity);
+            }
+        }
+
+        private void SaveNewQuantityToDeposit(double?[] newQuantityValues, int quantityLineIndex, int productId)
+        {
+            if (_lastQuantityValues[quantityLineIndex] == null && newQuantityValues[quantityLineIndex] == null || !_invoiceNumberYearCreation.HasValue) return;
 
             if (newQuantityValues[quantityLineIndex] == null && _lastQuantityValues[quantityLineIndex] != null)
             {
-                
-                //subtract number of last quantity number 
+                DepositAddQuantityModel subtractQuantity = new DepositAddQuantityModel
+                {
+                    Id = productId,
+                    InvoiceYear = _invoiceNumberYearCreation.Value,
+                    ProductQuantity = _lastQuantityValues[quantityLineIndex].Value
+                };
+
+                _depositRepository.SubtractQuantityByIdAndYear(subtractQuantity);
             }
             else if (newQuantityValues[quantityLineIndex] != null && _lastQuantityValues[quantityLineIndex] == null)
             {
-                //add quantity to newQuantityValue
+                DepositAddQuantityModel addQuantity = new DepositAddQuantityModel
+                {
+                    Id = productId,
+                    InvoiceYear = _invoiceNumberYearCreation.Value,
+                    ProductQuantity = newQuantityValues[quantityLineIndex].Value
+                };
+
+                _depositRepository.AddQuantityByIdAndYear(addQuantity);
             }
             else if (newQuantityValues[quantityLineIndex] > _lastQuantityValues[quantityLineIndex])
             {
-                // new - last  then add that number to quantity
+                double newValue = newQuantityValues[quantityLineIndex].Value -
+                                   _lastQuantityValues[quantityLineIndex].Value;
+
+                DepositAddQuantityModel addQuantity = new DepositAddQuantityModel
+                {
+                    Id = productId,
+                    InvoiceYear = _invoiceNumberYearCreation.Value,
+                    ProductQuantity = newValue
+                };
+
+                _depositRepository.AddQuantityByIdAndYear(addQuantity);
             }
             else if (newQuantityValues[quantityLineIndex] < _lastQuantityValues[quantityLineIndex])
             {
-                // last - new then subtract from quantity in deposit
+                double newValue = _lastQuantityValues[quantityLineIndex].Value - newQuantityValues[quantityLineIndex].Value;
+
+                DepositAddQuantityModel subtractQuantity = new DepositAddQuantityModel
+                {
+                    Id = productId,
+                    InvoiceYear = _invoiceNumberYearCreation.Value,
+                    ProductQuantity = newValue
+                };
+
+                _depositRepository.SubtractQuantityByIdAndYear(subtractQuantity);
             }
         }
+
+        
 
         #endregion
     }
