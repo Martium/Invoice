@@ -499,6 +499,7 @@ namespace Invoice.Forms
             if (string.IsNullOrWhiteSpace(InvoiceYearControlTextBox.Text))
             {
                 SaveButton.Enabled = false;
+                ChangeProductDepositIdByYearButton.Enabled = false;
                 e.Cancel = true;
                 _messageDialogService.DisplayLabelAndTextBoxError(
                     $" Raudonas langelis Negali būti tuščias! pvz.: {DateTime.Now.Year}", InvoiceYearControlTextBox,
@@ -507,6 +508,7 @@ namespace Invoice.Forms
             else if (!isNumber)
             {
                 SaveButton.Enabled = false;
+                ChangeProductDepositIdByYearButton.Enabled = false;
                 e.Cancel = true;
                 _messageDialogService.DisplayLabelAndTextBoxError(
                     $" Raudonas langelis turi būti metai pvz.: {DateTime.Now.Year}", InvoiceYearControlTextBox,
@@ -515,6 +517,7 @@ namespace Invoice.Forms
             else if (number > DateTime.Now.Year)
             {
                 SaveButton.Enabled = false;
+                ChangeProductDepositIdByYearButton.Enabled = false;
                 e.Cancel = true;
                 _messageDialogService.DisplayLabelAndTextBoxError(
                     $" Raudonam langelį metai negali būti ateityje pvz.: {DateTime.Now.Year}",
@@ -524,6 +527,7 @@ namespace Invoice.Forms
             else if (number < 2000)
             {
                 SaveButton.Enabled = false;
+                ChangeProductDepositIdByYearButton.Enabled = false;
                 e.Cancel = true;
                 _messageDialogService.DisplayLabelAndTextBoxError(
                     $" Raudonam langelyje negali būti mažiau nei 2000 pvz.: {DateTime.Now.Year}",
@@ -533,6 +537,7 @@ namespace Invoice.Forms
             else
             {
                 SaveButton.Enabled = true;
+                ChangeProductDepositIdByYearButton.Enabled = true;
                 e.Cancel = false;
                 _messageDialogService.HideLabelAndTextBoxError(ErrorMassageLabel, InvoiceYearControlTextBox);
             }
@@ -546,15 +551,127 @@ namespace Invoice.Forms
             {
                 _invoiceNumberYearCreation = number;
             }
+        }
 
-            if (_invoiceOperations == InvoiceOperations.Edit)
-            {
-                //change  product id by year each line by product name 
-            }
-
+        private void ChangeProductDepositIdByYearButton_Click(object sender, EventArgs e)
+        {
+            ChangeProductIdByProductNameAndYear();
         }
 
         #region Helpers
+
+        private void ChangeProductIdByProductNameAndYear()
+        {
+            if(!_invoiceNumberYearCreation.HasValue)return;
+
+            if (FirstProductNameComboBox.Text != string.Empty)
+            {
+                int firstLineId = _depositRepository.GetIdByProductNameAndYear(FirstProductNameComboBox.Text,
+                    _invoiceNumberYearCreation.Value);
+
+                FirstProductIdTextBox.Text = firstLineId == 0 ? string.Empty : firstLineId.ToString();
+            }
+
+
+            if (SecondProductNameComboBox.Text != string.Empty)
+            {
+                int secondLineId = _depositRepository.GetIdByProductNameAndYear(SecondProductNameComboBox.Text,
+                    _invoiceNumberYearCreation.Value);
+
+                SecondProductIdTextBox.Text = secondLineId == 0 ? string.Empty : secondLineId.ToString();
+            }
+
+
+            if (ThirdProductNameComboBox.Text != string.Empty)
+            {
+                int thirdLineId = _depositRepository.GetIdByProductNameAndYear(ThirdProductNameComboBox.Text,
+                    _invoiceNumberYearCreation.Value);
+
+                ThirdProductIdTextBox.Text = thirdLineId == 0 ? string.Empty : thirdLineId.ToString();
+            }
+
+
+            if (FourthProductNameComboBox.Text != string.Empty)
+            {
+                int fourthLineId = _depositRepository.GetIdByProductNameAndYear(FourthProductNameComboBox.Text,
+                    _invoiceNumberYearCreation.Value);
+
+                FourthProductIdTextBox.Text = fourthLineId == 0 ? string.Empty : fourthLineId.ToString();
+            }
+
+
+            if (FifthProductNameComboBox.Text != string.Empty)
+            {
+                int fifthLineId = _depositRepository.GetIdByProductNameAndYear(FifthProductNameComboBox.Text,
+                    _invoiceNumberYearCreation.Value);
+
+                FifthProductIdTextBox.Text = fifthLineId == 0 ? string.Empty : fifthLineId.ToString();
+            }
+
+
+            if (SixthProductNameComboBox.Text != string.Empty)
+            {
+                int sixthLineId = _depositRepository.GetIdByProductNameAndYear(SixthProductNameComboBox.Text,
+                    _invoiceNumberYearCreation.Value);
+
+                SixthProductIdTextBox.Text = sixthLineId == 0 ? string.Empty : sixthLineId.ToString();
+            }
+
+
+            if (SeventhProductNameComboBox.Text != string.Empty)
+            {
+                int seventhLineId = _depositRepository.GetIdByProductNameAndYear(SeventhProductNameComboBox.Text,
+                    _invoiceNumberYearCreation.Value);
+
+                SeventhProductIdTextBox.Text = seventhLineId == 0 ? string.Empty : seventhLineId.ToString();
+            }
+
+
+            if (EighthProductNameComboBox.Text != string.Empty)
+            {
+                int eighthProductLine = _depositRepository.GetIdByProductNameAndYear(EighthProductNameComboBox.Text,
+                    _invoiceNumberYearCreation.Value);
+
+                EighthProductIdTextBox.Text = eighthProductLine == 0 ? string.Empty : eighthProductLine.ToString();
+            }
+
+
+            if (NinthProductNameComboBox.Text != string.Empty)
+            {
+                int ninthLineId = _depositRepository.GetIdByProductNameAndYear(NinthProductNameComboBox.Text,
+                    _invoiceNumberYearCreation.Value);
+
+                NinthProductIdTextBox.Text = ninthLineId == 0 ? string.Empty : ninthLineId.ToString();
+            }
+
+
+            if (TenProductNameComboBox.Text != string.Empty)
+            {
+                int tenLineId = _depositRepository.GetIdByProductNameAndYear(TenProductNameComboBox.Text,
+                    _invoiceNumberYearCreation.Value);
+
+                TenProductIdTextBox.Text = tenLineId == 0 ? string.Empty : tenLineId.ToString();
+            }
+
+
+            if (EleventhProductNameComboBox.Text != string.Empty)
+            {
+                int eleventhLineId = _depositRepository.GetIdByProductNameAndYear(EleventhProductNameComboBox.Text,
+                    _invoiceNumberYearCreation.Value);
+
+                EleventhProductIdTextBox.Text = eleventhLineId == 0 ? string.Empty : eleventhLineId.ToString();
+            }
+
+
+            if (TwelfthProductNameComboBox.Text != string.Empty)
+            {
+                int twelfthLineId = _depositRepository.GetIdByProductNameAndYear(TwelfthProductNameComboBox.Text,
+                    _invoiceNumberYearCreation.Value);
+
+                TwelfthProductIdTextBox.Text = twelfthLineId == 0 ? string.Empty : twelfthLineId.ToString();
+            }
+                
+        }
 
         private void SaveInvoiceAndMoneyReceiptToToPdf()
         {
@@ -2429,5 +2546,6 @@ namespace Invoice.Forms
         }
 
         #endregion
+       
     }
 }

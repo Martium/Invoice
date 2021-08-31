@@ -244,6 +244,7 @@ namespace Invoice.Forms
             this.InvoiceControlYearLabel = new System.Windows.Forms.Label();
             this.InvoiceYearControlTextBox = new System.Windows.Forms.TextBox();
             this.InfoControlLabel = new System.Windows.Forms.Label();
+            this.ChangeProductDepositIdByYearButton = new System.Windows.Forms.Button();
             this.PrintInvoicePanel.SuspendLayout();
             this.ProductsTypesPanel.SuspendLayout();
             this.ProductInfoPanel.SuspendLayout();
@@ -2437,6 +2438,7 @@ namespace Invoice.Forms
             // InvoiceControlPanel
             // 
             this.InvoiceControlPanel.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.InvoiceControlPanel.Controls.Add(this.ChangeProductDepositIdByYearButton);
             this.InvoiceControlPanel.Controls.Add(this.InvoiceControlYearLabel);
             this.InvoiceControlPanel.Controls.Add(this.InvoiceYearControlTextBox);
             this.InvoiceControlPanel.Controls.Add(this.InfoControlLabel);
@@ -2473,6 +2475,16 @@ namespace Invoice.Forms
             this.InfoControlLabel.Size = new System.Drawing.Size(148, 16);
             this.InfoControlLabel.TabIndex = 40;
             this.InfoControlLabel.Text = "Sąskaitos valdymas";
+            // 
+            // ChangeProductDepositIdByYearButton
+            // 
+            this.ChangeProductDepositIdByYearButton.Location = new System.Drawing.Point(153, 80);
+            this.ChangeProductDepositIdByYearButton.Name = "ChangeProductDepositIdByYearButton";
+            this.ChangeProductDepositIdByYearButton.Size = new System.Drawing.Size(104, 20);
+            this.ChangeProductDepositIdByYearButton.TabIndex = 43;
+            this.ChangeProductDepositIdByYearButton.Text = "Taikyti metus";
+            this.ChangeProductDepositIdByYearButton.UseVisualStyleBackColor = true;
+            this.ChangeProductDepositIdByYearButton.Click += new System.EventHandler(this.ChangeProductDepositIdByYearButton_Click);
             // 
             // InvoiceForm
             // 
@@ -2723,5 +2735,6 @@ namespace Invoice.Forms
         private System.Windows.Forms.TextBox InvoiceYearControlTextBox;
         private System.Windows.Forms.Label InfoControlLabel;
         private System.Windows.Forms.Label InvoiceControlYearLabel;
+        private System.Windows.Forms.Button ChangeProductDepositIdByYearButton;
     }
 }

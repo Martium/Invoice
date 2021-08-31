@@ -51,6 +51,26 @@ namespace Invoice.Repositories
             }
         }
 
+        public int GetIdByProductNameAndYear(string productName, int year)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string getIdByProductNameAndYearQuery =
+                    $@"
+                        SELECT
+                          D.{Id}
+                        FROM {DepositTable} D
+                        WHERE D.{InvoiceYear} = {year} AND D.{ProductName} = '{productName}'
+                    ";
+
+                int getId = dbConnection.QuerySingleOrDefault<int>(getIdByProductNameAndYearQuery);
+
+                return getId;
+            }
+        }
+
         public IEnumerable<FullDepositProductWithoutIdModel> GetAllDepositProductsByYear(int year)
         {
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))

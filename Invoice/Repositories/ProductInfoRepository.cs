@@ -70,7 +70,7 @@ namespace Invoice.Repositories
                         WHERE PI.Id = {id}
                     ";
                 //select distinct and maybe year attribute must be pass
-                string getProductName = dbConnection.QuerySingle<string>(getProductNameQuery);
+                string getProductName = dbConnection.QuerySingleOrDefault<string>(getProductNameQuery);
                 return getProductName;
             }
         }

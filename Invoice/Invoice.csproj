@@ -158,6 +158,7 @@
     <Compile Include="Models\BuyersInfo\BuyerFullInfoWithIdModel.cs" />
     <Compile Include="Models\BuyersInfo\BuyersNamesModel.cs" />
     <Compile Include="Models\Deposit\DepositAddQuantityModel.cs" />
+    <Compile Include="Models\Deposit\DepositIdAndProductNameModel.cs" />
     <Compile Include="Models\Deposit\DepositIdLoadModel.cs" />
     <Compile Include="Models\Deposit\DepositIdSaveModel.cs" />
     <Compile Include="Models\Deposit\FullDepositProductModel.cs" />
