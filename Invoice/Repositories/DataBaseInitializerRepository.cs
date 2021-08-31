@@ -40,6 +40,8 @@ namespace Invoice.Repositories
                 CreatePasswordTable(dbConnection);
                 CreateBuyersInfoTable(dbConnection);
                 CreateProductInfoTable(dbConnection);
+                CreateDepositTable(dbConnection);
+                CreateDepositIdLineTable(dbConnection);
                 CreateMoneyReceiptTable(dbConnection);
 
                 SetDefaultPassword(dbConnection);
@@ -51,7 +53,8 @@ namespace Invoice.Repositories
                 FillStorageTestingInfo(dbConnection);
                 FillBuyersInfoTestingInfo(dbConnection);
                 FillProductInfoTestingInfo(dbConnection);
-
+                FillDepositTestingInfo(dbConnection);
+                FillDepositIdLineTestingInfo(dbConnection);
 #endif
 
             }
@@ -190,6 +193,61 @@ namespace Invoice.Repositories
 
             SQLiteCommand createStorageTableCommand = new SQLiteCommand(createStorageTableQuery, dbConnection);
             createStorageTableCommand.ExecuteNonQuery();
+        }
+
+        private void CreateDepositTable(SQLiteConnection dbConnection)
+        {
+            string dropADepositTableQuery = GetDropTableQuery("Deposit");
+            SQLiteCommand dropADepositTableCommand = new SQLiteCommand(dropADepositTableQuery, dbConnection);
+            dropADepositTableCommand.ExecuteNonQuery();
+
+            string createDepositTableQuery =
+                $@"
+                    CREATE TABLE [Deposit] (
+                        [Id] [INTEGER] NOT NULL,
+                        [InvoiceYear] [INTEGER] NOT NULL,
+                        [ProductName] [nvarchar]({FormSettings.TextBoxLengths.ProductName}) NULL,
+                        [BarCode] [nvarchar]({FormSettings.TextBoxLengths.BarCode}) NULL,
+                        [ProductQuantity] [NUMERIC] NULL,
+                        
+                        UNIQUE (Id)
+                    );
+                ";
+
+            SQLiteCommand createDepositTableCommand = new SQLiteCommand(createDepositTableQuery, dbConnection);
+            createDepositTableCommand.ExecuteNonQuery();
+        }
+
+        private void CreateDepositIdLineTable(SQLiteConnection dbConnection)
+        {
+            string dropADepositIdLineTable = GetDropTableQuery("DepositIdLine");
+            SQLiteCommand dropADepositIdLineTableCommand = new SQLiteCommand(dropADepositIdLineTable, dbConnection);
+            dropADepositIdLineTableCommand.ExecuteNonQuery();
+
+            string createDepositIdLineTableQuery =
+                $@"
+                    CREATE TABLE [DepositIdLine] (
+                        [InvoiceId] [INTEGER] NOT NULL,
+
+                        [FirstLineId] [INTEGER] NOT NULL,
+                        [SecondLineId] [INTEGER] NOT NULL,
+                        [ThirdLineId] [INTEGER] NOT NULL,
+                        [FourthLineId] [INTEGER] NOT NULL,
+                        [FifthLineId] [INTEGER] NOT NULL,
+                        [SixthLineId] [INTEGER] NOT NULL,
+                        [SeventhLineId] [INTEGER] NOT NULL,
+                        [EighthLineId] [INTEGER] NOT NULL,
+                        [NinthLineId] [INTEGER] NOT NULL,
+                        [TenLineId] [INTEGER] NOT NULL,
+                        [EleventhLineId] [INTEGER] NOT NULL,
+                        [TwelfthLineId] [INTEGER] NOT NULL,
+                        
+                        UNIQUE (InvoiceId)
+                    );
+                ";
+
+            SQLiteCommand createDepositIdLineCommand = new SQLiteCommand(createDepositIdLineTableQuery, dbConnection);
+            createDepositIdLineCommand.ExecuteNonQuery();
         }
 
         private void CreateMoneyReceiptTable(SQLiteConnection dbConnection)
@@ -354,6 +412,7 @@ namespace Invoice.Repositories
                 $@"
                     CREATE TABLE [ProductInfo] (
                         [Id] [INTEGER] PRIMARY KEY AUTOINCREMENT NOT NULL,
+                        [Year] [INTEGER] NOT NULL,
                         [ProductName] [nvarchar]({FormSettings.TextBoxLengths.ProductName}) NULL,
                         [BarCode] [nvarchar]({FormSettings.TextBoxLengths.BarCode}) NULL,
                         [ProductSees] [nvarchar]({FormSettings.TextBoxLengths.FirstProductSees}) NULL,
@@ -479,16 +538,53 @@ namespace Invoice.Repositories
             string fillProductTestingInfo =
                 $@"BEGIN TRANSACTION;
                     INSERT INTO 'ProductInfo'
-                        Values (NULL, '{text}', '1 23456 7891123', 'vnt', 1, '1l', 0.2);
+                        Values (NULL, {DateTime.Now.AddYears(-1).Year}, '{text}', '1 23456 7891123', 'vnt', 1, '1l', 0.2);
                     INSERT INTO 'ProductInfo'
-                        Values (NULL, '2 LITRAI', '2 23456 7592123', 'vnt', 2, '2l', 0.2);
+                        Values (NULL, {DateTime.Now.Year},'2 LITRAI','2 23456 7592123', 'vnt', 2, '2l', 0.2);
                     INSERT INTO 'ProductInfo'
-                        Values (NULL, '3 LITRAI', '3 23456 7891143', 'vnt', 3, '3l', 0.2);
+                        Values (NULL, {DateTime.Now.Year}, '3 LITRAI', '3 23456 7891143', 'vnt', 3, '3l', 0.2);
                     COMMIT;
                 ";
 
             SQLiteCommand fillTestingProductinfoCommand = new SQLiteCommand(fillProductTestingInfo, dbConnection);
             fillTestingProductinfoCommand.ExecuteNonQuery();
+        }
+
+        private void FillDepositTestingInfo(SQLiteConnection dbConnection)
+        {
+            string text = "sjdajsdfnasdfasdfasdcsadcac//dfsdfvsdfvsdfasdasdc";
+            text = text.Replace("//", "" + Environment.NewLine);
+
+            string fillDepositInfo =
+                $@"BEGIN TRANSACTION;
+                    INSERT INTO 'Deposit'
+                        Values (1, {DateTime.Now.AddYears(-1).Year}, '{text}', '1 23456 7891123', 0);
+                    INSERT INTO 'Deposit'
+                        Values (2, {DateTime.Now.Year}, '2 LITRAI', '2 23456 7592123', 0);
+                    INSERT INTO 'Deposit'
+                        Values (3, {DateTime.Now.Year}, '3 LITRAI', '3 23456 7891143', 0);
+                    COMMIT;
+                ";
+
+            SQLiteCommand fillTestingDepositInfoCommand = new SQLiteCommand(fillDepositInfo, dbConnection);
+            fillTestingDepositInfoCommand.ExecuteNonQuery();
+        }
+
+        private void FillDepositIdLineTestingInfo(SQLiteConnection dbConnection)
+        {
+            string fillDepositIdLineInfo =
+                $@"BEGIN TRANSACTION;
+                    INSERT INTO 'DepositIdLine'
+                        Values (1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                    INSERT INTO 'DepositIdLine'
+                        Values (2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                    INSERT INTO 'DepositIdLine'
+                        Values (3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                    COMMIT;
+                ";
+
+            SQLiteCommand fillTestingInfoCommand = new SQLiteCommand(fillDepositIdLineInfo, dbConnection);
+            fillTestingInfoCommand.ExecuteNonQuery();
         }
 
         private string GetDropTableQuery(string tableName)

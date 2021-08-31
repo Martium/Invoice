@@ -30,7 +30,52 @@ namespace Invoice.Repositories
             }
         }
 
-        public FullProductInfoModel GetFullProductInfo(string productName)
+        public int GetBiggestProductId()
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                int lastId;
+                string getLastIdQuery =
+                    $@"SELECT  
+                        MAX(PI.Id)
+                      FROM {ProductInfoTable} PI
+                    ";
+
+                try
+                {
+                     lastId = dbConnection.QuerySingle<int>(getLastIdQuery);
+                }
+                catch
+                {
+                     lastId = 1;
+                }
+
+                return lastId;
+            }
+        }
+
+        public string GetProductName(int id)
+        {
+            using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
+            {
+                dbConnection.Open();
+
+                string getProductNameQuery =
+                    $@"
+                        SELECT
+                          PI.ProductName
+                        FROM {ProductInfoTable} PI
+                        WHERE PI.Id = {id}
+                    ";
+                //select distinct and maybe year attribute must be pass
+                string getProductName = dbConnection.QuerySingleOrDefault<string>(getProductNameQuery);
+                return getProductName;
+            }
+        }
+
+        public FullProductInfoModel GetFullProductInfo(string productName, int year)
         {
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
             {
@@ -39,18 +84,17 @@ namespace Invoice.Repositories
                 string getExistingProductQuery =
                     $@"
                         SELECT 
-                            PI.ProductName, PI.BarCode, PI.ProductSees, PI.ProductPrice, PI.ProductType, PI.ProductTypePrice
+                            PI.Year, PI.ProductName, PI.BarCode, PI.ProductSees, PI.ProductPrice, PI.ProductType, PI.ProductTypePrice
                         FROM {ProductInfoTable} PI
-                        WHERE PI.ProductName = '{productName}'
+                        WHERE PI.ProductName = '{productName}' AND PI.Year = {year}
                     ";
-
                 FullProductInfoModel getFullProductInfo = dbConnection.QuerySingleOrDefault<FullProductInfoModel>(getExistingProductQuery);
 
                 return getFullProductInfo;
             }
         }
 
-        public FullProductInfoWithId GetFullProductInfoWithId(string productName)
+        public FullProductInfoWithId GetFullProductInfoWithId(string productName, int year)
         {
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
             {
@@ -60,7 +104,7 @@ namespace Invoice.Repositories
                     $@"
                         SELECT *
                         FROM {ProductInfoTable} PI
-                        WHERE PI.ProductName = '{productName}'
+                        WHERE PI.ProductName = '{productName}' AND Year = {year}
                     ";
 
                 FullProductInfoWithId getFullProductInfoWithId =
@@ -70,7 +114,7 @@ namespace Invoice.Repositories
             }
         }
 
-        public bool CheckIsProductNameExists(string productName)
+        public bool CheckIsProductNameExists(string productName, int year)
         {
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
             {
@@ -78,7 +122,7 @@ namespace Invoice.Repositories
 
                 string checkIsProductExists =
                     $@"
-                        SELECT EXISTS(SELECT 1 FROM {ProductInfoTable} WHERE ProductName = '{productName}');
+                        SELECT EXISTS(SELECT 1 FROM {ProductInfoTable} WHERE ProductName = '{productName}' AND Year = {year});
                     ";
 
                 bool isProductExists = dbConnection.QuerySingleOrDefault<bool>(checkIsProductExists);
@@ -87,7 +131,7 @@ namespace Invoice.Repositories
             }
         }
 
-        public bool CreateNewBuyerInfo(FullProductInfoModel newProduct)
+        public bool CreateNewProductInfo(FullProductInfoModel newProduct)
         {
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
             {
@@ -96,11 +140,12 @@ namespace Invoice.Repositories
                 string createNewProductInfoQuery =
                     $@"
                         INSERT INTO '{ProductInfoTable}'
-                            VALUES (NULL, @ProductName, @BarCode, @ProductSees, @ProductPrice, @ProductType, @ProductTypePrice)
+                            VALUES (NULL, @Year, @ProductName, @BarCode, @ProductSees, @ProductPrice, @ProductType, @ProductTypePrice)
                     ";
 
                 object queryParameters = new
                 {
+                    newProduct.Year,
                     newProduct.ProductName,
                     newProduct.BarCode,
                     newProduct.ProductSees,
@@ -126,11 +171,12 @@ namespace Invoice.Repositories
                     $@"
                         UPDATE '{ProductInfoTable}'
                           SET BarCode = @BarCode, ProductSees = @ProductSees, ProductPrice = @ProductPrice, ProductType = @ProductType, ProductTypePrice = @ProductTypePrice
-                        WHERE ProductName = @ProductName
+                        WHERE ProductName = @ProductName AND Year = @Year
                     ";
 
                 object queryParameters = new
                 {
+                    updateProduct.Year,
                     updateProduct.ProductName,
                     updateProduct.BarCode,
                     updateProduct.ProductSees,
@@ -139,8 +185,6 @@ namespace Invoice.Repositories
                     updateProduct.ProductType,
                     updateProduct.ProductTypePrice
                 };
-
-
 
                 int affectedRows = dbConnection.Execute(updateProductInfoQuery, queryParameters);
 

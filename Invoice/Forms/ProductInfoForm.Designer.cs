@@ -48,6 +48,9 @@ namespace Invoice.Forms
             this.ExistsProductListComboBox = new System.Windows.Forms.ComboBox();
             this.ProductListInfoLabel = new System.Windows.Forms.Label();
             this.ChooseProductButton = new System.Windows.Forms.Button();
+            this.YearInfoLabel = new System.Windows.Forms.Label();
+            this.DepositYearTextBox = new System.Windows.Forms.TextBox();
+            this.ErrorMassageLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ProductNameRichTextBox
@@ -187,7 +190,7 @@ namespace Invoice.Forms
             // 
             // NewProductButton
             // 
-            this.NewProductButton.Location = new System.Drawing.Point(41, 397);
+            this.NewProductButton.Location = new System.Drawing.Point(41, 498);
             this.NewProductButton.Name = "NewProductButton";
             this.NewProductButton.Size = new System.Drawing.Size(144, 28);
             this.NewProductButton.TabIndex = 52;
@@ -198,7 +201,7 @@ namespace Invoice.Forms
             // 
             // UpdateProductButton
             // 
-            this.UpdateProductButton.Location = new System.Drawing.Point(191, 397);
+            this.UpdateProductButton.Location = new System.Drawing.Point(191, 498);
             this.UpdateProductButton.Name = "UpdateProductButton";
             this.UpdateProductButton.Size = new System.Drawing.Size(118, 28);
             this.UpdateProductButton.TabIndex = 53;
@@ -237,11 +240,43 @@ namespace Invoice.Forms
             this.ChooseProductButton.UseVisualStyleBackColor = true;
             this.ChooseProductButton.Click += new System.EventHandler(this.ChooseProductButton_Click);
             // 
+            // YearInfoLabel
+            // 
+            this.YearInfoLabel.AutoSize = true;
+            this.YearInfoLabel.Location = new System.Drawing.Point(116, 328);
+            this.YearInfoLabel.Name = "YearInfoLabel";
+            this.YearInfoLabel.Size = new System.Drawing.Size(33, 13);
+            this.YearInfoLabel.TabIndex = 58;
+            this.YearInfoLabel.Text = "Metai";
+            // 
+            // DepositYearTextBox
+            // 
+            this.DepositYearTextBox.Location = new System.Drawing.Point(156, 325);
+            this.DepositYearTextBox.Name = "DepositYearTextBox";
+            this.DepositYearTextBox.Size = new System.Drawing.Size(49, 20);
+            this.DepositYearTextBox.TabIndex = 59;
+            this.DepositYearTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
+            this.DepositYearTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.DepositYearTextBox_Validating);
+            // 
+            // ErrorMassageLabel
+            // 
+            this.ErrorMassageLabel.AutoSize = true;
+            this.ErrorMassageLabel.ForeColor = System.Drawing.Color.Red;
+            this.ErrorMassageLabel.Location = new System.Drawing.Point(38, 422);
+            this.ErrorMassageLabel.Name = "ErrorMassageLabel";
+            this.ErrorMassageLabel.Size = new System.Drawing.Size(28, 13);
+            this.ErrorMassageLabel.TabIndex = 60;
+            this.ErrorMassageLabel.Text = "error";
+            this.ErrorMassageLabel.Visible = false;
+            // 
             // ProductInfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1070, 450);
+            this.ClientSize = new System.Drawing.Size(1070, 559);
+            this.Controls.Add(this.ErrorMassageLabel);
+            this.Controls.Add(this.DepositYearTextBox);
+            this.Controls.Add(this.YearInfoLabel);
             this.Controls.Add(this.ChooseProductButton);
             this.Controls.Add(this.ProductListInfoLabel);
             this.Controls.Add(this.ExistsProductListComboBox);
@@ -292,5 +327,8 @@ namespace Invoice.Forms
         private System.Windows.Forms.ComboBox ExistsProductListComboBox;
         private System.Windows.Forms.Label ProductListInfoLabel;
         private System.Windows.Forms.Button ChooseProductButton;
+        private System.Windows.Forms.Label YearInfoLabel;
+        private System.Windows.Forms.TextBox DepositYearTextBox;
+        private System.Windows.Forms.Label ErrorMassageLabel;
     }
 }

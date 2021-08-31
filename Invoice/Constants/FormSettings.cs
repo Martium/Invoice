@@ -66,6 +66,8 @@
             public static int BarCode => 25;
             public static int ProductName => 70;
 
+            public static int InvoiceYearControl => 4;
+
         }
     }
 }

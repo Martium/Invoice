@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using Invoice.Constants;
+using Invoice.Models.Deposit;
 using Invoice.Models.ProductInfo;
 using Invoice.Repositories;
 using Invoice.Service;
@@ -13,14 +14,16 @@ namespace Invoice.Forms
     public partial class ProductInfoForm : Form
     {
         private readonly ProductInfoRepository _productInfoRepository;
+        private readonly DepositRepository _depositRepository;
         private readonly MessageDialogService _messageDialogService;
         private readonly NumberService _numberService;
 
-        private string[] _lastProductInfo = new string[6];
+        private string[] _lastProductInfo = new string[7];
 
         public ProductInfoForm()
         {
             _productInfoRepository = new ProductInfoRepository();
+            _depositRepository = new DepositRepository();
             _messageDialogService = new MessageDialogService();
             _numberService = new NumberService();
 
@@ -29,6 +32,7 @@ namespace Invoice.Forms
             SetControlsInitialState();
             SetTextBoxMaxLength();
 
+            DepositYearTextBox.Text = DateTime.Now.Year.ToString();
             LoadAllProductsNamesToComboBox();
         }
 
@@ -109,13 +113,14 @@ namespace Invoice.Forms
 
         private void NewProductButton_Click(object sender, EventArgs e)
         {
+            int year = int.Parse(DepositYearTextBox.Text);
             bool isProductNameFilled = !string.IsNullOrWhiteSpace(ProductNameRichTextBox.Text);
-            bool isProductExists = _productInfoRepository.CheckIsProductNameExists(ProductNameRichTextBox.Text);
+            bool isProductExists = _productInfoRepository.CheckIsProductNameExists(ProductNameRichTextBox.Text, year);
             bool isAllTextBoxFilled = CheckIsAllInfoFilled();
 
             if (!isProductExists && isProductNameFilled && isAllTextBoxFilled)
             {
-                CreateNewBuyer();
+                CreateNewProduct();
                 LoadAllProductsNamesToComboBox();
             }
             else if (!isProductExists && isProductNameFilled)
@@ -124,7 +129,7 @@ namespace Invoice.Forms
 
                 if (dialogResult == DialogResult.OK)
                 {
-                    CreateNewBuyer();
+                    CreateNewProduct();
                     LoadAllProductsNamesToComboBox();
                 }
             }
@@ -142,8 +147,9 @@ namespace Invoice.Forms
 
         private void UpdateProductButton_Click(object sender, EventArgs e)
         {
+            int year = int.Parse(DepositYearTextBox.Text);
             bool isProductNameFilled = !string.IsNullOrWhiteSpace(ProductNameRichTextBox.Text);
-            bool isProductExists = _productInfoRepository.CheckIsProductNameExists(ProductNameRichTextBox.Text);
+            bool isProductExists = _productInfoRepository.CheckIsProductNameExists(ProductNameRichTextBox.Text, year);
             bool isAllValuesSameAsinDatabase = CheckIsProductAllValuesSameAsInDataBase();
 
             if (isProductExists && isProductNameFilled && !isAllValuesSameAsinDatabase)
@@ -160,10 +166,56 @@ namespace Invoice.Forms
             }
             else
             {
-                _messageDialogService.ShowErrorMassage("Produktas nerastas atnaujinimas negalimas");
+                _messageDialogService.ShowErrorMassage("Produktas nerastas atnaujinimas negalimas arba įvesti ne tie metai ");
             }
 
             SetCursorAtProductNameStringEnd();
+        }
+
+        private void DepositYearTextBox_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            bool isNumber = int.TryParse(DepositYearTextBox.Text, out int number);
+
+            if (string.IsNullOrWhiteSpace(DepositYearTextBox.Text))
+            {
+                SetButtonControl(false);
+                e.Cancel = true;
+                _messageDialogService.DisplayLabelAndTextBoxError(
+                    $" Raudonas langelis Negali būti tuščias! pvz.: {DateTime.Now.Year}", DepositYearTextBox,
+                    ErrorMassageLabel);
+            }
+            else if (!isNumber)
+            {
+                SetButtonControl(false);
+                e.Cancel = true;
+                _messageDialogService.DisplayLabelAndTextBoxError(
+                    $" Raudonas langelis turi būti metai pvz.: {DateTime.Now.Year}", DepositYearTextBox,
+                    ErrorMassageLabel);
+            }
+            else if (number > DateTime.Now.Year)
+            {
+                SetButtonControl(false);
+                e.Cancel = true;
+                _messageDialogService.DisplayLabelAndTextBoxError(
+                    $" Raudonam langelį metai negali būti ateityje pvz.: {DateTime.Now.Year}",
+                    DepositYearTextBox,
+                    ErrorMassageLabel);
+            }
+            else if (number < 2000)
+            {
+                SetButtonControl(false);
+                e.Cancel = true;
+                _messageDialogService.DisplayLabelAndTextBoxError(
+                    $" Raudonam langelyje negali būti mažiau nei 2000 pvz.: {DateTime.Now.Year}",
+                    DepositYearTextBox,
+                    ErrorMassageLabel);
+            }
+            else
+            {
+                SetButtonControl(true);
+                e.Cancel = false;
+                _messageDialogService.HideLabelAndTextBoxError(ErrorMassageLabel, DepositYearTextBox);
+            }
         }
 
         #region Helpers
@@ -184,6 +236,8 @@ namespace Invoice.Forms
 
             ProductTypeTextBox.MaxLength = FormSettings.TextBoxLengths.ProductType;
             ProductTypePriceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
+
+            DepositYearTextBox.MaxLength = FormSettings.TextBoxLengths.InvoiceYearControl;
         }
 
         private void SetCursorsAtRichTextBoxStringEnd()
@@ -192,6 +246,7 @@ namespace Invoice.Forms
             ProductBarCodeRichTextBox.SelectionStart = ProductBarCodeRichTextBox.Text.Length;
             ProductSeesRichTextBox.SelectionStart = ProductSeesRichTextBox.Text.Length;
             ProductPriceRichTextBox.SelectionStart = ProductPriceRichTextBox.Text.Length;
+            DepositYearTextBox.SelectionStart = DepositYearTextBox.Text.Length;
         }
 
         private void SetCursorsAtTextBoxStringEnd()
@@ -221,7 +276,8 @@ namespace Invoice.Forms
 
         private void LoadProductInfoToTextBoxes()
         {
-            FullProductInfoModel getFullProductInfo = _productInfoRepository.GetFullProductInfo(ExistsProductListComboBox.Text);
+            int year = int.Parse(DepositYearTextBox.Text);
+            FullProductInfoModel getFullProductInfo = _productInfoRepository.GetFullProductInfo(ExistsProductListComboBox.Text, year);
 
             if (getFullProductInfo != null)
             {
@@ -237,6 +293,8 @@ namespace Invoice.Forms
                     ? getFullProductInfo.ProductTypePrice.Value.ToString(CultureInfo.InvariantCulture)
                     : string.Empty;
 
+                DepositYearTextBox.Text = getFullProductInfo.Year.ToString();
+
                 _lastProductInfo[0] = ProductNameRichTextBox.Text;
                 _lastProductInfo[1] = ProductBarCodeRichTextBox.Text;
                 _lastProductInfo[2] = ProductSeesRichTextBox.Text;
@@ -244,10 +302,12 @@ namespace Invoice.Forms
 
                 _lastProductInfo[4] = ProductTypeTextBox.Text;
                 _lastProductInfo[5] = ProductTypePriceTextBox.Text;
+
+                _lastProductInfo[6] = DepositYearTextBox.Text;
             }
             else
             {
-                _messageDialogService.ShowErrorMassage("Nėra informacijos kurią būtų galima sukelti supildykite bent vieną produkto informaciją ");
+                _messageDialogService.ShowErrorMassage("Nėra informacijos kurią būtų galima sukelti supildykite bent vieną produkto informaciją arba nera tokio įrašo dėl blogai pasirinktų metų");
             }
         }
 
@@ -262,7 +322,7 @@ namespace Invoice.Forms
             return isAllInfoFilled;
         }
 
-        private void CreateNewBuyer()
+        private void CreateNewProduct()
         {
             ChangeCommaToDotForNumbersTextBox();
 
@@ -271,19 +331,21 @@ namespace Invoice.Forms
 
             FullProductInfoModel newProduct = new FullProductInfoModel
             {
+                Year = int.Parse(DepositYearTextBox.Text),
                 ProductName = ProductNameRichTextBox.Text,
                 BarCode = ProductBarCodeRichTextBox.Text,
                 ProductSees = ProductSeesRichTextBox.Text,
                 ProductPrice = productPrice,
-
+                
                 ProductType = ProductTypeTextBox.Text,
                 ProductTypePrice = productTypePrice
             };
 
-            bool isProductCreated = _productInfoRepository.CreateNewBuyerInfo(newProduct);
+            bool isProductCreated = _productInfoRepository.CreateNewProductInfo(newProduct);
 
             if (isProductCreated)
             {
+                CreateNewDepositInfo();
                 _messageDialogService.ShowInfoMessage("Naujas produktas pridėtas į duomenų bazę");
             }
             else
@@ -301,6 +363,7 @@ namespace Invoice.Forms
 
             FullProductInfoModel updateProduct = new FullProductInfoModel
             {
+                Year = int.Parse(DepositYearTextBox.Text),
                 ProductName = ProductNameRichTextBox.Text,
                 BarCode = ProductBarCodeRichTextBox.Text,
                 ProductSees = ProductSeesRichTextBox.Text,
@@ -342,7 +405,29 @@ namespace Invoice.Forms
             ProductTypePriceTextBox.Text = _numberService.ChangeCommaToDot(ProductTypePriceTextBox);
         }
 
-        #endregion
+        private void CreateNewDepositInfo()
+        {
+            int lastId = _productInfoRepository.GetBiggestProductId();
 
+            var newDepositInfo = new FullDepositProductModel
+            {
+                Id = lastId,
+                InvoiceYear = int.Parse(DepositYearTextBox.Text),
+                ProductName = ProductNameRichTextBox.Text,
+                BarCode = ProductBarCodeRichTextBox.Text,
+                ProductQuantity = 0
+            };
+
+            _depositRepository.CreateNewDepositProduct(newDepositInfo);
+        }
+
+        private void SetButtonControl(bool isButtonActive)
+        {
+            NewProductButton.Enabled = isButtonActive;
+            UpdateProductButton.Enabled = isButtonActive;
+            ChooseProductButton.Enabled = isButtonActive;
+        }
+
+        #endregion
     }
 }

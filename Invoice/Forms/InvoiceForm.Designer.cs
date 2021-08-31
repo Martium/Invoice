@@ -200,7 +200,7 @@ namespace Invoice.Forms
             this.TenProductNameComboBox = new System.Windows.Forms.ComboBox();
             this.EleventhProductNameComboBox = new System.Windows.Forms.ComboBox();
             this.TwelfthProductNameComboBox = new System.Windows.Forms.ComboBox();
-            this.FirsProductIdTextBox = new System.Windows.Forms.TextBox();
+            this.FirstProductIdTextBox = new System.Windows.Forms.TextBox();
             this.SecondProductIdTextBox = new System.Windows.Forms.TextBox();
             this.ThirdProductIdTextBox = new System.Windows.Forms.TextBox();
             this.FourthProductIdTextBox = new System.Windows.Forms.TextBox();
@@ -240,11 +240,17 @@ namespace Invoice.Forms
             this.SaveMoneyReceiptSuggestionNumberButton = new System.Windows.Forms.Button();
             this.MoneyRecepitNumberInfoLabel = new System.Windows.Forms.Label();
             this.MoneyReceiptOfferNumberTextBox = new System.Windows.Forms.TextBox();
+            this.InvoiceControlPanel = new System.Windows.Forms.Panel();
+            this.InvoiceControlYearLabel = new System.Windows.Forms.Label();
+            this.InvoiceYearControlTextBox = new System.Windows.Forms.TextBox();
+            this.InfoControlLabel = new System.Windows.Forms.Label();
+            this.ChangeProductDepositIdByYearButton = new System.Windows.Forms.Button();
             this.PrintInvoicePanel.SuspendLayout();
             this.ProductsTypesPanel.SuspendLayout();
             this.ProductInfoPanel.SuspendLayout();
             this.BuyerInfoPanel.SuspendLayout();
             this.MoneyPrecepitControlPanel.SuspendLayout();
+            this.InvoiceControlPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // PrintInvoicePanel
@@ -1980,14 +1986,14 @@ namespace Invoice.Forms
             this.TwelfthProductNameComboBox.TabIndex = 29;
             this.TwelfthProductNameComboBox.TabStop = false;
             // 
-            // FirsProductIdTextBox
+            // FirstProductIdTextBox
             // 
-            this.FirsProductIdTextBox.Location = new System.Drawing.Point(405, 64);
-            this.FirsProductIdTextBox.Name = "FirsProductIdTextBox";
-            this.FirsProductIdTextBox.ReadOnly = true;
-            this.FirsProductIdTextBox.Size = new System.Drawing.Size(54, 20);
-            this.FirsProductIdTextBox.TabIndex = 30;
-            this.FirsProductIdTextBox.TabStop = false;
+            this.FirstProductIdTextBox.Location = new System.Drawing.Point(405, 64);
+            this.FirstProductIdTextBox.Name = "FirstProductIdTextBox";
+            this.FirstProductIdTextBox.ReadOnly = true;
+            this.FirstProductIdTextBox.Size = new System.Drawing.Size(54, 20);
+            this.FirstProductIdTextBox.TabIndex = 30;
+            this.FirstProductIdTextBox.TabStop = false;
             // 
             // SecondProductIdTextBox
             // 
@@ -2232,7 +2238,7 @@ namespace Invoice.Forms
             this.ProductInfoPanel.Controls.Add(this.TwelfthProductIdTextBox);
             this.ProductInfoPanel.Controls.Add(this.AddToEleventhProductInfoButton);
             this.ProductInfoPanel.Controls.Add(this.TwelfthProductNameComboBox);
-            this.ProductInfoPanel.Controls.Add(this.FirsProductIdTextBox);
+            this.ProductInfoPanel.Controls.Add(this.FirstProductIdTextBox);
             this.ProductInfoPanel.Controls.Add(this.TwelfthNumberInfoLabel);
             this.ProductInfoPanel.Controls.Add(this.AddToTenProductInfoButton);
             this.ProductInfoPanel.Controls.Add(this.EleventhProductIdTextBox);
@@ -2426,14 +2432,66 @@ namespace Invoice.Forms
             this.MoneyReceiptOfferNumberTextBox.Name = "MoneyReceiptOfferNumberTextBox";
             this.MoneyReceiptOfferNumberTextBox.Size = new System.Drawing.Size(54, 20);
             this.MoneyReceiptOfferNumberTextBox.TabIndex = 58;
-            this.MoneyReceiptOfferNumberTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.MoneyReceiptOfferNumberTextBox_Validating);
             this.MoneyReceiptOfferNumberTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ProductTypeTextBox_KeyUp);
+            this.MoneyReceiptOfferNumberTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.MoneyReceiptOfferNumberTextBox_Validating);
+            // 
+            // InvoiceControlPanel
+            // 
+            this.InvoiceControlPanel.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.InvoiceControlPanel.Controls.Add(this.ChangeProductDepositIdByYearButton);
+            this.InvoiceControlPanel.Controls.Add(this.InvoiceControlYearLabel);
+            this.InvoiceControlPanel.Controls.Add(this.InvoiceYearControlTextBox);
+            this.InvoiceControlPanel.Controls.Add(this.InfoControlLabel);
+            this.InvoiceControlPanel.Location = new System.Drawing.Point(12, 714);
+            this.InvoiceControlPanel.Name = "InvoiceControlPanel";
+            this.InvoiceControlPanel.Size = new System.Drawing.Size(303, 143);
+            this.InvoiceControlPanel.TabIndex = 57;
+            // 
+            // InvoiceControlYearLabel
+            // 
+            this.InvoiceControlYearLabel.AutoSize = true;
+            this.InvoiceControlYearLabel.Location = new System.Drawing.Point(31, 63);
+            this.InvoiceControlYearLabel.Name = "InvoiceControlYearLabel";
+            this.InvoiceControlYearLabel.Size = new System.Drawing.Size(79, 13);
+            this.InvoiceControlYearLabel.TabIndex = 42;
+            this.InvoiceControlYearLabel.Text = "Sukūrimo metai";
+            // 
+            // InvoiceYearControlTextBox
+            // 
+            this.InvoiceYearControlTextBox.Location = new System.Drawing.Point(25, 80);
+            this.InvoiceYearControlTextBox.Name = "InvoiceYearControlTextBox";
+            this.InvoiceYearControlTextBox.Size = new System.Drawing.Size(122, 20);
+            this.InvoiceYearControlTextBox.TabIndex = 41;
+            this.InvoiceYearControlTextBox.TabStop = false;
+            this.InvoiceYearControlTextBox.TextChanged += new System.EventHandler(this.InvoiceYearControlTextBox_TextChanged);
+            this.InvoiceYearControlTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.InvoiceYearControlTextBox_Validating);
+            // 
+            // InfoControlLabel
+            // 
+            this.InfoControlLabel.AutoSize = true;
+            this.InfoControlLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InfoControlLabel.Location = new System.Drawing.Point(67, 23);
+            this.InfoControlLabel.Name = "InfoControlLabel";
+            this.InfoControlLabel.Size = new System.Drawing.Size(148, 16);
+            this.InfoControlLabel.TabIndex = 40;
+            this.InfoControlLabel.Text = "Sąskaitos valdymas";
+            // 
+            // ChangeProductDepositIdByYearButton
+            // 
+            this.ChangeProductDepositIdByYearButton.Location = new System.Drawing.Point(153, 80);
+            this.ChangeProductDepositIdByYearButton.Name = "ChangeProductDepositIdByYearButton";
+            this.ChangeProductDepositIdByYearButton.Size = new System.Drawing.Size(104, 20);
+            this.ChangeProductDepositIdByYearButton.TabIndex = 43;
+            this.ChangeProductDepositIdByYearButton.Text = "Taikyti metus";
+            this.ChangeProductDepositIdByYearButton.UseVisualStyleBackColor = true;
+            this.ChangeProductDepositIdByYearButton.Click += new System.EventHandler(this.ChangeProductDepositIdByYearButton_Click);
             // 
             // InvoiceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1871, 1017);
+            this.Controls.Add(this.InvoiceControlPanel);
             this.Controls.Add(this.MoneyPrecepitControlPanel);
             this.Controls.Add(this.BuyerInfoPanel);
             this.Controls.Add(this.ProductInfoPanel);
@@ -2457,6 +2515,8 @@ namespace Invoice.Forms
             this.BuyerInfoPanel.PerformLayout();
             this.MoneyPrecepitControlPanel.ResumeLayout(false);
             this.MoneyPrecepitControlPanel.PerformLayout();
+            this.InvoiceControlPanel.ResumeLayout(false);
+            this.InvoiceControlPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2631,7 +2691,7 @@ namespace Invoice.Forms
         private System.Windows.Forms.ComboBox TenProductNameComboBox;
         private System.Windows.Forms.ComboBox EleventhProductNameComboBox;
         private System.Windows.Forms.ComboBox TwelfthProductNameComboBox;
-        private System.Windows.Forms.TextBox FirsProductIdTextBox;
+        private System.Windows.Forms.TextBox FirstProductIdTextBox;
         private System.Windows.Forms.TextBox SecondProductIdTextBox;
         private System.Windows.Forms.TextBox ThirdProductIdTextBox;
         private System.Windows.Forms.TextBox FourthProductIdTextBox;
@@ -2671,5 +2731,10 @@ namespace Invoice.Forms
         private System.Windows.Forms.TextBox MoneyReceiptOfferNumberTextBox;
         private System.Windows.Forms.Label MoneyRecepitInfoLabel;
         private System.Windows.Forms.Button SaveMoneyReceiptSuggestionNumberButton;
+        private System.Windows.Forms.Panel InvoiceControlPanel;
+        private System.Windows.Forms.TextBox InvoiceYearControlTextBox;
+        private System.Windows.Forms.Label InfoControlLabel;
+        private System.Windows.Forms.Label InvoiceControlYearLabel;
+        private System.Windows.Forms.Button ChangeProductDepositIdByYearButton;
     }
 }

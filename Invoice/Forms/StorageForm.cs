@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using Invoice.Enums;
+using Invoice.Models.Deposit;
 using Invoice.Models.ProductType;
 using Invoice.Repositories;
 using Invoice.Service;
@@ -13,7 +14,9 @@ namespace Invoice.Forms
     public partial class StorageForm : Form
     {
         private List<SpecificNameProductTypeModel> _specificProductTypeAllInfo;
+        private List<FullDepositProductWithoutIdModel> _depositInfo;
         private readonly ProductTypeRepository _productTypeRepository;
+        private readonly DepositRepository _depositRepository;
         private readonly NumberService _numberService;
 
         private const int ProductTypeInvoiceIdIndex = 0;
@@ -22,24 +25,31 @@ namespace Invoice.Forms
         private const int ProductTypeQuantityIndex = 3;
         private const int ProductTypePriceIndex = 4;
 
+        private const int DepositInvoiceYearIndex = 0;
+        private const int DepositProductNameIndex = 1;
+        private const int DepositBarCodeIndex = 2;
+        private const int DepositProductQuantityIndex = 3;
+
         private StorageInfo _storageInfo;
 
         public StorageForm()
         {
             _specificProductTypeAllInfo = new List<SpecificNameProductTypeModel>();
+            _depositInfo = new List<FullDepositProductWithoutIdModel>();
             _productTypeRepository = new ProductTypeRepository();
+            _depositRepository = new DepositRepository();
             _numberService = new NumberService();
 
             InitializeComponent();
             SetControlInitializeState();
-            
         }
 
         private void StorageForm_Load(object sender, System.EventArgs e)
         {
             LoadSpecificInfoToStorageDataGridView(StorageInfo.ProductType);
-            TryFillProductTypeYearComboBox();
+            TryFillProductTypeAndDepositYearComboBox();
             TryFillProductTypeSpecificNamesToComboBox();
+            TryFillDepositProductNameComboBox();
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -75,11 +85,49 @@ namespace Invoice.Forms
         private void GetAllInfoByYearButton_Click(object sender, System.EventArgs e)
         {
             _storageInfo = StorageInfo.ProductType;
-
             GetAllInfoBySpecialProductTypeNameAndYear();
+
             LoadSpecificInfoToStorageDataGridView(_storageInfo);
             CalculateFullProductTypeQuantityAndPrice(_storageInfo);
         }
+
+        private void GetAllProductTypeInfoButton_Click(object sender, System.EventArgs e)
+        {
+            _storageInfo = StorageInfo.ProductType;
+            GetAllProductTypeInfo();
+
+            LoadSpecificInfoToStorageDataGridView(_storageInfo);
+            CalculateFullProductTypeQuantityAndPrice(_storageInfo);
+        }
+
+        private void GetAllInfoByDepositProductsByYearButton_Click(object sender, System.EventArgs e)
+        {
+            _storageInfo = StorageInfo.Deposit;
+            GetAllDepositInfoByYear();
+
+            LoadSpecificInfoToStorageDataGridView(_storageInfo);
+            CalculateFullProductTypeQuantityAndPrice(_storageInfo);
+
+        }
+
+        private void GetAllDepositInfoByYearAndNameButton_Click(object sender, System.EventArgs e)
+        {
+            _storageInfo = StorageInfo.Deposit;
+            GetAllDepositInfoByYearAndName();
+
+            LoadSpecificInfoToStorageDataGridView(_storageInfo);
+            CalculateFullProductTypeQuantityAndPrice(_storageInfo);
+        }
+
+        private void AllDepositInfoButton_Click(object sender, System.EventArgs e)
+        {
+            _storageInfo = StorageInfo.Deposit;
+            GetAllDepositInfo();
+
+            LoadSpecificInfoToStorageDataGridView(_storageInfo);
+            CalculateFullProductTypeQuantityAndPrice(_storageInfo);
+        }
+
 
         #region MyMethods
 
@@ -122,6 +170,10 @@ namespace Invoice.Forms
                     break;
 
                 case StorageInfo.Deposit:
+                    StorageDataGridView.Columns[DepositInvoiceYearIndex].Width = 80;
+                    StorageDataGridView.Columns[DepositProductNameIndex].Width = 240;
+                    StorageDataGridView.Columns[DepositBarCodeIndex].Width = 160;
+                    StorageDataGridView.Columns[DepositProductQuantityIndex].Width = 80;
                     break;
             }
         }
@@ -139,6 +191,10 @@ namespace Invoice.Forms
                     break;
 
                 case StorageInfo.Deposit:
+                    StorageDataGridView.Columns[DepositInvoiceYearIndex].HeaderText = @"Metai";
+                    StorageDataGridView.Columns[DepositProductNameIndex].HeaderText = @"Tipas";
+                    StorageDataGridView.Columns[DepositBarCodeIndex].HeaderText = @"Bar kodas";
+                    StorageDataGridView.Columns[DepositProductQuantityIndex].HeaderText = @"Kiekis";
                     break;
             }
         }
@@ -171,16 +227,16 @@ namespace Invoice.Forms
 
         private void LoadSpecificInfoToStorageDataGridView(StorageInfo storageInfo)
         {
+          
             switch (storageInfo)
             {
                 case StorageInfo.ProductType:
 
-                    var bidingSourceModel = new SpecificNameProductTypeModel();
-                    BindingSource bindingSource = new BindingSource { bidingSourceModel };
+                    var bidingSourceProductModel = new SpecificNameProductTypeModel();
+                    BindingSource productBidingSource = new BindingSource { bidingSourceProductModel };
 
-                    bindingSource.DataSource = _specificProductTypeAllInfo;
-
-                    StorageDataGridView.DataSource = bindingSource;
+                    productBidingSource.DataSource = _specificProductTypeAllInfo;
+                    StorageDataGridView.DataSource = productBidingSource;
 
                     ChangeDataGridViewHeadersSize(storageInfo);
                     ChangeDataGridViewHeaderText(storageInfo);
@@ -188,24 +244,38 @@ namespace Invoice.Forms
                     break;
 
                 case StorageInfo.Deposit:
+
+                    var bidingSourceDepositModel = new FullDepositProductWithoutIdModel();
+                    BindingSource depositBindingSource = new BindingSource() {bidingSourceDepositModel};
+
+                    depositBindingSource.DataSource = _depositInfo;
+                    StorageDataGridView.DataSource = depositBindingSource;
+
+                    ChangeDataGridViewHeadersSize(storageInfo);
+                    ChangeDataGridViewHeaderText(storageInfo);
+                    SetInformationOfDataGridViewTypeLabel(storageInfo);
+                   
                     break;
             }
         }
 
-        private void TryFillProductTypeYearComboBox()
+        private void TryFillProductTypeAndDepositYearComboBox()
         {
             ProductTypeYearComboBox.Items.Clear();
+            DepositYearComboBox.Items.Clear();
 
             IEnumerable<int> allYears = _productTypeRepository.GetAllExistingProductTypeYears();
 
             foreach (var year in allYears)
             {
                 ProductTypeYearComboBox.Items.Add(year);
+                DepositYearComboBox.Items.Add(year);
             }
 
             if (ProductTypeYearComboBox.Items.Count != 0)
             {
                 ProductTypeYearComboBox.Text = ProductTypeYearComboBox.Items[0].ToString();
+                DepositYearComboBox.Text = ProductTypeYearComboBox.Items[0].ToString();
             }
         }
 
@@ -261,6 +331,23 @@ namespace Invoice.Forms
                 ProductTypeSpecificNameComboBox.Text = ProductTypeSpecificNameComboBox.Items[0].ToString();
             }
 
+        }
+
+        private void TryFillDepositProductNameComboBox()
+        {
+            DepositProductNameListComboBox.Items.Clear();
+
+            IEnumerable<string> getAllProductNames = _depositRepository.GetAllProductsNames();
+
+            foreach (var product in getAllProductNames)
+            {
+                DepositProductNameListComboBox.Items.Add(product);
+            }
+
+            if (DepositProductNameListComboBox.Items.Count != 0)
+            {
+                DepositProductNameListComboBox.Text = DepositProductNameListComboBox.Items[0].ToString();
+            }
         }
 
         private void GetAllInfoBySpecialProductTypeName()
@@ -458,11 +545,15 @@ namespace Invoice.Forms
                     break;
 
                 case StorageInfo.Deposit:
+
+                    double calculateFullDepositQuantity =
+                        _numberService.SumAllDataGridViewRowsSpecificColumns(StorageDataGridView, rowsCount,
+                            DepositProductQuantityIndex);
+                    FullProductTypeQuantityTextBox.Text =
+                        calculateFullDepositQuantity.ToString(CultureInfo.InvariantCulture);
+                    FullProductTypePriceTextBox.Text = @"N/A";
                     break;
             }
-
-            
-
         }
 
         private void GetAllInfoBySpecialProductTypeNameAndYear()
@@ -654,9 +745,195 @@ namespace Invoice.Forms
                                                  });
         }
 
+        private void GetAllProductTypeInfo()
+        {
+            _specificProductTypeAllInfo.Clear();
 
+            IEnumerable<FirstSpecificProductTypeModel> firstSpecificProductInfo =
+                _productTypeRepository.GetAllInfo(ProductTypeOperations.FirstProductType);
+            IEnumerable<SecondSpecificProductTypeModel> secondSpecificProductInfo =
+                _productTypeRepository.GetAllInfo(ProductTypeOperations.SecondProductType);
+            IEnumerable<ThirdSpecificProductTypeModel> thirdSpecificProductInfo =
+                _productTypeRepository.GetAllInfo(ProductTypeOperations.ThirdProductType);
+            IEnumerable<FourthSpecificProductTypeModel> fourthSpecificProductInfo =
+                _productTypeRepository.GetAllInfo(ProductTypeOperations.FourthProductType);
+            IEnumerable<FifthSpecificProductTypeModel> fifthSpecificProductInfo =
+                _productTypeRepository.GetAllInfo(ProductTypeOperations.FifthProductType);
+            IEnumerable<SixthSpecificProductTypeModel> sixthSpecificProductInfo =
+                _productTypeRepository.GetAllInfo(ProductTypeOperations.SixthProductType);
+            IEnumerable<SeventhSpecificProductTypeModel> seventhSpecificProductInfo =
+                _productTypeRepository.GetAllInfo(ProductTypeOperations.SeventhProductType);
+            IEnumerable<EighthSpecificProductTypeModel> eighthSpecificProductInfo =
+                _productTypeRepository.GetAllInfo(ProductTypeOperations.EighthProductType);
+            IEnumerable<NinthSpecificProductTypeModel> ninthSpecificProductInfo =
+                _productTypeRepository.GetAllInfo(ProductTypeOperations.NinthProductType);
+            IEnumerable<TenSpecificProductTypeModel> tenSpecificProductInfo =
+                _productTypeRepository.GetAllInfo(ProductTypeOperations.TenProductType);
+            IEnumerable<EleventhSpecificProductTypeModel> eleventhSpecificProductInfo =
+                _productTypeRepository.GetAllInfo(ProductTypeOperations.EleventhProductType);
+            IEnumerable<TwelfthSpecificProductTypeModel> twelfthSpecificProductInfo =
+                _productTypeRepository.GetAllInfo(ProductTypeOperations.TwelfthProductType);
+
+            _specificProductTypeAllInfo = (from firstInfo in firstSpecificProductInfo
+                where firstInfo.FirstProductTypeQuantity.HasValue && firstInfo.FirstProductTypePrice.HasValue
+                select new SpecificNameProductTypeModel()
+                {
+                    IdByInvoiceNumber = firstInfo.IdByInvoiceNumber,
+                    IdByInvoiceNumberYearCreation = firstInfo.IdByInvoiceNumberYearCreation,
+                    ProductTypeName = firstInfo.FirstProductType,
+                    Quantity = firstInfo.FirstProductTypeQuantity.Value,
+                    Price = firstInfo.FirstProductTypePrice.Value
+                }).ToList();
+
+            _specificProductTypeAllInfo.AddRange(from secondInfo in secondSpecificProductInfo
+                where secondInfo.SecondProductTypeQuantity.HasValue && secondInfo.SecondProductTypePrice.HasValue
+                select new SpecificNameProductTypeModel()
+                {
+                    IdByInvoiceNumber = secondInfo.IdByInvoiceNumber,
+                    IdByInvoiceNumberYearCreation = secondInfo.IdByInvoiceNumberYearCreation,
+                    ProductTypeName = secondInfo.SecondProductType,
+                    Quantity = secondInfo.SecondProductTypeQuantity.Value,
+                    Price = secondInfo.SecondProductTypePrice.Value
+                });
+
+            _specificProductTypeAllInfo.AddRange(from thirdInfo in thirdSpecificProductInfo
+                                                 where thirdInfo.ThirdProductTypeQuantity.HasValue && thirdInfo.ThirdProductTypePrice.HasValue
+                                                 select new SpecificNameProductTypeModel()
+                                                 {
+                                                     IdByInvoiceNumber = thirdInfo.IdByInvoiceNumber,
+                                                     IdByInvoiceNumberYearCreation = thirdInfo.IdByInvoiceNumberYearCreation,
+                                                     ProductTypeName = thirdInfo.ThirdProductType,
+                                                     Quantity = thirdInfo.ThirdProductTypeQuantity.Value,
+                                                     Price = thirdInfo.ThirdProductTypePrice.Value
+                                                 });
+
+            _specificProductTypeAllInfo.AddRange(from fourthInfo in fourthSpecificProductInfo
+                                                 where fourthInfo.FourthProductTypeQuantity.HasValue && fourthInfo.FourthProductTypePrice.HasValue
+                                                 select new SpecificNameProductTypeModel()
+                                                 {
+                                                     IdByInvoiceNumber = fourthInfo.IdByInvoiceNumber,
+                                                     IdByInvoiceNumberYearCreation = fourthInfo.IdByInvoiceNumberYearCreation,
+                                                     ProductTypeName = fourthInfo.FourthProductType,
+                                                     Quantity = fourthInfo.FourthProductTypeQuantity.Value,
+                                                     Price = fourthInfo.FourthProductTypePrice.Value
+                                                 });
+
+            _specificProductTypeAllInfo.AddRange(from fifthInfo in fifthSpecificProductInfo
+                                                 where fifthInfo.FifthProductTypeQuantity.HasValue && fifthInfo.FifthProductTypePrice.HasValue
+                                                 select new SpecificNameProductTypeModel()
+                                                 {
+                                                     IdByInvoiceNumber = fifthInfo.IdByInvoiceNumber,
+                                                     IdByInvoiceNumberYearCreation = fifthInfo.IdByInvoiceNumberYearCreation,
+                                                     ProductTypeName = fifthInfo.FifthProductType,
+                                                     Quantity = fifthInfo.FifthProductTypeQuantity.Value,
+                                                     Price = fifthInfo.FifthProductTypePrice.Value
+                                                 });
+
+            _specificProductTypeAllInfo.AddRange(from sixthInfo in sixthSpecificProductInfo
+                                                 where sixthInfo.SixthProductTypeQuantity.HasValue && sixthInfo.SixthProductTypePrice.HasValue
+                                                 select new SpecificNameProductTypeModel()
+                                                 {
+                                                     IdByInvoiceNumber = sixthInfo.IdByInvoiceNumber,
+                                                     IdByInvoiceNumberYearCreation = sixthInfo.IdByInvoiceNumberYearCreation,
+                                                     ProductTypeName = sixthInfo.SixthProductType,
+                                                     Quantity = sixthInfo.SixthProductTypeQuantity.Value,
+                                                     Price = sixthInfo.SixthProductTypePrice.Value
+                                                 });
+
+            _specificProductTypeAllInfo.AddRange(from seventhInfo in seventhSpecificProductInfo
+                                                 where seventhInfo.SeventhProductTypeQuantity.HasValue && seventhInfo.SeventhProductTypePrice.HasValue
+                                                 select new SpecificNameProductTypeModel()
+                                                 {
+                                                     IdByInvoiceNumber = seventhInfo.IdByInvoiceNumber,
+                                                     IdByInvoiceNumberYearCreation = seventhInfo.IdByInvoiceNumberYearCreation,
+                                                     ProductTypeName = seventhInfo.SeventhProductType,
+                                                     Quantity = seventhInfo.SeventhProductTypeQuantity.Value,
+                                                     Price = seventhInfo.SeventhProductTypePrice.Value
+                                                 });
+
+            _specificProductTypeAllInfo.AddRange(from eighthInfo in eighthSpecificProductInfo
+                                                 where eighthInfo.EighthProductTypeQuantity.HasValue && eighthInfo.EighthProductTypePrice.HasValue
+                                                 select new SpecificNameProductTypeModel()
+                                                 {
+                                                     IdByInvoiceNumber = eighthInfo.IdByInvoiceNumber,
+                                                     IdByInvoiceNumberYearCreation = eighthInfo.IdByInvoiceNumberYearCreation,
+                                                     ProductTypeName = eighthInfo.EighthProductType,
+                                                     Quantity = eighthInfo.EighthProductTypeQuantity.Value,
+                                                     Price = eighthInfo.EighthProductTypePrice.Value
+                                                 });
+
+            _specificProductTypeAllInfo.AddRange(from ninthInfo in ninthSpecificProductInfo
+                                                 where ninthInfo.NinthProductTypeQuantity.HasValue && ninthInfo.NinthProductTypePrice.HasValue
+                                                 select new SpecificNameProductTypeModel()
+                                                 {
+                                                     IdByInvoiceNumber = ninthInfo.IdByInvoiceNumber,
+                                                     IdByInvoiceNumberYearCreation = ninthInfo.IdByInvoiceNumberYearCreation,
+                                                     ProductTypeName = ninthInfo.NinthProductType,
+                                                     Quantity = ninthInfo.NinthProductTypeQuantity.Value,
+                                                     Price = ninthInfo.NinthProductTypePrice.Value
+                                                 });
+
+            _specificProductTypeAllInfo.AddRange(from tenInfo in tenSpecificProductInfo
+                                                 where tenInfo.TenProductTypeQuantity.HasValue && tenInfo.TenProductTypePrice.HasValue
+                                                 select new SpecificNameProductTypeModel()
+                                                 {
+                                                     IdByInvoiceNumber = tenInfo.IdByInvoiceNumber,
+                                                     IdByInvoiceNumberYearCreation = tenInfo.IdByInvoiceNumberYearCreation,
+                                                     ProductTypeName = tenInfo.TenProductType,
+                                                     Quantity = tenInfo.TenProductTypeQuantity.Value,
+                                                     Price = tenInfo.TenProductTypePrice.Value
+                                                 });
+
+            _specificProductTypeAllInfo.AddRange(from eleventhInfo in eleventhSpecificProductInfo
+                                                 where eleventhInfo.EleventhProductTypeQuantity.HasValue &&
+                                                       eleventhInfo.EleventhProductTypePrice.HasValue
+                                                 select new SpecificNameProductTypeModel()
+                                                 {
+                                                     IdByInvoiceNumber = eleventhInfo.IdByInvoiceNumber,
+                                                     IdByInvoiceNumberYearCreation = eleventhInfo.IdByInvoiceNumberYearCreation,
+                                                     ProductTypeName = eleventhInfo.EleventhProductType,
+                                                     Quantity = eleventhInfo.EleventhProductTypeQuantity.Value,
+                                                     Price = eleventhInfo.EleventhProductTypePrice.Value
+                                                 });
+
+            _specificProductTypeAllInfo.AddRange(from twelfthInfo in twelfthSpecificProductInfo
+                                                 where twelfthInfo.TwelfthProductTypeQuantity.HasValue && twelfthInfo.TwelfthProductTypePrice.HasValue
+                                                 select new SpecificNameProductTypeModel()
+                                                 {
+                                                     IdByInvoiceNumber = twelfthInfo.IdByInvoiceNumber,
+                                                     IdByInvoiceNumberYearCreation = twelfthInfo.IdByInvoiceNumberYearCreation,
+                                                     ProductTypeName = twelfthInfo.TwelfthProductType,
+                                                     Quantity = twelfthInfo.TwelfthProductTypeQuantity.Value,
+                                                     Price = twelfthInfo.TwelfthProductTypePrice.Value
+                                                 });
+        }
+
+        private void GetAllDepositInfoByYear()
+        {
+            _depositInfo.Clear();
+
+            int year = int.Parse(DepositYearComboBox.Text);
+
+            _depositInfo = _depositRepository.GetAllDepositProductsByYear(year).ToList();
+        }
+
+        private void GetAllDepositInfoByYearAndName()
+        {
+            _depositInfo.Clear();
+
+            int year = int.Parse(DepositYearComboBox.Text);
+            string productName = DepositProductNameListComboBox.Text;
+
+            _depositInfo = _depositRepository.GetAllDepositInfoByYearAndName(year, productName).ToList();
+        }
+
+        private void GetAllDepositInfo()
+        {
+            _depositInfo.Clear();
+
+            _depositInfo = _depositRepository.GetAllInfo().ToList();
+        }
 
         #endregion
-        
     }
 }
