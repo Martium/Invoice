@@ -69,7 +69,7 @@ namespace Invoice.Repositories
                         FROM {ProductInfoTable} PI
                         WHERE PI.Id = {id}
                     ";
-
+                //select distinct and maybe year attribute must be pass
                 string getProductName = dbConnection.QuerySingle<string>(getProductNameQuery);
                 return getProductName;
             }
@@ -88,14 +88,13 @@ namespace Invoice.Repositories
                         FROM {ProductInfoTable} PI
                         WHERE PI.ProductName = '{productName}' AND PI.Year = {year}
                     ";
-                // year add 
                 FullProductInfoModel getFullProductInfo = dbConnection.QuerySingleOrDefault<FullProductInfoModel>(getExistingProductQuery);
 
                 return getFullProductInfo;
             }
         }
 
-        public FullProductInfoWithId GetFullProductInfoWithId(string productName)
+        public FullProductInfoWithId GetFullProductInfoWithId(string productName, int year)
         {
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
             {
@@ -105,7 +104,7 @@ namespace Invoice.Repositories
                     $@"
                         SELECT *
                         FROM {ProductInfoTable} PI
-                        WHERE PI.ProductName = '{productName}'
+                        WHERE PI.ProductName = '{productName}' AND Year = {year}
                     ";
 
                 FullProductInfoWithId getFullProductInfoWithId =
@@ -172,11 +171,12 @@ namespace Invoice.Repositories
                     $@"
                         UPDATE '{ProductInfoTable}'
                           SET BarCode = @BarCode, ProductSees = @ProductSees, ProductPrice = @ProductPrice, ProductType = @ProductType, ProductTypePrice = @ProductTypePrice
-                        WHERE ProductName = @ProductName
+                        WHERE ProductName = @ProductName AND Year = @Year
                     ";
 
                 object queryParameters = new
                 {
+                    updateProduct.Year,
                     updateProduct.ProductName,
                     updateProduct.BarCode,
                     updateProduct.ProductSees,

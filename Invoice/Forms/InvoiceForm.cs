@@ -49,6 +49,7 @@ namespace Invoice.Forms
         private int[] _idProductLinesValues;
         private int[] _idProductOldLineValues;
         private int _oldInvoiceYear;
+        private int[] _lastFilledYearForProductInfo;
 
         private static readonly int[] ProductLineIndex = {0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
 
@@ -95,6 +96,7 @@ namespace Invoice.Forms
             LoadSuggestedMoneyReceiptNumber();
             LoadInvoiceControlYearTextBox();
             FillDepositInfoToEditInvoiceOperation();
+            _lastFilledYearForProductInfo = new int[12];
         }
 
         private void InvoiceDateRichTextBox_TextChanged(object sender, EventArgs e)
@@ -366,7 +368,7 @@ namespace Invoice.Forms
 
         private void AddToFirstProductInfoButton_Click(object sender, EventArgs e)
         {
-            if (FirstProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[1]]) return;
+            if (_invoiceNumberYearCreation != null && FirstProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[1]] && _invoiceNumberYearCreation.Value == _lastFilledYearForProductInfo[ProductLineIndex[1]]) return;
 
             _lastProductLineFilled[ProductLineIndex[1]] = FirstProductNameComboBox.Text;
             FillSpecificProductLineTextBox(InvoiceProductLine.First, FirstProductNameComboBox.Text);
@@ -375,7 +377,7 @@ namespace Invoice.Forms
 
         private void AddToSecondProductInfoButton_Click(object sender, EventArgs e)
         {
-            if (SecondProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[2]]) return;
+            if (_invoiceNumberYearCreation != null && SecondProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[2]] && _invoiceNumberYearCreation.Value == _lastFilledYearForProductInfo[ProductLineIndex[2]]) return;
 
             _lastProductLineFilled[ProductLineIndex[2]] = SecondProductNameComboBox.Text;
             FillSpecificProductLineTextBox(InvoiceProductLine.Second, SecondProductNameComboBox.Text);
@@ -383,7 +385,7 @@ namespace Invoice.Forms
 
         private void AddToThirdProductInfoButton_Click(object sender, EventArgs e)
         {
-            if (ThirdProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[3]]) return;
+            if (_invoiceNumberYearCreation != null && ThirdProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[3]] && _invoiceNumberYearCreation.Value == _lastFilledYearForProductInfo[ProductLineIndex[3]]) return;
 
             _lastProductLineFilled[ProductLineIndex[3]] = ThirdProductNameComboBox.Text;
             FillSpecificProductLineTextBox(InvoiceProductLine.Third, ThirdProductNameComboBox.Text);
@@ -391,7 +393,7 @@ namespace Invoice.Forms
 
         private void AddToFourthProductInfoButton_Click(object sender, EventArgs e)
         {
-            if (FourthProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[4]]) return;
+            if (_invoiceNumberYearCreation != null && FourthProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[4]] && _invoiceNumberYearCreation.Value == _lastFilledYearForProductInfo[ProductLineIndex[4]]) return;
 
             _lastProductLineFilled[ProductLineIndex[4]] = FourthProductNameComboBox.Text;
             FillSpecificProductLineTextBox(InvoiceProductLine.Fourth, FourthProductNameComboBox.Text);
@@ -400,7 +402,7 @@ namespace Invoice.Forms
         private void AddToFifthProductInfoButton_Click(object sender, EventArgs e)
         {
 
-            if (FifthProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[5]]) return;
+            if (_invoiceNumberYearCreation != null && FifthProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[5]] && _invoiceNumberYearCreation.Value == _lastFilledYearForProductInfo[ProductLineIndex[5]]) return;
 
             _lastProductLineFilled[ProductLineIndex[5]] = FifthProductNameComboBox.Text;
             FillSpecificProductLineTextBox(InvoiceProductLine.Fifth, FifthProductNameComboBox.Text);
@@ -408,7 +410,7 @@ namespace Invoice.Forms
 
         private void AddToSixthProductInfoButton_Click(object sender, EventArgs e)
         {
-            if (SixthProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[6]]) return;
+            if (_invoiceNumberYearCreation != null && SixthProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[6]] && _invoiceNumberYearCreation.Value == _lastFilledYearForProductInfo[ProductLineIndex[6]]) return;
 
             _lastProductLineFilled[ProductLineIndex[6]] = SixthProductNameComboBox.Text;
             FillSpecificProductLineTextBox(InvoiceProductLine.Sixth, SixthProductNameComboBox.Text);
@@ -416,7 +418,7 @@ namespace Invoice.Forms
 
         private void AddToSeventhProductInfoButton_Click(object sender, EventArgs e)
         {
-            if (SeventhProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[7]]) return;
+            if (_invoiceNumberYearCreation != null && SeventhProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[7]] && _invoiceNumberYearCreation.Value == _lastFilledYearForProductInfo[ProductLineIndex[7]]) return;
 
             _lastProductLineFilled[ProductLineIndex[7]] = SeventhProductNameComboBox.Text;
             FillSpecificProductLineTextBox(InvoiceProductLine.Seventh, SeventhProductNameComboBox.Text);
@@ -424,7 +426,7 @@ namespace Invoice.Forms
 
         private void AddToEighthProductInfoButton_Click(object sender, EventArgs e)
         {
-            if (EighthProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[8]]) return;
+            if (_invoiceNumberYearCreation != null && EighthProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[8]] && _invoiceNumberYearCreation.Value == _lastFilledYearForProductInfo[ProductLineIndex[8]]) return;
 
             _lastProductLineFilled[ProductLineIndex[8]] = EighthProductNameComboBox.Text;
             FillSpecificProductLineTextBox(InvoiceProductLine.Eighth, EighthProductNameComboBox.Text);
@@ -432,7 +434,7 @@ namespace Invoice.Forms
 
         private void AddToNinthProductInfoButton_Click(object sender, EventArgs e)
         {
-            if (NinthProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[9]]) return;
+            if (_invoiceNumberYearCreation != null && NinthProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[9]] && _invoiceNumberYearCreation.Value == _lastFilledYearForProductInfo[ProductLineIndex[9]]) return;
 
             _lastProductLineFilled[ProductLineIndex[9]] = NinthProductNameComboBox.Text;
             FillSpecificProductLineTextBox(InvoiceProductLine.Ninth, NinthProductNameComboBox.Text);
@@ -440,7 +442,7 @@ namespace Invoice.Forms
 
         private void AddToTenProductInfoButton_Click(object sender, EventArgs e)
         {
-            if (TenProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[10]]) return;
+            if (_invoiceNumberYearCreation != null && TenProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[10]] && _invoiceNumberYearCreation.Value == _lastFilledYearForProductInfo[ProductLineIndex[10]]) return;
 
             _lastProductLineFilled[ProductLineIndex[10]] = TenProductNameComboBox.Text;
             FillSpecificProductLineTextBox(InvoiceProductLine.Ten, TenProductNameComboBox.Text);
@@ -448,7 +450,7 @@ namespace Invoice.Forms
 
         private void AddToEleventhProductInfoButton_Click(object sender, EventArgs e)
         {
-            if (EleventhProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[11]]) return;
+            if (_invoiceNumberYearCreation != null && EleventhProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[11]] && _invoiceNumberYearCreation.Value == _lastFilledYearForProductInfo[ProductLineIndex[11]]) return;
 
             _lastProductLineFilled[ProductLineIndex[11]] = EleventhProductNameComboBox.Text;
             FillSpecificProductLineTextBox(InvoiceProductLine.Eleventh, EleventhProductNameComboBox.Text);
@@ -456,7 +458,7 @@ namespace Invoice.Forms
 
         private void AddToTwelfthProductInfoButton_Click(object sender, EventArgs e)
         {
-            if (TwelfthProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[12]]) return;
+            if (_invoiceNumberYearCreation != null && TwelfthProductNameComboBox.Text == _lastProductLineFilled[ProductLineIndex[12]] && _invoiceNumberYearCreation.Value == _lastFilledYearForProductInfo[ProductLineIndex[12]]) return;
 
             _lastProductLineFilled[ProductLineIndex[12]] = TwelfthProductNameComboBox.Text;
             FillSpecificProductLineTextBox(InvoiceProductLine.Twelfth, TwelfthProductNameComboBox.Text);
@@ -1607,7 +1609,9 @@ namespace Invoice.Forms
 
         private void FillSpecificProductLineTextBox(InvoiceProductLine productLine, string productName)
         {
-            FullProductInfoWithId productInfo = _productInfoRepository.GetFullProductInfoWithId(productName);
+            if (!_invoiceNumberYearCreation.HasValue)return;
+           
+            FullProductInfoWithId productInfo = _productInfoRepository.GetFullProductInfoWithId(productName, _invoiceNumberYearCreation.Value);
 
             if (productInfo != null)
             {
@@ -1616,13 +1620,12 @@ namespace Invoice.Forms
             else
             {
                 _messageDialogService.ShowErrorMassage(
-                    "Nėra jokios informacijos duomenų bazėje apie galimus produktus");
+                    "Nėra jokios informacijos duomenų bazėje apie galimus produktus arba informacija produkto ne tų metų");
             }
         }
 
         private void FillProductLine(InvoiceProductLine productLine, FullProductInfoWithId productInfo)
         {
-
             switch (productLine)
             {
                 case InvoiceProductLine.First:
@@ -1634,6 +1637,8 @@ namespace Invoice.Forms
 
                     FirstProductTypeTextBox.Text = productInfo.ProductType;
                     FirstProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    if (_invoiceNumberYearCreation != null)
+                        _lastFilledYearForProductInfo[ProductLineIndex[1]] = _invoiceNumberYearCreation.Value;
                     break;
 
                 case InvoiceProductLine.Second:
@@ -1645,6 +1650,8 @@ namespace Invoice.Forms
 
                     SecondProductTypeTextBox.Text = productInfo.ProductType;
                     SecondProductTypePriceTextBox.Text = productInfo.ProductPrice.ToString();
+                    if (_invoiceNumberYearCreation != null)
+                        _lastFilledYearForProductInfo[ProductLineIndex[2]] = _invoiceNumberYearCreation.Value;
                     break;
 
                 case InvoiceProductLine.Third:
@@ -1656,6 +1663,8 @@ namespace Invoice.Forms
 
                     ThirdProductTypeTextBox.Text = productInfo.ProductType;
                     ThirdProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    if (_invoiceNumberYearCreation != null)
+                        _lastFilledYearForProductInfo[ProductLineIndex[3]] = _invoiceNumberYearCreation.Value;
                     break;
 
                 case InvoiceProductLine.Fourth:
@@ -1667,6 +1676,8 @@ namespace Invoice.Forms
 
                     FourthProductTypeTextBox.Text = productInfo.ProductType;
                     FourthProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    if (_invoiceNumberYearCreation != null)
+                        _lastFilledYearForProductInfo[ProductLineIndex[4]] = _invoiceNumberYearCreation.Value;
                     break;
 
                 case InvoiceProductLine.Fifth:
@@ -1678,6 +1689,8 @@ namespace Invoice.Forms
 
                     FifthProductTypeTextBox.Text = productInfo.ProductType;
                     FifthProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    if (_invoiceNumberYearCreation != null)
+                        _lastFilledYearForProductInfo[ProductLineIndex[5]] = _invoiceNumberYearCreation.Value;
                     break;
 
                 case InvoiceProductLine.Sixth:
@@ -1689,6 +1702,8 @@ namespace Invoice.Forms
 
                     SixthProductTypeTextBox.Text = productInfo.ProductType;
                     SixthProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    if (_invoiceNumberYearCreation != null)
+                        _lastFilledYearForProductInfo[ProductLineIndex[6]] = _invoiceNumberYearCreation.Value;
                     break;
 
                 case InvoiceProductLine.Seventh:
@@ -1700,6 +1715,8 @@ namespace Invoice.Forms
 
                     SeventhProductTypeTextBox.Text = productInfo.ProductType;
                     SeventhProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    if (_invoiceNumberYearCreation != null)
+                        _lastFilledYearForProductInfo[ProductLineIndex[7]] = _invoiceNumberYearCreation.Value;
                     break;
 
                 case InvoiceProductLine.Eighth:
@@ -1711,6 +1728,8 @@ namespace Invoice.Forms
 
                     EighthProductTypeTextBox.Text = productInfo.ProductType;
                     EighthProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    if (_invoiceNumberYearCreation != null)
+                        _lastFilledYearForProductInfo[ProductLineIndex[8]] = _invoiceNumberYearCreation.Value;
                     break;
 
                 case InvoiceProductLine.Ninth:
@@ -1722,6 +1741,8 @@ namespace Invoice.Forms
 
                     NinthProductTypeTextBox.Text = productInfo.ProductType;
                     NinthProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    if (_invoiceNumberYearCreation != null)
+                        _lastFilledYearForProductInfo[ProductLineIndex[9]] = _invoiceNumberYearCreation.Value;
                     break;
 
                 case InvoiceProductLine.Ten:
@@ -1733,6 +1754,8 @@ namespace Invoice.Forms
 
                     TenProductTypeTextBox.Text = productInfo.ProductType;
                     TenProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    if (_invoiceNumberYearCreation != null)
+                        _lastFilledYearForProductInfo[ProductLineIndex[10]] = _invoiceNumberYearCreation.Value;
                     break;
 
                 case InvoiceProductLine.Eleventh:
@@ -1744,6 +1767,8 @@ namespace Invoice.Forms
 
                     EleventhProductTypeTextBox.Text = productInfo.ProductType;
                     EleventhProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    if (_invoiceNumberYearCreation != null)
+                        _lastFilledYearForProductInfo[ProductLineIndex[11]] = _invoiceNumberYearCreation.Value;
                     break;
 
                 case InvoiceProductLine.Twelfth:
@@ -1755,6 +1780,8 @@ namespace Invoice.Forms
 
                     TwelfthProductTypeTextBox.Text = productInfo.ProductType;
                     TwelfthProductTypePriceTextBox.Text = productInfo.ProductTypePrice.ToString();
+                    if (_invoiceNumberYearCreation != null)
+                        _lastFilledYearForProductInfo[ProductLineIndex[12]] = _invoiceNumberYearCreation.Value;
                     break;
             }
         }

@@ -363,6 +363,7 @@ namespace Invoice.Forms
 
             FullProductInfoModel updateProduct = new FullProductInfoModel
             {
+                Year = int.Parse(DepositYearTextBox.Text),
                 ProductName = ProductNameRichTextBox.Text,
                 BarCode = ProductBarCodeRichTextBox.Text,
                 ProductSees = ProductSeesRichTextBox.Text,
@@ -420,11 +421,11 @@ namespace Invoice.Forms
             _depositRepository.CreateNewDepositProduct(newDepositInfo);
         }
 
-        private void SetButtonControl(bool setButtonControl)
+        private void SetButtonControl(bool isButtonActive)
         {
-            NewProductButton.Enabled = setButtonControl;
-            UpdateProductButton.Enabled = setButtonControl;
-            ChooseProductButton.Enabled = setButtonControl;
+            NewProductButton.Enabled = isButtonActive;
+            UpdateProductButton.Enabled = isButtonActive;
+            ChooseProductButton.Enabled = isButtonActive;
         }
 
         #endregion
