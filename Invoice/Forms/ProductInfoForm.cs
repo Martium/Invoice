@@ -166,7 +166,7 @@ namespace Invoice.Forms
             }
             else
             {
-                _messageDialogService.ShowErrorMassage("Produktas nerastas atnaujinimas negalimas");
+                _messageDialogService.ShowErrorMassage("Produktas nerastas atnaujinimas negalimas arba įvesti ne tie metai ");
             }
 
             SetCursorAtProductNameStringEnd();

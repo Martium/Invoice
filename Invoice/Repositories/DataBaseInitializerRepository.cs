@@ -48,13 +48,13 @@ namespace Invoice.Repositories
                 SetDefaultMoneyReceiptNumber(dbConnection);
 
 #if DEBUG
-                FillInvoiceTestingInfo(dbConnection);
-                FillProductTypeTestingInfo(dbConnection);
-                FillStorageTestingInfo(dbConnection);
-                FillBuyersInfoTestingInfo(dbConnection);
-                FillProductInfoTestingInfo(dbConnection);
-                FillDepositTestingInfo(dbConnection);
-                FillDepositIdLineTestingInfo(dbConnection);
+                //FillInvoiceTestingInfo(dbConnection);
+               // FillProductTypeTestingInfo(dbConnection);
+               // FillStorageTestingInfo(dbConnection);
+               // FillBuyersInfoTestingInfo(dbConnection);
+              //  FillProductInfoTestingInfo(dbConnection);
+               // FillDepositTestingInfo(dbConnection);
+               // FillDepositIdLineTestingInfo(dbConnection);
 #endif
 
             }

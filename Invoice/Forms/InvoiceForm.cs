@@ -546,6 +546,12 @@ namespace Invoice.Forms
             {
                 _invoiceNumberYearCreation = number;
             }
+
+            if (_invoiceOperations == InvoiceOperations.Edit)
+            {
+                //change  product id by year each line by product name 
+            }
+
         }
 
         #region Helpers
@@ -2017,15 +2023,13 @@ namespace Invoice.Forms
 
         private void FilledQuantityForOldInvoiceInfoToDepositDataBaseById(bool isHasId, int productLineIndex)
         {
-            if (!isHasId && _lastQuantityValues[productLineIndex].HasValue) return;
-            
-            double quantity = _lastQuantityValues[productLineIndex].Value;
-
+            if (_lastQuantityValues[productLineIndex] == null || !isHasId)return;
+          
             DepositAddQuantityModel depositAddQuantity = new DepositAddQuantityModel()
             {
                 Id = _idProductOldLineValues[productLineIndex], 
                 InvoiceYear = _oldInvoiceYear,
-                ProductQuantity = quantity
+                ProductQuantity = _lastQuantityValues[productLineIndex].Value
             };
 
             _depositRepository.SubtractQuantityByIdAndYear(depositAddQuantity);

@@ -151,6 +151,8 @@ namespace Invoice.Repositories
 
         public void SubtractQuantityByIdAndYear(DepositAddQuantityModel updateQuantity)
         {
+            if (!updateQuantity.ProductQuantity.HasValue)return;
+
             using (var dbConnection = new SQLiteConnection(AppConfiguration.ConnectionString))
             {
                 dbConnection.Open();

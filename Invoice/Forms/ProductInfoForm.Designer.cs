@@ -255,7 +255,6 @@ namespace Invoice.Forms
             this.DepositYearTextBox.Name = "DepositYearTextBox";
             this.DepositYearTextBox.Size = new System.Drawing.Size(49, 20);
             this.DepositYearTextBox.TabIndex = 59;
-            this.DepositYearTextBox.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
             this.DepositYearTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
             this.DepositYearTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.DepositYearTextBox_Validating);
             // 
