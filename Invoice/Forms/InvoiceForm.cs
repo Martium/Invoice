@@ -166,7 +166,6 @@ namespace Invoice.Forms
 
                     SaveNewProductsQuantityValuesForEditInvoice();
 
-                    // todo add quantity to deposit if product type has number and check number was bigger then before for each
                     _messageDialogService.ShowInfoMessage(successMessage);
                     this.Close();
                 }
@@ -2013,7 +2012,58 @@ namespace Invoice.Forms
                 ProductQuantity = quantity
             };
 
-            _depositRepository.AddQuantityByIdAndYear(depositAddQuantity); // wrong method need insert method
+            _depositRepository.AddQuantityByIdAndYear(depositAddQuantity);
+        }
+
+        private void FilledQuantityForOldInvoiceInfoToDepositDataBaseById(bool isHasId, int productLineIndex)
+        {
+            if (!isHasId && _lastQuantityValues[productLineIndex].HasValue) return;
+            
+            double quantity = _lastQuantityValues[productLineIndex].Value;
+
+            DepositAddQuantityModel depositAddQuantity = new DepositAddQuantityModel()
+            {
+                Id = _idProductOldLineValues[productLineIndex], 
+                InvoiceYear = _oldInvoiceYear,
+                ProductQuantity = quantity
+            };
+
+            _depositRepository.SubtractQuantityByIdAndYear(depositAddQuantity);
+        }
+
+        private void SubtractOldValuesFromDeposit()
+        {
+            bool isFirstHasId = CheckOldProductInfoId(0);
+            bool isSecondHasId = CheckOldProductInfoId(1);
+            bool isThirdHasId = CheckOldProductInfoId(2);
+            bool isFourthHasId = CheckOldProductInfoId(3);
+            bool isFifthHasId = CheckOldProductInfoId(4);
+            bool isSixthHasId = CheckOldProductInfoId(5);
+            bool isSeventhHasId = CheckOldProductInfoId(6);
+            bool isEighthHasId = CheckOldProductInfoId(7);
+            bool isNinthHasId = CheckOldProductInfoId(8);
+            bool isTenHasId = CheckOldProductInfoId(9);
+            bool isEleventhHasId = CheckOldProductInfoId(10);
+            bool isTwelfthHasId = CheckOldProductInfoId(11);
+
+            FilledQuantityForOldInvoiceInfoToDepositDataBaseById(isFirstHasId, 0);
+            FilledQuantityForOldInvoiceInfoToDepositDataBaseById(isSecondHasId, 1);
+            FilledQuantityForOldInvoiceInfoToDepositDataBaseById(isThirdHasId, 2);
+            FilledQuantityForOldInvoiceInfoToDepositDataBaseById(isFourthHasId, 3);
+            FilledQuantityForOldInvoiceInfoToDepositDataBaseById(isFifthHasId, 4);
+            FilledQuantityForOldInvoiceInfoToDepositDataBaseById(isSixthHasId, 5);
+            FilledQuantityForOldInvoiceInfoToDepositDataBaseById(isSeventhHasId, 6);
+            FilledQuantityForOldInvoiceInfoToDepositDataBaseById(isEighthHasId, 7);
+            FilledQuantityForOldInvoiceInfoToDepositDataBaseById(isNinthHasId, 8);
+            FilledQuantityForOldInvoiceInfoToDepositDataBaseById(isTenHasId, 9);
+            FilledQuantityForOldInvoiceInfoToDepositDataBaseById(isEleventhHasId, 10);
+            FilledQuantityForOldInvoiceInfoToDepositDataBaseById(isTwelfthHasId, 11);
+        }
+
+        private bool CheckOldProductInfoId(int productLineIndex)
+        {
+            bool isHasId = _idProductOldLineValues[productLineIndex] != 0;
+            return isHasId;
         }
 
         private void FillDepositInfoToEditInvoiceOperation()
@@ -2255,28 +2305,7 @@ namespace Invoice.Forms
             }
             else
             {
-                
-                //  need logic when year not same 
-
-                // check for new year info exists in deposit 
-                // if not  exist just add new info 
-                // if exists update new quantity by year and id 
-
-                // for old year subtract by id and old year lastQuantity
-            }
-
-
-        }
-
-        private void AddQuantityToDepositForNewYearEditOperation()
-        {
-            if (!_invoiceNumberYearCreation.HasValue) return;
-
-            bool isYearExists = _depositRepository.CheckIsYearExits(_invoiceNumberYearCreation.Value);
-
-            if (isYearExists)
-            {
-
+                AddToDepositNewInfoForEditOperationWhenYearNotSame();
             }
         }
 
@@ -2387,6 +2416,12 @@ namespace Invoice.Forms
 
                 _depositRepository.SubtractQuantityByIdAndYear(subtractQuantity);
             }
+        }
+
+        private void AddToDepositNewInfoForEditOperationWhenYearNotSame()
+        {
+            AddQuantityFromNewInvoiceToDeposit();
+            SubtractOldValuesFromDeposit();
         }
 
         #endregion
