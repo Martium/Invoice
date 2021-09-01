@@ -89,9 +89,9 @@ namespace Invoice.Forms
             this.PositionPanel.Controls.Add(this.InvoiceMakerLabel);
             this.PositionPanel.Controls.Add(this.BuyerInfoGuideLabel);
             this.PositionPanel.Controls.Add(this.SellerAcceptedMoneyInfoLabel);
-            this.PositionPanel.Location = new System.Drawing.Point(31, 680);
+            this.PositionPanel.Location = new System.Drawing.Point(31, 687);
             this.PositionPanel.Name = "PositionPanel";
-            this.PositionPanel.Size = new System.Drawing.Size(773, 294);
+            this.PositionPanel.Size = new System.Drawing.Size(773, 287);
             this.PositionPanel.TabIndex = 34;
             // 
             // PaidPriceInfoLabel
@@ -116,7 +116,7 @@ namespace Invoice.Forms
             // additionalInfoPriceInWordsLabel
             // 
             this.additionalInfoPriceInWordsLabel.AutoSize = true;
-            this.additionalInfoPriceInWordsLabel.Location = new System.Drawing.Point(107, 111);
+            this.additionalInfoPriceInWordsLabel.Location = new System.Drawing.Point(107, 87);
             this.additionalInfoPriceInWordsLabel.Name = "additionalInfoPriceInWordsLabel";
             this.additionalInfoPriceInWordsLabel.Size = new System.Drawing.Size(278, 13);
             this.additionalInfoPriceInWordsLabel.TabIndex = 23;
@@ -135,7 +135,7 @@ namespace Invoice.Forms
             // AdditionalLinksAboutProductLabel
             // 
             this.AdditionalLinksAboutProductLabel.AutoSize = true;
-            this.AdditionalLinksAboutProductLabel.Location = new System.Drawing.Point(107, 10);
+            this.AdditionalLinksAboutProductLabel.Location = new System.Drawing.Point(18, 0);
             this.AdditionalLinksAboutProductLabel.Name = "AdditionalLinksAboutProductLabel";
             this.AdditionalLinksAboutProductLabel.Size = new System.Drawing.Size(395, 13);
             this.AdditionalLinksAboutProductLabel.TabIndex = 24;
@@ -145,7 +145,7 @@ namespace Invoice.Forms
             // SellerInfoGuideLabel
             // 
             this.SellerInfoGuideLabel.AutoSize = true;
-            this.SellerInfoGuideLabel.Location = new System.Drawing.Point(107, 249);
+            this.SellerInfoGuideLabel.Location = new System.Drawing.Point(107, 238);
             this.SellerInfoGuideLabel.Name = "SellerInfoGuideLabel";
             this.SellerInfoGuideLabel.Size = new System.Drawing.Size(297, 13);
             this.SellerInfoGuideLabel.TabIndex = 30;
@@ -174,7 +174,7 @@ namespace Invoice.Forms
             // BuyerInfoGuideLabel
             // 
             this.BuyerInfoGuideLabel.AutoSize = true;
-            this.BuyerInfoGuideLabel.Location = new System.Drawing.Point(107, 178);
+            this.BuyerInfoGuideLabel.Location = new System.Drawing.Point(100, 169);
             this.BuyerInfoGuideLabel.Name = "BuyerInfoGuideLabel";
             this.BuyerInfoGuideLabel.Size = new System.Drawing.Size(178, 13);
             this.BuyerInfoGuideLabel.TabIndex = 29;
