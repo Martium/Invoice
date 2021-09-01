@@ -137,10 +137,9 @@ namespace Invoice.Forms
             this.AdditionalLinksAboutProductLabel.AutoSize = true;
             this.AdditionalLinksAboutProductLabel.Location = new System.Drawing.Point(18, 0);
             this.AdditionalLinksAboutProductLabel.Name = "AdditionalLinksAboutProductLabel";
-            this.AdditionalLinksAboutProductLabel.Size = new System.Drawing.Size(395, 13);
+            this.AdditionalLinksAboutProductLabel.Size = new System.Drawing.Size(354, 13);
             this.AdditionalLinksAboutProductLabel.TabIndex = 24;
-            this.AdditionalLinksAboutProductLabel.Text = "( prekių/paslaugų pavadinimai, kiekiai, matavimo vienetai,  vieneto kaina su PVM " +
-    ")";
+            this.AdditionalLinksAboutProductLabel.Text = "( prekių/paslaugų pavadinimai, kiekiai, matavimo vienetai, kaina su PVM )";
             // 
             // SellerInfoGuideLabel
             // 
