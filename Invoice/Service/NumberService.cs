@@ -227,9 +227,10 @@ namespace Invoice.Service
             return fullProductPrice;
         }
 
-        public double CalculateProductPriceWithPvm(RichTextBox productPrice)
+        public double CalculateProductPriceWithPvm(RichTextBox quantityRichTextBox, RichTextBox priceRichTextBox)
         {
-            double productPriceWithPvm = double.Parse(productPrice.Text) * 121 / 100;
+            double fullPriceProduct = double.Parse(quantityRichTextBox.Text) * double.Parse(priceRichTextBox.Text);
+            double productPriceWithPvm = fullPriceProduct * 121 / 100;
 
             double roundProductPrice = Math.Round(productPriceWithPvm, RoundDigitNumber, MidpointRounding.ToEven);
 

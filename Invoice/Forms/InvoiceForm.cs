@@ -811,7 +811,8 @@ namespace Invoice.Forms
             }
             else
             {
-                double priceWithPvm = _numberService.CalculateProductPriceWithPvm(productPriceRichTextBox);
+                double priceWithPvm =
+                    _numberService.CalculateProductPriceWithPvm(productQuantityRichTextBox, productPriceRichTextBox);
                 productInfo =
                     $"{productNameRichTextBox.Text}, {productQuantityRichTextBox.Text} {productSeesRichTextBox.Text}, {priceWithPvm} EUR. ";
             }
