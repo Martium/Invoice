@@ -36,7 +36,7 @@ namespace Invoice.Repositories
                 CreateInvoiceTable(dbConnection);
                 CreateSellerInfoTable(dbConnection);
                 CreateProductTypeTable(dbConnection);
-                CreateStorageTable(dbConnection);
+                //CreateStorageTable(dbConnection);
                 CreatePasswordTable(dbConnection);
                 CreateBuyersInfoTable(dbConnection);
                 CreateProductInfoTable(dbConnection);
@@ -50,7 +50,7 @@ namespace Invoice.Repositories
 #if DEBUG
                 FillInvoiceTestingInfo(dbConnection);
                 FillProductTypeTestingInfo(dbConnection);
-                FillStorageTestingInfo(dbConnection);
+                //FillStorageTestingInfo(dbConnection);
                 FillBuyersInfoTestingInfo(dbConnection);
                 FillProductInfoTestingInfo(dbConnection);
                 FillDepositTestingInfo(dbConnection);
