@@ -241,16 +241,22 @@ namespace Invoice.Forms
             this.MoneyRecepitNumberInfoLabel = new System.Windows.Forms.Label();
             this.MoneyReceiptOfferNumberTextBox = new System.Windows.Forms.TextBox();
             this.InvoiceControlPanel = new System.Windows.Forms.Panel();
+            this.ChangeProductDepositIdByYearButton = new System.Windows.Forms.Button();
             this.InvoiceControlYearLabel = new System.Windows.Forms.Label();
             this.InvoiceYearControlTextBox = new System.Windows.Forms.TextBox();
             this.InfoControlLabel = new System.Windows.Forms.Label();
-            this.ChangeProductDepositIdByYearButton = new System.Windows.Forms.Button();
+            this.CreationOfInvoiceControlPanel = new System.Windows.Forms.Panel();
+            this.InvoiceCreationNumberLabel = new System.Windows.Forms.Label();
+            this.NumberOfInvoiceTextBox = new System.Windows.Forms.TextBox();
+            this.GenerateInvoicesButton = new System.Windows.Forms.Button();
+            this.InvoiceGenerationInfoLabel = new System.Windows.Forms.Label();
             this.PrintInvoicePanel.SuspendLayout();
             this.ProductsTypesPanel.SuspendLayout();
             this.ProductInfoPanel.SuspendLayout();
             this.BuyerInfoPanel.SuspendLayout();
             this.MoneyPrecepitControlPanel.SuspendLayout();
             this.InvoiceControlPanel.SuspendLayout();
+            this.CreationOfInvoiceControlPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // PrintInvoicePanel
@@ -2447,6 +2453,16 @@ namespace Invoice.Forms
             this.InvoiceControlPanel.Size = new System.Drawing.Size(303, 143);
             this.InvoiceControlPanel.TabIndex = 57;
             // 
+            // ChangeProductDepositIdByYearButton
+            // 
+            this.ChangeProductDepositIdByYearButton.Location = new System.Drawing.Point(153, 80);
+            this.ChangeProductDepositIdByYearButton.Name = "ChangeProductDepositIdByYearButton";
+            this.ChangeProductDepositIdByYearButton.Size = new System.Drawing.Size(104, 20);
+            this.ChangeProductDepositIdByYearButton.TabIndex = 43;
+            this.ChangeProductDepositIdByYearButton.Text = "Taikyti metus";
+            this.ChangeProductDepositIdByYearButton.UseVisualStyleBackColor = true;
+            this.ChangeProductDepositIdByYearButton.Click += new System.EventHandler(this.ChangeProductDepositIdByYearButton_Click);
+            // 
             // InvoiceControlYearLabel
             // 
             this.InvoiceControlYearLabel.AutoSize = true;
@@ -2476,21 +2492,62 @@ namespace Invoice.Forms
             this.InfoControlLabel.TabIndex = 40;
             this.InfoControlLabel.Text = "Sąskaitos valdymas";
             // 
-            // ChangeProductDepositIdByYearButton
+            // CreationOfInvoiceControlPanel
             // 
-            this.ChangeProductDepositIdByYearButton.Location = new System.Drawing.Point(153, 80);
-            this.ChangeProductDepositIdByYearButton.Name = "ChangeProductDepositIdByYearButton";
-            this.ChangeProductDepositIdByYearButton.Size = new System.Drawing.Size(104, 20);
-            this.ChangeProductDepositIdByYearButton.TabIndex = 43;
-            this.ChangeProductDepositIdByYearButton.Text = "Taikyti metus";
-            this.ChangeProductDepositIdByYearButton.UseVisualStyleBackColor = true;
-            this.ChangeProductDepositIdByYearButton.Click += new System.EventHandler(this.ChangeProductDepositIdByYearButton_Click);
+            this.CreationOfInvoiceControlPanel.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.CreationOfInvoiceControlPanel.Controls.Add(this.InvoiceGenerationInfoLabel);
+            this.CreationOfInvoiceControlPanel.Controls.Add(this.GenerateInvoicesButton);
+            this.CreationOfInvoiceControlPanel.Controls.Add(this.NumberOfInvoiceTextBox);
+            this.CreationOfInvoiceControlPanel.Controls.Add(this.InvoiceCreationNumberLabel);
+            this.CreationOfInvoiceControlPanel.Location = new System.Drawing.Point(1249, 929);
+            this.CreationOfInvoiceControlPanel.Name = "CreationOfInvoiceControlPanel";
+            this.CreationOfInvoiceControlPanel.Size = new System.Drawing.Size(567, 76);
+            this.CreationOfInvoiceControlPanel.TabIndex = 58;
+            // 
+            // InvoiceCreationNumberLabel
+            // 
+            this.InvoiceCreationNumberLabel.AutoSize = true;
+            this.InvoiceCreationNumberLabel.Location = new System.Drawing.Point(27, 36);
+            this.InvoiceCreationNumberLabel.Name = "InvoiceCreationNumberLabel";
+            this.InvoiceCreationNumberLabel.Size = new System.Drawing.Size(113, 13);
+            this.InvoiceCreationNumberLabel.TabIndex = 0;
+            this.InvoiceCreationNumberLabel.Text = "Kiek sąskaitų sukurti ?";
+            // 
+            // NumberOfInvoiceTextBox
+            // 
+            this.NumberOfInvoiceTextBox.Location = new System.Drawing.Point(146, 33);
+            this.NumberOfInvoiceTextBox.Name = "NumberOfInvoiceTextBox";
+            this.NumberOfInvoiceTextBox.Size = new System.Drawing.Size(100, 20);
+            this.NumberOfInvoiceTextBox.TabIndex = 1;
+            this.NumberOfInvoiceTextBox.TabStop = false;
+            this.NumberOfInvoiceTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.NumberOfInvoiceTextBox_Validating);
+            // 
+            // GenerateInvoicesButton
+            // 
+            this.GenerateInvoicesButton.Location = new System.Drawing.Point(252, 31);
+            this.GenerateInvoicesButton.Name = "GenerateInvoicesButton";
+            this.GenerateInvoicesButton.Size = new System.Drawing.Size(75, 23);
+            this.GenerateInvoicesButton.TabIndex = 2;
+            this.GenerateInvoicesButton.Text = "Kurti sąskaitas";
+            this.GenerateInvoicesButton.UseVisualStyleBackColor = true;
+            this.GenerateInvoicesButton.Click += new System.EventHandler(this.GenerateInvoicesButton_Click);
+            // 
+            // InvoiceGenerationInfoLabel
+            // 
+            this.InvoiceGenerationInfoLabel.AutoSize = true;
+            this.InvoiceGenerationInfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InvoiceGenerationInfoLabel.Location = new System.Drawing.Point(177, 7);
+            this.InvoiceGenerationInfoLabel.Name = "InvoiceGenerationInfoLabel";
+            this.InvoiceGenerationInfoLabel.Size = new System.Drawing.Size(168, 16);
+            this.InvoiceGenerationInfoLabel.TabIndex = 59;
+            this.InvoiceGenerationInfoLabel.Text = "Naujų sąskaitų kūrimas";
             // 
             // InvoiceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1871, 1017);
+            this.Controls.Add(this.CreationOfInvoiceControlPanel);
             this.Controls.Add(this.InvoiceControlPanel);
             this.Controls.Add(this.MoneyPrecepitControlPanel);
             this.Controls.Add(this.BuyerInfoPanel);
@@ -2517,6 +2574,8 @@ namespace Invoice.Forms
             this.MoneyPrecepitControlPanel.PerformLayout();
             this.InvoiceControlPanel.ResumeLayout(false);
             this.InvoiceControlPanel.PerformLayout();
+            this.CreationOfInvoiceControlPanel.ResumeLayout(false);
+            this.CreationOfInvoiceControlPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2736,5 +2795,10 @@ namespace Invoice.Forms
         private System.Windows.Forms.Label InfoControlLabel;
         private System.Windows.Forms.Label InvoiceControlYearLabel;
         private System.Windows.Forms.Button ChangeProductDepositIdByYearButton;
+        private System.Windows.Forms.Panel CreationOfInvoiceControlPanel;
+        private System.Windows.Forms.Label InvoiceGenerationInfoLabel;
+        private System.Windows.Forms.Button GenerateInvoicesButton;
+        private System.Windows.Forms.TextBox NumberOfInvoiceTextBox;
+        private System.Windows.Forms.Label InvoiceCreationNumberLabel;
     }
 }

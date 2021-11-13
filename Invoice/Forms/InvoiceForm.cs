@@ -558,6 +558,47 @@ namespace Invoice.Forms
             ChangeProductIdByProductNameAndYear();
         }
 
+        private void NumberOfInvoiceTextBox_Validating(object sender, CancelEventArgs e)
+        {
+            bool isNumber = int.TryParse(NumberOfInvoiceTextBox.Text, out int number);
+            bool isNumberLimitAllowed = false;
+
+            if (isNumber)
+            {
+                 isNumberLimitAllowed = ValidateNumberValueLimitForCreatingMultipleInvoice(number);
+                 e.Cancel = true;
+                 GenerateInvoicesButton.Enabled = false;
+            }
+            else
+            {
+                e.Cancel = true;
+                GenerateInvoicesButton.Enabled = false;
+                _messageDialogService.DisplayLabelAndTextBoxError("Raudonas langelis turi būti skaičius ir negali būt didesnis nei 100 ", NumberOfInvoiceTextBox, ErrorMassageLabel);
+            }
+
+            if (isNumberLimitAllowed)
+            {
+                e.Cancel = false;
+                GenerateInvoicesButton.Enabled = true;
+                _messageDialogService.HideLabelAndTextBoxError(ErrorMassageLabel, NumberOfInvoiceTextBox);
+            }
+            else
+            {
+                _messageDialogService.DisplayLabelAndTextBoxError("Raudonas langelyje skaičius negali būt didesnis nei 100 ir mažesnis arba lygus 0 ", NumberOfInvoiceTextBox, ErrorMassageLabel);
+            }
+        }
+
+        private void GenerateInvoicesButton_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(NumberOfInvoiceTextBox.Text))
+            {
+                _messageDialogService.ShowErrorMassage("Turite įrašyti skaičių į langelį (Kiek sąskaitų sukurti ?)!");
+                return;
+            }
+
+            CreateMultipleInvoice();
+        }
+
         #region Helpers
 
         private void ChangeProductIdByProductNameAndYear()
@@ -1342,6 +1383,8 @@ namespace Invoice.Forms
 
             MoneyReceiptOfferNumberTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
             InvoiceYearControlTextBox.MaxLength = FormSettings.TextBoxLengths.InvoiceYearControl;
+
+            NumberOfInvoiceTextBox.MaxLength = FormSettings.TextBoxLengths.MaxNumberLength;
         }
 
         private void CaptureInvoiceFormScreen()
@@ -2546,7 +2589,102 @@ namespace Invoice.Forms
             SubtractOldValuesFromDeposit();
         }
 
+        private bool ValidateNumberValueLimitForCreatingMultipleInvoice(int number)
+        {
+            bool isAllowed;
+
+            if (number <= 0)
+            {
+                isAllowed = false;
+            }
+            else if (number > 100)
+            {
+                isAllowed = false;
+            }
+            else
+            {
+                isAllowed = true;
+            }
+           
+            return isAllowed;
+        }
+
+        private void CreateMultipleInvoice()
+        {
+            int numberOfInvoiceMustBeCreated = int.Parse(NumberOfInvoiceTextBox.Text);
+
+            for (int i = 1; i <= numberOfInvoiceMustBeCreated; i++)
+            {
+                var invoiceModel = GetAllInfoFromRichTextBox();
+
+                if (_invoiceNumberYearCreation.HasValue)
+                {
+                    bool isSuccess = _invoiceRepository.CreateNewInvoice(invoiceModel, _invoiceNumberYearCreation.Value);
+
+                    if (isSuccess)
+                    {
+                        bool isAllQuantityFilled = CheckIsAllProductTypeQuantityFilledByInvoiceProductQuantity();
+                        SuggestToFillProductTypeQuantityIfEmpty(isAllQuantityFilled);
+                        GetAllProductTypeForNewInvoice();
+
+                        if (i == 1)
+                        {
+                            SaveProductInfoId();
+                        }
+                        else
+                        {
+                            int nextId = int.Parse(InvoiceNumberRichTextBox.Text) + (i - 1);
+                            SaveProductInfoIdForMultipleInvoice(nextId);
+                        }
+
+                        AddQuantityFromNewInvoiceToDeposit();
+
+                        _messageDialogService.ShowInfoMessage($@"{i} sąskaita sukurta");
+                    }
+                }
+            }
+
+        }
+
+        private void SaveProductInfoIdForMultipleInvoice(int nextId)
+        {
+            _idProductLinesValues = new int[12];
+
+            FillIdProductLinesValuesSaveModel(FirstProductIdTextBox, 0);
+            FillIdProductLinesValuesSaveModel(SecondProductIdTextBox, 1);
+            FillIdProductLinesValuesSaveModel(ThirdProductIdTextBox, 2);
+            FillIdProductLinesValuesSaveModel(FourthProductIdTextBox, 3);
+            FillIdProductLinesValuesSaveModel(FifthProductIdTextBox, 4);
+            FillIdProductLinesValuesSaveModel(SixthProductIdTextBox, 5);
+            FillIdProductLinesValuesSaveModel(SeventhProductIdTextBox, 6);
+            FillIdProductLinesValuesSaveModel(EighthProductIdTextBox, 7);
+            FillIdProductLinesValuesSaveModel(NinthProductIdTextBox, 8);
+            FillIdProductLinesValuesSaveModel(TenProductIdTextBox, 9);
+            FillIdProductLinesValuesSaveModel(EleventhProductIdTextBox, 10);
+            FillIdProductLinesValuesSaveModel(TwelfthProductIdTextBox, 11);
+
+            DepositIdSaveModel saveProductInfoId = new DepositIdSaveModel
+            {
+                InvoiceId = nextId,
+
+                FirstLineId = _idProductLinesValues[0],
+                SecondLineId = _idProductLinesValues[1],
+                ThirdLineId = _idProductLinesValues[2],
+                FourthLineId = _idProductLinesValues[3],
+                FifthLineId = _idProductLinesValues[4],
+                SixthLineId = _idProductLinesValues[5],
+                SeventhLineId = _idProductLinesValues[6],
+                EighthLineId = _idProductLinesValues[7],
+                NinthLineId = _idProductLinesValues[8],
+                TenLineId = _idProductLinesValues[9],
+                EleventhLineId = _idProductLinesValues[10],
+                TwelfthLineId = _idProductLinesValues[11]
+            };
+
+            _depositRepository.SaveDepositIdLinesInfo(saveProductInfoId);
+        }
+
         #endregion
-       
+        
     }
 }
