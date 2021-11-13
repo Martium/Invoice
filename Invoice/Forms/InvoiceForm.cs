@@ -1053,6 +1053,12 @@ namespace Invoice.Forms
 
             DisableScrollBarRichTextBoxWithMultiLine();
             SetComboBoxesDropDown();
+
+            if (_invoiceOperations == InvoiceOperations.Edit || _invoiceOperations == InvoiceOperations.Copy)
+            {
+                GenerateInvoicesButton.Enabled = false;
+                NumberOfInvoiceTextBox.Enabled = false;
+            }
         }
 
         private void SetComboBoxesDropDown()
